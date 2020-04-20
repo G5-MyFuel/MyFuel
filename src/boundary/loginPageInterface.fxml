@@ -14,12 +14,12 @@
          <children>
             <ImageView fitHeight="600.0" fitWidth="502.0" layoutX="-1.0" opacity="0.14">
                <image>
-                  <Image url="@media_gasStationFuelHd.jpg" />
+                  <Image url="@../resources/media_gasStationFuelHd.jpg" />
                </image>
             </ImageView>
             <ImageView fitHeight="600.0" fitWidth="446.0" layoutX="23.0">
                <image>
-                  <Image url="@media_myFuelLogo.png" />
+                  <Image url="@../resources/media_myFuelLogo.png" />
                </image>
             </ImageView>
          </children></AnchorPane>
