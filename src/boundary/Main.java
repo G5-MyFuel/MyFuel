@@ -6,6 +6,8 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.fxml.FXMLLoader;
 
+import java.time.Clock;
+
 
 public class Main extends Application {
 	@Override
@@ -22,6 +24,9 @@ public class Main extends Application {
 	}
 	
 	public static void main(String[] args) {
+		System.out.println("hey");
 		launch(args);
+		//command
+
 	}
 }
