@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -7,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.loginPageController">
+<BorderPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.LoginPageBoundary">
    <left>
       <AnchorPane prefHeight="600.0" prefWidth="500.0" BorderPane.alignment="CENTER">
          <children>
@@ -26,8 +27,9 @@
    <right>
       <AnchorPane prefHeight="600.0" prefWidth="500.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField layoutX="176.0" layoutY="288.0" promptText="User ID" />
-            <PasswordField layoutX="176.0" layoutY="335.0" promptText="Password" />
+            <TextField fx:id="userId_txt" layoutX="176.0" layoutY="288.0" promptText="User ID" />
+            <PasswordField fx:id="password_passField" layoutX="176.0" layoutY="335.0" promptText="Password" />
+            <Button fx:id="login_Btn" layoutX="224.0" layoutY="386.0" mnemonicParsing="false" text="Login" />
          </children></AnchorPane>
    </right>
 </BorderPane>
