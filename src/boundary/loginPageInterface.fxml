@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -13,52 +13,46 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0"
-            prefWidth="1100.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="boundary.LoginPageBoundary">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundary.LoginPageBoundary">
     <center>
         <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <children>
                 <ImageView fitHeight="700.0" fitWidth="1100.0" opacity="0.14">
                     <image>
-                        <Image url="@../media/media_gasStationFuelHd.jpg"/>
+                        <Image url="@../media/media_gasStationFuelHd.jpg" />
                     </image>
                 </ImageView>
-                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="516.0" layoutX="335.0" layoutY="92.0"
-                           opacity="0.76" stroke="WHITE" strokeType="INSIDE" width="430.0"/>
+                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="516.0" layoutX="335.0" layoutY="92.0" opacity="0.76" stroke="WHITE" strokeType="INSIDE" width="430.0" />
                 <ImageView fitHeight="219.0" fitWidth="158.0" layoutX="472.0" layoutY="92.0">
                     <image>
-                        <Image url="@../media/media_myFuelLogo.png"/>
+                        <Image url="@../media/media_myFuelLogo.png" />
                     </image>
                 </ImageView>
-                <VBox alignment="CENTER" layoutX="402.0" layoutY="430.0" prefHeight="167.0" prefWidth="296.0"
-                      spacing="10.0">
+                <VBox alignment="CENTER" layoutX="402.0" layoutY="430.0" prefHeight="167.0" prefWidth="296.0" spacing="10.0">
                     <children>
                         <TextField fx:id="userIDTextField" prefHeight="49.0" prefWidth="252.0" promptText="User ID">
                             <font>
-                                <Font size="16.0"/>
+                                <Font size="16.0" />
                             </font>
                         </TextField>
                         <PasswordField fx:id="passwordField" prefHeight="50.0" prefWidth="253.0" promptText="Password">
                             <font>
-                                <Font size="16.0"/>
+                                <Font size="16.0" />
                             </font>
                         </PasswordField>
-                        <Button fx:id="loginBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false"
-                                prefHeight="45.0" prefWidth="128.0" text="Login">
+                        <Button fx:id="loginBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="45.0" prefWidth="128.0" text="Login">
                             <font>
-                                <Font size="22.0"/>
+                                <Font size="22.0" />
                             </font>
                         </Button>
                     </children>
                 </VBox>
-                <ListView fx:id="loginAsListView" layoutX="428.0" layoutY="373.0" prefHeight="25.0" prefWidth="244.0"/>
-                <Text layoutX="483.0" layoutY="358.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login as:"
-                      textAlignment="CENTER" wrappingWidth="134.9737548828125">
+                <Text layoutX="483.0" layoutY="358.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login as:" textAlignment="CENTER" wrappingWidth="134.9737548828125">
                     <font>
-                        <Font name="System Bold" size="20.0"/>
+                        <Font name="System Bold" size="20.0" />
                     </font>
                 </Text>
+            <ChoiceBox fx:id="loginAsChoiceBox" layoutX="475.0" layoutY="380.0" prefWidth="150.0" />
             </children>
         </AnchorPane>
     </center>

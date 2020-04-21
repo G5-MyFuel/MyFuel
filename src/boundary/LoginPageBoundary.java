@@ -4,10 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 public class LoginPageBoundary {
 
@@ -27,14 +24,14 @@ public class LoginPageBoundary {
     private Button loginBtn;
 
     @FXML
-    private ListView<String> loginAsListView;
+    private ChoiceBox<String> loginAsChoiceBox;
 
     @FXML
     void initialize() {
         assert userIDTextField != null : "fx:id=\"userIDTextField\" was not injected: check your FXML file 'loginPageInterface.fxml'.";
         assert passwordField != null : "fx:id=\"passwordField\" was not injected: check your FXML file 'loginPageInterface.fxml'.";
         assert loginBtn != null : "fx:id=\"loginBtn\" was not injected: check your FXML file 'loginPageInterface.fxml'.";
-        assert loginAsListView != null : "fx:id=\"loginAsListView\" was not injected: check your FXML file 'loginPageInterface.fxml'.";
+        assert loginAsChoiceBox != null : "fx:id=\"loginAsListView\" was not injected: check your FXML file 'loginPageInterface.fxml'.";
 
     }
 
@@ -58,7 +55,7 @@ public class LoginPageBoundary {
         return loginBtn;
     }
 
-    public ListView<String> getLoginAsListView() {
-        return loginAsListView;
+    public ChoiceBox<String> getLoginAsChoiceBox() {
+        return loginAsChoiceBox;
     }
 }

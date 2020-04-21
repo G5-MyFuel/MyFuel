@@ -2,6 +2,7 @@ package controller;
 
 import boundary.*;
 import com.sun.jndi.toolkit.url.UrlUtil;
+import com.sun.scenario.effect.impl.sw.java.JSWBlend_SRC_OUTPeer;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,7 +15,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-
+//itay commit test
 
 public class loginPageController extends Application {
     private BorderPane root;
@@ -22,7 +23,7 @@ public class loginPageController extends Application {
     private TextField userIDTextField;
     private PasswordField passwordField;
     private Button loginBtn;
-    private ListView<String> loginAsListView;
+    private ChoiceBox<String> loginAsChoiceBox;
     private ObservableList<String> userTypes = FXCollections.observableArrayList("Client", "Worker");
 
     public static void main(String[] args) {
@@ -46,14 +47,15 @@ public class loginPageController extends Application {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 
     public void setAllControllers() {
         userIDTextField = loginPageBoundary.getUserIDTextField();
         passwordField = loginPageBoundary.getPasswordField();
         loginBtn = loginPageBoundary.getLoginBtn();
-        loginAsListView = loginPageBoundary.getLoginAsListView();
-        loginAsListView.setItems(userTypes);
+        loginAsChoiceBox = loginPageBoundary.getLoginAsChoiceBox();
+        loginAsChoiceBox.setItems(userTypes);
     }
 
     public void loginBtnOperations() {
