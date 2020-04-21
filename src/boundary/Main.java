@@ -19,7 +19,6 @@ public class Main extends Application {
 		try {
 			BorderPane root = FXMLLoader.load(getClass().getResource("loginPageInterface.fxml"));
 			Scene scene = new Scene(root, 1000, 600);
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch (Exception e) {
@@ -27,3 +26,9 @@ public class Main extends Application {
 		}
 	}
 }
+
+/**
+ * 1. loginPageInterface.fxml
+ * 2. LoginPageBoundary.class
+ * 3. loginPageCss.css
+ */
