@@ -20,7 +20,7 @@ public class MainForTests extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
         try {
             FXMLLoader pageLoader = new FXMLLoader();
             pageLoader.setLocation(getClass().getResource(pageName + ""));
@@ -35,6 +35,7 @@ public class MainForTests extends Application {
             primaryStage.show();
         } catch (Exception e) {
             e.printStackTrace();
+            //xxx
         }
     }
 }
