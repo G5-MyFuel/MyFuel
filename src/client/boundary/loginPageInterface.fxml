@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.boundary.LoginPageBoundary">
+    <center>
+        <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <children>
+                <ImageView fitHeight="700.0" fitWidth="1100.0" opacity="0.14">
+                    <image>
+                        <Image url="@../../common/media/145-1453084_auto-breakdown-car-diesel-fuel-energy-fuel-full.jpg" />
+                    </image>
+                </ImageView>
+                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="516.0" layoutX="335.0" layoutY="92.0" opacity="0.76" stroke="WHITE" strokeType="INSIDE" width="430.0" />
+                <VBox alignment="CENTER" layoutX="402.0" layoutY="430.0" prefHeight="167.0" prefWidth="296.0" spacing="10.0">
+                    <children>
+                        <TextField fx:id="userIDTextField" prefHeight="49.0" prefWidth="252.0" promptText="User ID" style="-fx-background-radius: 100;">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </TextField>
+                        <PasswordField fx:id="passwordField" prefHeight="50.0" prefWidth="253.0" promptText="Password" style="-fx-background-radius: 100;">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </PasswordField>
+                        <Button fx:id="loginBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="45.0" prefWidth="128.0" style="-fx-background-radius: 100;" text="Login">
+                            <font>
+                                <Font size="22.0" />
+                            </font>
+                        </Button>
+                    </children>
+                </VBox>
+                <Text layoutX="483.0" layoutY="331.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login as:" textAlignment="CENTER" wrappingWidth="134.9737548828125">
+                    <font>
+                        <Font name="System Bold" size="20.0" />
+                    </font>
+                </Text>
+                <ChoiceBox fx:id="loginAsChoiceBox" layoutX="475.0" layoutY="350.0" prefHeight="25.0" prefWidth="155.0" />
+                <ImageView fitHeight="136.0" fitWidth="400.0" layoutX="350.0" layoutY="118.0">
+                    <image>
+                        <Image url="@../../common/media/2065573.png" />
+                    </image>
+                </ImageView>
+            </children>
+        </AnchorPane>
+    </center>
+</BorderPane>

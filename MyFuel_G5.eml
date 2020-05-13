@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component jdk="1.8 (2)" jdk_type="JavaSDK">
+	<exclude-output/>
+	<contentEntry url="file://$MODULE_DIR$"/>
+	<lib name="mysql-connector-java-8.0.20.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/src/mysql-connector-java-8.0.20.jar!/"/>
+	</lib>
+	<lib name="controlsfx-8.40.13.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/src/controlsfx-8.40.13.jar!/"/>
+	</lib>
+	<lib name="jfoenix-8.0.8.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/src/jfoenix-8.0.8.jar!/"/>
+	</lib>
+</component>
