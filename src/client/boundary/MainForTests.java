@@ -30,7 +30,7 @@ public class MainForTests extends Application {
 
             //
             Scene scene = new Scene(root, 1100, 700);
-            scene.getStylesheets().add("/client/loginPageCSS.css");
+            scene.getStylesheets().add("/client/LoginPageCSS.css");
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (Exception e) {

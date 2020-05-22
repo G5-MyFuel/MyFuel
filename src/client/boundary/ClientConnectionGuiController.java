@@ -37,10 +37,10 @@ public class ClientConnectionGuiController {
 
     @FXML
     void initialize() {
-        assert ap != null : "fx:id=\"ap\" was not injected: check your FXML file 'clientConnectionToServerFXML.fxml'.";
-        assert ipAddress != null : "fx:id=\"ipAddress\" was not injected: check your FXML file 'clientConnectionToServerFXML.fxml'.";
-        assert btnConnect != null : "fx:id=\"btnConnect\" was not injected: check your FXML file 'clientConnectionToServerFXML.fxml'.";
-        assert port != null : "fx:id=\"port\" was not injected: check your FXML file 'clientConnectionToServerFXML.fxml'.";
+        assert ap != null : "fx:id=\"ap\" was not injected: check your FXML file 'ClientConnectionToServerFXML.fxml'.";
+        assert ipAddress != null : "fx:id=\"ipAddress\" was not injected: check your FXML file 'ClientConnectionToServerFXML.fxml'.";
+        assert btnConnect != null : "fx:id=\"btnConnect\" was not injected: check your FXML file 'ClientConnectionToServerFXML.fxml'.";
+        assert port != null : "fx:id=\"port\" was not injected: check your FXML file 'ClientConnectionToServerFXML.fxml'.";
 
     }
 
