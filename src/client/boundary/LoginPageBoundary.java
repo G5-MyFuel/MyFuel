@@ -1,6 +1,6 @@
 package client.boundary;
 
-import client.logic.LoginPageController;
+import client.logic.LoginPageLogic;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -37,7 +37,7 @@ public class LoginPageBoundary {
 
     /*  other variables: */
     private ActionEvent event = null;
-    LoginPageController loginPageController;
+    LoginPageLogic loginPageController;
 
     public LoginPageBoundary() {
     }
@@ -48,7 +48,7 @@ public class LoginPageBoundary {
         assert passwordField != null : "fx:id=\"passwordField\" was not injected: check your FXML file 'loginPageInterface.fxml'.";
         assert loginBtn != null : "fx:id=\"loginBtn\" was not injected: check your FXML file 'loginPageInterface.fxml'.";
         assert loginAsChoiceBox != null : "fx:id=\"loginAsListView\" was not injected: check your FXML file 'loginPageInterface.fxml'.";
-        this.loginPageController = new LoginPageController(); //set connection to the controller
+        this.loginPageController = new LoginPageLogic(); //set connection to the controller
         loginAsChoiceBox.setItems(userTypes);   //set the user types in the 'loginAsChoiceBox'
         clickLoginBtn();    //set the operations that will happen when the "Login" btn pressed
     }

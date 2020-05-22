@@ -99,7 +99,6 @@
                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="125.66668701171875" minWidth="10.0" prefWidth="98.11114501953125" />
                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="173.5555419921875" minWidth="10.0" prefWidth="161.888916015625" />
                   <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="173.5555419921875" minWidth="10.0" prefWidth="120.111083984375" />
-                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="173.5555419921875" minWidth="10.0" prefWidth="120.111083984375" />
                   <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="173.5555419921875" minWidth="10.0" prefWidth="150.88885498046875" />
               </columnConstraints>
               <rowConstraints>
@@ -154,16 +153,11 @@
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Text>
-                          <TextField fx:id="port_field" prefHeight="39.0" prefWidth="123.0" text="5555" GridPane.columnIndex="4">
+                          <TextField fx:id="port_field" prefHeight="39.0" prefWidth="123.0" text="5555" GridPane.columnIndex="3">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </TextField>
-                  <Text fx:id="portFieldEmptyAlert" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="Port field is empty! try Again" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="1">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Text>
                </children>
             </GridPane>
             <GridPane alignment="CENTER" layoutX="531.0" layoutY="235.0" prefHeight="72.0" prefWidth="143.0">

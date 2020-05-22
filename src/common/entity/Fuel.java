@@ -1,4 +1,4 @@
 package common.entity;
 
-public class Employee {
+public class Fuel {
 }

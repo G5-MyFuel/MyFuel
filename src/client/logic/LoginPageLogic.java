@@ -2,8 +2,8 @@ package client.logic;
 
 import client.boundary.LoginPageBoundary;
 
-public class LoginPageController {
-    public LoginPageController() {
+public class LoginPageLogic {
+    public LoginPageLogic() {
     }
 
     /*return flag:

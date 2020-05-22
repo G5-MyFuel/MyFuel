@@ -11,7 +11,7 @@ public class MainForTests extends Application {
     //להגדיר בהתאם לדף:
     //השורות שיש לשנות אם מחליפים דף הן עם הערה סופית
     String pageName = "loginPageInterface.fxml";   //שם קובץ הfxml
-    //
+
     private BorderPane root;
     private LoginPageBoundary loginPageBoundary;    //אינסטנס של מחלקת הboundary
 
@@ -30,7 +30,7 @@ public class MainForTests extends Application {
 
             //
             Scene scene = new Scene(root, 1100, 700);
-            scene.getStylesheets().add("/client/loginPageStyle.css");
+            scene.getStylesheets().add("/client/loginPageCSS.css");
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (Exception e) {

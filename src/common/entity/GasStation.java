@@ -1,5 +1,4 @@
 package common.entity;
 
-public class Client {
-
+public class GasStation {
 }
