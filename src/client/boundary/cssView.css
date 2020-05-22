@@ -1,0 +1,119 @@
+.scroll-pane{
+    -fx-background-color:transparent;
+ }
+
+ .scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+.table-view .corner{
+    -fx-background-color:transparent;
+}
+/*Titled Pane*/
+.blue-titledPane{
+    -fx-text-fill: white;
+    -fx-text-alignment: center;
+    -fx-font-size:20px;
+}
+.blue-titledPane>.title{
+    -fx-background-color: #3f60a6;
+    -fx-font-weight:bold;
+    -fx-background-insets: 0, 0.1, 0.9;
+    -fx-background-radius: 5 5 0 0, 4 4 0 0, 3 3 0 0;
+    -fx-padding: 0.166667em 0.833333em 0.25em 0.833333em;    
+}
+.blue-titledPane:focused > .title {
+    -fx-color: -blue-A400;
+}
+/* .blue-titledPaneTab{
+    -fx-text-fill: white;
+    -fx-text-alignment: center;
+    -fx-font-size:30px; 
+} */
+
+
+/*Card and its components*/
+.card {
+    -fx-background-color: rgb(255.0, 255.0, 255.0);
+    -fx-background-radius: 4.0;
+    -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5);
+    -fx-padding: 16 16 16 16;
+}
+.card-unpadded {
+    -fx-background-color: rgb(255.0, 255.0, 255.0);
+    -fx-background-radius: 4.0;
+    -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,
+        1.5);
+    -fx-padding: 0 0 0 0;
+}
+
+.card-title {
+    -fx-font-size: 20.0px;
+    -fx-padding: 5 0 5 0;
+}
+
+.card-title .text {
+    -fx-fill: -fx-text-title-color;
+}
+
+.card-subtitle {
+    -fx-font-size: 16.0px;
+    -fx-padding: 5 0 5 0;
+}
+
+.card-subtitle .text {
+    -fx-fill: -fx-text-subtitle-color;
+}
+
+.combo-box .cell {
+    -fx-font: 18px "System";
+    -fx-border-radius: 50px;
+}
+
+/*
+    The tab bar
+*/
+
+.jfx-tab-pane .headers-region {
+    -fx-background-color:  #3f60a6;
+}
+.jfx-tab-pane .tab-header-background {
+    -fx-background-color: #3f60a6;
+}
+.jfx-tab-pane .tab-selected-line {
+    -fx-stroke: #75bc1b;
+    -fx-stroke-width: 3pt;
+}
+
+/**delivery time scheduler buttons*/
+.dalivery-time {
+    -jfx-button-type: FLAT;
+    -jfx-disable-visual-focus: true;
+    -fx-background-color: #1976D2;
+    -fx-text-fill: white;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+.dalivery-time:hover{
+    -fx-background-color: #5072b1;
+}
+.dalivery-time:checked{
+    -fx-background-color: #5072b1;
+    -fx-border-color: white;
+}
+.unavailable-delivery-time{
+    -fx-color: -fx-focused-base;
+    -fx-background-color: rgb(139, 139, 139);
+    -fx-text-fill: black;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+.confirm-order{
+    -jfx-button-type: FLAT;
+    -jfx-disable-visual-focus: true;
+    -fx-background-color: rgba(32, 109, 185, 0.479);
+    -fx-text-fill: white;
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+}

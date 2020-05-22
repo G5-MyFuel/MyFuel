@@ -27,7 +27,7 @@
                 </Text>
                 <ImageView fitHeight="72.0" fitWidth="180.0" layoutX="280.0" layoutY="14.0">
                     <image>
-                        <Image url="@../../common/media/serverMedia/media_myFuelLogo.png" />
+                        <Image url="@../../common/../../media/serverMedia/media_myFuelLogo.png" />
                     </image>
                 </ImageView>
                     <GridPane alignment="CENTER" layoutX="14.0" layoutY="8.0" prefHeight="116.0" prefWidth="212.0">
@@ -44,12 +44,12 @@
                                 <children>
                                     <ImageView fx:id="dbConnectImg" layoutX="14.0" layoutY="5.0">
                            <image>
-                              <Image url="@../../common/media/serverMedia/icons8_signal_48px.png" />
+                              <Image url="@../../common/../../media/serverMedia/icons8_signal_48px.png" />
                            </image>
                                     </ImageView>
                                     <ImageView fx:id="dbDisconnectImg" layoutX="14.0" layoutY="5.0">
                            <image>
-                              <Image url="@../../common/media/serverMedia/icons8_no_connection_48px_2.png" />
+                              <Image url="@../../common/../../media/serverMedia/icons8_no_connection_48px_2.png" />
                            </image>
                                     </ImageView>
                                 <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1ccad8" height="116.0" layoutX="-85.0" layoutY="-57.0" opacity="0.09" stroke="BLACK" strokeType="INSIDE" width="153.0" />
@@ -59,12 +59,12 @@
                                 <children>
                                     <ImageView fx:id="serverConnectImg" layoutX="14.0" layoutY="5.0">
                            <image>
-                              <Image url="@../../common/media/serverMedia/icons8_signal_48px.png" />
+                              <Image url="@../../common/../../media/serverMedia/icons8_signal_48px.png" />
                            </image>
                                     </ImageView>
                                     <ImageView fx:id="serverDisconnectImg" layoutX="14.0" layoutY="5.0">
                            <image>
-                              <Image url="@../../common/media/serverMedia/icons8_no_connection_48px_2.png" />
+                              <Image url="@../../common/../../media/serverMedia/icons8_no_connection_48px_2.png" />
                            </image>
                                     </ImageView>
                                 </children>
