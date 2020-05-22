@@ -10,10 +10,10 @@ import javafx.stage.Stage;
 public class MainForTests extends Application {
     //להגדיר בהתאם לדף:
     //השורות שיש לשנות אם מחליפים דף הן עם הערה סופית
-    String pageName = "loginPageInterface.fxml";   //שם קובץ הfxml
+    String pageName = "LoginToSystemFXML.fxml";   //שם קובץ הfxml
 
     private BorderPane root;
-    private LoginPageBoundary loginPageBoundary;    //אינסטנס של מחלקת הboundary
+    private LoginToSystemController loginPageBoundary;    //אינסטנס של מחלקת הboundary
 
     public static void main(String[] args) {
         launch(args);

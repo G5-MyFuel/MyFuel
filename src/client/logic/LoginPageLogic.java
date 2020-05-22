@@ -1,6 +1,6 @@
 package client.logic;
 
-import client.boundary.LoginPageBoundary;
+import client.boundary.LoginToSystemController;
 
 public class LoginPageLogic {
     public LoginPageLogic() {
@@ -12,7 +12,7 @@ public class LoginPageLogic {
      * 2: "userID field is empty
      * 3: "password field is empty
      * */
-    public int checkIfThereAreEmptyFields(LoginPageBoundary lpb) {
+    public int checkIfThereAreEmptyFields(LoginToSystemController lpb) {
         if (lpb.getUserIDTextField().getText().isEmpty()) return 1;
         else if (lpb.getPasswordField().getText().isEmpty()) return 2;
         else if (lpb.getLoginAsChoiceBox().getValue().isEmpty()) return 3;
@@ -20,7 +20,7 @@ public class LoginPageLogic {
     }
 
     //Checks whether the "User ID" consists only 9 digits
-    public boolean checkUserIdValidation(LoginPageBoundary lpb) {
+    public boolean checkUserIdValidation(LoginToSystemController lpb) {
         String uidStr = lpb.getUserIDTextField().getText();
         if (!uidStr.matches("[0-9]+")) {
             System.out.println("User ID can only contain numbers");
