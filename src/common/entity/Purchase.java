@@ -3,11 +3,11 @@ package common.entity;
 import java.util.Date;
 
 public class Purchase {
-    String purchaseID;
-    String customerID;
-    Date purchaseDate;
-    double fuelAmount;
-    double totalPrice;
+    private String purchaseID;
+    private String customerID;
+    private Date purchaseDate;
+    private double fuelAmount;
+    private double totalPrice;
 
     public Purchase(String purchaseID, String customerID, Date purchaseDate, double fuelAmount) {
         this.purchaseID = purchaseID;
