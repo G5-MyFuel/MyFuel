@@ -11,4 +11,7 @@
 	<lib name="jfoenix-8.0.8.jar" scope="COMPILE">
 		<relative-module-cls project-related="jar://$PROJECT_DIR$/src/jfoenix-8.0.8.jar!/"/>
 	</lib>
+	<levels>
+		<level name="validator" value="project"/>
+	</levels>
 </component>

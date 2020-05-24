@@ -12,7 +12,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 
 public class NewPurchaseFuelForHomeHeatingController {
-
     @FXML
     private ResourceBundle resources;
 
@@ -149,6 +148,7 @@ public class NewPurchaseFuelForHomeHeatingController {
     void initialize() {
 
     }
+
 
 
 }
