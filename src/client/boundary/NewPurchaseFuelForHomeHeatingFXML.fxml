@@ -438,7 +438,7 @@
                                     </AnchorPane>
                                  </content>
                                  <graphic>
-                                    <ImageView fitHeight="25.0" fitWidth="25.0">
+                                    <ImageView fx:id="orderDetailsIndicatorTAB" fitHeight="25.0" fitWidth="25.0">
                                        <image>
                                           <Image url="@../../media/icons/icons8_checked_48px.png" />
                                        </image>
@@ -574,7 +574,7 @@
                                     </AnchorPane>
                                  </content>
                                  <graphic>
-                                    <ImageView fitHeight="25.0" fitWidth="25.0" smooth="false">
+                                    <ImageView fx:id="shippingIndicatorTAB" fitHeight="25.0" fitWidth="25.0" smooth="false">
                                        <image>
                                           <Image url="@../../media/icons/icons8_checked_48px.png" />
                                        </image>

@@ -61,16 +61,4 @@ public class ClientApp extends Application {
         }
     }
 
-    public static class NewPurchaseFuelForHomeHeatingLogic {
-
-        public boolean fuelAmountValidation(double fuelAmount){
-            if(fuelAmount<=0){
-                System.out.println("The amount of fuel must be greater than 0");
-                return false;
-            }
-            return true;
-        }
-
-
-    }
 }
