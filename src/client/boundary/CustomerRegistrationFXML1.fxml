@@ -381,8 +381,7 @@
                                           <Cursor fx:constant="OPEN_HAND" />
                                        </cursor>
                                     </ImageView>
-                                    <Button layoutX="786.0" layoutY="574.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="100.0" style="-fx-background-color: #2D4578; -fx-background-radius: 50;"
-                                            text="Finish" />
+                                    <Button layoutX="786.0" layoutY="574.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="100.0" style="-fx-background-color: #2D4578; -fx-background-radius: 50;" stylesheets="@../GUI/דוגמאות%20לתוכנות/Javafx%20Examples/RestaurantMgtSampleUI-master/src/home/style.css" text="Finish" />
                                  </children>
                               </AnchorPane>
                           </content>
