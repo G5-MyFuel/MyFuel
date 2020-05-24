@@ -17,5 +17,6 @@ public class Purchase {
         this.totalPrice = 0.0;
     }
 
+    //בדיקה
 
 }
