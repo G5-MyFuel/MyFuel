@@ -3,6 +3,8 @@ package client.boundary;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
+import java.net.URL;
+import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -10,6 +12,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 
 public class NewPurchaseFuelForHomeHeatingController {
+
+    @FXML
+    private ResourceBundle resources;
+
+    @FXML
+    private URL location;
 
     @FXML
     private Button btnOverview;
@@ -136,5 +144,11 @@ public class NewPurchaseFuelForHomeHeatingController {
 
     @FXML
     private Text deliveryAddressTXT;
+
+    @FXML
+    void initialize() {
+
+    }
+
 
 }
