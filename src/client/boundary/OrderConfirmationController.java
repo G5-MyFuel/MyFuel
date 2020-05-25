@@ -1,8 +1,7 @@
 package client.boundary;
 
-package client.boundary;
-
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableColumn;
@@ -10,7 +9,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
-public class OrderConfirmationController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class OrderConfirmationController implements Initializable {
 
     @FXML
     private Button btnOverview;
@@ -97,5 +99,13 @@ public class OrderConfirmationController {
     void supplyFormPage(MouseEvent event) {
 
     }
+
+    public void initialize(URL location, ResourceBundle resources) {
+        arrowImage.setVisible(false);
+        hboxOrderConfirmation.setVisible(false);
+        btnDone.setVisible(false);
+        btnDone.setDisable(true);
+    }
+
 
 }
