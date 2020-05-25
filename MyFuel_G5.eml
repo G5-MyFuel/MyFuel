@@ -13,5 +13,6 @@
 	</lib>
 	<levels>
 		<level name="validator" value="project"/>
+		<level name="lang" value="project"/>
 	</levels>
 </component>

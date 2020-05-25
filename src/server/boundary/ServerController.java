@@ -87,9 +87,9 @@ public class ServerController implements Initializable {
     @FXML
     void initialize() {
         portFieldEmptyAlert.setVisible(false);
-//        RequiredFieldValidator validator = new RequiredFieldValidator();
-//        validator.setMessage("Required");
-//        vffCheck.getValidators().add(validator);
+//        RequiredFieldValidator APIs.validator = new RequiredFieldValidator();
+//        APIs.validator.setMessage("Required");
+//        vffCheck.getValidators().add(APIs.validator);
 //        vffCheck.focusedProperty().addListener(new ChangeListener<Boolean>() {
 //            @Override
 //            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {

@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="lang">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/APIs/lang" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="file://$PROJECT_DIR$/APIs/lang/apidocs" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/APIs/lang" />
+    </SOURCES>
+    <jarDirectory url="file://$PROJECT_DIR$/APIs/lang" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/APIs/lang" recursive="false" type="SOURCES" />
+  </library>
+</component>

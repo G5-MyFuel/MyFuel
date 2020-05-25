@@ -246,7 +246,7 @@
                                                             <Font name="System Bold" size="24.0" />
                                                          </font>
                                                       </Label>
-                                                      <GridPane maxWidth="439.0" prefHeight="303.0" prefWidth="439.0">
+                                                      <GridPane maxWidth="439.0" prefHeight="160.0" prefWidth="439.0">
                                                          <columnConstraints>
                                                             <ColumnConstraints hgrow="SOMETIMES" maxWidth="413.629638671875" minWidth="0.0" prefWidth="35.777801513671875" />
                                                             <ColumnConstraints hgrow="SOMETIMES" maxWidth="439.0" minWidth="10.0" prefWidth="301.0" />
@@ -261,6 +261,9 @@
                                                                <font>
                                                                   <Font size="18.0" />
                                                                </font>
+                                                               <GridPane.margin>
+                                                                  <Insets top="-10.0" />
+                                                               </GridPane.margin>
                                                             </JFXTextField>
                                                             <StackPane maxHeight="25.0" maxWidth="25.0" prefHeight="25.0" prefWidth="25.0" GridPane.rowIndex="1">
                                                                <children>
@@ -280,6 +283,9 @@
                                                                <font>
                                                                   <Font size="18.0" />
                                                                </font>
+                                                               <GridPane.margin>
+                                                                  <Insets top="-10.0" />
+                                                               </GridPane.margin>
                                                             </JFXTextField>
                                                             <ImageView fx:id="WrongQuantity1111111" fitHeight="25.0" fitWidth="25.0" visible="false">
                                                                <image>
@@ -312,10 +318,6 @@
                                                             </Text>
                                                          </children>
                                                       </GridPane>
-                                                      <Separator prefHeight="0.0" prefWidth="466.0">
-                                                         <VBox.margin>
-                                                            <Insets top="-20.0" />
-                                                         </VBox.margin></Separator>
                                                       <Label alignment="CENTER" prefHeight="30.0" prefWidth="446.0" style="-fx-background-color: #DCDCDC; -fx-opacity: 1; -fx-background-radius: 30;" text="Delivery Address Details">
                                                          <font>
                                                             <Font name="System Bold" size="24.0" />
@@ -328,7 +330,6 @@
                                                         <columnConstraints>
                                                             <ColumnConstraints hgrow="SOMETIMES" maxWidth="413.629638671875" minWidth="10.0" prefWidth="37.111083984375" />
                                                           <ColumnConstraints hgrow="SOMETIMES" maxWidth="415.0" minWidth="10.0" prefWidth="290.77783203125" />
-                                                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="415.0" minWidth="10.0" prefWidth="112.22216796875" />
                                                         </columnConstraints>
                                                         <rowConstraints>
                                                           <RowConstraints fillHeight="false" maxHeight="105.88882446289062" minHeight="10.0" prefHeight="105.88882446289062" vgrow="ALWAYS" />
@@ -419,11 +420,6 @@
                                                                   </ImageView>
                                                                </children>
                                                             </StackPane>
-                                                            <Text fx:id="EmptyStreetMSG" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="Empty Street Name" textAlignment="CENTER" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                                                               <font>
-                                                                  <Font name="Bell MT Bold" size="16.0" />
-                                                               </font>
-                                                            </Text>
                                                          </children>
                                                       </GridPane>
                                                    </children>

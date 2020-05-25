@@ -1,15 +1,15 @@
 <component name="libraryTable">
   <library name="validator">
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/validator" />
+      <root url="file://$PROJECT_DIR$/APIs/validator" />
     </CLASSES>
     <JAVADOC>
-      <root url="file://$PROJECT_DIR$/validator/apidocs" />
+      <root url="file://$PROJECT_DIR$/APIs/validator/apidocs" />
     </JAVADOC>
     <SOURCES>
-      <root url="file://$PROJECT_DIR$/validator" />
+      <root url="file://$PROJECT_DIR$/APIs/validator" />
     </SOURCES>
-    <jarDirectory url="file://$PROJECT_DIR$/validator" recursive="false" />
-    <jarDirectory url="file://$PROJECT_DIR$/validator" recursive="false" type="SOURCES" />
+    <jarDirectory url="file://$PROJECT_DIR$/APIs/validator" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/APIs/validator" recursive="false" type="SOURCES" />
   </library>
 </component>

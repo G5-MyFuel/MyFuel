@@ -167,7 +167,6 @@ public class NewPurchaseFuelForHomeHeatingController implements Initializable {
         formValidation();   //set all fields validators
         /*  check all required fields are'nt empty:*/
 
-        formValidation.isEmptyField(streetNameTXT, "Street Name");
         formValidation.isEmptyField(ApartmentNumberTXT, "Apartment Number");
         formValidation.isEmptyField(cityTXT, "City");
         formValidation.isEmptyField(zipCodeTXT, "Zip code");
@@ -182,8 +181,12 @@ public class NewPurchaseFuelForHomeHeatingController implements Initializable {
         formValidation.numberPositiveValidation(fuelQuantityTXT, "Fuel Quantity");
         /*  email address validation */
         formValidation.emailAddressValidation(emailAddressTXT, "Email");
-        //TODO: street name validation
-        //TODO: apartment number validation
+        /*  street name validation */
+        formValidation.isEmptyField(streetNameTXT, "Street Name");
+        formValidation.maxLengthValidation(streetNameTXT, "Street Name", 25);
+        /*  apartment number validation */
+        formValidation.maxLengthValidation(streetNameTXT, "Street Name", 5);
+        formValidation.isContainsOnlyNumbers(ApartmentNumberTXT,"Apartment Number");
         //TODO: city name validation
         //TODO: zip code validation
         //TODO: phone number validation

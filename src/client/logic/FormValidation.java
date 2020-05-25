@@ -5,11 +5,11 @@ import com.jfoenix.validation.DoubleValidator;
 import com.jfoenix.validation.RequiredFieldValidator;
 import com.jfoenix.validation.base.ValidatorBase;
 import javafx.scene.control.TextInputControl;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.validator.routines.EmailValidator;
 
 /**
  * class that contains methods that checks form fields
- *
  * @author daniel gabbay
  */
 public class FormValidation {
@@ -91,12 +91,13 @@ public class FormValidation {
 
     /**
      * Method for checking email address integrity by using EmailValidator
-     * @see EmailValidator - from Apache Commons Validator
+     *
      * @param theField  - the field that contains the email address to validate
      * @param fieldName - the name of field to validate "Email address"
+     * @see EmailValidator - from Apache Commons Validator
      */
     public void emailAddressValidation(JFXTextField theField, String fieldName) {
-        theField.getValidators().add(new ValidatorBase(fieldName + " is InValid") {
+        theField.getValidators().add(new ValidatorBase(fieldName + ": " + theField.getText() + " is InValid") {
             @Override
             protected void eval() {
                 if (this.srcControl.get() instanceof TextInputControl) {
@@ -110,6 +111,7 @@ public class FormValidation {
             private void evalTextInputField() {
                 TextInputControl textField = (TextInputControl) this.srcControl.get();
                 boolean result = validator.isValid(textField.getText());
+                if (textField.getText().isEmpty()) result = true;
                 System.out.println(result);
                 try {
                     if (result)
@@ -122,11 +124,115 @@ public class FormValidation {
             }
         });
         //  add listener to the txtField
-        theField.focusedProperty().addListener((o,oldVal,newVal)->{
-            if(!newVal){
+        theField.focusedProperty().addListener((o, oldVal, newVal) -> {
+            if (!newVal) {
                 theField.validate();
             }
         });
     }
 
+    /**
+     * A method that checks if the input length is too long (from max value)
+     *
+     * @param theField  - the field to validate
+     * @param fieldName - the name of the field
+     * @param maxLength - max string length
+     */
+    public void maxLengthValidation(JFXTextField theField, String fieldName, int maxLength) {
+        theField.getValidators().add(new ValidatorBase("The " + fieldName + " field length is too long (max - " + maxLength + " characters") {
+            @Override
+            protected void eval() {
+                if (this.srcControl.get() instanceof TextInputControl) {
+                    this.evalTextInputField();
+                }
+            }
+
+            private void evalTextInputField() {
+                TextInputControl textField = (TextInputControl) this.srcControl.get();
+                boolean result = textField.getLength() > maxLength ? false : true;
+                System.out.println(result);
+                try {
+                    if (result)
+                        this.hasErrors.set(false);
+                    else
+                        this.hasErrors.set(true);
+                } catch (Exception var3) {
+                    this.hasErrors.set(true);
+                }
+            }
+        });
+        //  add listener to the txtField
+        theField.focusedProperty().addListener((o, oldVal, newVal) -> {
+            if (!newVal) {
+                theField.validate();
+            }
+        });
+    }
+
+    /**
+     * A method that checks if a string contains different characters than needed
+     *
+     * @param theField  - the field to validate
+     * @param fieldName - the name of the field
+     * @param theChars  - required characters
+     */
+    public void isContainsCharsValidation(JFXTextField theField, String fieldName, String theChars) {
+        theField.getValidators().add(new ValidatorBase(fieldName + "The " + fieldName + " field can only contain the following characters: " + theChars) {
+            @Override
+            protected void eval() {
+                if (this.srcControl.get() instanceof TextInputControl) {
+                    this.evalTextInputField();
+                }
+            }
+
+            private void evalTextInputField() {
+                TextInputControl textField = (TextInputControl) this.srcControl.get();
+                boolean result = textField.getText().matches(theChars);
+                try {
+                    if (result)
+                        this.hasErrors.set(false);
+                    else
+                        this.hasErrors.set(true);
+                } catch (Exception var3) {
+                    this.hasErrors.set(true);
+                }
+            }
+        });
+        //  add listener to the txtField
+        theField.focusedProperty().addListener((o, oldVal, newVal) -> {
+            if (!newVal) {
+                theField.validate();
+            }
+        });
+    }
+
+    public void isContainsOnlyNumbers(JFXTextField theField, String fieldName){
+        theField.getValidators().add(new ValidatorBase(fieldName + "The " + fieldName + " field can only contain digits") {
+            @Override
+            protected void eval() {
+                if (this.srcControl.get() instanceof TextInputControl) {
+                    this.evalTextInputField();
+                }
+            }
+
+            private void evalTextInputField() {
+                TextInputControl textField = (TextInputControl) this.srcControl.get();
+                boolean result = StringUtils.isNumeric(textField.getText());
+                try {
+                    if (result)
+                        this.hasErrors.set(false);
+                    else
+                        this.hasErrors.set(true);
+                } catch (Exception var3) {
+                    this.hasErrors.set(true);
+                }
+            }
+        });
+        //  add listener to the txtField
+        theField.focusedProperty().addListener((o, oldVal, newVal) -> {
+            if (!newVal) {
+                theField.validate();
+            }
+        });
+    }
 }
