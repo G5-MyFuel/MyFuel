@@ -203,7 +203,7 @@
                                                             </StackPane>
                                                          </children>
                                                       </GridPane>
-                                                      <JFXTextArea fx:id="noteTXT" focusColor="WHITE" prefHeight="169.0" prefWidth="402.0" promptText="Add Note" style="-fx-border-color: #2D4578;" unFocusColor="WHITE">
+                                                      <JFXTextArea fx:id="noteTXT" focusColor="WHITE" prefHeight="169.0" prefWidth="402.0" promptText="Add Note (max 150 digits)" style="-fx-border-color: #2D4578;" unFocusColor="WHITE">
                                                          <VBox.margin>
                                                             <Insets top="-10.0" />
                                                          </VBox.margin>
@@ -246,7 +246,7 @@
                                                             <Font name="System Bold" size="24.0" />
                                                          </font>
                                                       </Label>
-                                                      <GridPane maxWidth="439.0" prefHeight="155.0" prefWidth="439.0">
+                                                      <GridPane maxWidth="439.0" prefHeight="303.0" prefWidth="439.0">
                                                          <columnConstraints>
                                                             <ColumnConstraints hgrow="SOMETIMES" maxWidth="413.629638671875" minWidth="0.0" prefWidth="35.777801513671875" />
                                                             <ColumnConstraints hgrow="SOMETIMES" maxWidth="439.0" minWidth="10.0" prefWidth="301.0" />
@@ -257,7 +257,7 @@
                                                             <RowConstraints maxHeight="85.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                          </rowConstraints>
                                                          <children>
-                                                            <JFXTextField fx:id="emailAddressTXT" focusColor="#00add8" labelFloat="true" maxWidth="240.0" prefHeight="39.0" prefWidth="200.0" promptText="Email address (for invoice)" unFocusColor="BLUE" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                            <JFXTextField fx:id="emailAddressTXT" focusColor="#00add8" labelFloat="true" maxWidth="240.0" prefHeight="5.0" prefWidth="240.0" promptText="Email address (for invoice)" unFocusColor="BLUE" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                                                <font>
                                                                   <Font size="18.0" />
                                                                </font>

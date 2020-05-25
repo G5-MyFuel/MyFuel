@@ -5,14 +5,10 @@ import client.logic.NewPurchaseFuelForHomeHeatingLogic;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
-import com.jfoenix.validation.DoubleValidator;
-import com.jfoenix.validation.RequiredFieldValidator;
-import com.jfoenix.validation.base.ValidatorBase;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextInputControl;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 
@@ -27,12 +23,6 @@ public class NewPurchaseFuelForHomeHeatingController implements Initializable {
     private NewPurchaseFuelForHomeHeatingLogic newPurchaseFuelForHomeHeatingLogic;
     private FormValidation formValidation;
     //gui variables:
-    @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
-
     @FXML
     private Button btnOverview;
 
@@ -109,6 +99,9 @@ public class NewPurchaseFuelForHomeHeatingController implements Initializable {
     private Text EmptyStreetMSG;
 
     @FXML
+    private ImageView orderDetailsIndicatorTAB;
+
+    @FXML
     private ComboBox<?> shippingMethodComboBOX;
 
     @FXML
@@ -134,6 +127,9 @@ public class NewPurchaseFuelForHomeHeatingController implements Initializable {
 
     @FXML
     private Text shippingSummeryDetailsTXT;
+
+    @FXML
+    private ImageView shippingIndicatorTAB;
 
     @FXML
     private Text totalPricesOfAlllInUsdTXT;
@@ -162,10 +158,13 @@ public class NewPurchaseFuelForHomeHeatingController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        //
+        orderDetailsIndicatorTAB.setVisible(false);
+        shippingIndicatorTAB.setVisible(false);
         this.newPurchaseFuelForHomeHeatingLogic = NewPurchaseFuelForHomeHeatingLogic.getInstance();
         this.formValidation = FormValidation.getValidator();
         //
-        formValidation();
+        formValidation();   //set all fields validators
         /*  check all required fields are'nt empty:*/
 
         formValidation.isEmptyField(streetNameTXT, "Street Name");
@@ -177,22 +176,18 @@ public class NewPurchaseFuelForHomeHeatingController implements Initializable {
     }
 
     private void formValidation() {
-        //fuel quantity validation
+        /*  fuel quantity validation */
         formValidation.isEmptyField(fuelQuantityTXT, "Fuel Quantity");
-        formValidation.isDoubleNumberValidation(fuelQuantityTXT,"fuel Quantity");
-        formValidation.numberPositiveValidator(fuelQuantityTXT, "Fuel Quantity");
-        //clie
+        formValidation.isDoubleNumberValidation(fuelQuantityTXT, "fuel Quantity");
+        formValidation.numberPositiveValidation(fuelQuantityTXT, "Fuel Quantity");
+        /*  email address validation */
+        formValidation.emailAddressValidation(emailAddressTXT, "Email");
+        //TODO: street name validation
+        //TODO: apartment number validation
+        //TODO: city name validation
+        //TODO: zip code validation
+        //TODO: phone number validation
+        //TODO: note validation
     }
-
-
-
-    @FXML
-    void CheckEmailValidation() {
-        boolean validator;
-        validator = newPurchaseFuelForHomeHeatingLogic.isValidEmail(emailAddressTXT.getText());
-        System.out.println("The Email address " + emailAddressTXT.getText() + " is " + (validator ? "valid" : "invalid"));
-        incorrectEmailMSG.setVisible(!validator);
-    }
-
 
 }
