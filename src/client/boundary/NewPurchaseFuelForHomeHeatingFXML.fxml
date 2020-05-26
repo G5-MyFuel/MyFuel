@@ -248,9 +248,8 @@
                                                       </Label>
                                                       <GridPane maxWidth="439.0" prefHeight="160.0" prefWidth="439.0">
                                                          <columnConstraints>
-                                                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="413.629638671875" minWidth="0.0" prefWidth="35.777801513671875" />
-                                                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="439.0" minWidth="10.0" prefWidth="301.0" />
-                                                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="439.0" minWidth="10.0" prefWidth="104.0" />
+                                                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="413.629638671875" minWidth="0.0" prefWidth="29.22222900390625" />
+                                                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="439.0" minWidth="10.0" prefWidth="409.77777099609375" />
                                                          </columnConstraints>
                                                          <rowConstraints>
                                                             <RowConstraints maxHeight="85.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -292,11 +291,6 @@
                                                                   <Image url="@../../media/alerts/icons8_close_window_48px.png" />
                                                                </image>
                                                             </ImageView>
-                                                            <Text fx:id="incorrectFuelQtyMSG" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="Incorrect fuel quantity" textAlignment="CENTER" visible="false" GridPane.columnIndex="2">
-                                                               <font>
-                                                                  <Font name="Bell MT Bold" size="16.0" />
-                                                               </font>
-                                                            </Text>
                                                             <StackPane maxHeight="25.0" maxWidth="25.0" prefHeight="25.0" prefWidth="25.0" visible="false">
                                                                <children>
                                                                   <ImageView fitHeight="25.0" fitWidth="25.0" visible="false">
@@ -311,11 +305,6 @@
                                                                   </ImageView>
                                                                </children>
                                                             </StackPane>
-                                                            <Text fx:id="incorrectEmailMSG" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="Incorrect Email address" textAlignment="CENTER" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                                                               <font>
-                                                                  <Font name="Bell MT Bold" size="16.0" />
-                                                               </font>
-                                                            </Text>
                                                          </children>
                                                       </GridPane>
                                                       <Label alignment="CENTER" prefHeight="30.0" prefWidth="446.0" style="-fx-background-color: #DCDCDC; -fx-opacity: 1; -fx-background-radius: 30;" text="Delivery Address Details">
@@ -330,16 +319,17 @@
                                                         <columnConstraints>
                                                             <ColumnConstraints hgrow="SOMETIMES" maxWidth="413.629638671875" minWidth="10.0" prefWidth="37.111083984375" />
                                                           <ColumnConstraints hgrow="SOMETIMES" maxWidth="415.0" minWidth="10.0" prefWidth="290.77783203125" />
+                                                            <ColumnConstraints />
                                                         </columnConstraints>
                                                         <rowConstraints>
-                                                          <RowConstraints fillHeight="false" maxHeight="105.88882446289062" minHeight="10.0" prefHeight="105.88882446289062" vgrow="ALWAYS" />
+                                                          <RowConstraints fillHeight="false" maxHeight="70.0" minHeight="10.0" prefHeight="90.0" vgrow="ALWAYS" />
                                                           <RowConstraints maxHeight="85.0" minHeight="10.0" prefHeight="0.0" vgrow="SOMETIMES" />
                                                           <RowConstraints maxHeight="85.0" minHeight="10.0" prefHeight="0.0" vgrow="SOMETIMES" />
                                                             <RowConstraints maxHeight="85.0" minHeight="10.0" prefHeight="0.0" vgrow="SOMETIMES" />
                                                             <RowConstraints maxHeight="85.0" minHeight="10.0" prefHeight="0.0" vgrow="SOMETIMES" />
                                                         </rowConstraints>
                                                          <children>
-                                                            <JFXTextField fx:id="customerGenericDetailsTXT" disable="true" editable="false" focusColor="#2196f3" nodeOrientation="LEFT_TO_RIGHT" prefHeight="64.0" prefWidth="425.0" promptText="Customer Details - Auto Genarated from DB" GridPane.columnIndex="1" GridPane.columnSpan="2">
+                                                            <JFXTextField fx:id="customerGenericDetailsTXT" disable="true" editable="false" focusColor="#2196f3" nodeOrientation="LEFT_TO_RIGHT" prefHeight="70.0" prefWidth="401.0" promptText="Customer Details - Auto Genarated from DB" GridPane.columnIndex="1" GridPane.columnSpan="2">
                                                                <font>
                                                                   <Font size="18.0" />
                                                                </font>
