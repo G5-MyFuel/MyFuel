@@ -196,7 +196,7 @@ public class NewPurchaseFuelForHomeHeatingController implements Initializable {
         formValidation.maxLengthValidation(zipCodeTXT, "Zip code", 7);
         formValidation.isContainsOnlyNumbers(zipCodeTXT,"Zip code");
         //TODO: phone number validation
-
+//ss
         /* note validation */
         formValidation.maxLengthValidationTextArea(noteTXT,"Note",150);
     }
