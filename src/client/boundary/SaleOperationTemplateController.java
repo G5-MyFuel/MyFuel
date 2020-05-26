@@ -23,7 +23,9 @@ import java.util.ResourceBundle;
  */
 
 public class SaleOperationTemplateController implements Initializable {
-
+    private SaleOperationTemplateLogic newSaleOperationTemplateLogic;
+    private FormValidation formValidation;
+    //gui variables:
     @FXML
     private Button btnOverview;
 
@@ -59,21 +61,26 @@ public class SaleOperationTemplateController implements Initializable {
 
     @FXML
     private JFXComboBox<?> comboSpecialization1;
+    private SaleOperationTemplateLogic SaleOperationTemplateLogic;
 
     @FXML
     void handleAddTemplate(MouseEvent event) {
+        newTemplateDetails.setVisible(true);
+        btnAddTemplate.setVisible(false);
+        txtAddTemplate.setVisible(false);
 
     }
 
     @FXML
     void handleClicks(ActionEvent event) {
-        newTemplateDetails.setVisible(true);
 
     }
 
     @FXML
     void handleSaveTemplate(ActionEvent event) {
         newTemplateDetails.setVisible(false);
+        btnAddTemplate.setVisible(true);
+        txtAddTemplate.setVisible(true);
 
     }
 
@@ -82,13 +89,12 @@ public class SaleOperationTemplateController implements Initializable {
         newTemplateDetails.setVisible(false);
 
 
-        this.newPurchaseFuelForHomeHeatingLogic = NewPurchaseFuelForHomeHeatingLogic.getInstance();
+        this.newSaleOperationTemplateLogic = SaleOperationTemplateLogic.getInstance();
         this.formValidation = FormValidation.getValidator();
         //
-        formValidation();   //set all fields validators
+        //TODO: formValidation();   //set all fields validators
+
         /*  check all required fields are'nt empty:*/
-
-
 
         /*  check form input validation */
 
