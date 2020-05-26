@@ -330,7 +330,7 @@
                                              <children>
                                                 <Label layoutY="30.0" style="-fx-text-fill: #868282;" text="Costumer Type" />
                                                 <JFXComboBox fx:id="comboSpecialization1" layoutX="180.0" layoutY="18.0" prefHeight="40.0" prefWidth="306.0" />
-                                                <ImageView fitHeight="18.0" fitWidth="16.0" layoutX="87.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+                                                <ImageView fitHeight="18.0" fitWidth="16.0" layoutX="108.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
                                                       <Image url="@../../media/CostumerRegisterationMedia/help_16px.png" />
                                                    </image>
@@ -341,7 +341,7 @@
                                              <children>
                                                 <Label layoutY="30.0" style="-fx-text-fill: #868282;" text="Service Plan" />
                                                 <JFXComboBox fx:id="comboSpecialization12" layoutX="180.0" layoutY="18.0" prefHeight="40.0" prefWidth="306.0" />
-                                                <ImageView fitHeight="18.0" fitWidth="16.0" layoutX="70.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+                                                <ImageView fitHeight="18.0" fitWidth="16.0" layoutX="89.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
                                                       <Image url="@../../media/CostumerRegisterationMedia/help_16px.png" />
                                                    </image>
@@ -364,7 +364,7 @@
                                                    </padding>
                                                 </HBox>
                                                 <Label layoutY="30.0" style="-fx-text-fill: #868282;" text="Purchase Plan" />
-                                                <ImageView fitHeight="18.0" fitWidth="16.0" layoutX="80.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+                                                <ImageView fitHeight="18.0" fitWidth="16.0" layoutX="98.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
                                                       <Image url="@../../media/CostumerRegisterationMedia/help_16px.png" />
                                                    </image>
