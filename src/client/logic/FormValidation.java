@@ -1,5 +1,6 @@
 package client.logic;
 
+import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.validation.DoubleValidator;
 import com.jfoenix.validation.RequiredFieldValidator;
@@ -171,7 +172,6 @@ public class FormValidation {
 
     /**
      * A method that checks if a string contains different characters than needed
-     *
      * @param theField  - the field to validate
      * @param fieldName - the name of the field
      * @param theChars  - required characters
@@ -206,8 +206,13 @@ public class FormValidation {
         });
     }
 
+    /**
+     * A method that checks if a string contains only digits
+     * @param theField  - the field to validate
+     * @param fieldName - the name of the field
+     */
     public void isContainsOnlyNumbers(JFXTextField theField, String fieldName){
-        theField.getValidators().add(new ValidatorBase(fieldName + "The " + fieldName + " field can only contain digits") {
+        theField.getValidators().add(new ValidatorBase(fieldName + " field can only contain digits") {
             @Override
             protected void eval() {
                 if (this.srcControl.get() instanceof TextInputControl) {
@@ -218,6 +223,7 @@ public class FormValidation {
             private void evalTextInputField() {
                 TextInputControl textField = (TextInputControl) this.srcControl.get();
                 boolean result = StringUtils.isNumeric(textField.getText());
+                if(textField.getText().isEmpty()) result = true;
                 try {
                     if (result)
                         this.hasErrors.set(false);
@@ -235,4 +241,81 @@ public class FormValidation {
             }
         });
     }
+
+    /**
+     * A method that checks if a string contains only letters and spaces
+     * @param theField  - the field to validate
+     * @param fieldName - the name of the field
+     */
+    public void isContainsOnlyLetters(JFXTextField theField, String fieldName){
+        theField.getValidators().add(new ValidatorBase(fieldName + " field can only contain letters") {
+            @Override
+            protected void eval() {
+                if (this.srcControl.get() instanceof TextInputControl) {
+                    this.evalTextInputField();
+                }
+            }
+
+            private void evalTextInputField() {
+                TextInputControl textField = (TextInputControl) this.srcControl.get();
+                boolean result = StringUtils.isAlpha(textField.getText());
+                if(textField.getText().isEmpty()) result = true;
+                if(textField.getText().contains(" ")) result = true;
+                try {
+                    if (result)
+                        this.hasErrors.set(false);
+                    else
+                        this.hasErrors.set(true);
+                } catch (Exception var3) {
+                    this.hasErrors.set(true);
+                }
+            }
+        });
+        //  add listener to the txtField
+        theField.focusedProperty().addListener((o, oldVal, newVal) -> {
+            if (!newVal) {
+                theField.validate();
+            }
+        });
+    }
+
+    /**
+     * A method that checks if the input length is too long (from max value) - to TextArea
+     *
+     * @param theTextAreaField  - the field to validate
+     * @param fieldName - the name of the field
+     * @param maxLength - max string length
+     */
+    public void maxLengthValidationTextArea(JFXTextArea theTextAreaField, String fieldName, int maxLength) {
+        theTextAreaField.getValidators().add(new ValidatorBase(fieldName + " length is too long (max - " + maxLength + " characters)") {
+            @Override
+            protected void eval() {
+                if (this.srcControl.get() instanceof TextInputControl) {
+                    this.evalTextInputField();
+                }
+            }
+
+            private void evalTextInputField() {
+                TextInputControl textField = (TextInputControl) this.srcControl.get();
+                boolean result = textField.getLength() > maxLength ? false : true;
+                System.out.println(result);
+                try {
+                    if (result)
+                        this.hasErrors.set(false);
+                    else
+                        this.hasErrors.set(true);
+                } catch (Exception var3) {
+                    this.hasErrors.set(true);
+                }
+            }
+        });
+        //  add listener to the txtField
+        theTextAreaField.focusedProperty().addListener((o, oldVal, newVal) -> {
+            if (!newVal) {
+                theTextAreaField.validate();
+            }
+        });
+    }
+
+
 }

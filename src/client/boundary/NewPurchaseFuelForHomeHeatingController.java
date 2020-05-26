@@ -167,9 +167,8 @@ public class NewPurchaseFuelForHomeHeatingController implements Initializable {
         formValidation();   //set all fields validators
         /*  check all required fields are'nt empty:*/
 
-        formValidation.isEmptyField(ApartmentNumberTXT, "Apartment Number");
-        formValidation.isEmptyField(cityTXT, "City");
-        formValidation.isEmptyField(zipCodeTXT, "Zip code");
+
+
         /*  check form input validation */
 
     }
@@ -185,12 +184,21 @@ public class NewPurchaseFuelForHomeHeatingController implements Initializable {
         formValidation.isEmptyField(streetNameTXT, "Street Name");
         formValidation.maxLengthValidation(streetNameTXT, "Street Name", 25);
         /*  apartment number validation */
-        formValidation.maxLengthValidation(streetNameTXT, "Street Name", 5);
+        formValidation.isEmptyField(ApartmentNumberTXT, "Apartment Number");
+        formValidation.maxLengthValidation(ApartmentNumberTXT, "Street Name", 5);
         formValidation.isContainsOnlyNumbers(ApartmentNumberTXT,"Apartment Number");
-        //TODO: city name validation
-        //TODO: zip code validation
+        /* city name validation */
+        formValidation.isEmptyField(cityTXT, "City");
+        formValidation.maxLengthValidation(cityTXT, "City", 15);
+        formValidation.isContainsOnlyLetters(cityTXT,"City");
+        /* zip code validation */
+        formValidation.isEmptyField(zipCodeTXT, "Zip code");
+        formValidation.maxLengthValidation(zipCodeTXT, "Zip code", 7);
+        formValidation.isContainsOnlyNumbers(zipCodeTXT,"Zip code");
         //TODO: phone number validation
-        //TODO: note validation
+
+        /* note validation */
+        formValidation.maxLengthValidationTextArea(noteTXT,"Note",150);
     }
 
 }
