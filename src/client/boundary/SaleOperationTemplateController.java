@@ -6,6 +6,7 @@ import com.jfoenix.controls.JFXComboBox;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TableView;
 import javafx.scene.image.ImageView;
@@ -58,22 +59,36 @@ public class SaleOperationTemplateController implements Initializable {
     private Button btnNewTemplate;
 
     @FXML
-    private JFXComboBox<?> comboSpecialization;
+    private TextField TemplateName;
 
     @FXML
-    private JFXComboBox<?> comboSpecialization1;
-    private SaleOperationTemplateLogic SaleOperationTemplateLogic;
+    private ComboBox<?> ChooseGasTypeComboSpecialization;
+
+    @FXML
+    private ComboBox<?> DayComboSpecialization1;
+
+    @FXML
+    private  TextField StartHour;
+
+    @FXML
+    private  TextField EndHour;
+
+    @FXML
+    private  TextField MarketingAdForTemplate;
+
+    @FXML
+    private TextField DiscountPercentages;
+
+    @FXML
+    void handleClicks(ActionEvent event) {
+
+    }
 
     @FXML
     void handleAddTemplate(MouseEvent event) {
         newTemplateDetails.setVisible(true);
         btnAddTemplate.setVisible(false);
         txtAddTemplate.setVisible(false);
-
-    }
-
-    @FXML
-    void handleClicks(ActionEvent event) {
 
     }
 
@@ -99,4 +114,37 @@ public class SaleOperationTemplateController implements Initializable {
         /*  check form input validation */
 
     }
+
+    private void formValidation() {
+        /*  Template Name validation */
+        formValidation.isEmptyField(TemplateName, "Template Name");
+        formValidation.maxLengthValidation(TemplateName, "Template Name", 45);
+
+        /*  Discount Percentages validation */
+        formValidation.isEmptyField(DiscountPercentages, "Discount Percentages");
+        formValidation.isContainsOnlyNumbers(DiscountPercentages,"Discount Percentages");
+        formValidation.numberPositiveValidation(DiscountPercentages,"Discount Percentages");
+
+        /*  Gas Type validation */
+
+
+        formValidation.isEmptyField(ApartmentNumberTXT, "Apartment Number");
+        formValidation.maxLengthValidation(ApartmentNumberTXT, "Street Name", 5);
+        formValidation.isContainsOnlyNumbers(ApartmentNumberTXT,"Apartment Number");
+        /* city name validation */
+        formValidation.isEmptyField(cityTXT, "City");
+        formValidation.maxLengthValidation(cityTXT, "City", 15);
+        formValidation.isContainsOnlyLetters(cityTXT,"City");
+        /* zip code validation */
+        formValidation.isEmptyField(zipCodeTXT, "Zip code");
+        formValidation.maxLengthValidation(zipCodeTXT, "Zip code", 7);
+        formValidation.isContainsOnlyNumbers(zipCodeTXT,"Zip code");
+        //TODO: phone number validation
+
+
+
+        /* note validation */
+        formValidation.maxLengthValidationTextArea(noteTXT,"Note",150);
+    }
+
 }
