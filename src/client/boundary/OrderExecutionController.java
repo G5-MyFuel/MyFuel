@@ -110,9 +110,13 @@ public class OrderExecutionController {
         tableView.setVisible(true);
         DoneBtn.setVisible(false);
         DoneBtn.setDisable(true);
+        /* Fileds that cant be changed */
+        StationManagerField.setDisable(true);
+        StationNumberField.setDisable(true);
+        OrderDateField.setDisable(true);
+        FuelTypeField.setDisable(true);
+        QuantityField.setDisable(true);
+        //TODO: display DB table
     }
 
-    private void ShowOrderDetailsView () {
-        //TODO: show details from table
-    }
 }
