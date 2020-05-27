@@ -139,7 +139,7 @@
                                                 <Font name="System Bold" size="40.0" />
                                             </font>
                                         </Label>
-                                        <TableView layoutX="36.0" layoutY="231.0" prefHeight="253.0" prefWidth="763.0">
+                                        <TableView fx:id="TableSubscriptionType" layoutX="36.0" layoutY="231.0" prefHeight="253.0" prefWidth="763.0">
                                             <columns>
                                                 <TableColumn prefWidth="53.0" text="V" />
                                                 <TableColumn prefWidth="488.0" text="Subscription type" />
@@ -147,7 +147,7 @@
                                                 <TableColumn prefWidth="119.0" text="New price" />
                                             </columns>
                                         </TableView>
-                                        <Button layoutX="476.0" layoutY="570.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="89.0" style="-fx-background-color: #2D4578; -fx-background-radius: 50;" stylesheets="@style.css" text="Approved" />
+                                        <Button fx:id="btnApprovedRates" layoutX="476.0" layoutY="570.0" mnemonicParsing="false" onAction="#handleApprovedRates" prefHeight="42.0" prefWidth="89.0" style="-fx-background-color: #2D4578; -fx-background-radius: 50;" stylesheets="@style.css" text="Approved" />
                                     </children>
                                 </Pane>
                             </content>
