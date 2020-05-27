@@ -8,11 +8,13 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import sun.font.TrueTypeFont;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class OrderConfirmationController implements Initializable {
+    private OrderConfirmationController OrderConfirmationController;
 
     @FXML
     private Button btnOverview;
@@ -87,17 +89,17 @@ public class OrderConfirmationController implements Initializable {
 
     @FXML
     void returnToHomePage(MouseEvent event) {
-
+        //TODO: return to the an empty page with the logo
     }
 
     @FXML
     void signOut(MouseEvent event) {
-
+        //TODO: exit myFuel
     }
 
     @FXML
     void supplyFormPage(MouseEvent event) {
-
+        //TODO: show the page OrderExecution
     }
 
     public void initialize(URL location, ResourceBundle resources) {
@@ -105,7 +107,10 @@ public class OrderConfirmationController implements Initializable {
         hboxOrderConfirmation.setVisible(false);
         btnDone.setVisible(false);
         btnDone.setDisable(true);
+        tableView.setVisible(true);
     }
+
+
 
 
 }
