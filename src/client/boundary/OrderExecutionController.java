@@ -1,18 +1,26 @@
 package client.boundary;
 
 import client.logic.FormValidation;
+import client.logic.SaleOperationTemplateLogic;
 import com.jfoenix.controls.JFXTextField;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-
+/**
+ * @author Adi Lampert
+ * @see OrderExecutionController - the from's logic class
+ */
 public class OrderExecutionController {
     private OrderExecutionController OrderExecutionController;
 
@@ -72,6 +80,7 @@ public class OrderExecutionController {
 
     @FXML
     void OrderConfirmationCheck(MouseEvent event) {
+        //TODO: if there a check mark - DontBtn is not disable + update status
 
     }
 
@@ -96,6 +105,7 @@ public class OrderExecutionController {
     }
 
     public void initialize(URL location, ResourceBundle resources) {
+        hboxOrderConfirmation.setVisible(false);
         arrowImage.setVisible(false);
         tableView.setVisible(true);
         DoneBtn.setVisible(false);
