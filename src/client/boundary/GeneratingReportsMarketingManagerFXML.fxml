@@ -15,7 +15,6 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.boundary.GeneratingReportsMarketingManagerController">
    <children>
       <Pane prefHeight="804.0" prefWidth="1284.0" />
@@ -138,9 +137,9 @@
                                     <Font name="System Bold" size="40.0" />
                                  </font>
                               </Label>
-                              <Button layoutX="39.0" layoutY="327.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="89.0" style="-fx-background-color: #2D4578; -fx-background-radius: 50;" stylesheets="@style.css" text="Generate" />
-                              <JFXComboBox layoutX="295.0" layoutY="157.0" prefHeight="31.0" prefWidth="184.0" />
-                              <JFXTextField disable="true" focusColor="#00add8" labelFloat="true" layoutX="39.0" layoutY="240.0" prefHeight="47.0" prefWidth="252.0" promptText="Please enter a operation sale" unFocusColor="#868282">
+                              <Button fx:id="btnGenerateReport" layoutX="39.0" layoutY="327.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="89.0" style="-fx-background-color: #2D4578; -fx-background-radius: 50;" stylesheets="@style.css" text="Generate" />
+                              <JFXComboBox fx:id="ChooseReportToGenerateCombo" layoutX="295.0" layoutY="157.0" onAction="#handleChooseReportToGenerate" prefHeight="31.0" prefWidth="184.0" />
+                              <JFXTextField fx:id="EnterOperationSaleTXT" disable="true" focusColor="#00add8" labelFloat="true" layoutX="39.0" layoutY="240.0" onAction="#handleEnterOperationSale" prefHeight="47.0" prefWidth="252.0" promptText="Please enter a operation sale" unFocusColor="#868282">
                                  <padding>
                                     <Insets top="20.0" />
                                  </padding>
