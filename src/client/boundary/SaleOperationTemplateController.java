@@ -79,6 +79,8 @@ public class SaleOperationTemplateController implements Initializable {
     @FXML
     private TextField DiscountPercentages;
 
+
+
     @FXML
     void handleClicks(ActionEvent event) {
 
@@ -122,29 +124,28 @@ public class SaleOperationTemplateController implements Initializable {
 
         /*  Discount Percentages validation */
         formValidation.isEmptyField(DiscountPercentages, "Discount Percentages");
-        formValidation.isContainsOnlyNumbers(DiscountPercentages,"Discount Percentages");
-        formValidation.numberPositiveValidation(DiscountPercentages,"Discount Percentages");
+        formValidation.isContainsOnlyNumbers(DiscountPercentages, "Discount Percentages");
+        formValidation.numberPositiveValidation(DiscountPercentages, "Discount Percentages");
 
         /*  Gas Type validation */
+        formValidation.isEmptyField(ChooseGasTypeComboSpecialization, "Choose Gas Type");
 
+        /*  Day validation */
+        formValidation.isEmptyField(DayComboSpecialization1, "Day");
 
-        formValidation.isEmptyField(ApartmentNumberTXT, "Apartment Number");
-        formValidation.maxLengthValidation(ApartmentNumberTXT, "Street Name", 5);
-        formValidation.isContainsOnlyNumbers(ApartmentNumberTXT,"Apartment Number");
-        /* city name validation */
-        formValidation.isEmptyField(cityTXT, "City");
-        formValidation.maxLengthValidation(cityTXT, "City", 15);
-        formValidation.isContainsOnlyLetters(cityTXT,"City");
-        /* zip code validation */
-        formValidation.isEmptyField(zipCodeTXT, "Zip code");
-        formValidation.maxLengthValidation(zipCodeTXT, "Zip code", 7);
-        formValidation.isContainsOnlyNumbers(zipCodeTXT,"Zip code");
-        //TODO: phone number validation
+        /*  Start Hour validation */
+        formValidation.isEmptyField(StartHour, "Start Hour");
+        formValidation.isContainsOnlyNumbers(StartHour, "Start Hour");
+        formValidation.numberPositiveValidation(StartHour, "Start Hour");
 
+        /*  End Hour validation */
+        formValidation.isEmptyField(EndHour, "End Hour");
+        formValidation.isContainsOnlyNumbers(EndHour, "End Hour");
+        formValidation.numberPositiveValidation(EndHour, "End Hour");
 
+        /*  Marketing Ad For Template validation */
+        formValidation.isEmptyField(MarketingAdForTemplate, "Marketing Ad For Template");
 
-        /* note validation */
-        formValidation.maxLengthValidationTextArea(noteTXT,"Note",150);
     }
 
 }
