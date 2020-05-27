@@ -25,6 +25,12 @@ public class OrderExecutionController {
     private OrderExecutionController OrderExecutionController;
 
     @FXML
+    private Button MenuHomePageBtn;
+
+    @FXML
+    private Button MenuOrderConfirmationBtn;
+
+    @FXML
     private Button btnOverview;
 
     @FXML
