@@ -25,6 +25,7 @@ import java.util.ResourceBundle;
 public class SaleOperationTemplateController implements Initializable {
     private SaleOperationTemplateLogic newSaleOperationTemplateLogic;
     private FormValidation formValidation;
+
     //gui variables:
     @FXML
     private Button btnOverview;
@@ -87,7 +88,6 @@ public class SaleOperationTemplateController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         newTemplateDetails.setVisible(false);
-
 
         this.newSaleOperationTemplateLogic = SaleOperationTemplateLogic.getInstance();
         this.formValidation = FormValidation.getValidator();
