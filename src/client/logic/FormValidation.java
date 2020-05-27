@@ -9,6 +9,8 @@ import javafx.scene.control.TextInputControl;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.validator.routines.EmailValidator;
 
+import java.awt.*;
+
 /**
  * class that contains methods that checks form fields
  * @author daniel gabbay
@@ -25,11 +27,9 @@ public class FormValidation {
 
     /**
      * Required Input field Validation method
-     *
-     * @param theField  - the field to validate
-     * @param fieldName - the name of field
-     */
-    public static void isEmptyField(JFXTextField theField, String fieldName) {
+     *  @param theField  - the field to validate
+     * @param fieldName - the name of field*/
+    public static void isEmptyField(TextField theField, String fieldName) {
         RequiredFieldValidator reqInputValidator = new RequiredFieldValidator();
         reqInputValidator.setMessage(fieldName + " field is Required!");
         theField.getValidators().add(reqInputValidator);
@@ -40,11 +40,10 @@ public class FormValidation {
 
     /**
      * A method that checks if a field is a positive number
-     *
-     * @param theField  - the field to validate
+     *  @param theField  - the field to validate
      * @param fieldName - the name of field
      */
-    public void numberPositiveValidation(JFXTextField theField, String fieldName) {
+    public void numberPositiveValidation(TextField theField, String fieldName) {
         theField.getValidators().add(new ValidatorBase(fieldName + " must be a positive number") {
             @Override
             protected void eval() {
@@ -134,12 +133,11 @@ public class FormValidation {
 
     /**
      * A method that checks if the input length is too long (from max value)
-     *
-     * @param theField  - the field to validate
+     *  @param theField  - the field to validate
      * @param fieldName - the name of the field
      * @param maxLength - max string length
      */
-    public void maxLengthValidation(JFXTextField theField, String fieldName, int maxLength) {
+    public void maxLengthValidation(TextField theField, String fieldName, int maxLength) {
         theField.getValidators().add(new ValidatorBase("The " + fieldName + " field length is too long (max - " + maxLength + " characters") {
             @Override
             protected void eval() {
@@ -211,7 +209,7 @@ public class FormValidation {
      * @param theField  - the field to validate
      * @param fieldName - the name of the field
      */
-    public void isContainsOnlyNumbers(JFXTextField theField, String fieldName){
+    public void isContainsOnlyNumbers(TextField theField, String fieldName){
         theField.getValidators().add(new ValidatorBase(fieldName + " field can only contain digits") {
             @Override
             protected void eval() {
