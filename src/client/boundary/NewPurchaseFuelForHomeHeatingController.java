@@ -9,10 +9,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
@@ -20,8 +23,10 @@ import java.util.ResourceBundle;
  * @see NewPurchaseFuelForHomeHeatingLogic - the form's logic class
  */
 public class NewPurchaseFuelForHomeHeatingController implements Initializable {
+    private static NewPurchaseFuelForHomeHeatingController Instance = null;
     private NewPurchaseFuelForHomeHeatingLogic newPurchaseFuelForHomeHeatingLogic;
     private FormValidation formValidation;
+
     //gui variables:
     @FXML
     private Button btnOverview;
@@ -154,25 +159,37 @@ public class NewPurchaseFuelForHomeHeatingController implements Initializable {
 
     @FXML
     private Text deliveryAddressTXT;
-    //
 
+    @FXML
+    private ImageView nextOrderDetails;
+    //
+//    private ImageView xImg = new ImageView(new Image("src\\media\\PurchaseMedia\\X.png"));
+    private String vImgUrl = "src/media/PurchaseMedia/V.png";
+    private String xImgUrl = "src/media/PurchaseMedia/X.png";
+
+    //
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //
-        orderDetailsIndicatorTAB.setVisible(false);
-        shippingIndicatorTAB.setVisible(false);
         this.newPurchaseFuelForHomeHeatingLogic = NewPurchaseFuelForHomeHeatingLogic.getInstance();
         this.formValidation = FormValidation.getValidator();
-        //
-        formValidation();   //set all fields validators
-        /*  check all required fields are'nt empty:*/
+//        this.orderDetailsIndicatorTAB = new ImageView(xImgUrl);
 
-
-
-        /*  check form input validation */
+        /*  set all fields validators */
+       // formValidation();   //
 
     }
 
+    /**
+     * NewPurchaseFuelForHomeHeatingController Instance getter using SingleTone DesignPatterns
+     * @return Instance of controller class
+     */
+    public NewPurchaseFuelForHomeHeatingController getInstance() {
+        if (Instance == null)
+            Instance = new NewPurchaseFuelForHomeHeatingController();
+        return Instance;
+    }
+
+    //
     private void formValidation() {
         /*  fuel quantity validation */
         formValidation.isEmptyField(fuelQuantityTXT, "Fuel Quantity");
@@ -195,10 +212,25 @@ public class NewPurchaseFuelForHomeHeatingController implements Initializable {
         formValidation.isEmptyField(zipCodeTXT, "Zip code");
         formValidation.maxLengthValidation(zipCodeTXT, "Zip code", 7);
         formValidation.isContainsOnlyNumbers(zipCodeTXT,"Zip code");
-        //TODO: phone number validation
-//ss
+        /* phone number validation */
+        formValidation.phoneNumberValidation(anotherContactPhoneNumberTXT,"");
         /* note validation */
         formValidation.maxLengthValidationTextArea(noteTXT,"Note",150);
+        //todo:בדיקת תקינות קלט לאחר מעבר כל מסך (מסך ראשון יהיה פה) לבדוק שכל הפונקציות מחזירות אינדיקציה שמה שנדרש תקין ואז האינדיקטור יהיה V אחרת X
     }
 
+    public void checkOrderDetails(){
+        ArrayList<Object> guiObjects = new ArrayList<Object>();
+        guiObjects.add(fuelQuantityTXT);
+        guiObjects.add(streetNameTXT);
+        guiObjects.add(ApartmentNumberTXT);
+        guiObjects.add(cityTXT);
+        guiObjects.add(zipCodeTXT);
+        //
+        for(Object guiObj:guiObjects){
+            if(!newPurchaseFuelForHomeHeatingLogic.validatePage(guiObj)){
+
+            }
+        }
+    }
 }

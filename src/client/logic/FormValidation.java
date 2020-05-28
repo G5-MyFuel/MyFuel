@@ -10,6 +10,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.validator.routines.EmailValidator;
 
 import java.awt.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * class that contains methods that checks form fields
@@ -27,9 +29,9 @@ public class FormValidation {
 
     /**
      * Required Input field Validation method
-     *  @param theField  - the field to validate
+     * @param theField  - the field to validate
      * @param fieldName - the name of field*/
-    public static void isEmptyField(TextField theField, String fieldName) {
+    public static void isEmptyField(JFXTextField theField, String fieldName) {
         RequiredFieldValidator reqInputValidator = new RequiredFieldValidator();
         reqInputValidator.setMessage(fieldName + " field is Required!");
         theField.getValidators().add(reqInputValidator);
@@ -43,7 +45,7 @@ public class FormValidation {
      *  @param theField  - the field to validate
      * @param fieldName - the name of field
      */
-    public void numberPositiveValidation(TextField theField, String fieldName) {
+    public void numberPositiveValidation(JFXTextField theField, String fieldName) {
         theField.getValidators().add(new ValidatorBase(fieldName + " must be a positive number") {
             @Override
             protected void eval() {
@@ -137,7 +139,7 @@ public class FormValidation {
      * @param fieldName - the name of the field
      * @param maxLength - max string length
      */
-    public void maxLengthValidation(TextField theField, String fieldName, int maxLength) {
+    public void maxLengthValidation(JFXTextField theField, String fieldName, int maxLength) {
         theField.getValidators().add(new ValidatorBase("The " + fieldName + " field length is too long (max - " + maxLength + " characters") {
             @Override
             protected void eval() {
@@ -209,7 +211,7 @@ public class FormValidation {
      * @param theField  - the field to validate
      * @param fieldName - the name of the field
      */
-    public void isContainsOnlyNumbers(TextField theField, String fieldName){
+    public void isContainsOnlyNumbers(JFXTextField theField, String fieldName){
         theField.getValidators().add(new ValidatorBase(fieldName + " field can only contain digits") {
             @Override
             protected void eval() {
@@ -316,4 +318,37 @@ public class FormValidation {
     }
 
 
+    public void phoneNumberValidation(JFXTextField theField, String fieldName) {
+        theField.getValidators().add(new ValidatorBase(fieldName + " is wrong") {
+            @Override
+            protected void eval() {
+                if (this.srcControl.get() instanceof TextInputControl) {
+                    this.evalTextInputField();
+                }
+            }
+
+            private void evalTextInputField() {
+                TextInputControl textField = (TextInputControl) this.srcControl.get();
+                Pattern pattern = Pattern.compile("^(\\d{3}[- .]?){2}\\d{4}$");
+                Matcher matcher = pattern.matcher(textField.getText());
+                boolean result = matcher.matches();
+                if(textField.getText().isEmpty()) result = true;
+                if(textField.getText().contains(" ")) result = true;
+                try {
+                    if (result)
+                        this.hasErrors.set(false);
+                    else
+                        this.hasErrors.set(true);
+                } catch (Exception var3) {
+                    this.hasErrors.set(true);
+                }
+            }
+        });
+        //  add listener to the txtField
+        theField.focusedProperty().addListener((o, oldVal, newVal) -> {
+            if (!newVal) {
+                theField.validate();
+            }
+        });
+    }
 }
