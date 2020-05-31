@@ -131,16 +131,13 @@
                             <content>
                                 <Pane prefHeight="796.0" prefWidth="1062.0" style="-fx-position-shape: center; -fx-border-color: transparent;">
                                     <children>
-                                        <Text layoutX="606.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Discounts for a regular monthly subscription - single vehicle:" wrappingWidth="412.6708984375" />
-                                        <Text layoutX="606.0" layoutY="175.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Discount for full monthly subscription (for single vehicle):" wrappingWidth="412.6708984375" />
-                                        <Text layoutX="592.0" layoutY="223.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Discount for a regular monthly subscription - number of vehicles" wrappingWidth="412.6708984375" />
                                         <Label layoutX="39.0" layoutY="55.0" text="Setting Discount Rates" textFill="#2d4578">
                                             <font>
                                                 <Font name="System Bold" size="40.0" />
                                             </font>
                                         </Label>
                                         <Label layoutX="56.0" layoutY="138.0" text="Please Choose Subscription Type:" />
-                              <JFXComboBox fx:id="ChooseSubscriptionTypeCombo" layoutX="301.0" layoutY="133.0" onAction="#handleChoseSubscriptionType" prefHeight="31.0" prefWidth="148.0" />
+                              <JFXComboBox fx:id="ChooseSubscriptionTypeCombo" layoutX="301.0" layoutY="133.0" onAction="#handleChoseSubscriptionType" prefHeight="31.0" prefWidth="366.0" />
                               <JFXTextField fx:id="ShowCurrentRateTXT" focusColor="#00add8" labelFloat="true" layoutX="301.0" layoutY="201.0" onAction="#handleShowCurrentRate" prefHeight="52.0" prefWidth="139.0" promptText="Current price:" unFocusColor="#868282">
                                  <padding>
                                     <Insets bottom="5.0" top="20.0" />
