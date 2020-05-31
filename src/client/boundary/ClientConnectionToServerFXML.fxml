@@ -6,19 +6,13 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="ap" prefHeight="248.0" prefWidth="399.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.boundary.ClientConnectionGuiController">
+<AnchorPane fx:id="ap" prefHeight="248.0" prefWidth="399.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.boundary.ClientConnectionToServer">
     <children>
         <AnchorPane prefHeight="248.0" prefWidth="399.0">
             <children>
-                <TextField fx:id="ipAddress" layoutX="114.0" layoutY="93.0" prefHeight="31.0" prefWidth="187.0" text="localhost" />
-                <Text layoutX="30.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="IP" textAlignment="CENTER" wrappingWidth="73.00000223517418">
-                    <font>
-                        <Font size="16.0" />
-                    </font>
-                </Text>
-                <Button fx:id="btnConnect" layoutX="301.0" layoutY="193.0" mnemonicParsing="false" onAction="#setServerIP" onMouseClicked="#setServerIP" text="connect" textAlignment="RIGHT" />
-                <TextField fx:id="port" layoutX="116.0" layoutY="146.0" />
-                <Text layoutX="30.0" layoutY="167.0" strokeType="OUTSIDE" strokeWidth="0.0" text="port" textAlignment="CENTER" wrappingWidth="73.00000223517418">
+                <Button fx:id="btnConnect" layoutX="170.0" layoutY="186.0" mnemonicParsing="false" onAction="#setServerIP" onMouseClicked="#setServerIP" text="connect" textAlignment="RIGHT" />
+                <TextField fx:id="port" layoutX="142.0" layoutY="112.0" />
+                <Text layoutX="47.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="port" textAlignment="CENTER" wrappingWidth="73.00000223517418">
                     <font>
                         <Font size="16.0" />
                     </font>

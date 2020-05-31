@@ -1,5 +1,6 @@
 package client.logic;
 
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.validation.DoubleValidator;
@@ -9,12 +10,12 @@ import javafx.scene.control.TextInputControl;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.validator.routines.EmailValidator;
 
-import java.awt.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
  * class that contains methods that checks form fields
+ *
  * @author daniel gabbay
  */
 public class FormValidation {
@@ -29,8 +30,10 @@ public class FormValidation {
 
     /**
      * Required Input field Validation method
+     *
      * @param theField  - the field to validate
-     * @param fieldName - the name of field*/
+     * @param fieldName - the name of field
+     */
     public static void isEmptyField(JFXTextField theField, String fieldName) {
         RequiredFieldValidator reqInputValidator = new RequiredFieldValidator();
         reqInputValidator.setMessage(fieldName + " field is Required!");
@@ -42,7 +45,8 @@ public class FormValidation {
 
     /**
      * A method that checks if a field is a positive number
-     *  @param theField  - the field to validate
+     *
+     * @param theField  - the field to validate
      * @param fieldName - the name of field
      */
     public void numberPositiveValidation(JFXTextField theField, String fieldName) {
@@ -135,7 +139,8 @@ public class FormValidation {
 
     /**
      * A method that checks if the input length is too long (from max value)
-     *  @param theField  - the field to validate
+     *
+     * @param theField  - the field to validate
      * @param fieldName - the name of the field
      * @param maxLength - max string length
      */
@@ -172,6 +177,7 @@ public class FormValidation {
 
     /**
      * A method that checks if a string contains different characters than needed
+     *
      * @param theField  - the field to validate
      * @param fieldName - the name of the field
      * @param theChars  - required characters
@@ -208,10 +214,11 @@ public class FormValidation {
 
     /**
      * A method that checks if a string contains only digits
+     *
      * @param theField  - the field to validate
      * @param fieldName - the name of the field
      */
-    public void isContainsOnlyNumbers(JFXTextField theField, String fieldName){
+    public void isContainsOnlyNumbers(JFXTextField theField, String fieldName) {
         theField.getValidators().add(new ValidatorBase(fieldName + " field can only contain digits") {
             @Override
             protected void eval() {
@@ -223,7 +230,7 @@ public class FormValidation {
             private void evalTextInputField() {
                 TextInputControl textField = (TextInputControl) this.srcControl.get();
                 boolean result = StringUtils.isNumeric(textField.getText());
-                if(textField.getText().isEmpty()) result = true;
+                if (textField.getText().isEmpty()) result = true;
                 try {
                     if (result)
                         this.hasErrors.set(false);
@@ -244,10 +251,11 @@ public class FormValidation {
 
     /**
      * A method that checks if a string contains only letters and spaces
+     *
      * @param theField  - the field to validate
      * @param fieldName - the name of the field
      */
-    public void isContainsOnlyLetters(JFXTextField theField, String fieldName){
+    public void isContainsOnlyLetters(JFXTextField theField, String fieldName) {
         theField.getValidators().add(new ValidatorBase(fieldName + " field can only contain letters") {
             @Override
             protected void eval() {
@@ -259,8 +267,8 @@ public class FormValidation {
             private void evalTextInputField() {
                 TextInputControl textField = (TextInputControl) this.srcControl.get();
                 boolean result = StringUtils.isAlpha(textField.getText());
-                if(textField.getText().isEmpty()) result = true;
-                if(textField.getText().contains(" ")) result = true;
+                if (textField.getText().isEmpty()) result = true;
+                if (textField.getText().contains(" ")) result = true;
                 try {
                     if (result)
                         this.hasErrors.set(false);
@@ -282,9 +290,9 @@ public class FormValidation {
     /**
      * A method that checks if the input length is too long (from max value) - to TextArea
      *
-     * @param theTextAreaField  - the field to validate
-     * @param fieldName - the name of the field
-     * @param maxLength - max string length
+     * @param theTextAreaField - the field to validate
+     * @param fieldName        - the name of the field
+     * @param maxLength        - max string length
      */
     public void maxLengthValidationTextArea(JFXTextArea theTextAreaField, String fieldName, int maxLength) {
         theTextAreaField.getValidators().add(new ValidatorBase(fieldName + " length is too long (max - " + maxLength + " characters)") {
@@ -319,6 +327,7 @@ public class FormValidation {
 
     /**
      * Method for checking phone number integrity
+     *
      * @param theField  - the field to validate
      * @param fieldName - the name of field
      */
@@ -336,8 +345,8 @@ public class FormValidation {
                 Pattern pattern = Pattern.compile("^(\\d{3}[- .]?){2}\\d{4}$");
                 Matcher matcher = pattern.matcher(textField.getText());
                 boolean result = matcher.matches();
-                if(textField.getText().isEmpty()) result = true;
-                if(textField.getText().contains(" ")) result = true;
+                if (textField.getText().isEmpty()) result = true;
+                if (textField.getText().contains(" ")) result = true;
                 try {
                     if (result)
                         this.hasErrors.set(false);
@@ -356,5 +365,37 @@ public class FormValidation {
         });
     }
 
+    public void checkIfComboBoxSelectValues(JFXComboBox jfxComboBox, String fieldName) {
+        jfxComboBox.getValidators().add(new ValidatorBase("No " + fieldName + " selected") {
+            @Override
+            protected void eval() {
+                if (this.srcControl.get() instanceof TextInputControl) {
+                    this.evalTextInputField();
+                }
+            }
 
+            private void evalTextInputField() {
+                TextInputControl textField = (TextInputControl) this.srcControl.get();
+                Pattern pattern = Pattern.compile("^(\\d{3}[- .]?){2}\\d{4}$");
+                Matcher matcher = pattern.matcher(textField.getText());
+                boolean result = matcher.matches();
+                if (textField.getText().isEmpty()) result = true;
+                if (textField.getText().contains(" ")) result = true;
+                try {
+                    if (result)
+                        this.hasErrors.set(false);
+                    else
+                        this.hasErrors.set(true);
+                } catch (Exception var3) {
+                    this.hasErrors.set(true);
+                }
+            }
+        });
+        //  add listener to the txtField
+        jfxComboBox.focusedProperty().addListener((o, oldVal, newVal) -> {
+            if (!newVal) {
+                jfxComboBox.validate();
+            }
+        });
+    }
 }

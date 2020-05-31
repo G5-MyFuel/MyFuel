@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
- * @author hani
+ * @author Hana Wiener
  * @see SaleOperationTemplateLogic - the form's logic class
  */
 
