@@ -1,10 +1,13 @@
 package client.boundary;
 
+import client.ClientApp;
 import client.logic.FormValidation;
 import client.logic.NewPurchaseFuelForHomeHeatingLogic;
 import client.logic.SettingDiscountRatesLogic;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import common.tools.Message;
+import common.tools.OperationType;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -83,6 +86,11 @@ public class SettingDiscountRatesController implements Initializable {
     void handleChoseSubscriptionType(ActionEvent event) {
 
         /*צריך להשוות את המנוי הנבחר עם המידע ב-DB ולהציג את המחיר הקיים.todo:*/
+
+        //String SubscriptionType = ChooseSubscriptionTypeCombo.getValue();
+        String SubscriptionType = "SELECT * FROM `DiscountRates` WHERE `Subscription type` LIKE '" + ChooseSubscriptionTypeCombo.getValue() + "');";
+        ClientApp.client.handleMessageFromClientUI(new Message(OperationType.getRequirementData, (Object)SubscriptionType));  //send the new employee jobTitle to DB
+        ShowCurrentRateTXT.setText(SubscriptionType);
         ShowCurrentRateTXT.setVisible(true);
         ShowCurrentRateTXT.setEditable(false);
         ShowNewRateTXT.setVisible(true);

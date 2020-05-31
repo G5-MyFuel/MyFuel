@@ -1,6 +1,7 @@
 package client;
 
 import client.boundary.LoginToSystemController;
+import client.boundary.SettingDiscountRatesController;
 import common.tools.Message;
 
 /**
