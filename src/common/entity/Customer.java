@@ -11,8 +11,8 @@ public class Customer extends User {
     private CreditCard CustomerCreditCard;
     private boolean purchasePlan;
 
-    public Customer(String ID,String CustomerPassword, String Fname, String Lname, String emailAdress, CreditCard customerCreditCard,boolean purchasePlan) {
-        super(ID, CustomerPassword, Fname, Lname, emailAdress);
+    public Customer(int ID,String CustomerPassword, String Fname, String Lname, String emailAdress, CreditCard customerCreditCard,boolean purchasePlan) {
+        super(ID,1, CustomerPassword, Fname, Lname, emailAdress);
         this.CustomerCreditCard = customerCreditCard;
         this.purchasePlan = purchasePlan;
     }
