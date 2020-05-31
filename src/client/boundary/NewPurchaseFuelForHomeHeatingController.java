@@ -31,6 +31,7 @@ import java.util.ResourceBundle;
  * @see NewPurchaseFuelForHomeHeatingLogic - the form's logic class
  */
 public class NewPurchaseFuelForHomeHeatingController implements Initializable {
+
     private static NewPurchaseFuelForHomeHeatingController Instance = null;
     private NewPurchaseFuelForHomeHeatingLogic newPurchaseFuelForHomeHeatingLogic;
     private FormValidation formValidation;
