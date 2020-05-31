@@ -22,6 +22,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.Clock;
 import java.util.ResourceBundle;
@@ -35,7 +36,7 @@ import java.util.ResourceBundle;
 public class CustomerRegistrationController implements Initializable {
 
     private static CustomerRegistrationController Instance = null;
-    private CustomerRegistrationLogic CustomerRegistrationFXML1Logic;
+    private CustomerRegistrationLogic CustomerRegistrationLogic;
     private FormValidation formValidation; //daniel implementation have to look before use** ~~~~~~~~~~~~~
 
     /*Gui variables:
@@ -123,13 +124,17 @@ public class CustomerRegistrationController implements Initializable {
     private Button FinishButton;
 
 
+
+    private AnchorPane paymentPage;
+
+
     private ObservableList<String> CostumerType = FXCollections.observableArrayList("Private", "Company");
 
     private ObservableList<String> ServicePlanType = FXCollections.observableArrayList("EXLUSIVE", "MULTIPLE_STATIONS");
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.CustomerRegistrationFXML1Logic = CustomerRegistrationFXML1Logic.getInstance();
+        this.CustomerRegistrationLogic = CustomerRegistrationLogic.getInstance();
         //
         //
 
@@ -160,6 +165,17 @@ public class CustomerRegistrationController implements Initializable {
     @FXML
     void addVehicleButton(MouseEvent event) {
         VehicleInformationSplitPane.setVisible(true);
+
+
+
+
+    }
+
+    @FXML
+    void creditCardLinkOnClick(MouseEvent event) throws IOException {
+        FXMLLoader pageLoader2 = new FXMLLoader();
+        pageLoader2.setLocation(getClass().getResource("Payment Window"));
+        paymentPage = pageLoader2.load();
 
     }
 

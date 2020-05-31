@@ -1,5 +1,10 @@
 package client.logic;
 
+/**
+ * @author itay
+ * @see CustomerRegistrationLogic - the form's logic class
+ */
+
 public class CustomerRegistrationLogic {
 
     /*Logic Variables*/

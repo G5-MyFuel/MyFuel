@@ -273,12 +273,12 @@
                                     <Label layoutX="65.0" layoutY="181.0" text="Add Vehicle" />
                                     <SplitPane fx:id="VehicleInformationSplitPane" dividerPositions="0.16161616161616163" layoutX="537.0" layoutY="215.0" orientation="VERTICAL" prefHeight="245.0" prefWidth="347.0">
                                       <items>
-                                        <AnchorPane focusTraversable="true" minHeight="0.0" minWidth="0.0" prefHeight="35.0" prefWidth="335.0" style="-fx-background-color: #fcf8e8;">
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="35.0" prefWidth="335.0" style="-fx-background-color: #fcf8e8;">
                                              <children>
                                                 <Label alignment="CENTER" layoutX="96.0" layoutY="7.0" style="-fx-font-weight: Bold;" text="Fill in Vehicle Information" />
                                              </children>
                                           </AnchorPane>
-                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="184.0" prefWidth="345.0" style="-fx-background-color: #fcf8e8;">
+                                        <AnchorPane style="-fx-background-color: #fcf8e8;">
                                              <children>
                                                 <Button fx:id="saveVehicleButton" layoutX="152.0" layoutY="151.0" mnemonicParsing="false" text="Save" />
                                                 <JFXTextField fx:id="VehicleIDtxt" focusColor="#00add8" labelFloat="true" layoutX="32.0" layoutY="28.0" prefHeight="25.0" prefWidth="281.0" promptText="Vehicle ID" unFocusColor="#868282" />

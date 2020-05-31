@@ -20,7 +20,7 @@
         <Pane prefHeight="804.0" prefWidth="1284.0" />
         <HBox prefHeight="804.0" prefWidth="1258.0">
             <children>
-                <AnchorPane prefHeight="749.0" prefWidth="235.0" style="-fx-background-color: #2D4578;">
+                <AnchorPane prefHeight="749.0" prefWidth="235.0" style="-fx-background-color: #2d4578;">
                     <children>
                         <Pane layoutX="-3.0" layoutY="480.0" prefHeight="325.0" prefWidth="238.0">
                             <children>
@@ -147,7 +147,7 @@
                                  </padding>
                               </JFXTextField>
                               <Button fx:id="btnSetNewRate" layoutX="301.0" layoutY="398.0" mnemonicParsing="false" onAction="#handleSetNewRate" prefHeight="42.0" prefWidth="122.0" style="-fx-background-color: #2D4578; -fx-background-radius: 50;" stylesheets="@style.css" text="Set New Rate" />
-                              <JFXTextField fx:id="ShowCurrentRateTXT1" focusColor="#00add8" labelFloat="true" layoutX="301.0" layoutY="286.0" onAction="#handleShowCurrentRate" prefHeight="52.0" prefWidth="139.0" promptText="New price:" unFocusColor="#868282">
+                              <JFXTextField fx:id="ShowNewRateTXT" focusColor="#00add8" labelFloat="true" layoutX="301.0" layoutY="286.0" onAction="#handleShowNewRate" prefHeight="52.0" prefWidth="139.0" promptText="New price:" unFocusColor="#868282">
                                  <padding>
                                     <Insets bottom="5.0" top="20.0" />
                                  </padding>

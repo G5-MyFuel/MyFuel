@@ -1,12 +1,22 @@
 package client.boundary;
 
+import client.logic.FormValidation;
+import client.logic.NewPurchaseFuelForHomeHeatingLogic;
+import client.logic.SettingDiscountRatesLogic;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 
-public class SettingDiscountRatesController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class SettingDiscountRatesController implements Initializable {
+    private static SettingDiscountRatesController Instance = null;
+    private SettingDiscountRatesLogic settingDiscountRatesLogic;
+    private FormValidation formValidation;
 
     @FXML
     private Button btnOverview;
@@ -21,7 +31,7 @@ public class SettingDiscountRatesController {
     private Button btnSignout;
 
     @FXML
-    private JFXComboBox<?> ChooseSubscriptionTypeCombo;
+    private JFXComboBox<String> ChooseSubscriptionTypeCombo;
 
     @FXML
     private JFXTextField ShowCurrentRateTXT;
@@ -30,7 +40,26 @@ public class SettingDiscountRatesController {
     private Button btnSetNewRate;
 
     @FXML
-    private JFXTextField ShowCurrentRateTXT1;
+    private JFXTextField ShowNewRateTXT;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        this.settingDiscountRatesLogic = SettingDiscountRatesLogic.getInstance();
+        //this.formValidation = FormValidation.getValidator();
+        ShowCurrentRateTXT.setVisible(false);
+        ShowNewRateTXT.setVisible(false);
+        //ChooseSubscriptionTypeCombo.set
+        //this.shippingIndicatorTAB1.setVisible(false);
+        /*  set all fields validators */
+        //formValidation();   //
+        /* set form items */
+        //setShippingTab();
+    }
+
+    /*private void formValidation() {
+
+        
+    }*/
 
     @FXML
     void handleChoseSubscriptionType(ActionEvent event) {
@@ -49,6 +78,11 @@ public class SettingDiscountRatesController {
 
     @FXML
     void handleShowCurrentRate(ActionEvent event) {
+
+    }
+
+    @FXML
+    void handleShowNewRate(ActionEvent event) {
 
     }
 
