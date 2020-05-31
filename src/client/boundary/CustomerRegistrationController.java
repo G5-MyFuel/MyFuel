@@ -92,10 +92,10 @@ public class CustomerRegistrationController implements Initializable {
     private JFXTextField VehicleIDtxt;
 
     @FXML
-    private SplitPane VehicleInformationSplitPane;
+    private Pane VehicleInformationPane;
 
     @FXML
-    private JFXComboBox<?> GasTypeChoiseBox;
+    private JFXComboBox<String> GasTypeChoiseBox;
 
     @FXML
     private ImageView backButtonVehicalToPersonal;
@@ -128,13 +128,11 @@ public class CustomerRegistrationController implements Initializable {
     private Pane mainPane;
 
 
-
-
-
-
     private ObservableList<String> CostumerType = FXCollections.observableArrayList("Private", "Company");
 
     private ObservableList<String> ServicePlanType = FXCollections.observableArrayList("EXLUSIVE", "MULTIPLE_STATIONS");
+
+    private ObservableList<String> GasType = FXCollections.observableArrayList("Solar", "Benzin");
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -145,8 +143,9 @@ public class CustomerRegistrationController implements Initializable {
         mainPane.setDisable(true);
 
         //disable vehicle information window
-        VehicleInformationSplitPane.setVisible(false);
+        VehicleInformationPane.setVisible(false);
 
+        GasTypeChoiseBox.setItems(GasType);
         CostumertypeChoiceBox.setItems(CostumerType);
         ServicePlanChoiseBox.setItems(ServicePlanType);
 
@@ -162,20 +161,25 @@ public class CustomerRegistrationController implements Initializable {
             Instance = new CustomerRegistrationController();
         return Instance;
     }
+
     @FXML
-    void addCostumerOnClick(MouseEvent event){
+    void addCostumerOnClick(MouseEvent event) {
         mainPane.setVisible(true);
         mainPane.setDisable(false);
     }
 
     @FXML
-    void handleClicks(ActionEvent event) {
+    void ClickSaveVehicleButton(MouseEvent event) {
+        CustomerRegistrationLogic.createVehicle(VehicleIDtxt.getText(),GasTypeChoiseBox.getValue());
+        ObservableList<Vehicle> VehicleToTbale = FXCollections.observableArrayList(CustomerRegistrationLogic.getCostumerVehicle());
+
 
     }
 
+
     @FXML
-    void addVehicleButton(MouseEvent event) {
-        VehicleInformationSplitPane.setVisible(true);
+    void setVehicleInfoVisible(MouseEvent event) {
+        VehicleInformationPane.setVisible(true);
     }
 
     @FXML
@@ -196,6 +200,11 @@ public class CustomerRegistrationController implements Initializable {
     @FXML
     void backwardButtonOnClick(MouseEvent event) {
         vehicleMangTAB.getTabPane().getSelectionModel().selectPrevious();
+    }
+
+    @FXML
+    void handleClicks(ActionEvent event) {
+
     }
 
 

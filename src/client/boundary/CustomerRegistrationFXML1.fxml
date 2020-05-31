@@ -204,7 +204,7 @@
                                                 </JFXTextField>
                                                 <Pane nodeOrientation="LEFT_TO_RIGHT" prefHeight="73.0" prefWidth="306.0">
                                                    <children>
-                                                      <Hyperlink fx:id="CreditCardLink" layoutX="87.0" layoutY="25.0" text="Credit Card Details (Optional)" />
+                                                      <Hyperlink fx:id="CreditCardLink" layoutX="87.0" layoutY="25.0" onMouseClicked="#creditCardLinkOnClick" text="Credit Card Details (Optional)" />
                                                       <ImageView fitHeight="47.0" fitWidth="58.0" layoutX="29.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
                                                             <Image url="@../../media/CostumerRegisterationMedia/card_security_40px.png" />
@@ -262,7 +262,7 @@
                                           </AnchorPane>
                                       </content>
                                     </ScrollPane>
-                                    <ImageView fx:id="addVehicleButton" accessibleRole="BUTTON" fitHeight="33.0" fitWidth="35.0" layoutX="24.0" layoutY="173.0" onMouseClicked="#addVehicleButton" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="addVehicleButton" accessibleRole="BUTTON" fitHeight="33.0" fitWidth="35.0" layoutX="24.0" layoutY="173.0" onMouseClicked="#setVehicleInfoVisible" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../../media/CostumerRegisterationMedia/add_40px.png" />
                                        </image>
@@ -271,22 +271,6 @@
                                        </cursor>
                                     </ImageView>
                                     <Label layoutX="65.0" layoutY="181.0" text="Add Vehicle" />
-                                    <SplitPane fx:id="VehicleInformationSplitPane" dividerPositions="0.16161616161616163" layoutX="537.0" layoutY="215.0" orientation="VERTICAL" prefHeight="245.0" prefWidth="347.0">
-                                      <items>
-                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="35.0" prefWidth="335.0" style="-fx-background-color: #fcf8e8;">
-                                             <children>
-                                                <Label alignment="CENTER" layoutX="96.0" layoutY="7.0" style="-fx-font-weight: Bold;" text="Fill in Vehicle Information" />
-                                             </children>
-                                          </AnchorPane>
-                                        <AnchorPane style="-fx-background-color: #fcf8e8;">
-                                             <children>
-                                                <Button fx:id="saveVehicleButton" layoutX="152.0" layoutY="151.0" mnemonicParsing="false" text="Save" />
-                                                <JFXTextField fx:id="VehicleIDtxt" focusColor="#00add8" labelFloat="true" layoutX="32.0" layoutY="28.0" prefHeight="25.0" prefWidth="281.0" promptText="Vehicle ID" unFocusColor="#868282" />
-                                                <JFXComboBox fx:id="GasTypeChoiseBox" layoutX="38.0" layoutY="81.0" prefHeight="40.0" prefWidth="270.0" promptText="Chose Gas Type:" />
-                                             </children>
-                                          </AnchorPane>
-                                      </items>
-                                    </SplitPane>
                                     <ImageView fx:id="backButtonVehicalToPersonal" accessibleRole="BUTTON" fitHeight="70.0" fitWidth="94.0" layoutX="50.0" layoutY="562.0" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#backwardButtonOnClick" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../../media/CostumerRegisterationMedia/forward_button_40px.png" />
@@ -303,6 +287,26 @@
                                           <Cursor fx:constant="OPEN_HAND" />
                                        </cursor>
                                     </ImageView>
+                                    <Pane fx:id="VehicleInformationPane" layoutX="530.0" layoutY="206.0" prefHeight="243.0" prefWidth="350.0">
+                                       <children>
+                                          <SplitPane dividerPositions="0.16161616161616163" orientation="VERTICAL" prefHeight="245.0" prefWidth="347.0">
+                                            <items>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="35.0" prefWidth="335.0" style="-fx-background-color: #fcf8e8;">
+                                                   <children>
+                                                      <Label alignment="CENTER" layoutX="96.0" layoutY="7.0" style="-fx-font-weight: Bold;" text="Fill in Vehicle Information" />
+                                                   </children>
+                                                </AnchorPane>
+                                              <AnchorPane style="-fx-background-color: #fcf8e8;">
+                                                   <children>
+                                                      <Button fx:id="saveVehicleButton" layoutX="152.0" layoutY="151.0" mnemonicParsing="false" onMouseClicked="#ClickSaveVehicleButton" text="Save" />
+                                                      <JFXTextField fx:id="VehicleIDtxt" focusColor="#00add8" labelFloat="true" layoutX="32.0" layoutY="28.0" prefHeight="25.0" prefWidth="281.0" promptText="Vehicle ID" unFocusColor="#868282" />
+                                                      <JFXComboBox fx:id="GasTypeChoiseBox" layoutX="38.0" layoutY="81.0" prefHeight="40.0" prefWidth="270.0" promptText="Chose Gas Type:" />
+                                                   </children>
+                                                </AnchorPane>
+                                            </items>
+                                          </SplitPane>
+                                       </children>
+                                    </Pane>
                                  </children>
                               </AnchorPane>
                            </content>

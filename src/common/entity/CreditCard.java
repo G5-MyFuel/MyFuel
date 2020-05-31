@@ -9,20 +9,20 @@ package common.entity;
 
 public class CreditCard {
 
-    private Customer cardOwner;
+    private Costumer cardOwner;
     private String cardNumber;
     private String cardExparation;
     private String cardSecurityNumber;
 
 
-    public CreditCard(Customer cardOwner, String cardNumber, String cardExparation, String cardSecurityNumber) {
+    public CreditCard(Costumer cardOwner, String cardNumber, String cardExparation, String cardSecurityNumber) {
         this.cardOwner = cardOwner;
         this.cardNumber = cardNumber;
         this.cardExparation = cardExparation;
         this.cardSecurityNumber = cardSecurityNumber;
     }
 
-    public Customer getCardOwner() {
+    public Costumer getCardOwner() {
         return cardOwner;
     }
 
@@ -38,7 +38,7 @@ public class CreditCard {
         return cardSecurityNumber;
     }
 
-    public void setCardOwner(Customer cardOwner) {
+    public void setCardOwner(Costumer cardOwner) {
         this.cardOwner = cardOwner;
     }
 
