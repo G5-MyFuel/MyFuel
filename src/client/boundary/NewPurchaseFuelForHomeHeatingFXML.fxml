@@ -77,7 +77,7 @@
                               <Insets bottom="20.0" />
                            </VBox.margin>
                         </Label>
-                        <Button fx:id="btnOverview" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" style="-fx-font-family: 'Abel', sans-serif; -fx-font-size: 16; -fx-alignment: left;" stylesheets="@style.css" text="Home Page" textFill="#e7e5e5">
+                        <Button fx:id="btnOverview" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" style="-fx-font-family: 'Abel', sans-serif; -fx-font-size: 16; -fx-alignment: center-left;" stylesheets="@style.css" text="Home Page" textFill="#e7e5e5">
                            <graphic>
                               <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -95,7 +95,7 @@
                               <Insets left="50.0" />
                            </padding>
                         </Button>
-                        <Button fx:id="btnCustomers" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" style="-fx-font-family: 'Abel', sans-serif; -fx-font-size: 16; -fx-alignment: left;" stylesheets="@style.css" text="New Order">
+                        <Button fx:id="btnCustomers" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" style="-fx-font-family: 'Abel', sans-serif; -fx-font-size: 16; -fx-alignment: center-left;" stylesheets="@style.css" text="New Order">
                            <graphic>
                               <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -107,7 +107,7 @@
                               <Insets left="50.0" />
                            </padding>
                         </Button>
-                        <Button fx:id="btnMenus" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" style="-fx-font-family: 'Abel', sans-serif; -fx-font-size: 16; -fx-alignment: left;" stylesheets="@style.css" text="Order Tracking">
+                        <Button fx:id="btnMenus" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" style="-fx-font-family: 'Abel', sans-serif; -fx-font-size: 16; -fx-alignment: center-left;" stylesheets="@style.css" text="Order Tracking">
                            <graphic>
                               <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -119,7 +119,7 @@
                               <Insets left="50.0" />
                            </padding>
                         </Button>
-                        <Button fx:id="btnPackages" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" style="-fx-font-family: 'Abel', sans-serif; -fx-font-size: 16; -fx-alignment: left;" stylesheets="@style.css" text="My Account">
+                        <Button fx:id="btnPackages" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" style="-fx-font-family: 'Abel', sans-serif; -fx-font-size: 16; -fx-alignment: center-left;" stylesheets="@style.css" text="My Account">
                            <graphic>
                               <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -131,7 +131,7 @@
                               <Insets left="50.0" />
                            </padding>
                         </Button>
-                        <Button fx:id="btnSignout" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" style="-fx-font-family: 'Abel', sans-serif; -fx-font-size: 16; -fx-alignment: left;" stylesheets="@style.css" text="Sign Out">
+                        <Button fx:id="btnSignout" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" style="-fx-font-family: 'Abel', sans-serif; -fx-font-size: 16; -fx-alignment: center-left;" stylesheets="@style.css" text="Sign Out">
                            <graphic>
                               <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -156,6 +156,7 @@
                               <Font name="System Bold Italic" size="40.0" />
                            </font>
                         </Label>
+                        <JFXButton layoutX="937.0" layoutY="712.0" text=" " />
                         <JFXTabPane layoutX="21.0" layoutY="89.0" prefHeight="701.0" prefWidth="1001.0" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="50.0">
                            <tabs>
                               <Tab closable="false" styleClass="blue-titledPaneTab" text="Order Details">
@@ -174,7 +175,6 @@
                                                       </Label>
                                                       <GridPane maxWidth="444.0" prefHeight="85.0" prefWidth="444.0">
                                                          <columnConstraints>
-                                                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="413.629638671875" minWidth="10.0" prefWidth="37.888916015625" />
                                                             <ColumnConstraints hgrow="SOMETIMES" maxWidth="420.111083984375" minWidth="10.0" prefWidth="396.111083984375" />
                                                             <ColumnConstraints hgrow="SOMETIMES" maxWidth="218.07403564453125" minWidth="10.0" prefWidth="47.33331298828125" />
                                                          </columnConstraints>
@@ -182,25 +182,11 @@
                                                             <RowConstraints maxHeight="85.0" minHeight="10.0" prefHeight="0.0" vgrow="SOMETIMES" />
                                                          </rowConstraints>
                                                          <children>
-                                                            <JFXTextField fx:id="anotherContactPhoneNumberTXT" focusColor="#00add8" labelFloat="true" maxWidth="350.0" promptText="Another contact phone number" unFocusColor="BLUE" GridPane.columnIndex="1">
+                                                            <JFXTextField fx:id="anotherContactPhoneNumberTXT" focusColor="#00add8" labelFloat="true" maxWidth="350.0" promptText="Another contact phone number" unFocusColor="BLUE">
                                                                <font>
                                                                   <Font size="18.0" />
                                                                </font>
                                                             </JFXTextField>
-                                                            <StackPane maxHeight="25.0" maxWidth="25.0" prefHeight="25.0" prefWidth="25.0">
-                                                               <children>
-                                                                  <ImageView fitHeight="25.0" fitWidth="25.0" visible="false">
-                                                                     <image>
-                                                                        <Image url="@../../media/alerts/icons8_ok_48px.png" />
-                                                                     </image>
-                                                                  </ImageView>
-                                                                  <ImageView fx:id="WrongQuantity1111141" fitHeight="25.0" fitWidth="25.0" visible="false">
-                                                                     <image>
-                                                                        <Image url="@../../media/alerts/icons8_close_window_48px.png" />
-                                                                     </image>
-                                                                  </ImageView>
-                                                               </children>
-                                                            </StackPane>
                                                          </children>
                                                       </GridPane>
                                                       <JFXTextArea fx:id="noteTXT" focusColor="WHITE" prefHeight="169.0" prefWidth="402.0" promptText="Add Note (max 150 digits)" style="-fx-border-color: #2D4578;" unFocusColor="WHITE">
@@ -246,9 +232,8 @@
                                                             <Font name="System Bold" size="24.0" />
                                                          </font>
                                                       </Label>
-                                                      <GridPane maxWidth="439.0" prefHeight="160.0" prefWidth="439.0">
+                                                      <GridPane maxWidth="439.0" prefHeight="172.0" prefWidth="439.0">
                                                          <columnConstraints>
-                                                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="413.629638671875" minWidth="0.0" prefWidth="29.22222900390625" />
                                                             <ColumnConstraints hgrow="SOMETIMES" maxWidth="439.0" minWidth="10.0" prefWidth="409.77777099609375" />
                                                          </columnConstraints>
                                                          <rowConstraints>
@@ -256,7 +241,7 @@
                                                             <RowConstraints maxHeight="85.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                          </rowConstraints>
                                                          <children>
-                                                            <JFXTextField fx:id="emailAddressTXT" focusColor="#00add8" labelFloat="true" maxWidth="240.0" prefHeight="5.0" prefWidth="240.0" promptText="Email address (for invoice)" unFocusColor="BLUE" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                            <JFXTextField fx:id="emailAddressTXT" focusColor="#00add8" labelFloat="true" maxWidth="240.0" prefHeight="5.0" prefWidth="240.0" promptText="Email address (for invoice)" unFocusColor="BLUE" GridPane.rowIndex="1">
                                                                <font>
                                                                   <Font size="18.0" />
                                                                </font>
@@ -264,21 +249,7 @@
                                                                   <Insets top="-10.0" />
                                                                </GridPane.margin>
                                                             </JFXTextField>
-                                                            <StackPane maxHeight="25.0" maxWidth="25.0" prefHeight="25.0" prefWidth="25.0" GridPane.rowIndex="1">
-                                                               <children>
-                                                                  <ImageView fitHeight="25.0" fitWidth="25.0" visible="false">
-                                                                     <image>
-                                                                        <Image url="@../../media/alerts/icons8_ok_48px.png" />
-                                                                     </image>
-                                                                  </ImageView>
-                                                                  <ImageView fx:id="WrongQuantity11111211" fitHeight="25.0" fitWidth="25.0" visible="false">
-                                                                     <image>
-                                                                        <Image url="@../../media/alerts/icons8_close_window_48px.png" />
-                                                                     </image>
-                                                                  </ImageView>
-                                                               </children>
-                                                            </StackPane>
-                                                            <JFXTextField fx:id="fuelQuantityTXT" focusColor="#00add8" labelFloat="true" maxWidth="240.0" minWidth="189.0" prefHeight="39.0" prefWidth="207.0" promptText="Fuel Quantity (liters) *" unFocusColor="BLUE" GridPane.columnIndex="1">
+                                                            <JFXTextField fx:id="fuelQuantityTXT" focusColor="#00add8" labelFloat="true" maxWidth="240.0" minWidth="189.0" prefHeight="39.0" prefWidth="207.0" promptText="Fuel Quantity (liters) *" unFocusColor="BLUE">
                                                                <font>
                                                                   <Font size="18.0" />
                                                                </font>
@@ -286,25 +257,6 @@
                                                                   <Insets top="-10.0" />
                                                                </GridPane.margin>
                                                             </JFXTextField>
-                                                            <ImageView fx:id="WrongQuantity1111111" fitHeight="25.0" fitWidth="25.0" visible="false">
-                                                               <image>
-                                                                  <Image url="@../../media/alerts/icons8_close_window_48px.png" />
-                                                               </image>
-                                                            </ImageView>
-                                                            <StackPane maxHeight="25.0" maxWidth="25.0" prefHeight="25.0" prefWidth="25.0" visible="false">
-                                                               <children>
-                                                                  <ImageView fitHeight="25.0" fitWidth="25.0" visible="false">
-                                                                     <image>
-                                                                        <Image url="@../../media/alerts/icons8_ok_48px.png" />
-                                                                     </image>
-                                                                  </ImageView>
-                                                                  <ImageView fx:id="WrongQuantity111112111" fitHeight="25.0" fitWidth="25.0" visible="false">
-                                                                     <image>
-                                                                        <Image url="@../../media/alerts/icons8_close_window_48px.png" />
-                                                                     </image>
-                                                                  </ImageView>
-                                                               </children>
-                                                            </StackPane>
                                                          </children>
                                                       </GridPane>
                                                       <Label alignment="CENTER" prefHeight="30.0" prefWidth="446.0" style="-fx-background-color: #DCDCDC; -fx-opacity: 1; -fx-background-radius: 30;" text="Delivery Address Details">
@@ -315,101 +267,37 @@
                                                             <Insets />
                                                          </VBox.margin>
                                                       </Label>
-                                                      <GridPane maxWidth="439.0" prefHeight="429.0" prefWidth="439.0">
+                                                      <GridPane maxWidth="439.0" prefHeight="340.0" prefWidth="412.0">
                                                         <columnConstraints>
-                                                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="413.629638671875" minWidth="10.0" prefWidth="37.111083984375" />
-                                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="415.0" minWidth="10.0" prefWidth="290.77783203125" />
-                                                            <ColumnConstraints />
+                                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="415.0" minWidth="10.0" prefWidth="391.0" />
                                                         </columnConstraints>
                                                         <rowConstraints>
-                                                          <RowConstraints fillHeight="false" maxHeight="70.0" minHeight="10.0" prefHeight="90.0" vgrow="ALWAYS" />
                                                           <RowConstraints maxHeight="85.0" minHeight="10.0" prefHeight="0.0" vgrow="SOMETIMES" />
                                                           <RowConstraints maxHeight="85.0" minHeight="10.0" prefHeight="0.0" vgrow="SOMETIMES" />
                                                             <RowConstraints maxHeight="85.0" minHeight="10.0" prefHeight="0.0" vgrow="SOMETIMES" />
                                                             <RowConstraints maxHeight="85.0" minHeight="10.0" prefHeight="0.0" vgrow="SOMETIMES" />
                                                         </rowConstraints>
                                                          <children>
-                                                            <JFXTextField fx:id="customerGenericDetailsTXT" disable="true" editable="false" focusColor="#2196f3" nodeOrientation="LEFT_TO_RIGHT" prefHeight="70.0" prefWidth="401.0" promptText="Customer Details - Auto Genarated from DB" GridPane.columnIndex="1" GridPane.columnSpan="2">
+                                                            <JFXTextField fx:id="streetNameTXT" focusColor="#00add8" labelFloat="true" maxWidth="350.0" prefColumnCount="18" promptText="Street Name *" unFocusColor="BLUE">
                                                                <font>
                                                                   <Font size="18.0" />
                                                                </font>
                                                             </JFXTextField>
-                                                            <JFXTextField fx:id="streetNameTXT" focusColor="#00add8" labelFloat="true" maxWidth="350.0" prefColumnCount="18" promptText="Street Name *" unFocusColor="BLUE" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                            <JFXTextField fx:id="ApartmentNumberTXT" focusColor="#00add8" labelFloat="true" maxWidth="350.0" promptText="Apartment Number *" unFocusColor="BLUE" GridPane.rowIndex="1">
                                                                <font>
                                                                   <Font size="18.0" />
                                                                </font>
                                                             </JFXTextField>
-                                                            <JFXTextField fx:id="ApartmentNumberTXT" focusColor="#00add8" labelFloat="true" maxWidth="350.0" promptText="Apartment Number *" unFocusColor="BLUE" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                                            <JFXTextField fx:id="cityTXT" focusColor="#00add8" labelFloat="true" maxWidth="350.0" promptText="City *" unFocusColor="BLUE" GridPane.rowIndex="2">
                                                                <font>
                                                                   <Font size="18.0" />
                                                                </font>
                                                             </JFXTextField>
-                                                            <JFXTextField fx:id="cityTXT" focusColor="#00add8" labelFloat="true" maxWidth="350.0" promptText="City *" unFocusColor="BLUE" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                                            <JFXTextField fx:id="zipCodeTXT" focusColor="#00add8" labelFloat="true" maxWidth="350.0" promptText="ZIP Code *" unFocusColor="BLUE" GridPane.rowIndex="3">
                                                                <font>
                                                                   <Font size="18.0" />
                                                                </font>
                                                             </JFXTextField>
-                                                            <JFXTextField fx:id="zipCodeTXT" focusColor="#00add8" labelFloat="true" maxWidth="350.0" promptText="ZIP Code *" unFocusColor="BLUE" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                                                               <font>
-                                                                  <Font size="18.0" />
-                                                               </font>
-                                                            </JFXTextField>
-                                                            <StackPane maxHeight="25.0" maxWidth="25.0" prefHeight="25.0" prefWidth="25.0" GridPane.rowIndex="1">
-                                                               <children>
-                                                                  <ImageView fitHeight="25.0" fitWidth="25.0" visible="false">
-                                                                     <image>
-                                                                        <Image url="@../../media/alerts/icons8_ok_48px.png" />
-                                                                     </image>
-                                                                  </ImageView>
-                                                                  <ImageView fx:id="WrongQuantity111111" fitHeight="25.0" fitWidth="25.0" visible="false">
-                                                                     <image>
-                                                                        <Image url="@../../media/alerts/icons8_close_window_48px.png" />
-                                                                     </image>
-                                                                  </ImageView>
-                                                               </children>
-                                                            </StackPane>
-                                                            <StackPane maxHeight="25.0" maxWidth="25.0" prefHeight="25.0" prefWidth="25.0" GridPane.rowIndex="2">
-                                                               <children>
-                                                                  <ImageView fitHeight="25.0" fitWidth="25.0" visible="false">
-                                                                     <image>
-                                                                        <Image url="@../../media/alerts/icons8_ok_48px.png" />
-                                                                     </image>
-                                                                  </ImageView>
-                                                                  <ImageView fx:id="WrongQuantity111112" fitHeight="25.0" fitWidth="25.0" visible="false">
-                                                                     <image>
-                                                                        <Image url="@../../media/alerts/icons8_close_window_48px.png" />
-                                                                     </image>
-                                                                  </ImageView>
-                                                               </children>
-                                                            </StackPane>
-                                                            <StackPane maxHeight="25.0" maxWidth="25.0" prefHeight="25.0" prefWidth="25.0" GridPane.rowIndex="3">
-                                                               <children>
-                                                                  <ImageView fitHeight="25.0" fitWidth="25.0" visible="false">
-                                                                     <image>
-                                                                        <Image url="@../../media/alerts/icons8_ok_48px.png" />
-                                                                     </image>
-                                                                  </ImageView>
-                                                                  <ImageView fx:id="WrongQuantity111113" fitHeight="25.0" fitWidth="25.0" visible="false">
-                                                                     <image>
-                                                                        <Image url="@../../media/alerts/icons8_close_window_48px.png" />
-                                                                     </image>
-                                                                  </ImageView>
-                                                               </children>
-                                                            </StackPane>
-                                                            <StackPane maxHeight="25.0" maxWidth="25.0" prefHeight="25.0" prefWidth="25.0" GridPane.rowIndex="4">
-                                                               <children>
-                                                                  <ImageView fitHeight="25.0" fitWidth="25.0" visible="false">
-                                                                     <image>
-                                                                        <Image url="@../../media/alerts/icons8_ok_48px.png" />
-                                                                     </image>
-                                                                  </ImageView>
-                                                                  <ImageView fx:id="WrongQuantity111114" fitHeight="25.0" fitWidth="25.0" visible="false">
-                                                                     <image>
-                                                                        <Image url="@../../media/alerts/icons8_close_window_48px.png" />
-                                                                     </image>
-                                                                  </ImageView>
-                                                               </children>
-                                                            </StackPane>
                                                          </children>
                                                       </GridPane>
                                                    </children>
@@ -431,10 +319,14 @@
                                     </ImageView>
                                  </graphic>
                                  <graphic>
-                                    <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                                    <ImageView fx:id="orderDetailsIndicatorTAB" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                                       <image>
+                                          <Image url="@../../media/PurchaseMedia/ok.png" />
+                                       </image>
+                                    </ImageView>
                                  </graphic>
                               </Tab>
-                              <Tab styleClass="blue-titledPaneTab" text="Shipping">
+                              <Tab onSelectionChanged="#checkOrderDetails" styleClass="blue-titledPaneTab" text="Shipping">
                                  <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="180.0" prefWidth="1123.0">
                                        <children>
@@ -562,6 +454,13 @@
                                        </children>
                                     </AnchorPane>
                                  </content>
+                                 <graphic>
+                                    <ImageView fx:id="shippingIndicatorTAB1" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                                       <image>
+                                          <Image url="@../../media/PurchaseMedia/ok.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
                               </Tab>
                               <Tab styleClass="blue-titledPaneTab" text="Review">
                                  <content>
@@ -719,7 +618,6 @@
                               </Tab>
                            </tabs>
                         </JFXTabPane>
-                        <JFXButton layoutX="937.0" layoutY="712.0" text=" " />
                      </children>
                   </Pane>
                </children>

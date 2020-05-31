@@ -8,7 +8,7 @@
 
 .head-background
 {
-    -fx-background-c: linear-gradient(to left,#795AF3 ,#3929E0);
+    -fx-background-c: linear-gradient(center-left,#795AF3 ,#3929E0);
 }
 
 .button

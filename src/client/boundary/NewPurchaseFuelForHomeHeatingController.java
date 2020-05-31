@@ -134,7 +134,7 @@ public class NewPurchaseFuelForHomeHeatingController implements Initializable {
     private Text shippingSummeryDetailsTXT;
 
     @FXML
-    private ImageView shippingIndicatorTAB;
+    private ImageView shippingIndicatorTAB1;
 
     @FXML
     private Text totalPricesOfAlllInUsdTXT;
@@ -162,6 +162,9 @@ public class NewPurchaseFuelForHomeHeatingController implements Initializable {
 
     @FXML
     private ImageView nextOrderDetails;
+
+    @FXML
+    private ImageView reviewIndicatorTAB;
     //
 //    private ImageView xImg = new ImageView(new Image("src\\media\\PurchaseMedia\\X.png"));
     private String vImgUrl = "src/media/PurchaseMedia/V.png";
@@ -172,10 +175,10 @@ public class NewPurchaseFuelForHomeHeatingController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         this.newPurchaseFuelForHomeHeatingLogic = NewPurchaseFuelForHomeHeatingLogic.getInstance();
         this.formValidation = FormValidation.getValidator();
-//        this.orderDetailsIndicatorTAB = new ImageView(xImgUrl);
-
+        this.orderDetailsIndicatorTAB.setVisible(false);
+        this.shippingIndicatorTAB1.setVisible(false);
         /*  set all fields validators */
-       // formValidation();   //
+        formValidation();   //
 
     }
 
@@ -213,13 +216,15 @@ public class NewPurchaseFuelForHomeHeatingController implements Initializable {
         formValidation.maxLengthValidation(zipCodeTXT, "Zip code", 7);
         formValidation.isContainsOnlyNumbers(zipCodeTXT,"Zip code");
         /* phone number validation */
-        formValidation.phoneNumberValidation(anotherContactPhoneNumberTXT,"");
+        formValidation.phoneNumberValidation(anotherContactPhoneNumberTXT,"Phone Number");
         /* note validation */
         formValidation.maxLengthValidationTextArea(noteTXT,"Note",150);
-        //todo:בדיקת תקינות קלט לאחר מעבר כל מסך (מסך ראשון יהיה פה) לבדוק שכל הפונקציות מחזירות אינדיקציה שמה שנדרש תקין ואז האינדיקטור יהיה V אחרת X
+
+
     }
 
     public void checkOrderDetails(){
+        boolean indicator = true;
         ArrayList<Object> guiObjects = new ArrayList<Object>();
         guiObjects.add(fuelQuantityTXT);
         guiObjects.add(streetNameTXT);
@@ -229,8 +234,11 @@ public class NewPurchaseFuelForHomeHeatingController implements Initializable {
         //
         for(Object guiObj:guiObjects){
             if(!newPurchaseFuelForHomeHeatingLogic.validatePage(guiObj)){
-
+                orderDetailsIndicatorTAB.setImage(new Image("media/PurchaseMedia/cancel.png"));
+                break;
             }
         }
+        orderDetailsIndicatorTAB.setVisible(true);
+
     }
 }

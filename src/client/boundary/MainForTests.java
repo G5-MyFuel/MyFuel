@@ -9,8 +9,7 @@ import javafx.stage.Stage;
 
 
 public class MainForTests extends Application {
-    //להגדיר בהתאם לדף:
-    //השורות שיש לשנות אם מחליפים דף הן עם הערה סופית
+    //קובץ בדיקות עבור NewPurchaseFuelForHomeHeatingController
     String pageName = "NewPurchaseFuelForHomeHeatingFXML.fxml";   //שם קובץ הfxml
 
     private AnchorPane root;
