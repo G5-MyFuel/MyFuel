@@ -4,6 +4,8 @@ import common.entity.Costumer;
 import common.entity.CreditCard;
 import common.entity.Vehicle;
 
+import java.util.ArrayList;
+
 /**
  * @author itay
  * @see CustomerRegistrationLogic - the form's logic class

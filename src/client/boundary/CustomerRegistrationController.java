@@ -4,6 +4,7 @@ import client.logic.*;
 import client.logic.FormValidation;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import common.entity.Employee;
 import common.entity.Vehicle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,6 +17,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -127,6 +129,12 @@ public class CustomerRegistrationController implements Initializable {
     @FXML
     private Pane mainPane;
 
+    @FXML
+    private TableColumn<Vehicle, String> VehicleIdColom;
+
+    @FXML
+    private TableColumn<Vehicle, String> GasTypeColom;
+
 
     private ObservableList<String> CostumerType = FXCollections.observableArrayList("Private", "Company");
 
@@ -170,10 +178,13 @@ public class CustomerRegistrationController implements Initializable {
 
     @FXML
     void ClickSaveVehicleButton(MouseEvent event) {
+        VehicleTable.setEditable(true);
         CustomerRegistrationLogic.createVehicle(VehicleIDtxt.getText(),GasTypeChoiseBox.getValue());
-        ObservableList<Vehicle> VehicleToTbale = FXCollections.observableArrayList(CustomerRegistrationLogic.getCostumerVehicle());
 
+        VehicleIdColom.setCellValueFactory(new PropertyValueFactory<>("VehicleID"));
+        GasTypeColom.setCellValueFactory(new PropertyValueFactory<>("GasType"));
 
+        VehicleTable.getItems().add(CustomerRegistrationLogic.getCostumerVehicle());
     }
 
 

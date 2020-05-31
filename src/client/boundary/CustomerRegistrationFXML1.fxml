@@ -254,8 +254,8 @@
                                              <children>
                                                 <TableView fx:id="VehicleTable" prefHeight="234.0" prefWidth="238.0" style="-fx-background-color: #fcf8e8;" AnchorPane.bottomAnchor="-34.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-4.0" AnchorPane.topAnchor="0.0">
                                                   <columns>
-                                                    <TableColumn prefWidth="115.0" text="Vehicle ID" />
-                                                      <TableColumn prefWidth="120.0" text="Gas Type" />
+                                                    <TableColumn fx:id="VehicleIdColom" prefWidth="115.0" text="Vehicle ID" />
+                                                      <TableColumn fx:id="GasTypeColom" prefWidth="120.0" text="Gas Type" />
                                                   </columns>
                                                 </TableView>
                                              </children>
