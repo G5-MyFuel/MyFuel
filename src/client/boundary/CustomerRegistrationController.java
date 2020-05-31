@@ -91,7 +91,7 @@ public class CustomerRegistrationController implements Initializable {
     private JFXTextField VehicleIDtxt;
 
     @FXML
-    private SplitPane VehicleInformationSplitPane;
+    private Pane VehicleInformationSplitPane;
 
     @FXML
     private JFXComboBox<?> GasTypeChoiseBox;
@@ -139,7 +139,7 @@ public class CustomerRegistrationController implements Initializable {
         //
 
         //disable vehicle information window
-        VehicleInformationSplitPane.setVisible(false);
+       VehicleInformationSplitPane.setVisible(false);
 
         CostumertypeChoiceBox.setItems(CostumerType);
         ServicePlanChoiseBox.setItems(ServicePlanType);
@@ -163,8 +163,9 @@ public class CustomerRegistrationController implements Initializable {
     }
 
     @FXML
-    void addVehicleButton(MouseEvent event) {
+    void addVehicleButton() {
         VehicleInformationSplitPane.setVisible(true);
+
 
 
 

@@ -10,7 +10,7 @@
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -252,7 +252,7 @@
                                       <content>
                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="232.0" prefWidth="234.0">
                                              <children>
-                                                <TableView fx:id="VehicleTable" prefHeight="234.0" prefWidth="238.0" style="-fx-background-color: #fcf8e8;" AnchorPane.bottomAnchor="-34.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-4.0" AnchorPane.topAnchor="0.0">
+                                                <TableView fx:id="VehicleTable" prefHeight="234.0" prefWidth="238.0" style="-fx-background-color: #fcf8e8;" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-4.0" AnchorPane.topAnchor="0.0">
                                                   <columns>
                                                     <TableColumn prefWidth="115.0" text="Vehicle ID" />
                                                       <TableColumn prefWidth="120.0" text="Gas Type" />
@@ -270,23 +270,7 @@
                                           <Cursor fx:constant="OPEN_HAND" />
                                        </cursor>
                                     </ImageView>
-                                    <Label layoutX="65.0" layoutY="181.0" text="Add Vehicle" />
-                                    <SplitPane fx:id="VehicleInformationSplitPane" dividerPositions="0.16161616161616163" layoutX="537.0" layoutY="215.0" orientation="VERTICAL" prefHeight="245.0" prefWidth="347.0">
-                                      <items>
-                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="35.0" prefWidth="335.0" style="-fx-background-color: #fcf8e8;">
-                                             <children>
-                                                <Label alignment="CENTER" layoutX="96.0" layoutY="7.0" style="-fx-font-weight: Bold;" text="Fill in Vehicle Information" />
-                                             </children>
-                                          </AnchorPane>
-                                        <AnchorPane style="-fx-background-color: #fcf8e8;">
-                                             <children>
-                                                <Button fx:id="saveVehicleButton" layoutX="152.0" layoutY="151.0" mnemonicParsing="false" text="Save" />
-                                                <JFXTextField fx:id="VehicleIDtxt" focusColor="#00add8" labelFloat="true" layoutX="32.0" layoutY="28.0" prefHeight="25.0" prefWidth="281.0" promptText="Vehicle ID" unFocusColor="#868282" />
-                                                <JFXComboBox fx:id="GasTypeChoiseBox" layoutX="38.0" layoutY="81.0" prefHeight="40.0" prefWidth="270.0" promptText="Chose Gas Type:" />
-                                             </children>
-                                          </AnchorPane>
-                                      </items>
-                                    </SplitPane>
+                                    <Label layoutX="65.0" layoutY="181.0" onMouseClicked="#addVehicleButton" text="Add Vehicle" />
                                     <ImageView fx:id="backButtonVehicalToPersonal" accessibleRole="BUTTON" fitHeight="70.0" fitWidth="94.0" layoutX="50.0" layoutY="562.0" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#backwardButtonOnClick" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../../media/CostumerRegisterationMedia/forward_button_40px.png" />
@@ -303,6 +287,19 @@
                                           <Cursor fx:constant="OPEN_HAND" />
                                        </cursor>
                                     </ImageView>
+                                    <Pane fx:id="VehicleInformationSplitPane" layoutX="360.0" layoutY="215.0" prefHeight="237.0" prefWidth="389.0" style="-fx-border-color: gray;">
+                                       <children>
+                                          <Label alignment="CENTER" layoutX="-4.0" layoutY="8.0" prefHeight="27.0" prefWidth="397.0" style="-fx-font-weight: Bold; -fx-font-size: 18;" text="Fill in Vehicle Information" />
+                                          <Pane layoutX="38.0" layoutY="42.0">
+                                             <children>
+                                                <Button fx:id="saveVehicleButton" layoutX="152.0" layoutY="162.0" mnemonicParsing="false" text="Save" />
+                                                <JFXTextField fx:id="VehicleIDtxt" focusColor="#00add8" labelFloat="true" layoutX="32.0" layoutY="39.0" prefHeight="25.0" prefWidth="281.0" promptText="Vehicle ID" unFocusColor="#868282" />
+                                                <JFXComboBox fx:id="GasTypeChoiseBox" layoutX="38.0" layoutY="92.0" prefHeight="40.0" prefWidth="270.0" promptText="Chose Gas Type:" />
+                                             </children>
+                                          </Pane>
+                                          <Separator layoutY="41.0" prefHeight="0.0" prefWidth="388.0" />
+                                       </children>
+                                    </Pane>
                                  </children>
                               </AnchorPane>
                            </content>
@@ -381,7 +378,7 @@
                                           <Cursor fx:constant="OPEN_HAND" />
                                        </cursor>
                                     </ImageView>
-                                    <Button fx:id="FinishButton" layoutX="786.0" layoutY="574.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="100.0" style="-fx-background-color: #2D4578; -fx-background-radius: 50;" stylesheets="@../GUI/דוגמאות%20לתוכנות/Javafx%20Examples/RestaurantMgtSampleUI-master/src/home/style.css" text="Finish" />
+                                    <Button fx:id="FinishButton" layoutX="786.0" layoutY="574.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="100.0" style="-fx-background-color: #2D4578; -fx-background-radius: 50;" text="Finish" />
                                  </children>
                               </AnchorPane>
                           </content>
