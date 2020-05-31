@@ -129,13 +129,13 @@ public class OrderExecutionController {
         //TODO: display DB table
     }
 
-    public void setEmployeeTableColumns() {
+    /*public void setEmployeeTableColumns() {
         EmployeeIdCol.setCellValueFactory(new PropertyValueFactory<Employee, String>("employeeID"));
         FirstNameCol.setCellValueFactory(new PropertyValueFactory<Employee, String>("firstName"));
         lastNameCol.setCellValueFactory(new PropertyValueFactory<Employee, String>("lastName"));
         emailAddressCol.setCellValueFactory(new PropertyValueFactory<Employee, String>("emailAddress"));
         jobTitleCol.setCellValueFactory(new PropertyValueFactory<Employee, String>("jobTitle"));
         fuelCompanyNameCol.setCellValueFactory(new PropertyValueFactory<Employee, String>("fuelCompanyName"));
-    }
+    }*/
 
 }
