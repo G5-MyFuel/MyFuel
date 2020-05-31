@@ -1,5 +1,6 @@
 package client;
 
+import client.boundary.LoginToSystemController;
 import common.ocsf.client.AbstractClient;
 import common.tools.Message;
 
@@ -36,7 +37,7 @@ public class Client extends AbstractClient {
     protected void handleMessageFromServer(Object msg) {
         //System.out.println("--> handleMessageFromServer");
         try {
-            messageFromServer((Message) msg);
+            ClientMessages.messageFromServer((Message) msg);
         } catch (Exception e) {
             e.printStackTrace();
 
@@ -75,6 +76,10 @@ public class Client extends AbstractClient {
             case updateRequirement:
 //                EmployeesManagementGuiController.Instance.afterUpdateJobTitleInDb(m.getObject());
                 break;
+            case getAllUsersTable:
+
+                break;
+
 
             default:
                 break;

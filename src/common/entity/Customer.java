@@ -10,8 +10,8 @@ public class Customer extends User {
 
     private CreditCard CustomerCreditCard;
 
-    public Customer(String ID,String CustomerPassword, String Fname, String Lname, String emailAdress, CreditCard customerCreditCard) {
-        super(ID, CustomerPassword, Fname, Lname, emailAdress);
+    public Customer(int ID, String CustomerPassword, String Fname, String Lname, String emailAdress, CreditCard customerCreditCard) {
+        super(ID, 1, CustomerPassword, Fname, Lname, emailAdress);
         this.CustomerCreditCard = customerCreditCard;
     }
 

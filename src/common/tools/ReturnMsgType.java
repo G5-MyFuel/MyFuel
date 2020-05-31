@@ -11,4 +11,5 @@ public enum ReturnMsgType {
     successfullyEdit,
     successfullyAdd,
     updateRequirement,
+    getAllUsersTable,
 }

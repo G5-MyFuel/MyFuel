@@ -1,6 +1,7 @@
 package client.logic;
 
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.validation.DoubleValidator;
@@ -42,6 +43,7 @@ public class FormValidation {
             if (!newVal) theField.validate();
         });
     }
+
 
     /**
      * A method that checks if a field is a positive number
@@ -365,37 +367,12 @@ public class FormValidation {
         });
     }
 
-    public void checkIfComboBoxSelectValues(JFXComboBox jfxComboBox, String fieldName) {
-        jfxComboBox.getValidators().add(new ValidatorBase("No " + fieldName + " selected") {
-            @Override
-            protected void eval() {
-                if (this.srcControl.get() instanceof TextInputControl) {
-                    this.evalTextInputField();
-                }
-            }
-
-            private void evalTextInputField() {
-                TextInputControl textField = (TextInputControl) this.srcControl.get();
-                Pattern pattern = Pattern.compile("^(\\d{3}[- .]?){2}\\d{4}$");
-                Matcher matcher = pattern.matcher(textField.getText());
-                boolean result = matcher.matches();
-                if (textField.getText().isEmpty()) result = true;
-                if (textField.getText().contains(" ")) result = true;
-                try {
-                    if (result)
-                        this.hasErrors.set(false);
-                    else
-                        this.hasErrors.set(true);
-                } catch (Exception var3) {
-                    this.hasErrors.set(true);
-                }
-            }
-        });
-        //  add listener to the txtField
-        jfxComboBox.focusedProperty().addListener((o, oldVal, newVal) -> {
-            if (!newVal) {
-                jfxComboBox.validate();
-            }
+    public void isEmptyPasswordField(JFXPasswordField passwordField, String password) {
+        RequiredFieldValidator reqInputValidator = new RequiredFieldValidator();
+        reqInputValidator.setMessage(password + " field is Required!");
+        passwordField.getValidators().add(reqInputValidator);
+        passwordField.focusedProperty().addListener((o, oldVal, newVal) -> {
+            if (!newVal) passwordField.validate();
         });
     }
 }

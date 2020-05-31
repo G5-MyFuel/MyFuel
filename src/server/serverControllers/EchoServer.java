@@ -39,11 +39,12 @@ public class EchoServer extends AbstractServer {
     @Override
     public void handleMessageFromClient(Object msg, ConnectionToClient client) {
         Message m = (Message) msg;
+        ResultSet rs;
         System.out.println("Message received: " + msg + " from " + client);
         try {
             switch ((m.getOperationType())) {
                 case getRequirementData:
-                    ResultSet rs = mysql.getQuery(m.getObject().toString());
+                    rs = mysql.getQuery(m.getObject().toString());
                     sendToClient(new Message(OperationType.getRequirementData, QueryToArrayList.ResultSetToArrayList(rs)), client);
                     rs.close();
                     break;
@@ -51,6 +52,12 @@ public class EchoServer extends AbstractServer {
                     boolean res = mysql.insertOrUpdate(m.getObject().toString());
                     sendToClient(new Message(OperationType.updateRequirement, res), client);
                     break;
+                case getAllUsersTable:
+                    rs = mysql.getQuery(m.getObject().toString());
+                    sendToClient(new Message(OperationType.getRequirementData, QueryToArrayList.ResultSetToUsersArrayList(rs)), client);
+                    rs.close();
+                    break;
+
             }
         } catch (Exception e) {
             e.printStackTrace();
