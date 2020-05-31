@@ -3,12 +3,15 @@ package client.boundary;
 import client.logic.FormValidation;
 import client.logic.SaleOperationTemplateLogic;
 import com.jfoenix.controls.JFXTextField;
+import common.entity.Employee;
+import common.entity.OrderFuelFromSupplier;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
@@ -23,6 +26,7 @@ import java.util.ResourceBundle;
  */
 public class OrderExecutionController {
     private OrderExecutionController OrderExecutionController;
+    common.entity.OrderFuelFromSupplier OrderFuelFromSupplier;
 
     @FXML
     private Button MenuHomePageBtn;
@@ -46,13 +50,13 @@ public class OrderExecutionController {
     private Text OrderViewTitle;
 
     @FXML
-    private TableView<?> tableView;
+    private TableView<OrderFuelFromSupplier> tableView;
 
     @FXML
-    private TableColumn<?, ?> titleCol;
+    private TableColumn< TableView<OrderFuelFromSupplier>, String> titleCol;
 
     @FXML
-    private TableColumn<?, ?> idCol;
+    private TableColumn<TableView<OrderFuelFromSupplier>, String> idCol;
 
     @FXML
     private VBox vboxOrderView;
@@ -123,6 +127,15 @@ public class OrderExecutionController {
         FuelTypeField.setDisable(true);
         QuantityField.setDisable(true);
         //TODO: display DB table
+    }
+
+    public void setEmployeeTableColumns() {
+        EmployeeIdCol.setCellValueFactory(new PropertyValueFactory<Employee, String>("employeeID"));
+        FirstNameCol.setCellValueFactory(new PropertyValueFactory<Employee, String>("firstName"));
+        lastNameCol.setCellValueFactory(new PropertyValueFactory<Employee, String>("lastName"));
+        emailAddressCol.setCellValueFactory(new PropertyValueFactory<Employee, String>("emailAddress"));
+        jobTitleCol.setCellValueFactory(new PropertyValueFactory<Employee, String>("jobTitle"));
+        fuelCompanyNameCol.setCellValueFactory(new PropertyValueFactory<Employee, String>("fuelCompanyName"));
     }
 
 }
