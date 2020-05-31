@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 
 public class MainForTestsHani extends Application {
     //קובץ בדיקות עבור SaleOperationTemplateController
-    String pageName = "SaleOperationTemplateFXML.fxml";   //שם קובץ הfxml
+    String pageName = "SaleOperationTemplate.fxml";   //שם קובץ הfxml
 
     private AnchorPane root;
     private SaleOperationTemplateController SaleOperationTemplateController;    //אינסטנס של מחלקת הboundary

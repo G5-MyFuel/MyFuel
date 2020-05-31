@@ -39,18 +39,17 @@ public class SaleOperationTemplateController implements Initializable {
     ObservableList<Employee> data1;
     ArrayList<Employee> employeeArrayList;
     //
-    TableColumn templateID = new TableColumn("Template Number");
-    TableColumn templateName = new TableColumn("Template Name");
-    TableColumn fuelType = new TableColumn("Fuel Type");
-    TableColumn DiscountPercentages = new TableColumn("Discount Percentages");
-    TableColumn MarketingAdForTemplate = new TableColumn("Marketing Ad For Template");
-    TableColumn day = new TableColumn("Day");
-    TableColumn beginHour = new TableColumn("Beginning Hour");
-    TableColumn endHour = new TableColumn("End Hour");
+    TableColumn templateIDColumn = new TableColumn("Template Number");
+    TableColumn templateNameColumn = new TableColumn("Template Name");
+    TableColumn fuelTypeColumn = new TableColumn("Fuel Type");
+    TableColumn DiscountPercentagesColumn = new TableColumn("Discount Percentages");
+    TableColumn MarketingAdForTemplateColumn = new TableColumn("Marketing Ad For Template");
+    TableColumn dayColumn = new TableColumn("Day");
+    TableColumn beginHourColumn = new TableColumn("Beginning Hour");
+    TableColumn endHourColumn = new TableColumn("End Hour");
     //
 
     //gui variables:
-
     @FXML
     private ResourceBundle resources;
 
@@ -112,14 +111,22 @@ public class SaleOperationTemplateController implements Initializable {
     private Text errorMassageEmptyFileds;
 
 
-    @FXML
-    void handleClicks(ActionEvent event) {
+     @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+        this.newSaleOperationTemplateLogic = newSaleOperationTemplateLogic.getInstance();
+        this.formValidation = FormValidation.getValidator();
+        this.newTemplateDetails.setVisible(false);
+        this.errorMassageEmptyFileds.setVisible(false);
+        //TODO: formValidation();   set all fields validators
+        //formValidation();   //
+        /*  check all required fields are'nt empty:*/
+
+        /*  check form input validation */
 
     }
-
     @FXML
     void handleAddTemplate(MouseEvent event) {
-
         newTemplateDetails.setVisible(true);
         btnAddTemplate.setVisible(false);
         txtAddTemplate.setVisible(false);
@@ -140,21 +147,6 @@ public class SaleOperationTemplateController implements Initializable {
             }
         }
         */
-    }
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
-        this.newSaleOperationTemplateLogic = newSaleOperationTemplateLogic.getInstance();
-        this.formValidation = FormValidation.getValidator();
-        this.newTemplateDetails.setVisible(false);
-        this.errorMassageEmptyFileds.setVisible(false);
-        //TODO: formValidation();   set all fields validators
-        formValidation();   //
-        /*  check all required fields are'nt empty:*/
-
-        /*  check form input validation */
-
     }
 
     private void formValidation() {
