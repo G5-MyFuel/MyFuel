@@ -11,6 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -31,7 +32,7 @@ import java.util.ResourceBundle;
  * @see CustomerRegistrationLogic - the form's logic class
  */
 
-public class CustomerRegistrationController {
+public class CustomerRegistrationController implements Initializable {
 
     private static CustomerRegistrationController Instance = null;
     private CustomerRegistrationLogic CustomerRegistrationFXML1Logic;
@@ -126,12 +127,13 @@ public class CustomerRegistrationController {
 
     private ObservableList<String> ServicePlanType = FXCollections.observableArrayList("EXLUSIVE", "MULTIPLE_STATIONS");
 
+    @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.CustomerRegistrationFXML1Logic = CustomerRegistrationFXML1Logic.getInstance();
         //
         //
-        //
-        VehicleInformationSplitPane.setDisable(true);
+
+        //disable vehicle information window
         VehicleInformationSplitPane.setVisible(false);
 
         CostumertypeChoiceBox.setItems(CostumerType);
@@ -157,7 +159,8 @@ public class CustomerRegistrationController {
 
     @FXML
     void addVehicleButton(MouseEvent event) {
-        //VehicleInformationSplitPane.setVisible(true);
+        VehicleInformationSplitPane.setVisible(true);
+
     }
 
     @FXML
