@@ -6,19 +6,21 @@ import client.logic.FormValidation;
 
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import common.entity.Employee;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.*;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.SplitPane;
-import javafx.scene.control.TableView;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 
 import java.awt.*;
+import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
@@ -27,10 +29,20 @@ import java.util.ResourceBundle;
  */
 
 public class SaleOperationTemplateController implements Initializable {
+
     private SaleOperationTemplateLogic newSaleOperationTemplateLogic;
     private FormValidation formValidation;
 
-    private boolean[] IfEmptyFileds = new boolean[7];
+    ObservableList<Employee> data1;
+    ArrayList<Employee> employeeArrayList;
+    //
+    TableColumn EmployeeIdCol = new TableColumn("EmployeeId");
+    TableColumn FirstNameCol = new TableColumn("firstName");
+    TableColumn lastNameCol = new TableColumn("lastName");
+    TableColumn emailAddressCol = new TableColumn("emailAddress");
+    TableColumn jobTitleCol = new TableColumn("jobTitle");
+    TableColumn fuelCompanyNameCol = new TableColumn("fuelCompanyName");
+    //
 
     //gui variables:
 
