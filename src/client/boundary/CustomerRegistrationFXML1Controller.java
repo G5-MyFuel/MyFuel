@@ -1,11 +1,12 @@
 package client.boundary;
 
-import  client.logic.*
+import  client.logic.*;
 import client.logic.FormValidation;
 import client.logic.NewPurchaseFuelForHomeHeatingLogic;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import common.entity.Vehicle;
+import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 
 import java.net.URL;
@@ -24,7 +26,7 @@ import java.util.ResourceBundle;
  * @see CustomerRegistrationFXML1Logic - the form's logic class
  */
 
-public class CustomerRegistrationFXML1Controller {
+public class CustomerRegistrationFXML1Controller  {
 
     private static CustomerRegistrationFXML1Controller Instance = null;
     private CustomerRegistrationFXML1Logic CustomerRegistrationFXML1Logic;
@@ -114,7 +116,6 @@ public class CustomerRegistrationFXML1Controller {
 
     private ObservableList<String> CostumerType= FXCollections.observableArrayList("Private", "Regular");
 
-   @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.CustomerRegistrationFXML1Logic = CustomerRegistrationFXML1Logic.getInstance();
         //
@@ -140,5 +141,6 @@ public class CustomerRegistrationFXML1Controller {
     void handleClicks(ActionEvent event) {
 
     }
+
 
 }

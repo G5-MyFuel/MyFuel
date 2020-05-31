@@ -3,7 +3,12 @@ package client.logic;
 import client.boundary.LoginToSystemController;
 
 public class LoginPageLogic {
-    public LoginPageLogic() {
+    private static LoginPageLogic Instance = null;
+
+    public LoginPageLogic getInstance() {
+        if (Instance == null)
+            Instance = new LoginPageLogic();
+        return Instance;
     }
 
     /*return flag:
@@ -15,7 +20,7 @@ public class LoginPageLogic {
     public int checkIfThereAreEmptyFields(LoginToSystemController lpb) {
         if (lpb.getUserIDTextField().getText().isEmpty()) return 1;
         else if (lpb.getPasswordField().getText().isEmpty()) return 2;
-        else if (lpb.getLoginAsChoiceBox().getValue().isEmpty()) return 3;
+        else if (lpb.getLoginAsComboBox().getValue().isEmpty()) return 3;
         return 0;
     }
 

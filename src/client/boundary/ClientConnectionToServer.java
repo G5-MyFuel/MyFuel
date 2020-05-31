@@ -27,9 +27,6 @@ public class ClientConnectionToServer {
     private AnchorPane ap;
 
     @FXML
-    private TextField ipAddress;
-
-    @FXML
     private Button btnConnect;
 
     @FXML
@@ -38,7 +35,6 @@ public class ClientConnectionToServer {
     @FXML
     void initialize() {
         assert ap != null : "fx:id=\"ap\" was not injected: check your FXML file 'ClientConnectionToServerFXML.fxml'.";
-        assert ipAddress != null : "fx:id=\"ipAddress\" was not injected: check your FXML file 'ClientConnectionToServerFXML.fxml'.";
         assert btnConnect != null : "fx:id=\"btnConnect\" was not injected: check your FXML file 'ClientConnectionToServerFXML.fxml'.";
         assert port != null : "fx:id=\"port\" was not injected: check your FXML file 'ClientConnectionToServerFXML.fxml'.";
 
@@ -47,7 +43,7 @@ public class ClientConnectionToServer {
     @FXML
     void setServerIP(ActionEvent event) throws IOException {
         //initialize ip & port of MyFuel Server
-        ClientApp.server_ip = ipAddress.getText();
+        ClientApp.server_ip = "localhost";
         ClientApp.server_port = port.getText();
 
         //check server connection status
@@ -57,12 +53,11 @@ public class ClientConnectionToServer {
         if (res) {
             //hide current window
             ((Stage) ((Node) event.getSource()).getScene().getWindow()).hide();
-
+            System.out.println("ClientConnectionToServer gui closed");
             //show login page gui
-            loginToSystemController = loginToSystemController.getInstance();
-            loginToSystemController.getInstance();
-            loginToSystemController.getInstance().primaryStage = new Stage();
-            loginToSystemController.getInstance().start(null);
+            loginToSystemController = LoginToSystemController.getInstance();
+            loginToSystemController.primaryStage = new Stage();
+            loginToSystemController.start(null);
         } else System.err.println("Can't open EmployeesManagementGUI screen");
     }
 }

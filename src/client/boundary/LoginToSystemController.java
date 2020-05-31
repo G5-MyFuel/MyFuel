@@ -1,6 +1,10 @@
 package client.boundary;
 
+import client.logic.FormValidation;
 import client.logic.LoginPageLogic;
+import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXPasswordField;
+import com.jfoenix.controls.JFXTextField;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,8 +24,6 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class LoginToSystemController extends Application {
-    private LoginToSystemController Instance = null;
-
     /*  fxml file object variables: */
     @FXML
     private ResourceBundle resources;
@@ -30,13 +32,13 @@ public class LoginToSystemController extends Application {
     private URL location;
 
     @FXML
-    private ChoiceBox<String> loginAsChoiceBox;
+    private JFXComboBox<String> loginAsComboBox;
 
     @FXML
-    private TextField userIDTextField;
+    private JFXTextField userIDTextField;
 
     @FXML
-    private PasswordField passwordField;
+    private JFXPasswordField passwordField;
 
     @FXML
     private Button loginBtn;
@@ -44,50 +46,45 @@ public class LoginToSystemController extends Application {
     @FXML
     public Stage primaryStage;
 
-    /* other gui variables:  */
-    private ObservableList<String> userTypes = FXCollections.observableArrayList("Client", "Worker", "Supplier");
+    private static LoginToSystemController Instance;
 
     /*  other variables: */
     private ActionEvent event = null;
-    LoginPageLogic loginPageController;
+    LoginPageLogic loginPageController; //logic instance
+    FormValidation formValidation;
 
 
-    public LoginToSystemController getInstance(){
-        if(loginPageController==null)
+    public static LoginToSystemController getInstance(){
+        if(Instance==null)
             Instance = new LoginToSystemController();
         return Instance;
     }
 
     @FXML
     void initialize() {
-        assert userIDTextField != null : "fx:id=\"userIDTextField\" was not injected: check your FXML file 'LoginToSystemFXML.fxml'.";
-        assert passwordField != null : "fx:id=\"passwordField\" was not injected: check your FXML file 'LoginToSystemFXML.fxml'.";
-        assert loginBtn != null : "fx:id=\"loginBtn\" was not injected: check your FXML file 'LoginToSystemFXML.fxml'.";
-        assert loginAsChoiceBox != null : "fx:id=\"loginAsListView\" was not injected: check your FXML file 'LoginToSystemFXML.fxml'.";
-        this.loginPageController = new LoginPageLogic(); //set connection to the controller
-        loginAsChoiceBox.setItems(userTypes);   //set the user types in the 'loginAsChoiceBox'
-        clickLoginBtn();    //set the operations that will happen when the "Login" btn pressed
+        formValidation = FormValidation.getValidator();
+        //this.loginPageController = new LoginPageLogic(); //set connection to the controller
+        // clickLoginBtn();    //set the operations that will happen when the "Login" btn pressed
+        loginAsComboBox.getItems().addAll("Customer","Employee","Supplier");
+        LoginValidation();
     }
 
+    public void LoginValidation(){
+        
+    }
 
     @FXML
     void clickLoginBtn() {
         loginBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                //for tests
-                System.out.println("LoginBtn Clicked");
-                System.out.println("The 'Login As' choice is: " + loginAsChoiceBox.getValue());
-                System.out.println("UserId field is: " + userIDTextField.getText());
-                System.out.println("The password is:" + passwordField.getText());
-                //
                 checkInputs();
             }
         });
     }
 
     public void checkInputs() {
-        int flag = loginPageController.checkIfThereAreEmptyFields(this);
+        int flag = loginPageController.getInstance().checkIfThereAreEmptyFields(this);
         if (flag > 0) {
             switch (flag) {
                 case 1: //"login as" field is empty
@@ -100,11 +97,11 @@ public class LoginToSystemController extends Application {
                     messageWindow(Alert.AlertType.ERROR, "Input 3 Error!", "already connected", "");
                     break;
             }
-        } else if (!loginPageController.checkUserIdValidation(this)) {
+        } else if (!loginPageController.getInstance().checkUserIdValidation(this)) {
             //יוצג alertWindow שיגיד שהרכב שם המשתמש שגוי
-        } else if (!loginPageController.checkIfUserExistInDB()) {
+        } else if (!loginPageController.getInstance().checkIfUserExistInDB()) {
             //יוצג חלון שיגיד שהמשתמש לא קיים במערכת
-        } else if (!loginPageController.checkIfPasswordCorrect()) {
+        } else if (!loginPageController.getInstance().checkIfPasswordCorrect()) {
             //יוצג חלון שהסיסמה לא תקינה
         }
     }
@@ -115,10 +112,6 @@ public class LoginToSystemController extends Application {
         alert.setHeaderText(mes);
         alert.setContentText(mes1);
         return alert.showAndWait();
-    }
-
-    public ChoiceBox<String> getLoginAsChoiceBox() {
-        return loginAsChoiceBox;
     }
 
     public TextField getUserIDTextField() {
@@ -137,13 +130,18 @@ public class LoginToSystemController extends Application {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/client/boundary/LoginToSystemFXML.fxml"));
             newRoot = loader.load();
-            Scene s1 = new Scene(newRoot);
+            Scene s1 = new Scene(newRoot,807,600);
+
             this.primaryStage.setScene(s1);
-            this.primaryStage.setResizable(false);
             this.primaryStage.show();
         } catch (IOException e) {
             System.err.println("IOException - open LoginToSystemFXML.fxml file!!!");
             e.printStackTrace();
         }
     }
+
+    public JFXComboBox<String> getLoginAsComboBox() {
+        return loginAsComboBox;
+    }
 }
+

@@ -18,9 +18,9 @@ public class CustomerRegistrationFXML1Logic {
         return Instance;
     }
 
-    public createCostumer(){
-
-    }
+//    public createCostumer(){
+//
+//    }
 
 
 
