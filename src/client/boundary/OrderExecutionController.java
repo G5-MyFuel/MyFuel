@@ -1,12 +1,17 @@
 package client.boundary;
 
 import client.logic.FormValidation;
+import client.logic.OrderFromSupplierLogic;
 import client.logic.SaleOperationTemplateLogic;
 import com.jfoenix.controls.JFXTextField;
 import common.entity.Employee;
 import common.entity.OrderFuelFromSupplier;
+import common.tools.Message;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableColumn;
@@ -19,14 +24,19 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 /**
  * @author Adi Lampert
  * @see OrderExecutionController - the from's logic class
  */
-public class OrderExecutionController {
+public class OrderExecutionController implements Initializable {
+
+    private static OrderExecutionController Instance= null;
     private OrderExecutionController OrderExecutionController;
-    common.entity.OrderFuelFromSupplier OrderFuelFromSupplier;
+    OrderFuelFromSupplier OrderFuelFromSupplier;
+    ArrayList<OrderFuelFromSupplier> OFFS;
+
 
     @FXML
     private Button MenuHomePageBtn;
@@ -53,10 +63,10 @@ public class OrderExecutionController {
     private TableView<OrderFuelFromSupplier> tableView;
 
     @FXML
-    private TableColumn< TableView<OrderFuelFromSupplier>, String> titleCol;
+    private TableColumn < TableView<OrderFuelFromSupplier>, String> orderCol;
 
     @FXML
-    private TableColumn<TableView<OrderFuelFromSupplier>, String> idCol;
+    private TableColumn < TableView<OrderFuelFromSupplier>, String> statusCol;
 
     @FXML
     private VBox vboxOrderView;
@@ -113,7 +123,17 @@ public class OrderExecutionController {
     void handleRefresh(ActionEvent event) {
 
     }
-
+    /**
+     * OrderExecutionController Instance getter using SingleTone DesignPatterns
+     *
+     * @return Instance of controller class
+     */
+    public static OrderExecutionController getInstance() {
+        if (Instance == null)
+            Instance = new OrderExecutionController();
+        return Instance;
+    }
+    @Override
     public void initialize(URL location, ResourceBundle resources) {
         hboxOrderConfirmation.setVisible(false);
         arrowImage.setVisible(false);
@@ -128,14 +148,14 @@ public class OrderExecutionController {
         QuantityField.setDisable(true);
         //TODO: display DB table
     }
-
-    /*public void setEmployeeTableColumns() {
-        EmployeeIdCol.setCellValueFactory(new PropertyValueFactory<Employee, String>("employeeID"));
-        FirstNameCol.setCellValueFactory(new PropertyValueFactory<Employee, String>("firstName"));
-        lastNameCol.setCellValueFactory(new PropertyValueFactory<Employee, String>("lastName"));
-        emailAddressCol.setCellValueFactory(new PropertyValueFactory<Employee, String>("emailAddress"));
-        jobTitleCol.setCellValueFactory(new PropertyValueFactory<Employee, String>("jobTitle"));
-        fuelCompanyNameCol.setCellValueFactory(new PropertyValueFactory<Employee, String>("fuelCompanyName"));
-    }*/
+    
+    public void setOrderFuelFromSupplierTableView(Object msg) {
+        orderCol.setCellValueFactory(new PropertyValueFactory<>("OrderNumber"));
+        statusCol.setCellValueFactory(new PropertyValueFactory<>("OrderStatus"));
+        OFFS = (ArrayList<OrderFuelFromSupplier>) msg;
+        ObservableList<OrderFuelFromSupplier> data = FXCollections.observableArrayList(OFFS);
+        tableView.setEditable(true);
+        tableView.setItems(data);
+    }
 
 }

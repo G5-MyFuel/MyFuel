@@ -19,7 +19,7 @@ public class OrderFromSupplierLogic {
     }
 
     public void getOrderFuelFromSupplierTable(){
-        ClientApp.client.handleMessageFromClientUI(new Message(OperationType.getAllUsersTable, "SELECT * FROM OrderForStock as O;"));
+        ClientApp.client.handleMessageFromClientUI(new Message(OperationType.getRequirementData, "SELECT * FROM OrderForStock as O;"));
     }
 
     public static ArrayList<OrderFuelFromSupplier> getOrderFromSupplierArrayList() {
