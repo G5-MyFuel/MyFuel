@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
@@ -46,7 +47,7 @@ public class CustomerRegistrationController implements Initializable {
     private Button btnOverview;
 
     @FXML
-    private Button btnCustomers;
+    private Button addCostumerBtn;
 
     @FXML
     private Button btnMenus;
@@ -91,7 +92,7 @@ public class CustomerRegistrationController implements Initializable {
     private JFXTextField VehicleIDtxt;
 
     @FXML
-    private Pane VehicleInformationSplitPane;
+    private SplitPane VehicleInformationSplitPane;
 
     @FXML
     private JFXComboBox<?> GasTypeChoiseBox;
@@ -123,9 +124,12 @@ public class CustomerRegistrationController implements Initializable {
     @FXML
     private Button FinishButton;
 
+    @FXML
+    private Pane mainPane;
 
 
-    private AnchorPane paymentPage;
+
+
 
 
     private ObservableList<String> CostumerType = FXCollections.observableArrayList("Private", "Company");
@@ -137,9 +141,11 @@ public class CustomerRegistrationController implements Initializable {
         this.CustomerRegistrationLogic = CustomerRegistrationLogic.getInstance();
         //
         //
+        mainPane.setVisible(false);
+        mainPane.setDisable(true);
 
         //disable vehicle information window
-       VehicleInformationSplitPane.setVisible(false);
+        VehicleInformationSplitPane.setVisible(false);
 
         CostumertypeChoiceBox.setItems(CostumerType);
         ServicePlanChoiseBox.setItems(ServicePlanType);
@@ -156,6 +162,11 @@ public class CustomerRegistrationController implements Initializable {
             Instance = new CustomerRegistrationController();
         return Instance;
     }
+    @FXML
+    void addCostumerOnClick(MouseEvent event){
+        mainPane.setVisible(true);
+        mainPane.setDisable(false);
+    }
 
     @FXML
     void handleClicks(ActionEvent event) {
@@ -163,21 +174,18 @@ public class CustomerRegistrationController implements Initializable {
     }
 
     @FXML
-    void addVehicleButton() {
+    void addVehicleButton(MouseEvent event) {
         VehicleInformationSplitPane.setVisible(true);
-
-
-
-
-
     }
 
     @FXML
     void creditCardLinkOnClick(MouseEvent event) throws IOException {
-        FXMLLoader pageLoader2 = new FXMLLoader();
-        pageLoader2.setLocation(getClass().getResource("Payment Window"));
-        paymentPage = pageLoader2.load();
-
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Payment Window.fxml"));
+        Parent root = (Parent) fxmlLoader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setTitle("Insert Credit Card Details");
+        stage.show();
     }
 
     @FXML
