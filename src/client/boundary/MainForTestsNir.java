@@ -27,6 +27,7 @@ public class MainForTestsNir extends Application {
             root = pageLoader.load();
             settingDiscountRatesController = pageLoader.getController();//קבלת גישה לקונטרולר
             //
+            //
 
             //
             Scene scene = new Scene(root, 1280, 800);
