@@ -1,5 +1,12 @@
 package common.entity;
 
+
+/**
+ * @author itay
+ * @see CreditCard - the form's entity class
+ */
+
+
 public class CreditCard {
 
     private Customer cardOwner;
