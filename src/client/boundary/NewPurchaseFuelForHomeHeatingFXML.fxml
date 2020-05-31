@@ -326,7 +326,7 @@
                                     </ImageView>
                                  </graphic>
                               </Tab>
-                              <Tab onSelectionChanged="#checkOrderDetails" styleClass="blue-titledPaneTab" text="Shipping">
+                              <Tab onSelectionChanged="#CheckOrderDetails" styleClass="blue-titledPaneTab" text="Shipping">
                                  <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="180.0" prefWidth="1123.0">
                                        <children>

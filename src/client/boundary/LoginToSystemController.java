@@ -1,18 +1,27 @@
 package client.boundary;
 
 import client.logic.LoginPageLogic;
+import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.JFXPanel;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class LoginToSystemController {
+public class LoginToSystemController extends Application {
+    private LoginToSystemController Instance = null;
+
     /*  fxml file object variables: */
     @FXML
     private ResourceBundle resources;
@@ -32,6 +41,9 @@ public class LoginToSystemController {
     @FXML
     private Button loginBtn;
 
+    @FXML
+    public Stage primaryStage;
+
     /* other gui variables:  */
     private ObservableList<String> userTypes = FXCollections.observableArrayList("Client", "Worker", "Supplier");
 
@@ -39,7 +51,11 @@ public class LoginToSystemController {
     private ActionEvent event = null;
     LoginPageLogic loginPageController;
 
-    public LoginToSystemController() {
+
+    public LoginToSystemController getInstance(){
+        if(loginPageController==null)
+            Instance = new LoginToSystemController();
+        return Instance;
     }
 
     @FXML
@@ -111,5 +127,23 @@ public class LoginToSystemController {
 
     public PasswordField getPasswordField() {
         return passwordField;
+    }
+
+
+    @Override
+    public void start(Stage primaryStage) throws IOException {
+        Pane newRoot = null;
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/client/boundary/LoginToSystemFXML.fxml"));
+            newRoot = loader.load();
+            Scene s1 = new Scene(newRoot);
+            this.primaryStage.setScene(s1);
+            this.primaryStage.setResizable(false);
+            this.primaryStage.show();
+        } catch (IOException e) {
+            System.err.println("IOException - open LoginToSystemFXML.fxml file!!!");
+            e.printStackTrace();
+        }
     }
 }

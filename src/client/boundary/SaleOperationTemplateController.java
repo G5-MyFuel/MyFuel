@@ -127,10 +127,10 @@ public class SaleOperationTemplateController implements Initializable {
         formValidation.numberPositiveValidation(DiscountPercentages, "Discount Percentages");
 
         /*  Gas Type validation */
-        formValidation.isEmptyField(ChooseGasTypeComboSpecialization, "Choose Gas Type");
-
+//        formValidation.isEmptyField(ChooseGasTypeComboSpecialization, "Choose Gas Type");
+//
         /*  Day validation */
-        formValidation.isEmptyField(DayComboSpecialization1, "Day");
+//        formValidation.isEmptyField(DayComboSpecialization1, "Day");
 
         /*  Start Hour validation */
         formValidation.isEmptyField(StartHour, "Start Hour");

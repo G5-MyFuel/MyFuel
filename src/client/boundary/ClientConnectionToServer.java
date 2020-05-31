@@ -13,9 +13,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ClientConnectionGuiController {
+public class ClientConnectionToServer {
     //GuiController variables:
-//    EmployeesManagementGuiController employeesManagementGuiController;
+    LoginToSystemController loginToSystemController = null;
 
     @FXML
     private ResourceBundle resources;
@@ -58,11 +58,11 @@ public class ClientConnectionGuiController {
             //hide current window
             ((Stage) ((Node) event.getSource()).getScene().getWindow()).hide();
 
-            //show employeesManagement gui
-//            employeesManagementGuiController = new EmployeesManagementGuiController();
-//            employeesManagementGuiController.Instance.primaryStage = new Stage();
-//            employeesManagementGuiController.Instance.start(null);
-
+            //show login page gui
+            loginToSystemController = loginToSystemController.getInstance();
+            loginToSystemController.getInstance();
+            loginToSystemController.getInstance().primaryStage = new Stage();
+            loginToSystemController.getInstance().start(null);
         } else System.err.println("Can't open EmployeesManagementGUI screen");
     }
 }

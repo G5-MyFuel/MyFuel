@@ -16,7 +16,8 @@ public class MySqlConnection {
         }
         try {
             // Parameters class contains DB Details
-            con = DriverManager.getConnection("jdbc:mysql://" + dbDetails.DB_HOST + ":3306/" + dbDetails.DB_SCHEME + "?serverTimezone=IST", dbDetails.DB_USERNAME, dbDetails.DB_PASSWORD);
+            con = DriverManager.getConnection("jdbc:mysql://uec30klrdxwlktiw:tc3wfAIidXugUM7hr3nK@bpsdc8o22sikrlpvvxqm-mysql.services.clever-cloud.com:3306/bpsdc8o22sikrlpvvxqm" , dbDetails.DB_USERNAME, dbDetails.DB_PASSWORD);
+            //+ "?serverTimezone=IST"
             System.out.println("SQL connection succeed");
         } catch (SQLException ex) {/* handle any errors*/
             System.out.println("SQLException: " + ex.getMessage());

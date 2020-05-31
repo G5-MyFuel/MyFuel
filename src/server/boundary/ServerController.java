@@ -123,7 +123,7 @@ public class ServerController implements Initializable {
         if (port_field.getText().equals("")) {
             portFieldEmptyAlert.setVisible(true);
         } else {
-            portFieldEmptyAlert.setVisible(false);
+           // portFieldEmptyAlert.setVisible(false);
             // EchoServer.mainServer(args);
             setDBDetailsFromGUI();
             int port = 0; // Port to listen on

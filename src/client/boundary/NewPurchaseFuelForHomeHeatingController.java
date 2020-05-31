@@ -1,11 +1,14 @@
 package client.boundary;
 
+import client.ClientApp;
 import client.logic.FormValidation;
 import client.logic.NewPurchaseFuelForHomeHeatingLogic;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
+import common.tools.Message;
+import common.tools.OperationType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -16,9 +19,11 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
-import java.net.MalformedURLException;
 import java.net.URL;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.ResourceBundle;
 
 /**
@@ -185,9 +190,9 @@ public class NewPurchaseFuelForHomeHeatingController implements Initializable {
         this.orderDetailsIndicatorTAB.setVisible(false);
         this.shippingIndicatorTAB1.setVisible(false);
         /*  set all fields validators */
-        formValidation();   //
+        FormValidation();   //
         /* set form items */
-        setShippingTab();
+        SetShippingTab();
     }
 
     /**
@@ -201,7 +206,7 @@ public class NewPurchaseFuelForHomeHeatingController implements Initializable {
     }
 
     //
-    private void formValidation() {
+    private void FormValidation() {
         //order details page - start
         /*  fuel quantity validation */
         formValidation.isEmptyField(fuelQuantityTXT, "Fuel Quantity");
@@ -231,10 +236,12 @@ public class NewPurchaseFuelForHomeHeatingController implements Initializable {
         //order details page - end
         //
         //shipping - start
+       // InitialAndResetAllShippingDates();
 
     }
 
-    public void checkOrderDetails(){
+
+    public void CheckOrderDetails(){
         ArrayList<Object> guiObjects = new ArrayList<Object>();
         guiObjects.add(fuelQuantityTXT);
         guiObjects.add(streetNameTXT);
@@ -249,14 +256,23 @@ public class NewPurchaseFuelForHomeHeatingController implements Initializable {
             }
         }
         orderDetailsIndicatorTAB.setVisible(true);
-
     }
 
     //todo: להמשיך להגדיר את התאריכים האופציונלים שיובאו מהדטהבייס מטבלת ShippingOptionalDates
-    public void setShippingTab(){
+    public void SetShippingTab(){
         shippingMethodComboBOX.getItems().addAll("Fast Shipping (40$)","Standard Shipping (15$)");
         whenPane.setVisible(false);
         shippingOverviewPane.setVisible(false);
         optionalDatesForShippingGridPane.setVisible(false);
+        //get available dates for shipping from DB
+        String getAllAvailableDatesFromDbQUERY = "";    //todo:  query
+//        ClientApp.client.handleMessageFromClientUI(new Message(OperationType.getRequirementData,""));
+    }
+
+    public void InitialAndResetAllShippingDates(){
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        Date date = new Date(Calendar.getInstance().getTime().getTime());
+        String initialShippingDatesQUERY = "INSERT INTO `bpsdc8o22sikrlpvvxqm`.`ShippingOptionalDates` (`DayAndDate`, `T1`, `T2`, `T3`, `T4`, `T5`, `T6`) VALUES ('2020-05-31', '1', '1', '1', '1', '1', '1');";
+        ClientApp.client.handleMessageFromClientUI(new Message(OperationType.updateRequirement,initialShippingDatesQUERY));
     }
 }
