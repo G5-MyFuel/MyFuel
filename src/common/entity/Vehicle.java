@@ -1,5 +1,15 @@
 package common.entity;
 
+import client.logic.CustomerRegistrationFXML1Logic;
+
+import java.util.Objects;
+
+
+/**
+ * @author itay
+ * @see Vehicle - the form's entity class
+ */
+
 public class Vehicle {
 
     private String VehicleID;
@@ -24,5 +34,21 @@ public class Vehicle {
 
     public void setGasType(String gasType) {
         GasType = gasType;
+    }
+
+
+    //need to implements comparator for table view.
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Vehicle vehicle = (Vehicle) o;
+        return VehicleID.equals(vehicle.VehicleID) &&
+                GasType.equals(vehicle.GasType);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(VehicleID, GasType);
     }
 }
