@@ -15,4 +15,7 @@ public class Customer {
         this.emailAdress = emailAdress;
         CustomerCreditCard = customerCreditCard;
     }
+
+
+
 }
