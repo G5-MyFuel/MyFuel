@@ -20,7 +20,7 @@
         <Pane prefHeight="804.0" prefWidth="1284.0" />
         <HBox prefHeight="804.0" prefWidth="1258.0">
             <children>
-                <AnchorPane prefHeight="749.0" prefWidth="235.0" style="-fx-background-color: #2D4578;">
+                <AnchorPane prefHeight="749.0" prefWidth="235.0" style="-fx-background-color: #2d4578;">
                     <children>
                         <Pane layoutX="-3.0" layoutY="480.0" prefHeight="325.0" prefWidth="238.0">
                             <children>
@@ -131,23 +131,20 @@
                             <content>
                                 <Pane prefHeight="796.0" prefWidth="1062.0" style="-fx-position-shape: center; -fx-border-color: transparent;">
                                     <children>
-                                        <Text layoutX="606.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Discounts for a regular monthly subscription - single vehicle:" wrappingWidth="412.6708984375" />
-                                        <Text layoutX="606.0" layoutY="175.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Discount for full monthly subscription (for single vehicle):" wrappingWidth="412.6708984375" />
-                                        <Text layoutX="592.0" layoutY="223.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Discount for a regular monthly subscription - number of vehicles" wrappingWidth="412.6708984375" />
                                         <Label layoutX="39.0" layoutY="55.0" text="Setting Discount Rates" textFill="#2d4578">
                                             <font>
                                                 <Font name="System Bold" size="40.0" />
                                             </font>
                                         </Label>
                                         <Label layoutX="56.0" layoutY="138.0" text="Please Choose Subscription Type:" />
-                              <JFXComboBox fx:id="ChooseSubscriptionTypeCombo" layoutX="301.0" layoutY="133.0" onAction="#handleChoseSubscriptionType" prefHeight="31.0" prefWidth="148.0" />
+                              <JFXComboBox fx:id="ChooseSubscriptionTypeCombo" layoutX="301.0" layoutY="133.0" onAction="#handleChoseSubscriptionType" prefHeight="31.0" prefWidth="366.0" />
                               <JFXTextField fx:id="ShowCurrentRateTXT" focusColor="#00add8" labelFloat="true" layoutX="301.0" layoutY="201.0" onAction="#handleShowCurrentRate" prefHeight="52.0" prefWidth="139.0" promptText="Current price:" unFocusColor="#868282">
                                  <padding>
                                     <Insets bottom="5.0" top="20.0" />
                                  </padding>
                               </JFXTextField>
                               <Button fx:id="btnSetNewRate" layoutX="301.0" layoutY="398.0" mnemonicParsing="false" onAction="#handleSetNewRate" prefHeight="42.0" prefWidth="122.0" style="-fx-background-color: #2D4578; -fx-background-radius: 50;" stylesheets="@style.css" text="Set New Rate" />
-                              <JFXTextField fx:id="ShowCurrentRateTXT1" focusColor="#00add8" labelFloat="true" layoutX="301.0" layoutY="286.0" onAction="#handleShowCurrentRate" prefHeight="52.0" prefWidth="139.0" promptText="New price:" unFocusColor="#868282">
+                              <JFXTextField fx:id="ShowNewRateTXT" focusColor="#00add8" labelFloat="true" layoutX="301.0" layoutY="286.0" onAction="#handleShowNewRate" prefHeight="52.0" prefWidth="139.0" promptText="New price:" unFocusColor="#868282">
                                  <padding>
                                     <Insets bottom="5.0" top="20.0" />
                                  </padding>

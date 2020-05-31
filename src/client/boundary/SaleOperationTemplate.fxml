@@ -18,7 +18,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.boundary.SaleOperationTemplateController">
    <children>
       <Pane prefHeight="804.0" prefWidth="1284.0" />
       <HBox prefHeight="804.0" prefWidth="1284.0">
@@ -71,7 +71,7 @@
                               <Insets bottom="20.0" />
                            </VBox.margin>
                         </Label>
-                        <Button fx:id="btnOverview" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" style="-fx-font-family: 'Abel', sans-serif; -fx-font-size: 16; -fx-alignment: left;" stylesheets="@style.css" text="Home Page" textFill="#e7e5e5">
+                        <Button fx:id="btnOverview" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" style="-fx-font-family: 'Abel', sans-serif; -fx-font-size: 16; -fx-alignment: left;" stylesheets="@style.css" text="Home Page" textFill="#e7e5e5">
                            <graphic>
                               <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -89,7 +89,7 @@
                               <Insets left="50.0" />
                            </padding>
                         </Button>
-                        <Button fx:id="btnCustomers" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" style="-fx-font-family: 'Abel', sans-serif; -fx-font-size: 16; -fx-alignment: left;" stylesheets="@style.css" text="View analytic data">
+                        <Button fx:id="btnCustomers" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" style="-fx-font-family: 'Abel', sans-serif; -fx-font-size: 16; -fx-alignment: left;" stylesheets="@style.css" text="View analytic data">
                            <graphic>
                               <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -101,7 +101,7 @@
                               <Insets left="50.0" />
                            </padding>
                         </Button>
-                        <Button fx:id="btnMenus" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" style="-fx-font-family: 'Abel', sans-serif; -fx-font-size: 16; -fx-alignment: left;" stylesheets="@style.css" text="Sale operation templates">
+                        <Button fx:id="btnMenus" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" style="-fx-font-family: 'Abel', sans-serif; -fx-font-size: 16; -fx-alignment: left;" stylesheets="@style.css" text="Sale operation templates">
                            <graphic>
                               <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -153,7 +153,7 @@
                                  </font>
                               </Label>
                               <TableView fx:id="employeesTableView" layoutX="41.0" layoutY="129.0" prefHeight="325.0" prefWidth="873.0" />
-                              <ImageView fx:id="btnAddTemplate" accessibleRole="BUTTON" fitHeight="53.0" fitWidth="61.0" layoutX="41.0" layoutY="476.0" onMousePressed="#handleAddTemplate" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="btnAddTemplate" accessibleRole="BUTTON" fitHeight="53.0" fitWidth="61.0" layoutX="41.0" layoutY="476.0" onMouseClicked="#handleAddTemplate" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../../media/CostumerRegisterationMedia/add_40px.png" />
                                  </image>
@@ -161,18 +161,14 @@
                                     <Cursor fx:constant="OPEN_HAND" />
                                  </cursor>
                               </ImageView>
-                              <Label fx:id="txtAddTemplate" layoutX="104.0" layoutY="488.0" onMousePressed="#handleAddTemplate" text="Add new template">
+                              <Label fx:id="txtAddTemplate" layoutX="104.0" layoutY="488.0" onMouseClicked="#handleAddTemplate" text="Add new template">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
                               </Label>
-                              <SplitPane fx:id="newTemplateDetails" dividerPositions="0.1440329218106996" layoutX="41.0" layoutY="467.0" orientation="VERTICAL" prefHeight="286.0" prefWidth="872.0">
+                              <SplitPane fx:id="newTemplateDetails" dividerPositions="0.1440329218106996" layoutX="41.0" layoutY="467.0" orientation="VERTICAL" prefHeight="286.0" prefWidth="872.0" visible="false">
                                  <items>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="35.0" prefWidth="335.0" style="-fx-background-color: #fcf8e8;">
-                                       <children>
-                                          <Label alignment="CENTER" layoutY="-2.0" prefHeight="32.0" prefWidth="870.0" style="-fx-font-weight: Bold;" text="Fill in Tamplate Details  " />
-                                       </children>
-                                    </AnchorPane>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="35.0" prefWidth="335.0" style="-fx-background-color: #fcf8e8;" />
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="272.0" prefWidth="870.0" style="-fx-background-color: #fcf8e8;">
                                        <children>
                                           <Button fx:id="btnNewTemplate" layoutX="343.0" layoutY="179.0" mnemonicParsing="false" onAction="#handleSaveTemplate" text="Save new template" />
@@ -183,6 +179,7 @@
                                           <JFXTextField fx:id="EndHour" focusColor="#00add8" labelFloat="true" layoutX="604.0" layoutY="71.0" prefHeight="31.0" prefWidth="159.0" promptText="End Hour" unFocusColor="#868282" />
                                           <JFXTextField fx:id="MarketingAdForTemplate" focusColor="#00add8" labelFloat="true" layoutX="438.0" layoutY="122.0" prefHeight="33.0" prefWidth="329.0" promptText="Marketing Ad For Template" unFocusColor="#868282" />
                                           <JFXTextField fx:id="DiscountPercentages" focusColor="#00add8" labelFloat="true" layoutX="86.0" layoutY="67.0" prefHeight="25.0" prefWidth="281.0" promptText="Discount Percentages" unFocusColor="#868282" />
+                                          <Label alignment="CENTER" layoutX="-43.0" layoutY="6.0" prefHeight="32.0" prefWidth="870.0" style="-fx-font-weight: Bold;" text="Fill in Tamplate Details  " />
                                        </children>
                                     </AnchorPane>
                                  </items>

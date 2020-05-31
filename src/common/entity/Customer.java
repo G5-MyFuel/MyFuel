@@ -9,10 +9,12 @@ package common.entity;
 public class Customer extends User {
 
     private CreditCard CustomerCreditCard;
+    private boolean purchasePlan;
 
-    public Customer(int ID, String CustomerPassword, String Fname, String Lname, String emailAdress, CreditCard customerCreditCard) {
-        super(ID, 1, CustomerPassword, Fname, Lname, emailAdress);
+    public Customer(String ID,String CustomerPassword, String Fname, String Lname, String emailAdress, CreditCard customerCreditCard,boolean purchasePlan) {
+        super(ID, CustomerPassword, Fname, Lname, emailAdress);
         this.CustomerCreditCard = customerCreditCard;
+        this.purchasePlan = purchasePlan;
     }
 
     public CreditCard getCustomerCreditCard() {
@@ -21,5 +23,13 @@ public class Customer extends User {
 
     public void setCustomerCreditCard(CreditCard customerCreditCard) {
         CustomerCreditCard = customerCreditCard;
+    }
+
+    public boolean isPurchasePlan() {
+        return purchasePlan;
+    }
+
+    public void setPurchasePlan(boolean purchasePlan) {
+        this.purchasePlan = purchasePlan;
     }
 }

@@ -11,4 +11,5 @@ public class SaleOperationTemplate {
     private Day day;
     private Time beginHour;
     private Time endHour;
+
 }

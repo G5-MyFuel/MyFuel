@@ -1,39 +1,46 @@
 package client.boundary;
 
-import  client.logic.*;
+import client.logic.*;
 import client.logic.FormValidation;
-import client.logic.NewPurchaseFuelForHomeHeatingLogic;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import common.entity.Vehicle;
-import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 
+import java.io.IOException;
 import java.net.URL;
+import java.time.Clock;
 import java.util.ResourceBundle;
 
 
 /**
  * @author itay
- * @see CustomerRegistrationFXML1Logic - the form's logic class
+ * @see CustomerRegistrationLogic - the form's logic class
  */
 
-public class CustomerRegistrationFXML1Controller  {
+public class CustomerRegistrationController implements Initializable {
 
-    private static CustomerRegistrationFXML1Controller Instance = null;
-    private CustomerRegistrationFXML1Logic CustomerRegistrationFXML1Logic;
+    private static CustomerRegistrationController Instance = null;
+    private CustomerRegistrationLogic CustomerRegistrationLogic;
     private FormValidation formValidation; //daniel implementation have to look before use** ~~~~~~~~~~~~~
 
     /*Gui variables:
-    * */
+     * */
 
     @FXML
     private Button btnOverview;
@@ -84,6 +91,9 @@ public class CustomerRegistrationFXML1Controller  {
     private JFXTextField VehicleIDtxt;
 
     @FXML
+    private SplitPane VehicleInformationSplitPane;
+
+    @FXML
     private JFXComboBox<?> GasTypeChoiseBox;
 
     @FXML
@@ -114,32 +124,69 @@ public class CustomerRegistrationFXML1Controller  {
     private Button FinishButton;
 
 
-    private ObservableList<String> CostumerType= FXCollections.observableArrayList("Private", "Regular");
 
+    private AnchorPane paymentPage;
+
+
+    private ObservableList<String> CostumerType = FXCollections.observableArrayList("Private", "Company");
+
+    private ObservableList<String> ServicePlanType = FXCollections.observableArrayList("EXLUSIVE", "MULTIPLE_STATIONS");
+
+    @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.CustomerRegistrationFXML1Logic = CustomerRegistrationFXML1Logic.getInstance();
+        this.CustomerRegistrationLogic = CustomerRegistrationLogic.getInstance();
         //
-       //
-       //
+        //
 
+        //disable vehicle information window
+        VehicleInformationSplitPane.setVisible(false);
 
-       CostumertypeChoiceBox.setItems(CostumerType);
+        CostumertypeChoiceBox.setItems(CostumerType);
+        ServicePlanChoiseBox.setItems(ServicePlanType);
 
     }
 
     /**
      * CustomerRegistrationFXML1Controller Instance getter using SingleTone DesignPatterns
+     *
      * @return Instance of controller class
      */
-    public CustomerRegistrationFXML1Controller getInstance() {
+    public CustomerRegistrationController getInstance() {
         if (Instance == null)
-            Instance = new CustomerRegistrationFXML1Controller();
+            Instance = new CustomerRegistrationController();
         return Instance;
     }
 
     @FXML
     void handleClicks(ActionEvent event) {
 
+    }
+
+    @FXML
+    void addVehicleButton(MouseEvent event) {
+        VehicleInformationSplitPane.setVisible(true);
+
+
+
+
+    }
+
+    @FXML
+    void creditCardLinkOnClick(MouseEvent event) throws IOException {
+        FXMLLoader pageLoader2 = new FXMLLoader();
+        pageLoader2.setLocation(getClass().getResource("Payment Window"));
+        paymentPage = pageLoader2.load();
+
+    }
+
+    @FXML
+    void forwardButtonOnClick(MouseEvent event) {
+        vehicleMangTAB.getTabPane().getSelectionModel().selectNext();
+    }
+
+    @FXML
+    void backwardButtonOnClick(MouseEvent event) {
+        vehicleMangTAB.getTabPane().getSelectionModel().selectPrevious();
     }
 
 

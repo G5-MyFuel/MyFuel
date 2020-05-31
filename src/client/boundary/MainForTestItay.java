@@ -1,28 +1,31 @@
 package client.boundary;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class MainForTestsHani extends Application {
-    //קובץ בדיקות עבור SaleOperationTemplateController
-    String pageName = "SaleOperationTemplate.fxml";   //שם קובץ הfxml
+public class MainForTestItay extends Application {
+
+
+
+    String pageName = "CustomerRegistrationFXML1.fxml";   //שם קובץ הfxml
 
     private AnchorPane root;
-    private SaleOperationTemplateController SaleOperationTemplateController;    //אינסטנס של מחלקת הboundary
+    private CustomerRegistrationController CustomerRegistrationController;    //אינסטנס של מחלקת הboundary
 
     public static void main(String[] args) {
         launch(args);
     }
 
-    @Override
+
     public void start(Stage primaryStage) {
         try {
             FXMLLoader pageLoader = new FXMLLoader();
             pageLoader.setLocation(getClass().getResource(pageName + ""));
             root = pageLoader.load();
-            SaleOperationTemplateController = pageLoader.getController();//קבלת גישה לקונטרולר
+            CustomerRegistrationController = pageLoader.getController();//קבלת גישה לקונטרולר
             //
 
             //

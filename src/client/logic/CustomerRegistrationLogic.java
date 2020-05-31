@@ -1,9 +1,14 @@
 package client.logic;
 
-public class CustomerRegistrationFXML1Logic {
+/**
+ * @author itay
+ * @see CustomerRegistrationLogic - the form's logic class
+ */
+
+public class CustomerRegistrationLogic {
 
     /*Logic Variables*/
-    private static CustomerRegistrationFXML1Logic Instance = null;
+    private static CustomerRegistrationLogic Instance = null;
 
     /*Logic Methods*/
 
@@ -12,16 +17,16 @@ public class CustomerRegistrationFXML1Logic {
      * CustomerRegistrationFXML1Logic Instance getter using SingleTone DesignPatterns
      * @return Instance of logic class
      */
-    public static CustomerRegistrationFXML1Logic getInstance() {
+    public static CustomerRegistrationLogic getInstance() {
         if (Instance == null)
-            Instance = new CustomerRegistrationFXML1Logic();
+            Instance = new CustomerRegistrationLogic();
         return Instance;
     }
 
     //~~~~~~~~~~~~~~~~~~~will get details from boundry and set costumer in database ~~~~~~~~~~~~~~~~~~~~~~~~
-    public void createCostumer(){
-
-    }
+//    public createCostumer(){
+//
+//    }
 
 
 
