@@ -6,7 +6,9 @@ import client.logic.FormValidation;
 
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import common.entity.Day;
 import common.entity.Employee;
+import common.entity.FuelTypes;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -20,6 +22,7 @@ import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.net.URL;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -36,12 +39,14 @@ public class SaleOperationTemplateController implements Initializable {
     ObservableList<Employee> data1;
     ArrayList<Employee> employeeArrayList;
     //
-    TableColumn EmployeeIdCol = new TableColumn("EmployeeId");
-    TableColumn FirstNameCol = new TableColumn("firstName");
-    TableColumn lastNameCol = new TableColumn("lastName");
-    TableColumn emailAddressCol = new TableColumn("emailAddress");
-    TableColumn jobTitleCol = new TableColumn("jobTitle");
-    TableColumn fuelCompanyNameCol = new TableColumn("fuelCompanyName");
+    TableColumn templateID = new TableColumn("Template Number");
+    TableColumn templateName = new TableColumn("Template Name");
+    TableColumn fuelType = new TableColumn("Fuel Type");
+    TableColumn DiscountPercentages = new TableColumn("Discount Percentages");
+    TableColumn MarketingAdForTemplate = new TableColumn("Marketing Ad For Template");
+    TableColumn day = new TableColumn("Day");
+    TableColumn beginHour = new TableColumn("Beginning Hour");
+    TableColumn endHour = new TableColumn("End Hour");
     //
 
     //gui variables:
