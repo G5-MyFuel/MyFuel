@@ -1,7 +1,5 @@
 package common.entity;
 
-import client.logic.CustomerRegistrationFXML1Logic;
-
 import java.util.Objects;
 
 
