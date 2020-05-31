@@ -317,7 +317,11 @@ public class FormValidation {
         });
     }
 
-
+    /**
+     * Method for checking phone number integrity
+     * @param theField  - the field to validate
+     * @param fieldName - the name of field
+     */
     public void phoneNumberValidation(JFXTextField theField, String fieldName) {
         theField.getValidators().add(new ValidatorBase(fieldName + " is wrong") {
             @Override
@@ -351,4 +355,6 @@ public class FormValidation {
             }
         });
     }
+
+
 }

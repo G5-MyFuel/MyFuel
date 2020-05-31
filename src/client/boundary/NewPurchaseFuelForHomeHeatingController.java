@@ -3,6 +3,7 @@ package client.boundary;
 import client.logic.FormValidation;
 import client.logic.NewPurchaseFuelForHomeHeatingLogic;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
@@ -11,6 +12,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 import java.net.MalformedURLException;
@@ -107,7 +110,7 @@ public class NewPurchaseFuelForHomeHeatingController implements Initializable {
     private ImageView orderDetailsIndicatorTAB;
 
     @FXML
-    private ComboBox<?> shippingMethodComboBOX;
+    private JFXComboBox<String> shippingMethodComboBOX;
 
     @FXML
     private ComboBox<?> dayAndDateComboBox;
@@ -165,11 +168,15 @@ public class NewPurchaseFuelForHomeHeatingController implements Initializable {
 
     @FXML
     private ImageView reviewIndicatorTAB;
-    //
-//    private ImageView xImg = new ImageView(new Image("src\\media\\PurchaseMedia\\X.png"));
-    private String vImgUrl = "src/media/PurchaseMedia/V.png";
-    private String xImgUrl = "src/media/PurchaseMedia/X.png";
 
+    @FXML
+    private VBox whenPane;
+
+    @FXML
+    private VBox shippingOverviewPane;
+
+    @FXML
+    private GridPane optionalDatesForShippingGridPane;
     //
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -179,7 +186,8 @@ public class NewPurchaseFuelForHomeHeatingController implements Initializable {
         this.shippingIndicatorTAB1.setVisible(false);
         /*  set all fields validators */
         formValidation();   //
-
+        /* set form items */
+        setShippingTab();
     }
 
     /**
@@ -194,6 +202,7 @@ public class NewPurchaseFuelForHomeHeatingController implements Initializable {
 
     //
     private void formValidation() {
+        //order details page - start
         /*  fuel quantity validation */
         formValidation.isEmptyField(fuelQuantityTXT, "Fuel Quantity");
         formValidation.isDoubleNumberValidation(fuelQuantityTXT, "fuel Quantity");
@@ -219,12 +228,13 @@ public class NewPurchaseFuelForHomeHeatingController implements Initializable {
         formValidation.phoneNumberValidation(anotherContactPhoneNumberTXT,"Phone Number");
         /* note validation */
         formValidation.maxLengthValidationTextArea(noteTXT,"Note",150);
-
+        //order details page - end
+        //
+        //shipping - start
 
     }
 
     public void checkOrderDetails(){
-        boolean indicator = true;
         ArrayList<Object> guiObjects = new ArrayList<Object>();
         guiObjects.add(fuelQuantityTXT);
         guiObjects.add(streetNameTXT);
@@ -240,5 +250,13 @@ public class NewPurchaseFuelForHomeHeatingController implements Initializable {
         }
         orderDetailsIndicatorTAB.setVisible(true);
 
+    }
+
+    //todo: להמשיך להגדיר את התאריכים האופציונלים שיובאו מהדטהבייס מטבלת ShippingOptionalDates
+    public void setShippingTab(){
+        shippingMethodComboBOX.getItems().addAll("Fast Shipping (40$)","Standard Shipping (15$)");
+        whenPane.setVisible(false);
+        shippingOverviewPane.setVisible(false);
+        optionalDatesForShippingGridPane.setVisible(false);
     }
 }
