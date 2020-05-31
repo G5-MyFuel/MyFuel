@@ -1,6 +1,9 @@
 package client.boundary;
 
+import client.logic.NewPurchaseFuelForHomeHeatingLogic;
+import client.logic.SaleOperationTemplateLogic;
 import client.logic.FormValidation;
+
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
@@ -10,7 +13,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TableView;
 import javafx.scene.image.ImageView;
-import client.logic.SaleOperationTemplateLogic;
+import javafx.scene.text.Text;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -27,7 +30,16 @@ public class SaleOperationTemplateController implements Initializable {
     private SaleOperationTemplateLogic newSaleOperationTemplateLogic;
     private FormValidation formValidation;
 
+    private boolean[] IfEmptyFileds = new boolean[7];
+
     //gui variables:
+
+    @FXML
+    private ResourceBundle resources;
+
+    @FXML
+    private URL location;
+
     @FXML
     private Button btnOverview;
 
@@ -79,6 +91,9 @@ public class SaleOperationTemplateController implements Initializable {
     @FXML
     private JFXTextField DiscountPercentages;
 
+    @FXML
+    private Text errorMassageEmptyFileds;
+
 
     @FXML
     void handleClicks(ActionEvent event) {
@@ -87,6 +102,7 @@ public class SaleOperationTemplateController implements Initializable {
 
     @FXML
     void handleAddTemplate(MouseEvent event) {
+
         newTemplateDetails.setVisible(true);
         btnAddTemplate.setVisible(false);
         txtAddTemplate.setVisible(false);
@@ -95,21 +111,29 @@ public class SaleOperationTemplateController implements Initializable {
 
     @FXML
     void handleSaveTemplate(ActionEvent event) {
+        //TODO: save it in DB
         newTemplateDetails.setVisible(false);
         btnAddTemplate.setVisible(true);
         txtAddTemplate.setVisible(true);
 
+/*   boolean thereIsEmptyFiled = false;
+        for ( boolean b : IfEmptyFileds) {
+            if (b) {
+                thereIsEmptyFiled = true;
+            }
+        }
+        */
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        newTemplateDetails.setVisible(false);
 
-        this.newSaleOperationTemplateLogic = SaleOperationTemplateLogic.getInstance();
+        this.newSaleOperationTemplateLogic = newSaleOperationTemplateLogic.getInstance();
         this.formValidation = FormValidation.getValidator();
-        //
-        //TODO: formValidation();   //set all fields validators
-
+        this.newTemplateDetails.setVisible(false);
+        this.errorMassageEmptyFileds.setVisible(false);
+        //TODO: formValidation();   set all fields validators
+        formValidation();   //
         /*  check all required fields are'nt empty:*/
 
         /*  check form input validation */
@@ -125,12 +149,6 @@ public class SaleOperationTemplateController implements Initializable {
         formValidation.isEmptyField(DiscountPercentages, "Discount Percentages");
         formValidation.isContainsOnlyNumbers(DiscountPercentages, "Discount Percentages");
         formValidation.numberPositiveValidation(DiscountPercentages, "Discount Percentages");
-
-        /*  Gas Type validation */
-        formValidation.isEmptyField(ChooseGasTypeComboSpecialization, "Choose Gas Type");
-
-        /*  Day validation */
-        formValidation.isEmptyField(DayComboSpecialization1, "Day");
 
         /*  Start Hour validation */
         formValidation.isEmptyField(StartHour, "Start Hour");
