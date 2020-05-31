@@ -1,6 +1,6 @@
 package client.boundary;
 
-import  client.logic.*
+import  client.logic.*;
 import client.logic.FormValidation;
 import client.logic.NewPurchaseFuelForHomeHeatingLogic;
 import com.jfoenix.controls.JFXComboBox;
