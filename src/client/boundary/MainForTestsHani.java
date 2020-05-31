@@ -4,16 +4,15 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 
-public class MainForTests extends Application {
+public class MainForTestsHani extends Application {
     //קובץ בדיקות עבור SaleOperationTemplateController
-    String pageName = "NewPurchaseFuelForHomeHeatingFXML.fxml";   //שם קובץ הfxml
+    String pageName = "SaleOperationTemplateFXML.fxml";   //שם קובץ הfxml
 
     private AnchorPane root;
-    private NewPurchaseFuelForHomeHeatingController newPurchaseFuelForHomeHeatingController;    //אינסטנס של מחלקת הboundary
+    private SaleOperationTemplateController SaleOperationTemplateController;    //אינסטנס של מחלקת הboundary
 
     public static void main(String[] args) {
         launch(args);
@@ -25,12 +24,12 @@ public class MainForTests extends Application {
             FXMLLoader pageLoader = new FXMLLoader();
             pageLoader.setLocation(getClass().getResource(pageName + ""));
             root = pageLoader.load();
-            newPurchaseFuelForHomeHeatingController = pageLoader.getController();//קבלת גישה לקונטרולר
+            SaleOperationTemplateController = pageLoader.getController();//קבלת גישה לקונטרולר
             //
 
             //
             Scene scene = new Scene(root, 1280, 800);
-          //  scene.getStylesheets().add("/client/LoginPageCSS.css");
+            //  scene.getStylesheets().add("/client/LoginPageCSS.css");
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (Exception e) {
