@@ -18,6 +18,7 @@ public class CustomerRegistrationFXML1Logic {
         return Instance;
     }
 
+    //~~~~~~~~~~~~~~~~~~~will get details from boundry and set costumer in database ~~~~~~~~~~~~~~~~~~~~~~~~
     public createCostumer(){
 
     }
