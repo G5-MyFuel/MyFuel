@@ -32,11 +32,10 @@ import java.util.ResourceBundle;
  */
 public class OrderExecutionController implements Initializable {
 
-    private static OrderExecutionController Instance= null;
+    public static OrderExecutionController Instance= null;
     private OrderExecutionController OrderExecutionController;
     OrderFuelFromSupplier OrderFuelFromSupplier;
     ArrayList<OrderFuelFromSupplier> OFFS;
-
 
     @FXML
     private Button MenuHomePageBtn;
@@ -123,6 +122,10 @@ public class OrderExecutionController implements Initializable {
     void handleRefresh(ActionEvent event) {
 
     }
+    public OrderExecutionController() {
+        Instance = this;
+    }
+
     /**
      * OrderExecutionController Instance getter using SingleTone DesignPatterns
      *
@@ -146,9 +149,9 @@ public class OrderExecutionController implements Initializable {
         OrderDateField.setDisable(true);
         FuelTypeField.setDisable(true);
         QuantityField.setDisable(true);
-        //TODO: display DB table
     }
-    
+
+
     public void setOrderFuelFromSupplierTableView(Object msg) {
         orderCol.setCellValueFactory(new PropertyValueFactory<>("OrderNumber"));
         statusCol.setCellValueFactory(new PropertyValueFactory<>("OrderStatus"));

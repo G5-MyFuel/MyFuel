@@ -1,6 +1,7 @@
 package client.logic;
 
 import client.ClientApp;
+import common.entity.Employee;
 import common.entity.OrderFuelFromSupplier;
 import common.entity.User;
 import common.tools.Message;
@@ -26,9 +27,8 @@ public class OrderFromSupplierLogic {
         return OrderFromSupplierArrayList;
     }
 
-    public static void setUsersArrayList(ArrayList<User> usersArrayList) {
+    public static void setOrderFromSupplierArrayList(ArrayList<User> usersArrayList) {
         LoginToSystemLogic.usersArrayList = usersArrayList;
     }
-
 
 }
