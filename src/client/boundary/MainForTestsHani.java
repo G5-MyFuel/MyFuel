@@ -7,10 +7,13 @@ import javafx.stage.Stage;
 
 public class MainForTestsHani extends Application {
     //קובץ בדיקות עבור SaleOperationTemplateController
-    String pageName = "SaleOperationTemplate.fxml";   //שם קובץ הfxml
+
+    //1 String pageName = "SaleOperationTemplate.fxml";   //שם קובץ הfxml
+    String pageName = "RunSaleOperation.fxml";   //שם קובץ הfxml
 
     private AnchorPane root;
-    private SaleOperationTemplateController saleOperationTemplateController;    //אינסטנס של מחלקת הboundary
+    //1 private SaleOperationTemplateController saleOperationTemplateController;    //אינסטנס של מחלקת הboundary
+    private RunSaleOperationController RunSaleOperationController;    //אינסטנס של מחלקת הboundary
 
     public static void main(String[] args) {
         launch(args);
@@ -22,7 +25,9 @@ public class MainForTestsHani extends Application {
             FXMLLoader pageLoader = new FXMLLoader();
             pageLoader.setLocation(getClass().getResource(pageName + ""));
             root = pageLoader.load();
-            saleOperationTemplateController = pageLoader.getController();//קבלת גישה לקונטרולר
+          //1  saleOperationTemplateController = pageLoader.getController();//קבלת גישה לקונטרולר
+            RunSaleOperationController = pageLoader.getController();//קבלת גישה לקונטרולר
+
             //
 
             //

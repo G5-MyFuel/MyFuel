@@ -6,12 +6,14 @@ import client.logic.FormValidation;
 import client.logic.SettingDiscountRatesLogic;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.JFXTimePicker;
 import common.entity.Day;
 import common.entity.FuelTypes;
 import common.entity.SaleOperationTemplate;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -23,7 +25,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
 import java.awt.Label;
-import java.awt.event.ActionEvent;
 import java.net.URL;
 import java.sql.Time;
 import java.util.ArrayList;
@@ -115,10 +116,10 @@ public class SaleOperationTemplateController implements Initializable {
     private JFXComboBox<String> DayComboSpecialization1;
 
     @FXML
-    private JFXTextField StartHour;
+    private JFXTimePicker StartHour;
 
     @FXML
-    private JFXTextField EndHour;
+    private JFXTimePicker EndHour;
 
     @FXML
     private JFXTextField MarketingAdForTemplate;
@@ -130,7 +131,6 @@ public class SaleOperationTemplateController implements Initializable {
     private Button btnAddNewTemplate;
 
 
-
     private ObservableList<String> DayType = FXCollections.observableArrayList("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday");
     private ObservableList<String> FuelType = FXCollections.observableArrayList("Gasoline", "Diesel", "ScooterFuel", "HomeHeatingFuel");
 
@@ -140,11 +140,11 @@ public class SaleOperationTemplateController implements Initializable {
         this.saleOperationTemplateLogic = saleOperationTemplateLogic.getInstance();
         ChooseGasTypeComboSpecialization.setItems(FuelType);
         DayComboSpecialization1.setItems(DayType);
-       this.formValidation = FormValidation.getValidator();
+        this.formValidation = FormValidation.getValidator();
         this.detailsPane.setVisible(false);
         //TODO: formValidation();   set all fields validators
         FormValidation();   //
-         /* check all required fields are'nt empty:*/
+        /* check all required fields are'nt empty:*/
 
         /*  check form input validation */
 
@@ -152,6 +152,7 @@ public class SaleOperationTemplateController implements Initializable {
 
     /**
      * SaleOperationTemplateController Instance getter using SingleTone DesignPatterns
+     *
      * @return Instance of controller class
      */
     public SaleOperationTemplateController getInstance() {
@@ -176,9 +177,7 @@ public class SaleOperationTemplateController implements Initializable {
     public void handleSaveTemplate(javafx.event.ActionEvent actionEvent) {
         //TODO: save it in DB
         detailsPane.setVisible(false);
-/*      btnAddTemplate.setVisible(true);
-        txtAddTemplate.setVisible(true);
-*/
+
     }
 
     private void FormValidation() {
@@ -191,36 +190,37 @@ public class SaleOperationTemplateController implements Initializable {
         formValidation.isContainsOnlyNumbers(DiscountPercentages, "Discount Percentages");
         formValidation.numberPositiveValidation(DiscountPercentages, "Discount Percentages");
 
-        /*  Start Hour validation */
+        /*  Start Hour validation
         formValidation.isEmptyField(StartHour, "Start Hour");
         formValidation.isContainsOnlyNumbers(StartHour, "Start Hour");
         formValidation.numberPositiveValidation(StartHour, "Start Hour");
-
+ */
         /*  End Hour validation */
-        formValidation.isEmptyField(EndHour, "End Hour");
+       /* formValidation.isEmptyField(EndHour, "End Hour");
         formValidation.isContainsOnlyNumbers(EndHour, "End Hour");
         formValidation.numberPositiveValidation(EndHour, "End Hour");
-
+*/
         /*  Marketing Ad For Template validation */
         formValidation.isEmptyField(MarketingAdForTemplate, "Marketing Ad For Template");
 
-         //TODO: add more validation.. לבדוק אורך השדה בשעות ואת הטקסט שקשור
+        //TODO: add more validation.. לבדוק אורך השדה בשעות ואת הטקסט שקשור
     }
 
 
-
-
-/*
     public void setTemplatesTableColumns() {
-        templateIDColumn.setCellValueFactory(new PropertyValueFactory<SaleOperationTemplate, String>("employeeID"));
-        templateNameColumn.setCellValueFactory(new PropertyValueFactory<SaleOperationTemplate, String>("firstName"));
-        fuelTypeColumn.setCellValueFactory(new PropertyValueFactory<SaleOperationTemplate, String>("lastName"));
-        DiscountPercentagesColumn.setCellValueFactory(new PropertyValueFactory<SaleOperationTemplate, String>("emailAddress"));
+        TemplateIDColumn.setCellValueFactory(new PropertyValueFactory<SaleOperationTemplate, String>("Template ID"));
+        TemplateNameColumn.setCellValueFactory(new PropertyValueFactory<SaleOperationTemplate, String>("Template Name"));
+        FuelTypeColumn.setCellValueFactory(new PropertyValueFactory<SaleOperationTemplate, FuelTypes>("Fuel Type"));
+       /* DiscountPercentagesColumn.setCellValueFactory(new PropertyValueFactory<SaleOperationTemplate, String>("emailAddress"));
         MarketingAdForTemplateColumn.setCellValueFactory(new PropertyValueFactory<SaleOperationTemplate, String>("jobTitle"));
         dayColumn.setCellValueFactory(new PropertyValueFactory<SaleOperationTemplate, String>("fuelCompanyName"));
         beginHourColumn.setCellValueFactory(new PropertyValueFactory<SaleOperationTemplate, String>("fuelCompanyName"));
         endHourColumn.setCellValueFactory(new PropertyValueFactory<SaleOperationTemplate, String>("fuelCompanyName"));
+
+        */
     }
+
+/*
     public void setDataTable(Object object) {///????????????
         System.out.println("--> setDataTable");
         SaleOperationTemplateLogic.getInstance().setTemplatesArrayList((ArrayList<SaleOperationTemplate>) object);
@@ -230,6 +230,6 @@ public class SaleOperationTemplateController implements Initializable {
         employeesTableView.setItems(data);
         employeesTableView.getColumns().addAll(EmployeeIdCol, FirstNameCol, lastNameCol, emailAddressCol, jobTitleCol, fuelCompanyNameCol);
     }
-*/
+    */
 
 }
