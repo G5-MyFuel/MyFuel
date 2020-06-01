@@ -6,6 +6,8 @@ import client.logic.FormValidation;
 import client.logic.SettingDiscountRatesLogic;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import common.entity.Day;
+import common.entity.FuelTypes;
 import common.entity.SaleOperationTemplate;
 
 import javafx.collections.FXCollections;
@@ -23,6 +25,7 @@ import javafx.scene.text.Text;
 import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.net.URL;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -67,7 +70,31 @@ public class SaleOperationTemplateController implements Initializable {
     private Button btnSignout;
 
     @FXML
-    private TableView<?> employeesTableView;
+    private TableView<SaleOperationTemplate> TemplateTableView;
+
+    @FXML
+    private TableColumn<SaleOperationTemplate, String> TemplateIDColumn;
+
+    @FXML
+    private TableColumn<SaleOperationTemplate, String> TemplateNameColumn;
+
+    @FXML
+    private TableColumn<SaleOperationTemplate, FuelTypes> FuelTypeColumn;
+
+    @FXML
+    private TableColumn<SaleOperationTemplate, Float> DiscountPercentagesColumn;
+
+    @FXML
+    private TableColumn<SaleOperationTemplate, Day> dayColumn;
+
+    @FXML
+    private TableColumn<SaleOperationTemplate, Time> BeginHourColumn;
+
+    @FXML
+    private TableColumn<SaleOperationTemplate, Time> EndHourColumn;
+
+    @FXML
+    private TableColumn<SaleOperationTemplate, String> MarketingAdColumn;
 
     @FXML
     private Pane detailsPane;

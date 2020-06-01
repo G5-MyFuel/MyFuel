@@ -7,6 +7,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -151,7 +152,17 @@
                                     <Font name="System Bold Italic" size="40.0" />
                                  </font>
                               </Label>
-                              <TableView fx:id="employeesTableView" layoutX="88.0" layoutY="105.0" prefHeight="276.0" prefWidth="873.0" />
+                              <TableView fx:id="employeesTableView" layoutX="88.0" layoutY="105.0" prefHeight="276.0" prefWidth="873.0">
+                                 <columns>
+                                    <TableColumn fx:id="TemplateIDColumn" prefWidth="96.0" text="Template ID" />
+                                    <TableColumn fx:id="TemplateNameColumn" prefWidth="134.0" text="Template Name" />
+                                    <TableColumn fx:id="FuelTypeColumn" prefWidth="78.0" text="Fuel Type" />
+                                    <TableColumn fx:id="DiscountPercentagesColumn" prefWidth="164.0" text="Discount percentages" />
+                                    <TableColumn fx:id="dayColumn" minWidth="0.0" prefWidth="91.0" text="day" />
+                                    <TableColumn fx:id="BeginHourColumn" prefWidth="88.0" text="Begin Hour" />
+                                    <TableColumn fx:id="EndHourColumn" prefWidth="86.0" text="End Hour" />
+                                    <TableColumn fx:id="MarketingAdColumn" prefWidth="135.0" text="Marketing Ad" />
+                                 </columns></TableView>
                               <Button fx:id="btnAddNewTemplate" layoutX="428.0" layoutY="398.0" mnemonicParsing="false" onAction="#handleBtnAddTemplate" prefHeight="42.0" prefWidth="207.0" style="-fx-background-color: #2D4578; -fx-background-radius: 50;" stylesheets="@style.css" text="Add New Template" textFill="WHITE" />
                               <Pane fx:id="detailsPane" layoutX="88.0" layoutY="387.0" prefHeight="389.0" prefWidth="873.0" visible="false">
                                  <children>
