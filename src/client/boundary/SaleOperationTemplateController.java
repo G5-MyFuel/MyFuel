@@ -17,6 +17,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
 import java.awt.Label;
@@ -69,7 +70,7 @@ public class SaleOperationTemplateController implements Initializable {
     private TableView<?> employeesTableView;
 
     @FXML
-    private ImageView btnPlusAddTemplate;
+    private Pane detailsPane;
 
     @FXML
     private SplitPane newTemplateDetails;
@@ -99,9 +100,7 @@ public class SaleOperationTemplateController implements Initializable {
     private JFXTextField DiscountPercentages;
 
     @FXML
-    private Label txtAddTemplate;
-
-
+    private Button btnAddNewTemplate;
 
 
 
@@ -112,12 +111,12 @@ public class SaleOperationTemplateController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.saleOperationTemplateLogic = saleOperationTemplateLogic.getInstance();
-        ChooseGasTypeComboSpecialization.setItems(DayType);
-        DayComboSpecialization1.setItems(FuelType);
-       // this.formValidation = FormValidation.getValidator();
-        this.newTemplateDetails.setVisible(false);
+        ChooseGasTypeComboSpecialization.setItems(FuelType);
+        DayComboSpecialization1.setItems(DayType);
+       this.formValidation = FormValidation.getValidator();
+        this.detailsPane.setVisible(false);
         //TODO: formValidation();   set all fields validators
-        //formValidation();   //
+        FormValidation();   //
          /* check all required fields are'nt empty:*/
 
         /*  check form input validation */
@@ -136,27 +135,26 @@ public class SaleOperationTemplateController implements Initializable {
 
     @FXML
     public void handleChoseDayType(javafx.event.ActionEvent actionEvent) {
+
     }
 
     @FXML
-    void handleAddTemplate(MouseEvent event) {
-        newTemplateDetails.setVisible(true);
-       // btnAddTemplate.setVisible(false);
-       // txtAddTemplate.setVisible(false);
+    void handleBtnAddTemplate(javafx.event.ActionEvent actionEvent) {
+        this.detailsPane.setVisible(true);
 
     }
+
 
     @FXML
     public void handleSaveTemplate(javafx.event.ActionEvent actionEvent) {
         //TODO: save it in DB
-        newTemplateDetails.setVisible(false);
+        detailsPane.setVisible(false);
 /*      btnAddTemplate.setVisible(true);
         txtAddTemplate.setVisible(true);
 */
-
     }
 
-    private void formValidation() {
+    private void FormValidation() {
         /*  Template Name validation */
         formValidation.isEmptyField(TemplateName, "Template Name");
         formValidation.maxLengthValidation(TemplateName, "Template Name", 45);
@@ -179,6 +177,7 @@ public class SaleOperationTemplateController implements Initializable {
         /*  Marketing Ad For Template validation */
         formValidation.isEmptyField(MarketingAdForTemplate, "Marketing Ad For Template");
 
+         //TODO: add more validation.. לבדוק אורך השדה בשעות ואת הטקסט שקשור
     }
 
 
