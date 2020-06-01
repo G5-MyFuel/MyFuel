@@ -1,6 +1,8 @@
 package common.entity;
 
 
+import java.util.ArrayList;
+
 /**
  * @author itay
  * @see Costumer - the form's entity class
@@ -9,15 +11,21 @@ package common.entity;
 public class Costumer extends User {
 
     private CreditCard CostumerCreditCard;
-    private Vehicle CostumerVehicle;
+    private ArrayList<Vehicle> CostumerVehicle = new ArrayList<Vehicle>();
+
     private boolean purchasePlan;
 
     public Costumer(int ID, String CustomerPassword, int  CostumerType, String Fname, String Lname, String emailAdress, CreditCard customerCreditCard, boolean purchasePlan, Vehicle CostumerVehicle) {
         super(ID,CostumerType, CustomerPassword, Fname, Lname, emailAdress);
         this.CostumerCreditCard = customerCreditCard;
         this.purchasePlan = purchasePlan;
-        this.CostumerVehicle = CostumerVehicle;
+        this.CostumerVehicle.add(CostumerVehicle);
     }
+
+    public Costumer() {
+        super();
+    }
+
 
     public CreditCard getCostumerCreditCard() {
         return CostumerCreditCard;
@@ -35,11 +43,13 @@ public class Costumer extends User {
         this.purchasePlan = purchasePlan;
     }
 
-    public Vehicle getCostumerVehicle() {
+    public ArrayList<Vehicle> getCostumerVehicle() {
         return CostumerVehicle;
     }
-
-    public void setCostumerVehicle(Vehicle costumerVehicle) {
+    public void addCostumerVehicle(Vehicle costumerVehicle) {
+        this.CostumerVehicle.add(costumerVehicle);
+    }
+    public void setCostumerVehicle(ArrayList<Vehicle> costumerVehicle) {
         CostumerVehicle = costumerVehicle;
     }
 }

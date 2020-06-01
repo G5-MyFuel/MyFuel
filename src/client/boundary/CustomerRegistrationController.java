@@ -179,12 +179,19 @@ public class CustomerRegistrationController implements Initializable {
     @FXML
     void ClickSaveVehicleButton(MouseEvent event) {
         VehicleTable.setEditable(true);
-        CustomerRegistrationLogic.createVehicle(VehicleIDtxt.getText(),GasTypeChoiseBox.getValue());
+        /**
+         * Here i have to validate Vehicle information before adding this vehicle.
+         *
+         * have to add msg to client - validation = true = successes msg
+         * ELSE: failed msg and do no continue to add that vehicle!
+         */
+        Vehicle vehicle = new Vehicle(VehicleIDtxt.getText(),GasTypeChoiseBox.getValue());
+        CustomerRegistrationLogic.getCostumer().addCostumerVehicle(vehicle);
 
         VehicleIdColom.setCellValueFactory(new PropertyValueFactory<>("VehicleID"));
         GasTypeColom.setCellValueFactory(new PropertyValueFactory<>("GasType"));
-
-        VehicleTable.getItems().add(CustomerRegistrationLogic.getCostumerVehicle());
+        ObservableList<Vehicle> data = FXCollections.observableArrayList(CustomerRegistrationLogic.getCostumer().getCostumerVehicle());
+        VehicleTable.setItems(data);
     }
 
 
