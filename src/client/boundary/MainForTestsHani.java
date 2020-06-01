@@ -10,7 +10,7 @@ public class MainForTestsHani extends Application {
     String pageName = "SaleOperationTemplate.fxml";   //שם קובץ הfxml
 
     private AnchorPane root;
-    private SaleOperationTemplateController SaleOperationTemplateController;    //אינסטנס של מחלקת הboundary
+    private SaleOperationTemplateController saleOperationTemplateController;    //אינסטנס של מחלקת הboundary
 
     public static void main(String[] args) {
         launch(args);
@@ -22,7 +22,7 @@ public class MainForTestsHani extends Application {
             FXMLLoader pageLoader = new FXMLLoader();
             pageLoader.setLocation(getClass().getResource(pageName + ""));
             root = pageLoader.load();
-            SaleOperationTemplateController = pageLoader.getController();//קבלת גישה לקונטרולר
+            saleOperationTemplateController = pageLoader.getController();//קבלת גישה לקונטרולר
             //
 
             //

@@ -3,6 +3,7 @@ package client.boundary;
 import client.logic.SaleOperationTemplateLogic;
 import client.logic.FormValidation;
 
+import client.logic.SettingDiscountRatesLogic;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import common.entity.SaleOperationTemplate;
@@ -33,7 +34,7 @@ public class SaleOperationTemplateController implements Initializable {
 
     private SaleOperationTemplateController Instance = null;
     private SaleOperationTemplateLogic saleOperationTemplateLogic;
-    private FormValidation formValidation;//??
+    private FormValidation formValidation;
 /*
     ObservableList<SaleOperationTemplate> data1;
     ArrayList<SaleOperationTemplate> employeeArrayList;
@@ -49,12 +50,6 @@ public class SaleOperationTemplateController implements Initializable {
 */
 
     //gui variables:
-    @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
-
     @FXML
     private Button btnOverview;
 
@@ -74,10 +69,7 @@ public class SaleOperationTemplateController implements Initializable {
     private TableView<?> employeesTableView;
 
     @FXML
-    private ImageView btnAddTemplate;
-
-    @FXML
-    private Label txtAddTemplate;
+    private ImageView btnPlusAddTemplate;
 
     @FXML
     private SplitPane newTemplateDetails;
@@ -89,10 +81,10 @@ public class SaleOperationTemplateController implements Initializable {
     private JFXTextField TemplateName;
 
     @FXML
-    private JFXComboBox<?> ChooseGasTypeComboSpecialization;
+    private JFXComboBox<String> ChooseGasTypeComboSpecialization;
 
     @FXML
-    private JFXComboBox<?> DayComboSpecialization1;
+    private JFXComboBox<String> DayComboSpecialization1;
 
     @FXML
     private JFXTextField StartHour;
@@ -106,16 +98,27 @@ public class SaleOperationTemplateController implements Initializable {
     @FXML
     private JFXTextField DiscountPercentages;
 
+    @FXML
+    private Label txtAddTemplate;
 
-     @Override
+
+
+
+
+    private ObservableList<String> DayType = FXCollections.observableArrayList("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday");
+    private ObservableList<String> FuelType = FXCollections.observableArrayList("Gasoline", "Diesel", "ScooterFuel", "HomeHeatingFuel");
+
+
+    @Override
     public void initialize(URL location, ResourceBundle resources) {
-
         this.saleOperationTemplateLogic = saleOperationTemplateLogic.getInstance();
-        this.formValidation = FormValidation.getValidator();
+        ChooseGasTypeComboSpecialization.setItems(DayType);
+        DayComboSpecialization1.setItems(FuelType);
+       // this.formValidation = FormValidation.getValidator();
         this.newTemplateDetails.setVisible(false);
         //TODO: formValidation();   set all fields validators
         //formValidation();   //
-        /*  check all required fields are'nt empty:*/
+         /* check all required fields are'nt empty:*/
 
         /*  check form input validation */
 
@@ -132,6 +135,10 @@ public class SaleOperationTemplateController implements Initializable {
     }
 
     @FXML
+    public void handleChoseDayType(javafx.event.ActionEvent actionEvent) {
+    }
+
+    @FXML
     void handleAddTemplate(MouseEvent event) {
         newTemplateDetails.setVisible(true);
        // btnAddTemplate.setVisible(false);
@@ -140,10 +147,10 @@ public class SaleOperationTemplateController implements Initializable {
     }
 
     @FXML
-    void handleSaveTemplate(ActionEvent event) {
+    public void handleSaveTemplate(javafx.event.ActionEvent actionEvent) {
         //TODO: save it in DB
-       /* newTemplateDetails.setVisible(false);
-        btnAddTemplate.setVisible(true);
+        newTemplateDetails.setVisible(false);
+/*      btnAddTemplate.setVisible(true);
         txtAddTemplate.setVisible(true);
 */
 
@@ -173,7 +180,11 @@ public class SaleOperationTemplateController implements Initializable {
         formValidation.isEmptyField(MarketingAdForTemplate, "Marketing Ad For Template");
 
     }
-    /*
+
+
+
+
+/*
     public void setTemplatesTableColumns() {
         templateIDColumn.setCellValueFactory(new PropertyValueFactory<SaleOperationTemplate, String>("employeeID"));
         templateNameColumn.setCellValueFactory(new PropertyValueFactory<SaleOperationTemplate, String>("firstName"));
