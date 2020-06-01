@@ -68,10 +68,10 @@ public class SettingDiscountRatesController implements Initializable {
     }
 
     /**
-     * NewPurchaseFuelForHomeHeatingController Instance getter using SingleTone DesignPatterns
+     * SettingDiscountRatesController Instance getter using SingleTone DesignPatterns
      * @return Instance of controller class
      */
-    public SettingDiscountRatesController getInstance() {
+    public static SettingDiscountRatesController getInstance() {
         if (Instance == null)
             Instance = new SettingDiscountRatesController();
         return Instance;
@@ -89,6 +89,8 @@ public class SettingDiscountRatesController implements Initializable {
 
         //String SubscriptionType = ChooseSubscriptionTypeCombo.getValue();
         String SubscriptionType = "SELECT * FROM `DiscountRates` WHERE `Subscription type` LIKE '" + ChooseSubscriptionTypeCombo.getValue() + "');";
+        //SettingDiscountRatesLogic settingDiscountRatesLogic = new SettingDiscountRatesLogic();
+        SettingDiscountRatesLogic.getInstance().getDiscountRatesTable(SubscriptionType);
         //ClientApp.client.handleMessageFromClientUI(new Message(OperationType.getRequirementData, (Object)SubscriptionType));  //send the new employee jobTitle to DB
         ShowCurrentRateTXT.setText(SubscriptionType);
         ShowCurrentRateTXT.setVisible(true);

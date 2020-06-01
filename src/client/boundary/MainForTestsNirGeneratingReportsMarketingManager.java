@@ -4,16 +4,14 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-
-public class MainForTestsNir extends Application {
-    //File test for SettingDiscountRatesController
-    String pageName = "SettingDiscountRatesFXML.fxml";   //שם קובץ הfxml
+public class MainForTestsNirGeneratingReportsMarketingManager extends Application {
+    //File test for generatingReportsMarketingManagerController
+    String pageName = "GeneratingReportsMarketingManagerFXML.fxml";   //שם קובץ הfxml
 
     private AnchorPane root;
-    private SettingDiscountRatesController settingDiscountRatesController;    //אינסטנס של מחלקת הboundary
+    private GeneratingReportsMarketingManagerController generatingReportsMarketingManagerController;    //אינסטנס של מחלקת הboundary
 
     public static void main(String[] args) {
         launch(args);
@@ -25,7 +23,7 @@ public class MainForTestsNir extends Application {
             FXMLLoader pageLoader = new FXMLLoader();
             pageLoader.setLocation(getClass().getResource(pageName + ""));
             root = pageLoader.load();
-            settingDiscountRatesController = pageLoader.getController();//קבלת גישה לקונטרולר
+            generatingReportsMarketingManagerController = pageLoader.getController();//קבלת גישה לקונטרולר
             //
 
 
