@@ -1,6 +1,7 @@
 package client;
 
 import client.boundary.LoginToSystemController;
+import client.logic.LoginToSystemLogic;
 import common.ocsf.client.AbstractClient;
 import common.tools.Message;
 
@@ -35,7 +36,7 @@ public class Client extends AbstractClient {
      */
     @Override
     protected void handleMessageFromServer(Object msg) {
-        //System.out.println("--> handleMessageFromServer");
+        System.out.println("--> handleMessageFromServer");
         try {
             ClientMessages.messageFromServer((Message) msg);
         } catch (Exception e) {
@@ -79,8 +80,6 @@ public class Client extends AbstractClient {
             case getAllUsersTable:
 
                 break;
-
-
             default:
                 break;
 

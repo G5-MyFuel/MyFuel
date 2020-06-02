@@ -28,7 +28,7 @@ public class ClientMessages {
                 //EmployeesManagementGuiController.Instance.afterUpdateJobTitleInDb(m.getObject());
                 break;
             case getAllUsersTable:
-                LoginToSystemController.getInstance().SetUsersTable(m.getObject());
+                LoginToSystemController.getInstance().setUsersDetailsArrayList(m.getObject());
                 break;
 
             default:

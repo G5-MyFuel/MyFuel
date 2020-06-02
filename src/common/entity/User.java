@@ -15,6 +15,7 @@ public class User  {
         this.userFirstName = userFirstName;
         this.userLastName = userLastName;
         this.userEmail = userEmail;
+        this.userPassword = Integer.toString(userID);
     }
 
     public User(int userID, int userType, String userPassword, String userFirstName, String userLastName, String userEmail) {
@@ -54,4 +55,16 @@ public class User  {
         return userEmail;
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "userID=" + userID +
+                ", userType=" + userType +
+                ", userPassword='" + userPassword + '\'' +
+                ", isLoginIndicator=" + isLoginIndicator +
+                ", userFirstName='" + userFirstName + '\'' +
+                ", userLastName='" + userLastName + '\'' +
+                ", userEmail='" + userEmail + '\'' +
+                '}';
+    }
 }

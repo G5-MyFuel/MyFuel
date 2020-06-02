@@ -21,11 +21,11 @@ public class LoginToSystemLogic {
         ClientApp.client.handleMessageFromClientUI(new Message(OperationType.getAllUsersTable, "SELECT * FROM Users as U;"));
     }
 
-    public static ArrayList<User> getUsersArrayList() {
+    public ArrayList<User> getUsersArrayList() {
         return usersArrayList;
     }
 
-    public static void setUsersArrayList(ArrayList<User> usersArrayList) {
+    public void setUsersArrayList(ArrayList<User> usersArrayList) {
         LoginToSystemLogic.usersArrayList = usersArrayList;
     }
 

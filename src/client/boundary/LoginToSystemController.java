@@ -11,7 +11,6 @@ import common.tools.Message;
 import common.tools.OperationType;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -67,6 +66,7 @@ public class LoginToSystemController extends Application {
         formValidation = FormValidation.getValidator();
         loginAsComboBox.getItems().addAll("Customer", "Employee", "Supplier");
         LoginValidation();
+        LoginToSystemLogic.getInstance().getUsersTable();
     }
 
     public void LoginValidation() {
@@ -80,18 +80,12 @@ public class LoginToSystemController extends Application {
 
     @FXML
     void clickLoginBtn() {
-        loginBtn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                //מה קורה לאחר לחיצה על לוגין
-                checkInputs();
-            }
-        });
+        System.out.println("-->clickLoginBtn method");
+        checkInputs();
     }
 
     public void checkInputs() {
         int userType = 0;
-        System.out.println(loginAsComboBox.getValue().toString());
         switch (loginAsComboBox.getValue().toString()) {
             case "Customer":
                 userType = 1;
@@ -103,17 +97,20 @@ public class LoginToSystemController extends Application {
                 userType = 3;
                 break;
         }
+        System.out.println(loginAsComboBox.getValue() + " " + userType);
 
         //check if userID exist in DB
-        String getAllUsers = "Select * from Users";
-        ClientApp.client.handleMessageFromClientUI(new Message(OperationType.getAllUsersTable, getAllUsers));
-        while (true) {
-            if (!LoginToSystemLogic.getInstance().getUsersArrayList().isEmpty()) {
-                break;
-            }
-        }
+//        String getAllUsers = "Select * from Users";
+//        ClientApp.client.handleMessageFromClientUI(new Message(OperationType.getAllUsersTable, getAllUsers));
+        System.out.println("11");
         boolean result = LoginToSystemLogic.getInstance().searchUserIdAndUserTypeInArrayList(Integer.parseInt(userIDTextField.getText()), Integer.parseInt(passwordField.getText()));
         System.out.println("result of Login is:" + result);
+    }
+
+    public void setUsersDetailsArrayList(Object object) {
+        System.out.println("----->setUsersDetailsArrayList");
+        LoginToSystemLogic.getInstance().setUsersArrayList((ArrayList<User>) object);
+        System.out.println(LoginToSystemLogic.getInstance().getUsersArrayList().toString());
     }
 
     public static Optional<ButtonType> messageWindow(Alert.AlertType alertType, String win, String mes, String mes1) {
