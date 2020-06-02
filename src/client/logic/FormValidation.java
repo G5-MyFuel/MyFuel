@@ -375,4 +375,78 @@ public class FormValidation {
             if (!newVal) passwordField.validate();
         });
     }
+
+    /**
+     * A method that checks if a string is smaller than a given number
+     *
+     * @param theField  - the field to validate
+     * @param fieldName - the name of the field
+     */
+    public void maxSizeValidation(JFXTextField theField, String fieldName, Integer mazSize) {
+        theField.getValidators().add(new ValidatorBase(fieldName + " Size is too big. Field can be max" + mazSize.toString()) {
+            @Override
+            protected void eval() {
+                if (this.srcControl.get() instanceof TextInputControl) {
+                    this.evalTextInputField();
+                }
+            }
+
+            private void evalTextInputField() {
+                TextInputControl textField = (TextInputControl) this.srcControl.get();
+                boolean result = Integer.parseInt(textField.getText()) > mazSize ? false : true;
+                System.out.println(result);
+                try {
+                    if (result)
+                        this.hasErrors.set(false);
+                    else
+                        this.hasErrors.set(true);
+                } catch (Exception var3) {
+                    this.hasErrors.set(true);
+                }
+            }
+        });
+        //  add listener to the txtField
+        theField.focusedProperty().addListener((o, oldVal, newVal) -> {
+            if (!newVal) {
+                theField.validate();
+            }
+        });
+    }
+
+    /**
+     * A method that checks if a string is smaller than a given number
+     *
+     * @param theField  - the field to validate
+     * @param fieldName - the name of the field
+     */
+    public void minSizeValidation(JFXTextField theField, String fieldName, Integer minSize) {
+        theField.getValidators().add(new ValidatorBase(fieldName + " Size is too big. Field can be max" + minSize.toString()) {
+            @Override
+            protected void eval() {
+                if (this.srcControl.get() instanceof TextInputControl) {
+                    this.evalTextInputField();
+                }
+            }
+
+            private void evalTextInputField() {
+                TextInputControl textField = (TextInputControl) this.srcControl.get();
+                boolean result = Integer.parseInt(textField.getText()) < minSize ? false : true;
+                System.out.println(result);
+                try {
+                    if (result)
+                        this.hasErrors.set(false);
+                    else
+                        this.hasErrors.set(true);
+                } catch (Exception var3) {
+                    this.hasErrors.set(true);
+                }
+            }
+        });
+        //  add listener to the txtField
+        theField.focusedProperty().addListener((o, oldVal, newVal) -> {
+            if (!newVal) {
+                theField.validate();
+            }
+        });
+    }
 }

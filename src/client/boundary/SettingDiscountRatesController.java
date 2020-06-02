@@ -54,7 +54,7 @@ public class SettingDiscountRatesController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.settingDiscountRatesLogic = SettingDiscountRatesLogic.getInstance();
-        //this.formValidation = FormValidation.getValidator();
+        this.formValidation = FormValidation.getValidator();
         ChooseSubscriptionTypeCombo.setItems(SubscriptionType);
         ShowCurrentRateTXT.setVisible(false);
         ShowNewRateTXT.setVisible(false);
@@ -62,13 +62,14 @@ public class SettingDiscountRatesController implements Initializable {
         //ChooseSubscriptionTypeCombo.set
         //this.shippingIndicatorTAB1.setVisible(false);
         /*  set all fields validators */
-        //formValidation();   //
+        formValidation();
         /* set form items */
         //setShippingTab();
     }
 
     /**
      * SettingDiscountRatesController Instance getter using SingleTone DesignPatterns
+     *
      * @return Instance of controller class
      */
     public static SettingDiscountRatesController getInstance() {
@@ -77,10 +78,18 @@ public class SettingDiscountRatesController implements Initializable {
         return Instance;
     }
 
-    /*private void formValidation() {
+    private void formValidation() {
 
-        
-    }*/
+        /*  New price validation */
+
+        //formValidation.isContainsOnlyNumbers(ShowNewRateTXT, "New price");
+        formValidation.numberPositiveValidation(ShowNewRateTXT, "New price");
+        formValidation.isEmptyField(ShowNewRateTXT, "New price");
+        //formValidation.maxLengthValidation(ShowNewRateTXT, "New price", 3);
+        //formValidation.maxSizeValidation(ShowNewRateTXT, "New price", 100);
+        formValidation.minSizeValidation(ShowNewRateTXT, "New price", 100);
+
+    }
 
     @FXML
     void handleChoseSubscriptionType(ActionEvent event) {
@@ -90,7 +99,8 @@ public class SettingDiscountRatesController implements Initializable {
         //String SubscriptionType = ChooseSubscriptionTypeCombo.getValue();
         String SubscriptionType = "SELECT * FROM `DiscountRates` WHERE `Subscription type` LIKE '" + ChooseSubscriptionTypeCombo.getValue() + "');";
         //SettingDiscountRatesLogic settingDiscountRatesLogic = new SettingDiscountRatesLogic();
-        SettingDiscountRatesLogic.getInstance().getDiscountRatesTable(SubscriptionType);
+        System.out.println("Check");
+        //SettingDiscountRatesLogic.getInstance().getDiscountRatesTable(SubscriptionType);
         //ClientApp.client.handleMessageFromClientUI(new Message(OperationType.getRequirementData, (Object)SubscriptionType));  //send the new employee jobTitle to DB
         ShowCurrentRateTXT.setText(SubscriptionType);
         ShowCurrentRateTXT.setVisible(true);
