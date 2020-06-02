@@ -1,14 +1,11 @@
 package client.boundary;
 
-import client.ClientApp;
 import client.logic.FormValidation;
 import client.logic.LoginToSystemLogic;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import common.entity.User;
-import common.tools.Message;
-import common.tools.OperationType;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -51,7 +48,7 @@ public class LoginToSystemController extends Application {
 
     /*  other variables: */
     private ActionEvent event = null;
-    LoginToSystemLogic loginPageController; //logic instance
+    LoginToSystemLogic loginToSystemLogic; //logic instance
     FormValidation formValidation;
 
 
@@ -63,12 +60,14 @@ public class LoginToSystemController extends Application {
 
     @FXML
     void initialize() {
-        formValidation = FormValidation.getValidator();
-        loginAsComboBox.getItems().addAll("Customer", "Employee", "Supplier");
+        formValidation = FormValidation.getValidator(); //for form validation instance
+        loginAsComboBox.getItems().addAll("Customer", "Employee", "Supplier");  //set the user types
         LoginValidation();
-        LoginToSystemLogic.getInstance().getUsersTable();
+        LoginToSystemLogic.getInstance().importAllUsersToArrayListInLogicClass();   //before login - get instance of all users in the system
+
     }
 
+    //מתודה שמאתחלת את בדיקות הקלט לטופס הלוגין
     public void LoginValidation() {
         //username validation
         formValidation.isEmptyField(userIDTextField, "User ID");
@@ -102,15 +101,16 @@ public class LoginToSystemController extends Application {
         //check if userID exist in DB
 //        String getAllUsers = "Select * from Users";
 //        ClientApp.client.handleMessageFromClientUI(new Message(OperationType.getAllUsersTable, getAllUsers));
-        System.out.println("11");
-        boolean result = LoginToSystemLogic.getInstance().searchUserIdAndUserTypeInArrayList(Integer.parseInt(userIDTextField.getText()), Integer.parseInt(passwordField.getText()));
+        System.out.println("bdika11");
+        boolean result = LoginToSystemLogic.getInstance().searchUserIdAndUserTypeInArrayList(Integer.parseInt(userIDTextField.getText()), userType);
         System.out.println("result of Login is:" + result);
+        //todo: להמשיך מפה! זיהוי לקוח בוצע בהצלחה - כעת לממש שגיאות קלט והודעות בהתאם
     }
 
     public void setUsersDetailsArrayList(Object object) {
         System.out.println("----->setUsersDetailsArrayList");
         LoginToSystemLogic.getInstance().setUsersArrayList((ArrayList<User>) object);
-        System.out.println(LoginToSystemLogic.getInstance().getUsersArrayList().toString());
+        //System.out.println(LoginToSystemLogic.getInstance().getUsersArrayList().toString());
     }
 
     public static Optional<ButtonType> messageWindow(Alert.AlertType alertType, String win, String mes, String mes1) {

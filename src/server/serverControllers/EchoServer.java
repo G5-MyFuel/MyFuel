@@ -54,7 +54,9 @@ public class EchoServer extends AbstractServer {
                     break;
                 case getAllUsersTable:
                     rs = mysql.getQuery(m.getObject().toString());
-                    sendToClient(new Message(OperationType.getRequirementData, QueryToArrayList.ResultSetToUsersArrayList(rs)), client);
+                    //sendToClient(message(type,the object to send - array list of users), the client);
+                    //the user get the result in handleMessageFromServer -> ClientMessages(type)
+                    sendToClient(new Message(OperationType.getAllUsersTable, QueryToArrayList.ResultSetToUsersArrayList(rs)), client);
                     rs.close();
                     break;
 

@@ -17,7 +17,8 @@ public class LoginToSystemLogic {
         return Instance;
     }
 
-    public void getUsersTable() {
+    //בקשה לשליפת כל היוזרים במערכת - מקבלת את כל הנתונים בarraylist של יוזרים שיחכה בlogic
+    public void importAllUsersToArrayListInLogicClass() {
         ClientApp.client.handleMessageFromClientUI(new Message(OperationType.getAllUsersTable, "SELECT * FROM Users as U;"));
     }
 
@@ -26,10 +27,13 @@ public class LoginToSystemLogic {
     }
 
     public void setUsersArrayList(ArrayList<User> usersArrayList) {
-        LoginToSystemLogic.usersArrayList = usersArrayList;
+        this.usersArrayList = usersArrayList;
     }
 
     public boolean searchUserIdAndUserTypeInArrayList(int userId, int userType) {
+        if(userType==0){
+            System.err.println("user type not detected");
+        }
         for (User u : usersArrayList) {
             if (u.getUserID() == userId && u.getUserType() == userType)
                 return true;

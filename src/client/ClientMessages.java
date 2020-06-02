@@ -3,7 +3,11 @@ package client;
 import client.boundary.LoginToSystemController;
 import client.boundary.OrderExecutionController;
 import client.boundary.SettingDiscountRatesController;
+import client.logic.LoginToSystemLogic;
+import common.entity.User;
 import common.tools.Message;
+
+import java.util.ArrayList;
 
 /**
  * get <Code> Message </code> from server and send it to the relevant
@@ -31,7 +35,9 @@ public class ClientMessages {
                 //EmployeesManagementGuiController.Instance.afterUpdateJobTitleInDb(m.getObject());
                 break;
             case getAllUsersTable:
-                LoginToSystemController.getInstance().setUsersDetailsArrayList(m.getObject());
+                ArrayList<User> alu = (ArrayList<User>)m.getObject();
+                LoginToSystemLogic.getInstance().setUsersArrayList(alu);
+               // LoginToSystemController.getInstance().setUsersDetailsArrayList(m.getObject());
                 break;
 
             default:
