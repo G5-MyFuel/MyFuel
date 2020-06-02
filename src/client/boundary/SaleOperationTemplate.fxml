@@ -2,12 +2,13 @@
 
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTimePicker?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -147,43 +148,48 @@
                      <content>
                         <Pane prefHeight="796.0" prefWidth="1062.0" style="-fx-position-shape: center; -fx-border-color: transparent;">
                            <children>
-                              <Label layoutX="41.0" layoutY="54.0" text="Sale operation templates" textFill="#2d4578">
+                              <Label layoutX="297.0" layoutY="37.0" text="Sale operation templates" textFill="#2d4578">
                                  <font>
                                     <Font name="System Bold Italic" size="40.0" />
                                  </font>
                               </Label>
-                              <TableView fx:id="employeesTableView" layoutX="41.0" layoutY="129.0" prefHeight="325.0" prefWidth="873.0" />
-                              <ImageView fx:id="btnAddTemplate" accessibleRole="BUTTON" fitHeight="53.0" fitWidth="61.0" layoutX="41.0" layoutY="476.0" onMouseClicked="#handleAddTemplate" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../media/CostumerRegisterationMedia/add_40px.png" />
-                                 </image>
-                                 <cursor>
-                                    <Cursor fx:constant="OPEN_HAND" />
-                                 </cursor>
-                              </ImageView>
-                              <Label fx:id="txtAddTemplate" layoutX="104.0" layoutY="488.0" onMouseClicked="#handleAddTemplate" text="Add new template">
-                                 <font>
-                                    <Font size="20.0" />
-                                 </font>
-                              </Label>
-                              <SplitPane fx:id="newTemplateDetails" dividerPositions="0.1440329218106996" layoutX="41.0" layoutY="467.0" orientation="VERTICAL" prefHeight="286.0" prefWidth="872.0" visible="false">
-                                 <items>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="35.0" prefWidth="335.0" style="-fx-background-color: #fcf8e8;" />
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="272.0" prefWidth="870.0" style="-fx-background-color: #fcf8e8;">
-                                       <children>
-                                          <Button fx:id="btnNewTemplate" layoutX="343.0" layoutY="179.0" mnemonicParsing="false" onAction="#handleSaveTemplate" text="Save new template" />
-                                          <JFXTextField fx:id="TemplateName" focusColor="#00add8" labelFloat="true" layoutX="86.0" layoutY="19.0" prefHeight="31.0" prefWidth="275.0" promptText="Template Name" unFocusColor="#868282" />
-                                          <JFXComboBox fx:id="ChooseGasTypeComboSpecialization" accessibleHelp="vd" accessibleText="fv" layoutX="87.0" layoutY="110.0" prefHeight="40.0" prefWidth="274.0" promptText="Choose Gas Type:" />
-                                          <JFXComboBox fx:id="DayComboSpecialization1" accessibleHelp="vd" accessibleText="fv" layoutX="437.0" layoutY="15.0" prefHeight="40.0" prefWidth="330.0" promptText="Day" />
-                                          <JFXTextField fx:id="StartHour" focusColor="#00add8" labelFloat="true" layoutX="438.0" layoutY="71.0" prefHeight="31.0" prefWidth="151.0" promptText="Start Hour" unFocusColor="#868282" />
-                                          <JFXTextField fx:id="EndHour" focusColor="#00add8" labelFloat="true" layoutX="604.0" layoutY="71.0" prefHeight="31.0" prefWidth="159.0" promptText="End Hour" unFocusColor="#868282" />
-                                          <JFXTextField fx:id="MarketingAdForTemplate" focusColor="#00add8" labelFloat="true" layoutX="438.0" layoutY="122.0" prefHeight="33.0" prefWidth="329.0" promptText="Marketing Ad For Template" unFocusColor="#868282" />
-                                          <JFXTextField fx:id="DiscountPercentages" focusColor="#00add8" labelFloat="true" layoutX="86.0" layoutY="67.0" prefHeight="25.0" prefWidth="281.0" promptText="Discount Percentages" unFocusColor="#868282" />
-                                          <Label alignment="CENTER" layoutX="-43.0" layoutY="6.0" prefHeight="32.0" prefWidth="870.0" style="-fx-font-weight: Bold;" text="Fill in Tamplate Details  " />
-                                       </children>
-                                    </AnchorPane>
-                                 </items>
-                              </SplitPane>
+                              <TableView fx:id="TemplateTableView" layoutX="88.0" layoutY="105.0" prefHeight="276.0" prefWidth="873.0">
+                                 <columns>
+                                    <TableColumn fx:id="TemplateIDColumn" prefWidth="122.0" text="Template ID" />
+                                    <TableColumn fx:id="TemplateNameColumn" prefWidth="156.0" text="Template Name" />
+                                    <TableColumn fx:id="FuelTypeColumn" prefWidth="99.0" text="Fuel Type" />
+                                    <TableColumn fx:id="DiscountPercentagesColumn" prefWidth="95.0" text="Discount" />
+                                    <TableColumn fx:id="dayColumn" minWidth="0.0" prefWidth="77.0" text="day" />
+                                    <TableColumn fx:id="BeginHourColumn" prefWidth="102.0" text="Begin Hour" />
+                                    <TableColumn fx:id="EndHourColumn" prefWidth="86.0" text="End Hour" />
+                                    <TableColumn fx:id="MarketingAdColumn" prefWidth="135.0" text="Marketing Ad" />
+                                 </columns></TableView>
+                              <Button fx:id="btnAddNewTemplate" layoutX="428.0" layoutY="398.0" mnemonicParsing="false" onAction="#handleBtnAddTemplate" prefHeight="42.0" prefWidth="207.0" style="-fx-background-color: #2D4578; -fx-background-radius: 50;" stylesheets="@style.css" text="Add New Template" textFill="WHITE" />
+                              <Pane fx:id="detailsPane" layoutX="88.0" layoutY="387.0" prefHeight="389.0" prefWidth="873.0">
+                                 <children>
+                                    <SplitPane fx:id="newTemplateDetails" dividerPositions="0.1440329218106996" orientation="VERTICAL" prefHeight="392.0" prefWidth="872.0">
+                                       <items>
+                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="35.0" prefWidth="335.0" style="-fx-background-color: #fcf8e8;">
+                                             <children>
+                                                <Label alignment="CENTER" layoutX="6.0" layoutY="3.0" prefHeight="53.0" prefWidth="860.0" style="-fx-font-weight: Bold;" text="Fill in Tamplate Details  " />
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="272.0" prefWidth="870.0" style="-fx-background-color: #fcf8e8;">
+                                             <children>
+                                                <Button fx:id="btnNewTemplate" layoutX="349.0" layoutY="273.0" mnemonicParsing="false" onAction="#handleSaveTemplate" text="Save new template" />
+                                                <JFXTextField fx:id="TemplateName" focusColor="#00add8" labelFloat="true" layoutX="37.0" layoutY="54.0" prefHeight="31.0" prefWidth="342.0" promptText="Template Name" unFocusColor="#868282" />
+                                                <JFXComboBox fx:id="ChooseGasTypeComboSpecialization" accessibleHelp="vd" accessibleText="fv" layoutX="38.0" layoutY="130.0" prefHeight="40.0" prefWidth="341.0" promptText="Choose Gas Type:" />
+                                                <JFXComboBox fx:id="DayComboSpecialization1" layoutX="453.0" layoutY="50.0" onAction="#handleChoseDayType" prefHeight="40.0" prefWidth="354.0" promptText="Day" />
+                                                <JFXTextField fx:id="MarketingAdForTemplate" focusColor="#00add8" labelFloat="true" layoutX="451.0" layoutY="211.0" prefHeight="33.0" prefWidth="355.0" promptText="Marketing Ad For Template" unFocusColor="#868282" />
+                                                <JFXTextField fx:id="DiscountPercentages" focusColor="#00add8" labelFloat="true" layoutX="35.0" layoutY="212.0" prefHeight="31.0" prefWidth="347.0" promptText="Discount Percentages" unFocusColor="#868282" />
+                                                <JFXTimePicker fx:id="StartHour" defaultColor="#32236f" layoutX="451.0" layoutY="135.0" prefHeight="31.0" prefWidth="168.0" promptText="Start Hour" />
+                                                <JFXTimePicker defaultColor="#32236f" layoutX="639.0" layoutY="139.0" prefHeight="31.0" prefWidth="168.0" promptText="End Hour" />
+                                             </children>
+                                          </AnchorPane>
+                                       </items>
+                                    </SplitPane>
+                                 </children>
+                              </Pane>
                            </children>
                         </Pane>
                      </content></ScrollPane>

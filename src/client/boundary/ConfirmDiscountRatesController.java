@@ -1,11 +1,21 @@
 package client.boundary;
 
+import client.logic.ConfirmDiscountRatesLogic;
+import client.logic.FormValidation;
+import client.logic.SettingDiscountRatesLogic;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
 
-public class ConfirmDiscountRatesController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class ConfirmDiscountRatesController implements Initializable {
+    private static ConfirmDiscountRatesController Instance = null;
+    private ConfirmDiscountRatesLogic confirmDiscountRatesLogic;
+    private FormValidation formValidation;
 
     @FXML
     private Button btnOverview;
@@ -25,6 +35,40 @@ public class ConfirmDiscountRatesController {
     @FXML
     private Button btnApprovedRates;
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        this.confirmDiscountRatesLogic = ConfirmDiscountRatesLogic.getInstance();
+        //this.formValidation = FormValidation.getValidator();
+
+        btnApprovedRates.setDisable(true);
+        /*ChooseSubscriptionTypeCombo.setItems(SubscriptionType);
+        ShowCurrentRateTXT.setVisible(false);
+        ShowNewRateTXT.setVisible(false);
+        btnSetNewRate.setVisible(false);
+        //ChooseSubscriptionTypeCombo.set
+        //this.shippingIndicatorTAB1.setVisible(false);
+        /*  set all fields validators */
+        //formValidation();   //
+        /* set form items */
+        //setShippingTab();
+    }
+
+    /**
+     * ConfirmDiscountRatesController Instance getter using SingleTone DesignPatterns
+     *
+     * @return Instance of controller class
+     */
+    public static ConfirmDiscountRatesController getInstance() {
+        if (Instance == null)
+            Instance = new ConfirmDiscountRatesController();
+        return Instance;
+    }
+
+    /*private void formValidation() {
+
+
+    }*/
+
     @FXML
     void handleApprovedRates(ActionEvent event) {
 
@@ -34,5 +78,6 @@ public class ConfirmDiscountRatesController {
     void handleClicks(ActionEvent event) {
 
     }
+
 
 }

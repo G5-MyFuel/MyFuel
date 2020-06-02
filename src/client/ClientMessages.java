@@ -1,6 +1,8 @@
 package client;
 
 import client.boundary.LoginToSystemController;
+import client.boundary.OrderExecutionController;
+import client.boundary.SettingDiscountRatesController;
 import common.tools.Message;
 
 /**
@@ -22,7 +24,8 @@ public class ClientMessages {
 
         switch (m.getOperationType()) {
             case getRequirementData:
-               // EmployeesManagementGuiController.Instance.setDataTable(m.getObject());
+               // EmployeesManagementGuiController.Instance.setDataTable(m.getObject())
+                OrderExecutionController.Instance.setOrderFuelFromSupplierTableView(m.getObject());
                 break;
             case updateRequirement:
                 //EmployeesManagementGuiController.Instance.afterUpdateJobTitleInDb(m.getObject());

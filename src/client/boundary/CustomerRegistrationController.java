@@ -4,6 +4,7 @@ import client.logic.*;
 import client.logic.FormValidation;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import common.entity.Employee;
 import common.entity.Vehicle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,8 +14,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -46,7 +49,7 @@ public class CustomerRegistrationController implements Initializable {
     private Button btnOverview;
 
     @FXML
-    private Button btnCustomers;
+    private Button addCostumerBtn;
 
     @FXML
     private Button btnMenus;
@@ -91,10 +94,10 @@ public class CustomerRegistrationController implements Initializable {
     private JFXTextField VehicleIDtxt;
 
     @FXML
-    private Pane VehicleInformationSplitPane;
+    private Pane VehicleInformationPane;
 
     @FXML
-    private JFXComboBox<?> GasTypeChoiseBox;
+    private JFXComboBox<String> GasTypeChoiseBox;
 
     @FXML
     private ImageView backButtonVehicalToPersonal;
@@ -123,24 +126,34 @@ public class CustomerRegistrationController implements Initializable {
     @FXML
     private Button FinishButton;
 
+    @FXML
+    private Pane mainPane;
 
+    @FXML
+    private TableColumn<Vehicle, String> VehicleIdColom;
 
-    private AnchorPane paymentPage;
+    @FXML
+    private TableColumn<Vehicle, String> GasTypeColom;
 
 
     private ObservableList<String> CostumerType = FXCollections.observableArrayList("Private", "Company");
 
     private ObservableList<String> ServicePlanType = FXCollections.observableArrayList("EXLUSIVE", "MULTIPLE_STATIONS");
 
+    private ObservableList<String> GasType = FXCollections.observableArrayList("Solar", "Benzin");
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.CustomerRegistrationLogic = CustomerRegistrationLogic.getInstance();
         //
         //
+        mainPane.setVisible(false);
+        mainPane.setDisable(true);
 
         //disable vehicle information window
-       VehicleInformationSplitPane.setVisible(false);
+        VehicleInformationPane.setVisible(false);
 
+        GasTypeChoiseBox.setItems(GasType);
         CostumertypeChoiceBox.setItems(CostumerType);
         ServicePlanChoiseBox.setItems(ServicePlanType);
 
@@ -158,26 +171,43 @@ public class CustomerRegistrationController implements Initializable {
     }
 
     @FXML
-    void handleClicks(ActionEvent event) {
-
+    void addCostumerOnClick(MouseEvent event) {
+        mainPane.setVisible(true);
+        mainPane.setDisable(false);
     }
 
     @FXML
-    void addVehicleButton() {
-        VehicleInformationSplitPane.setVisible(true);
+    void ClickSaveVehicleButton(MouseEvent event) {
+        VehicleTable.setEditable(true);
+        /**
+         * Here i have to validate Vehicle information before adding this vehicle.
+         *
+         * have to add msg to client - validation = true = successes msg
+         * ELSE: failed msg and do no continue to add that vehicle!
+         */
+        Vehicle vehicle = new Vehicle(VehicleIDtxt.getText(),GasTypeChoiseBox.getValue());
+        CustomerRegistrationLogic.getCostumer().addCostumerVehicle(vehicle);
+
+        VehicleIdColom.setCellValueFactory(new PropertyValueFactory<>("VehicleID"));
+        GasTypeColom.setCellValueFactory(new PropertyValueFactory<>("GasType"));
+        ObservableList<Vehicle> data = FXCollections.observableArrayList(CustomerRegistrationLogic.getCostumer().getCostumerVehicle());
+        VehicleTable.setItems(data);
+    }
 
 
-
-
-
+    @FXML
+    void setVehicleInfoVisible(MouseEvent event) {
+        VehicleInformationPane.setVisible(true);
     }
 
     @FXML
     void creditCardLinkOnClick(MouseEvent event) throws IOException {
-        FXMLLoader pageLoader2 = new FXMLLoader();
-        pageLoader2.setLocation(getClass().getResource("Payment Window"));
-        paymentPage = pageLoader2.load();
-
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Payment Window.fxml"));
+        Parent root = (Parent) fxmlLoader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setTitle("Insert Credit Card Details");
+        stage.show();
     }
 
     @FXML
@@ -188,6 +218,11 @@ public class CustomerRegistrationController implements Initializable {
     @FXML
     void backwardButtonOnClick(MouseEvent event) {
         vehicleMangTAB.getTabPane().getSelectionModel().selectPrevious();
+    }
+
+    @FXML
+    void handleClicks(ActionEvent event) {
+
     }
 
 
