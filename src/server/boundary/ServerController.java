@@ -126,29 +126,29 @@ public class ServerController implements Initializable {
            // portFieldEmptyAlert.setVisible(false);
             // EchoServer.mainServer(args);
             setDBDetailsFromGUI();
-//            int port = 0; // Port to listen on
-//            try {
-//                port = Integer.parseInt(port_field.getText()); // Get port from command line
-//            } catch (Throwable t) {
-//                port = EchoServer.DEFAULT_PORT; // Set port to 5555
-//            }
-            EchoServer sv = new EchoServer(Integer.parseInt(MySQLWorkbench.DB_PORT));
+            int port = 0; // Port to listen on
+            try {
+                port = Integer.parseInt(port_field.getText()); // Get port from command line
+            } catch (Throwable t) {
+                port = EchoServer.DEFAULT_PORT; // Set port to 5555
+            }
+            EchoServer sv = new EchoServer(port);
             ServerApp.echoserver = sv;
-            //EchoServer.portNumber = Integer.parseInt(port_field.getText());
-            EchoServer.portNumber = Integer.parseInt(MySQLWorkbench.DB_PORT);
+            EchoServer.portNumber = Integer.parseInt(port_field.getText());
             //
             if (MySqlConnection.con == null)
                 MySqlConnection.openConnection(MySQLWorkbench);
             else
                 System.out.println("DB already connected");
             //
+
             if (!ServerApp.echoserver.isListening()) {
                 try {
                     ServerApp.echoserver.listen();
                     serverConnectImg.setVisible(true);
                     serverDisconnectImg.setVisible(false);
                 } catch (IOException e) {
-                    System.err.println("Server con err");
+                    System.err.println("Server con Error");
                 }
             } else {
                 System.out.println("Server connected");
