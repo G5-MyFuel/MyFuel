@@ -86,8 +86,8 @@ public class SettingDiscountRatesController implements Initializable {
         formValidation.numberPositiveValidation(ShowNewRateTXT, "New price");
         formValidation.isEmptyField(ShowNewRateTXT, "New price");
         //formValidation.maxLengthValidation(ShowNewRateTXT, "New price", 3);
-        //formValidation.maxSizeValidation(ShowNewRateTXT, "New price", 100);
-        formValidation.minSizeValidation(ShowNewRateTXT, "New price", 100);
+        formValidation.maxSizeValidation(ShowNewRateTXT, "New price", 100);
+        formValidation.minSizeValidation(ShowNewRateTXT, "New price", 1);
 
     }
 

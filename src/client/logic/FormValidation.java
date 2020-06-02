@@ -420,7 +420,7 @@ public class FormValidation {
      * @param fieldName - the name of the field
      */
     public void minSizeValidation(JFXTextField theField, String fieldName, Integer minSize) {
-        theField.getValidators().add(new ValidatorBase(fieldName + " Size is too big. Field can be max" + minSize.toString()) {
+        theField.getValidators().add(new ValidatorBase(fieldName + " Size is too small. Field need to be min" + minSize.toString()) {
             @Override
             protected void eval() {
                 if (this.srcControl.get() instanceof TextInputControl) {
