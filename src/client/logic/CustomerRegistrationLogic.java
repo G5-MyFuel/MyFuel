@@ -18,7 +18,6 @@ public class CustomerRegistrationLogic {
 
     /*Logic Variables*/
     private static CustomerRegistrationLogic Instance = null;
-    private Costumer costumer = new Costumer();
 
     /*Logic Methods*/
 
@@ -41,14 +40,4 @@ public class CustomerRegistrationLogic {
 
     }
 
-
-
-
-    public Costumer getCostumer() {
-        return costumer;
-    }
-
-    public void setCostumer(Costumer costumer) {
-        this.costumer = costumer;
-    }
 }

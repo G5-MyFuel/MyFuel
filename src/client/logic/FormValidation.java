@@ -89,7 +89,7 @@ public class FormValidation {
     public void isDoubleNumberValidation(JFXTextField theField, String fieldName) {
         DoubleValidator doubleValidator = new DoubleValidator();
         theField.getValidators().add(doubleValidator);
-        doubleValidator.setMessage(fieldName + "must contains only digits");
+        doubleValidator.setMessage(fieldName + " must contains only digits");
         theField.focusedProperty().addListener((o, oldValue, newValue) -> {
             if (!newValue) {
                 theField.validate();
@@ -147,7 +147,7 @@ public class FormValidation {
      * @param maxLength - max string length
      */
     public void maxLengthValidation(JFXTextField theField, String fieldName, int maxLength) {
-        theField.getValidators().add(new ValidatorBase("The " + fieldName + " field length is too long (max - " + maxLength + " characters") {
+        theField.getValidators().add(new ValidatorBase("The " + fieldName + " field length is too long (max - " + maxLength + ") characters") {
             @Override
             protected void eval() {
                 if (this.srcControl.get() instanceof TextInputControl) {

@@ -149,15 +149,15 @@
                            <content>
                               <AnchorPane>
                                  <children>
-                                    <Pane layoutX="14.0" layoutY="-7.0" prefHeight="761.0" prefWidth="1045.0" AnchorPane.bottomAnchor="-100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-44.0" AnchorPane.topAnchor="0.0">
+                                    <Pane layoutX="14.0" layoutY="-7.0" prefHeight="663.0" prefWidth="979.0" AnchorPane.bottomAnchor="-27.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-44.0" AnchorPane.topAnchor="0.0">
                                        <children>
-                                          <Label layoutX="30.0" layoutY="80.0" text="Personal Information" textFill="#2d4578">
+                                          <Label layoutX="30.0" layoutY="30.0" text="Personal Information" textFill="#2d4578">
                                              <font>
                                                 <Font name="System Bold Italic" size="40.0" />
                                              </font>
                                           </Label>
-                                          <Label layoutX="30.0" layoutY="135.0" text="Fill in the required information" />
-                                          <ImageView fx:id="forwardButtonPersonalToVehicle" accessibleRole="BUTTON" fitHeight="70.0" fitWidth="94.0" layoutX="851.0" layoutY="551.0" onMouseClicked="#forwardButtonOnClick" pickOnBounds="true" preserveRatio="true">
+                                          <Label layoutX="30.0" layoutY="85.0" text="Fill in the required information" />
+                                          <ImageView fx:id="forwardButtonPersonalToVehicle" accessibleRole="BUTTON" fitHeight="70.0" fitWidth="94.0" layoutX="851.0" layoutY="551.0" onMouseClicked="#FirstForwardButtonOnClick" pickOnBounds="true" preserveRatio="true">
                                              <image>
                                                 <Image url="@../../media/CostumerRegisterationMedia/forward_button_40px.png" />
                                              </image>
@@ -168,19 +168,16 @@
                                                 <Cursor fx:constant="OPEN_HAND" />
                                              </cursor>
                                           </ImageView>
-                                          <VBox layoutX="14.0" layoutY="182.0" prefHeight="325.0" prefWidth="405.0" spacing="10.0">
+                                          <VBox layoutX="14.0" layoutY="162.0" prefHeight="325.0" prefWidth="405.0" spacing="10.0">
                                              <children>
                                                 <JFXTextField fx:id="CostumerIDtxt" focusColor="#00add8" labelFloat="true" promptText="Costumer ID" unFocusColor="#868282">
-                                                   <padding>
-                                                      <Insets top="20.0" />
-                                                   </padding>
                                                    <font>
                                                       <Font size="18.0" />
                                                    </font>
                                                 </JFXTextField>
                                                 <JFXTextField fx:id="FirstNametxt" focusColor="#00add8" labelFloat="true" layoutX="10.0" layoutY="10.0" promptText="First Name" unFocusColor="#868282">
                                                    <padding>
-                                                      <Insets bottom="5.0" top="20.0" />
+                                                      <Insets bottom="5.0" top="50.0" />
                                                    </padding>
                                                    <font>
                                                       <Font size="18.0" />
@@ -188,7 +185,7 @@
                                                 </JFXTextField>
                                                 <JFXTextField fx:id="LastNametxt" focusColor="#00add8" labelFloat="true" layoutX="10.0" layoutY="46.0" promptText="Last Name" unFocusColor="#868282">
                                                    <padding>
-                                                      <Insets top="20.0" />
+                                                      <Insets top="50.0" />
                                                    </padding>
                                                    <font>
                                                       <Font size="18.0" />
@@ -196,7 +193,7 @@
                                                 </JFXTextField>
                                                 <JFXTextField fx:id="EmailAdresstxt" focusColor="#00add8" focusTraversable="false" labelFloat="true" layoutX="10.0" layoutY="82.0" promptText="Email Adress" unFocusColor="#868282">
                                                    <padding>
-                                                      <Insets top="20.0" />
+                                                      <Insets top="50.0" />
                                                    </padding>
                                                    <font>
                                                       <Font size="18.0" />
@@ -204,13 +201,13 @@
                                                 </JFXTextField>
                                                 <Pane nodeOrientation="LEFT_TO_RIGHT" prefHeight="73.0" prefWidth="306.0">
                                                    <children>
-                                                      <Hyperlink fx:id="CreditCardLink" layoutX="87.0" layoutY="25.0" onMouseClicked="#creditCardLinkOnClick" text="Credit Card Details (Optional)" />
-                                                      <ImageView fitHeight="47.0" fitWidth="58.0" layoutX="29.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+                                                      <Hyperlink fx:id="CreditCardLink" layoutX="86.0" layoutY="37.0" onMouseClicked="#creditCardLinkOnClick" text="Credit Card Details (Optional)" />
+                                                      <ImageView fitHeight="47.0" fitWidth="58.0" layoutX="29.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
                                                             <Image url="@../../media/CostumerRegisterationMedia/card_security_40px.png" />
                                                          </image>
                                                       </ImageView>
-                                                      <ImageView fitHeight="64.0" fitWidth="16.0" layoutX="250.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+                                                      <ImageView fitHeight="64.0" fitWidth="16.0" layoutX="249.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
                                                             <Image url="@../../media/CostumerRegisterationMedia/help_16px.png" />
                                                          </image>
@@ -219,6 +216,9 @@
                                                          </cursor>
                                                       </ImageView>
                                                    </children>
+                                                   <padding>
+                                                      <Insets top="20.0" />
+                                                   </padding>
                                                 </Pane>
                                              </children>
                                              <padding>

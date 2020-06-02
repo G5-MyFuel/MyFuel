@@ -4,6 +4,8 @@ import client.logic.*;
 import client.logic.FormValidation;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import common.entity.Costumer;
+import common.entity.CreditCard;
 import common.entity.Employee;
 import common.entity.Vehicle;
 import javafx.collections.FXCollections;
@@ -28,6 +30,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.time.Clock;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 
@@ -38,9 +41,11 @@ import java.util.ResourceBundle;
 
 public class CustomerRegistrationController implements Initializable {
 
+    private ArrayList<Vehicle> tempVehicleArray;
+    private CreditCard tempCreditCard;
     private static CustomerRegistrationController Instance = null;
     private CustomerRegistrationLogic CustomerRegistrationLogic;
-    private FormValidation formValidation; //daniel implementation have to look before use** ~~~~~~~~~~~~~
+    private FormValidation formValidation;
 
     /*Gui variables:
      * */
@@ -138,17 +143,22 @@ public class CustomerRegistrationController implements Initializable {
 
     private ObservableList<String> CostumerType = FXCollections.observableArrayList("Private", "Company");
 
-    private ObservableList<String> ServicePlanType = FXCollections.observableArrayList("EXLUSIVE", "MULTIPLE_STATIONS");
+    private ObservableList<String> ServicePlanType = FXCollections.observableArrayList("Exclusive", "Multiple Stations");
 
-    private ObservableList<String> GasType = FXCollections.observableArrayList("Solar", "Benzin");
+    private ObservableList<String> GasType = FXCollections.observableArrayList("Gasoline-95", "Diesel","Scooter Fuel");
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.CustomerRegistrationLogic = CustomerRegistrationLogic.getInstance();
+        formValidation = FormValidation.getValidator();
+        PersonalInfoValidation();
         //
         //
         mainPane.setVisible(false);
         mainPane.setDisable(true);
+
+        vehicleMangTAB.setDisable(true);
+        planInfoTAB.setDisable(true);
 
         //disable vehicle information window
         VehicleInformationPane.setVisible(false);
@@ -186,12 +196,20 @@ public class CustomerRegistrationController implements Initializable {
          * ELSE: failed msg and do no continue to add that vehicle!
          */
         Vehicle vehicle = new Vehicle(VehicleIDtxt.getText(),GasTypeChoiseBox.getValue());
-        CustomerRegistrationLogic.getCostumer().addCostumerVehicle(vehicle);
+        if(tempVehicleArray.equals(null))
+            tempVehicleArray = new ArrayList<Vehicle>();
+        tempVehicleArray.add(vehicle);
+
 
         VehicleIdColom.setCellValueFactory(new PropertyValueFactory<>("VehicleID"));
         GasTypeColom.setCellValueFactory(new PropertyValueFactory<>("GasType"));
-        ObservableList<Vehicle> data = FXCollections.observableArrayList(CustomerRegistrationLogic.getCostumer().getCostumerVehicle());
+        ObservableList<Vehicle> data = FXCollections.observableArrayList(tempVehicleArray);
         VehicleTable.setItems(data);
+    }
+
+    @FXML
+    void ClickFinishButton(MouseEvent event){
+
     }
 
 
@@ -209,6 +227,15 @@ public class CustomerRegistrationController implements Initializable {
         stage.setTitle("Insert Credit Card Details");
         stage.show();
     }
+    @FXML
+    void FirstForwardButtonOnClick(MouseEvent event) {
+        System.out.println("somthing");
+
+
+
+
+        //vehicleMangTAB.getTabPane().getSelectionModel().selectNext();
+    }
 
     @FXML
     void forwardButtonOnClick(MouseEvent event) {
@@ -224,6 +251,9 @@ public class CustomerRegistrationController implements Initializable {
     void handleClicks(ActionEvent event) {
 
     }
-
+    private void PersonalInfoValidation(){
+        formValidation.isDoubleNumberValidation(CostumerIDtxt,"Costumer ID");
+        formValidation.maxLengthValidation(CostumerIDtxt,"Costumer ID",9);
+    }
 
 }

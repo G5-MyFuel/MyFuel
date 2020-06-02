@@ -11,15 +11,19 @@ public class CreditCard {
 
     private Costumer cardOwner;
     private String cardNumber;
-    private String cardExparation;
+    private String ExperationDate;
     private String cardSecurityNumber;
 
 
     public CreditCard(Costumer cardOwner, String cardNumber, String cardExparation, String cardSecurityNumber) {
         this.cardOwner = cardOwner;
         this.cardNumber = cardNumber;
-        this.cardExparation = cardExparation;
+        this.ExperationDate = cardExparation;
         this.cardSecurityNumber = cardSecurityNumber;
+    }
+
+    public CreditCard() {
+
     }
 
     public Costumer getCardOwner() {
@@ -30,8 +34,8 @@ public class CreditCard {
         return cardNumber;
     }
 
-    public String getCardExparation() {
-        return cardExparation;
+    public String getExperationDate() {
+        return ExperationDate;
     }
 
     public String getCardSecurityNumber() {
@@ -46,8 +50,8 @@ public class CreditCard {
         this.cardNumber = cardNumber;
     }
 
-    public void setCardExparation(String cardExparation) {
-        this.cardExparation = cardExparation;
+    public void setExperationDate(String experationDate) {
+        this.ExperationDate = experationDate;
     }
 
     public void setCardSecurityNumber(String cardSecurityNumber) {

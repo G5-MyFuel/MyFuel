@@ -22,10 +22,6 @@ public class Costumer extends User {
         this.CostumerVehicle.add(CostumerVehicle);
     }
 
-    public Costumer() {
-        super();
-    }
-
 
     public CreditCard getCostumerCreditCard() {
         return CostumerCreditCard;
