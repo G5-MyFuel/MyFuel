@@ -6,7 +6,7 @@ public class DbDetails {
     public String DB_USERNAME = "uec30klrdxwlktiw";
     public String DB_PASSWORD = "tc3wfAIidXugUM7hr3nK";
     public String DB_PORT = "3306";
-    public String Scheme = "bpsdc8o22sikrlpvvxqm";
+
 
     public DbDetails(String DB_HOST, String DB_SCHEME, String DB_USERNAME, String DB_PASSWORD, String DB_PORT) {
         this.DB_HOST = DB_HOST;

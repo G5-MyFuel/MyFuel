@@ -13,7 +13,7 @@ public class ClientApp extends Application {
     /**
      * The default port to connect on.
      */
-    final public static int DEFAULT_PORT = 5555;
+    final public static int DEFAULT_PORT = 3306;
     public static Client client;
     public static String server_ip = "";
     public static String server_port = "3306";

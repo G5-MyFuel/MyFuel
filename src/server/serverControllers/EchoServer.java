@@ -13,7 +13,7 @@ public class EchoServer extends AbstractServer {
     /**
      * The default port to listen on.
      */
-    final public static int DEFAULT_PORT = 5555;
+    final public static int DEFAULT_PORT = 3306;
     public static int portNumber = 0;
     MySqlConnection mysql = MySqlConnection.Instance;
 
