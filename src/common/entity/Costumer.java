@@ -22,6 +22,12 @@ public class Costumer extends User {
         this.CostumerVehicle.add(CostumerVehicle);
     }
 
+    public void setPurchasePlan(boolean purchasePlan) {
+        this.purchasePlan = purchasePlan;
+    }
+    public boolean getPurchasePlan() {
+        return this.purchasePlan;
+    }
 
     public CreditCard getCostumerCreditCard() {
         return CostumerCreditCard;
@@ -35,9 +41,7 @@ public class Costumer extends User {
         return purchasePlan;
     }
 
-    public void setPurchasePlan(boolean purchasePlan) {
-        this.purchasePlan = purchasePlan;
-    }
+
 
     public ArrayList<Vehicle> getCostumerVehicle() {
         return CostumerVehicle;

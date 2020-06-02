@@ -43,7 +43,7 @@ public class ClientConnectionToServer {
     @FXML
     void setServerIP(ActionEvent event) throws IOException {
         //initialize ip & port of MyFuel Server
-        ClientApp.server_ip = "localhost";
+        ClientApp.server_ip = "";
         ClientApp.server_port = port.getText();
 
         //check server connection status

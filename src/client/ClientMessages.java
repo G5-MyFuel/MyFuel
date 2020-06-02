@@ -3,6 +3,7 @@ package client;
 import client.boundary.LoginToSystemController;
 import client.boundary.OrderExecutionController;
 import client.boundary.SettingDiscountRatesController;
+import client.logic.CustomerRegistrationLogic;
 import client.logic.LoginToSystemLogic;
 import common.entity.User;
 import common.tools.Message;

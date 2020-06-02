@@ -31,6 +31,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.Clock;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 
@@ -145,7 +146,7 @@ public class CustomerRegistrationController implements Initializable {
 
     private ObservableList<String> ServicePlanType = FXCollections.observableArrayList("Exclusive", "Multiple Stations");
 
-    private ObservableList<String> GasType = FXCollections.observableArrayList("Gasoline-95", "Diesel","Scooter Fuel");
+    private ObservableList<String> GasType = FXCollections.observableArrayList("Gasoline-95", "Diesel", "Scooter Fuel");
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -181,7 +182,7 @@ public class CustomerRegistrationController implements Initializable {
     }
 
     @FXML
-    void addCostumerOnClick(MouseEvent event) {
+    void addNewCostumerOnClick(MouseEvent event) {
         mainPane.setVisible(true);
         mainPane.setDisable(false);
     }
@@ -195,8 +196,8 @@ public class CustomerRegistrationController implements Initializable {
          * have to add msg to client - validation = true = successes msg
          * ELSE: failed msg and do no continue to add that vehicle!
          */
-        Vehicle vehicle = new Vehicle(VehicleIDtxt.getText(),GasTypeChoiseBox.getValue());
-        if(tempVehicleArray.equals(null))
+        Vehicle vehicle = new Vehicle(VehicleIDtxt.getText(), GasTypeChoiseBox.getValue());
+        if (tempVehicleArray.equals(null))
             tempVehicleArray = new ArrayList<Vehicle>();
         tempVehicleArray.add(vehicle);
 
@@ -208,7 +209,7 @@ public class CustomerRegistrationController implements Initializable {
     }
 
     @FXML
-    void ClickFinishButton(MouseEvent event){
+    void ClickFinishButton(MouseEvent event) {
 
     }
 
@@ -227,23 +228,34 @@ public class CustomerRegistrationController implements Initializable {
         stage.setTitle("Insert Credit Card Details");
         stage.show();
     }
+
     @FXML
     void FirstForwardButtonOnClick(MouseEvent event) {
-        System.out.println("somthing");
-
-
-
-
-        //vehicleMangTAB.getTabPane().getSelectionModel().selectNext();
-    }
-
-    @FXML
-    void forwardButtonOnClick(MouseEvent event) {
+        vehicleMangTAB.setDisable(false);
+        personalInfoTAB.setDisable(true);
+        Costumer costumer = new Costumer(Integer.parseInt(CostumerIDtxt.getText()), CostumerIDtxt.getText(), 0, FirstNametxt.getText(), LastNametxt.getText(), EmailAdresstxt.getText(), null, true, null);
+        CustomerRegistrationLogic.setCostumerInDBFirstPhase(costumer);
         vehicleMangTAB.getTabPane().getSelectionModel().selectNext();
     }
 
     @FXML
-    void backwardButtonOnClick(MouseEvent event) {
+    void SecoundForwardButtonOnClick(MouseEvent event) {
+        planInfoTAB.setDisable(false);
+        vehicleMangTAB.setDisable(true);
+        vehicleMangTAB.getTabPane().getSelectionModel().selectNext();
+    }
+
+    @FXML
+    void FirstBackwardButtonOnClick(MouseEvent event) {
+        personalInfoTAB.setDisable(false);
+        vehicleMangTAB.setDisable(true);
+        vehicleMangTAB.getTabPane().getSelectionModel().selectPrevious();
+    }
+
+    @FXML
+    void SecoundBackwardButtonOnClick(MouseEvent event) {
+        planInfoTAB.setDisable(true);
+        vehicleMangTAB.setDisable(false);
         vehicleMangTAB.getTabPane().getSelectionModel().selectPrevious();
     }
 
@@ -251,9 +263,23 @@ public class CustomerRegistrationController implements Initializable {
     void handleClicks(ActionEvent event) {
 
     }
-    private void PersonalInfoValidation(){
-        formValidation.isDoubleNumberValidation(CostumerIDtxt,"Costumer ID");
-        formValidation.maxLengthValidation(CostumerIDtxt,"Costumer ID",9);
+
+    private void PersonalInfoValidation() {
+        //costumer ID field check
+        formValidation.isDoubleNumberValidation(CostumerIDtxt, "Costumer ID");
+        formValidation.maxLengthValidation(CostumerIDtxt, "Costumer ID", 9);
+        //have to add minimum 9 ID len
+
+        //first Name field check
+        formValidation.isContainsOnlyLetters(FirstNametxt, "First Name");
+        formValidation.isContainsOnlyLetters(FirstNametxt, "First Name");
+
+        //last Name field check
+        formValidation.isContainsOnlyLetters(LastNametxt, "Last Name");
+        formValidation.isContainsOnlyLetters(LastNametxt, "Last Name");
+
+        //email adress field check
+        formValidation.emailAddressValidation(EmailAdresstxt, "Email Adress");
     }
 
 }
