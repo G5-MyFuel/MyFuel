@@ -3,11 +3,11 @@ package client.boundary;
 import client.logic.FormValidation;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 
-import java.awt.event.ActionEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -48,7 +48,7 @@ public class RunSaleOperationController implements Initializable {
     private JFXDatePicker startDatePicker1;
 
     @FXML
-    private JFXComboBox<?> ChooseTemplateCombo;
+    private JFXComboBox<String> ChooseTemplateCombo;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -73,11 +73,9 @@ public class RunSaleOperationController implements Initializable {
         return Instance;
     }
 
-    @FXML
-    public void handleChooseTemplate(javafx.event.ActionEvent actionEvent) {
+    public void handleChooseTemplate(ActionEvent actionEvent) {
     }
 
-
-    public void handleBtnRunSale(javafx.event.ActionEvent actionEvent) {
+    public void handleBtnRunSale(ActionEvent actionEvent) {
     }
 }

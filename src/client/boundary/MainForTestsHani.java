@@ -13,7 +13,7 @@ public class MainForTestsHani extends Application {
 
     private AnchorPane root;
     //1 private SaleOperationTemplateController saleOperationTemplateController;    //אינסטנס של מחלקת הboundary
-    private RunSaleOperationController RunSaleOperationController;    //אינסטנס של מחלקת הboundary
+    private RunSaleOperationController runSaleOperationController;    //אינסטנס של מחלקת הboundary
 
     public static void main(String[] args) {
         launch(args);
@@ -26,7 +26,7 @@ public class MainForTestsHani extends Application {
             pageLoader.setLocation(getClass().getResource(pageName + ""));
             root = pageLoader.load();
           //1  saleOperationTemplateController = pageLoader.getController();//קבלת גישה לקונטרולר
-            RunSaleOperationController = pageLoader.getController();//קבלת גישה לקונטרולר
+            runSaleOperationController = pageLoader.getController();//קבלת גישה לקונטרולר
 
             //
 

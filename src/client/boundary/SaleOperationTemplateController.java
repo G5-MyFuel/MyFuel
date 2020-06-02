@@ -36,7 +36,6 @@ import java.util.ResourceBundle;
  */
 
 public class SaleOperationTemplateController implements Initializable {
-
     private SaleOperationTemplateController Instance = null;
     private SaleOperationTemplateLogic saleOperationTemplateLogic;
     private FormValidation formValidation;
