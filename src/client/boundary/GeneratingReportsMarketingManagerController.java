@@ -42,7 +42,7 @@ public class GeneratingReportsMarketingManagerController implements Initializabl
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.generatingReportsMarketingManagerLogic = GeneratingReportsMarketingManagerLogic.getInstance();
-        //this.formValidation = FormValidation.getValidator();
+        this.formValidation = FormValidation.getValidator();
 
         EnterOperationSaleTXT.setDisable(true);
         //EnterOperationSaleTXT.setEditable(false);
@@ -54,7 +54,7 @@ public class GeneratingReportsMarketingManagerController implements Initializabl
         //ChooseSubscriptionTypeCombo.set
         //this.shippingIndicatorTAB1.setVisible(false);
         /*  set all fields validators */
-        //formValidation();   //
+        formValidation();
         /* set form items */
         //setShippingTab();
     }
@@ -67,6 +67,19 @@ public class GeneratingReportsMarketingManagerController implements Initializabl
         if (Instance == null)
             Instance = new GeneratingReportsMarketingManagerController();
         return Instance;
+    }
+
+    private void formValidation() {
+
+        /*  EnterOperationSaleTXT validation */
+/*
+        //formValidation.isContainsOnlyNumbers(ShowNewRateTXT, "New price");
+        formValidation.numberPositiveValidation(ShowNewRateTXT, "New price");
+        formValidation.isEmptyField(ShowNewRateTXT, "New price");
+        //formValidation.maxLengthValidation(ShowNewRateTXT, "New price", 3);
+        formValidation.maxSizeValidation(ShowNewRateTXT, "New price", 100);
+        formValidation.minSizeValidation(ShowNewRateTXT, "New price", 1);
+*/
     }
 
     @FXML
