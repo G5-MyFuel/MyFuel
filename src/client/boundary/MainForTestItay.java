@@ -12,7 +12,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class MainForTestItay extends Application {
-
     /**
      * The default port to connect on.
      */

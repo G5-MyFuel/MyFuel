@@ -1,9 +1,6 @@
 package client.logic;
 
-import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXPasswordField;
-import com.jfoenix.controls.JFXTextArea;
-import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.*;
 import com.jfoenix.validation.DoubleValidator;
 import com.jfoenix.validation.RequiredFieldValidator;
 import com.jfoenix.validation.base.ValidatorBase;
@@ -11,6 +8,7 @@ import javafx.scene.control.TextInputControl;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.validator.routines.EmailValidator;
 
+import java.sql.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -451,13 +449,14 @@ public class FormValidation {
     }
 
     /**
-     * A method that checks if a string is smaller than a given number - short massage version
+     * A method that checks if the input length is too long (from max value) - short massage version
      *
      * @param theField  - the field to validate
      * @param fieldName - the name of the field
+     * @param maxLength - max string length
      */
-    public void minSizeValidationShort(JFXTextField theField, String fieldName, Integer minSize) {
-        theField.getValidators().add(new ValidatorBase("Too short. minimum " + minSize.toString() + " characters.") {
+    public void minLengthValidationShort(JFXTextField theField, String fieldName, int maxLength) {
+        theField.getValidators().add(new ValidatorBase(" Too long. Maximum " + maxLength + " characters.") {
             @Override
             protected void eval() {
                 if (this.srcControl.get() instanceof TextInputControl) {
@@ -467,7 +466,7 @@ public class FormValidation {
 
             private void evalTextInputField() {
                 TextInputControl textField = (TextInputControl) this.srcControl.get();
-                boolean result = Integer.parseInt(textField.getText()) < minSize ? false : true;
+                boolean result = textField.getLength() < maxLength ? false : true;
                 System.out.println(result);
                 try {
                     if (result)
@@ -485,7 +484,6 @@ public class FormValidation {
                 theField.validate();
             }
         });
-
     }
 
     /**
@@ -526,6 +524,16 @@ public class FormValidation {
         });
     }
 
+
+    public void isEmptyDateField(JFXDatePicker dateField, String date) {
+        RequiredFieldValidator reqInputValidator = new RequiredFieldValidator();
+        reqInputValidator.setMessage(date + " field is Required!");
+        dateField.getValidators().add(reqInputValidator);
+        dateField.focusedProperty().addListener((o, oldVal, newVal) -> {
+            if (!newVal)
+                dateField.validate();
+        });
+    }
 
 }
 
