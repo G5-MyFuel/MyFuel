@@ -34,6 +34,8 @@ public class ClientMessages {
                 break;
             case updateRequirement:
                 //EmployeesManagementGuiController.Instance.afterUpdateJobTitleInDb(m.getObject());
+
+
                 break;
             case getAllUsersTable:
                 ArrayList<User> alu = (ArrayList<User>)m.getObject();

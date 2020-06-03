@@ -18,6 +18,15 @@ import java.util.ArrayList;
 public class CustomerRegistrationLogic {
 
     MySqlConnection mySqlConnector;
+    private boolean insertCostumerFlag;
+
+    public boolean isInsertCostumerFlag() {
+        return insertCostumerFlag;
+    }
+
+    public void setInsertCostumerFlag(boolean insertCostumerFlag) {
+        this.insertCostumerFlag = insertCostumerFlag;
+    }
 
     /*Logic Variables*/
     private static CustomerRegistrationLogic Instance = null;
@@ -43,9 +52,9 @@ public class CustomerRegistrationLogic {
         String FirstName = costumer.getUserFirstName();
         String LastName = costumer.getUserLastName();
         String EmailAdress = costumer.getUserEmail();
-        String nullTemp= "1";
-        String Quarry = "INSERT INTO `Costumer` (`ID`, `Password`, `Type`, `First Name`, `Last Name`, `Email Adress`, `Credit Card Number`," + " `Purchase Plan`, `Vehicle ID`) " +
-                "VALUES ( "+ ID +", "+Password+", "+nullTemp+", "+FirstName+", "+LastName+", "+EmailAdress+", "+nullTemp+", "+nullTemp+", "+nullTemp+");";
+        String Quarry = "INSERT INTO `bpsdc8o22sikrlpvvxqm`.`Costumer` (`ID`, `Password`, `First Name`, `Last Name`, `Email Adress`)" +
+                "VALUES("+ID+","+Password+","+FirstName+","+LastName+","+EmailAdress+");";
+        System.out.println(Quarry);
         ClientApp.client.handleMessageFromClientUI(new Message(OperationType.updateRequirement,Quarry));
     }
     public void setCostumerInDBSecoundPhase(Costumer costumer){
