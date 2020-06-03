@@ -182,7 +182,7 @@ public class SaleOperationTemplateController implements Initializable {
     private void FormValidation() {
         /*  Template Name validation */
         formValidation.isEmptyField(TemplateName, "Template Name");
-        formValidation.maxLengthValidation(TemplateName, "Template Name", 45);
+        formValidation.maxLengthValidationShort(TemplateName, "Template Name", 45);
 
         /*  Discount Percentages validation */
         formValidation.isEmptyField(DiscountPercentages, "Discount Percentages");
@@ -205,12 +205,12 @@ public class SaleOperationTemplateController implements Initializable {
         //TODO: add more validation.. לבדוק אורך השדה בשעות ואת הטקסט שקשור
     }
 
-
+ /*
     public void setTemplatesTableColumns() {
         TemplateIDColumn.setCellValueFactory(new PropertyValueFactory<SaleOperationTemplate, String>("Template ID"));
         TemplateNameColumn.setCellValueFactory(new PropertyValueFactory<SaleOperationTemplate, String>("Template Name"));
         FuelTypeColumn.setCellValueFactory(new PropertyValueFactory<SaleOperationTemplate, FuelTypes>("Fuel Type"));
-       /* DiscountPercentagesColumn.setCellValueFactory(new PropertyValueFactory<SaleOperationTemplate, String>("emailAddress"));
+       DiscountPercentagesColumn.setCellValueFactory(new PropertyValueFactory<SaleOperationTemplate, String>("emailAddress"));
         MarketingAdForTemplateColumn.setCellValueFactory(new PropertyValueFactory<SaleOperationTemplate, String>("jobTitle"));
         dayColumn.setCellValueFactory(new PropertyValueFactory<SaleOperationTemplate, String>("fuelCompanyName"));
         beginHourColumn.setCellValueFactory(new PropertyValueFactory<SaleOperationTemplate, String>("fuelCompanyName"));
@@ -229,6 +229,7 @@ public class SaleOperationTemplateController implements Initializable {
         employeesTableView.setItems(data);
         employeesTableView.getColumns().addAll(EmployeeIdCol, FirstNameCol, lastNameCol, emailAddressCol, jobTitleCol, fuelCompanyNameCol);
     }
+    }
     */
 
-}
+

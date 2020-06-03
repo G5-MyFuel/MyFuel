@@ -3,16 +3,19 @@ package client.boundary;
 import client.logic.FormValidation;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * @author itay
+ * @author hani
  * @see client.logic.RunSaleOperationLogic - the form's logic class
  */
 
@@ -21,8 +24,15 @@ public class RunSaleOperationController implements Initializable {
         private client.logic.RunSaleOperationLogic RunSaleOperationLogic;
         private FormValidation formValidation;
 
-    /*Gui variables:
+    /*
+    Gui variables:
          * */
+    @FXML
+    private ResourceBundle resources;
+
+    @FXML
+    private URL location;
+
     @FXML
     private Button btnOverview;
 
@@ -42,24 +52,51 @@ public class RunSaleOperationController implements Initializable {
     private Button btnRunSaleOperation;
 
     @FXML
+    private Label startSaleDateTXT;
+
+    @FXML
     private JFXDatePicker startDatePicker;
 
     @FXML
-    private JFXDatePicker startDatePicker1;
+    private Label endSaleDateTXT;
 
     @FXML
-    private JFXComboBox<String> ChooseTemplateCombo;
+    private JFXDatePicker endDatePicker;
+
+    @FXML
+    private JFXComboBox<?> ChooseTemplateCombo;
+
+    @FXML
+    private Label ChooseTemplateTXT;
+
+    @FXML
+    private Label TemplateIDTXT;
+
+    @FXML
+    private Label FuelTypeTXT;
+
+    @FXML
+    private Label DiscountTXT;
+
+    @FXML
+    private Label DayTXT;
+
+    @FXML
+    private Label BeginHourTXT;
+
+    @FXML
+    private Label EndHourTXT;
+
+   //* private ObservableList<String> TemplateName = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         this.RunSaleOperationLogic = RunSaleOperationLogic.getInstance();
-        this.formValidation = FormValidation.getValidator();
-        //TODO: formValidation();   set all fields validators
-       // FormValidation();   //
-        /* check all required fields are'nt empty:*/
 
-        /*  check form input validation */
-
+        //this.formValidation = FormValidation.getValidator();
+        // TODO: formValidation();
+        //FormValidation();   // check all required fields are'nt empty
     }
 
     /**
@@ -73,9 +110,16 @@ public class RunSaleOperationController implements Initializable {
         return Instance;
     }
 
-    public void handleChooseTemplate(ActionEvent actionEvent) {
+    @FXML
+    public void handleChooseTemplate(javafx.event.ActionEvent actionEvent) {
     }
 
-    public void handleBtnRunSale(ActionEvent actionEvent) {
+    @FXML
+    public void handleBtnRunSale(javafx.event.ActionEvent actionEvent) {
+    }
+
+    @FXML
+    void handleClicks(ActionEvent event) {
+
     }
 }

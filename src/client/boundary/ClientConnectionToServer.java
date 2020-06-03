@@ -37,7 +37,6 @@ public class ClientConnectionToServer {
         assert ap != null : "fx:id=\"ap\" was not injected: check your FXML file 'ClientConnectionToServerFXML.fxml'.";
         assert btnConnect != null : "fx:id=\"btnConnect\" was not injected: check your FXML file 'ClientConnectionToServerFXML.fxml'.";
         assert port != null : "fx:id=\"port\" was not injected: check your FXML file 'ClientConnectionToServerFXML.fxml'.";
-
     }
 
     @FXML
