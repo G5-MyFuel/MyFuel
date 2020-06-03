@@ -170,12 +170,12 @@
                                           </ImageView>
                                           <VBox layoutX="14.0" layoutY="162.0" prefHeight="325.0" prefWidth="405.0" spacing="10.0">
                                              <children>
-                                                <JFXTextField fx:id="CostumerIDtxt" focusColor="#00add8" labelFloat="true" promptText="Costumer ID" unFocusColor="#868282">
+                                                <JFXTextField fx:id="CostumerIDtxt" focusColor="#00add8" labelFloat="true" promptText="Costumer ID" text="123456789" unFocusColor="#868282">
                                                    <font>
                                                       <Font size="18.0" />
                                                    </font>
                                                 </JFXTextField>
-                                                <JFXTextField fx:id="FirstNametxt" focusColor="#00add8" labelFloat="true" layoutX="10.0" layoutY="10.0" promptText="First Name" unFocusColor="#868282">
+                                                <JFXTextField fx:id="FirstNametxt" focusColor="#00add8" labelFloat="true" layoutX="10.0" layoutY="10.0" promptText="First Name" text="testName" unFocusColor="#868282">
                                                    <padding>
                                                       <Insets bottom="5.0" top="50.0" />
                                                    </padding>
@@ -183,7 +183,7 @@
                                                       <Font size="18.0" />
                                                    </font>
                                                 </JFXTextField>
-                                                <JFXTextField fx:id="LastNametxt" focusColor="#00add8" labelFloat="true" layoutX="10.0" layoutY="46.0" promptText="Last Name" unFocusColor="#868282">
+                                                <JFXTextField fx:id="LastNametxt" focusColor="#00add8" labelFloat="true" layoutX="10.0" layoutY="46.0" promptText="Last Name" text="testLastName" unFocusColor="#868282">
                                                    <padding>
                                                       <Insets top="50.0" />
                                                    </padding>
@@ -191,7 +191,7 @@
                                                       <Font size="18.0" />
                                                    </font>
                                                 </JFXTextField>
-                                                <JFXTextField fx:id="EmailAdresstxt" focusColor="#00add8" focusTraversable="false" labelFloat="true" layoutX="10.0" layoutY="82.0" promptText="Email Adress" unFocusColor="#868282">
+                                                <JFXTextField fx:id="EmailAdresstxt" focusColor="#00add8" focusTraversable="false" labelFloat="true" layoutX="10.0" layoutY="82.0" promptText="Email Adress" text="test@gmail.com" unFocusColor="#868282">
                                                    <padding>
                                                       <Insets top="50.0" />
                                                    </padding>

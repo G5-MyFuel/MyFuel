@@ -175,7 +175,7 @@ public class CustomerRegistrationController implements Initializable {
      *
      * @return Instance of controller class
      */
-    public CustomerRegistrationController getInstance() {
+    public static CustomerRegistrationController getInstance() {
         if (Instance == null)
             Instance = new CustomerRegistrationController();
         return Instance;
@@ -231,15 +231,17 @@ public class CustomerRegistrationController implements Initializable {
 
     @FXML
     void FirstForwardButtonOnClick(MouseEvent event) {
+        Costumer costumer = new Costumer(Integer.parseInt(CostumerIDtxt.getText()), CostumerIDtxt.getText(), 0, FirstNametxt.getText(), LastNametxt.getText(), EmailAdresstxt.getText(), null, true, null);
+        CustomerRegistrationLogic.setCostumerFirstPhase(costumer);
         vehicleMangTAB.setDisable(false);
         personalInfoTAB.setDisable(true);
-        Costumer costumer = new Costumer(Integer.parseInt(CostumerIDtxt.getText()), CostumerIDtxt.getText(), 0, FirstNametxt.getText(), LastNametxt.getText(), EmailAdresstxt.getText(), null, true, null);
-        CustomerRegistrationLogic.setCostumerInDBFirstPhase(costumer);
         vehicleMangTAB.getTabPane().getSelectionModel().selectNext();
+
     }
 
     @FXML
     void SecoundForwardButtonOnClick(MouseEvent event) {
+        CustomerRegistrationLogic.setCostumerSecoundPhase(tempVehicleArray);
         planInfoTAB.setDisable(false);
         vehicleMangTAB.setDisable(true);
         vehicleMangTAB.getTabPane().getSelectionModel().selectNext();

@@ -2,6 +2,7 @@ package client.boundary;
 
 import client.logic.CustomerRegistrationLogic;
 import com.jfoenix.controls.JFXTextField;
+import common.entity.CreditCard;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -13,7 +14,7 @@ import java.util.ResourceBundle;
 
 public class pymentWindowController implements Initializable {
 
-
+    private CustomerRegistrationLogic CRL = CustomerRegistrationLogic.getInstance();
     private static pymentWindowController Instance = null;
     @FXML
     private JFXTextField creditCardNumbertxt;
@@ -44,11 +45,11 @@ public class pymentWindowController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        payButton.setVisible(false);
+        payButton.setText("Add Card");
     }
 
     public void addCard(MouseEvent event){
-
+            CRL.addCostumerCreditCard(new CreditCard(CRL.getTempCostumer(),creditCardNumbertxt.getText(),experationDatetxt.getText(),CVVtxt.getText()));
     }
 
 }

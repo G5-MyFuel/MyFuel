@@ -47,6 +47,7 @@ public class MySqlConnection {
     public boolean insertOrUpdate(String query) {
         try {
             Statement stmt = con.createStatement();
+            System.out.println(query);
             stmt.executeUpdate(query);
             System.out.println("my sql: " + query + " executed!");
             return true;

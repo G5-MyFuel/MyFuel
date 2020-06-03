@@ -55,7 +55,7 @@
                   <Cursor fx:constant="OPEN_HAND" />
                </cursor>
             </ImageView>
-            <Button fx:id="payButton" layoutX="151.0" layoutY="388.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="89.0" style="-fx-background-color: #2D4578; -fx-background-radius: 50;" stylesheets="@style.css" text="Pay" textFill="WHITE" />
+            <Button fx:id="payButton" layoutX="151.0" layoutY="388.0" mnemonicParsing="false" onMouseClicked="#addCard" prefHeight="42.0" prefWidth="89.0" style="-fx-background-color: #2D4578; -fx-background-radius: 50;" stylesheets="@style.css" text="Pay" textFill="WHITE" />
             <ImageView fitHeight="70.0" fitWidth="136.0" layoutX="172.0" layoutY="250.0" mouseTransparent="true">
                <image>
                   <Image url="@../../media/credit-card-cvv-code.png" />

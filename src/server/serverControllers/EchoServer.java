@@ -40,7 +40,9 @@ public class EchoServer extends AbstractServer {
     public void handleMessageFromClient(Object msg, ConnectionToClient client) {
         Message m = (Message) msg;
         ResultSet rs;
-        System.out.println("Message received: " + msg + " from " + client);
+        System.out.println("Message received: " + m + " from " + client);
+
+
         try {
             switch ((m.getOperationType())) {
                 case getRequirementData:
@@ -50,6 +52,7 @@ public class EchoServer extends AbstractServer {
                     break;
                 case updateRequirement:
                     boolean res = mysql.insertOrUpdate(m.getObject().toString());
+                    System.out.println(res);
                     sendToClient(new Message(OperationType.updateRequirement, res), client);
                     break;
                 case getAllUsersTable:
