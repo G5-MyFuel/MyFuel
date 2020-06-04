@@ -6,6 +6,7 @@ import client.logic.NewPurchaseFuelForHomeHeatingLogic;
 import client.logic.SettingDiscountRatesLogic;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import common.entity.User;
 import common.tools.Message;
 import common.tools.OperationType;
 import javafx.collections.FXCollections;
@@ -16,6 +17,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class SettingDiscountRatesController implements Initializable {
@@ -136,7 +140,9 @@ public class SettingDiscountRatesController implements Initializable {
 
     public void setData(Object object) {
 
+        ArrayList<String> arr = (ArrayList<String>)object;
+        String str =(String) arr.get(0);
         System.out.println("Settig data");
-        ShowCurrentRateTXT.setText((String) object);
+        ShowCurrentRateTXT.setText(str);
     }
 }

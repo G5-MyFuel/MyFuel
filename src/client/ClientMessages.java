@@ -32,7 +32,7 @@ public class ClientMessages {
             case getRequirementData:
                // EmployeesManagementGuiController.Instance.setDataTable(m.getObject())
                 //OrderExecutionController.Instance.setOrderFuelFromSupplierTableView(m.getObject());
-                SettingDiscountRatesController.getInstance().setData(m.getObject());
+                SettingDiscountRatesController.getInstance().setData(m.getReturnMsgType());
                 break;
             case updateRequirement:
                 //EmployeesManagementGuiController.Instance.afterUpdateJobTitleInDb(m.getObject());
