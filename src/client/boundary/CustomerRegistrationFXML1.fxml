@@ -356,12 +356,12 @@
                                              <children>
                                                 <HBox alignment="CENTER_LEFT" layoutX="266.0" layoutY="40.0" prefHeight="42.0" prefWidth="191.0" spacing="30.0">
                                                    <children>
-                                                      <JFXRadioButton selected="true" text="YES">
+                                                      <JFXRadioButton fx:id="yesButton" text="YES">
                                                          <toggleGroup>
                                                             <ToggleGroup fx:id="q" />
                                                          </toggleGroup>
                                                       </JFXRadioButton>
-                                                      <JFXRadioButton layoutX="10.0" layoutY="10.0" text="NO" toggleGroup="$q" />
+                                                      <JFXRadioButton fx:id="noButton" layoutX="10.0" layoutY="10.0" text="NO" toggleGroup="$q" />
                                                    </children>
                                                    <padding>
                                                       <Insets left="100.0" right="20.0" />

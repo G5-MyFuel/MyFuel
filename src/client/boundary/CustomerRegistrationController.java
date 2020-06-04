@@ -3,10 +3,10 @@ package client.boundary;
 import client.logic.*;
 import client.logic.FormValidation;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import common.entity.Costumer;
 import common.entity.CreditCard;
-import common.entity.Employee;
 import common.entity.Vehicle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,23 +15,19 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.Clock;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.ResourceBundle;
 
 
@@ -43,10 +39,12 @@ import java.util.ResourceBundle;
 public class CustomerRegistrationController implements Initializable {
 
     private ArrayList<Vehicle> tempVehicleArray;
-    private CreditCard tempCreditCard;
+    CreditCard tempCreditCard = null;
     private static CustomerRegistrationController Instance = null;
-    private CustomerRegistrationLogic CustomerRegistrationLogic;
+    private CustomerRegistrationLogic CRLogic;
     private FormValidation formValidation;
+   @FXML private FXMLLoader PRCLoader;
+   @FXML private pymentWindowControllerForRegistar PRC;
 
     /*Gui variables:
      * */
@@ -141,6 +139,12 @@ public class CustomerRegistrationController implements Initializable {
     @FXML
     private TableColumn<Vehicle, String> GasTypeColom;
 
+    @FXML
+    private JFXRadioButton noButton;
+
+    @FXML
+    private JFXRadioButton yesButton;
+
 
     private ObservableList<String> CostumerType = FXCollections.observableArrayList("Private", "Company");
 
@@ -150,9 +154,13 @@ public class CustomerRegistrationController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.CustomerRegistrationLogic = CustomerRegistrationLogic.getInstance();
+        this.CRLogic = CRLogic.getInstance();
         formValidation = FormValidation.getValidator();
         PersonalInfoValidation();
+        tempVehicleArray = null;
+        PRCLoader = new FXMLLoader(getClass().getResource("Payment Window.fxml"));
+        PRC = PRC.getInstance();
+        PRC.init(getInstance());
         //
         //
         mainPane.setVisible(false);
@@ -210,7 +218,23 @@ public class CustomerRegistrationController implements Initializable {
 
     @FXML
     void ClickFinishButton(MouseEvent event) {
+        Costumer tempCos = CRLogic.getTempCostumer();
+        if(yesButton.isSelected())
+            tempCos.setPurchasePlan(true);
+        else
+            tempCos.setPurchasePlan(false);
 
+        if(CostumertypeChoiceBox.getSelectionModel().toString().equals("Private"))
+                 tempCos.setUserType(0);
+        else
+            tempCos.setUserType(1);
+
+        tempCos.setServicePlan(ServicePlanChoiseBox.getSelectionModel().toString());
+        tempCos.setCostumerVehicle(tempVehicleArray);
+        tempCos.setCostumerCreditCard(tempCreditCard);
+        CRLogic.setCostumerInDB(tempCos);
+        mainPane.setVisible(false);
+        mainPane.setDisable(true);
     }
 
 
@@ -221,27 +245,34 @@ public class CustomerRegistrationController implements Initializable {
 
     @FXML
     void creditCardLinkOnClick(MouseEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Payment Window.fxml"));
-        Parent root = (Parent) fxmlLoader.load();
+        Parent root = (Parent) PRCLoader.load();
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.setTitle("Insert Credit Card Details");
         stage.show();
     }
+    public void init(pymentWindowControllerForRegistar PrController) {
+        PRC = PrController;
+    }
 
     @FXML
     void FirstForwardButtonOnClick(MouseEvent event) {
-        Costumer costumer = new Costumer(Integer.parseInt(CostumerIDtxt.getText()), CostumerIDtxt.getText(), 0, FirstNametxt.getText(), LastNametxt.getText(), EmailAdresstxt.getText(), null, true, null);
-        CustomerRegistrationLogic.setCostumerFirstPhase(costumer);
+        Costumer costumer = new Costumer(Integer.parseInt(CostumerIDtxt.getText()), CostumerIDtxt.getText(), -1, FirstNametxt.getText(),
+                LastNametxt.getText(), EmailAdresstxt.getText(), null, true, null,null);
+        if(PRCLoader != null){
+            tempCreditCard.setCardOwner(costumer);
+            costumer.setCostumerCreditCard(tempCreditCard);
+        }
+        CRLogic.setCostumerFirstPhase(costumer);
         vehicleMangTAB.setDisable(false);
         personalInfoTAB.setDisable(true);
         vehicleMangTAB.getTabPane().getSelectionModel().selectNext();
-
+        System.out.println(costumer.getCostumerCreditCard().getCardNumber().toString());
     }
 
     @FXML
     void SecoundForwardButtonOnClick(MouseEvent event) {
-        CustomerRegistrationLogic.setCostumerSecoundPhase(tempVehicleArray);
+        CRLogic.setCostumerSecoundPhase(tempVehicleArray);
         planInfoTAB.setDisable(false);
         vehicleMangTAB.setDisable(true);
         vehicleMangTAB.getTabPane().getSelectionModel().selectNext();
@@ -284,4 +315,7 @@ public class CustomerRegistrationController implements Initializable {
         formValidation.emailAddressValidation(EmailAdresstxt, "Email Adress");
     }
 
+    public void setTempCreditCard(CreditCard tempCreditCard) {
+        this.tempCreditCard = tempCreditCard;
+    }
 }

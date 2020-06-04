@@ -58,6 +58,34 @@ public class User implements Serializable {
         return userEmail;
     }
 
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
+
+    public void setUserType(int userType) {
+        this.userType = userType;
+    }
+
+    public void setUserPassword(String userPassword) {
+        this.userPassword = userPassword;
+    }
+
+    public void setIsLoginIndicator(int isLoginIndicator) {
+        this.isLoginIndicator = isLoginIndicator;
+    }
+
+    public void setUserFirstName(String userFirstName) {
+        this.userFirstName = userFirstName;
+    }
+
+    public void setUserLastName(String userLastName) {
+        this.userLastName = userLastName;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
+
     @Override
     public String toString() {
         return "User{" +

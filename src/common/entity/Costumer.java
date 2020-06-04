@@ -13,13 +13,15 @@ public class Costumer extends User {
     private CreditCard CostumerCreditCard;
     private ArrayList<Vehicle> CostumerVehicle = new ArrayList<Vehicle>();
 
+    private String servicePlan;
     private boolean purchasePlan;
 
-    public Costumer(int ID, String CustomerPassword, int  CostumerType, String Fname, String Lname, String emailAdress, CreditCard customerCreditCard, boolean purchasePlan, Vehicle CostumerVehicle) {
+    public Costumer(int ID, String CustomerPassword, int  CostumerType, String Fname, String Lname, String emailAdress, CreditCard customerCreditCard, boolean purchasePlan, Vehicle CostumerVehicle,String servicePlan) {
         super(ID,CostumerType, CustomerPassword, Fname, Lname, emailAdress);
         this.CostumerCreditCard = customerCreditCard;
         this.purchasePlan = purchasePlan;
         this.CostumerVehicle.add(CostumerVehicle);
+        this.servicePlan = servicePlan;
     }
 
     public void setPurchasePlan(boolean purchasePlan) {
@@ -34,14 +36,20 @@ public class Costumer extends User {
     }
 
     public void setCostumerCreditCard(CreditCard costumerCreditCard) {
-        CostumerCreditCard = costumerCreditCard;
+        this.CostumerCreditCard = costumerCreditCard;
     }
 
     public boolean isPurchasePlan() {
         return purchasePlan;
     }
 
+    public String getServicePlan() {
+        return servicePlan;
+    }
 
+    public void setServicePlan(String servicePlan) {
+        this.servicePlan = servicePlan;
+    }
 
     public ArrayList<Vehicle> getCostumerVehicle() {
         return CostumerVehicle;
