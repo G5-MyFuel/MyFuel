@@ -1,6 +1,7 @@
 package server.serverControllers;
 
 import common.tools.DbDetails;
+import common.tools.QueryToArrayList;
 
 import java.sql.*;
 
@@ -31,7 +32,7 @@ public class MySqlConnection {
     }
 
 
-    public ResultSet getQuery(String query) {
+    public ResultSet getQuery(String query){
         System.out.println("getQuery");
         System.out.println(con);
         ResultSet rs = null;

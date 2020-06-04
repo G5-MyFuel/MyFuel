@@ -4,6 +4,7 @@ import client.ClientApp;
 import client.boundary.SettingDiscountRatesController;
 import common.tools.Message;
 import common.tools.OperationType;
+import common.tools.ReturnMsgType;
 import server.serverControllers.MySqlConnection;
 
 public class SettingDiscountRatesLogic {
@@ -23,10 +24,15 @@ public class SettingDiscountRatesLogic {
     }
 
     public static SettingDiscountRatesLogic getInstance() {
-
         if (Instance == null)
             Instance = new SettingDiscountRatesLogic();
         return Instance;
+    }
+    public void setData(Object object) {
+        ReturnMsgType currentPrice = (ReturnMsgType) object;
+        System.out.println(ReturnMsgType.values());
+        //System.out.println(currentPrice);
+
     }
 
 }

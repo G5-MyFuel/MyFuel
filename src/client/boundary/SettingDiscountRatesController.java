@@ -138,10 +138,5 @@ public class SettingDiscountRatesController implements Initializable {
 
     }
 
-    public void setData(Object object) {
 
-        Float currentPrice = (Float) object;
-        System.out.println(currentPrice);
-        ShowCurrentRateTXT.setText(currentPrice.toString());
-    }
 }

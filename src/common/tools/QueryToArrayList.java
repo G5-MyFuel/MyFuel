@@ -17,6 +17,8 @@ public class QueryToArrayList {
 //        return ArrayListToSent;
 //    }
 
+
+
     public static ArrayList<User> ResultSetToUsersArrayList(ResultSet rs) throws SQLException{
         ArrayList<User> arrayListToSent = new ArrayList<User>();
         while (rs.next()){
