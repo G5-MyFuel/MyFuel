@@ -56,7 +56,7 @@ public class MainForTestItay extends Application {
         Pane root = null;
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/client/boundary/CustomerRegistrationFXML1.fxml"));
+            loader.setLocation(getClass().getResource("/client/boundary/CustomerRegistrationFXML2.fxml"));
             root = loader.load();
             Scene s1 = new Scene(root);
             primaryStage.setScene(s1);

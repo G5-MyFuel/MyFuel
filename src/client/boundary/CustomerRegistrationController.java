@@ -43,8 +43,10 @@ public class CustomerRegistrationController implements Initializable {
     private static CustomerRegistrationController Instance = null;
     private CustomerRegistrationLogic CRLogic;
     private FormValidation formValidation;
-   @FXML private FXMLLoader PRCLoader;
-   @FXML private pymentWindowControllerForRegistar PRC;
+    @FXML
+    private FXMLLoader PRCLoader;
+    @FXML
+    private pymentWindowControllerForRegistar PRC;
 
     /*Gui variables:
      * */
@@ -145,6 +147,20 @@ public class CustomerRegistrationController implements Initializable {
     @FXML
     private JFXRadioButton yesButton;
 
+    @FXML
+    private Pane CreditCardWindow;
+    @FXML
+    private JFXTextField creditCardNumbertxt;
+
+    @FXML
+    private JFXTextField experationDatetxt;
+
+    @FXML
+    private JFXTextField CVVtxt;
+
+    @FXML
+    private ImageView addCardButton;
+
 
     private ObservableList<String> CostumerType = FXCollections.observableArrayList("Private", "Company");
 
@@ -157,10 +173,10 @@ public class CustomerRegistrationController implements Initializable {
         this.CRLogic = CRLogic.getInstance();
         formValidation = FormValidation.getValidator();
         PersonalInfoValidation();
-        tempVehicleArray = null;
-        PRCLoader = new FXMLLoader(getClass().getResource("Payment Window.fxml"));
-        PRC = PRC.getInstance();
-        PRC.init(getInstance());
+        CreditCardWindow.setVisible(false);
+        CreditCardWindow.setDisable(true);
+        tempVehicleArray = new ArrayList<Vehicle>();
+        tempCreditCard = null;
         //
         //
         mainPane.setVisible(false);
@@ -205,13 +221,11 @@ public class CustomerRegistrationController implements Initializable {
          * ELSE: failed msg and do no continue to add that vehicle!
          */
         Vehicle vehicle = new Vehicle(VehicleIDtxt.getText(), GasTypeChoiseBox.getValue());
-        if (tempVehicleArray.equals(null))
-            tempVehicleArray = new ArrayList<Vehicle>();
         tempVehicleArray.add(vehicle);
-
 
         VehicleIdColom.setCellValueFactory(new PropertyValueFactory<>("VehicleID"));
         GasTypeColom.setCellValueFactory(new PropertyValueFactory<>("GasType"));
+
         ObservableList<Vehicle> data = FXCollections.observableArrayList(tempVehicleArray);
         VehicleTable.setItems(data);
     }
@@ -219,17 +233,17 @@ public class CustomerRegistrationController implements Initializable {
     @FXML
     void ClickFinishButton(MouseEvent event) {
         Costumer tempCos = CRLogic.getTempCostumer();
-        if(yesButton.isSelected())
+        if (yesButton.isSelected())
             tempCos.setPurchasePlan(true);
         else
             tempCos.setPurchasePlan(false);
 
-        if(CostumertypeChoiceBox.getSelectionModel().toString().equals("Private"))
-                 tempCos.setUserType(0);
+        if (CostumertypeChoiceBox.getSelectionModel().getSelectedItem().toString().equals("Private"))
+            tempCos.setUserType(0);
         else
             tempCos.setUserType(1);
 
-        tempCos.setServicePlan(ServicePlanChoiseBox.getSelectionModel().toString());
+        tempCos.setServicePlan(ServicePlanChoiseBox.getSelectionModel().getSelectedItem().toString());
         tempCos.setCostumerVehicle(tempVehicleArray);
         tempCos.setCostumerCreditCard(tempCreditCard);
         CRLogic.setCostumerInDB(tempCos);
@@ -239,35 +253,38 @@ public class CustomerRegistrationController implements Initializable {
 
 
     @FXML
+    void addCreditCardLinkOnClick(MouseEvent event) {
+        tempCreditCard = new CreditCard(null, creditCardNumbertxt.getText(), experationDatetxt.getText(), CVVtxt.getText());
+        CreditCardWindow.setVisible(false);
+    }
+
+    @FXML
     void setVehicleInfoVisible(MouseEvent event) {
         VehicleInformationPane.setVisible(true);
     }
 
     @FXML
-    void creditCardLinkOnClick(MouseEvent event) throws IOException {
-        Parent root = (Parent) PRCLoader.load();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.setTitle("Insert Credit Card Details");
-        stage.show();
+    void creditCardLinkOnClick(MouseEvent event) {
+        CreditCardWindow.setDisable(false);
+        CreditCardWindow.setVisible(true);
     }
-    public void init(pymentWindowControllerForRegistar PrController) {
-        PRC = PrController;
-    }
+
 
     @FXML
     void FirstForwardButtonOnClick(MouseEvent event) {
         Costumer costumer = new Costumer(Integer.parseInt(CostumerIDtxt.getText()), CostumerIDtxt.getText(), -1, FirstNametxt.getText(),
-                LastNametxt.getText(), EmailAdresstxt.getText(), null, true, null,null);
-        if(PRCLoader != null){
+                LastNametxt.getText(), EmailAdresstxt.getText(), null, true, null, null);
+
+        if (CreditCardWindow.isVisible()) {//have to popUp User
+            System.out.println("please insert card details first please.");
+        } else {
             tempCreditCard.setCardOwner(costumer);
             costumer.setCostumerCreditCard(tempCreditCard);
+            CRLogic.setCostumerFirstPhase(costumer);
+            vehicleMangTAB.setDisable(false);
+            personalInfoTAB.setDisable(true);
+            vehicleMangTAB.getTabPane().getSelectionModel().selectNext();
         }
-        CRLogic.setCostumerFirstPhase(costumer);
-        vehicleMangTAB.setDisable(false);
-        personalInfoTAB.setDisable(true);
-        vehicleMangTAB.getTabPane().getSelectionModel().selectNext();
-        System.out.println(costumer.getCostumerCreditCard().getCardNumber().toString());
     }
 
     @FXML

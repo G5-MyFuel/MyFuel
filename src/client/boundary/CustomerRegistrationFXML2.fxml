@@ -225,7 +225,7 @@
                                                 <Insets left="20.0" top="10.0" />
                                              </padding>
                                           </VBox>
-                                          <Pane layoutX="490.0" layoutY="49.0" prefHeight="493.0" prefWidth="431.0">
+                                          <Pane fx:id="CreditCardWindow" layoutX="490.0" layoutY="49.0" prefHeight="493.0" prefWidth="431.0">
                                              <children>
                                                 <Label layoutX="20.0" layoutY="16.0" text="Payment" textFill="#2d4578">
                                                    <font>
@@ -252,13 +252,13 @@
                                                       <Insets bottom="10.0" top="10.0" />
                                                    </padding>
                                                 </JFXTextField>
-                                                <Hyperlink layoutX="110.0" layoutY="360.0" prefHeight="29.0" prefWidth="278.0" text="Add this credit card to my account." />
+                                                <Hyperlink layoutX="110.0" layoutY="360.0" onMouseClicked="#addCreditCardLinkOnClick" prefHeight="29.0" prefWidth="278.0" text="Add this credit card to my account." />
                                                 <ImageView layoutX="75.0" layoutY="275.0">
                                                    <image>
                                                       <Image url="@../../media/CostumerRegisterationMedia/help_16px.png" />
                                                    </image>
                                                 </ImageView>
-                                                <ImageView fx:id="addCardButton" accessibleRole="BUTTON" fitHeight="32.0" fitWidth="29.0" layoutX="61.0" layoutY="359.0">
+                                                <ImageView fx:id="addCardButton" accessibleRole="BUTTON" fitHeight="32.0" fitWidth="29.0" layoutX="61.0" layoutY="359.0" onMouseClicked="#addCreditCardLinkOnClick">
                                                    <image>
                                                       <Image url="@../../media/CostumerRegisterationMedia/add_40px.png" />
                                                    </image>
@@ -266,7 +266,6 @@
                                                       <Cursor fx:constant="OPEN_HAND" />
                                                    </cursor>
                                                 </ImageView>
-                                                <Button fx:id="payButton" layoutX="162.0" layoutY="416.0" mnemonicParsing="false" onMouseClicked="#addCard" prefHeight="42.0" prefWidth="89.0" style="-fx-background-color: #2D4578; -fx-background-radius: 50;" stylesheets="@style.css" text="Pay" textFill="WHITE" />
                                                 <ImageView fitHeight="70.0" fitWidth="136.0" layoutX="162.0" layoutY="248.0" mouseTransparent="true">
                                                    <image>
                                                       <Image url="@../../media/credit-card-cvv-code.png" />
@@ -405,12 +404,12 @@
                                              <children>
                                                 <HBox alignment="CENTER_LEFT" layoutX="266.0" layoutY="40.0" prefHeight="42.0" prefWidth="191.0" spacing="30.0">
                                                    <children>
-                                                      <JFXRadioButton selected="true" text="YES">
+                                                      <JFXRadioButton fx:id="yesButton" selected="true" text="YES">
                                                          <toggleGroup>
                                                             <ToggleGroup fx:id="q" />
                                                          </toggleGroup>
                                                       </JFXRadioButton>
-                                                      <JFXRadioButton layoutX="10.0" layoutY="10.0" text="NO" toggleGroup="$q" />
+                                                      <JFXRadioButton fx:id="noButton" layoutX="10.0" layoutY="10.0" text="NO" toggleGroup="$q" />
                                                    </children>
                                                    <padding>
                                                       <Insets left="100.0" right="20.0" />
@@ -434,7 +433,10 @@
                                           <Cursor fx:constant="OPEN_HAND" />
                                        </cursor>
                                     </ImageView>
-                                    <Button fx:id="FinishButton" layoutX="786.0" layoutY="574.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="100.0" style="-fx-background-color: #2D4578; -fx-background-radius: 50;" stylesheets="@style.css" text="Finish" textFill="WHITE" />
+                                    <Button fx:id="FinishButton" layoutX="786.0" layoutY="574.0" mnemonicParsing="false" onMouseClicked="#ClickFinishButton" prefHeight="47.0" prefWidth="100.0" style="-fx-background-color: #2D4578; -fx-background-radius: 50;" stylesheets="@style.css" text="Finish" textFill="WHITE">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor></Button>
                                  </children>
                               </AnchorPane>
                           </content>

@@ -51,19 +51,12 @@ public class pymentWindowControllerForRegistar implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         payButton.setText("Add Card");
-        CRC = CRC.getInstance();
     }
 
     public void addCardOnClick(MouseEvent event) throws IOException {
-        tempCreditCard = new CreditCard(null,creditCardNumbertxt.getText(),experationDatetxt.getText(),CVVtxt.getText());
-        CRC.setTempCreditCard(tempCreditCard);
-        // get a handle to the stage
-        Stage stage = (Stage) payButton.getScene().getWindow();
-        stage.close();
+
     }
-    public void init(CustomerRegistrationController CrController) {
-        CRC = CrController;
-    }
+
 
     public CreditCard getTempCreditCard() {
         return this.tempCreditCard;

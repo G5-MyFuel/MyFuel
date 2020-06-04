@@ -22,7 +22,6 @@ public class CustomerRegistrationLogic {
     private Costumer tempCostumer;
 
 
-
     /*Logic Variables*/
     private static CustomerRegistrationLogic Instance = null;
 
@@ -40,42 +39,48 @@ public class CustomerRegistrationLogic {
         return Instance;
     }
 
-    public void setCostumerInDB(Costumer costumer){
+    public void setCostumerInDB(Costumer costumer) {
         //Building Quarry :
         Integer ID = costumer.getUserID();
         String Password = costumer.getUserPassword();
+        Password = "Aa" + Password;
         String Type;
-        if(costumer.getUserType() == 0)
+        if (costumer.getUserType() == 0)
             Type = "Private";
         else
             Type = "Company";
+
         String Fname = costumer.getUserFirstName();
         String Lname = costumer.getUserLastName();
         String Email = costumer.getUserEmail();
         String CreditCardnum = costumer.getCostumerCreditCard().getCardNumber();
         String purchasePlan;
-        if(costumer.getPurchasePlan())
+        if (costumer.getPurchasePlan())
             purchasePlan = "true";
         else
             purchasePlan = "false";
-        String mainVehicle = costumer.getCostumerVehicle().get(0).toString();
-        String ServicePlan = costumer.getServicePlan();
-        String quarry = "INSERT INTO `bpsdc8o22sikrlpvvxqm`.`Costumer` (`ID`, `Password`, `Type`, `First Name`, `Last Name`, `Email Adress`, `Credit Card Number`, `Purchase Plan`, `Vehicle ID`,`Service Plan`) " +
-                "VALUES ('"+ID+"', '"+Password+"', '"+Type+"', '"+Fname+"', '"+Lname+"', '"+Email+"', '"+CreditCardnum+"', '"+purchasePlan+"', '"+mainVehicle+"', '"+ServicePlan+"');";
-        ClientApp.client.handleMessageFromClientUI(new Message(OperationType.updateRequirement,quarry));
+        String mainVehicle = costumer.getCostumerVehicle().get(0).getVehicleID().toString();
+        String ServicePlan = costumer.getServicePlan().toString();
+        String quarry = "INSERT INTO `bpsdc8o22sikrlpvvxqm`.`Costumer`(`ID`, `Password`, `Type`, `First Name`, `Last Name`, `Email Adress`, `Credit Card Number`, `Purchase Plan`, `Vehicle ID`, `Service Plan`)";
+        String Values = " VALUES (\""+ ID.toString() + "\",\"" + Password + "\",\"" + Type + "\",\"" + Fname + "\",\"" + Lname + "\",\"" + Email + "\",\"" + CreditCardnum + "\",\"" + purchasePlan + "\",\"" + mainVehicle + "\",\"" + ServicePlan +"\");";
+        quarry += Values;
+        ClientApp.client.handleMessageFromClientUI(new Message(OperationType.updateRequirement, quarry));
+
     }
 
-    public void addCostumerCreditCard(CreditCard card){
+    public void addCostumerCreditCard(CreditCard card) {
         this.tempCostumer.setCostumerCreditCard(card);
     }
 
     public void setCostumerFirstPhase(Costumer costumer) {
         this.tempCostumer = costumer;
     }
-    public void setCostumerSecoundPhase(ArrayList<Vehicle> vehicles){
-            tempCostumer.setCostumerVehicle(vehicles);
+
+    public void setCostumerSecoundPhase(ArrayList<Vehicle> vehicles) {
+        tempCostumer.setCostumerVehicle(vehicles);
     }
-    public void setCostumerThirdPhase(Costumer costumer){
+
+    public void setCostumerThirdPhase(Costumer costumer) {
 
     }
 
