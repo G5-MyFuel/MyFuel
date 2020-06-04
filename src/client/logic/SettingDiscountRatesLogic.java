@@ -29,5 +29,4 @@ public class SettingDiscountRatesLogic {
         return Instance;
     }
 
-
 }

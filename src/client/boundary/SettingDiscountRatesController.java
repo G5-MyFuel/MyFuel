@@ -100,9 +100,10 @@ public class SettingDiscountRatesController implements Initializable {
         String SubscriptionType = "SELECT * FROM `DiscountRates` WHERE `Subscription type` LIKE '" + ChooseSubscriptionTypeCombo.getValue() + "');";
         //SettingDiscountRatesLogic settingDiscountRatesLogic = new SettingDiscountRatesLogic();
         System.out.println("Check");
-        //SettingDiscountRatesLogic.getInstance().getDiscountRatesTable(SubscriptionType);
+        SettingDiscountRatesLogic.getInstance().getDiscountRatesTable(SubscriptionType);
         //ClientApp.client.handleMessageFromClientUI(new Message(OperationType.getRequirementData, (Object)SubscriptionType));  //send the new employee jobTitle to DB
-        ShowCurrentRateTXT.setText(SubscriptionType);
+
+        //ShowCurrentRateTXT.setText(SubscriptionType);
         ShowCurrentRateTXT.setVisible(true);
         ShowCurrentRateTXT.setEditable(false);
         ShowNewRateTXT.setVisible(true);
@@ -134,4 +135,9 @@ public class SettingDiscountRatesController implements Initializable {
 
     }
 
+    public void setData(Object object) {
+
+        System.out.println("Settig data");
+        ShowCurrentRateTXT.setText((String) object);
+    }
 }

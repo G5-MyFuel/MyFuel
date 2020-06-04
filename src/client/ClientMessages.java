@@ -5,6 +5,7 @@ import client.boundary.OrderExecutionController;
 import client.boundary.SettingDiscountRatesController;
 import client.logic.CustomerRegistrationLogic;
 import client.logic.LoginToSystemLogic;
+import client.logic.SettingDiscountRatesLogic;
 import common.entity.User;
 import common.tools.Message;
 
@@ -30,7 +31,8 @@ public class ClientMessages {
         switch (m.getOperationType()) {
             case getRequirementData:
                // EmployeesManagementGuiController.Instance.setDataTable(m.getObject())
-                OrderExecutionController.Instance.setOrderFuelFromSupplierTableView(m.getObject());
+                //OrderExecutionController.Instance.setOrderFuelFromSupplierTableView(m.getObject());
+                SettingDiscountRatesController.getInstance().setData(m.getObject());
                 break;
             case updateRequirement:
                 //EmployeesManagementGuiController.Instance.afterUpdateJobTitleInDb(m.getObject());

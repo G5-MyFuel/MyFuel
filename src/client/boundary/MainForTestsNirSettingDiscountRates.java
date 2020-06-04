@@ -1,14 +1,28 @@
 package client.boundary;
 
+import client.Client;
+import client.ClientApp;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 
 
 public class MainForTestsNirSettingDiscountRates extends Application {
+
+    /**
+     * The default port to connect on.
+     */
+    final public static int DEFAULT_PORT = 5555;
+    public static Client client;
+    public static String server_ip = "";
+    public static String server_port = "";
+
     //File test for SettingDiscountRatesController
     String pageName = "SettingDiscountRatesFXML.fxml";   //שם קובץ הfxml
 
@@ -19,8 +33,31 @@ public class MainForTestsNirSettingDiscountRates extends Application {
         launch(args);
     }
 
+    public static boolean startClient() throws IOException {
+        String host = "";
+        int port = 0; // The port number
+        if (server_port == "")
+            port = DEFAULT_PORT;
+        else
+            port = Integer.parseInt(server_port);
+
+        host = server_ip;
+
+
+        client = new Client(host, port);
+        System.out.println("Client setup connection! " + host + ": " + port);
+
+        return true;
+
+    }
+
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws Exception {
+
+        ClientApp.server_port = "5555";
+        ClientApp.startClient();
+        Pane root = null;
+
         try {
             FXMLLoader pageLoader = new FXMLLoader();
             pageLoader.setLocation(getClass().getResource(pageName + ""));
