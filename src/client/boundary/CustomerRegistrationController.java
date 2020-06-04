@@ -22,6 +22,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
 
@@ -43,6 +45,7 @@ public class CustomerRegistrationController implements Initializable {
     private static CustomerRegistrationController Instance = null;
     private CustomerRegistrationLogic CRLogic;
     private FormValidation formValidation;
+    private boolean CardClickFlag = false;
     @FXML
     private FXMLLoader PRCLoader;
     @FXML
@@ -160,6 +163,17 @@ public class CustomerRegistrationController implements Initializable {
 
     @FXML
     private ImageView addCardButton;
+    @FXML
+    private Tooltip typeTT;
+    @FXML
+    private ImageView CostumerTypeInfo;
+    @FXML
+    private ImageView PurchasePlanInffo;
+    @FXML
+    private ImageView ServicePlanInfo;
+    @FXML
+    private ImageView CreditCardLinkTT;
+
 
 
     private ObservableList<String> CostumerType = FXCollections.observableArrayList("Private", "Company");
@@ -177,6 +191,21 @@ public class CustomerRegistrationController implements Initializable {
         CreditCardWindow.setDisable(true);
         tempVehicleArray = new ArrayList<Vehicle>();
         tempCreditCard = null;
+        CostumerIDtxt.clear();
+        FirstNametxt.clear();
+        LastNametxt.clear();
+        EmailAdresstxt.clear();
+        creditCardNumbertxt.clear();
+        experationDatetxt.clear();
+        CVVtxt.clear();
+        VehicleIDtxt.clear();
+        VehicleInformationPane.setVisible(false);
+        VehicleTable.getItems().clear();
+        typeTT = createToolTip("you mother fucker this is costumer type");
+        Tooltip.install(CostumerTypeInfo,typeTT);
+        Tooltip.install(PurchasePlanInffo,createToolTip("this is purchaesesesesese info semek ars"));
+        Tooltip.install(ServicePlanInfo,createToolTip("this is Service Plan info semek ars"));
+        Tooltip.install(CreditCardLinkTT,createToolTip("this is CreditCard link GTFO "));
         //
         //
         mainPane.setVisible(false);
@@ -209,6 +238,18 @@ public class CustomerRegistrationController implements Initializable {
     void addNewCostumerOnClick(MouseEvent event) {
         mainPane.setVisible(true);
         mainPane.setDisable(false);
+        tempVehicleArray = new ArrayList<Vehicle>();
+        tempCreditCard = null;
+        CostumerIDtxt.clear();
+        FirstNametxt.clear();
+        LastNametxt.clear();
+        EmailAdresstxt.clear();
+        creditCardNumbertxt.clear();
+        experationDatetxt.clear();
+        CVVtxt.clear();
+        VehicleIDtxt.clear();
+        VehicleInformationPane.setVisible(false);
+        VehicleTable.getItems().clear();
     }
 
     @FXML
@@ -249,6 +290,10 @@ public class CustomerRegistrationController implements Initializable {
         CRLogic.setCostumerInDB(tempCos);
         mainPane.setVisible(false);
         mainPane.setDisable(true);
+        planInfoTAB.setDisable(true);
+        personalInfoTAB.setDisable(false);
+        vehicleMangTAB.getTabPane().getSelectionModel().selectPrevious();
+        vehicleMangTAB.getTabPane().getSelectionModel().selectPrevious();
     }
 
 
@@ -256,6 +301,7 @@ public class CustomerRegistrationController implements Initializable {
     void addCreditCardLinkOnClick(MouseEvent event) {
         tempCreditCard = new CreditCard(null, creditCardNumbertxt.getText(), experationDatetxt.getText(), CVVtxt.getText());
         CreditCardWindow.setVisible(false);
+        CardClickFlag = true;
     }
 
     @FXML
@@ -275,16 +321,17 @@ public class CustomerRegistrationController implements Initializable {
         Costumer costumer = new Costumer(Integer.parseInt(CostumerIDtxt.getText()), CostumerIDtxt.getText(), -1, FirstNametxt.getText(),
                 LastNametxt.getText(), EmailAdresstxt.getText(), null, true, null, null);
 
-        if (CreditCardWindow.isVisible()) {//have to popUp User
-            System.out.println("please insert card details first please.");
-        } else {
-            tempCreditCard.setCardOwner(costumer);
-            costumer.setCostumerCreditCard(tempCreditCard);
-            CRLogic.setCostumerFirstPhase(costumer);
-            vehicleMangTAB.setDisable(false);
-            personalInfoTAB.setDisable(true);
-            vehicleMangTAB.getTabPane().getSelectionModel().selectNext();
-        }
+        if (CardClickFlag)
+            if (CreditCardWindow.isVisible()) {//have to popUp User
+                System.out.println("please insert card details first please.");
+            } else {
+                tempCreditCard.setCardOwner(costumer);
+                costumer.setCostumerCreditCard(tempCreditCard);
+            }
+        CRLogic.setCostumerFirstPhase(costumer);
+        vehicleMangTAB.setDisable(false);
+        personalInfoTAB.setDisable(true);
+        vehicleMangTAB.getTabPane().getSelectionModel().selectNext();
     }
 
     @FXML
@@ -314,6 +361,13 @@ public class CustomerRegistrationController implements Initializable {
 
     }
 
+    @FXML
+    void RemoveSelectedVe(MouseEvent event){
+        tempVehicleArray.remove(VehicleTable.getSelectionModel().getSelectedItem());
+        ObservableList<Vehicle> data = FXCollections.observableArrayList(tempVehicleArray);
+        VehicleTable.setItems(data);
+    }
+
     private void PersonalInfoValidation() {
         //costumer ID field check
         formValidation.isDoubleNumberValidation(CostumerIDtxt, "Costumer ID");
@@ -334,5 +388,32 @@ public class CustomerRegistrationController implements Initializable {
 
     public void setTempCreditCard(CreditCard tempCreditCard) {
         this.tempCreditCard = tempCreditCard;
+    }
+    private Tooltip createToolTip(String htmlStr) {
+        Tooltip thisToolTip = new Tooltip();
+
+        WebView browser = new WebView();
+        WebEngine webEngine = browser.getEngine();
+        webEngine.loadContent(htmlStr);
+
+        thisToolTip.setStyle("\n"
+                + "    -fx-border-color: black;\n"
+                + "    -fx-border-width: 1px;\n"
+                + "    -fx-font: normal bold 1pt \"Times New Roman\" ;\n"
+                + "    -fx-background-color: #2d4578;\n"
+                + "    -fx-text-fill: black;\n"
+                + "    -fx-background-radius: 1;\n"
+                + "    -fx-border-radius: 10;\n"
+                + "    -fx-opacity: 1.0;");
+
+        thisToolTip.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+
+        thisToolTip.setGraphic(browser);
+        thisToolTip.setAutoHide(false);
+        thisToolTip.setMaxWidth(250);
+        thisToolTip.setMaxHeight(100);
+        thisToolTip.setGraphicTextGap(0.0);
+
+        return thisToolTip;
     }
 }

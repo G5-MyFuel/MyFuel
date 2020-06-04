@@ -15,6 +15,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.effect.Blend?>
 <?import javafx.scene.effect.Glow?>
 <?import javafx.scene.image.Image?>
@@ -207,12 +208,12 @@
                                                             <Image url="@../../media/CostumerRegisterationMedia/card_security_40px.png" />
                                                          </image>
                                                       </ImageView>
-                                                      <ImageView fitHeight="64.0" fitWidth="16.0" layoutX="249.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true">
+                                                      <ImageView fx:id="CreditCardLinkTT" fitHeight="64.0" fitWidth="16.0" layoutX="249.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
                                                             <Image url="@../../media/CostumerRegisterationMedia/help_16px.png" />
                                                          </image>
                                                          <cursor>
-                                                            <Cursor fx:constant="DEFAULT" />
+                                                            <Cursor fx:constant="HAND" />
                                                          </cursor>
                                                       </ImageView>
                                                    </children>
@@ -225,7 +226,7 @@
                                                 <Insets left="20.0" top="10.0" />
                                              </padding>
                                           </VBox>
-                                          <Pane fx:id="CreditCardWindow" layoutX="490.0" layoutY="49.0" prefHeight="493.0" prefWidth="431.0">
+                                          <Pane fx:id="CreditCardWindow" layoutX="490.0" layoutY="49.0" prefHeight="434.0" prefWidth="431.0" style="-fx-border-color: #2D4578; -fx-border-width: 3;">
                                              <children>
                                                 <Label layoutX="20.0" layoutY="16.0" text="Payment" textFill="#2d4578">
                                                    <font>
@@ -318,7 +319,10 @@
                                           <Cursor fx:constant="OPEN_HAND" />
                                        </cursor>
                                     </ImageView>
-                                    <Label layoutX="65.0" layoutY="181.0" text="Add Vehicle" />
+                                    <Label layoutX="65.0" layoutY="181.0" onMouseClicked="#setVehicleInfoVisible" text="Add Vehicle">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor></Label>
                                     <ImageView fx:id="backButtonVehicalToPersonal" accessibleRole="BUTTON" fitHeight="70.0" fitWidth="94.0" layoutX="50.0" layoutY="562.0" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#FirstBackwardButtonOnClick" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../../media/CostumerRegisterationMedia/forward_button_40px.png" />
@@ -335,9 +339,9 @@
                                           <Cursor fx:constant="OPEN_HAND" />
                                        </cursor>
                                     </ImageView>
-                                    <Pane fx:id="VehicleInformationPane" layoutX="530.0" layoutY="206.0" prefHeight="243.0" prefWidth="350.0">
+                                    <Pane fx:id="VehicleInformationPane" layoutX="492.0" layoutY="198.0" prefHeight="256.0" prefWidth="364.0" style="-fx-border-color: #2D4578; -fx-border-width: 4;">
                                        <children>
-                                          <SplitPane dividerPositions="0.16161616161616163" orientation="VERTICAL" prefHeight="245.0" prefWidth="347.0">
+                                          <SplitPane dividerPositions="0.16161616161616163" layoutX="9.0" layoutY="6.0" orientation="VERTICAL" prefHeight="245.0" prefWidth="347.0">
                                             <items>
                                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="35.0" prefWidth="335.0" style="-fx-background-color: #fcf8e8;">
                                                    <children>
@@ -355,6 +359,19 @@
                                           </SplitPane>
                                        </children>
                                     </Pane>
+                                    <ImageView fitHeight="29.0" fitWidth="31.0" layoutX="142.0" layoutY="175.0" onMouseClicked="#RemoveSelectedVe" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../media/CostumerRegisterationMedia/minus_80px.png" />
+                                       </image>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </ImageView>
+                                    <Label layoutX="185.0" layoutY="181.0" onMouseClicked="#RemoveSelectedVe" text="Remove Selected Vehicle">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </Label>
                                  </children>
                               </AnchorPane>
                            </content>
@@ -380,12 +397,18 @@
                                        <children>
                                           <Pane prefHeight="75.0" prefWidth="500.0">
                                              <children>
-                                                <Label layoutY="30.0" style="-fx-text-fill: #868282;" text="Costumer Type" />
+                                                <Label layoutY="30.0" style="-fx-text-fill: #868282;" text="Costumer Type">
+                                                   <tooltip>
+                                                      <Tooltip fx:id="typeTT" text="informationToolTip" />
+                                                   </tooltip></Label>
                                                 <JFXComboBox fx:id="CostumertypeChoiceBox" layoutX="180.0" layoutY="18.0" prefHeight="40.0" prefWidth="306.0" />
-                                                <ImageView fitHeight="18.0" fitWidth="16.0" layoutX="108.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+                                                <ImageView fx:id="CostumerTypeInfo" fitHeight="18.0" fitWidth="16.0" layoutX="87.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
                                                       <Image url="@../../media/CostumerRegisterationMedia/help_16px.png" />
                                                    </image>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
                                                 </ImageView>
                                              </children>
                                           </Pane>
@@ -393,10 +416,13 @@
                                              <children>
                                                 <Label layoutY="30.0" style="-fx-text-fill: #868282;" text="Service Plan" />
                                                 <JFXComboBox fx:id="ServicePlanChoiseBox" layoutX="180.0" layoutY="18.0" prefHeight="40.0" prefWidth="306.0" />
-                                                <ImageView fitHeight="18.0" fitWidth="16.0" layoutX="89.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
+                                                <ImageView fx:id="ServicePlanInfo" fitHeight="18.0" fitWidth="16.0" layoutX="72.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
                                                       <Image url="@../../media/CostumerRegisterationMedia/help_16px.png" />
                                                    </image>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
                                                 </ImageView>
                                              </children>
                                           </Pane>
@@ -416,10 +442,13 @@
                                                    </padding>
                                                 </HBox>
                                                 <Label layoutY="30.0" style="-fx-text-fill: #868282;" text="Purchase Plan" />
-                                                <ImageView fitHeight="18.0" fitWidth="16.0" layoutX="98.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+                                                <ImageView fx:id="PurchasePlanInffo" fitHeight="18.0" fitWidth="16.0" layoutX="80.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
                                                       <Image url="@../../media/CostumerRegisterationMedia/help_16px.png" />
                                                    </image>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
                                                 </ImageView>
                                              </children>
                                           </Pane>
