@@ -96,11 +96,10 @@ public class SettingDiscountRatesController implements Initializable {
 
         /*צריך להשוות את המנוי הנבחר עם המידע ב-DB ולהציג את המחיר הקיים.todo:*/
 
-        //String SubscriptionType = ChooseSubscriptionTypeCombo.getValue();
-        String SubscriptionType = "SELECT * FROM `DiscountRates` WHERE `Subscription type` LIKE '" + ChooseSubscriptionTypeCombo.getValue() + "');";
+        String SubscriptionType = "SELECT * FROM `bpsdc8o22sikrlpvvxqm`.`DiscountRates` WHERE `Subscription type` LIKE \"" + ChooseSubscriptionTypeCombo.getValue() + "\";";
         //SettingDiscountRatesLogic settingDiscountRatesLogic = new SettingDiscountRatesLogic();
-        System.out.println("Check");
-        SettingDiscountRatesLogic.getInstance().getDiscountRatesTable(SubscriptionType);
+        //System.out.println(SubscriptionType);
+        settingDiscountRatesLogic.getDiscountRatesTable(SubscriptionType);
         //ClientApp.client.handleMessageFromClientUI(new Message(OperationType.getRequirementData, (Object)SubscriptionType));  //send the new employee jobTitle to DB
 
         //ShowCurrentRateTXT.setText(SubscriptionType);
