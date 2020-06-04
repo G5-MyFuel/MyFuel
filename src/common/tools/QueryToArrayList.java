@@ -25,4 +25,9 @@ public class QueryToArrayList {
         }
         return arrayListToSent;
     }
+
+    public static Float RsultSetToString(ResultSet rs) throws SQLException {
+        Float num = rs.getFloat(1);
+        return num;
+    }
 }
