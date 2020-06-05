@@ -5,10 +5,13 @@ import client.boundary.OrderExecutionController;
 import client.boundary.SettingDiscountRatesController;
 import client.logic.CustomerRegistrationLogic;
 import client.logic.LoginToSystemLogic;
+import client.logic.OrderFromSupplierLogic;
 import client.logic.SettingDiscountRatesLogic;
 import common.entity.User;
 import common.tools.Message;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -25,13 +28,15 @@ public class ClientMessages {
      * the operation and after send a msg to the client with the appropriate details
      */
 
-    public static void messageFromServer(Message msg) {
+    public static void messageFromServer(Message msg) throws SQLException {
         Message m = msg;
+        ResultSet rs;
+        rs =(ResultSet) m.getObject();
 
         switch (m.getOperationType()) {
             case getRequirementData:
                // EmployeesManagementGuiController.Instance.setDataTable(m.getObject())
-                //OrderExecutionController.Instance.setOrderFuelFromSupplierTableView(m.getObject());
+                OrderFromSupplierLogic.getInstance().setRs(rs);
                 SettingDiscountRatesLogic.getInstance().setData(m.getReturnMsgType());
                 break;
             case updateRequirement:

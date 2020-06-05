@@ -24,6 +24,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 /**
@@ -34,8 +35,10 @@ public class OrderExecutionController implements Initializable {
 
     public static OrderExecutionController Instance= null;
     private OrderExecutionController OrderExecutionController;
-    OrderFuelFromSupplier OrderFuelFromSupplier;
-    ArrayList<OrderFuelFromSupplier> OFFS;
+    private OrderFromSupplierLogic OFSLogic = OrderFromSupplierLogic.getInstance(); //logic
+
+
+    private ArrayList<OrderFuelFromSupplier> OFFS;
 
     @FXML
     private Button MenuHomePageBtn;
@@ -152,10 +155,14 @@ public class OrderExecutionController implements Initializable {
     }
 
 
-    public void setOrderFuelFromSupplierTableView(Object msg) {
+    public void setOrderFuelFromSupplierTableView(Object msg) throws SQLException {
+        OFSLogic.setOrder(OFSLogic.getRs());
+
+        OFFS = OFSLogic.getOrderFromSupplierArrayList();
+
         orderCol.setCellValueFactory(new PropertyValueFactory<>("OrderNumber"));
         statusCol.setCellValueFactory(new PropertyValueFactory<>("OrderStatus"));
-        OFFS = (ArrayList<OrderFuelFromSupplier>) msg;
+
         ObservableList<OrderFuelFromSupplier> data = FXCollections.observableArrayList(OFFS);
         tableView.setEditable(true);
         tableView.setItems(data);

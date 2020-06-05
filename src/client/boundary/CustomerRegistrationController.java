@@ -402,9 +402,11 @@ public class CustomerRegistrationController implements Initializable {
                 + "    -fx-font: normal bold 1pt \"Times New Roman\" ;\n"
                 + "    -fx-background-color: #2d4578;\n"
                 + "    -fx-text-fill: black;\n"
-                + "    -fx-background-radius: 1;\n"
-                + "    -fx-border-radius: 10;\n"
+                + "    -fx-background-radius: 20;\n"
+                + "    -fx-border-radius: 15px;\n"
                 + "    -fx-opacity: 1.0;");
+
+        
 
         thisToolTip.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
 

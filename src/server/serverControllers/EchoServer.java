@@ -47,8 +47,7 @@ public class EchoServer extends AbstractServer {
             switch ((m.getOperationType())) {
                 case getRequirementData:
                     rs = mysql.getQuery(m.getObject().toString());
-                    //sendToClient(new Message(OperationType.getRequirementData, QueryToArrayList.ResultSetToArrayList(rs)), client);
-                    sendToClient(new Message(OperationType.getRequirementData, QueryToArrayList.RsultSetToString(rs)), client);
+                    sendToClient(new Message(OperationType.getRequirementData, rs), client);
                     rs.close();
                     break;
                 case updateRequirement:

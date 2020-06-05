@@ -1,6 +1,9 @@
 package common.tools;
 
+import common.ocsf.server.ConnectionToClient;
+
 import java.io.Serializable;
+import java.sql.ResultSet;
 
 public class Message implements Serializable {
     private static final long serialVersionUID = -5764940580602574742L;
@@ -19,6 +22,8 @@ public class Message implements Serializable {
         this.object = object;
         this.returnMsgType = returnmsg;
     }
+
+
 
     public OperationType getOperationType() {
         return operationType;
