@@ -148,10 +148,15 @@ public class OrderExecutionController implements Initializable {
         DoneBtn.setDisable(true);
         /* Fileds that cant be changed */
         StationManagerField.setDisable(true);
+        StationManagerField.setVisible(true);
         StationNumberField.setDisable(true);
+        StationNumberField.setVisible(true);
         OrderDateField.setDisable(true);
+        OrderDateField.setVisible(true);
         FuelTypeField.setDisable(true);
+        FuelTypeField.setVisible(true);
         QuantityField.setDisable(true);
+        QuantityField.setVisible(true);
     }
 
 
