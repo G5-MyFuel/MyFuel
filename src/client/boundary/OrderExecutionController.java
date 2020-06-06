@@ -74,9 +74,6 @@ public class OrderExecutionController implements Initializable {
     private TableColumn<TableView<OrderFuelFromSupplier>, String> statusCol;
 
     @FXML
-    private VBox vboxOrderView;
-
-    @FXML
     private Label QuantityField;
 
     @FXML
@@ -141,14 +138,12 @@ public class OrderExecutionController implements Initializable {
         tableView.setVisible(true);
         DoneBtn.setVisible(false);
         DoneBtn.setDisable(true);
-        vboxOrderView.setVisible(false);
         /* Fileds that cant be changed */
 //        StationManagerField.setDisable(true);
 //        StationNumberField.setDisable(true);
 //        OrderDateField.setDisable(true);
 //        FuelTypeField.setDisable(true);
 //        QuantityField.setDisable(true);
-        vboxOrderView.setDisable(true);
         OFSLogic.getOrderFuelFromSupplierTable();
         System.out.println(OFSLogic.getOrderSet());
 
@@ -182,7 +177,6 @@ public class OrderExecutionController implements Initializable {
                         temp = OFFS.get(i);
                     if (temp != null) {
                         arrowImage.setVisible(true);
-                        vboxOrderView.setVisible(true);
                         hboxOrderConfirmation.setVisible(true);
                         hboxOrderConfirmation.setDisable(false);
                         DoneBtn.setVisible(true);
