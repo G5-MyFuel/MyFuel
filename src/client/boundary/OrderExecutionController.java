@@ -164,17 +164,7 @@ public class OrderExecutionController implements Initializable {
         tableView.setItems(data);
     }
 
-    public void handle(MouseEvent event) {
-        Object object;
-        int i=0;
-        if (event.isPrimaryButtonDown() && event.getClickCount() == 1) {   //one mouse click
-            if(OFFS.get(i).getOrderNumber().equals(tableView.getSelectionModel().getSelectedItem().getOrderNumber()))
-                object=OFFS.get(i);
-            else i++;
-        }
 
-
-    }
     public void getOrderDetailsFromTableView(){
 
     tableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -186,13 +176,16 @@ public class OrderExecutionController implements Initializable {
                     if(OFFS.get(i).getOrderNumber().equals(tableView.getSelectionModel().getSelectedItem().getOrderNumber()))
                         temp=OFFS.get(i);
                 }
+                arrowImage.setVisible(true);
+                vboxOrderView.setVisible(true);
+                hboxOrderConfirmation.setVisible(true);
+                DoneBtn.setVisible(true);
                 StationManagerField.setText(temp.getStationManagerName().toString());
                 StationNumberField.setText(temp.getStationNum().toString());
                 OrderDateField.setText(temp.getOrderDate().toString());
                 FuelTypeField.setText(temp.getFuelType().toString());
                 QuantityField.setText(temp.getQuantity().toString());
             }
-
         }
     });
     }

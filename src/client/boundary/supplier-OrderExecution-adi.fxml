@@ -137,7 +137,7 @@
                               <Font name="System Bold Italic" size="24.0" />
                            </font>
                         </Text>
-                        <TableView fx:id="tableView" layoutX="60.0" layoutY="221.0" prefHeight="391.0" prefWidth="361.0" style="-fx-background-color: #fcf8e8; -fx-border-style: solid;">
+                        <TableView fx:id="tableView" layoutX="60.0" layoutY="221.0" onMouseClicked="#getOrderDetailsFromTableView" prefHeight="391.0" prefWidth="361.0" style="-fx-background-color: #fcf8e8; -fx-border-style: solid;">
                            <columns>
                               <TableColumn fx:id="orderCol" prefWidth="242.0" text="Order" />
                               <TableColumn fx:id="statusCol" maxWidth="2500.0" prefWidth="115.0" text="Status" />
@@ -148,7 +148,7 @@
                            <contextMenu>
                               <ContextMenu>
                                  <items>
-                                    <MenuItem mnemonicParsing="false" onAction="#handleRefresh" text="Refresh" />
+                                    <MenuItem mnemonicParsing="false" onAction="#getOrderDetailsFromTableView" text="Refresh" />
                                  </items>
                                  <styleClass>
                                     <String fx:value="table-context" />
