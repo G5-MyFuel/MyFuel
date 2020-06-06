@@ -3,12 +3,13 @@ package common.entity;
 import java.util.Date;
 
 public class OrderFuelFromSupplier {
-    private String OrderNumber, CompanyName, StationManagerName;
+    private String OrderNumber, FuelType, StationManagerName;
     private int StationNum,Quantity;
     private Date OrderDate;
     private String OrderStatus;
+
     public OrderFuelFromSupplier(String OrderNumber, String CompanyName, String StationManagerName, int StationNum, Date OrderDate, int Quantity,String OrderStatus){
-        this.CompanyName=CompanyName;
+        this.FuelType=CompanyName;
         this.OrderNumber=OrderNumber;
         this.Quantity=Quantity;
         this.StationManagerName=StationManagerName;
@@ -20,16 +21,14 @@ public class OrderFuelFromSupplier {
     public String getOrderNumber() {
         return OrderNumber;
     }
-    public String getCompanyName() {
-        return CompanyName;
+    public String getFuelType() {
+        return FuelType;
     }
     public String getStationManagerName() {
         return StationManagerName;
     }
-    public int getStationNum() {
-        return StationNum;
-    }
-    public int getQuantity() {
+    public Integer getStationNum() { return StationNum; }
+    public Integer getQuantity() {
         return Quantity;
     }
 
@@ -37,8 +36,8 @@ public class OrderFuelFromSupplier {
         OrderNumber = orderNumber;
     }
 
-    public void setCompanyName(String companyName) {
-        CompanyName = companyName;
+    public void setFuelType(String companyName) {
+        FuelType = companyName;
     }
 
     public void setStationManagerName(String stationManagerName) {

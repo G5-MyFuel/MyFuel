@@ -149,8 +149,6 @@
                               <ContextMenu>
                                  <items>
                                     <MenuItem mnemonicParsing="false" onAction="#handleRefresh" text="Refresh" />
-                                    <MenuItem mnemonicParsing="false" onAction="#handleBookEditOption" text="Edit" />
-                                    <MenuItem mnemonicParsing="false" onAction="#handleBookDeleteOption" text="Delete" />
                                  </items>
                                  <styleClass>
                                     <String fx:value="table-context" />

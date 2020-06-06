@@ -10,6 +10,7 @@ import common.tools.Message;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -109,16 +110,6 @@ public class OrderExecutionController implements Initializable {
     }
 
     @FXML
-    void handleBookDeleteOption(ActionEvent event) {
-
-    }
-
-    @FXML
-    void handleBookEditOption(ActionEvent event) {
-
-    }
-
-    @FXML
     void handleClicks(ActionEvent event) {
 
     }
@@ -148,13 +139,14 @@ public class OrderExecutionController implements Initializable {
         tableView.setVisible(true);
         DoneBtn.setVisible(false);
         DoneBtn.setDisable(true);
-        vboxOrderView.setVisible(true);
+        vboxOrderView.setVisible(false);
         /* Fileds that cant be changed */
         StationManagerField.setDisable(true);
         StationNumberField.setDisable(true);
         OrderDateField.setDisable(true);
         FuelTypeField.setDisable(true);
         QuantityField.setDisable(true);
+
         OFSLogic.getOrderFuelFromSupplierTable();
         System.out.println(OFSLogic.getOrderSet());
 
@@ -164,16 +156,44 @@ public class OrderExecutionController implements Initializable {
 
 
     public void setOrderFuelFromSupplierTableView(MouseEvent event) throws SQLException {
-
-
         orderCol.setCellValueFactory(new PropertyValueFactory<>("OrderNumber"));
         statusCol.setCellValueFactory(new PropertyValueFactory<>("OrderStatus"));
-
-
 
         ObservableList<OrderFuelFromSupplier> data = FXCollections.observableArrayList(OFFS);
         tableView.setEditable(true);
         tableView.setItems(data);
     }
 
+    public void handle(MouseEvent event) {
+        Object object;
+        int i=0;
+        if (event.isPrimaryButtonDown() && event.getClickCount() == 1) {   //one mouse click
+            if(OFFS.get(i).getOrderNumber().equals(tableView.getSelectionModel().getSelectedItem().getOrderNumber()))
+                object=OFFS.get(i);
+            else i++;
+        }
+
+
+    }
+    public void getOrderDetailsFromTableView(){
+
+    tableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        @Override
+        public void handle(MouseEvent event) {
+            OrderFuelFromSupplier temp = null;
+            if (event.isPrimaryButtonDown() && event.getClickCount() == 1) {
+                for (int i = 0; i < OFFS.size(); i++) {
+                    if(OFFS.get(i).getOrderNumber().equals(tableView.getSelectionModel().getSelectedItem().getOrderNumber()))
+                        temp=OFFS.get(i);
+                }
+                StationManagerField.setText(temp.getStationManagerName().toString());
+                StationNumberField.setText(temp.getStationNum().toString());
+                OrderDateField.setText(temp.getOrderDate().toString());
+                FuelTypeField.setText(temp.getFuelType().toString());
+                QuantityField.setText(temp.getQuantity().toString());
+            }
+
+        }
+    });
+    }
 }
