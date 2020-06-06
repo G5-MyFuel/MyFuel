@@ -18,6 +18,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -63,6 +64,9 @@ public class OrderExecutionController implements Initializable {
 
     @FXML
     private Text OrderViewTitle;
+
+    @FXML
+    private AnchorPane OrderViewAnchorPane;
 
     @FXML
     private TableView<OrderFuelFromSupplier> tableView;
@@ -138,12 +142,7 @@ public class OrderExecutionController implements Initializable {
         tableView.setVisible(true);
         DoneBtn.setVisible(false);
         DoneBtn.setDisable(true);
-        /* Fileds that cant be changed */
-//        StationManagerField.setDisable(true);
-//        StationNumberField.setDisable(true);
-//        OrderDateField.setDisable(true);
-//        FuelTypeField.setDisable(true);
-//        QuantityField.setDisable(true);
+        OrderViewAnchorPane.setVisible(false);
         OFSLogic.getOrderFuelFromSupplierTable();
         System.out.println(OFSLogic.getOrderSet());
 
@@ -176,6 +175,7 @@ public class OrderExecutionController implements Initializable {
                     if (OFFS.get(i).getOrderNumber().equals(tableView.getSelectionModel().getSelectedItem().getOrderNumber()))
                         temp = OFFS.get(i);
                     if (temp != null) {
+                        OrderViewAnchorPane.setVisible(true);
                         arrowImage.setVisible(true);
                         hboxOrderConfirmation.setVisible(true);
                         hboxOrderConfirmation.setDisable(false);
