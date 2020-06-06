@@ -26,6 +26,8 @@ import javafx.scene.text.Text;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.ResourceBundle;
 /**
  * @author Adi Lampert
@@ -155,14 +157,19 @@ public class OrderExecutionController implements Initializable {
         QuantityField.setDisable(true);
         OFSLogic.getOrderFuelFromSupplierTable();
         System.out.println(OFSLogic.getOrderSet());
+
+        OFFS = new ArrayList<OrderFuelFromSupplier>();
+        OFFS.add(new OrderFuelFromSupplier("1111","Paz","Valeria Chapman",5,null,800,"done"));
     }
 
 
     public void setOrderFuelFromSupplierTableView(MouseEvent event) throws SQLException {
-        System.out.println(OFFS);
-        OFFS = OFSLogic.getOrderFromSupplierArrayList();
+
+
         orderCol.setCellValueFactory(new PropertyValueFactory<>("OrderNumber"));
         statusCol.setCellValueFactory(new PropertyValueFactory<>("OrderStatus"));
+
+
 
         ObservableList<OrderFuelFromSupplier> data = FXCollections.observableArrayList(OFFS);
         tableView.setEditable(true);

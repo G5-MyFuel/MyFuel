@@ -384,11 +384,6 @@
                                           <Cursor fx:constant="OPEN_HAND" />
                                        </cursor>
                                     </ImageView>
-                                    <ImageView layoutX="398.0" layoutY="308.0">
-                                       <image>
-                                          <Image url="@../../media/CostumerUpdateMedia/icons8_rh-_30px_1.png" />
-                                       </image>
-                                    </ImageView>
                                  </children>
                               </AnchorPane>
                            </content>
