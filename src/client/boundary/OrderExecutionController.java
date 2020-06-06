@@ -4,6 +4,7 @@ import client.logic.FormValidation;
 import client.logic.OrderFromSupplierLogic;
 import client.logic.SaleOperationTemplateLogic;
 import com.jfoenix.controls.JFXTextField;
+import com.sun.xml.internal.ws.api.model.wsdl.WSDLOutput;
 import common.entity.Employee;
 import common.entity.OrderFuelFromSupplier;
 import common.tools.Message;
@@ -20,6 +21,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import org.w3c.dom.ls.LSOutput;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -27,13 +29,14 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.ResourceBundle;
+
 /**
  * @author Adi Lampert
  * @see OrderExecutionController - the from's logic class
  */
 public class OrderExecutionController implements Initializable {
 
-    public static OrderExecutionController Instance= null;
+    public static OrderExecutionController Instance = null;
     private OrderExecutionController OrderExecutionController;
     private OrderFromSupplierLogic OFSLogic = OrderFromSupplierLogic.getInstance(); //logic
 
@@ -65,10 +68,10 @@ public class OrderExecutionController implements Initializable {
     private TableView<OrderFuelFromSupplier> tableView;
 
     @FXML
-    private TableColumn < TableView<OrderFuelFromSupplier>, String> orderCol;
+    private TableColumn<TableView<OrderFuelFromSupplier>, String> orderCol;
 
     @FXML
-    private TableColumn < TableView<OrderFuelFromSupplier>, String> statusCol;
+    private TableColumn<TableView<OrderFuelFromSupplier>, String> statusCol;
 
     @FXML
     private VBox vboxOrderView;
@@ -115,6 +118,7 @@ public class OrderExecutionController implements Initializable {
     void handleRefresh(ActionEvent event) {
 
     }
+
     public OrderExecutionController() {
         Instance = this;
     }
@@ -129,6 +133,7 @@ public class OrderExecutionController implements Initializable {
             Instance = new OrderExecutionController();
         return Instance;
     }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         hboxOrderConfirmation.setVisible(false);
@@ -138,17 +143,21 @@ public class OrderExecutionController implements Initializable {
         DoneBtn.setDisable(true);
         vboxOrderView.setVisible(false);
         /* Fileds that cant be changed */
-        StationManagerField.setDisable(true);
-        StationNumberField.setDisable(true);
-        OrderDateField.setDisable(true);
-        FuelTypeField.setDisable(true);
-        QuantityField.setDisable(true);
-
+//        StationManagerField.setDisable(true);
+//        StationNumberField.setDisable(true);
+//        OrderDateField.setDisable(true);
+//        FuelTypeField.setDisable(true);
+//        QuantityField.setDisable(true);
+        vboxOrderView.setDisable(true);
         OFSLogic.getOrderFuelFromSupplierTable();
         System.out.println(OFSLogic.getOrderSet());
 
         OFFS = new ArrayList<OrderFuelFromSupplier>();
-        OFFS.add(new OrderFuelFromSupplier("1111","Paz","Valeria Chapman",5,null,800,"done"));
+        OFFS.add(new OrderFuelFromSupplier("1111", "Paz", "Valeria Chapman", 5, null, 800, "done"));
+        OFFS.add(new OrderFuelFromSupplier("2222", "pazosh", "Valeria qweqwe", 6, null, 800, "done"));
+        OFFS.add(new OrderFuelFromSupplier("221231222", "pazosasdasdh", "Valeria qweqwe", 6, null, 800, "done"));
+        OFFS.add(new OrderFuelFromSupplier("21321", "paasdzosh", "Valeria qweqwe", 6, null, 800, "done"));
+        OFFS.add(new OrderFuelFromSupplier("22345235222", "pazodccdsh", "Valeria qweqwe", 6, null, 800, "done"));
     }
 
 
@@ -162,28 +171,29 @@ public class OrderExecutionController implements Initializable {
     }
 
 
-    public void getOrderDetailsFromTableView(){
+    public void getOrderDetailsFromTableView() {
 
-    tableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
-        @Override
-        public void handle(MouseEvent event) {
-            OrderFuelFromSupplier temp = null;
-            if (event.isPrimaryButtonDown() && event.getClickCount() == 1) {
+        tableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                OrderFuelFromSupplier temp = null;
                 for (int i = 0; i < OFFS.size(); i++) {
-                    if(OFFS.get(i).getOrderNumber().equals(tableView.getSelectionModel().getSelectedItem().getOrderNumber()))
-                        temp=OFFS.get(i);
+                    if (OFFS.get(i).getOrderNumber().equals(tableView.getSelectionModel().getSelectedItem().getOrderNumber()))
+                        temp = OFFS.get(i);
+                    if (temp != null) {
+                        arrowImage.setVisible(true);
+                        vboxOrderView.setVisible(true);
+                        hboxOrderConfirmation.setVisible(true);
+                        hboxOrderConfirmation.setDisable(false);
+                        DoneBtn.setVisible(true);
+                        StationManagerField.setText(temp.getStationManagerName().toString());
+                        StationNumberField.setText(temp.getStationNum().toString());
+                        OrderDateField.setText("null");
+                        FuelTypeField.setText(temp.getFuelType().toString());
+                        QuantityField.setText(temp.getQuantity().toString());
+                    }
                 }
-                arrowImage.setVisible(true);
-                vboxOrderView.setVisible(true);
-                hboxOrderConfirmation.setVisible(true);
-                DoneBtn.setVisible(true);
-                StationManagerField.setText(temp.getStationManagerName().toString());
-                StationNumberField.setText(temp.getStationNum().toString());
-                OrderDateField.setText(temp.getOrderDate().toString());
-                FuelTypeField.setText(temp.getFuelType().toString());
-                QuantityField.setText(temp.getQuantity().toString());
             }
-        }
-    });
+        });
     }
 }
