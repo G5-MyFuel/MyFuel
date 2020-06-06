@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXTextField?>
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
@@ -148,7 +147,7 @@
                            <contextMenu>
                               <ContextMenu>
                                  <items>
-                                    <MenuItem mnemonicParsing="false" onAction="#getOrderDetailsFromTableView" text="Refresh" />
+                                    <MenuItem mnemonicParsing="false" onAction="#handleRefresh" text="Refresh" />
                                  </items>
                                  <styleClass>
                                     <String fx:value="table-context" />
@@ -157,56 +156,6 @@
                               </ContextMenu>
                            </contextMenu>
                         </TableView>
-                        <VBox fx:id="vboxOrderView" layoutX="603.0" layoutY="213.0" prefHeight="380.0" prefWidth="386.0" spacing="20.0">
-                           <children>
-                              <JFXTextField fx:id="StationManagerField" focusColor="#00add8" labelFloat="true" promptText="Station Manager Name" unFocusColor="#868282">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                                 <padding>
-                                    <Insets top="20.0" />
-                                 </padding>
-                              </JFXTextField>
-                              <JFXTextField fx:id="StationNumberField" focusColor="#00add8" labelFloat="true" layoutX="10.0" layoutY="10.0" promptText="Station Number" unFocusColor="#868282">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                                 <padding>
-                                    <Insets top="20.0" />
-                                 </padding>
-                              </JFXTextField>
-                              <JFXTextField fx:id="OrderDateField" focusColor="#00add8" labelFloat="true" layoutX="10.0" layoutY="46.0" promptText="Order Date" unFocusColor="#868282">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                                 <padding>
-                                    <Insets top="20.0" />
-                                 </padding>
-                              </JFXTextField>
-                              <JFXTextField fx:id="FuelTypeField" focusColor="#00add8" labelFloat="true" layoutX="10.0" layoutY="82.0" promptText="Fuel Type" unFocusColor="#868282">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                                 <padding>
-                                    <Insets top="20.0" />
-                                 </padding>
-                              </JFXTextField>
-                              <JFXTextField fx:id="QuantityField" focusColor="#00add8" labelFloat="true" layoutX="10.0" layoutY="118.0" promptText="Quantity (in liters)" unFocusColor="#868282">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                                 <VBox.margin>
-                                    <Insets />
-                                 </VBox.margin>
-                                 <padding>
-                                    <Insets top="20.0" />
-                                 </padding>
-                              </JFXTextField>
-                           </children>
-                           <padding>
-                              <Insets bottom="10.0" left="20.0" top="12.0" />
-                           </padding>
-                        </VBox>
                         <Text layoutX="61.0" layoutY="634.0" strokeType="OUTSIDE" strokeWidth="0.0" text="* Status: In treatment / Done" wrappingWidth="317.6708984375" />
                         <Button fx:id="DoneBtn" layoutX="713.0" layoutY="710.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="89.0" style="-fx-background-color: #2D4578; -fx-background-radius: 50;" text="Done" textFill="WHITE" />
                         <HBox fx:id="hboxOrderConfirmation" alignment="CENTER_LEFT" layoutX="622.0" layoutY="616.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="53.0" prefWidth="285.0" style="-fx-background-color: #fcf8e8; -fx-border-color: #888888; -fx-background-radius: 5; -fx-background-insets: 0;">
@@ -239,6 +188,26 @@
                               <Font name="System Bold Italic" size="40.0" />
                            </font>
                         </Text>
+                        <AnchorPane layoutX="606.0" layoutY="216.0" prefHeight="375.0" prefWidth="393.0" style="-fx-background-color: #00ADD8;" styleClass="card-unpadded">
+                           <children>
+                              <Pane layoutX="-1.0" prefHeight="325.0" prefWidth="23.0" style="-fx-background-color: #007390;" />
+                              <Label layoutX="142.0" layoutY="57.0" prefHeight="35.0" prefWidth="126.0" styleClass="custom-white-title-label" text="Station Manager: " />
+                              <Label layoutX="142.0" layoutY="120.0" prefHeight="31.0" prefWidth="116.0" styleClass="custom-white-label" text="Station Number: " />
+                              <Label layoutX="142.0" layoutY="181.0" prefHeight="33.0" prefWidth="89.0" styleClass="custom-white-label" text="Order Date:" />
+                              <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="35.0" layoutY="20.0">
+                                 <image>
+                                    <Image url="@../../media/icons/contact.png" />
+                                 </image>
+                              </ImageView>
+                              <Label layoutX="142.0" layoutY="241.0" prefHeight="33.0" prefWidth="80.0" styleClass="custom-white-label" text="Fuel Type: " />
+                              <Label fx:id="QuantityField" layoutX="141.0" layoutY="299.0" prefHeight="33.0" prefWidth="74.0" styleClass="custom-white-label" text="Quantity:" />
+                              <Label fx:id="StationManagerField" layoutX="268.0" layoutY="64.0" prefHeight="21.0" prefWidth="109.0" text="Label" />
+                              <Label fx:id="StationNumberField" layoutX="268.0" layoutY="125.0" prefHeight="21.0" prefWidth="109.0" text="Label" />
+                              <Label fx:id="OrderDateField" layoutX="268.0" layoutY="187.0" prefHeight="21.0" prefWidth="109.0" text="Label" />
+                              <Label fx:id="FuelTypeField" layoutX="268.0" layoutY="247.0" prefHeight="21.0" prefWidth="109.0" text="Label" />
+                              <Label fx:id="QuantityField" layoutX="266.0" layoutY="305.0" prefHeight="21.0" prefWidth="109.0" text="Label" />
+                           </children>
+                        </AnchorPane>
                      </children>
                   </Pane>
                </children>

@@ -13,10 +13,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -77,19 +74,19 @@ public class OrderExecutionController implements Initializable {
     private VBox vboxOrderView;
 
     @FXML
-    private JFXTextField StationManagerField;
+    private Label QuantityField;
 
     @FXML
-    private JFXTextField StationNumberField;
+    private Label StationManagerField;
 
     @FXML
-    private JFXTextField OrderDateField;
+    private Label StationNumberField;
 
     @FXML
-    private JFXTextField FuelTypeField;
+    private Label OrderDateField;
 
     @FXML
-    private JFXTextField QuantityField;
+    private Label FuelTypeField;
 
     @FXML
     private Button DoneBtn;
