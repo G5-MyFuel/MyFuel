@@ -453,10 +453,10 @@ public class FormValidation {
      *
      * @param theField  - the field to validate
      * @param fieldName - the name of the field
-     * @param maxLength - max string length
+     * @param minLength - max string length
      */
-    public void minLengthValidationShort(JFXTextField theField, String fieldName, int maxLength) {
-        theField.getValidators().add(new ValidatorBase(" Too long. Maximum " + maxLength + " characters.") {
+    public void minLengthValidationShort(JFXTextField theField, String fieldName, int minLength) {
+        theField.getValidators().add(new ValidatorBase(" Too short. Minimum " + minLength + " characters.") {
             @Override
             protected void eval() {
                 if (this.srcControl.get() instanceof TextInputControl) {
@@ -466,7 +466,7 @@ public class FormValidation {
 
             private void evalTextInputField() {
                 TextInputControl textField = (TextInputControl) this.srcControl.get();
-                boolean result = textField.getLength() < maxLength ? false : true;
+                boolean result = textField.getLength() < minLength ? false : true;
                 System.out.println(result);
                 try {
                     if (result)

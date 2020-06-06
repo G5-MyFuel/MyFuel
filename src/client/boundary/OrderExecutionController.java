@@ -153,14 +153,14 @@ public class OrderExecutionController implements Initializable {
         OrderDateField.setDisable(true);
         FuelTypeField.setDisable(true);
         QuantityField.setDisable(true);
+        OFSLogic.getOrderFuelFromSupplierTable();
+        System.out.println(OFSLogic.getOrderSet());
     }
 
 
-    public void setOrderFuelFromSupplierTableView(Object msg) throws SQLException {
-        OFSLogic.setOrder(OFSLogic.getRs());
-
+    public void setOrderFuelFromSupplierTableView(MouseEvent event) throws SQLException {
+        System.out.println(OFFS);
         OFFS = OFSLogic.getOrderFromSupplierArrayList();
-
         orderCol.setCellValueFactory(new PropertyValueFactory<>("OrderNumber"));
         statusCol.setCellValueFactory(new PropertyValueFactory<>("OrderStatus"));
 

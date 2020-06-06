@@ -135,7 +135,7 @@
                   </VBox>
                </children>
             </AnchorPane>
-            <AnchorPane prefHeight="804.0" prefWidth="1088.0" style="-fx-background-color: #f6d186;">
+            <AnchorPane prefHeight="804.0" prefWidth="1088.0">
                <children>
                   <ScrollPane layoutX="2.0" prefHeight="800.0" prefWidth="1066.0" style="-fx-border-color: #f6d186;">
                      <content>

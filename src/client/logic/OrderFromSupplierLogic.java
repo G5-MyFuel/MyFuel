@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class OrderFromSupplierLogic {
     private static OrderFromSupplierLogic Instance= null;
-    private static ArrayList<OrderFuelFromSupplier> orderSet;
+    private ArrayList<OrderFuelFromSupplier> orderSet;
     private ResultSet rs;
 
 
@@ -25,17 +25,18 @@ public class OrderFromSupplierLogic {
     }
 
     public void getOrderFuelFromSupplierTable(){
-        ClientApp.client.handleMessageFromClientUI(new Message(OperationType.getRequirementData, "SELECT * FROM OrderForStock as O;"));
+        ClientApp.client.handleMessageFromClientUI(new Message(OperationType.getRequirementData, "SELECT * FROM `OrderForStock`"));
     }
 
     public ArrayList<OrderFuelFromSupplier> getOrderFromSupplierArrayList() {
         return orderSet;
     }
 
-     public static void setOrder(ResultSet rs) throws SQLException {
+     public void setOrder(ResultSet rs) throws SQLException {
         while(rs.next()){
-            orderSet.add(new OrderFuelFromSupplier(rs.getString(1),rs.getString(2),rs.getString(3),rs.getInt(4),rs.getDate(5),rs.getInt(6),rs.getString(7)));
+            this.orderSet.add(new OrderFuelFromSupplier(rs.getString(1),rs.getString(2),rs.getString(3),rs.getInt(4),rs.getDate(5),rs.getInt(6),rs.getString(7)));
         }
+         System.out.println(orderSet);
     }
 
 
@@ -50,4 +51,11 @@ public class OrderFromSupplierLogic {
         this.rs = rs;
     }
 
+    public ArrayList<OrderFuelFromSupplier> getOrderSet() {
+        return orderSet;
+    }
+
+    public void setOrderSet(ArrayList<OrderFuelFromSupplier> orderSet) {
+        this.orderSet = orderSet;
+    }
 }

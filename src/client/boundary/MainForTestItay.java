@@ -20,7 +20,7 @@ public class MainForTestItay extends Application {
     public static String server_ip = "";
     public static String server_port = "";
 
-    String pageName = "CustomerRegistrationFXML1.fxml";   //שם קובץ הfxml
+
 
     private AnchorPane root;
     private CustomerRegistrationController CustomerRegistrationController;    //אינסטנס של מחלקת הboundary

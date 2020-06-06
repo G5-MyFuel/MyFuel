@@ -254,7 +254,7 @@
                                                    </padding>
                                                 </JFXTextField>
                                                 <Hyperlink layoutX="110.0" layoutY="360.0" onMouseClicked="#addCreditCardLinkOnClick" prefHeight="29.0" prefWidth="278.0" text="Add this credit card to my account." />
-                                                <ImageView layoutX="75.0" layoutY="275.0">
+                                                <ImageView layoutX="68.0" layoutY="275.0">
                                                    <image>
                                                       <Image url="@../../media/CostumerRegisterationMedia/help_16px.png" />
                                                    </image>

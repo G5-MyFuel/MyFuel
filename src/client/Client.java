@@ -2,10 +2,13 @@ package client;
 
 import client.boundary.LoginToSystemController;
 import client.logic.LoginToSystemLogic;
+import client.logic.OrderFromSupplierLogic;
 import common.ocsf.client.AbstractClient;
 import common.tools.Message;
 
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class Client extends AbstractClient {
     public static Client Instant;
@@ -67,7 +70,7 @@ public class Client extends AbstractClient {
      * the operation and after send a msg to the client with the appropriate details
      */
 
-    public static void messageFromServer(Message msg) {
+    public static void messageFromServer(Message msg)  {
         Message m = msg;
 
         switch (m.getOperationType()) {

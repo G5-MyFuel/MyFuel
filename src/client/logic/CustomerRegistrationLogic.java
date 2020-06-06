@@ -53,7 +53,12 @@ public class CustomerRegistrationLogic {
         String Fname = costumer.getUserFirstName();
         String Lname = costumer.getUserLastName();
         String Email = costumer.getUserEmail();
-        String CreditCardnum = costumer.getCostumerCreditCard().getCardNumber();
+        String CreditCardnum;
+        if(costumer.getCostumerCreditCard() != null)
+            CreditCardnum = costumer.getCostumerCreditCard().getCardNumber();
+        else
+            CreditCardnum = "No Card exists";
+
         String purchasePlan;
         if (costumer.getPurchasePlan())
             purchasePlan = "true";

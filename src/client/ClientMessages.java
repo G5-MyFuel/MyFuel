@@ -31,12 +31,15 @@ public class ClientMessages {
     public static void messageFromServer(Message msg) throws SQLException {
         Message m = msg;
         ResultSet rs;
-        rs =(ResultSet) m.getObject();
+
+
 
         switch (m.getOperationType()) {
             case getRequirementData:
+
                // EmployeesManagementGuiController.Instance.setDataTable(m.getObject())
-                OrderFromSupplierLogic.getInstance().setRs(rs);
+
+
                 SettingDiscountRatesLogic.getInstance().setData(m.getReturnMsgType());
                 break;
             case updateRequirement:

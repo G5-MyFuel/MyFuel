@@ -1,21 +1,26 @@
 package client.boundary;
 
 import client.Client;
+import client.ClientApp;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class MainForTestAdi extends Application {
-    //קובץ בדיקות עבור SaleOperationTemplateController
-    String pageName = "supplier-OrderExecution-adi.fxml";   //שם קובץ הfxml
+    /**
+     * The default port to connect on.
+     */
     final public static int DEFAULT_PORT = 5555;
     public static Client client;
     public static String server_ip = "";
     public static String server_port = "";
+
+
 
     private AnchorPane root;
     private OrderExecutionController OrderExecutionController;    //אינסטנס של מחלקת הboundary
@@ -23,6 +28,7 @@ public class MainForTestAdi extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+
 
     public static boolean startClient() throws IOException {
         String host = "";
@@ -43,22 +49,25 @@ public class MainForTestAdi extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) {
-        try {
-            FXMLLoader pageLoader = new FXMLLoader();
-            pageLoader.setLocation(getClass().getResource(pageName + ""));
-            root = pageLoader.load();
-            OrderExecutionController = pageLoader.getController();//קבלת גישה לקונטרולר
-            //
+    public void start(Stage primaryStage) throws Exception {
+        ClientApp.server_port = "5555";
+        ClientApp.startClient();
 
-            //
-            Scene scene = new Scene(root, 1280, 800);
-            //  scene.getStylesheets().add("/client/LoginPageCSS.css");
-            primaryStage.setScene(scene);
+        Pane root = null;
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/client/boundary/supplier-OrderExecution-adi.fxml"));
+            root = loader.load();
+            Scene s1 = new Scene(root);
+            primaryStage.setScene(s1);
+            primaryStage.setResizable(false);
             primaryStage.show();
         } catch (Exception e) {
             e.printStackTrace();
-            //xxx
+            System.out.println("ERR at App.Start");
         }
     }
+
 }
+
+

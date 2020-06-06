@@ -46,6 +46,8 @@ public class CustomerRegistrationController implements Initializable {
     private CustomerRegistrationLogic CRLogic;
     private FormValidation formValidation;
     private boolean CardClickFlag = false;
+    private Alert ErrorAlert = new Alert(Alert.AlertType.ERROR);
+
     @FXML
     private FXMLLoader PRCLoader;
     @FXML
@@ -175,7 +177,6 @@ public class CustomerRegistrationController implements Initializable {
     private ImageView CreditCardLinkTT;
 
 
-
     private ObservableList<String> CostumerType = FXCollections.observableArrayList("Private", "Company");
 
     private ObservableList<String> ServicePlanType = FXCollections.observableArrayList("Exclusive", "Multiple Stations");
@@ -201,11 +202,13 @@ public class CustomerRegistrationController implements Initializable {
         VehicleIDtxt.clear();
         VehicleInformationPane.setVisible(false);
         VehicleTable.getItems().clear();
-        typeTT = createToolTip("you mother fucker this is costumer type");
-        Tooltip.install(CostumerTypeInfo,typeTT);
-        Tooltip.install(PurchasePlanInffo,createToolTip("this is purchaesesesesese info semek ars"));
-        Tooltip.install(ServicePlanInfo,createToolTip("this is Service Plan info semek ars"));
-        Tooltip.install(CreditCardLinkTT,createToolTip("this is CreditCard link GTFO "));
+        typeTT = createToolTip("There are two Customer Type, Private and Company, you may chose one.");
+        Tooltip.install(CostumerTypeInfo, typeTT);
+        Tooltip.install(PurchasePlanInffo, createToolTip("Chose weather you have purchase plan or not"));
+        Tooltip.install(ServicePlanInfo, createToolTip("Chose your service plan type"));
+        Tooltip.install(CreditCardLinkTT, createToolTip("You can add your credit card info by clicking this link. "));
+
+
         //
         //
         mainPane.setVisible(false);
@@ -299,9 +302,16 @@ public class CustomerRegistrationController implements Initializable {
 
     @FXML
     void addCreditCardLinkOnClick(MouseEvent event) {
-        tempCreditCard = new CreditCard(null, creditCardNumbertxt.getText(), experationDatetxt.getText(), CVVtxt.getText());
-        CreditCardWindow.setVisible(false);
-        CardClickFlag = true;
+
+        if (creditCardNumbertxt.getText().isEmpty() || experationDatetxt.getText().isEmpty() || CVVtxt.getText().isEmpty()) {
+            ErrorAlert.setTitle("Credit Card Fields Error");
+            ErrorAlert.setHeaderText("Please insert all Credit Card Information.");
+            ErrorAlert.showAndWait();
+        } else {
+            tempCreditCard = new CreditCard(null, creditCardNumbertxt.getText(), experationDatetxt.getText(), CVVtxt.getText());
+            CreditCardWindow.setVisible(false);
+            CardClickFlag = true;
+        }
     }
 
     @FXML
@@ -311,27 +321,41 @@ public class CustomerRegistrationController implements Initializable {
 
     @FXML
     void creditCardLinkOnClick(MouseEvent event) {
-        CreditCardWindow.setDisable(false);
-        CreditCardWindow.setVisible(true);
+        if (CreditCardWindow.isVisible()) {
+            CreditCardWindow.setDisable(true);
+            CreditCardWindow.setVisible(false);
+        } else {
+            CreditCardWindow.setDisable(false);
+            CreditCardWindow.setVisible(true);
+        }
     }
 
 
     @FXML
     void FirstForwardButtonOnClick(MouseEvent event) {
-        Costumer costumer = new Costumer(Integer.parseInt(CostumerIDtxt.getText()), CostumerIDtxt.getText(), -1, FirstNametxt.getText(),
-                LastNametxt.getText(), EmailAdresstxt.getText(), null, true, null, null);
 
-        if (CardClickFlag)
-            if (CreditCardWindow.isVisible()) {//have to popUp User
-                System.out.println("please insert card details first please.");
-            } else {
-                tempCreditCard.setCardOwner(costumer);
-                costumer.setCostumerCreditCard(tempCreditCard);
-            }
-        CRLogic.setCostumerFirstPhase(costumer);
-        vehicleMangTAB.setDisable(false);
-        personalInfoTAB.setDisable(true);
-        vehicleMangTAB.getTabPane().getSelectionModel().selectNext();
+        if (CostumerIDtxt.getText().isEmpty() || FirstNametxt.getText().isEmpty() || LastNametxt.getText().isEmpty() || EmailAdresstxt.getText().isEmpty()) {
+            ErrorAlert.setTitle("Fields Error");
+            ErrorAlert.setHeaderText("Please fill all require information");
+            ErrorAlert.showAndWait();
+        } else {
+            Costumer costumer = new Costumer(Integer.parseInt(CostumerIDtxt.getText()), CostumerIDtxt.getText(), -1, FirstNametxt.getText(),
+                    LastNametxt.getText(), EmailAdresstxt.getText(), null, true, null, null);
+
+            if (CardClickFlag)
+                if (CreditCardWindow.isVisible()) {//have to popUp User
+                    ErrorAlert.setTitle("Credit Card Fields Error");
+                    ErrorAlert.setHeaderText("Please insert all Credit Card Information.");
+                    ErrorAlert.showAndWait();
+                } else {
+                    tempCreditCard.setCardOwner(costumer);
+                    costumer.setCostumerCreditCard(tempCreditCard);
+                }
+            CRLogic.setCostumerFirstPhase(costumer);
+            vehicleMangTAB.setDisable(false);
+            personalInfoTAB.setDisable(true);
+            vehicleMangTAB.getTabPane().getSelectionModel().selectNext();
+        }
     }
 
     @FXML
@@ -362,7 +386,7 @@ public class CustomerRegistrationController implements Initializable {
     }
 
     @FXML
-    void RemoveSelectedVe(MouseEvent event){
+    void RemoveSelectedVe(MouseEvent event) {
         tempVehicleArray.remove(VehicleTable.getSelectionModel().getSelectedItem());
         ObservableList<Vehicle> data = FXCollections.observableArrayList(tempVehicleArray);
         VehicleTable.setItems(data);
@@ -372,6 +396,7 @@ public class CustomerRegistrationController implements Initializable {
         //costumer ID field check
         formValidation.isDoubleNumberValidation(CostumerIDtxt, "Costumer ID");
         formValidation.maxLengthValidation(CostumerIDtxt, "Costumer ID", 9);
+        formValidation.minLengthValidationShort(CostumerIDtxt,"Costumer ID",9);
         //have to add minimum 9 ID len
 
         //first Name field check
@@ -384,11 +409,26 @@ public class CustomerRegistrationController implements Initializable {
 
         //email adress field check
         formValidation.emailAddressValidation(EmailAdresstxt, "Email Adress");
+        //credit card field check
+        formValidation.isDoubleNumberValidation(creditCardNumbertxt,"Card number");
+        formValidation.maxLengthValidation(creditCardNumbertxt, "Card number", 16);
+        formValidation.minLengthValidationShort(creditCardNumbertxt,"Card number",16);
+        formValidation.isDoubleNumberValidation(experationDatetxt,"failed");
+        formValidation.isDoubleNumberValidation(CVVtxt,"CVV");
+        formValidation.maxLengthValidation(CVVtxt, "CVV", 3);
+        formValidation.minLengthValidationShort(CVVtxt,"CVV",3);
+        //Vehicle fields check
+        formValidation.isDoubleNumberValidation(VehicleIDtxt,"Vehicle ID");
+        formValidation.maxLengthValidation(VehicleIDtxt, "Vehicle ID", 6);
+        formValidation.minLengthValidationShort(VehicleIDtxt,"Vehicle ID",6);
+
+
     }
 
     public void setTempCreditCard(CreditCard tempCreditCard) {
         this.tempCreditCard = tempCreditCard;
     }
+
     private Tooltip createToolTip(String htmlStr) {
         Tooltip thisToolTip = new Tooltip();
 
@@ -406,7 +446,6 @@ public class CustomerRegistrationController implements Initializable {
                 + "    -fx-border-radius: 15px;\n"
                 + "    -fx-opacity: 1.0;");
 
-        
 
         thisToolTip.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
 
@@ -418,4 +457,6 @@ public class CustomerRegistrationController implements Initializable {
 
         return thisToolTip;
     }
+
+
 }
