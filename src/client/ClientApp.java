@@ -37,7 +37,7 @@ public class ClientApp extends Application {
         host = server_ip;
 
 
-        chatClient = new ChatClient(host, port);
+        //chatClient = new ChatClient(host, port);
         System.out.println("Client setup connection! " + host + ": " + port);
 
         return true;
@@ -49,7 +49,7 @@ public class ClientApp extends Application {
         Pane root = null;
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/client/boundary/ClientConnectionToServerFXML.fxml"));
+            loader.setLocation(getClass().getResource("/boundary/ClientConnectionToServerFXML.fxml"));
             root = loader.load();
             Scene s1 = new Scene(root);
             primaryStage.setScene(s1);

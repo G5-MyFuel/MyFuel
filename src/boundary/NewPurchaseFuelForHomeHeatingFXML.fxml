@@ -1,0 +1,631 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundary.NewPurchaseFuelForHomeHeatingControllerBoundary">
+   <children>
+      <Pane prefHeight="802.0" prefWidth="1284.0" />
+      <HBox prefHeight="804.0" prefWidth="1284.0">
+         <children>
+            <AnchorPane prefHeight="749.0" prefWidth="235.0" style="-fx-background-color: #2D4578;">
+               <children>
+                  <Pane layoutX="-3.0" layoutY="480.0" prefHeight="325.0" prefWidth="238.0">
+                     <children>
+                        <VBox layoutX="8.0" layoutY="230.0" prefHeight="85.0" prefWidth="226.0" style="-fx-border-color: linear-gradient(to left, white, orange);">
+                           <children>
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 35; -fx-font-family: 'Abel', sans-serif;;" text="13:00" textAlignment="CENTER" wrappingWidth="221.6215419769287" />
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 25; -fx-font-family: 'Abel', sans-serif;;" text="Friday 15/05/20" textAlignment="CENTER" wrappingWidth="223.39935874938965" />
+                           </children>
+                        </VBox>
+                        <HBox alignment="CENTER" layoutX="-97.0" layoutY="107.0" prefHeight="62.0" prefWidth="197.0" spacing="5.0" visible="false" />
+                        <Pane layoutX="7.0" layoutY="86.0" prefHeight="137.0" prefWidth="226.0" style="-fx-background-color: gray; -fx-border-color: linear-gradient(to left, white, orange);">
+                           <children>
+                              <Text fill="#ffdf21" layoutX="2.0" layoutY="66.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" text="The total order price was updated to 223$" textAlignment="CENTER" visible="false" wrappingWidth="225.77682495117188">
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                              </Text>
+                              <ImageView fitHeight="64.0" fitWidth="70.0" layoutX="81.0" layoutY="-33.0">
+                                 <image>
+                                    <Image url="@../../media/interface.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                     </children>
+                  </Pane>
+                  <VBox alignment="TOP_CENTER" prefHeight="467.0" prefWidth="235.0" style="-fx-background-color: #2D4578;">
+                     <children>
+                        <Label style="-fx-font-size: 22;" text="Customer" textAlignment="CENTER" textFill="#e5e5e5">
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </Label>
+                        <ImageView fitHeight="139.0" fitWidth="191.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../media/avatars/customer_male_avatar.png" />
+                           </image>
+                           <VBox.margin>
+                              <Insets bottom="10.0" top="10.0" />
+                           </VBox.margin>
+                        </ImageView>
+                        <Label style="-fx-font-size: 22; -fx-font-weight: bold;" text="Robin Jon" textAlignment="CENTER" textFill="#e5e5e5">
+                           <VBox.margin>
+                              <Insets bottom="20.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Button fx:id="btnOverview" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" style="-fx-font-family: 'Abel', sans-serif; -fx-font-size: 16; -fx-alignment: center-left;" stylesheets="@style.css" text="Home Page" textFill="#e7e5e5">
+                           <graphic>
+                              <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../media/icons/icons8_home_80px.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                           <padding>
+                              <Insets left="50.0" />
+                           </padding>
+                        </Button>
+                        <Button fx:id="btnCustomers" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" style="-fx-font-family: 'Abel', sans-serif; -fx-font-size: 16; -fx-alignment: center-left;" stylesheets="@style.css" text="New Order">
+                           <graphic>
+                              <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../media/icons/icons8_new_copy_96px_1.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <padding>
+                              <Insets left="50.0" />
+                           </padding>
+                        </Button>
+                        <Button fx:id="btnMenus" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" style="-fx-font-family: 'Abel', sans-serif; -fx-font-size: 16; -fx-alignment: center-left;" stylesheets="@style.css" text="Order Tracking">
+                           <graphic>
+                              <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../media/icons/icons8_data_pending_80px_1.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <padding>
+                              <Insets left="50.0" />
+                           </padding>
+                        </Button>
+                        <Button fx:id="btnPackages" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" style="-fx-font-family: 'Abel', sans-serif; -fx-font-size: 16; -fx-alignment: center-left;" stylesheets="@style.css" text="My Account">
+                           <graphic>
+                              <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../media/icons/icons8_more_details_80px.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <padding>
+                              <Insets left="50.0" />
+                           </padding>
+                        </Button>
+                        <Button fx:id="btnSignout" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" style="-fx-font-family: 'Abel', sans-serif; -fx-font-size: 16; -fx-alignment: center-left;" stylesheets="@style.css" text="Sign Out">
+                           <graphic>
+                              <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../media/icons/icons8_sign_out_80px.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <padding>
+                              <Insets left="50.0" />
+                           </padding>
+                        </Button>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="804.0" prefWidth="1088.0">
+               <children>
+                  <Pane prefHeight="796.0" prefWidth="1034.0">
+                     <children>
+                        <Label layoutX="27.0" layoutY="16.0" text="New order fuel for home heating" textFill="#2d4578">
+                           <font>
+                              <Font name="System Bold Italic" size="40.0" />
+                           </font>
+                        </Label>
+                        <JFXButton layoutX="937.0" layoutY="712.0" text=" " />
+                        <JFXTabPane layoutX="21.0" layoutY="89.0" prefHeight="701.0" prefWidth="1001.0" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="50.0">
+                           <tabs>
+                              <Tab closable="false" styleClass="blue-titledPaneTab" text="Order Details">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="180.0" prefWidth="1123.0">
+                                       <children>
+                                          <AnchorPane layoutX="1.0" layoutY="3.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="601.0" prefWidth="999.0" styleClass="card-unpadded">
+                                             <children>
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="661.0" prefWidth="1001.0" />
+                                                <VBox accessibleRole="BUTTON" fillWidth="false" layoutX="501.0" layoutY="-1.0" prefHeight="674.0" prefWidth="486.0" spacing="30.0">
+                                                   <children>
+                                                      <Label alignment="CENTER" maxWidth="460.0" prefHeight="30.0" prefWidth="460.0" style="-fx-background-color: #DCDCDC; -fx-opacity: 1; -fx-background-radius: 30;" text="Additional Details (optional)">
+                                                         <font>
+                                                            <Font name="System Bold" size="24.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <GridPane maxWidth="444.0" prefHeight="85.0" prefWidth="444.0">
+                                                         <columnConstraints>
+                                                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="420.111083984375" minWidth="10.0" prefWidth="396.111083984375" />
+                                                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="218.07403564453125" minWidth="10.0" prefWidth="47.33331298828125" />
+                                                         </columnConstraints>
+                                                         <rowConstraints>
+                                                            <RowConstraints maxHeight="85.0" minHeight="10.0" prefHeight="0.0" vgrow="SOMETIMES" />
+                                                         </rowConstraints>
+                                                         <children>
+                                                            <JFXTextField fx:id="anotherContactPhoneNumberTXT" focusColor="#00add8" labelFloat="true" maxWidth="350.0" promptText="Another contact phone number" unFocusColor="BLUE">
+                                                               <font>
+                                                                  <Font size="18.0" />
+                                                               </font>
+                                                            </JFXTextField>
+                                                         </children>
+                                                      </GridPane>
+                                                      <JFXTextArea fx:id="noteTXT" focusColor="WHITE" prefHeight="169.0" prefWidth="402.0" promptText="Add Note (max 150 digits)" style="-fx-border-color: #2D4578;" unFocusColor="WHITE">
+                                                         <VBox.margin>
+                                                            <Insets top="-10.0" />
+                                                         </VBox.margin>
+                                                         <font>
+                                                            <Font size="20.0" />
+                                                         </font>
+                                                      </JFXTextArea>
+                                                      <Pane prefHeight="278.0" prefWidth="460.0">
+                                                         <children>
+                                                            <ImageView fx:id="nextOrderDetailsBtn" accessibleRole="BUTTON" fitHeight="70.0" fitWidth="87.0" layoutX="390.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true">
+                                                               <image>
+                                                                  <Image url="@../../media/CostumerRegisterationMedia/forward_button_40px.png" />
+                                                               </image>
+                                                               <effect>
+                                                                  <Blend />
+                                                               </effect>
+                                                               <cursor>
+                                                                  <Cursor fx:constant="OPEN_HAND" />
+                                                               </cursor>
+                                                            </ImageView>
+                                                            <Label layoutX="7.0" layoutY="243.0" text="* Required field">
+                                                               <font>
+                                                                  <Font size="18.0" />
+                                                               </font>
+                                                            </Label>
+                                                         </children>
+                                                      </Pane>
+                                                   </children>
+                                                   <padding>
+                                                      <Insets bottom="10.0" left="20.0" top="12.0" />
+                                                   </padding>
+                                                   <cursor>
+                                                      <Cursor fx:constant="OPEN_HAND" />
+                                                   </cursor>
+                                                </VBox>
+                                                <VBox layoutX="11.0" layoutY="3.0" prefHeight="665.0" prefWidth="486.0" spacing="20.0">
+                                                   <children>
+                                                      <Label alignment="CENTER" prefHeight="30.0" prefWidth="446.0" style="-fx-background-color: #DCDCDC; -fx-opacity: 1; -fx-background-radius: 30;" text="General Information">
+                                                         <font>
+                                                            <Font name="System Bold" size="24.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <GridPane maxWidth="439.0" prefHeight="172.0" prefWidth="439.0">
+                                                         <columnConstraints>
+                                                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="439.0" minWidth="10.0" prefWidth="409.77777099609375" />
+                                                         </columnConstraints>
+                                                         <rowConstraints>
+                                                            <RowConstraints maxHeight="85.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                            <RowConstraints maxHeight="85.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                         </rowConstraints>
+                                                         <children>
+                                                            <JFXTextField fx:id="emailAddressTXT" focusColor="#00add8" labelFloat="true" maxWidth="240.0" prefHeight="5.0" prefWidth="240.0" promptText="Email address (for invoice)" unFocusColor="BLUE" GridPane.rowIndex="1">
+                                                               <font>
+                                                                  <Font size="18.0" />
+                                                               </font>
+                                                               <GridPane.margin>
+                                                                  <Insets top="-10.0" />
+                                                               </GridPane.margin>
+                                                            </JFXTextField>
+                                                            <JFXTextField fx:id="fuelQuantityTXT" focusColor="#00add8" labelFloat="true" maxWidth="240.0" minWidth="189.0" prefHeight="39.0" prefWidth="207.0" promptText="Fuel Quantity (liters) *" unFocusColor="BLUE">
+                                                               <font>
+                                                                  <Font size="18.0" />
+                                                               </font>
+                                                               <GridPane.margin>
+                                                                  <Insets top="-10.0" />
+                                                               </GridPane.margin>
+                                                            </JFXTextField>
+                                                         </children>
+                                                      </GridPane>
+                                                      <Label alignment="CENTER" prefHeight="30.0" prefWidth="446.0" style="-fx-background-color: #DCDCDC; -fx-opacity: 1; -fx-background-radius: 30;" text="Delivery Address Details">
+                                                         <font>
+                                                            <Font name="System Bold" size="24.0" />
+                                                         </font>
+                                                         <VBox.margin>
+                                                            <Insets />
+                                                         </VBox.margin>
+                                                      </Label>
+                                                      <GridPane maxWidth="439.0" prefHeight="340.0" prefWidth="412.0">
+                                                        <columnConstraints>
+                                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="415.0" minWidth="10.0" prefWidth="391.0" />
+                                                        </columnConstraints>
+                                                        <rowConstraints>
+                                                          <RowConstraints maxHeight="85.0" minHeight="10.0" prefHeight="0.0" vgrow="SOMETIMES" />
+                                                          <RowConstraints maxHeight="85.0" minHeight="10.0" prefHeight="0.0" vgrow="SOMETIMES" />
+                                                            <RowConstraints maxHeight="85.0" minHeight="10.0" prefHeight="0.0" vgrow="SOMETIMES" />
+                                                            <RowConstraints maxHeight="85.0" minHeight="10.0" prefHeight="0.0" vgrow="SOMETIMES" />
+                                                        </rowConstraints>
+                                                         <children>
+                                                            <JFXTextField fx:id="streetNameTXT" focusColor="#00add8" labelFloat="true" maxWidth="350.0" prefColumnCount="18" promptText="Street Name *" unFocusColor="BLUE">
+                                                               <font>
+                                                                  <Font size="18.0" />
+                                                               </font>
+                                                            </JFXTextField>
+                                                            <JFXTextField fx:id="ApartmentNumberTXT" focusColor="#00add8" labelFloat="true" maxWidth="350.0" promptText="Apartment Number *" unFocusColor="BLUE" GridPane.rowIndex="1">
+                                                               <font>
+                                                                  <Font size="18.0" />
+                                                               </font>
+                                                            </JFXTextField>
+                                                            <JFXTextField fx:id="cityTXT" focusColor="#00add8" labelFloat="true" maxWidth="350.0" promptText="City *" unFocusColor="BLUE" GridPane.rowIndex="2">
+                                                               <font>
+                                                                  <Font size="18.0" />
+                                                               </font>
+                                                            </JFXTextField>
+                                                            <JFXTextField fx:id="zipCodeTXT" focusColor="#00add8" labelFloat="true" maxWidth="350.0" promptText="ZIP Code *" unFocusColor="BLUE" GridPane.rowIndex="3">
+                                                               <font>
+                                                                  <Font size="18.0" />
+                                                               </font>
+                                                            </JFXTextField>
+                                                         </children>
+                                                      </GridPane>
+                                                   </children>
+                                                   <padding>
+                                                      <Insets bottom="10.0" left="20.0" top="12.0" />
+                                                   </padding>
+                                                </VBox>
+                                                <Separator layoutX="496.0" layoutY="-5.0" orientation="VERTICAL" prefHeight="659.0" prefWidth="4.0" />
+                                             </children>
+                                          </AnchorPane>
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                                 <graphic>
+                                    <ImageView fx:id="shippingIndicatorTAB" fitHeight="25.0" fitWidth="25.0" smooth="false" visible="false">
+                                       <image>
+                                          <Image url="@../../media/icons/icons8_checked_48px.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <graphic>
+                                    <ImageView fx:id="orderDetailsIndicatorTAB" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                                       <image>
+                                          <Image url="@../../media/PurchaseMedia/ok.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Tab>
+                              <Tab onSelectionChanged="#CheckOrderDetails" styleClass="blue-titledPaneTab" text="Shipping">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="180.0" prefWidth="1123.0">
+                                       <children>
+                                          <AnchorPane layoutX="1.0" layoutY="1.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="673.0" prefWidth="0.0" styleClass="card-unpadded">
+                                             <children>
+                                                <VBox accessibleRole="BUTTON" alignment="CENTER" layoutX="-2.0" layoutY="-1.0" prefHeight="674.0" prefWidth="1003.0" spacing="30.0">
+                                                   <children>
+                                                      <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1016.0" prefHeight="35.0" prefWidth="336.0" style="-fx-background-color: #DCDCDC; -fx-opacity: 1; -fx-background-radius: 30;" text="Shipping Details" textAlignment="CENTER">
+                                                         <font>
+                                                            <Font name="System Bold" size="24.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <HBox alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="48.0" prefWidth="466.0" spacing="10.0">
+                                                         <children>
+                                                            <JFXComboBox fx:id="shippingMethodComboBOX" prefHeight="25.0" prefWidth="215.0" promptText="Select Shipping Method" style="-fx-font-size: 12pt;" unFocusColor="BLUE" />
+                                                            <StackPane maxHeight="25.0" maxWidth="25.0" prefHeight="25.0" prefWidth="25.0">
+                                                               <children>
+                                                                  <ImageView fitHeight="25.0" fitWidth="25.0" visible="false">
+                                                                     <image>
+                                                                        <Image url="@../../media/alerts/icons8_ok_48px.png" />
+                                                                     </image>
+                                                                  </ImageView>
+                                                                  <ImageView fx:id="WrongQuantity111111" fitHeight="25.0" fitWidth="25.0" visible="false">
+                                                                     <image>
+                                                                        <Image url="@../../media/alerts/icons8_close_window_48px.png" />
+                                                                     </image>
+                                                                  </ImageView>
+                                                               </children>
+                                                            </StackPane>
+                                                         </children>
+                                                         <VBox.margin>
+                                                            <Insets top="-10.0" />
+                                                         </VBox.margin>
+                                                      </HBox>
+                                                      <VBox fx:id="whenPane" alignment="TOP_CENTER" prefHeight="318.0" prefWidth="720.0" spacing="5.0">
+                                                         <children>
+                                                            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="39.0" prefWidth="974.0" style="-fx-background-color: #DCDCDC; -fx-font-size: 22; -fx-font-weight: bold; -fx-background-radius: 30;" text="When ?" textAlignment="CENTER">
+                                                               <VBox.margin>
+                                                                  <Insets />
+                                                               </VBox.margin>
+                                                            </Label>
+                                                            <JFXComboBox fx:id="dayAndDateComboBox" style="-fx-font-size: 12pt;" />
+                                                            <Label text="Shipping hours available on this day:">
+                                                               <VBox.margin>
+                                                                  <Insets top="10.0" />
+                                                               </VBox.margin>
+                                                               <font>
+                                                                  <Font size="24.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <GridPane fx:id="optionalDatesForShippingGridPane" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="199.0" prefWidth="983.0" stylesheets="@NewPurchaseFuelForHomeHeatingCSS.css">
+                                                               <columnConstraints>
+                                                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="194.2222900390625" minWidth="10.0" prefWidth="194.2222900390625" />
+                                                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="196.0" minWidth="10.0" prefWidth="181.7777099609375" />
+                                                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="164.4444580078125" minWidth="10.0" prefWidth="150.185302734375" />
+                                                               </columnConstraints>
+                                                               <rowConstraints>
+                                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                               </rowConstraints>
+                                                               <children>
+                                                                  <JFXButton fx:id="t17to19BTN" alignment="CENTER" mouseTransparent="true" prefHeight="73.0" prefWidth="141.0" ripplerFill="#b7b7b7" style="-fx-font-size: 12pt;" styleClass="unavailable-delivery-time" text="17:00 - 19:00" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                                                  <JFXButton fx:id="t9to11BTN" alignment="CENTER" prefHeight="73.0" prefWidth="141.0" style="-fx-font-size: 12pt;" styleClass="dalivery-time" text="09:00 - 11:00" GridPane.columnIndex="1" />
+                                                                  <JFXButton fx:id="t11to13BTN" alignment="CENTER" prefHeight="73.0" prefWidth="141.0" style="-fx-font-size: 12pt;" styleClass="dalivery-time" text="11:00 - 13:00" GridPane.columnIndex="2" />
+                                                                  <JFXButton fx:id="t13to15BTN" alignment="CENTER" mouseTransparent="true" prefHeight="73.0" prefWidth="141.0" ripplerFill="#b7b7b7" style="-fx-font-size: 12pt;" styleClass="unavailable-delivery-time" text="13:00 - 15:00" GridPane.rowIndex="1">
+                                                                     <effect>
+                                                                        <Blend mode="RED" />
+                                                                     </effect>
+                                                                  </JFXButton>
+                                                                  <JFXButton fx:id="t15to17BTN" alignment="CENTER" prefHeight="73.0" prefWidth="141.0" style="-fx-font-size: 12pt;" styleClass="dalivery-time" text="15:00 - 17:00" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                                  <JFXButton fx:id="t7to9BTN" alignment="CENTER" prefHeight="73.0" prefWidth="141.0" style="-fx-font-size: 12pt;" styleClass="dalivery-time" text="07:00 - 09:00" />
+                                                               </children>
+                                                            </GridPane>
+                                                         </children>
+                                                      </VBox>
+                                                      <VBox fx:id="shippingOverviewPane" alignment="CENTER" maxWidth="968.0" prefHeight="90.0" prefWidth="968.0" spacing="10.0" style="-fx-background-color: #DCDCDC; -fx-background-radius: 50;">
+                                                         <children>
+                                                            <HBox alignment="CENTER">
+                                                               <children>
+                                                                  <ImageView fitHeight="35.0" fitWidth="33.0">
+                                                                     <image>
+                                                                        <Image url="@../../../../../../../AppData/Local/Temp/icons8_fuel_tank_50px_1.png" />
+                                                                     </image>
+                                                                  </ImageView>
+                                                                  <Text fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold; -fx-font-size: 22;" text="Your fuel order will be delivered on" textAlignment="CENTER" wrappingWidth="460.00567626953125" />
+                                                               </children>
+                                                            </HBox>
+                                                            <Text fx:id="shippingSummeryDetailsTXT" fontSmoothingType="LCD" lineSpacing="4.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 22;" text="Sunday, 17/05/20 between 15:00 - 17:00" textAlignment="CENTER" wrappingWidth="460.00567626953125" />
+                                                         </children>
+                                                      </VBox>
+                                                      <Pane prefHeight="87.0" prefWidth="983.0">
+                                                         <children>
+                                                            <ImageView accessibleRole="BUTTON" fitHeight="70.0" fitWidth="87.0" layoutX="899.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+                                                               <image>
+                                                                  <Image url="@../../media/CostumerRegisterationMedia/forward_button_40px.png" />
+                                                               </image>
+                                                               <effect>
+                                                                  <Blend />
+                                                               </effect>
+                                                               <cursor>
+                                                                  <Cursor fx:constant="OPEN_HAND" />
+                                                               </cursor>
+                                                            </ImageView>
+                                                            <JFXButton text=" ">
+                                                               <graphic>
+                                                                  <ImageView accessibleRole="BUTTON" fitHeight="70.0" fitWidth="94.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+                                                                     <image>
+                                                                        <Image url="@../../media/CostumerRegisterationMedia/forward_button_40px.png" />
+                                                                     </image>
+                                                                     <cursor>
+                                                                        <Cursor fx:constant="OPEN_HAND" />
+                                                                     </cursor>
+                                                                  </ImageView>
+                                                               </graphic>
+                                                            </JFXButton>
+                                                         </children>
+                                                      </Pane>
+                                                   </children>
+                                                   <padding>
+                                                      <Insets bottom="10.0" left="20.0" top="12.0" />
+                                                   </padding>
+                                                   <cursor>
+                                                      <Cursor fx:constant="OPEN_HAND" />
+                                                   </cursor>
+                                                </VBox>
+                                             </children>
+                                          </AnchorPane>
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                                 <graphic>
+                                    <ImageView fx:id="shippingIndicatorTAB1" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                                       <image>
+                                          <Image url="@../../media/PurchaseMedia/ok.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Tab>
+                              <Tab styleClass="blue-titledPaneTab" text="Review">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1129.0">
+                                       <children>
+                                          <GridPane gridLinesVisible="true" layoutX="299.0" layoutY="345.0" prefHeight="191.0" prefWidth="409.0">
+                                            <columnConstraints>
+                                              <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="176.07421875" minWidth="10.0" prefWidth="135.888671875" />
+                                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="228.999755859375" minWidth="10.0" prefWidth="173.111328125" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                              <RowConstraints maxHeight="45.0" minHeight="10.0" prefHeight="40.259246826171875" vgrow="SOMETIMES" />
+                                              <RowConstraints maxHeight="45.0" minHeight="5.7037353515625" prefHeight="35.111083984375" vgrow="SOMETIMES" />
+                                              <RowConstraints maxHeight="45.0" minHeight="10.0" prefHeight="37.888916015625" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="45.0" minHeight="10.0" prefHeight="37.888916015625" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                             <children>
+                                                <Text lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Fuel Quantity">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Text>
+                                                <Text lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Subtotal" GridPane.rowIndex="1">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Text>
+                                                <Text lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Delivery fee" GridPane.rowIndex="2">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Text>
+                                                <Text lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TOTAL" textAlignment="CENTER" wrappingWidth="135.979248046875" GridPane.rowIndex="3">
+                                                   <font>
+                                                      <Font name="System Bold" size="20.0" />
+                                                   </font>
+                                                </Text>
+                                                <Text fx:id="totalPricesOfAlllInUsdTXT" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2163$" textAlignment="CENTER" wrappingWidth="176.8681640625" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                                   <font>
+                                                      <Font name="System Bold" size="23.0" />
+                                                   </font>
+                                                </Text>
+                                                <Text fx:id="DeliveryFeeTXT" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="40 $" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Text>
+                                                <Text fx:id="subTotalPriceInUsdTXT" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2123 $" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Text>
+                                                <Text fx:id="fuelQuantityInLitersTXT" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="400 L" GridPane.columnIndex="1">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Text>
+                                             </children>
+                                          </GridPane>
+                                          <GridPane gridLinesVisible="true" layoutX="170.0" layoutY="67.0" prefHeight="165.0" prefWidth="637.0">
+                                             <columnConstraints>
+                                                <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="378.333251953125" minWidth="10.0" prefWidth="255.5556640625" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="361.888916015625" minWidth="10.0" prefWidth="344.4443359375" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints maxHeight="45.0" minHeight="10.0" prefHeight="0.0" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="45.0" minHeight="5.7037353515625" prefHeight="0.0" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="45.0" minHeight="10.0" prefHeight="0.0" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="45.0" minHeight="10.0" prefHeight="0.0" vgrow="SOMETIMES" />
+                                             </rowConstraints>
+                                             <children>
+                                                <Text lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" First Name">
+                                                   <font>
+                                                      <Font name="System Bold" size="22.0" />
+                                                   </font>
+                                                </Text>
+                                                <Text lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Last Name" GridPane.rowIndex="1">
+                                                   <font>
+                                                      <Font name="System Bold" size="22.0" />
+                                                   </font>
+                                                </Text>
+                                                <Text lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Delivery Address" GridPane.rowIndex="2">
+                                                   <font>
+                                                      <Font name="System Bold" size="22.0" />
+                                                   </font>
+                                                </Text>
+                                                <Text lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Scheduled delivery date" GridPane.rowIndex="3">
+                                                   <font>
+                                                      <Font name="System Bold" size="22.0" />
+                                                   </font>
+                                                </Text>
+                                                <Text fx:id="firstNameTXT" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Robin" GridPane.columnIndex="1">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Text>
+                                                <Text fx:id="lastNameTXT" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Jon" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Text>
+                                                <Text fx:id="scheduledDeliveryDateTXT" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Sunday, 17/05/20 between 15:00 - 17:00" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Text>
+                                                <Text fx:id="deliveryAddressTXT" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Rabin 255, 7 | Tel Aviv |1322233" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Text>
+                                             </children>
+                                          </GridPane>
+                                          <Label alignment="CENTER" layoutX="19.0" layoutY="10.0" maxWidth="971.0" prefHeight="35.0" prefWidth="960.0" style="-fx-background-color: #DCDCDC; -fx-opacity: 1; -fx-background-radius: 30;" text="Shipping">
+                                             <font>
+                                                <Font name="System Bold" size="24.0" />
+                                             </font>
+                                          </Label>
+                                          <Label alignment="CENTER" layoutX="21.0" layoutY="271.0" maxWidth="971.0" prefHeight="35.0" prefWidth="960.0" style="-fx-background-color: #DCDCDC; -fx-opacity: 1; -fx-background-radius: 30;" text="Prices">
+                                             <font>
+                                                <Font name="System Bold" size="24.0" />
+                                             </font>
+                                          </Label>
+                                          <JFXButton layoutX="3.0" layoutY="583.0" text=" ">
+                                             <graphic>
+                                                <ImageView accessibleRole="BUTTON" fitHeight="70.0" fitWidth="94.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../../media/CostumerRegisterationMedia/forward_button_40px.png" />
+                                                   </image>
+                                                   <cursor>
+                                                      <Cursor fx:constant="OPEN_HAND" />
+                                                   </cursor>
+                                                </ImageView>
+                                             </graphic>
+                                          </JFXButton>
+                                          <JFXButton layoutX="348.0" layoutY="565.0" prefHeight="74.0" prefWidth="302.0" ripplerFill="WHITE" stylesheets="@NewPurchaseFuelForHomeHeatingCSS.css" text="Confirm &amp; Pay">
+                                             <font>
+                                                <Font name="System Bold" size="23.0" />
+                                             </font>
+                                          </JFXButton>
+                                          <ImageView layoutX="267.0" layoutY="570.0">
+                                             <image>
+                                                <Image url="@../../../../../../../AppData/Local/Temp/icons8_pay_64px.png" />
+                                             </image>
+                                          </ImageView>
+                                       </children></AnchorPane>
+                                 </content>
+                                 <graphic>
+                                    <ImageView disable="true" fitHeight="25.0" fitWidth="25.0" visible="false">
+                                       <image>
+                                          <Image url="@../../media/icons/icons8_checked_48px.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Tab>
+                           </tabs>
+                        </JFXTabPane>
+                     </children>
+                  </Pane>
+               </children>
+            </AnchorPane>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

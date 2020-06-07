@@ -10,13 +10,16 @@ import java.util.ArrayList;
  * @author Hana Wiener
  */
 @SuppressWarnings("serial")
-public class SqlAction implements Serializable
-{
+public class SqlAction implements Serializable {
 
-    /** The action type. */
+    /**
+     * The action type.
+     */
     private SqlQueryType actionType;
 
-    /** The action vars. */
+    /**
+     * The action vars.
+     */
     private ArrayList<Object> actionVars;
 
     /**
@@ -35,8 +38,7 @@ public class SqlAction implements Serializable
      *
      * @param actionType the action type
      */
-    public SqlAction(SqlQueryType actionType)
-    {
+    public SqlAction(SqlQueryType actionType) {
         this.actionType = actionType;
         actionVars = new ArrayList<Object>();
     }

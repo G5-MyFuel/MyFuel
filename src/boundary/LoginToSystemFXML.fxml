@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundary.LoginToSystemBoundary">
+   <children>
+      <ImageView fitHeight="600.0" fitWidth="807.0">
+         <image>
+            <Image url="@../../media/BGs/3315591.png" />
+         </image>
+      </ImageView>
+      <BorderPane layoutX="7.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0">
+         <left>
+            <VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="379.0" style="-fx-background-color: rgba(255, 255, 255, 0.6);;" BorderPane.alignment="CENTER">
+               <children>
+                  <Pane prefHeight="458.0" prefWidth="440.0">
+                     <children>
+                        <ImageView fitHeight="140.0" fitWidth="329.0" layoutX="25.0" layoutY="42.0" preserveRatio="true">
+                           <image>
+                              <Image url="@../../media/2065573.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="666.0" prefWidth="366.0">
+                     <children>
+                        <GridPane layoutX="-7.0" layoutY="133.0" prefHeight="230.0" prefWidth="390.0">
+                          <columnConstraints>
+                            <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="SOMETIMES" maxWidth="428.44451904296875" minWidth="10.0" prefWidth="406.66668701171875" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints fillHeight="false" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints fillHeight="false" maxHeight="72.11114501953125" minHeight="10.0" prefHeight="49.4444580078125" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="103.5555419921875" minHeight="10.0" prefHeight="103.5555419921875" valignment="CENTER" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                                    <Button fx:id="loginBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#clickLoginBtn" prefHeight="29.0" prefWidth="128.0" style="-fx-background-radius: 100;" text="Login" GridPane.rowIndex="2">
+                                        <font>
+                                            <Font size="22.0" />
+                                        </font>
+                                    </Button>
+                              <JFXTextField fx:id="userIDTextField" prefWidth="326.0" promptText="User ID" style="-fx-font-size: 14pt;" unFocusColor="BLUE" />
+                              <JFXPasswordField fx:id="passwordField" prefHeight="41.0" prefWidth="326.0" promptText="Password" style="-fx-font-size: 14pt;" unFocusColor="BLUE" GridPane.rowIndex="1" />
+                           </children>
+                        </GridPane>
+                        <VBox alignment="CENTER" layoutX="-5.0" prefHeight="96.0" prefWidth="384.0">
+                           <children>
+                                  <Text fill="#2d4578" strokeType="OUTSIDE" strokeWidth="0.0" text="Login as:" textAlignment="CENTER" wrappingWidth="286.529296875">
+                                      <font>
+                                          <Font name="System Bold" size="20.0" />
+                                      </font>
+                                  </Text>
+                              <JFXComboBox fx:id="loginAsComboBox" promptText="Select The User Type" style="-fx-font-size: 12pt;">
+                                 <VBox.margin>
+                                    <Insets top="15.0" />
+                                 </VBox.margin>
+                              </JFXComboBox>
+                           </children>
+                        </VBox>
+                        <Label alignment="BOTTOM_RIGHT" ellipsisString="" layoutX="-1.0" layoutY="382.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="17.0" prefWidth="377.0" text="* All fields are required">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+               </children>
+            </VBox>
+         </left>
+         <center>
+            <ImageView fitHeight="321.0" fitWidth="330.0" preserveRatio="true" BorderPane.alignment="CENTER">
+               <image>
+                  <Image url="@../../media/גרפיקות%20למערכת%20myfuel/22472%20%5BConverted%5D.png" />
+               </image>
+            </ImageView>
+         </center>
+      </BorderPane>
+   </children>
+</Pane>

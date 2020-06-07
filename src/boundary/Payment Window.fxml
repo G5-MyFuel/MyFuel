@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundary.pymentWindowControllerForRegistarBoundary">
+   <children>
+      <Pane prefHeight="436.0" prefWidth="396.0" styleClass="viewport" stylesheets="@../../../../../OneDrive/פרוייקט/משימה 3/מסכים - הגשה סופית/style.css" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label layoutX="23.0" layoutY="40.0" text="Payment" textFill="#2d4578">
+               <font>
+                  <Font name="System Bold Italic" size="34.0" />
+               </font>
+            </Label>
+            <Label layoutX="30.0" layoutY="92.0" text="Fill in the required information">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <JFXTextField fx:id="creditCardNumbertxt" focusColor="#00add8" labelFloat="true" layoutX="55.0" layoutY="139.0" prefHeight="41.0" prefWidth="284.0" promptText="Card number" text="                -                -                -                " unFocusColor="#868282">
+               <padding>
+                  <Insets bottom="10.0" top="10.0" />
+               </padding>
+            </JFXTextField>
+            <JFXTextField fx:id="experationDatetxt" focusColor="#00add8" labelFloat="true" layoutX="55.0" layoutY="211.0" prefHeight="41.0" prefWidth="105.0" promptText="Expiration date" text="          /" unFocusColor="#868282">
+               <padding>
+                  <Insets bottom="10.0" top="10.0" />
+               </padding>
+            </JFXTextField>
+            <JFXTextField fx:id="CVVtxt" focusColor="#00add8" labelFloat="true" layoutX="56.0" layoutY="278.0" prefHeight="41.0" prefWidth="104.0" promptText="CVV" text=" " unFocusColor="#868282">
+               <padding>
+                  <Insets bottom="10.0" top="10.0" />
+               </padding>
+            </JFXTextField>
+            <Hyperlink layoutX="108.0" layoutY="342.0" prefHeight="29.0" prefWidth="278.0" text="Add this credit card to my account." />
+            <ImageView layoutX="86.0" layoutY="270.0">
+               <image>
+                  <Image url="@../../media/CostumerRegisterationMedia/help_16px.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="addCardButton" accessibleRole="BUTTON" fitHeight="32.0" fitWidth="29.0" layoutX="72.0" layoutY="341.0">
+               <image>
+                  <Image url="@../../media/CostumerRegisterationMedia/add_40px.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="OPEN_HAND" />
+               </cursor>
+            </ImageView>
+            <Button fx:id="payButton" layoutX="151.0" layoutY="388.0" mnemonicParsing="false" onMouseClicked="#addCardOnClick" prefHeight="42.0" prefWidth="89.0" style="-fx-background-color: #2D4578; -fx-background-radius: 50;" stylesheets="@style.css" text="Pay" textFill="WHITE" />
+            <ImageView fitHeight="70.0" fitWidth="136.0" layoutX="172.0" layoutY="250.0" mouseTransparent="true">
+               <image>
+                  <Image url="@../../media/credit-card-cvv-code.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

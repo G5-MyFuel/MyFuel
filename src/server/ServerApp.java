@@ -1,39 +1,82 @@
 package server;
 
+import common.assets.ProjectPages;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import server.serverControllers.EchoServer;
+import javafx.stage.WindowEvent;
+
+import java.net.URL;
+import java.util.Optional;
 
 
-//Hani commit test
-//adi commit test
-//nir commit test
-//itay commit test
 public class ServerApp extends Application {
-    public static EchoServer echoserver;
+    /**
+     * The newargs.
+     */
+    public static String[] newargs;
 
+    /**
+     * The sql connection.
+     */
+    private MysqlConnection sqlConnection = new MysqlConnection();
+
+    /* (non-Javadoc)
+     * @see javafx.application.Application#start(javafx.stage.Stage)
+     */
     public static void main(String[] args) {
+        newargs = args;
+        initTimeWatcher();
         launch(args);
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Pane root = null;
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/server/boundary/serverGUI.fxml"));
-            root = loader.load();
-            Scene s1 = new Scene(root);
-            primaryStage.setScene(s1);
-            primaryStage.show();
-            primaryStage.setResizable(false);
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("ERR");
-        }
+        URL url = getClass().getResource(ProjectPages.SERVER_START_PAGE.getPath());
+        Parent pane = FXMLLoader.load(url);
+        Scene scene = new Scene(pane);
+        //setting the stage and showing server app
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Start Server");
+        primaryStage.show();
+        primaryStage.setResizable(false);
+
+        //on close server
+        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent e) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.getButtonTypes().remove(ButtonType.OK);
+                alert.getButtonTypes().add(ButtonType.CANCEL);
+                alert.getButtonTypes().add(ButtonType.YES);
+                alert.setTitle("Quit application");
+                alert.setContentText(String.format("Are you sure you want to quit?"));
+                Optional<ButtonType> res = alert.showAndWait();
+
+                if (res.isPresent()) {
+                    if (res.get().equals(ButtonType.CANCEL)) {
+                        e.consume();
+                    } else {
+                        sqlConnection.disconnectAllLoggedUsers();
+                    }
+                }
+                System.exit(0);
+            }
+        });
+    }
+
+    /**
+     * Inits the time watcher.
+     */
+    private static void initTimeWatcher() {
+        Thread t = new Thread(new TimeWatcher());
+        t.start();
     }
 
 }

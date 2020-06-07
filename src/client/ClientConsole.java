@@ -123,4 +123,4 @@ public class ClientConsole implements ChatIF
 
     }
 }
-
+//End of ClientConsole class

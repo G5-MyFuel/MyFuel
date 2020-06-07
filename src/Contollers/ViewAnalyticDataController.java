@@ -1,0 +1,18 @@
+package Contollers;
+
+import server.MysqlConnection;
+
+public class ViewAnalyticDataController {
+
+    MysqlConnection mySqlConnector;
+
+    /*Logic Variables*/
+    private static ViewAnalyticDataController Instance = null;
+
+    public static ViewAnalyticDataController getInstance() {
+
+        if (Instance == null)
+            Instance = new ViewAnalyticDataController();
+        return Instance;
+    }
+}

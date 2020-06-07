@@ -1,9 +1,8 @@
 package client;
 
-import common.assets.BasicController;
+import Contollers.BasicController;
 import common.assets.SqlResult;
-import common.ocsf.client.AbstractClient;
-import common.tools.Message;
+import ocsf.client.*;
 import javafx.application.Platform;
 
 import java.io.IOException;
@@ -21,28 +20,12 @@ public class ChatClient extends AbstractClient {
     ChatIF clientUI;
 
     /* Static variables */
-    /** all of the below are objects of each client controllers that we created */
+    /**
+     * all of the below are objects of each client controllers that we created
+     */
 
     private static List<BasicController> deliverySubscribers = new ArrayList<BasicController>();
     // Constructors ****************************************************
-
-    public static ChatClient Instant;//ours
-
-//שלנו:
-    /**
-     * Client is execute the connection to the server
-     *
-     * @param host is the host ip number
-     * @param port is the port number
-     * @throws IOException if IO problems occurs
-     */
-    public ChatClient(String host, int port) throws IOException {
-        super(host, port);
-        Instant = this;
-        openConnection();
-    }
-
-//שלהם:
 
     /**
      * Constructs an instance of the chat client.
@@ -58,9 +41,6 @@ public class ChatClient extends AbstractClient {
         openConnection();
     }
 
-    public static ChatClient getInstant() {
-        return Instant;
-    }
 
     // Instance methods ************************************************
 
@@ -69,24 +49,15 @@ public class ChatClient extends AbstractClient {
      *
      * @param msg is the message that received from the server
      */
-    @Override
+
     protected void handleMessageFromServer(Object msg) {
         SqlResult result = (SqlResult) msg;
-
+        System.out.println("--> handleMessageFromServer");
         Platform.runLater(() -> {
             for (BasicController bc : deliverySubscribers) {
                 bc.getResultFromClient(result);
             }
         });
-        //שלנו הישן:
-       /* System.out.println("--> handleMessageFromServer");
-        try {
-            ClientMessages.messageFromServer((Message) msg);
-        } catch (Exception e) {
-            e.printStackTrace();
-
-            System.out.println("Could not handle message from server. " + e);
-        }*/
     }
 
     /**
@@ -100,11 +71,6 @@ public class ChatClient extends AbstractClient {
         } catch (IOException e) {
             clientUI.display("Could not send message to server.  Terminating client.");
             quit();
-
-            /*שלנו
-            e.printStackTrace();
-            System.out.println("Could not send message to server.  Terminating client." + e);
-            */
         }
     }
 
@@ -119,33 +85,6 @@ public class ChatClient extends AbstractClient {
         System.exit(0);
     }
 
-    /***
-     * messageFromServer - The next method receives 1 Object and , divides all
-     * actions into cases according to Operationtype and use the Object to perform
-     * the operation and after send a msg to the client with the appropriate details
-     */
-//לא צריך !!!!!! ?????
-    public static void messageFromServer(Message msg)  {
-        Message m = msg;
-
-        switch (m.getOperationType()) {
-            case getRequirementData:
-//                EmployeesManagementGuiController.Instance.setDataTable(m.getObject());
-                break;
-            case updateRequirement:
-//                EmployeesManagementGuiController.Instance.afterUpdateJobTitleInDb(m.getObject());
-                break;
-            case getAllUsersTable:
-
-                break;
-            default:
-                break;
-
-        }
-    }
-
-
-//check if we need this:
     public static void joinSubscription(BasicController basicController) {
         if (!deliverySubscribers.contains(basicController)) {
             deliverySubscribers.add(basicController);
@@ -157,7 +96,6 @@ public class ChatClient extends AbstractClient {
             deliverySubscribers.remove(basicController);
         }
     }
-//
-
 
 }
+//End of ChatClient class
