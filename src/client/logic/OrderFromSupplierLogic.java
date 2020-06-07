@@ -1,7 +1,6 @@
 package client.logic;
 
 import client.ClientApp;
-import common.entity.Employee;
 import common.entity.OrderFuelFromSupplier;
 import common.entity.User;
 import common.tools.Message;
@@ -25,7 +24,7 @@ public class OrderFromSupplierLogic {
     }
 
     public void getOrderFuelFromSupplierTable(){
-        ClientApp.client.handleMessageFromClientUI(new Message(OperationType.getRequirementData, "SELECT * FROM `OrderForStock`"));
+        ClientApp.chatClient.handleMessageFromClientUI(new Message(OperationType.getRequirementData, "SELECT * FROM `OrderForStock`"));
     }
 
     public ArrayList<OrderFuelFromSupplier> getOrderFromSupplierArrayList() {

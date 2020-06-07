@@ -1,7 +1,6 @@
 package client.logic;
 
 import client.ClientApp;
-import client.boundary.SettingDiscountRatesController;
 import common.tools.Message;
 import common.tools.OperationType;
 import common.tools.ReturnMsgType;
@@ -19,7 +18,7 @@ public class SettingDiscountRatesLogic {
 
     public void getDiscountRatesTable(String query) {
         //(type of message to server, the message) = (requirement,query to get all employees table)
-        ClientApp.client.handleMessageFromClientUI(new Message(OperationType.getRequirementData, (Object) query));
+        ClientApp.chatClient.handleMessageFromClientUI(new Message(OperationType.getRequirementData, (Object) query));
         System.out.println("Hey");
     }
 

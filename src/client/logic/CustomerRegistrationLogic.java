@@ -69,7 +69,7 @@ public class CustomerRegistrationLogic {
         String quarry = "INSERT INTO `bpsdc8o22sikrlpvvxqm`.`Costumer`(`ID`, `Password`, `Type`, `First Name`, `Last Name`, `Email Adress`, `Credit Card Number`, `Purchase Plan`, `Vehicle ID`, `Service Plan`)";
         String Values = " VALUES (\""+ ID.toString() + "\",\"" + Password + "\",\"" + Type + "\",\"" + Fname + "\",\"" + Lname + "\",\"" + Email + "\",\"" + CreditCardnum + "\",\"" + purchasePlan + "\",\"" + mainVehicle + "\",\"" + ServicePlan +"\");";
         quarry += Values;
-        ClientApp.client.handleMessageFromClientUI(new Message(OperationType.updateRequirement, quarry));
+        ClientApp.chatClient.handleMessageFromClientUI(new Message(OperationType.updateRequirement, quarry));
 
     }
 

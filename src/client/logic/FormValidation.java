@@ -535,5 +535,18 @@ public class FormValidation {
         });
     }
 
+
+    public void isEmptyTimeField(JFXTimePicker timePicker, String time) {
+        RequiredFieldValidator reqInputValidator = new RequiredFieldValidator();
+        reqInputValidator.setMessage(time + " field is Required!");
+        timePicker.validate();
+        timePicker.getValidators().add(reqInputValidator);
+        timePicker.focusedProperty().addListener((o, oldVal, newVal) -> {
+            if (!newVal)
+                timePicker.validate();
+        });
+    }
+
+
 }
 

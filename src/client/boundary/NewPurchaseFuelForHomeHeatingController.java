@@ -274,6 +274,6 @@ public class NewPurchaseFuelForHomeHeatingController implements Initializable {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date date = new Date(Calendar.getInstance().getTime().getTime());
         String initialShippingDatesQUERY = "INSERT INTO `bpsdc8o22sikrlpvvxqm`.`ShippingOptionalDates` (`DayAndDate`, `T1`, `T2`, `T3`, `T4`, `T5`, `T6`) VALUES ('2020-05-31', '1', '1', '1', '1', '1', '1');";
-        ClientApp.client.handleMessageFromClientUI(new Message(OperationType.updateRequirement,initialShippingDatesQUERY));
+        ClientApp.chatClient.handleMessageFromClientUI(new Message(OperationType.updateRequirement,initialShippingDatesQUERY));
     }
 }

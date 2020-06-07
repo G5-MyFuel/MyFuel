@@ -19,7 +19,7 @@ public class LoginToSystemLogic {
 
     //בקשה לשליפת כל היוזרים במערכת - מקבלת את כל הנתונים בarraylist של יוזרים שיחכה בlogic
     public void importAllUsersToArrayListInLogicClass() {
-        ClientApp.client.handleMessageFromClientUI(new Message(OperationType.getAllUsersTable, "SELECT * FROM Users as U;"));
+        ClientApp.chatClient.handleMessageFromClientUI(new Message(OperationType.getAllUsersTable, "SELECT * FROM Users as U;"));
     }
 
     public ArrayList<User> getUsersArrayList() {

@@ -1,12 +1,11 @@
 package client.boundary;
 
-import client.Client;
+import client.ChatClient;
 import client.ClientApp;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -19,7 +18,7 @@ public class MainForTestsNirSettingDiscountRates extends Application {
      * The default port to connect on.
      */
     final public static int DEFAULT_PORT = 5555;
-    public static Client client;
+    public static ChatClient chatClient;
     public static String server_ip = "";
     public static String server_port = "";
 
@@ -44,7 +43,7 @@ public class MainForTestsNirSettingDiscountRates extends Application {
         host = server_ip;
 
 
-        client = new Client(host, port);
+        chatClient = new ChatClient(host, port);
         System.out.println("Client setup connection! " + host + ": " + port);
 
         return true;

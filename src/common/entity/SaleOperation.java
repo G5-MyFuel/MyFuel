@@ -32,7 +32,7 @@ public class SaleOperation {
         return endDate;
     }
 
-
+    public SaleOperation getSaleOperation () {return this;}
     public void setSaleOperationID(String saleOperationID) {
         this.saleOperationID = saleOperationID;
     }

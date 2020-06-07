@@ -3,8 +3,10 @@ package client.boundary;
 import client.logic.FormValidation;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
+import com.sun.xml.internal.ws.policy.EffectiveAlternativeSelector;
 import common.entity.Costumer;
 import common.entity.SaleOperation;
+import common.entity.SaleOperationTemplate;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -12,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 
 import java.net.URL;
 import java.sql.Date;
@@ -30,7 +33,7 @@ public class RunSaleOperationController implements Initializable {
 
     /*
     Gui variables:
-         * */
+    * */
     @FXML
     private ResourceBundle resources;
 
@@ -74,6 +77,9 @@ public class RunSaleOperationController implements Initializable {
     private Label ChooseTemplateTXT;
 
     @FXML
+    private VBox templateDetailsVBOX;
+
+    @FXML
     private Label TemplateIDTXT;
 
     @FXML
@@ -90,17 +96,25 @@ public class RunSaleOperationController implements Initializable {
 
     @FXML
     private Label EndHourTXT;
-
  private ObservableList<String> TemplateID = FXCollections.observableArrayList("0001","0002","0003","0004","0005","0006");
  //TODO: Change to template name from DB^
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.RunSaleOperationLogic = RunSaleOperationLogic.getInstance();
-        ChooseTemplateCombo.setItems(TemplateID);
+        ChooseTemplateCombo.setItems(TemplateID);///to do ^
         this.formValidation = FormValidation.getValidator();
         // TODO: formValidation();
         FormValidation();   // check all required fields are'nt empty
+
+        templateDetailsVBOX.setVisible(false);
+        startSaleDateTXT.setVisible(false);
+        startDatePicker.setVisible(false);
+        endSaleDateTXT.setVisible(false);
+        endDatePicker.setVisible(false);
+        btnRunSaleOperation.setVisible(false);
+        btnRunSaleOperation.setDisable(false);//???
+
     }
 
     /**
@@ -116,13 +130,22 @@ public class RunSaleOperationController implements Initializable {
 
     @FXML
     public void handleChooseTemplate(javafx.event.ActionEvent actionEvent) {
+        //save the chosen one
+        String chosenTemplate = new String(ChooseTemplateCombo.getValue());
 
+        templateDetailsVBOX.setVisible(true);
+        startSaleDateTXT.setVisible(true);
+        startDatePicker.setVisible(true);
+        endSaleDateTXT.setVisible(true);
+        endDatePicker.setVisible(true);
+        btnRunSaleOperation.setVisible(true);
     }
 
     @FXML
     public void handleBtnRunSaleOperation(javafx.event.ActionEvent actionEvent) {
        // SaleOperation saleOperation = new SaleOperation(ChooseTemplateCombo.getValue() , "0001" ,Date.valueOf(startDatePicker.getValue()),Date.valueOf(endDatePicker.getValue()));
         //RunSaleOperationLogic.setSaleOperationInDB(saleOperation);
+        SaleOperation newSaleOperation = new SaleOperation("0001", ChooseTemplateCombo.getValue(), java.sql.Date.valueOf(startDatePicker.getValue()), java.sql.Date.valueOf(endDatePicker.getValue()));
     }
 
     @FXML
@@ -134,6 +157,6 @@ public class RunSaleOperationController implements Initializable {
         /*  Template Name validation */
         formValidation.isEmptyDateField(startDatePicker, "Start Date");
         formValidation.isEmptyDateField(endDatePicker, "End Date");
-
     }
+
 }
