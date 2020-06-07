@@ -1,14 +1,9 @@
 package client.boundary;
 
-import client.ClientApp;
 import client.logic.FormValidation;
-import client.logic.NewPurchaseFuelForHomeHeatingLogic;
 import client.logic.SettingDiscountRatesLogic;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
-import common.entity.User;
-import common.tools.Message;
-import common.tools.OperationType;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,9 +12,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 
 import java.net.URL;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class SettingDiscountRatesController implements Initializable {
