@@ -36,3 +36,38 @@ public class SettingDiscountRatesLogic {
     }
 
 }
+
+/*EchoServer:
+
+ handleMessageFromClient:
+
+ System.out.println(rs.getString(1));
+ System.out.println(m.getObject().toString());
+ System.out.println(m.getReturnMsgType().toString());
+ System.out.println(m.getOperationType().toString());
+ //sendToClient(new Message(OperationType.getRequirementData, QueryToArrayList.ResultSetToArrayList(rs)), client);
+ sendToClient(new Message(OperationType.getRequirementData, QueryToArrayList.RsultSetToFloat(rs)), client);
+
+ */
+
+
+/*ClientMessages:
+
+messageFromServer:
+
+case getRequirementData:
+               // EmployeesManagementGuiController.Instance.setDataTable(m.getObject())
+                //OrderExecutionController.Instance.setOrderFuelFromSupplierTableView(m.getObject());
+                SettingDiscountRatesLogic.getInstance().setData(m.getReturnMsgType());
+                break;
+ */
+
+
+/*QueryToArrayList:
+
+public static Float RsultSetToFloat(ResultSet rs) throws SQLException {
+        System.out.println(rs.getString(1));
+        Float num = rs.getFloat(1);
+        return num;
+    }
+ */
