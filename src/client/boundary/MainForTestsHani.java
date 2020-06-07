@@ -25,7 +25,7 @@ public class MainForTestsHani extends Application {
 
     private AnchorPane root;
 
-     private SaleOperationTemplateController saleOperationTemplateController;    //אינסטנס של מחלקת הboundary
+     private SaleOperationTemplateBoundary saleOperationTemplateController;    //אינסטנס של מחלקת הboundary
     // private RunSaleOperationController runSaleOperationController;    //אינסטנס של מחלקת הboundary
 
     public static void main(String[] args) {

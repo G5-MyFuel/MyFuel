@@ -2,7 +2,6 @@ package client.boundary;
 
 import client.logic.ConfirmDiscountRatesLogic;
 import client.logic.FormValidation;
-import client.logic.SettingDiscountRatesLogic;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -12,8 +11,8 @@ import javafx.scene.control.TableView;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ConfirmDiscountRatesController implements Initializable {
-    private static ConfirmDiscountRatesController Instance = null;
+public class ConfirmDiscountRatesBoundary implements Initializable {
+    private static ConfirmDiscountRatesBoundary Instance = null;
     private ConfirmDiscountRatesLogic confirmDiscountRatesLogic;
     private FormValidation formValidation;
 
@@ -58,9 +57,9 @@ public class ConfirmDiscountRatesController implements Initializable {
      *
      * @return Instance of controller class
      */
-    public static ConfirmDiscountRatesController getInstance() {
+    public static ConfirmDiscountRatesBoundary getInstance() {
         if (Instance == null)
-            Instance = new ConfirmDiscountRatesController();
+            Instance = new ConfirmDiscountRatesBoundary();
         return Instance;
     }
 

@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class LoginToSystemController extends Application {
+public class LoginToSystemBoundary extends Application {
     /*  fxml file object variables: */
     @FXML
     private ResourceBundle resources;
@@ -44,7 +44,7 @@ public class LoginToSystemController extends Application {
     @FXML
     public Stage primaryStage;
 
-    private static LoginToSystemController Instance;
+    private static LoginToSystemBoundary Instance;
 
     /*  other variables: */
     private ActionEvent event = null;
@@ -52,9 +52,9 @@ public class LoginToSystemController extends Application {
     FormValidation formValidation;
 
 
-    public static LoginToSystemController getInstance() {
+    public static LoginToSystemBoundary getInstance() {
         if (Instance == null)
-            Instance = new LoginToSystemController();
+            Instance = new LoginToSystemBoundary();
         return Instance;
     }
 

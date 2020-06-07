@@ -30,9 +30,9 @@ import java.util.ResourceBundle;
  * @author daniel
  * @see NewPurchaseFuelForHomeHeatingLogic - the form's logic class
  */
-public class NewPurchaseFuelForHomeHeatingController implements Initializable {
+public class NewPurchaseFuelForHomeHeatingControllerBoundary implements Initializable {
 
-    private static NewPurchaseFuelForHomeHeatingController Instance = null;
+    private static NewPurchaseFuelForHomeHeatingControllerBoundary Instance = null;
     private NewPurchaseFuelForHomeHeatingLogic newPurchaseFuelForHomeHeatingLogic;
     private FormValidation formValidation;
 
@@ -200,9 +200,9 @@ public class NewPurchaseFuelForHomeHeatingController implements Initializable {
      * NewPurchaseFuelForHomeHeatingController Instance getter using SingleTone DesignPatterns
      * @return Instance of controller class
      */
-    public NewPurchaseFuelForHomeHeatingController getInstance() {
+    public NewPurchaseFuelForHomeHeatingControllerBoundary getInstance() {
         if (Instance == null)
-            Instance = new NewPurchaseFuelForHomeHeatingController();
+            Instance = new NewPurchaseFuelForHomeHeatingControllerBoundary();
         return Instance;
     }
 

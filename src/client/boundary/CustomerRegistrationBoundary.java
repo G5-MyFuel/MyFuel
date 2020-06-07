@@ -11,12 +11,9 @@ import common.entity.Vehicle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
@@ -24,10 +21,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
-import javafx.stage.Stage;
 
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -38,11 +33,11 @@ import java.util.ResourceBundle;
  * @see CustomerRegistrationLogic - the form's logic class
  */
 
-public class CustomerRegistrationController implements Initializable {
+public class CustomerRegistrationBoundary implements Initializable {
 
     private ArrayList<Vehicle> tempVehicleArray;
     CreditCard tempCreditCard = null;
-    private static CustomerRegistrationController Instance = null;
+    private static CustomerRegistrationBoundary Instance = null;
     private CustomerRegistrationLogic CRLogic;
     private FormValidation formValidation;
     private boolean CardClickFlag = false;
@@ -51,7 +46,7 @@ public class CustomerRegistrationController implements Initializable {
     @FXML
     private FXMLLoader PRCLoader;
     @FXML
-    private pymentWindowControllerForRegistar PRC;
+    private pymentWindowControllerForRegistarBoundary PRC;
 
     /*Gui variables:
      * */
@@ -231,9 +226,9 @@ public class CustomerRegistrationController implements Initializable {
      *
      * @return Instance of controller class
      */
-    public static CustomerRegistrationController getInstance() {
+    public static CustomerRegistrationBoundary getInstance() {
         if (Instance == null)
-            Instance = new CustomerRegistrationController();
+            Instance = new CustomerRegistrationBoundary();
         return Instance;
     }
 
@@ -283,9 +278,9 @@ public class CustomerRegistrationController implements Initializable {
             tempCos.setPurchasePlan(false);
 
         if (CostumertypeChoiceBox.getSelectionModel().getSelectedItem().toString().equals("Private"))
-            tempCos.setUserType(0);
+            tempCos.setCostumerType(0);
         else
-            tempCos.setUserType(1);
+            tempCos.setCostumerType(1);
 
         tempCos.setServicePlan(ServicePlanChoiseBox.getSelectionModel().getSelectedItem().toString());
         tempCos.setCostumerVehicle(tempVehicleArray);

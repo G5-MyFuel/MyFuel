@@ -1,6 +1,5 @@
 package client.boundary;
 
-import client.logic.ConfirmDiscountRatesLogic;
 import client.logic.FormValidation;
 import client.logic.GeneratingReportsStationManagerLogic;
 import com.jfoenix.controls.JFXComboBox;
@@ -12,8 +11,8 @@ import javafx.scene.control.Button;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class GeneratingReportsStationManagerController implements Initializable {
-    private static GeneratingReportsStationManagerController Instance = null;
+public class GeneratingReportsStationManagerBoundary implements Initializable {
+    private static GeneratingReportsStationManagerBoundary Instance = null;
     private GeneratingReportsStationManagerLogic generatingReportsStationManagerLogic;
     private FormValidation formValidation;
 
@@ -58,9 +57,9 @@ public class GeneratingReportsStationManagerController implements Initializable 
      *
      * @return Instance of controller class
      */
-    public static GeneratingReportsStationManagerController getInstance() {
+    public static GeneratingReportsStationManagerBoundary getInstance() {
         if (Instance == null)
-            Instance = new GeneratingReportsStationManagerController();
+            Instance = new GeneratingReportsStationManagerBoundary();
         return Instance;
     }
 

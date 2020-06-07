@@ -14,8 +14,8 @@ import javafx.scene.control.Button;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class SettingDiscountRatesController implements Initializable {
-    private static SettingDiscountRatesController Instance = null;
+public class SettingDiscountRatesBoundary implements Initializable {
+    private static SettingDiscountRatesBoundary Instance = null;
     private SettingDiscountRatesLogic settingDiscountRatesLogic;
     private FormValidation formValidation;
 
@@ -68,9 +68,9 @@ public class SettingDiscountRatesController implements Initializable {
      *
      * @return Instance of controller class
      */
-    public static SettingDiscountRatesController getInstance() {
+    public static SettingDiscountRatesBoundary getInstance() {
         if (Instance == null)
-            Instance = new SettingDiscountRatesController();
+            Instance = new SettingDiscountRatesBoundary();
         return Instance;
     }
 

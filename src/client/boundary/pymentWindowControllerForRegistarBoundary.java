@@ -1,25 +1,21 @@
 package client.boundary;
 
-import client.logic.CustomerRegistrationLogic;
 import com.jfoenix.controls.JFXTextField;
 import common.entity.CreditCard;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class pymentWindowControllerForRegistar implements Initializable {
+public class pymentWindowControllerForRegistarBoundary implements Initializable {
 
-    private CustomerRegistrationController CRC;
-    private static pymentWindowControllerForRegistar Instance = null;
+    private CustomerRegistrationBoundary CRC;
+    private static pymentWindowControllerForRegistarBoundary Instance = null;
     private CreditCard tempCreditCard;
     @FXML
     private JFXTextField creditCardNumbertxt;
@@ -40,9 +36,9 @@ public class pymentWindowControllerForRegistar implements Initializable {
      * CustomerRegistrationFXML1Logic Instance getter using SingleTone DesignPatterns
      * @return Instance of logic class
      */
-    public static pymentWindowControllerForRegistar getInstance() {
+    public static pymentWindowControllerForRegistarBoundary getInstance() {
         if (Instance == null)
-            Instance = new pymentWindowControllerForRegistar();
+            Instance = new pymentWindowControllerForRegistarBoundary();
         return Instance;
     }
 

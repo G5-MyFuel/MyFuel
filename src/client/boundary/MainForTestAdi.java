@@ -23,7 +23,7 @@ public class MainForTestAdi extends Application {
 
 
     private AnchorPane root;
-    private OrderExecutionController OrderExecutionController;    //אינסטנס של מחלקת הboundary
+    private OrderExecutionBoundary OrderExecutionController;    //אינסטנס של מחלקת הboundary
 
     public static void main(String[] args) {
         launch(args);

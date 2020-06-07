@@ -3,10 +3,7 @@ package client.boundary;
 import client.logic.FormValidation;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
-import com.sun.xml.internal.ws.policy.EffectiveAlternativeSelector;
-import common.entity.Costumer;
 import common.entity.SaleOperation;
-import common.entity.SaleOperationTemplate;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,8 +14,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
 import java.net.URL;
-import java.sql.Date;
-import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 /**
@@ -26,8 +21,8 @@ import java.util.ResourceBundle;
  * @see client.logic.RunSaleOperationLogic - the form's logic class
  */
 
-public class RunSaleOperationController implements Initializable {
-        private static RunSaleOperationController Instance = null;
+public class RunSaleOperationBoundary implements Initializable {
+        private static RunSaleOperationBoundary Instance = null;
         private client.logic.RunSaleOperationLogic RunSaleOperationLogic;
         private FormValidation formValidation;
 
@@ -122,9 +117,9 @@ public class RunSaleOperationController implements Initializable {
      *
      * @return Instance of controller class
      */
-    public RunSaleOperationController getInstance() {
+    public RunSaleOperationBoundary getInstance() {
         if (Instance == null)
-            Instance = new RunSaleOperationController();
+            Instance = new RunSaleOperationBoundary();
         return Instance;
     }
 

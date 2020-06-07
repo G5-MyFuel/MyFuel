@@ -23,7 +23,7 @@ public class MainForTestItay extends Application {
 
 
     private AnchorPane root;
-    private CustomerRegistrationController CustomerRegistrationController;    //אינסטנס של מחלקת הboundary
+    private CustomerRegistrationBoundary CustomerRegistrationController;    //אינסטנס של מחלקת הboundary
 
     public static void main(String[] args) {
         launch(args);
