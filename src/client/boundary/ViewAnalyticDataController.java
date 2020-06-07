@@ -1,12 +1,20 @@
 package client.boundary;
 
+import client.logic.FormValidation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
-public class ViewAnalyticDataController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class ViewAnalyticDataController implements Initializable {
+    private static ViewAnalyticDataController Instance = null;
+    private ViewAnalyticDataLogic viewAnalyticDataLogic;
+    private FormValidation formValidation;
 
     @FXML
     private Button btnOverview;
@@ -34,6 +42,36 @@ public class ViewAnalyticDataController {
 
     @FXML
     private TableColumn<?, ?> FuelTypeColumn;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        this.viewAnalyticDataLogic = ViewAnalyticDataLogic.getInstance();
+        this.formValidation = FormValidation.getValidator();
+
+        /*  set all fields validators */
+        formValidation();
+        /* set form items */
+        //setShippingTab();
+    }
+
+    /**
+     * ViewAnalyticDataController Instance getter using SingleTone DesignPatterns
+     *
+     * @return Instance of controller class
+     */
+    public static ViewAnalyticDataController getInstance() {
+        if (Instance == null)
+            Instance = new ViewAnalyticDataController();
+        return Instance;
+    }
+
+    private void formValidation() {
+        /**
+         *
+         *
+         */
+
+    }
 
     @FXML
     void handleClicks(ActionEvent event) {

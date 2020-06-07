@@ -143,9 +143,9 @@
                                        <children>
                                           <TableView fx:id="AnalyticDataTable" prefHeight="312.0" prefWidth="474.0" style="-fx-background-color: #fcf8e8;" AnchorPane.bottomAnchor="-9.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-4.0" AnchorPane.topAnchor="0.0">
                                              <columns>
-                                                <TableColumn fx:id="CustomerTypeColumn" prefWidth="115.0" text="Customer Type" />
-                                                <TableColumn fx:id="RefuelingHoursColumn" prefWidth="120.0" text="Refueling hours" />
-                                                <TableColumn fx:id="FuelTypeColumn" prefWidth="75.0" text="Fuel Type" />
+                                                <TableColumn fx:id="CustomerTypeColumn" prefWidth="197.0" text="Customer Type" />
+                                                <TableColumn fx:id="RefuelingHoursColumn" prefWidth="141.0" text="Refueling hours" />
+                                                <TableColumn fx:id="FuelTypeColumn" prefWidth="133.0" text="Fuel Type" />
                                              </columns>
                                           </TableView>
                                        </children>
