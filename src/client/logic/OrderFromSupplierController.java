@@ -10,16 +10,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class OrderFromSupplierLogic {
-    private static OrderFromSupplierLogic Instance= null;
+public class OrderFromSupplierController {
+    private static OrderFromSupplierController Instance= null;
     private ArrayList<OrderFuelFromSupplier> orderSet;
     private ResultSet rs;
 
 
 
-    public static OrderFromSupplierLogic getInstance() {
+    public static OrderFromSupplierController getInstance() {
         if (Instance == null)
-            Instance = new OrderFromSupplierLogic();
+            Instance = new OrderFromSupplierController();
         return Instance;
     }
 
@@ -40,7 +40,7 @@ public class OrderFromSupplierLogic {
 
 
     public static void setOrderFromSupplierArrayList(ArrayList<User> usersArrayList) {
-        LoginToSystemLogic.usersArrayList = usersArrayList;
+        LoginToSystemController.usersArrayList = usersArrayList;
     }
     public ResultSet getRs() {
         return rs;

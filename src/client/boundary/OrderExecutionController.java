@@ -1,13 +1,7 @@
 package client.boundary;
 
-import client.logic.FormValidation;
-import client.logic.OrderFromSupplierLogic;
-import client.logic.SaleOperationTemplateLogic;
-import com.jfoenix.controls.JFXTextField;
-import com.sun.xml.internal.ws.api.model.wsdl.WSDLOutput;
-import common.entity.Employee;
+import client.logic.OrderFromSupplierController;
 import common.entity.OrderFuelFromSupplier;
-import common.tools.Message;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -20,15 +14,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import org.w3c.dom.ls.LSOutput;
 
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.ResourceBundle;
 
 /**
@@ -39,7 +29,7 @@ public class OrderExecutionController implements Initializable {
 
     public static OrderExecutionController Instance = null;
     private OrderExecutionController OrderExecutionController;
-    private OrderFromSupplierLogic OFSLogic = OrderFromSupplierLogic.getInstance(); //logic
+    private OrderFromSupplierController OFSLogic = OrderFromSupplierController.getInstance(); //logic
 
 
     private ArrayList<OrderFuelFromSupplier> OFFS;

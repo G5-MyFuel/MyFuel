@@ -6,12 +6,12 @@ import common.tools.OperationType;
 import common.tools.ReturnMsgType;
 import server.serverControllers.MySqlConnection;
 
-public class SettingDiscountRatesLogic {
+public class SettingDiscountRatesController {
 
     MySqlConnection mySqlConnector;
 
     /*Logic Variables*/
-    private static SettingDiscountRatesLogic Instance = null;
+    private static SettingDiscountRatesController Instance = null;
     //private SettingDiscountRatesController settingDiscountRatesController = SettingDiscountRatesController.getInstance();
 
     /*Logic Methods*/
@@ -22,9 +22,9 @@ public class SettingDiscountRatesLogic {
         System.out.println("Hey");
     }
 
-    public static SettingDiscountRatesLogic getInstance() {
+    public static SettingDiscountRatesController getInstance() {
         if (Instance == null)
-            Instance = new SettingDiscountRatesLogic();
+            Instance = new SettingDiscountRatesController();
         return Instance;
     }
     public void setData(Object object) {

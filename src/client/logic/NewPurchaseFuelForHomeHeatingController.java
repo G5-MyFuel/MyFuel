@@ -3,9 +3,9 @@ package client.logic;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 
-public class NewPurchaseFuelForHomeHeatingLogic {
+public class NewPurchaseFuelForHomeHeatingController {
     /*Logic Variables*/
-    private static NewPurchaseFuelForHomeHeatingLogic Instance = null;
+    private static NewPurchaseFuelForHomeHeatingController Instance = null;
 
     /*Logic Methods*/
 
@@ -13,9 +13,9 @@ public class NewPurchaseFuelForHomeHeatingLogic {
      * NewPurchaseFuelForHomeHeatingLogic Instance getter using SingleTone DesignPatterns
      * @return Instance of logic class
      */
-    public static NewPurchaseFuelForHomeHeatingLogic getInstance() {
+    public static NewPurchaseFuelForHomeHeatingController getInstance() {
         if (Instance == null)
-            Instance = new NewPurchaseFuelForHomeHeatingLogic();
+            Instance = new NewPurchaseFuelForHomeHeatingController();
         return Instance;
     }
 

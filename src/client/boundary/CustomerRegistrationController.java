@@ -1,6 +1,5 @@
 package client.boundary;
 
-import client.logic.*;
 import client.logic.FormValidation;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXRadioButton;
@@ -11,12 +10,9 @@ import common.entity.Vehicle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
@@ -24,10 +20,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
-import javafx.stage.Stage;
 
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -35,7 +29,7 @@ import java.util.ResourceBundle;
 
 /**
  * @author itay
- * @see CustomerRegistrationLogic - the form's logic class
+ * @see client.logic.CustomerRegistrationController - the form's logic class
  */
 
 public class CustomerRegistrationController implements Initializable {
@@ -43,7 +37,7 @@ public class CustomerRegistrationController implements Initializable {
     private ArrayList<Vehicle> tempVehicleArray;
     CreditCard tempCreditCard = null;
     private static CustomerRegistrationController Instance = null;
-    private CustomerRegistrationLogic CRLogic;
+    private client.logic.CustomerRegistrationController CRLogic;
     private FormValidation formValidation;
     private boolean CardClickFlag = false;
     private Alert ErrorAlert = new Alert(Alert.AlertType.ERROR);

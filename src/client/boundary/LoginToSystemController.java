@@ -1,7 +1,6 @@
 package client.boundary;
 
 import client.logic.FormValidation;
-import client.logic.LoginToSystemLogic;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
@@ -48,7 +47,7 @@ public class LoginToSystemController extends Application {
 
     /*  other variables: */
     private ActionEvent event = null;
-    LoginToSystemLogic loginToSystemLogic; //logic instance
+    client.logic.LoginToSystemController loginToSystemLogic; //logic instance
     FormValidation formValidation;
 
 
@@ -63,7 +62,7 @@ public class LoginToSystemController extends Application {
         formValidation = FormValidation.getValidator(); //for form validation instance
         loginAsComboBox.getItems().addAll("Customer", "Employee", "Supplier");  //set the user types
         LoginValidation();
-        LoginToSystemLogic.getInstance().importAllUsersToArrayListInLogicClass();   //before login - get instance of all users in the system
+        client.logic.LoginToSystemController.getInstance().importAllUsersToArrayListInLogicClass();   //before login - get instance of all users in the system
 
     }
 
@@ -102,14 +101,14 @@ public class LoginToSystemController extends Application {
 //        String getAllUsers = "Select * from Users";
 //        ClientApp.client.handleMessageFromClientUI(new Message(OperationType.getAllUsersTable, getAllUsers));
         System.out.println("bdika11");
-        boolean result = LoginToSystemLogic.getInstance().searchUserIdAndUserTypeInArrayList(Integer.parseInt(userIDTextField.getText()), userType);
+        boolean result = client.logic.LoginToSystemController.getInstance().searchUserIdAndUserTypeInArrayList(Integer.parseInt(userIDTextField.getText()), userType);
         System.out.println("result of Login is:" + result);
         //todo: להמשיך מפה! זיהוי לקוח בוצע בהצלחה - כעת לממש שגיאות קלט והודעות בהתאם
     }
 
     public void setUsersDetailsArrayList(Object object) {
         System.out.println("----->setUsersDetailsArrayList");
-        LoginToSystemLogic.getInstance().setUsersArrayList((ArrayList<User>) object);
+        client.logic.LoginToSystemController.getInstance().setUsersArrayList((ArrayList<User>) object);
         //System.out.println(LoginToSystemLogic.getInstance().getUsersArrayList().toString());
     }
 
@@ -152,7 +151,7 @@ public class LoginToSystemController extends Application {
     }
 
     public void SetUsersTable(Object object) {
-        LoginToSystemLogic.getInstance().setUsersArrayList((ArrayList<User>) object);
+        client.logic.LoginToSystemController.getInstance().setUsersArrayList((ArrayList<User>) object);
     }
 }
 

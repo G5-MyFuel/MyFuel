@@ -1,8 +1,6 @@
 package client.boundary;
 
-import client.logic.ConfirmDiscountRatesLogic;
 import client.logic.FormValidation;
-import client.logic.GeneratingReportsStationManagerLogic;
 import com.jfoenix.controls.JFXComboBox;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,7 +12,7 @@ import java.util.ResourceBundle;
 
 public class GeneratingReportsStationManagerController implements Initializable {
     private static GeneratingReportsStationManagerController Instance = null;
-    private GeneratingReportsStationManagerLogic generatingReportsStationManagerLogic;
+    private client.logic.GeneratingReportsStationManagerController generatingReportsStationManagerLogic;
     private FormValidation formValidation;
 
     @FXML
@@ -37,7 +35,7 @@ public class GeneratingReportsStationManagerController implements Initializable 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.generatingReportsStationManagerLogic = GeneratingReportsStationManagerLogic.getInstance();
+        this.generatingReportsStationManagerLogic = client.logic.GeneratingReportsStationManagerController.getInstance();
         this.formValidation = FormValidation.getValidator();
 
         btnGenerateReport.setDisable(true);

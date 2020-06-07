@@ -1,8 +1,6 @@
 package client.boundary;
 
-import client.logic.ConfirmDiscountRatesLogic;
 import client.logic.FormValidation;
-import client.logic.SettingDiscountRatesLogic;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,7 +12,7 @@ import java.util.ResourceBundle;
 
 public class ConfirmDiscountRatesController implements Initializable {
     private static ConfirmDiscountRatesController Instance = null;
-    private ConfirmDiscountRatesLogic confirmDiscountRatesLogic;
+    private client.logic.ConfirmDiscountRatesController confirmDiscountRatesLogic;
     private FormValidation formValidation;
 
     @FXML
@@ -37,7 +35,7 @@ public class ConfirmDiscountRatesController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.confirmDiscountRatesLogic = ConfirmDiscountRatesLogic.getInstance();
+        this.confirmDiscountRatesLogic = client.logic.ConfirmDiscountRatesController.getInstance();
         this.formValidation = FormValidation.getValidator();
 
         btnApprovedRates.setDisable(true);

@@ -2,7 +2,6 @@ package client.boundary;
 
 import client.ClientApp;
 import client.logic.FormValidation;
-import client.logic.NewPurchaseFuelForHomeHeatingLogic;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
@@ -28,12 +27,12 @@ import java.util.ResourceBundle;
 
 /**
  * @author daniel
- * @see NewPurchaseFuelForHomeHeatingLogic - the form's logic class
+ * @see client.logic.NewPurchaseFuelForHomeHeatingController - the form's logic class
  */
 public class NewPurchaseFuelForHomeHeatingController implements Initializable {
 
     private static NewPurchaseFuelForHomeHeatingController Instance = null;
-    private NewPurchaseFuelForHomeHeatingLogic newPurchaseFuelForHomeHeatingLogic;
+    private client.logic.NewPurchaseFuelForHomeHeatingController newPurchaseFuelForHomeHeatingLogic;
     private FormValidation formValidation;
 
     //gui variables:
@@ -186,7 +185,7 @@ public class NewPurchaseFuelForHomeHeatingController implements Initializable {
     //
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.newPurchaseFuelForHomeHeatingLogic = NewPurchaseFuelForHomeHeatingLogic.getInstance();
+        this.newPurchaseFuelForHomeHeatingLogic = client.logic.NewPurchaseFuelForHomeHeatingController.getInstance();
         this.formValidation = FormValidation.getValidator();
         this.orderDetailsIndicatorTAB.setVisible(false);
         this.shippingIndicatorTAB1.setVisible(false);

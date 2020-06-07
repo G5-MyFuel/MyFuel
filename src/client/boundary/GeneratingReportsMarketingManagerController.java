@@ -1,8 +1,6 @@
 package client.boundary;
 
 import client.logic.FormValidation;
-import client.logic.GeneratingReportsMarketingManagerLogic;
-import client.logic.SettingDiscountRatesLogic;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
@@ -15,7 +13,7 @@ import java.util.ResourceBundle;
 
 public class GeneratingReportsMarketingManagerController implements Initializable {
     private static GeneratingReportsMarketingManagerController Instance = null;
-    private GeneratingReportsMarketingManagerLogic generatingReportsMarketingManagerLogic;
+    private client.logic.GeneratingReportsMarketingManagerController generatingReportsMarketingManagerLogic;
     private FormValidation formValidation;
 
     @FXML
@@ -41,7 +39,7 @@ public class GeneratingReportsMarketingManagerController implements Initializabl
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.generatingReportsMarketingManagerLogic = GeneratingReportsMarketingManagerLogic.getInstance();
+        this.generatingReportsMarketingManagerLogic = client.logic.GeneratingReportsMarketingManagerController.getInstance();
         this.formValidation = FormValidation.getValidator();
 
         EnterOperationSaleTXT.setDisable(true);

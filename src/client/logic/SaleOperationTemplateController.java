@@ -1,19 +1,13 @@
 package client.logic;
 
-import client.ClientApp;
-import common.entity.SaleOperationTemplate;
-import common.tools.Message;
-import common.tools.OperationType;
 import server.serverControllers.MySqlConnection;
-
-import java.util.ArrayList;
 
 /**
  * @author hani
  */
-public class SaleOperationTemplateLogic {
+public class SaleOperationTemplateController {
 
-    private static SaleOperationTemplateLogic Instance = null;
+    private static SaleOperationTemplateController Instance = null;
     MySqlConnection mySqlConnector;
   //  ArrayList<SaleOperationTemplate> templateArrayList;
 
@@ -21,9 +15,9 @@ public class SaleOperationTemplateLogic {
      * SaleOperationTemplateLogic Instance getter using SingleTone DesignPatterns
      * @return Instance of logic class
      */
-    public static SaleOperationTemplateLogic getInstance() {
+    public static SaleOperationTemplateController getInstance() {
         if (Instance == null)
-            Instance = new SaleOperationTemplateLogic();
+            Instance = new SaleOperationTemplateController();
         return Instance;
     }
 /*

@@ -1,9 +1,7 @@
 package client.boundary;
 
-import client.logic.SaleOperationTemplateLogic;
 import client.logic.FormValidation;
 
-import client.logic.SettingDiscountRatesLogic;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTimePicker;
@@ -18,25 +16,19 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.text.Text;
 
-import java.awt.Label;
 import java.net.URL;
 import java.sql.Time;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
  * @author hani
- * @see SaleOperationTemplateLogic - the form's logic class
+ * @see client.logic.SaleOperationTemplateController - the form's logic class
  */
 public class SaleOperationTemplateController implements Initializable {
     private SaleOperationTemplateController Instance = null;
-    private SaleOperationTemplateLogic saleOperationTemplateLogic;
+    private client.logic.SaleOperationTemplateController saleOperationTemplateLogic;
     private FormValidation formValidation;
 
     /* db:

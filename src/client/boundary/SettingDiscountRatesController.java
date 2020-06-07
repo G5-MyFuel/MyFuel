@@ -1,7 +1,6 @@
 package client.boundary;
 
 import client.logic.FormValidation;
-import client.logic.SettingDiscountRatesLogic;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import javafx.collections.FXCollections;
@@ -16,7 +15,7 @@ import java.util.ResourceBundle;
 
 public class SettingDiscountRatesController implements Initializable {
     private static SettingDiscountRatesController Instance = null;
-    private SettingDiscountRatesLogic settingDiscountRatesLogic;
+    private client.logic.SettingDiscountRatesController settingDiscountRatesLogic;
     private FormValidation formValidation;
 
     @FXML
@@ -49,7 +48,7 @@ public class SettingDiscountRatesController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.settingDiscountRatesLogic = SettingDiscountRatesLogic.getInstance();
+        this.settingDiscountRatesLogic = client.logic.SettingDiscountRatesController.getInstance();
         this.formValidation = FormValidation.getValidator();
         ChooseSubscriptionTypeCombo.setItems(SubscriptionType);
         ShowCurrentRateTXT.setVisible(false);

@@ -1,16 +1,13 @@
 package client.boundary;
 
-import client.logic.CustomerRegistrationLogic;
+import client.logic.CustomerRegistrationController;
 import com.jfoenix.controls.JFXTextField;
 import common.entity.CreditCard;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;

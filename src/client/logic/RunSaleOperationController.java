@@ -1,21 +1,14 @@
 package client.logic;
 
-import client.ClientApp;
-import com.sun.org.apache.xpath.internal.operations.Operation;
-import common.entity.Costumer;
 import common.entity.SaleOperation;
-import common.tools.Message;
-import common.tools.OperationType;
 import server.serverControllers.MySqlConnection;
-
-import java.sql.Date;// sql class of date !!!!
 
 /**
  * @author hani
- * @see RunSaleOperationLogic - the form's logic class
+ * @see RunSaleOperationController - the form's logic class
  */
 
-public class RunSaleOperationLogic {
+public class RunSaleOperationController {
 
     MySqlConnection mySqlConnector;
     private boolean insertCostumerFlag;
@@ -23,7 +16,7 @@ public class RunSaleOperationLogic {
 
 
     /*Logic Variables*/
-    private static RunSaleOperationLogic Instance = null;
+    private static RunSaleOperationController Instance = null;
 
     /*Logic Methods*/
 
@@ -33,9 +26,9 @@ public class RunSaleOperationLogic {
      *
      * @return Instance of logic class
      */
-    public static RunSaleOperationLogic getInstance() {
+    public static RunSaleOperationController getInstance() {
         if (Instance == null)
-            Instance = new RunSaleOperationLogic();
+            Instance = new RunSaleOperationController();
         return Instance;
     }
 

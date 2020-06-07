@@ -12,10 +12,10 @@ import java.util.ArrayList;
 
 /**
  * @author itay
- * @see CustomerRegistrationLogic - the form's logic class
+ * @see CustomerRegistrationController - the form's logic class
  */
 
-public class CustomerRegistrationLogic {
+public class CustomerRegistrationController {
 
     MySqlConnection mySqlConnector;
     private boolean insertCostumerFlag;
@@ -23,7 +23,7 @@ public class CustomerRegistrationLogic {
 
 
     /*Logic Variables*/
-    private static CustomerRegistrationLogic Instance = null;
+    private static CustomerRegistrationController Instance = null;
 
     /*Logic Methods*/
 
@@ -33,9 +33,9 @@ public class CustomerRegistrationLogic {
      *
      * @return Instance of logic class
      */
-    public static CustomerRegistrationLogic getInstance() {
+    public static CustomerRegistrationController getInstance() {
         if (Instance == null)
-            Instance = new CustomerRegistrationLogic();
+            Instance = new CustomerRegistrationController();
         return Instance;
     }
 

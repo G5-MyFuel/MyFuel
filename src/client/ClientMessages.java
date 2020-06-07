@@ -1,12 +1,7 @@
 package client;
 ////???????????????????????????????????????????????????????????????????????
-import client.boundary.LoginToSystemController;
-import client.boundary.OrderExecutionController;
-import client.boundary.SettingDiscountRatesController;
-import client.logic.CustomerRegistrationLogic;
-import client.logic.LoginToSystemLogic;
-import client.logic.OrderFromSupplierLogic;
-import client.logic.SettingDiscountRatesLogic;
+import client.logic.LoginToSystemController;
+import client.logic.SettingDiscountRatesController;
 import common.entity.User;
 import common.tools.Message;
 
@@ -40,14 +35,14 @@ public class ClientMessages {
                // EmployeesManagementGuiController.Instance.setDataTable(m.getObject())
 
 
-                SettingDiscountRatesLogic.getInstance().setData(m.getReturnMsgType());
+                SettingDiscountRatesController.getInstance().setData(m.getReturnMsgType());
                 break;
             case updateRequirement:
                 //EmployeesManagementGuiController.Instance.afterUpdateJobTitleInDb(m.getObject());
                 break;
             case getAllUsersTable:
                 ArrayList<User> alu = (ArrayList<User>)m.getObject();
-                LoginToSystemLogic.getInstance().setUsersArrayList(alu);
+                LoginToSystemController.getInstance().setUsersArrayList(alu);
                // LoginToSystemController.getInstance().setUsersDetailsArrayList(m.getObject());
                 break;
 

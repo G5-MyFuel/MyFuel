@@ -7,13 +7,13 @@ import common.tools.OperationType;
 
 import java.util.ArrayList;
 
-public class LoginToSystemLogic {
-    private static LoginToSystemLogic Instance = null;
+public class LoginToSystemController {
+    private static LoginToSystemController Instance = null;
     public static ArrayList<User> usersArrayList;
 
-    public static LoginToSystemLogic getInstance() {
+    public static LoginToSystemController getInstance() {
         if (Instance == null)
-            Instance = new LoginToSystemLogic();
+            Instance = new LoginToSystemController();
         return Instance;
     }
 

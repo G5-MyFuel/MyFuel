@@ -2,20 +2,20 @@ package client.logic;
 
 import server.serverControllers.MySqlConnection;
 
-public class ConfirmDiscountRatesLogic {
+public class GeneratingReportsStationManagerController {
 
     MySqlConnection mySqlConnector;
 
     /*Logic Variables*/
-    private static ConfirmDiscountRatesLogic Instance = null;
+    private static GeneratingReportsStationManagerController Instance = null;
     //private SettingDiscountRatesController settingDiscountRatesController = SettingDiscountRatesController.getInstance();
 
     /*Logic Methods*/
 
-    public static ConfirmDiscountRatesLogic getInstance() {
+    public static GeneratingReportsStationManagerController getInstance() {
 
         if (Instance == null)
-            Instance = new ConfirmDiscountRatesLogic();
+            Instance = new GeneratingReportsStationManagerController();
         return Instance;
     }
 }
