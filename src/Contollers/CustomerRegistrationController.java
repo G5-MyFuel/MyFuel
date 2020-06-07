@@ -3,6 +3,9 @@ package Contollers;
 import boundary.CostumerManagmentTablePageBoundary;
 import boundary.CustomerRegistrationBoundary;
 import client.ClientApp;
+import common.assets.SqlAction;
+import common.assets.SqlQueryType;
+import common.assets.SqlResult;
 import entity.Costumer;
 import entity.CreditCard;
 import entity.Vehicle;
@@ -15,7 +18,7 @@ import java.util.ArrayList;
  * @see CustomerRegistrationController - the form's logic class
  */
 
-public class CustomerRegistrationController {
+public class CustomerRegistrationController extends BasicController {
 
     /**
      * The boundary controlled by this controller
@@ -28,41 +31,36 @@ public class CustomerRegistrationController {
     private Costumer tempCostumer;
 
 
-
-
-    public CustomerRegistrationController(CustomerRegistrationBoundary myBoundary){
+    public CustomerRegistrationController(CustomerRegistrationBoundary myBoundary) {
         this.myBoundary = myBoundary;
     }
 
     /*Logic Methods*/
 
     public void setCostumerInDB(Costumer costumer) {
-        //Building Quarry :
-        Integer ID = costumer.getID();
-        String Password = costumer.getCustomerPassword();
-        Password = "Aa" + Password;
-        String Type = costumer.getCostumerType();
-
-        String Fname = costumer.getFname();
-        String Lname = costumer.getLname();
-        String Email = costumer.getEmailAdress();
-        String CreditCardnum;
-        if(costumer.getCostumerCreditCard() != null)
-            CreditCardnum = costumer.getCostumerCreditCard().getCardNumber();
-        else
-            CreditCardnum = "No Card exists";
-
-        String purchasePlan;
-        if (costumer.getPurchasePlan())
-            purchasePlan = "true";
-        else
-            purchasePlan = "false";
-        String mainVehicle = costumer.getCostumerVehicle().get(0).getVehicleID().toString();
-        String ServicePlan = costumer.getServicePlan().toString();
-        String quarry = "INSERT INTO `bpsdc8o22sikrlpvvxqm`.`Costumer`(`ID`, `Password`, `Type`, `First Name`, `Last Name`, `Email Adress`, `Credit Card Number`, `Purchase Plan`, `Vehicle ID`, `Service Plan`)";
-        String Values = " VALUES (\""+ ID.toString() + "\",\"" + Password + "\",\"" + Type + "\",\"" + Fname + "\",\"" + Lname + "\",\"" + Email + "\",\"" + CreditCardnum + "\",\"" + purchasePlan + "\",\"" + mainVehicle + "\",\"" + ServicePlan +"\");";
-        quarry += Values;
-
+        //set Costumer data into varArray
+        ArrayList<Object> varArray = new ArrayList<>();
+        varArray.add(costumer.getID());
+        varArray.add("Aa" + costumer.getCustomerPassword());
+        varArray.add(costumer.getCostumerType());
+        varArray.add(costumer.getFname());
+        varArray.add(costumer.getLname());
+        varArray.add(costumer.getEmailAdress());
+        if (costumer.getCostumerCreditCard() != null) {
+            varArray.add(costumer.getCostumerCreditCard().getCardNumber());
+            varArray.add(costumer.getCostumerCreditCard().getExperationDate());
+            varArray.add(costumer.getCostumerCreditCard().getCardSecurityNumber());
+        } else {
+            varArray.add("No Card Exists");
+            varArray.add("No Card Exists");
+            varArray.add("No Card Exists");
+        }
+        varArray.add(costumer.getPurchasePlan());
+        varArray.add(costumer.getCostumerVehicle().get(0).getVehicleID());
+        varArray.add(costumer.getCostumerVehicle().get(0).getGasType());
+        varArray.add(costumer.getServicePlan());
+        SqlAction sqlAction = new SqlAction(SqlQueryType.INSERT_NEW_COSTUMER, varArray);
+        super.sendSqlActionToClient(sqlAction);
     }
 
     public void addCostumerCreditCard(CreditCard card) {
@@ -87,5 +85,10 @@ public class CustomerRegistrationController {
 
     public void setTempCostumer(Costumer tempCostumer) {
         this.tempCostumer = tempCostumer;
+    }
+
+    @Override
+    public void getResultFromClient(SqlResult result) {
+
     }
 }

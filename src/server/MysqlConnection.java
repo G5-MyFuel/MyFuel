@@ -153,6 +153,16 @@ public class MysqlConnection {
         sqlArray[SqlQueryType.GET_ALL_COSTUMER_TABLE.getCode()] = "SELECT * FROM `Costumer`";
 
 
+
+
+        /* *****************************************
+         * ********** Costumer Registration Queries ****************
+         * *****************************************/
+        sqlArray[SqlQueryType.INSERT_NEW_COSTUMER.getCode()] =
+                "INSERT INTO `Costumer`(`ID`, `Password`, `Type`, `First Name`, `Last Name`, `Email Adress`, `Credit Card Number`, `CreditCardExperationDate`, `CVV`," +
+                        " `purchasePlan`, `Vehicle ID`, `Vehicale GasType`, `Service Plan`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?);";
+
+
     }
 
     public Connection getConnection() {

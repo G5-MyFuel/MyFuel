@@ -42,7 +42,7 @@
                         </Label>
                         <ImageView fitHeight="139.0" fitWidth="191.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../media/avatars/customer_male_avatar.png" />
+                              <Image url="@../media/avatars/customer_male_avatar.png" />
                            </image>
                            <VBox.margin>
                               <Insets bottom="10.0" top="10.0" />
@@ -57,7 +57,7 @@
                            <graphic>
                               <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../media/icons/icons8_home_80px.png" />
+                                    <Image url="@../media/CostumerRegisterationMedia/icons8_home_80px.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -75,7 +75,7 @@
                            <graphic>
                               <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../media/CostumerRegisterationMedia/add_user_male_40px.png" />
+                                    <Image url="@../media/CostumerRegisterationMedia/add_user_male_40px.png" />
                                  </image>
                                  <cursor>
                                     <Cursor fx:constant="CLOSED_HAND" />
@@ -93,7 +93,7 @@
                            <graphic>
                               <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../media/CostumerUpdateMedia/icons8_registration_40px_2.png" />
+                                    <Image url="@../media/CostumerUpdateMedia/icons8_registration_40px_2.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -105,7 +105,7 @@
                            <graphic>
                               <ImageView fitHeight="22.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../media/CostumerRegisterationMedia/icons8_sign_out_80px.png" />
+                                    <Image url="@../media/CostumerRegisterationMedia/icons8_sign_out_80px.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -125,7 +125,7 @@
                                     </Text>
                                     <ImageView fitHeight="64.0" fitWidth="70.0" layoutX="81.0" layoutY="-33.0">
                                        <image>
-                                          <Image url="@../../media/interface.png" />
+                                          <Image url="@../media/interface.png" />
                                        </image>
                                     </ImageView>
                                  </children>
@@ -160,7 +160,7 @@
                                           <Label layoutX="30.0" layoutY="85.0" text="Fill in the required information" />
                                           <ImageView fx:id="forwardButtonPersonalToVehicle" accessibleRole="BUTTON" fitHeight="70.0" fitWidth="94.0" layoutX="851.0" layoutY="551.0" onMouseClicked="#FirstForwardButtonOnClick" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../../media/CostumerRegisterationMedia/forward_button_40px.png" />
+                                                <Image url="@../media/CostumerRegisterationMedia/forward_button_40px.png" />
                                              </image>
                                              <effect>
                                                 <Blend />
@@ -205,12 +205,12 @@
                                                       <Hyperlink fx:id="CreditCardLink" layoutX="86.0" layoutY="37.0" onMouseClicked="#creditCardLinkOnClick" text="Credit Card Details (Optional)" />
                                                       <ImageView fitHeight="47.0" fitWidth="58.0" layoutX="29.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
-                                                            <Image url="@../../media/CostumerRegisterationMedia/card_security_40px.png" />
+                                                            <Image url="@../media/CostumerRegisterationMedia/card_security_40px.png" />
                                                          </image>
                                                       </ImageView>
                                                       <ImageView fx:id="CreditCardLinkTT" fitHeight="64.0" fitWidth="16.0" layoutX="249.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
-                                                            <Image url="@../../media/CostumerRegisterationMedia/help_16px.png" />
+                                                            <Image url="@../media/CostumerRegisterationMedia/help_16px.png" />
                                                          </image>
                                                          <cursor>
                                                             <Cursor fx:constant="HAND" />
@@ -256,12 +256,12 @@
                                                 <Hyperlink layoutX="110.0" layoutY="360.0" onMouseClicked="#addCreditCardLinkOnClick" prefHeight="29.0" prefWidth="278.0" text="Add this credit card to my account." />
                                                 <ImageView layoutX="68.0" layoutY="275.0">
                                                    <image>
-                                                      <Image url="@../../media/CostumerRegisterationMedia/help_16px.png" />
+                                                      <Image url="@../media/CostumerRegisterationMedia/help_16px.png" />
                                                    </image>
                                                 </ImageView>
                                                 <ImageView fx:id="addCardButton" accessibleRole="BUTTON" fitHeight="32.0" fitWidth="29.0" layoutX="61.0" layoutY="359.0" onMouseClicked="#addCreditCardLinkOnClick">
                                                    <image>
-                                                      <Image url="@../../media/CostumerRegisterationMedia/add_40px.png" />
+                                                      <Image url="@../media/CostumerRegisterationMedia/add_40px.png" />
                                                    </image>
                                                    <cursor>
                                                       <Cursor fx:constant="OPEN_HAND" />
@@ -269,7 +269,7 @@
                                                 </ImageView>
                                                 <ImageView fitHeight="70.0" fitWidth="136.0" layoutX="162.0" layoutY="248.0" mouseTransparent="true">
                                                    <image>
-                                                      <Image url="@../../media/credit-card-cvv-code.png" />
+                                                      <Image url="@../media/credit-card-cvv-code.png" />
                                                    </image>
                                                 </ImageView>
                                              </children>
@@ -282,7 +282,7 @@
                            <graphic>
                               <ImageView fitHeight="90.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../media/CostumerRegisterationMedia/chevron_left_50px.png" />
+                                    <Image url="@../media/CostumerRegisterationMedia/chevron_left_50px.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -313,7 +313,7 @@
                                     </ScrollPane>
                                     <ImageView fx:id="addVehicleButton" accessibleRole="BUTTON" fitHeight="33.0" fitWidth="35.0" layoutX="24.0" layoutY="173.0" onMouseClicked="#setVehicleInfoVisible" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../../media/CostumerRegisterationMedia/add_40px.png" />
+                                          <Image url="@../media/CostumerRegisterationMedia/add_40px.png" />
                                        </image>
                                        <cursor>
                                           <Cursor fx:constant="OPEN_HAND" />
@@ -325,7 +325,7 @@
                                        </cursor></Label>
                                     <ImageView fx:id="backButtonVehicalToPersonal" accessibleRole="BUTTON" fitHeight="70.0" fitWidth="94.0" layoutX="50.0" layoutY="562.0" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#FirstBackwardButtonOnClick" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../../media/CostumerRegisterationMedia/forward_button_40px.png" />
+                                          <Image url="@../media/CostumerRegisterationMedia/forward_button_40px.png" />
                                        </image>
                                        <cursor>
                                           <Cursor fx:constant="OPEN_HAND" />
@@ -333,7 +333,7 @@
                                     </ImageView>
                                     <ImageView fx:id="forwardButtonVehicleToPlan" accessibleRole="BUTTON" fitHeight="70.0" fitWidth="94.0" layoutX="856.0" layoutY="552.0" onMouseClicked="#SecoundForwardButtonOnClick" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../../media/CostumerRegisterationMedia/forward_button_40px.png" />
+                                          <Image url="@../media/CostumerRegisterationMedia/forward_button_40px.png" />
                                        </image>
                                        <cursor>
                                           <Cursor fx:constant="OPEN_HAND" />
@@ -361,7 +361,7 @@
                                     </Pane>
                                     <ImageView fitHeight="29.0" fitWidth="31.0" layoutX="142.0" layoutY="175.0" onMouseClicked="#RemoveSelectedVe" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../../media/CostumerRegisterationMedia/minus_80px.png" />
+                                          <Image url="@../media/CostumerRegisterationMedia/minus_80px.png" />
                                        </image>
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
@@ -378,7 +378,7 @@
                            <graphic>
                               <ImageView fitHeight="89.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../media/CostumerRegisterationMedia/car_30px.png" />
+                                    <Image url="@../media/CostumerRegisterationMedia/car_30px.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -404,7 +404,7 @@
                                                 <JFXComboBox fx:id="CostumertypeChoiceBox" layoutX="180.0" layoutY="18.0" prefHeight="40.0" prefWidth="306.0" />
                                                 <ImageView fx:id="CostumerTypeInfo" fitHeight="18.0" fitWidth="16.0" layoutX="87.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
-                                                      <Image url="@../../media/CostumerRegisterationMedia/help_16px.png" />
+                                                      <Image url="@../media/CostumerRegisterationMedia/help_16px.png" />
                                                    </image>
                                                    <cursor>
                                                       <Cursor fx:constant="HAND" />
@@ -418,7 +418,7 @@
                                                 <JFXComboBox fx:id="ServicePlanChoiseBox" layoutX="180.0" layoutY="18.0" prefHeight="40.0" prefWidth="306.0" />
                                                 <ImageView fx:id="ServicePlanInfo" fitHeight="18.0" fitWidth="16.0" layoutX="72.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
-                                                      <Image url="@../../media/CostumerRegisterationMedia/help_16px.png" />
+                                                      <Image url="@../media/CostumerRegisterationMedia/help_16px.png" />
                                                    </image>
                                                    <cursor>
                                                       <Cursor fx:constant="HAND" />
@@ -444,7 +444,7 @@
                                                 <Label layoutY="30.0" style="-fx-text-fill: #868282;" text="Purchase Plan" />
                                                 <ImageView fx:id="PurchasePlanInffo" fitHeight="18.0" fitWidth="16.0" layoutX="80.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
-                                                      <Image url="@../../media/CostumerRegisterationMedia/help_16px.png" />
+                                                      <Image url="@../media/CostumerRegisterationMedia/help_16px.png" />
                                                    </image>
                                                    <cursor>
                                                       <Cursor fx:constant="HAND" />
@@ -456,7 +456,7 @@
                                     </VBox>
                                     <ImageView fx:id="backButtonPlanToVehicle" accessibleRole="BUTTON" fitHeight="70.0" fitWidth="94.0" layoutX="50.0" layoutY="562.0" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#SecoundBackwardButtonOnClick" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../../media/CostumerRegisterationMedia/forward_button_40px.png" />
+                                          <Image url="@../media/CostumerRegisterationMedia/forward_button_40px.png" />
                                        </image>
                                        <cursor>
                                           <Cursor fx:constant="OPEN_HAND" />
@@ -472,7 +472,7 @@
                            <graphic>
                               <ImageView fitHeight="77.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../media/CostumerRegisterationMedia/view_details_40px.png" />
+                                    <Image url="@../media/CostumerRegisterationMedia/view_details_40px.png" />
                                  </image>
                               </ImageView>
                            </graphic>

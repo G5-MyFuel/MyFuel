@@ -37,7 +37,7 @@ public class CustomerRegistrationBoundary implements Initializable {
 
     private ArrayList<Vehicle> tempVehicleArray;
     CreditCard tempCreditCard = null;
-    private static CustomerRegistrationBoundary Instance = null;
+
     private CustomerRegistrationController myController = new CustomerRegistrationController(this);
     private FormValidation formValidation;
     private boolean CardClickFlag = false;

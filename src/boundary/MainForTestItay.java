@@ -3,6 +3,7 @@ package boundary;
 import client.ChatClient;
 import client.ClientApp;
 import client.ClientConsole;
+import common.assets.ProjectPages;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -35,7 +36,7 @@ public class MainForTestItay extends Application {
         Pane root = null;
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/boundary/CostumerManagementTablePage.fxml"));
+            loader.setLocation(getClass().getResource(ProjectPages.COSTUMER_MANAGEMENT_TABLE_PAGE.getPath()));
             root = loader.load();
             Scene s1 = new Scene(root);
             primaryStage.setScene(s1);

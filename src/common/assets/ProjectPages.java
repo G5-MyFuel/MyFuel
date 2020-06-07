@@ -2,7 +2,7 @@ package common.assets;
 
 /**
  * Enum that represents all our project boundaries
- * @author Raviv Komem
+ * @author Itay Ziv
  *
  */
 public enum ProjectPages {

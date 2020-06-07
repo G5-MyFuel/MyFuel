@@ -15,9 +15,11 @@ public enum SqlQueryType {
 
 
 
+
     /* *****************************************
      * ********** Costumer Registration Queries ****************
      * *****************************************/
+    INSERT_NEW_COSTUMER(SqlExecutionType.UPDATE_QUERY),
 
 
 
