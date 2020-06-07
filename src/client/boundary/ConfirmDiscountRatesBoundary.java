@@ -1,5 +1,6 @@
 package client.boundary;
 
+import client.logic.ConfirmDiscountRatesLogic;
 import client.logic.FormValidation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,9 +11,9 @@ import javafx.scene.control.TableView;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ConfirmDiscountRatesController implements Initializable {
-    private static ConfirmDiscountRatesController Instance = null;
-    private client.logic.ConfirmDiscountRatesController confirmDiscountRatesLogic;
+public class ConfirmDiscountRatesBoundary implements Initializable {
+    private static ConfirmDiscountRatesBoundary Instance = null;
+    private ConfirmDiscountRatesLogic confirmDiscountRatesLogic;
     private FormValidation formValidation;
 
     @FXML
@@ -35,7 +36,7 @@ public class ConfirmDiscountRatesController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.confirmDiscountRatesLogic = client.logic.ConfirmDiscountRatesController.getInstance();
+        this.confirmDiscountRatesLogic = ConfirmDiscountRatesLogic.getInstance();
         this.formValidation = FormValidation.getValidator();
 
         btnApprovedRates.setDisable(true);
@@ -56,9 +57,9 @@ public class ConfirmDiscountRatesController implements Initializable {
      *
      * @return Instance of controller class
      */
-    public static ConfirmDiscountRatesController getInstance() {
+    public static ConfirmDiscountRatesBoundary getInstance() {
         if (Instance == null)
-            Instance = new ConfirmDiscountRatesController();
+            Instance = new ConfirmDiscountRatesBoundary();
         return Instance;
     }
 

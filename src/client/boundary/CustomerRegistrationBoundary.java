@@ -1,5 +1,6 @@
 package client.boundary;
 
+import client.logic.*;
 import client.logic.FormValidation;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXRadioButton;
@@ -29,15 +30,15 @@ import java.util.ResourceBundle;
 
 /**
  * @author itay
- * @see client.logic.CustomerRegistrationController - the form's logic class
+ * @see CustomerRegistrationLogic - the form's logic class
  */
 
-public class CustomerRegistrationController implements Initializable {
+public class CustomerRegistrationBoundary implements Initializable {
 
     private ArrayList<Vehicle> tempVehicleArray;
     CreditCard tempCreditCard = null;
-    private static CustomerRegistrationController Instance = null;
-    private client.logic.CustomerRegistrationController CRLogic;
+    private static CustomerRegistrationBoundary Instance = null;
+    private CustomerRegistrationLogic CRLogic;
     private FormValidation formValidation;
     private boolean CardClickFlag = false;
     private Alert ErrorAlert = new Alert(Alert.AlertType.ERROR);
@@ -45,7 +46,7 @@ public class CustomerRegistrationController implements Initializable {
     @FXML
     private FXMLLoader PRCLoader;
     @FXML
-    private pymentWindowControllerForRegistar PRC;
+    private pymentWindowControllerForRegistarBoundary PRC;
 
     /*Gui variables:
      * */
@@ -225,9 +226,9 @@ public class CustomerRegistrationController implements Initializable {
      *
      * @return Instance of controller class
      */
-    public static CustomerRegistrationController getInstance() {
+    public static CustomerRegistrationBoundary getInstance() {
         if (Instance == null)
-            Instance = new CustomerRegistrationController();
+            Instance = new CustomerRegistrationBoundary();
         return Instance;
     }
 
@@ -277,9 +278,9 @@ public class CustomerRegistrationController implements Initializable {
             tempCos.setPurchasePlan(false);
 
         if (CostumertypeChoiceBox.getSelectionModel().getSelectedItem().toString().equals("Private"))
-            tempCos.setUserType(0);
+            tempCos.setCostumerType(0);
         else
-            tempCos.setUserType(1);
+            tempCos.setCostumerType(1);
 
         tempCos.setServicePlan(ServicePlanChoiseBox.getSelectionModel().getSelectedItem().toString());
         tempCos.setCostumerVehicle(tempVehicleArray);

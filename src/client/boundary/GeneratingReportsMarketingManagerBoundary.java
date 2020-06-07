@@ -1,6 +1,7 @@
 package client.boundary;
 
 import client.logic.FormValidation;
+import client.logic.GeneratingReportsMarketingManagerLogic;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
@@ -11,9 +12,9 @@ import javafx.scene.control.Button;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class GeneratingReportsMarketingManagerController implements Initializable {
-    private static GeneratingReportsMarketingManagerController Instance = null;
-    private client.logic.GeneratingReportsMarketingManagerController generatingReportsMarketingManagerLogic;
+public class GeneratingReportsMarketingManagerBoundary implements Initializable {
+    private static GeneratingReportsMarketingManagerBoundary Instance = null;
+    private GeneratingReportsMarketingManagerLogic generatingReportsMarketingManagerLogic;
     private FormValidation formValidation;
 
     @FXML
@@ -39,7 +40,7 @@ public class GeneratingReportsMarketingManagerController implements Initializabl
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.generatingReportsMarketingManagerLogic = client.logic.GeneratingReportsMarketingManagerController.getInstance();
+        this.generatingReportsMarketingManagerLogic = GeneratingReportsMarketingManagerLogic.getInstance();
         this.formValidation = FormValidation.getValidator();
 
         EnterOperationSaleTXT.setDisable(true);
@@ -61,9 +62,9 @@ public class GeneratingReportsMarketingManagerController implements Initializabl
      * GeneratingReportsMarketingManagerController Instance getter using SingleTone DesignPatterns
      * @return Instance of controller class
      */
-    public static GeneratingReportsMarketingManagerController getInstance() {
+    public static GeneratingReportsMarketingManagerBoundary getInstance() {
         if (Instance == null)
-            Instance = new GeneratingReportsMarketingManagerController();
+            Instance = new GeneratingReportsMarketingManagerBoundary();
         return Instance;
     }
 

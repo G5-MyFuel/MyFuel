@@ -11,8 +11,8 @@ import javafx.scene.control.TableView;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ViewAnalyticDataController implements Initializable {
-    private static ViewAnalyticDataController Instance = null;
+public class ViewAnalyticDataBoundary implements Initializable {
+    private static ViewAnalyticDataBoundary Instance = null;
     private ViewAnalyticDataLogic viewAnalyticDataLogic;
     private FormValidation formValidation;
 
@@ -59,9 +59,9 @@ public class ViewAnalyticDataController implements Initializable {
      *
      * @return Instance of controller class
      */
-    public static ViewAnalyticDataController getInstance() {
+    public static ViewAnalyticDataBoundary getInstance() {
         if (Instance == null)
-            Instance = new ViewAnalyticDataController();
+            Instance = new ViewAnalyticDataBoundary();
         return Instance;
     }
 

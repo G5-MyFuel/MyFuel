@@ -41,18 +41,18 @@ public class CustomerRegistrationController {
 
     public void setCostumerInDB(Costumer costumer) {
         //Building Quarry :
-        Integer ID = costumer.getUserID();
-        String Password = costumer.getUserPassword();
+        Integer ID = costumer.getID();
+        String Password = costumer.getCustomerPassword();
         Password = "Aa" + Password;
         String Type;
-        if (costumer.getUserType() == 0)
+        if (costumer.getCostumerType() == 0)
             Type = "Private";
         else
             Type = "Company";
 
-        String Fname = costumer.getUserFirstName();
-        String Lname = costumer.getUserLastName();
-        String Email = costumer.getUserEmail();
+        String Fname = costumer.getFname();
+        String Lname = costumer.getLname();
+        String Email = costumer.getEmailAdress();
         String CreditCardnum;
         if(costumer.getCostumerCreditCard() != null)
             CreditCardnum = costumer.getCostumerCreditCard().getCardNumber();

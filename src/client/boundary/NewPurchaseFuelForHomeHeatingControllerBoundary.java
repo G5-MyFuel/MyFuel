@@ -2,6 +2,7 @@ package client.boundary;
 
 import client.ClientApp;
 import client.logic.FormValidation;
+import client.logic.NewPurchaseFuelForHomeHeatingLogic;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
@@ -27,12 +28,12 @@ import java.util.ResourceBundle;
 
 /**
  * @author daniel
- * @see client.logic.NewPurchaseFuelForHomeHeatingController - the form's logic class
+ * @see NewPurchaseFuelForHomeHeatingLogic - the form's logic class
  */
-public class NewPurchaseFuelForHomeHeatingController implements Initializable {
+public class NewPurchaseFuelForHomeHeatingControllerBoundary implements Initializable {
 
-    private static NewPurchaseFuelForHomeHeatingController Instance = null;
-    private client.logic.NewPurchaseFuelForHomeHeatingController newPurchaseFuelForHomeHeatingLogic;
+    private static NewPurchaseFuelForHomeHeatingControllerBoundary Instance = null;
+    private NewPurchaseFuelForHomeHeatingLogic newPurchaseFuelForHomeHeatingLogic;
     private FormValidation formValidation;
 
     //gui variables:
@@ -185,7 +186,7 @@ public class NewPurchaseFuelForHomeHeatingController implements Initializable {
     //
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.newPurchaseFuelForHomeHeatingLogic = client.logic.NewPurchaseFuelForHomeHeatingController.getInstance();
+        this.newPurchaseFuelForHomeHeatingLogic = NewPurchaseFuelForHomeHeatingLogic.getInstance();
         this.formValidation = FormValidation.getValidator();
         this.orderDetailsIndicatorTAB.setVisible(false);
         this.shippingIndicatorTAB1.setVisible(false);
@@ -199,9 +200,9 @@ public class NewPurchaseFuelForHomeHeatingController implements Initializable {
      * NewPurchaseFuelForHomeHeatingController Instance getter using SingleTone DesignPatterns
      * @return Instance of controller class
      */
-    public NewPurchaseFuelForHomeHeatingController getInstance() {
+    public NewPurchaseFuelForHomeHeatingControllerBoundary getInstance() {
         if (Instance == null)
-            Instance = new NewPurchaseFuelForHomeHeatingController();
+            Instance = new NewPurchaseFuelForHomeHeatingControllerBoundary();
         return Instance;
     }
 

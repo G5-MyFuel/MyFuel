@@ -15,7 +15,7 @@ import java.util.ResourceBundle;
 
 public class ClientConnectionToServer {
     //GuiController variables:
-    LoginToSystemController loginToSystemController = null;
+    LoginToSystemBoundary loginToSystemController = null;
 
     @FXML
     private ResourceBundle resources;
@@ -54,7 +54,7 @@ public class ClientConnectionToServer {
             ((Stage) ((Node) event.getSource()).getScene().getWindow()).hide();
             System.out.println("ClientConnectionToServer gui closed");
             //show login page gui
-            loginToSystemController = LoginToSystemController.getInstance();
+            loginToSystemController = LoginToSystemBoundary.getInstance();
             loginToSystemController.primaryStage = new Stage();
             loginToSystemController.start(null);
         } else System.err.println("Can't open EmployeesManagementGUI screen");

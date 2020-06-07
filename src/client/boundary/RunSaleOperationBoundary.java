@@ -18,12 +18,12 @@ import java.util.ResourceBundle;
 
 /**
  * @author hani
- * @see client.logic.RunSaleOperationController - the form's logic class
+ * @see client.logic.RunSaleOperationLogic - the form's logic class
  */
 
-public class RunSaleOperationController implements Initializable {
-        private static RunSaleOperationController Instance = null;
-        private client.logic.RunSaleOperationController RunSaleOperationLogic;
+public class RunSaleOperationBoundary implements Initializable {
+        private static RunSaleOperationBoundary Instance = null;
+        private client.logic.RunSaleOperationLogic RunSaleOperationLogic;
         private FormValidation formValidation;
 
     /*
@@ -117,9 +117,9 @@ public class RunSaleOperationController implements Initializable {
      *
      * @return Instance of controller class
      */
-    public RunSaleOperationController getInstance() {
+    public RunSaleOperationBoundary getInstance() {
         if (Instance == null)
-            Instance = new RunSaleOperationController();
+            Instance = new RunSaleOperationBoundary();
         return Instance;
     }
 

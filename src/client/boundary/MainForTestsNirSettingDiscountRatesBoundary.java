@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 
-public class MainForTestsNirSettingDiscountRates extends Application {
+public class MainForTestsNirSettingDiscountRatesBoundary extends Application {
 
     /**
      * The default port to connect on.
@@ -26,7 +26,7 @@ public class MainForTestsNirSettingDiscountRates extends Application {
     String pageName = "SettingDiscountRatesFXML.fxml";   //שם קובץ הfxml
 
     private AnchorPane root;
-    private SettingDiscountRatesController settingDiscountRatesController;    //אינסטנס של מחלקת הboundary
+    private SettingDiscountRatesBoundary settingDiscountRatesController;    //אינסטנס של מחלקת הboundary
 
     public static void main(String[] args) {
         launch(args);

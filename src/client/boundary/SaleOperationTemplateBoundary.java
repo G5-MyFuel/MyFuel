@@ -1,5 +1,6 @@
 package client.boundary;
 
+import client.logic.SaleOperationTemplateLogic;
 import client.logic.FormValidation;
 
 import com.jfoenix.controls.JFXComboBox;
@@ -24,11 +25,11 @@ import java.util.ResourceBundle;
 
 /**
  * @author hani
- * @see client.logic.SaleOperationTemplateController - the form's logic class
+ * @see SaleOperationTemplateLogic - the form's logic class
  */
-public class SaleOperationTemplateController implements Initializable {
-    private SaleOperationTemplateController Instance = null;
-    private client.logic.SaleOperationTemplateController saleOperationTemplateLogic;
+public class SaleOperationTemplateBoundary implements Initializable {
+    private SaleOperationTemplateBoundary Instance = null;
+    private SaleOperationTemplateLogic saleOperationTemplateLogic;
     private FormValidation formValidation;
 
     /* db:
@@ -150,9 +151,9 @@ public class SaleOperationTemplateController implements Initializable {
      *
      * @return Instance of controller class
      */
-    public SaleOperationTemplateController getInstance() {
+    public SaleOperationTemplateBoundary getInstance() {
         if (Instance == null)
-            Instance = new SaleOperationTemplateController();
+            Instance = new SaleOperationTemplateBoundary();
         return Instance;
     }
     @FXML

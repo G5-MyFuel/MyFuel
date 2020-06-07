@@ -1,6 +1,7 @@
 package client.boundary;
 
 import client.logic.FormValidation;
+import client.logic.GeneratingReportsStationManagerLogic;
 import com.jfoenix.controls.JFXComboBox;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,9 +11,9 @@ import javafx.scene.control.Button;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class GeneratingReportsStationManagerController implements Initializable {
-    private static GeneratingReportsStationManagerController Instance = null;
-    private client.logic.GeneratingReportsStationManagerController generatingReportsStationManagerLogic;
+public class GeneratingReportsStationManagerBoundary implements Initializable {
+    private static GeneratingReportsStationManagerBoundary Instance = null;
+    private GeneratingReportsStationManagerLogic generatingReportsStationManagerLogic;
     private FormValidation formValidation;
 
     @FXML
@@ -35,7 +36,7 @@ public class GeneratingReportsStationManagerController implements Initializable 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.generatingReportsStationManagerLogic = client.logic.GeneratingReportsStationManagerController.getInstance();
+        this.generatingReportsStationManagerLogic = GeneratingReportsStationManagerLogic.getInstance();
         this.formValidation = FormValidation.getValidator();
 
         btnGenerateReport.setDisable(true);
@@ -56,9 +57,9 @@ public class GeneratingReportsStationManagerController implements Initializable 
      *
      * @return Instance of controller class
      */
-    public static GeneratingReportsStationManagerController getInstance() {
+    public static GeneratingReportsStationManagerBoundary getInstance() {
         if (Instance == null)
-            Instance = new GeneratingReportsStationManagerController();
+            Instance = new GeneratingReportsStationManagerBoundary();
         return Instance;
     }
 

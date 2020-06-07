@@ -4,7 +4,6 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 
@@ -13,7 +12,7 @@ public class MainForTests extends Application {
     String pageName = "NewPurchaseFuelForHomeHeatingFXML.fxml";   //שם קובץ הfxml
 
     private AnchorPane root;
-    private NewPurchaseFuelForHomeHeatingController newPurchaseFuelForHomeHeatingController;    //אינסטנס של מחלקת הboundary
+    private NewPurchaseFuelForHomeHeatingControllerBoundary newPurchaseFuelForHomeHeatingController;    //אינסטנס של מחלקת הboundary
 
     public static void main(String[] args) {
         launch(args);

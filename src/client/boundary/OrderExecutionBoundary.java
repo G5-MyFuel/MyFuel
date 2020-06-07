@@ -1,6 +1,6 @@
 package client.boundary;
 
-import client.logic.OrderFromSupplierController;
+import client.logic.OrderFromSupplierLogic;
 import common.entity.OrderFuelFromSupplier;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,13 +23,13 @@ import java.util.ResourceBundle;
 
 /**
  * @author Adi Lampert
- * @see OrderExecutionController - the from's logic class
+ * @see OrderExecutionBoundary - the from's logic class
  */
-public class OrderExecutionController implements Initializable {
+public class OrderExecutionBoundary implements Initializable {
 
-    public static OrderExecutionController Instance = null;
-    private OrderExecutionController OrderExecutionController;
-    private OrderFromSupplierController OFSLogic = OrderFromSupplierController.getInstance(); //logic
+    public static OrderExecutionBoundary Instance = null;
+    private OrderExecutionBoundary OrderExecutionController;
+    private OrderFromSupplierLogic OFSLogic = OrderFromSupplierLogic.getInstance(); //logic
 
 
     private ArrayList<OrderFuelFromSupplier> OFFS;
@@ -110,7 +110,7 @@ public class OrderExecutionController implements Initializable {
 
     }
 
-    public OrderExecutionController() {
+    public OrderExecutionBoundary() {
         Instance = this;
     }
 
@@ -119,9 +119,9 @@ public class OrderExecutionController implements Initializable {
      *
      * @return Instance of controller class
      */
-    public static OrderExecutionController getInstance() {
+    public static OrderExecutionBoundary getInstance() {
         if (Instance == null)
-            Instance = new OrderExecutionController();
+            Instance = new OrderExecutionBoundary();
         return Instance;
     }
 
