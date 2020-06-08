@@ -24,10 +24,6 @@ public class SettingDiscountRatesBoundary implements Initializable {
     private SettingDiscountRatesController myController = new SettingDiscountRatesController(this);
     private FormValidation formValidation;
 
-    /*private static SettingDiscountRatesBoundary Instance = null;
-    private SettingDiscountRatesController settingDiscountRatesLogic;
-    private FormValidation formValidation;*/
-
     @FXML
     private Button btnOverview;
 
@@ -55,33 +51,18 @@ public class SettingDiscountRatesBoundary implements Initializable {
     private ObservableList<String> SubscriptionType = FXCollections.observableArrayList("Regular monthly subscription - single vehicle",
             "Full monthly subscription (for single vehicle)", "Regular monthly subscription - number of vehicles");
 
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //this.settingDiscountRatesLogic = SettingDiscountRatesController.getInstance();
         this.formValidation = FormValidation.getValidator();
         ChooseSubscriptionTypeCombo.setItems(SubscriptionType);
         ShowCurrentRateTXT.setVisible(false);
         ShowNewRateTXT.setVisible(false);
         btnSetNewRate.setVisible(false);
-        //ChooseSubscriptionTypeCombo.set
-        //this.shippingIndicatorTAB1.setVisible(false);
+
         /*  set all fields validators */
         formValidation();
-        /* set form items */
-        //setShippingTab();
     }
 
-    /**
-     * SettingDiscountRatesController Instance getter using SingleTone DesignPatterns
-     *
-     * @return Instance of controller class
-     */
-    /*public static SettingDiscountRatesBoundary getInstance() {
-        if (Instance == null)
-            Instance = new SettingDiscountRatesBoundary();
-        return Instance;
-    }*/
     private void formValidation() {
 
         /*  New price validation */
@@ -100,14 +81,7 @@ public class SettingDiscountRatesBoundary implements Initializable {
 
         /*צריך להשוות את המנוי הנבחר עם המידע ב-DB ולהציג את המחיר הקיים.todo:*/
 
-        ShowCurrentRateTXT.setText("Check");
-        //String SubscriptionType = "SELECT * FROM `bpsdc8o22sikrlpvvxqm`.`DiscountRates` WHERE `Subscription type` LIKE \"" + ChooseSubscriptionTypeCombo.getValue() + "\";";
         myController.getDiscountRatesTable(); //start the process that will ask server to execute quarry and get the table details
-        //SettingDiscountRatesLogic settingDiscountRatesLogic = new SettingDiscountRatesLogic();
-        //System.out.println(SubscriptionType);
-        //settingDiscountRatesLogic.getDiscountRatesTable(SubscriptionType);
-        //ClientApp.client.handleMessageFromClientUI(new Message(OperationType.getRequirementData, (Object)SubscriptionType));  //send the new employee jobTitle to DB
-
         //ShowCurrentRateTXT.setText(SubscriptionType);
         ShowCurrentRateTXT.setVisible(true);
         ShowCurrentRateTXT.setEditable(false);
@@ -115,14 +89,8 @@ public class SettingDiscountRatesBoundary implements Initializable {
         btnSetNewRate.setVisible(true);
     }
 
-    public void setData(float currentRate) {
-
-        Float current = currentRate;
-        /*ReturnMsgType currentPrice = (ReturnMsgType) object;
-        System.out.println(ReturnMsgType.values());*/
-        //System.out.println(currentPrice);
-        ShowCurrentRateTXT.setText(current.toString());
-
+    public void setData(String currentRate) {
+        ShowCurrentRateTXT.setText(currentRate);
     }
 
     @FXML
@@ -149,6 +117,5 @@ public class SettingDiscountRatesBoundary implements Initializable {
 
 
     }
-
 
 }
