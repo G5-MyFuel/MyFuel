@@ -4,13 +4,14 @@ import boundary.CostumerManagmentTablePageBoundary;
 import boundary.SaleOperationTemplateBoundary;
 import common.assets.SqlAction;
 import common.assets.SqlQueryType;
+import common.assets.SqlResult;
 import server.MysqlConnection;
 
 /**
  * @author Hana Wiener
  */
 
-public class SaleOperationTemplateController {
+public class SaleOperationTemplateController extends BasicController  {
     /**
      * The boundary controlled by this controller
      */
@@ -34,6 +35,11 @@ public class SaleOperationTemplateController {
 
     public void getTemplatesTable() {
         SqlAction sqlAction = new SqlAction(SqlQueryType.GET_ALL_TEMPLATES_TABLE);
+
+    }
+
+    @Override
+    public void getResultFromClient(SqlResult result) {
 
     }
 

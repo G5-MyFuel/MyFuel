@@ -14,6 +14,7 @@ public enum ProjectPages {
     COSTUMER_REGISTRATION_PAGE("/boundary/CustomerRegistrationFXML2.fxml"),
     FAST_FUEL_PAGE("/boundary/CustomerRegistrationFXML2.fxml"),
 
+
     //hani pages:
     SALE_OPERATION_TEMPLATE_PAGE("/boundary/SaleOperationTemplate.fxml");
 
