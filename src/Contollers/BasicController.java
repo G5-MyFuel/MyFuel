@@ -9,9 +9,6 @@ import java.io.Serializable;
 /*
 import assets.SqlAction;
 import assets.SqlResult;
-import client.ChatClient;
-import client.ClientConsole;
-
  */
 
 /**

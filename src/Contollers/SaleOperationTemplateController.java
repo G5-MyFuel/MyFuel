@@ -5,7 +5,14 @@ import boundary.SaleOperationTemplateBoundary;
 import common.assets.SqlAction;
 import common.assets.SqlQueryType;
 import common.assets.SqlResult;
+import entity.Day;
+import entity.FuelTypes;
+import entity.SaleOperationTemplate;
+import javafx.application.Platform;
 import server.MysqlConnection;
+
+import java.sql.Time;
+import java.util.ArrayList;
 
 /**
  * @author Hana Wiener
@@ -35,30 +42,46 @@ public class SaleOperationTemplateController extends BasicController  {
 
     public void getTemplatesTable() {
         SqlAction sqlAction = new SqlAction(SqlQueryType.GET_ALL_TEMPLATES_TABLE);
+        super.sendSqlActionToClient(sqlAction);
 
     }
+
 
     @Override
     public void getResultFromClient(SqlResult result) {
+        Platform.runLater(() -> {
+            switch (result.getActionType()) {
+                case GET_ALL_TEMPLATES_TABLE:
+                    ArrayList<SaleOperationTemplate> resultList = new ArrayList<>();
+                    resultList.addAll(this.changeResultToTemplate(result));
+                    myBoundary.setTemplateTable(resultList);
+                    break;
 
+                default:
+                    break;
+            }
+        });
     }
+    /**
+     * This method create array list of templates from the data base result.
+     *
+     * @param result the result
+     * @return Array list of costumers
+     */
+    private ArrayList<SaleOperationTemplate> changeResultToTemplate(SqlResult result){
 
-/*
-    public void getTemplateTable() {
-        ClientApp.client.handleMessageFromClientUI(new Message(OperationType.getRequirementData, "SELECT * FROM CampaignTemplates as T;"));
+        ArrayList<SaleOperationTemplate> resultList = new ArrayList<>();
+        for(ArrayList<Object> a: result.getResultData()) {
+            SaleOperationTemplate cos = new SaleOperationTemplate((String) a.get(0), (String)a.get(1),null,
+                    (float)a.get(3),null,null,null,(String)a.get(7));
+
+            cos.setFuelType(FuelTypes.valueOf((String) a.get(2)));
+            cos.setDay( Day.valueOf((String) a.get(4)));
+            cos.setBeginHour(Time.valueOf((String) a.get(5)));
+            cos.setEndHour(Time.valueOf((String) a.get(6)));
+            resultList.add(cos);
+        }
+        return resultList;
     }
-
-    public void getDatafromServer() {
-        ClientApp.client.handleMessageFromClientUI(new Message(OperationType.getRequirementData, "SELECT * FROM CampaignTemplates"));
-    }
-
-
-    public ArrayList<SaleOperationTemplate> getTemplatesArrayList() {
-        return templateArrayList;
-    }
-
-    public void setTemplateArrayList(ArrayList<SaleOperationTemplate> templateArrayList) {
-        this.templateArrayList = templateArrayList;
-    }
-*/
 }
+

@@ -185,10 +185,10 @@ public class SaleOperationTemplateBoundary implements Initializable {
         formValidation.numberPositiveValidation(DiscountPercentages, "Discount Percentages");
 
         /*  Start Hour validation */
-        formValidation.isEmptyTimeField(StartHour, "Start Hour");
+      //  formValidation.isEmptyTimeField(StartHour, "Start Hour");
 
         /*  End Hour validation */
-        formValidation.isEmptyTimeField(EndHour, "End Hour");
+       // formValidation.isEmptyTimeField(EndHour, "End Hour");
 
         /*  Marketing Ad For Template validation */
         formValidation.isEmptyField(MarketingAdForTemplate, "Marketing Ad For Template");
