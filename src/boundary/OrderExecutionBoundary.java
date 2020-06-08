@@ -27,10 +27,8 @@ import java.util.ResourceBundle;
  */
 public class OrderExecutionBoundary implements Initializable {
 
-    public static OrderExecutionBoundary Instance = null;
     private OrderExecutionBoundary OrderExecutionController;
-    private OrderFromSupplierController OFSLogic = OrderFromSupplierController.getInstance(); //logic
-
+    private OrderFromSupplierController myController = new OrderFromSupplierController(this);
 
     private ArrayList<OrderFuelFromSupplier> OFFS;
 
@@ -110,20 +108,9 @@ public class OrderExecutionBoundary implements Initializable {
 
     }
 
-    public OrderExecutionBoundary() {
-        Instance = this;
-    }
 
-    /**
-     * OrderExecutionController Instance getter using SingleTone DesignPatterns
-     *
-     * @return Instance of controller class
-     */
-    public static OrderExecutionBoundary getInstance() {
-        if (Instance == null)
-            Instance = new OrderExecutionBoundary();
-        return Instance;
-    }
+
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -133,15 +120,9 @@ public class OrderExecutionBoundary implements Initializable {
         DoneBtn.setVisible(false);
         DoneBtn.setDisable(true);
         OrderViewAnchorPane.setVisible(false);
-        OFSLogic.getOrderFuelFromSupplierTable();
-        System.out.println(OFSLogic.getOrderSet());
+        //myController.getOrderFuelFromSupplierTable();
+       // System.out.println(myController.getOrderSet());
 
-        OFFS = new ArrayList<OrderFuelFromSupplier>();
-        OFFS.add(new OrderFuelFromSupplier("1111", "Paz", "Valeria Chapman", 5, null, 800, "done"));
-        OFFS.add(new OrderFuelFromSupplier("2222", "pazosh", "Valeria qweqwe", 6, null, 800, "done"));
-        OFFS.add(new OrderFuelFromSupplier("221231222", "pazosasdasdh", "Valeria qweqwe", 6, null, 800, "done"));
-        OFFS.add(new OrderFuelFromSupplier("21321", "paasdzosh", "Valeria qweqwe", 6, null, 800, "done"));
-        OFFS.add(new OrderFuelFromSupplier("22345235222", "pazodccdsh", "Valeria qweqwe", 6, null, 800, "done"));
     }
 
 

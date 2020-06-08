@@ -1,20 +1,67 @@
 package Contollers;
 
+import boundary.CustomerRegistrationBoundary;
+import boundary.OrderExecutionBoundary;
 import client.ClientApp;
-import entity.OrderFuelFromSupplier;
-import entity.User;
+import common.assets.SqlAction;
+import common.assets.SqlQueryType;
+import common.assets.SqlResult;
+import entity.*;
+import javafx.application.Platform;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 
-public class OrderFromSupplierController {
-    private static OrderFromSupplierController Instance= null;
+/**
+ * @author Adi Lampert
+ * @see OrderFromSupplierController - the form's logic class
+ */
+
+public class OrderFromSupplierController extends BasicController {
+
+    private OrderExecutionBoundary myBoundary;
+
+
+    /*private static OrderFromSupplierController Instance= null;
     private ArrayList<OrderFuelFromSupplier> orderSet;
-    private ResultSet rs;
+    private ResultSet rs;*/
 
+    public OrderFromSupplierController(OrderExecutionBoundary myBoundary) {
+        this.myBoundary = myBoundary;
+    }
 
-    public ArrayList<OrderFuelFromSupplier> getOrderFromSupplierArrayList() {
+    public void getOrdersFromDB() {
+            SqlAction sqlAction = new SqlAction(SqlQueryType.GET_ALL_ORDERS_FROM_SUPPLIER_TABLE);
+            super.sendSqlActionToClient(sqlAction);
+        }
+
+    public void getResultFromClient(SqlResult result) {
+        Platform.runLater(() -> {
+            switch (result.getActionType()) {
+                case GET_ALL_ORDERS_FROM_SUPPLIER_TABLE:
+                    ArrayList<OrderFuelFromSupplier> resultList = new ArrayList<>();
+                    resultList.addAll(this.changeResultToOrder(result));
+                   // myBoundary.getOrderDetailsFromTableView(resultList);
+                    break;
+
+                default:
+                    break;
+            }
+        });
+    }
+
+    private ArrayList<OrderFuelFromSupplier> changeResultToOrder(SqlResult result){
+        ArrayList<OrderFuelFromSupplier> resultList=new ArrayList<>();
+        for(ArrayList<Object> a: result.getResultData()) {
+            OrderFuelFromSupplier OFFS = new OrderFuelFromSupplier((String)a.get(1),(String)a.get(2),
+                    (int)a.get(3),(Date)a.get(4),(int)a.get(5),(String)a.get(6),(String)a.get(7));
+
+        }
+        return resultList;
+    }
+    /*public ArrayList<OrderFuelFromSupplier> getOrderFromSupplierArrayList() {
         return orderSet;
     }
 
@@ -43,5 +90,5 @@ public class OrderFromSupplierController {
 
     public void setOrderSet(ArrayList<OrderFuelFromSupplier> orderSet) {
         this.orderSet = orderSet;
-    }
+    }*/
 }

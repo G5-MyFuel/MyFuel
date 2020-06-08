@@ -8,14 +8,14 @@ public class OrderFuelFromSupplier {
     private Date OrderDate;
     private String OrderStatus;
 
-    public OrderFuelFromSupplier(String OrderNumber, String CompanyName, String StationManagerName, int StationNum, Date OrderDate, int Quantity,String OrderStatus){
-        this.FuelType=CompanyName;
+    public OrderFuelFromSupplier(String OrderNumber, String StationManagerName, int StationNum, Date OrderDate, int Quantity,String OrderStatus,String FuelType){
         this.OrderNumber=OrderNumber;
         this.Quantity=Quantity;
         this.StationManagerName=StationManagerName;
         this.StationNum=StationNum;
         this.OrderDate = OrderDate;
         this.OrderStatus = OrderStatus;
+        this.FuelType=FuelType;
     }
 
     public String getOrderNumber() {
