@@ -6,8 +6,20 @@ public class SaleOperationTemplate {
     private String templateID;
     private String templateName;
     private FuelTypes fuelType;
-    private float DiscountPercentages;
-    private String MarketingAdForTemplate;
+    private float discountPercentages;
+
+    public SaleOperationTemplate(String templateID, String templateName, FuelTypes fuelType, float discountPercentages, String marketingAdForTemplate, Day day, Time beginHour, Time endHour) {
+        this.templateID = templateID;
+        this.templateName = templateName;
+        this.fuelType = fuelType;
+        this.discountPercentages = discountPercentages;
+        this.marketingAdForTemplate = marketingAdForTemplate;
+        this.day = day;
+        this.beginHour = beginHour;
+        this.endHour = endHour;
+    }
+
+    private String marketingAdForTemplate;
     private Day day;
     private Time beginHour;
     private Time endHour;
@@ -37,19 +49,19 @@ public class SaleOperationTemplate {
     }
 
     public float getDiscountPercentages() {
-        return DiscountPercentages;
+        return discountPercentages;
     }
 
     public void setDiscountPercentages(float discountPercentages) {
-        DiscountPercentages = discountPercentages;
+        this.discountPercentages = discountPercentages;
     }
 
     public String getMarketingAdForTemplate() {
-        return MarketingAdForTemplate;
+        return marketingAdForTemplate;
     }
 
     public void setMarketingAdForTemplate(String marketingAdForTemplate) {
-        MarketingAdForTemplate = marketingAdForTemplate;
+        this.marketingAdForTemplate = marketingAdForTemplate;
     }
 
     public Day getDay() {

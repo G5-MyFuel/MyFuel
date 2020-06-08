@@ -12,10 +12,10 @@ public enum ProjectPages {
     CONFIRM_DISCOUNT_RATE_PAGE("/boundary/ConfirmDiscountRatesFXML.fxml"),
     COSTUMER_MANAGEMENT_TABLE_PAGE("/boundary/CostumerManagementTablePage.fxml"),
     COSTUMER_REGISTRATION_PAGE("/boundary/CustomerRegistrationFXML2.fxml"),
-    FAST_FUEL_PAGE("/boundary/CustomerRegistrationFXML2.fxml");
+    FAST_FUEL_PAGE("/boundary/CustomerRegistrationFXML2.fxml"),
 
-
-
+    //hani pages:
+    SALE_OPERATION_TEMPLATE_PAGE("/boundary/SaleOperationTemplate.fxml");
 
 
     private String path;

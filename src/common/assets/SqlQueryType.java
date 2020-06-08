@@ -11,7 +11,7 @@ public enum SqlQueryType {
      * ********** Costumer Management Queries ****************
      * *****************************************/
     GET_ALL_COSTUMER_TABLE(SqlExecutionType.EXECUTE_QUERY),
-
+    GET_ALL_TEMPLATES_TABLE(SqlExecutionType.EXECUTE_QUERY),
 
 
 

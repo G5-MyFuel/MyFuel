@@ -2,6 +2,7 @@ package boundary;
 import client.ChatClient;
 import client.ClientApp;
 import client.ClientConsole;
+import common.assets.ProjectPages;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -14,20 +15,14 @@ import java.io.IOException;
 
 public class MainForTestsHani extends Application {
 
-       String pageName = "SaleOperationTemplate.fxml";   //שם קובץ הfxml
-    // String pageName = "RunSaleOperationFXML.fxml";   //שם קובץ הfxml
-
     private AnchorPane root;
-
-     private SaleOperationTemplateBoundary saleOperationTemplateController;    //אינסטנס של מחלקת הboundary
-    // private RunSaleOperationController runSaleOperationController;    //אינסטנס של מחלקת הboundary
 
     public static void main(String[] args) {
         launch(args);
     }
 
 
-
+    @Override
     public void start(Stage primaryStage) throws Exception {
         //set server connection -
         String serverIp = "127.0.0.1";
@@ -37,7 +32,7 @@ public class MainForTestsHani extends Application {
         Pane root = null;
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/boundary/SaleOperationTemplate.fxml"));// RunSaleOperationFXML  //
+            loader.setLocation(getClass().getResource(ProjectPages.SALE_OPERATION_TEMPLATE_PAGE.getPath()));
             root = loader.load();
             Scene s1 = new Scene(root);
             primaryStage.setScene(s1);

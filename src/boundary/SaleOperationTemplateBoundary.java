@@ -6,6 +6,7 @@ import Contollers.FormValidation;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTimePicker;
+import entity.Costumer;
 import entity.Day;
 import entity.FuelTypes;
 import entity.SaleOperationTemplate;
@@ -17,27 +18,24 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 
 import java.net.URL;
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
- * @author hani
+ * @author Hana Wiener
  * @see SaleOperationTemplateController - the form's logic class
  */
 public class SaleOperationTemplateBoundary implements Initializable {
-    private SaleOperationTemplateBoundary Instance = null;
-    private SaleOperationTemplateController saleOperationTemplateLogic;
-    private FormValidation formValidation;
 
-    /* db:
-    boolean updateExist;
-    SaleOperationTemplate saleOperationTemplateToInsert;
-    ObservableList<SaleOperationTemplate> data1;
-    ArrayList<SaleOperationTemplate> employeeArrayList;
-    */
+        /** The supervisor boundary controller. */
+        private SaleOperationTemplateController myController = new SaleOperationTemplateController(this);
+
+    private FormValidation formValidation;//??
 
     //gui variables:
     @FXML
@@ -129,33 +127,35 @@ public class SaleOperationTemplateBoundary implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.saleOperationTemplateLogic = saleOperationTemplateLogic.getInstance();
-        this.formValidation = FormValidation.getValidator();
         ChooseGasTypeComboSpecialization.setItems(FuelType);
         DayComboSpecialization1.setItems(DayType);
         this.detailsPane.setVisible(false);
-        //TODO: formValidation();   set all fields validators
-        FormValidation();
-        /* check all required fields are'nt empty:*/
-        /*  check form input validation */
 
-        /*   db
-        updateExist = false;
-        // request data from server
-        saleOperationTemplateLogic.getInstance().getTemplateTable();    //first initialize of employees table
-        */
+        this.formValidation = FormValidation.getValidator();
+        FormValidation();        //TODO: formValidation();   set all fields validators
+
+        myController.getTemplatesTable(); //start the process that will ask server to execute quarry and get the table details
     }
 
     /**
-     * SaleOperationTemplateController Instance getter using SingleTone DesignPatterns
-     *
-     * @return Instance of controller class
+     this method will set the templates table when we will initialize the page.
      */
-    public SaleOperationTemplateBoundary getInstance() {
-        if (Instance == null)
-            Instance = new SaleOperationTemplateBoundary();
-        return Instance;
+    public void setTemplateTable(ArrayList<SaleOperationTemplate> cosArray){
+        //col oms parameters
+        TemplateIDColumn.setCellValueFactory(new PropertyValueFactory<>("ID"));
+        TemplateNameColumn.setCellValueFactory(new PropertyValueFactory<>("Name"));
+        FuelTypeColumn.setCellValueFactory(new PropertyValueFactory<>("Type"));
+        DiscountPercentagesColumn.setCellValueFactory(new PropertyValueFactory<>("Discount"));
+        dayColumn.setCellValueFactory(new PropertyValueFactory<>("Day"));
+        BeginHourColumn.setCellValueFactory(new PropertyValueFactory<>("start hour"));
+        EndHourColumn.setCellValueFactory(new PropertyValueFactory<>("end hour"));
+        MarketingAdColumn.setCellValueFactory(new PropertyValueFactory<>("Marketing ad"));
+
+        ObservableList<SaleOperationTemplate> data = FXCollections.observableArrayList(cosArray);
+        TemplateTableView.setItems(data);
     }
+
+
     @FXML
     void handleBtnAddTemplate(ActionEvent event) {
         this.detailsPane.setVisible(true);
@@ -195,34 +195,6 @@ public class SaleOperationTemplateBoundary implements Initializable {
 
         //TODO: add more validation.. לבדוק אורך השדה בשעות ואת הטקסט שקשור
     }
-
-/*
-    public void setDataTable(Object object) {///????????????
-        System.out.println("--> setDataTable");
-        SaleOperationTemplateLogic.getInstance().setTemplateArrayList((ArrayList<SaleOperationTemplate>) object);
-        //setTemplatesTableColumns();//???????????????
-        ObservableList<SaleOperationTemplate> data = FXCollections.observableArrayList(SaleOperationTemplateLogic.getInstance().getTemplatesArrayList());
-        TemplateTableView.setEditable(true);
-        TemplateTableView.setItems(data);
-      //  TemplateTableView.getColumns().addAll(EmployeeIdCol, FirstNameCol, lastNameCol, emailAddressCol, jobTitleCol, fuelCompanyNameCol);
-    }
-
-
-
-*/
-
- /*
-    public void setTemplatesTableColumns() {
-        TemplateIDColumn.setCellValueFactory(new PropertyValueFactory<SaleOperationTemplate, String>("Template ID"));
-        TemplateNameColumn.setCellValueFactory(new PropertyValueFactory<SaleOperationTemplate, String>("Template Name"));
-        FuelTypeColumn.setCellValueFactory(new PropertyValueFactory<SaleOperationTemplate, FuelTypes>("Fuel Type"));
-       DiscountPercentagesColumn.setCellValueFactory(new PropertyValueFactory<SaleOperationTemplate, String>("emailAddress"));
-        MarketingAdForTemplateColumn.setCellValueFactory(new PropertyValueFactory<SaleOperationTemplate, String>("jobTitle"));
-        dayColumn.setCellValueFactory(new PropertyValueFactory<SaleOperationTemplate, String>("fuelCompanyName"));
-        beginHourColumn.setCellValueFactory(new PropertyValueFactory<SaleOperationTemplate, String>("fuelCompanyName"));
-        endHourColumn.setCellValueFactory(new PropertyValueFactory<SaleOperationTemplate, String>("fuelCompanyName"));
-
-        */
 
 }
 

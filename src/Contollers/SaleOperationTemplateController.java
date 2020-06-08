@@ -1,25 +1,42 @@
 package Contollers;
 
+import boundary.CostumerManagmentTablePageBoundary;
+import boundary.SaleOperationTemplateBoundary;
+import common.assets.SqlAction;
+import common.assets.SqlQueryType;
 import server.MysqlConnection;
 
 /**
- * @author hani
+ * @author Hana Wiener
  */
-public class SaleOperationTemplateController {
 
-    private static SaleOperationTemplateController Instance = null;
-    MysqlConnection mySqlConnector;
-  //  ArrayList<SaleOperationTemplate> templateArrayList;
+public class SaleOperationTemplateController {
+    /**
+     * The boundary controlled by this controller
+     */
+    private SaleOperationTemplateBoundary myBoundary;
 
     /**
-     * SaleOperationTemplateLogic Instance getter using SingleTone DesignPatterns
-     * @return Instance of logic class
+     * Instantiates a new Template Management controller.
+     *
+     * @param myBoundary the my boundary
      */
-    public static SaleOperationTemplateController getInstance() {
-        if (Instance == null)
-            Instance = new SaleOperationTemplateController();
-        return Instance;
+    public SaleOperationTemplateController(SaleOperationTemplateBoundary myBoundary) {
+        this.myBoundary = myBoundary;
     }
+
+
+    public void getCostumerTable() {
+        SqlAction sqlAction = new SqlAction(SqlQueryType.GET_ALL_COSTUMER_TABLE);
+        super.sendSqlActionToClient(sqlAction);
+    }
+
+
+    public void getTemplatesTable() {
+        SqlAction sqlAction = new SqlAction(SqlQueryType.GET_ALL_TEMPLATES_TABLE);
+
+    }
+
 /*
     public void getTemplateTable() {
         ClientApp.client.handleMessageFromClientUI(new Message(OperationType.getRequirementData, "SELECT * FROM CampaignTemplates as T;"));

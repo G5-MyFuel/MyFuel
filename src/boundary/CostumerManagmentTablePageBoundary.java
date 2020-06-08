@@ -126,6 +126,7 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
         ObservableList<Costumer> data = FXCollections.observableArrayList(cosArray);
         CosManageTbale.setItems(data);
     }
+
     public void setVehicleTable(){
 
     }
