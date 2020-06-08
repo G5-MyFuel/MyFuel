@@ -77,6 +77,7 @@ public class SaleOperationTemplateController extends BasicController  {
             cos.setEndHour(Time.valueOf((String) a.get(6)));
             resultList.add(cos);
         }
+
         return resultList;
     }
 }
