@@ -21,7 +21,7 @@ public class SettingDiscountRatesBoundary implements Initializable {
     /**
      * The supervisor boundary controller.
      */
-    private SettingDiscountRatesController myController = new SettingDiscountRatesController(this);
+    private final SettingDiscountRatesController myController = new SettingDiscountRatesController(this);
     private FormValidation formValidation;
 
     @FXML
@@ -48,7 +48,7 @@ public class SettingDiscountRatesBoundary implements Initializable {
     @FXML
     private JFXTextField ShowNewRateTXT;
 
-    private ObservableList<String> SubscriptionType = FXCollections.observableArrayList("Regular monthly subscription - single vehicle",
+    private final ObservableList<String> SubscriptionType = FXCollections.observableArrayList("Regular monthly subscription - single vehicle",
             "Full monthly subscription (for single vehicle)", "Regular monthly subscription - number of vehicles");
 
     @Override
@@ -69,7 +69,7 @@ public class SettingDiscountRatesBoundary implements Initializable {
 
         //formValidation.isContainsOnlyNumbers(ShowNewRateTXT, "New price");
         formValidation.numberPositiveValidation(ShowNewRateTXT, "New price");
-        formValidation.isEmptyField(ShowNewRateTXT, "New price");
+        FormValidation.isEmptyField(ShowNewRateTXT, "New price");
         //formValidation.maxLengthValidation(ShowNewRateTXT, "New price", 3);
         formValidation.maxSizeValidation(ShowNewRateTXT, "New price", 100);
         formValidation.minSizeValidation(ShowNewRateTXT, "New price", 1);
@@ -81,7 +81,7 @@ public class SettingDiscountRatesBoundary implements Initializable {
 
         /*צריך להשוות את המנוי הנבחר עם המידע ב-DB ולהציג את המחיר הקיים.todo:*/
 
-        myController.getDiscountRatesTable(); //start the process that will ask server to execute quarry and get the table details
+        myController.getDiscountRatesTable(ChooseSubscriptionTypeCombo.getValue()); //start the process that will ask server to execute quarry and get the table details
         //ShowCurrentRateTXT.setText(SubscriptionType);
         ShowCurrentRateTXT.setVisible(true);
         ShowCurrentRateTXT.setEditable(false);
