@@ -14,17 +14,6 @@ public class OrderFromSupplierController {
     private ResultSet rs;
 
 
-
-    public static OrderFromSupplierController getInstance() {
-        if (Instance == null)
-            Instance = new OrderFromSupplierController();
-        return Instance;
-    }
-
-    public void getOrderFuelFromSupplierTable(){
-        //ClientApp.chatClient.handleMessageFromClientUI(new Message(OperationType.getRequirementData, "SELECT * FROM `OrderForStock`"));
-    }
-
     public ArrayList<OrderFuelFromSupplier> getOrderFromSupplierArrayList() {
         return orderSet;
     }

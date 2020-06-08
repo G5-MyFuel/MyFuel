@@ -162,6 +162,10 @@ public class MysqlConnection {
                 "INSERT INTO `Costumer`(`ID`, `Password`, `Type`, `First Name`, `Last Name`, `Email Adress`, `Credit Card Number`, `CreditCardExperationDate`, `CVV`," +
                         " `purchasePlan`, `Vehicle ID`, `Vehicale GasType`, `Service Plan`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?);";
 
+        /* *****************************************
+         * ********** Orders From Supplier Queries ****************
+         * *****************************************/
+        sqlArray[SqlQueryType.GET_ALL_ORDERS_FROM_SUPPLIER_TABLE.getCode()]= "SELECT * FROM `OrderForStock`";
 
         /* *****************************************
          * ********** Template Management Queries ****************
