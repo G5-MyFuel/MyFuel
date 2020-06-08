@@ -5,4 +5,5 @@ public enum FuelTypes {
     Diesel,
     ScooterFuel,
     HomeHeatingFuel;
+
 }
