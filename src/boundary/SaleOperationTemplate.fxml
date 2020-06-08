@@ -10,8 +10,6 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
@@ -42,11 +40,6 @@
                                     <Font name="System Bold" size="20.0" />
                                  </font>
                               </Text>
-                              <ImageView fitHeight="64.0" fitWidth="70.0" layoutX="81.0" layoutY="-33.0">
-                                 <image>
-                                    <Image url="@../../media/interface.png" />
-                                 </image>
-                              </ImageView>
                            </children>
                         </Pane>
                      </children>
@@ -59,27 +52,17 @@
                            </VBox.margin>
                         </Label>
                         <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="32.0" prefWidth="230.0" style="-fx-font-size: 22;" text="employee" textAlignment="CENTER" textFill="#e5e5e5" />
-                        <ImageView fitHeight="139.0" fitWidth="191.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../media/avatars/customer_male_avatar.png" />
-                           </image>
-                           <VBox.margin>
-                              <Insets bottom="10.0" top="10.0" />
-                           </VBox.margin>
-                        </ImageView>
                         <Label style="-fx-font-size: 22; -fx-font-weight: bold;" text="Robin Jon" textAlignment="CENTER" textFill="#e5e5e5">
                            <VBox.margin>
                               <Insets bottom="20.0" />
                            </VBox.margin>
                         </Label>
+                        <Button fx:id="btnCustomers" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" style="-fx-font-family: 'Abel', sans-serif; -fx-font-size: 16; -fx-alignment: left;" stylesheets="@style.css" text="View analytic data">
+                           <padding>
+                              <Insets left="50.0" />
+                           </padding>
+                        </Button>
                         <Button fx:id="btnOverview" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" style="-fx-font-family: 'Abel', sans-serif; -fx-font-size: 16; -fx-alignment: left;" stylesheets="@style.css" text="Home Page" textFill="#e7e5e5">
-                           <graphic>
-                              <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../media/icons/icons8_home_80px.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
@@ -90,50 +73,17 @@
                               <Insets left="50.0" />
                            </padding>
                         </Button>
-                        <Button fx:id="btnCustomers" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" style="-fx-font-family: 'Abel', sans-serif; -fx-font-size: 16; -fx-alignment: left;" stylesheets="@style.css" text="View analytic data">
-                           <graphic>
-                              <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../media/icons/icons8_new_copy_96px_1.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <padding>
-                              <Insets left="50.0" />
-                           </padding>
-                        </Button>
                         <Button fx:id="btnMenus" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" style="-fx-font-family: 'Abel', sans-serif; -fx-font-size: 16; -fx-alignment: left;" stylesheets="@style.css" text="Sale operation templates">
-                           <graphic>
-                              <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../media/icons/icons8_data_pending_80px_1.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
                            <padding>
                               <Insets left="50.0" />
                            </padding>
                         </Button>
                         <Button fx:id="btnPackages" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" style="-fx-font-family: 'Abel', sans-serif; -fx-font-size: 16; -fx-alignment: left;" stylesheets="@style.css" text="My Account">
-                           <graphic>
-                              <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../media/icons/icons8_more_details_80px.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
                            <padding>
                               <Insets left="50.0" />
                            </padding>
                         </Button>
                         <Button fx:id="btnSignout" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" style="-fx-font-family: 'Abel', sans-serif; -fx-font-size: 16; -fx-alignment: left;" stylesheets="@style.css" text="Sign Out">
-                           <graphic>
-                              <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../media/icons/icons8_sign_out_80px.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
                            <padding>
                               <Insets left="50.0" />
                            </padding>
@@ -157,12 +107,11 @@
                                  <columns>
                                     <TableColumn fx:id="TemplateIDColumn" prefWidth="122.0" text="Template ID" />
                                     <TableColumn fx:id="TemplateNameColumn" prefWidth="156.0" text="Template Name" />
-                                    <TableColumn fx:id="FuelTypeColumn" prefWidth="99.0" text="Fuel Type" />
-                                    <TableColumn fx:id="DiscountPercentagesColumn" prefWidth="95.0" text="Discount" />
-                                    <TableColumn fx:id="dayColumn" minWidth="0.0" prefWidth="77.0" text="day" />
-                                    <TableColumn fx:id="BeginHourColumn" prefWidth="102.0" text="Begin Hour" />
-                                    <TableColumn fx:id="EndHourColumn" prefWidth="86.0" text="End Hour" />
-                                    <TableColumn fx:id="MarketingAdColumn" prefWidth="135.0" text="Marketing Ad" />
+                                    <TableColumn fx:id="FuelTypeColumn" prefWidth="131.0" text="Fuel Type" />
+                                    <TableColumn fx:id="DiscountPercentagesColumn" prefWidth="117.0" text="Discount" />
+                                    <TableColumn fx:id="dayColumn" minWidth="0.0" prefWidth="113.0" text="day" />
+                                    <TableColumn fx:id="BeginHourColumn" prefWidth="131.0" text="Begin Hour" />
+                                    <TableColumn fx:id="EndHourColumn" prefWidth="102.0" text="End Hour" />
                                  </columns></TableView>
                               <Button fx:id="btnAddNewTemplate" layoutX="428.0" layoutY="398.0" mnemonicParsing="false" onAction="#handleBtnAddTemplate" prefHeight="42.0" prefWidth="207.0" style="-fx-background-color: #2d4578; -fx-background-radius: 50;" stylesheets="@style.css" text="Add New Template" textFill="WHITE" />
                               <Pane fx:id="detailsPane" layoutX="88.0" layoutY="387.0" prefHeight="389.0" prefWidth="873.0">

@@ -1,6 +1,8 @@
 package boundary;
 
 import Contollers.FormValidation;
+import Contollers.RunSaleOperationController;
+import Contollers.SaleOperationTemplateController;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import entity.SaleOperation;
@@ -17,13 +19,14 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * @author hani
+ * @author Hana Wiener
  * @see Contollers.RunSaleOperationController - the form's logic class
  */
 
 public class RunSaleOperationBoundary implements Initializable {
-        private static RunSaleOperationBoundary Instance = null;
-        private Contollers.RunSaleOperationController RunSaleOperationLogic;
+    /** The supervisor boundary controller. */
+    private RunSaleOperationController myController = new RunSaleOperationController(this);
+
         private FormValidation formValidation;
 
     /*
@@ -95,12 +98,12 @@ public class RunSaleOperationBoundary implements Initializable {
  //TODO: Change to template name from DB^
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        this.RunSaleOperationLogic = RunSaleOperationLogic.getInstance();
+       public void initialize(URL location, ResourceBundle resources) {
         ChooseTemplateCombo.setItems(TemplateID);///to do ^
         this.formValidation = FormValidation.getValidator();
         // TODO: formValidation();
         FormValidation();   // check all required fields are'nt empty
+        myController.insertNewSaleOperation();
 
         templateDetailsVBOX.setVisible(false);
         startSaleDateTXT.setVisible(false);
@@ -110,17 +113,6 @@ public class RunSaleOperationBoundary implements Initializable {
         btnRunSaleOperation.setVisible(false);
         btnRunSaleOperation.setDisable(false);//???
 
-    }
-
-    /**
-     * SaleOperationTemplateController Instance getter using SingleTone DesignPatterns
-     *
-     * @return Instance of controller class
-     */
-    public RunSaleOperationBoundary getInstance() {
-        if (Instance == null)
-            Instance = new RunSaleOperationBoundary();
-        return Instance;
     }
 
     @FXML
@@ -138,9 +130,7 @@ public class RunSaleOperationBoundary implements Initializable {
 
     @FXML
     public void handleBtnRunSaleOperation(javafx.event.ActionEvent actionEvent) {
-       // SaleOperation saleOperation = new SaleOperation(ChooseTemplateCombo.getValue() , "0001" ,Date.valueOf(startDatePicker.getValue()),Date.valueOf(endDatePicker.getValue()));
-        //RunSaleOperationLogic.setSaleOperationInDB(saleOperation);
-        SaleOperation newSaleOperation = new SaleOperation("0001", ChooseTemplateCombo.getValue(), java.sql.Date.valueOf(startDatePicker.getValue()), java.sql.Date.valueOf(endDatePicker.getValue()));
+
     }
 
     @FXML

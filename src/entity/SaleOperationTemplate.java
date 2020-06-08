@@ -5,21 +5,20 @@ import java.sql.Time;
 public class SaleOperationTemplate {
     private String templateID;
     private String templateName;
-    private FuelTypes fuelType;
+    private String fuelType;
     private float discountPercentages;
-    private Day day;
+    private String day;
+    //private String marketingAdForTemplate;
     private Time beginHour;
     private Time endHour;
-    private String marketingAdForTemplate;
 
-
-    public SaleOperationTemplate(String templateID, String templateName, FuelTypes fuelType, String discountPercentages, Day day, Time beginHour, Time endHour,String marketingAdForTemplate) {
+    public SaleOperationTemplate(String templateID, String templateName, String fuelType, String discountPercentages, String day /*,String marketingAdForTemplate*/, Time beginHour, Time endHour) {
         this.templateID = templateID;
         this.templateName = templateName;
         this.fuelType = fuelType;
         this.discountPercentages = Float.parseFloat(discountPercentages);
-        this.marketingAdForTemplate = marketingAdForTemplate;
         this.day = day;
+       // this.marketingAdForTemplate = marketingAdForTemplate;
         this.beginHour = beginHour;
         this.endHour = endHour;
     }
@@ -42,11 +41,11 @@ public class SaleOperationTemplate {
         this.templateName = templateName;
     }
 
-    public FuelTypes getFuelType() {
+    public String getFuelType() {
         return fuelType;
     }
 
-    public void setFuelType(FuelTypes fuelType) {
+    public void setFuelType(String fuelType) {
         this.fuelType = fuelType;
     }
 
@@ -57,7 +56,7 @@ public class SaleOperationTemplate {
     public void setDiscountPercentages(float discountPercentages) {
         this.discountPercentages = discountPercentages;
     }
-
+/*
     public String getMarketingAdForTemplate() {
         return marketingAdForTemplate;
     }
@@ -65,12 +64,12 @@ public class SaleOperationTemplate {
     public void setMarketingAdForTemplate(String marketingAdForTemplate) {
         this.marketingAdForTemplate = marketingAdForTemplate;
     }
-
-    public Day getDay() {
+*/
+    public String getDay() {
         return day;
     }
 
-    public void setDay(Day day) {
+    public void setDay(String day) {
         this.day = day;
     }
 

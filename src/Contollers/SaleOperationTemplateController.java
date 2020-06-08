@@ -69,13 +69,10 @@ public class SaleOperationTemplateController extends BasicController  {
      * @return Array list of costumers
      */
     private ArrayList<SaleOperationTemplate> changeResultToTemplate(SqlResult result){
-
         ArrayList<SaleOperationTemplate> resultList = new ArrayList<>();
         for(ArrayList<Object> a: result.getResultData()) {
-            SaleOperationTemplate cos = new SaleOperationTemplate((String) a.get(0), (String)a.get(1),null,
-                    (String) a.get(3),null,null,null,(String)a.get(7));
-            cos.setFuelType(FuelTypes.valueOf((String) a.get(2)));
-            cos.setDay( Day.valueOf((String) a.get(4)));
+            SaleOperationTemplate cos = new SaleOperationTemplate((String) a.get(0),(String)a.get(1),(String) a.get(2),(String) a.get(3),(String) a.get(4),
+                    null,null);
             cos.setBeginHour(Time.valueOf((String) a.get(5)));
             cos.setEndHour(Time.valueOf((String) a.get(6)));
             resultList.add(cos);
@@ -83,4 +80,3 @@ public class SaleOperationTemplateController extends BasicController  {
         return resultList;
     }
 }
-

@@ -32,10 +32,10 @@ import java.util.ResourceBundle;
  */
 public class SaleOperationTemplateBoundary implements Initializable {
 
-        /** The supervisor boundary controller. */
-        private SaleOperationTemplateController myController = new SaleOperationTemplateController(this);
+    /** The supervisor boundary controller. */
+    private SaleOperationTemplateController myController = new SaleOperationTemplateController(this);
 
-    private FormValidation formValidation;//??
+    private FormValidation formValidation;
 
     //gui variables:
     @FXML
@@ -104,9 +104,9 @@ public class SaleOperationTemplateBoundary implements Initializable {
     @FXML
     private TableColumn<SaleOperationTemplate, Time> EndHourColumn;
 
-    @FXML
+   /* @FXML
     private TableColumn<SaleOperationTemplate, String> MarketingAdColumn;
-
+*/
     @FXML
     private JFXComboBox<String> ChooseGasTypeComboSpecialization;
 
@@ -142,14 +142,14 @@ public class SaleOperationTemplateBoundary implements Initializable {
      */
     public void setTemplateTable(ArrayList<SaleOperationTemplate> cosArray){
         //col oms parameters
-        TemplateIDColumn.setCellValueFactory(new PropertyValueFactory<>("ID"));
-        TemplateNameColumn.setCellValueFactory(new PropertyValueFactory<>("Name"));
-        FuelTypeColumn.setCellValueFactory(new PropertyValueFactory<>("Type"));
-        DiscountPercentagesColumn.setCellValueFactory(new PropertyValueFactory<>("Discount"));
+        TemplateIDColumn.setCellValueFactory(new PropertyValueFactory<>("templateID"));
+        TemplateNameColumn.setCellValueFactory(new PropertyValueFactory<>("templateName"));
+        FuelTypeColumn.setCellValueFactory(new PropertyValueFactory<>("fuelType"));
+        DiscountPercentagesColumn.setCellValueFactory(new PropertyValueFactory<>("DiscountPercentages"));
         dayColumn.setCellValueFactory(new PropertyValueFactory<>("Day"));
-        BeginHourColumn.setCellValueFactory(new PropertyValueFactory<>("start hour"));
-        EndHourColumn.setCellValueFactory(new PropertyValueFactory<>("end hour"));
-        MarketingAdColumn.setCellValueFactory(new PropertyValueFactory<>("Marketing ad"));
+        BeginHourColumn.setCellValueFactory(new PropertyValueFactory<>("beginHour"));
+        EndHourColumn.setCellValueFactory(new PropertyValueFactory<>("endHour"));
+     //   MarketingAdColumn.setCellValueFactory(new PropertyValueFactory<>("Marketing ad"));
 
         ObservableList<SaleOperationTemplate> data = FXCollections.observableArrayList(cosArray);
         TemplateTableView.setItems(data);
