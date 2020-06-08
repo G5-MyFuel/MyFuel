@@ -1,9 +1,11 @@
 package boundary;
 
+import Contollers.CostumerManagementController;
 import Contollers.FormValidation;
 import Contollers.SettingDiscountRatesController;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import common.assets.ReturnMsgType;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,9 +17,16 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class SettingDiscountRatesBoundary implements Initializable {
-    private static SettingDiscountRatesBoundary Instance = null;
-    private SettingDiscountRatesController settingDiscountRatesLogic;
+
+    /**
+     * The supervisor boundary controller.
+     */
+    private SettingDiscountRatesController myController = new SettingDiscountRatesController(this);
     private FormValidation formValidation;
+
+    /*private static SettingDiscountRatesBoundary Instance = null;
+    private SettingDiscountRatesController settingDiscountRatesLogic;
+    private FormValidation formValidation;*/
 
     @FXML
     private Button btnOverview;
@@ -49,7 +58,7 @@ public class SettingDiscountRatesBoundary implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.settingDiscountRatesLogic = SettingDiscountRatesController.getInstance();
+        //this.settingDiscountRatesLogic = SettingDiscountRatesController.getInstance();
         this.formValidation = FormValidation.getValidator();
         ChooseSubscriptionTypeCombo.setItems(SubscriptionType);
         ShowCurrentRateTXT.setVisible(false);
@@ -68,12 +77,11 @@ public class SettingDiscountRatesBoundary implements Initializable {
      *
      * @return Instance of controller class
      */
-    public static SettingDiscountRatesBoundary getInstance() {
+    /*public static SettingDiscountRatesBoundary getInstance() {
         if (Instance == null)
             Instance = new SettingDiscountRatesBoundary();
         return Instance;
-    }
-
+    }*/
     private void formValidation() {
 
         /*  New price validation */
@@ -92,10 +100,12 @@ public class SettingDiscountRatesBoundary implements Initializable {
 
         /*צריך להשוות את המנוי הנבחר עם המידע ב-DB ולהציג את המחיר הקיים.todo:*/
 
-        String SubscriptionType = "SELECT * FROM `bpsdc8o22sikrlpvvxqm`.`DiscountRates` WHERE `Subscription type` LIKE \"" + ChooseSubscriptionTypeCombo.getValue() + "\";";
+        ShowCurrentRateTXT.setText("Check");
+        //String SubscriptionType = "SELECT * FROM `bpsdc8o22sikrlpvvxqm`.`DiscountRates` WHERE `Subscription type` LIKE \"" + ChooseSubscriptionTypeCombo.getValue() + "\";";
+        myController.getDiscountRatesTable(); //start the process that will ask server to execute quarry and get the table details
         //SettingDiscountRatesLogic settingDiscountRatesLogic = new SettingDiscountRatesLogic();
         //System.out.println(SubscriptionType);
-        settingDiscountRatesLogic.getDiscountRatesTable(SubscriptionType);
+        //settingDiscountRatesLogic.getDiscountRatesTable(SubscriptionType);
         //ClientApp.client.handleMessageFromClientUI(new Message(OperationType.getRequirementData, (Object)SubscriptionType));  //send the new employee jobTitle to DB
 
         //ShowCurrentRateTXT.setText(SubscriptionType);
@@ -103,6 +113,16 @@ public class SettingDiscountRatesBoundary implements Initializable {
         ShowCurrentRateTXT.setEditable(false);
         ShowNewRateTXT.setVisible(true);
         btnSetNewRate.setVisible(true);
+    }
+
+    public void setData(float currentRate) {
+
+        Float current = currentRate;
+        /*ReturnMsgType currentPrice = (ReturnMsgType) object;
+        System.out.println(ReturnMsgType.values());*/
+        //System.out.println(currentPrice);
+        ShowCurrentRateTXT.setText(current.toString());
+
     }
 
     @FXML

@@ -1,36 +1,91 @@
 package Contollers;
 
+import boundary.CostumerManagmentTablePageBoundary;
+import boundary.SettingDiscountRatesBoundary;
 import client.ClientApp;
 import common.assets.ReturnMsgType;
+import common.assets.SqlAction;
+import common.assets.SqlQueryType;
+import common.assets.SqlResult;
+import entity.Costumer;
+import entity.CreditCard;
+import entity.Vehicle;
+import javafx.application.Platform;
 import server.MysqlConnection;
 
-public class SettingDiscountRatesController {
+import java.util.ArrayList;
 
-    MysqlConnection mySqlConnector;
+public class SettingDiscountRatesController extends BasicController {
 
-    /*Logic Variables*/
-    private static SettingDiscountRatesController Instance = null;
-    //private SettingDiscountRatesController settingDiscountRatesController = SettingDiscountRatesController.getInstance();
+    /**
+     * The boundary controlled by this controller
+     */
+    private SettingDiscountRatesBoundary myBoundary;
+
+    /**
+     * Instantiates a new Costumer Management controller.
+     *
+     * @param myBoundary the my boundary
+     */
+    public SettingDiscountRatesController(SettingDiscountRatesBoundary myBoundary) {
+        this.myBoundary = myBoundary;
+    }
 
     /*Logic Methods*/
 
-    public void getDiscountRatesTable(String query) {
+    public void getDiscountRatesTable() {
+
+        SqlAction sqlAction = new SqlAction(SqlQueryType.GET_ALL_DiscountRates_TABLE);
+        super.sendSqlActionToClient(sqlAction);
         //(type of message to server, the message) = (requirement,query to get all employees table)
         //ClientApp.chatClient.handleMessageFromClientUI(new Message(OperationType.getRequirementData, (Object) query));
         System.out.println("Hey");
     }
 
-    public static SettingDiscountRatesController getInstance() {
+    @Override
+    public void getResultFromClient(SqlResult result) {
+        Platform.runLater(() -> {
+            switch (result.getActionType()) {
+                case GET_ALL_DiscountRates_TABLE:
+                    //ArrayList<Costumer> resultList = new ArrayList<>();
+                    float currentRate;
+                    currentRate = this.changeResultToFloat(result);
+                    myBoundary.setData(currentRate);
+                    break;
+
+                default:
+                    break;
+            }
+        });
+
+    }
+
+    /**
+     * This method create array list of costumers from the data base result.
+     *
+     * @param result the result
+     * @return Array list of costumers
+     */
+    private float changeResultToFloat(SqlResult result) {
+        float currentRate = 0;
+        for (ArrayList<Object> a : result.getResultData()) {
+            currentRate = (float) a.get(0);
+            /*Costumer cos = new Costumer((Integer) a.get(0), (String)a.get(1),(String)a.get(2),
+                    (String)a.get(3),(String)a.get(4),(String)a.get(5),null,(boolean)a.get(9),null,(String)a.get(12));
+            CreditCard card = new CreditCard(cos,(String)a.get(6),(String)a.get(7),(String)a.get(8));
+            Vehicle vehicle = new Vehicle(cos.getID().toString(),(String)a.get(10),(String)a.get(11)); //here i need to find a way to get all vehicles and not just 1 of them.
+            cos.setCostumerCreditCard(card);
+            cos.addCostumerVehicle(vehicle);
+            resultList.add(cos);*/
+        }
+        return currentRate;
+    }
+
+    /*public static SettingDiscountRatesController getInstance() {
         if (Instance == null)
             Instance = new SettingDiscountRatesController();
         return Instance;
-    }
-    public void setData(Object object) {
-        ReturnMsgType currentPrice = (ReturnMsgType) object;
-        System.out.println(ReturnMsgType.values());
-        //System.out.println(currentPrice);
-
-    }
+    }*/
 
 }
 

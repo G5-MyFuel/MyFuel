@@ -16,7 +16,10 @@ public enum ProjectPages {
 
 
     //hani pages:
-    SALE_OPERATION_TEMPLATE_PAGE("/boundary/SaleOperationTemplate.fxml");
+    SALE_OPERATION_TEMPLATE_PAGE("/boundary/SaleOperationTemplate.fxml"),
+
+    //Nir pages:
+    SETTING_DISCOUNT_RATES_PAGE("/boundary/SettingDiscountRatesFXML.fxml");
 
 
     private String path;

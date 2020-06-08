@@ -3,6 +3,7 @@ package boundary;
 import client.ChatClient;
 import client.ClientApp;
 import client.ClientConsole;
+import common.assets.ProjectPages;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -17,10 +18,10 @@ public class MainForTestsNirSettingDiscountRatesBoundary extends Application {
 
 
     //File test for SettingDiscountRatesController
-    String pageName = "SettingDiscountRatesFXML.fxml";   //שם קובץ הfxml
+    //String pageName = "SettingDiscountRatesFXML.fxml";   //שם קובץ הfxml
 
     private AnchorPane root;
-    private SettingDiscountRatesBoundary settingDiscountRatesController;    //אינסטנס של מחלקת הboundary
+    //private SettingDiscountRatesBoundary settingDiscountRatesController;    //אינסטנס של מחלקת הboundary
 
     public static void main(String[] args) {
         launch(args);
@@ -38,8 +39,18 @@ public class MainForTestsNirSettingDiscountRatesBoundary extends Application {
         Pane root = null;
 
         try {
-            FXMLLoader pageLoader = new FXMLLoader();
-            pageLoader.setLocation(getClass().getResource(pageName + ""));
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource(ProjectPages.SETTING_DISCOUNT_RATES_PAGE.getPath()));
+            root = loader.load();
+            Scene s1 = new Scene(root);
+            primaryStage.setScene(s1);
+            primaryStage.setResizable(false);
+            primaryStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("ERR at App.Start");
+        }
+            /*pageLoader.setLocation(getClass().getResource(pageName + ""));
             root = pageLoader.load();
             settingDiscountRatesController = pageLoader.getController();//קבלת גישה לקונטרולר
             //
@@ -53,6 +64,6 @@ public class MainForTestsNirSettingDiscountRatesBoundary extends Application {
         } catch (Exception e) {
             e.printStackTrace();
             //xxx
-        }
+        }*/
     }
 }

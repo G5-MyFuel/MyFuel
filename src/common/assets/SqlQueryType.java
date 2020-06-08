@@ -6,6 +6,9 @@ package common.assets;
  */
 public enum SqlQueryType {
 
+    /* Discount Rates Queries*/
+    GET_ALL_DiscountRates_TABLE(SqlExecutionType.EXECUTE_QUERY),
+
 
     /* *****************************************
      * ********** Costumer Management Queries ****************

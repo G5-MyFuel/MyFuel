@@ -172,6 +172,11 @@ public class MysqlConnection {
          * *****************************************/
         sqlArray[SqlQueryType.GET_ALL_TEMPLATES_TABLE.getCode()] = "SELECT * FROM `CampaignTemplates`";
 
+        /* *****************************************
+         * ********** Discount Rates Queries ****************
+         * *****************************************/
+        sqlArray[SqlQueryType.GET_ALL_DiscountRates_TABLE.getCode()] = "SELECT * FROM `DiscountRates` WHERE `Subscription type` LIKE \"Regular monthly subscription - single vehicle\"";
+
 
 
     }
