@@ -163,6 +163,13 @@ public class MysqlConnection {
                         " `purchasePlan`, `Vehicle ID`, `Vehicale GasType`, `Service Plan`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?);";
 
 
+        /* *****************************************
+         * ********** Template Management Queries ****************
+         * *****************************************/
+        sqlArray[SqlQueryType.GET_ALL_TEMPLATES_TABLE.getCode()] = "SELECT * FROM `CampaignTemplates`";
+
+
+
     }
 
     public Connection getConnection() {
