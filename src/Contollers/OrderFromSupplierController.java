@@ -43,7 +43,11 @@ public class OrderFromSupplierController extends BasicController {
                 case GET_ALL_ORDERS_FROM_SUPPLIER_TABLE:
                     ArrayList<OrderFuelFromSupplier> resultList = new ArrayList<>();
                     resultList.addAll(this.changeResultToOrder(result));
-                   // myBoundary.getOrderDetailsFromTableView(resultList);
+                    try {
+                        myBoundary.setOrderFuelFromSupplierTableView(resultList);
+                    } catch (SQLException throwables) {
+                        throwables.printStackTrace();
+                    }
                     break;
 
                 default:

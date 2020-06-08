@@ -109,9 +109,6 @@ public class OrderExecutionBoundary implements Initializable {
     }
 
 
-
-
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         hboxOrderConfirmation.setVisible(false);
@@ -120,24 +117,23 @@ public class OrderExecutionBoundary implements Initializable {
         DoneBtn.setVisible(false);
         DoneBtn.setDisable(true);
         OrderViewAnchorPane.setVisible(false);
-        //myController.getOrderFuelFromSupplierTable();
-       // System.out.println(myController.getOrderSet());
+        System.out.println("Order Execution Page Is Open");
 
     }
 
 
-    public void setOrderFuelFromSupplierTableView(MouseEvent event) throws SQLException {
+    public void setOrderFuelFromSupplierTableView( ArrayList<OrderFuelFromSupplier> OrderArray) throws SQLException {
         orderCol.setCellValueFactory(new PropertyValueFactory<>("OrderNumber"));
         statusCol.setCellValueFactory(new PropertyValueFactory<>("OrderStatus"));
 
-        ObservableList<OrderFuelFromSupplier> data = FXCollections.observableArrayList(OFFS);
+        ObservableList<OrderFuelFromSupplier> data = FXCollections.observableArrayList(OrderArray);
         tableView.setEditable(true);
         tableView.setItems(data);
     }
 
 
     public void getOrderDetailsFromTableView() {
-
+        /*  Show DB details in tableView  */
         tableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
