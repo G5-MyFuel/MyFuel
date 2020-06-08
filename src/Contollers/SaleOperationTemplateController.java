@@ -73,8 +73,7 @@ public class SaleOperationTemplateController extends BasicController  {
         ArrayList<SaleOperationTemplate> resultList = new ArrayList<>();
         for(ArrayList<Object> a: result.getResultData()) {
             SaleOperationTemplate cos = new SaleOperationTemplate((String) a.get(0), (String)a.get(1),null,
-                    (float)a.get(3),null,null,null,(String)a.get(7));
-
+                    (String) a.get(3),null,null,null,(String)a.get(7));
             cos.setFuelType(FuelTypes.valueOf((String) a.get(2)));
             cos.setDay( Day.valueOf((String) a.get(4)));
             cos.setBeginHour(Time.valueOf((String) a.get(5)));

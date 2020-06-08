@@ -13,11 +13,11 @@ public class SaleOperationTemplate {
     private String marketingAdForTemplate;
 
 
-    public SaleOperationTemplate(String templateID, String templateName, FuelTypes fuelType, float discountPercentages, Day day, Time beginHour, Time endHour,String marketingAdForTemplate) {
+    public SaleOperationTemplate(String templateID, String templateName, FuelTypes fuelType, String discountPercentages, Day day, Time beginHour, Time endHour,String marketingAdForTemplate) {
         this.templateID = templateID;
         this.templateName = templateName;
         this.fuelType = fuelType;
-        this.discountPercentages = discountPercentages;
+        this.discountPercentages = Float.parseFloat(discountPercentages);
         this.marketingAdForTemplate = marketingAdForTemplate;
         this.day = day;
         this.beginHour = beginHour;
