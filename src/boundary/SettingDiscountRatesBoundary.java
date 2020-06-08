@@ -73,13 +73,12 @@ public class SettingDiscountRatesBoundary implements Initializable {
         //formValidation.maxLengthValidation(ShowNewRateTXT, "New price", 3);
         formValidation.maxSizeValidation(ShowNewRateTXT, "New price", 100);
         formValidation.minSizeValidation(ShowNewRateTXT, "New price", 1);
+        //לא לאפשר עדכון מחיר חדש אם הבדיקת לא תקינה!!
 
     }
 
     @FXML
     void handleChoseSubscriptionType(ActionEvent event) {
-
-        /*צריך להשוות את המנוי הנבחר עם המידע ב-DB ולהציג את המחיר הקיים.todo:*/
 
         myController.getDiscountRatesTable(ChooseSubscriptionTypeCombo.getValue()); //start the process that will ask server to execute quarry and get the table details
         //ShowCurrentRateTXT.setText(SubscriptionType);
@@ -101,20 +100,17 @@ public class SettingDiscountRatesBoundary implements Initializable {
     @FXML
     void handleSetNewRate(ActionEvent event) {
 
+        myController.setNewPriceInDB(ShowNewRateTXT.getText(), ChooseSubscriptionTypeCombo.getValue());
+        //לרענן את שורת המחיר הנוכחי!!
     }
 
     @FXML
     void handleShowCurrentRate(ActionEvent event) {
 
-        /* מחזיר מה-DB את המחיר הנוכחי של התוכנית המתאימה.todo:*/
-
     }
 
     @FXML
     void handleShowNewRate(ActionEvent event) {
-
-        /* מעדכן את ה-DB במחיר החדש של התוכנית המתאימה + בדיקת תקינות.todo:*/
-
 
     }
 

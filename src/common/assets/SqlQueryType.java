@@ -12,6 +12,7 @@ public enum SqlQueryType {
     GET_RegularSubscriptionSingleVehicle_PRICE(SqlExecutionType.EXECUTE_QUERY),
     GET_FullSubscriptionSingleVehicle_PRICE(SqlExecutionType.EXECUTE_QUERY),
     GET_RegularSubscriptionMultiVehicle_PRICE(SqlExecutionType.EXECUTE_QUERY),
+    INSERT_NEW_PRICE(SqlExecutionType.UPDATE_QUERY),
 
 
     /* *****************************************

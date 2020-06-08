@@ -44,8 +44,15 @@ public class SettingDiscountRatesController extends BasicController {
             default:
                 break;
         }
-        /*SqlAction sqlAction = new SqlAction(SqlQueryType.GET_ALL_DiscountRates_TABLE);
-        super.sendSqlActionToClient(sqlAction);*/
+    }
+
+    public void setNewPriceInDB(String newPrice, String subscriptionType) {
+
+        ArrayList<Object> varArray = new ArrayList<>();
+        varArray.add(newPrice);
+        varArray.add(subscriptionType);
+        SqlAction sqlAction = new SqlAction(SqlQueryType.INSERT_NEW_PRICE, varArray);
+        super.sendSqlActionToClient(sqlAction);
     }
 
     @Override
@@ -60,6 +67,9 @@ public class SettingDiscountRatesController extends BasicController {
                     break;
                 case GET_RegularSubscriptionMultiVehicle_PRICE:
                     myBoundary.setData(this.changeResultToString(result));
+                    break;
+                case INSERT_NEW_PRICE:
+                    //myBoundary.setData(this.changeResultToString(result));
                     break;
 
                 default:
