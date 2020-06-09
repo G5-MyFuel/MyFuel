@@ -5,8 +5,6 @@ import Contollers.FormValidation;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
-import common.assets.SqlAction;
-import common.assets.SqlQueryType;
 import entity.Costumer;
 import entity.CreditCard;
 import entity.Vehicle;
@@ -37,6 +35,7 @@ import java.util.ResourceBundle;
 public class CustomerRegistrationBoundary implements Initializable {
 
     private ArrayList<Vehicle> tempVehicleArray;
+    private ArrayList<Vehicle> allVehicleArray;
     CreditCard tempCreditCard = null;
 
     private CustomerRegistrationController myController = new CustomerRegistrationController(this);
@@ -240,18 +239,22 @@ public class CustomerRegistrationBoundary implements Initializable {
         VehicleIDtxt.clear();
         VehicleInformationPane.setVisible(false);
         VehicleTable.getItems().clear();
+        tempVehicleArray.clear();
     }
 
     @FXML
     void ClickSaveVehicleButton(MouseEvent event) {
         VehicleTable.setEditable(true);
-        /**
-         * Here i have to validate Vehicle information before adding this vehicle.
-         *
-         * have to add msg to client - validation = true = successes msg
-         * ELSE: failed msg and do no continue to add that vehicle!
-         */
-        Vehicle vehicle = new Vehicle(VehicleIDtxt.getText(), GasTypeChoiseBox.getValue());
+
+
+        if(isVehicleExistInDb() || isVehicleExistInTempVehicleArr())
+        {
+            ErrorAlert.setTitle("Vehicle ID Error");
+            ErrorAlert.setHeaderText("Vehicle ID exists in system");
+            ErrorAlert.showAndWait();
+        }
+        else{
+        Vehicle vehicle = new Vehicle(CostumerIDtxt.getText(),VehicleIDtxt.getText(), GasTypeChoiseBox.getValue());
         tempVehicleArray.add(vehicle);
 
         VehicleIdColom.setCellValueFactory(new PropertyValueFactory<>("VehicleID"));
@@ -259,15 +262,16 @@ public class CustomerRegistrationBoundary implements Initializable {
 
         ObservableList<Vehicle> data = FXCollections.observableArrayList(tempVehicleArray);
         VehicleTable.setItems(data);
+        }
     }
 
     @FXML
     void ClickFinishButton(MouseEvent event) {
         Costumer tempCos = myController.getTempCostumer();
         if (yesButton.isSelected())
-            tempCos.setPurchasePlan(true);
+            tempCos.setPurchasePlan("true");
         else
-            tempCos.setPurchasePlan(false);
+            tempCos.setPurchasePlan("false");
 
         tempCos.setCostumerType(CostumertypeChoiceBox.getSelectionModel().getSelectedItem().toString());
         tempCos.setServicePlan(ServicePlanChoiseBox.getSelectionModel().getSelectedItem().toString());
@@ -327,8 +331,8 @@ public class CustomerRegistrationBoundary implements Initializable {
                 ErrorAlert.setHeaderText("Costumer ID already Exists,\nPlease Chose Different ID.");
                 ErrorAlert.showAndWait();
             } else {//build costumer
-                Costumer costumer = new Costumer(Integer.parseInt(CostumerIDtxt.getText()), CostumerIDtxt.getText(), "", FirstNametxt.getText(),
-                        LastNametxt.getText(), EmailAdresstxt.getText(), null, true, null, null);
+                Costumer costumer = new Costumer(CostumerIDtxt.getText(), CostumerIDtxt.getText(), "", FirstNametxt.getText(),
+                        LastNametxt.getText(), EmailAdresstxt.getText(), null, "true", null, null);
 
                 if (CardClickFlag)
                     if (CreditCardWindow.isVisible()) {//have to popUp User
@@ -343,8 +347,10 @@ public class CustomerRegistrationBoundary implements Initializable {
                 vehicleMangTAB.setDisable(false);
                 personalInfoTAB.setDisable(true);
                 vehicleMangTAB.getTabPane().getSelectionModel().selectNext();
+                myController.getVehicaleTable();
             }
         }
+
 
 
     }
@@ -365,7 +371,7 @@ public class CustomerRegistrationBoundary implements Initializable {
     }
 
     @FXML
-    void SecoundBackwardButtonOnClick(MouseEvent event) {
+    void SecondBackwardButtonOnClick(MouseEvent event) {
         planInfoTAB.setDisable(true);
         vehicleMangTAB.setDisable(false);
         vehicleMangTAB.getTabPane().getSelectionModel().selectPrevious();
@@ -384,9 +390,25 @@ public class CustomerRegistrationBoundary implements Initializable {
         VehicleTable.setItems(data);
     }
 
-    public boolean isCostumerExist() {
+    private boolean isCostumerExist() {
         for (Costumer cos : allDBCostumerArray) {
             if (cos.getID().toString().equals(CostumerIDtxt.getText()))
+                return true;
+        }
+        return false;
+    }
+
+    private boolean isVehicleExistInDb(){
+        for (Vehicle v : allVehicleArray) {
+            if (v.getVehicleID().equals(VehicleIDtxt.getText()))
+                return true;
+        }
+        return false;
+    }
+
+    private boolean isVehicleExistInTempVehicleArr(){
+        for (Vehicle v : tempVehicleArray) {
+            if (v.getVehicleID().toString().equals(VehicleIDtxt.getText()))
                 return true;
         }
         return false;
@@ -419,9 +441,8 @@ public class CustomerRegistrationBoundary implements Initializable {
         formValidation.minLengthValidationShort(CVVtxt, "CVV", 3);
         //Vehicle fields check
         formValidation.isDoubleNumberValidation(VehicleIDtxt, "Vehicle ID");
-        formValidation.maxLengthValidation(VehicleIDtxt, "Vehicle ID", 6);
-        formValidation.minLengthValidationShort(VehicleIDtxt, "Vehicle ID", 6);
-
+        formValidation.maxLengthValidation(VehicleIDtxt, "Vehicle ID", 7);
+        formValidation.minLengthValidationShort(VehicleIDtxt, "Vehicle ID", 7);
 
     }
 
@@ -465,5 +486,13 @@ public class CustomerRegistrationBoundary implements Initializable {
 
     public void setAllDBCostumerArray(ArrayList<Costumer> allDBCostumerArray) {
         this.allDBCostumerArray = allDBCostumerArray;
+    }
+
+    public ArrayList<Vehicle> getAllVehicleArray() {
+        return allVehicleArray;
+    }
+
+    public void setAllVehicleArray(ArrayList<Vehicle> allVehicleArray) {
+        this.allVehicleArray = allVehicleArray;
     }
 }

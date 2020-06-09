@@ -25,6 +25,7 @@ public enum SqlQueryType {
     /* *****************************************
      * ********** Costumer Management Queries ****************
      * *****************************************/
+    UPDATE_COSTUMER_DETAIL(SqlExecutionType.UPDATE_QUERY),
 
 
     /* *****************************************
@@ -39,6 +40,7 @@ public enum SqlQueryType {
      * ********** Costumer Registration Queries ****************
      * *****************************************/
     INSERT_NEW_COSTUMER(SqlExecutionType.UPDATE_QUERY),
+    INSERT_NEW_VEHICLE(SqlExecutionType.UPDATE_QUERY),
 
     /* *****************************************
      * ********** Order From Supplier Queries ****************

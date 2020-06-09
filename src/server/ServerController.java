@@ -96,17 +96,6 @@ public class ServerController implements Initializable {
     @FXML
     void initialize() {
         portFieldEmptyAlert.setVisible(false);
-//        RequiredFieldValidator APIs.validator = new RequiredFieldValidator();
-//        APIs.validator.setMessage("Required");
-//        vffCheck.getValidators().add(APIs.validator);
-//        vffCheck.focusedProperty().addListener(new ChangeListener<Boolean>() {
-//            @Override
-//            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-//                if(!newValue){
-//                    vffCheck.validate();
-//                }
-//            }
-//        });
 
     }
 
@@ -161,61 +150,5 @@ public class ServerController implements Initializable {
 
 
 }
-
-
-//            if (!ServerApp.echoserver.isListening()) {
-//                try {
-//                    ServerApp.echoserver.listen(); // Start listening for
-//                    // connections
-//                    boolean show = true;
-//                    if (ServerApp.echoserver.isListening()) {
-//                        serverConnectImg.setVisible(show);
-//                        serverDisconnectImg.setVisible(!show);
-//                    } else {
-//                        serverConnectImg.setVisible(!show);
-//                        serverDisconnectImg.setVisible(show);
-//                    }
-//                } catch (IOException e) {
-////                    Alert alert = new Alert(AlertType.ERROR);
-////                    alert.setTitle("Failed to Start Server");
-////                    alert.setHeaderText("error");
-////                    alert.showAndWait();
-//                    if (ServerApp.echoserver.isListening()) {
-//                        System.out.println("here");
-//                    } else {
-//                        System.out.println("already opened");
-//                    }
-//                }
-//
-//            } else {
-//                Alert alert = new Alert(AlertType.INFORMATION);
-//                alert.setTitle("Server already Connected");
-//                alert.setHeaderText("Server already Connected"); // ADD MORE
-//                // INFORAMTION
-//                alert.show();
-//            }
-//            boolean show = true;
-//            if (ServerApp.echoserver.getDBStatus()) {
-//                dbConnectImg.setVisible(show);
-//                dbDisconnectImg.setVisible(!show);
-//            } else {
-//                dbConnectImg.setVisible(!show);
-//                dbDisconnectImg.setVisible(show);
-//            }
-//todo: לייצר בדיקה ושמירה לוקאלית של פרטי הסרבר אם לחץ כל שמור על פרטיי במחשב זה
-//                    LocalDataStore localDataStore = new LocalDataStore();
-//                    List<DbDetails> list = new ArrayList<DbDetails>();
-//                    list.add(MySQLWorkbench);
-//                    localDataStore.setList(list);
-////                    String FILENAME = "ObjectDB";
-//                    try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FILENAME))) {
-//                        oos.writeObject(localDataStore);
-//                    }
-//
-//                    try {
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
-
 
 

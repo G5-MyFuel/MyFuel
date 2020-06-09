@@ -161,7 +161,7 @@
                                                 <Font size="18.0" />
                                              </font>
                                           </JFXTextField>
-                                          <Button fx:id="SearchButton1" layoutX="323.0" layoutY="112.0" mnemonicParsing="false" onMouseClicked="#ClickFinishButton" prefHeight="33.0" prefWidth="91.0" style="-fx-background-color: #2D4578; -fx-background-radius: 50;" stylesheets="@style.css" text="Search" textFill="WHITE">
+                                          <Button fx:id="SearchButton1" layoutX="323.0" layoutY="112.0" mnemonicParsing="false" onMouseClicked="#ClickSearchCostumer" prefHeight="33.0" prefWidth="91.0" style="-fx-background-color: #2D4578; -fx-background-radius: 50;" stylesheets="@style.css" text="Search" textFill="WHITE">
                                              <cursor>
                                                 <Cursor fx:constant="HAND" />
                                              </cursor>
