@@ -2,8 +2,8 @@ package common.assets;
 
 /**
  * Enum that represents all our project boundaries
- * @author Itay Ziv
  *
+ * @author Itay Ziv
  */
 public enum ProjectPages {
 
@@ -23,7 +23,6 @@ public enum ProjectPages {
     CONFIRM_DISCOUNT_RATES_PAGE("/boundary/ConfirmDiscountRatesFXML.fxml"),
     GENERATING_REPORTS_STATION_MANAGER_PAGE("/boundary/GeneratingReportsStationManagerFXML.fxml"),
     GENERATING_REPORTS_MARKETING_MANAGER_PAGE("/boundary/GeneratingReportsMarketingManagerFXML.fxml");
-
 
 
     private String path;
