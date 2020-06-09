@@ -2,6 +2,7 @@ package entity;
 
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * @author itay
@@ -117,5 +118,18 @@ public class Costumer {
 
     public void setID(Integer ID) {
         this.ID = ID;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Costumer costumer = (Costumer) o;
+        return ID.equals(costumer.ID);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ID);
     }
 }
