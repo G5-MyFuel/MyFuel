@@ -22,8 +22,11 @@ public enum ProjectPages {
     SETTING_DISCOUNT_RATES_PAGE("/boundary/SettingDiscountRatesFXML.fxml"),
     CONFIRM_DISCOUNT_RATES_PAGE("/boundary/ConfirmDiscountRatesFXML.fxml"),
     GENERATING_REPORTS_STATION_MANAGER_PAGE("/boundary/GeneratingReportsStationManagerFXML.fxml"),
-    GENERATING_REPORTS_MARKETING_MANAGER_PAGE("/boundary/GeneratingReportsMarketingManagerFXML.fxml");
+    GENERATING_REPORTS_MARKETING_MANAGER_PAGE("/boundary/GeneratingReportsMarketingManagerFXML.fxml"),
 
+    //Daniel pages:
+    PURCHASE_FUEL_FOR_HOME_HEATING("/boundary/NewPurchaseFuelForHomeHeatingFXML.fxml"),
+    LOGIN_PAGE("/boundary/LoginToSystemFXML.fxml");
 
     private String path;
 
