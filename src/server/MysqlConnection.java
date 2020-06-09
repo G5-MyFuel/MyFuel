@@ -143,7 +143,7 @@ public class MysqlConnection {
         /* *****************************************************
          * *************** Common Queries ****************
          * *****************************************************/
-
+        sqlArray[SqlQueryType.GET_ALL_VEHICLE_TABLE.getCode()] = "SELECT * FROM `Vehicle`";
 
 
 

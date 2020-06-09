@@ -331,7 +331,7 @@
                                           <Cursor fx:constant="OPEN_HAND" />
                                        </cursor>
                                     </ImageView>
-                                    <ImageView fx:id="forwardButtonVehicleToPlan" accessibleRole="BUTTON" fitHeight="70.0" fitWidth="94.0" layoutX="856.0" layoutY="552.0" onMouseClicked="#SecoundForwardButtonOnClick" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="forwardButtonVehicleToPlan" accessibleRole="BUTTON" fitHeight="70.0" fitWidth="94.0" layoutX="856.0" layoutY="552.0" onMouseClicked="#SecondForwardButtonOnClick" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../media/CostumerRegisterationMedia/forward_button_40px.png" />
                                        </image>

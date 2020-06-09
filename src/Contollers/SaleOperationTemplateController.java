@@ -83,9 +83,8 @@ public class SaleOperationTemplateController extends BasicController  {
         varArray.add(template.getFuelType());
         varArray.add(template.getDiscountPercentages());
         varArray.add(template.getDay());
-        varArray.add(template.getBeginHour());
-        varArray.add(template.getEndHour());
-
+        varArray.add(template.getBeginHour().toString());
+        varArray.add(template.getEndHour().toString());
         SqlAction sqlAction = new SqlAction(SqlQueryType.INSERT_NEW_TEMPLATE, varArray);
         super.sendSqlActionToClient(sqlAction);
     }

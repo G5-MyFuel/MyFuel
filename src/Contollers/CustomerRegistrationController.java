@@ -97,12 +97,19 @@ public class CustomerRegistrationController extends BasicController {
                     resultList.addAll(this.changeResultToCostumer(result));
                     myBoundary.setAllDBCostumerArray(resultList);
                     break;
+                case GET_ALL_VEHICLE_TABLE:
+                    ArrayList<Vehicle> vehicaleArray = new ArrayList<>();
 
                 default:
                     break;
             }
         });
 
+    }
+
+    public void getVehicaleTable(){
+        SqlAction sqlAction = new SqlAction(SqlQueryType.GET_ALL_VEHICLE_TABLE);
+        super.sendSqlActionToClient(sqlAction);
     }
 
     public void getCostumerTable() {

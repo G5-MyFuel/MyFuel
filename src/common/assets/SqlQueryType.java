@@ -7,6 +7,13 @@ package common.assets;
 public enum SqlQueryType {
 
     /* *****************************************
+     * ********** Common Queries ****************
+     * *****************************************/
+    GET_ALL_COSTUMER_TABLE(SqlExecutionType.EXECUTE_QUERY),
+    GET_ALL_VEHICLE_TABLE(SqlExecutionType.EXECUTE_QUERY),
+
+
+    /* *****************************************
      * ********** Discount Rates Queries ****************
      * *****************************************/
     GET_RegularSubscriptionSingleVehicle_PRICE(SqlExecutionType.EXECUTE_QUERY),
@@ -18,7 +25,7 @@ public enum SqlQueryType {
     /* *****************************************
      * ********** Costumer Management Queries ****************
      * *****************************************/
-    GET_ALL_COSTUMER_TABLE(SqlExecutionType.EXECUTE_QUERY),
+
 
     /* *****************************************
      * ********** Sales and Template Management Queries ****************

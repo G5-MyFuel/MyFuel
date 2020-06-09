@@ -225,7 +225,7 @@ public class CustomerRegistrationBoundary implements Initializable {
 
     @FXML
     void addNewCostumerOnClick(MouseEvent event) {
-        myController.getTempCostumer();
+        myController.getCostumerTable();
         mainPane.setVisible(true);
         mainPane.setDisable(false);
         tempVehicleArray = new ArrayList<Vehicle>();
@@ -323,8 +323,8 @@ public class CustomerRegistrationBoundary implements Initializable {
             ErrorAlert.showAndWait();
         } else {
             if (isCostumerExist()) { //check if costumer is on system already
-                ErrorAlert.setTitle("Costumer ID already Exists");
-                ErrorAlert.setHeaderText("Please Chose Different ID");
+                ErrorAlert.setTitle("ID Error");
+                ErrorAlert.setHeaderText("Costumer ID already Exists,\nPlease Chose Different ID.");
                 ErrorAlert.showAndWait();
             } else {//build costumer
                 Costumer costumer = new Costumer(Integer.parseInt(CostumerIDtxt.getText()), CostumerIDtxt.getText(), "", FirstNametxt.getText(),
@@ -350,7 +350,7 @@ public class CustomerRegistrationBoundary implements Initializable {
     }
 
     @FXML
-    void SecoundForwardButtonOnClick(MouseEvent event) {
+    void SecondForwardButtonOnClick(MouseEvent event) {
         myController.setCostumerSecoundPhase(tempVehicleArray);
         planInfoTAB.setDisable(false);
         vehicleMangTAB.setDisable(true);
