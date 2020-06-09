@@ -1,21 +1,29 @@
 package Contollers;
 
-import server.MysqlConnection;
+import boundary.GeneratingReportsMarketingManagerBoundary;
+import common.assets.SqlResult;
 
-public class GeneratingReportsMarketingManagerController {
+public class GeneratingReportsMarketingManagerController extends BasicController {
 
-    MysqlConnection mySqlConnector;
+    /**
+     * The boundary controlled by this controller
+     */
+    private final GeneratingReportsMarketingManagerBoundary myBoundary;
 
-    /*Logic Variables*/
-    private static GeneratingReportsMarketingManagerController Instance = null;
-    //private SettingDiscountRatesController settingDiscountRatesController = SettingDiscountRatesController.getInstance();
+    /**
+     * Instantiates a new Costumer Management controller.
+     *
+     * @param myBoundary the my boundary
+     */
+    public GeneratingReportsMarketingManagerController(GeneratingReportsMarketingManagerBoundary myBoundary) {
+        this.myBoundary = myBoundary;
+    }
 
     /*Logic Methods*/
 
-    public static GeneratingReportsMarketingManagerController getInstance() {
+    @Override
+    public void getResultFromClient(SqlResult result) {
 
-        if (Instance == null)
-            Instance = new GeneratingReportsMarketingManagerController();
-        return Instance;
     }
+
 }

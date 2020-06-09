@@ -1,21 +1,29 @@
 package Contollers;
 
-import server.MysqlConnection;
+import boundary.ConfirmDiscountRatesBoundary;
+import common.assets.SqlResult;
 
-public class ConfirmDiscountRatesController {
+public class ConfirmDiscountRatesController extends BasicController {
 
-    MysqlConnection mySqlConnector;
+    /**
+     * The boundary controlled by this controller
+     */
+    private final ConfirmDiscountRatesBoundary myBoundary;
 
-    /*Logic Variables*/
-    private static ConfirmDiscountRatesController Instance = null;
-    //private SettingDiscountRatesController settingDiscountRatesController = SettingDiscountRatesController.getInstance();
+    /**
+     * Instantiates a new Costumer Management controller.
+     *
+     * @param myBoundary the my boundary
+     */
+    public ConfirmDiscountRatesController(ConfirmDiscountRatesBoundary myBoundary) {
+        this.myBoundary = myBoundary;
+    }
 
     /*Logic Methods*/
 
-    public static ConfirmDiscountRatesController getInstance() {
+    @Override
+    public void getResultFromClient(SqlResult result) {
 
-        if (Instance == null)
-            Instance = new ConfirmDiscountRatesController();
-        return Instance;
     }
+
 }

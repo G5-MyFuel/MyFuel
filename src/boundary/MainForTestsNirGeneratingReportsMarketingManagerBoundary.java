@@ -1,40 +1,45 @@
 package boundary;
 
+import client.ClientConsole;
+import common.assets.ProjectPages;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class MainForTestsNirGeneratingReportsMarketingManagerBoundary extends Application {
-    //File test for generatingReportsMarketingManagerController
-    String pageName = "GeneratingReportsMarketingManagerFXML.fxml";   //שם קובץ הfxml
+
+    //File test for SettingDiscountRatesController
 
     private AnchorPane root;
-    private GeneratingReportsMarketingManagerBoundary generatingReportsMarketingManagerController;    //אינסטנס של מחלקת הboundary
 
     public static void main(String[] args) {
         launch(args);
     }
 
+
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws Exception {
+        //set server connection -
+        String serverIp = "127.0.0.1";
+        String[] args = {serverIp};
+        ClientConsole.connection(args);
+
+        Pane root = null;
+
         try {
-            FXMLLoader pageLoader = new FXMLLoader();
-            pageLoader.setLocation(getClass().getResource(pageName + ""));
-            root = pageLoader.load();
-            generatingReportsMarketingManagerController = pageLoader.getController();//קבלת גישה לקונטרולר
-            //
-
-
-            //
-            Scene scene = new Scene(root, 1280, 800);
-            //  scene.getStylesheets().add("/client/LoginPageCSS.css");
-            primaryStage.setScene(scene);
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource(ProjectPages.GENERATING_REPORTS_MARKETING_MANAGER_PAGE.getPath()));
+            root = loader.load();
+            Scene s1 = new Scene(root);
+            primaryStage.setScene(s1);
+            primaryStage.setResizable(false);
             primaryStage.show();
         } catch (Exception e) {
             e.printStackTrace();
-            //xxx
+            System.out.println("ERR at App.Start");
         }
     }
 }

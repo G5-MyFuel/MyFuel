@@ -2,8 +2,8 @@ package common.assets;
 
 /**
  * Enum that represents all our project boundaries
- * @author Itay Ziv
  *
+ * @author Itay Ziv
  */
 public enum ProjectPages {
 
@@ -20,10 +20,10 @@ public enum ProjectPages {
 
     //Nir pages:
     SETTING_DISCOUNT_RATES_PAGE("/boundary/SettingDiscountRatesFXML.fxml"),
+    CONFIRM_DISCOUNT_RATES_PAGE("/boundary/ConfirmDiscountRatesFXML.fxml"),
+    GENERATING_REPORTS_STATION_MANAGER_PAGE("/boundary/GeneratingReportsStationManagerFXML.fxml"),
+    GENERATING_REPORTS_MARKETING_MANAGER_PAGE("/boundary/GeneratingReportsMarketingManagerFXML.fxml");
 
-    //Daniel pages:
-    PURCHASE_FUEL_FOR_HOME_HEATING("/boundary/NewPurchaseFuelForHomeHeatingFXML.fxml"),
-    LOGIN_PAGE("/boundary/LoginToSystemFXML.fxml");
 
     private String path;
 
