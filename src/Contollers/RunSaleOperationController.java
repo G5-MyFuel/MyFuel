@@ -45,6 +45,7 @@ public class RunSaleOperationController extends BasicController {
 
     @Override
     public void getResultFromClient(SqlResult result) {
+
         Platform.runLater(() -> {
             switch (result.getActionType()) {
                 case GET_ALL_SALES_TABLE:
