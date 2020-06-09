@@ -20,7 +20,9 @@ public enum ProjectPages {
 
     //Nir pages:
     SETTING_DISCOUNT_RATES_PAGE("/boundary/SettingDiscountRatesFXML.fxml"),
-    CONFIRM_DISCOUNT_RATES_PAGE("/boundary/ConfirmDiscountRatesFXML.fxml");
+    CONFIRM_DISCOUNT_RATES_PAGE("/boundary/ConfirmDiscountRatesFXML.fxml"),
+    GENERATING_REPORTS_STATION_MANAGER_PAGE("/boundary/GeneratingReportsStationManagerFXML.fxml"),
+    GENERATING_REPORTS_MARKETING_MANAGER_PAGE("/boundary/GeneratingReportsMarketingManagerFXML.fxml");
 
 
 
