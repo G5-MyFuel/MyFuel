@@ -30,7 +30,7 @@ public class MainForTestsNirGeneratingReportsStationManagerBoundary extends Appl
 
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource(ProjectPages.CONFIRM_DISCOUNT_RATES_PAGE.getPath()));
+            loader.setLocation(getClass().getResource(ProjectPages.GENERATING_REPORTS_STATION_MANAGER_PAGE.getPath()));
             root = loader.load();
             Scene s1 = new Scene(root);
             primaryStage.setScene(s1);
