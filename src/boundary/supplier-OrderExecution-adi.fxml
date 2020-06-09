@@ -35,7 +35,7 @@
                         </Label>
                         <ImageView fitHeight="162.0" fitWidth="171.0">
                            <image>
-                              <Image url="@../../media/avatars/customer_male_avatar.png" />
+                              <Image url="@../media/avatars/customer_male_avatar.png" />
                            </image>
                         </ImageView>
                         <Label style="-fx-font-size: 22;" text="Avi Levi" textAlignment="CENTER" textFill="#e5e5e5">
@@ -56,7 +56,7 @@
                            <graphic>
                               <ImageView fitHeight="23.0" fitWidth="27.0">
                                  <image>
-                                    <Image url="@../../media/icons/icons8_home_80px.png" />
+                                    <Image url="@../media/icons/icons8_home_80px.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -65,7 +65,7 @@
                            <graphic>
                               <ImageView fitHeight="23.0" fitWidth="27.0">
                                  <image>
-                                    <Image url="@../../media/icons/checked_checkbox_40px.png" />
+                                    <Image url="@../media/icons/checked_checkbox_40px.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -80,7 +80,7 @@
                            <graphic>
                               <ImageView fitHeight="23.0" fitWidth="27.0">
                                  <image>
-                                    <Image url="@../../media/icons/icons8_sign_out_80px.png" />
+                                    <Image url="@../media/icons/icons8_sign_out_80px.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -108,7 +108,7 @@
                               </Text>
                               <ImageView fitHeight="64.0" fitWidth="70.0" layoutX="81.0" layoutY="-33.0">
                                  <image>
-                                    <Image url="@../../media/interface.png" />
+                                    <Image url="@../media/interface.png" />
                                  </image>
                               </ImageView>
                            </children>
@@ -123,7 +123,7 @@
                      <children>
                         <ImageView fx:id="arrowImage" layoutX="468.0" layoutY="353.0">
                            <image>
-                              <Image url="@../../media/icons/arrow_100px.png" />
+                              <Image url="@../media/icons/arrow_100px.png" />
                            </image>
                         </ImageView>
                         <Text fx:id="OrderViewTitle" fill="#2d4578" layoutX="591.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Order View" wrappingWidth="244.6708984375">
@@ -165,7 +165,7 @@
                                     <Insets left="20.0" right="30.0" />
                                  </HBox.margin>
                                  <image>
-                                    <Image url="@../../media/icons/check_all_64px.png" />
+                                    <Image url="@../media/icons/check_all_64px.png" />
                                  </image>
                               </ImageView>
                               <Label prefHeight="21.0" prefWidth="136.0" text="Order completed">
@@ -196,7 +196,7 @@
                               <Label layoutX="124.0" layoutY="181.0" prefHeight="33.0" prefWidth="89.0" style="-fx-font-weight: bold;" styleClass="custom-white-label" text="Order Date:" textFill="WHITE" />
                               <ImageView fitHeight="83.0" fitWidth="89.0" layoutX="30.0">
                                  <image>
-                                    <Image url="@../../media/icons/contact.png" />
+                                    <Image url="@../media/icons/contact.png" />
                                  </image>
                               </ImageView>
                               <Label layoutX="123.0" layoutY="241.0" prefHeight="33.0" prefWidth="80.0" style="-fx-font-weight: bold;" styleClass="custom-white-label" text="Fuel Type: " textFill="WHITE" />

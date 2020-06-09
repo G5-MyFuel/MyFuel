@@ -23,9 +23,6 @@ public class MainForTestAdi extends Application {
         launch(args);
     }
 
-
-
-
     @Override
     public void start(Stage primaryStage) throws Exception {
         //set server connection -
@@ -49,5 +46,3 @@ public class MainForTestAdi extends Application {
     }
 
 }
-
-
