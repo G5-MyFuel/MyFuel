@@ -117,17 +117,6 @@ public class CustomerRegistrationController extends BasicController {
         super.sendSqlActionToClient(sqlAction);
     }
 
-
-
-
-
-
-
-
-
-
-
-
     /**
      * This method create array list of costumers from the data base result.
      *
