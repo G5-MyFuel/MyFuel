@@ -377,7 +377,7 @@
                                           </Pane>
                                        </children>
                                     </VBox>
-                                    <ImageView fx:id="backButtonPlanToVehicle" accessibleRole="BUTTON" fitHeight="70.0" fitWidth="94.0" layoutX="50.0" layoutY="562.0" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#SecoundBackwardButtonOnClick" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="backButtonPlanToVehicle" accessibleRole="BUTTON" fitHeight="70.0" fitWidth="94.0" layoutX="50.0" layoutY="562.0" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#SecondBackwardButtonOnClick" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../media/CostumerRegisterationMedia/forward_button_40px.png" />
                                        </image>

@@ -5,13 +5,18 @@ import client.ClientApp;
 import client.ClientConsole;
 import common.assets.ProjectPages;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.IOException;
+import java.util.Optional;
 
 public class MainForTestItay extends Application {
 
@@ -36,7 +41,7 @@ public class MainForTestItay extends Application {
         Pane root = null;
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource(ProjectPages.COSTUMER_REGISTRATION_PAGE.getPath()));
+            loader.setLocation(getClass().getResource(ProjectPages.COSTUMER_MANAGEMENT_TABLE_PAGE.getPath()));
             root = loader.load();
             Scene s1 = new Scene(root);
             primaryStage.setScene(s1);
@@ -46,6 +51,19 @@ public class MainForTestItay extends Application {
             e.printStackTrace();
             System.out.println("ERR at App.Start");
         }
+        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent e) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.getButtonTypes().remove(ButtonType.OK);
+                alert.getButtonTypes().add(ButtonType.CANCEL);
+                alert.getButtonTypes().add(ButtonType.YES);
+                alert.setTitle("Quit application");
+                alert.setContentText(String.format("Are you sure you want to quit?"));
+                Optional<ButtonType> res = alert.showAndWait();
+                System.exit(0);
+            }
+        });
     }
 
 }

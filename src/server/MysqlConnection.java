@@ -151,6 +151,7 @@ public class MysqlConnection {
          * ********** Costumer Management Queries ****************
          * *****************************************/
         sqlArray[SqlQueryType.GET_ALL_COSTUMER_TABLE.getCode()] = "SELECT * FROM `Costumer`";
+        sqlArray[SqlQueryType.UPDATE_COSTUMER_DETAIL.getCode()] = "UPDATE `Costumer` SET `?`= ? WHERE ID =?";
 
 
 
@@ -161,6 +162,8 @@ public class MysqlConnection {
         sqlArray[SqlQueryType.INSERT_NEW_COSTUMER.getCode()] =
                 "INSERT INTO `Costumer`(`ID`, `Password`, `Type`, `First Name`, `Last Name`, `Email Adress`, `Credit Card Number`, `CreditCardExperationDate`, `CVV`," +
                         " `purchasePlan`, `Vehicle ID`, `Vehicale GasType`, `Service Plan`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?);";
+        sqlArray[SqlQueryType.INSERT_NEW_VEHICLE.getCode()] = "INSERT INTO `Vehicle`(`Vehicle ID`, `Fuel Type`, `Owner ID`) VALUES (?,?,?);" ;
+
 
         /* *****************************************
          * ********** Orders From Supplier Queries ****************
@@ -174,6 +177,10 @@ public class MysqlConnection {
         sqlArray[SqlQueryType.INSERT_NEW_TEMPLATE.getCode()] =
                 "INSERT INTO `CampaignTemplates`(`templateID`, `templateName`, `fuelType`, `DiscountPercentages`, `day`,"+
                         " `beginHour`, `endHour`) VALUES (?,?,?,?,?,?,?);";
+        sqlArray[SqlQueryType.GET_ALL_SALES_TABLE.getCode()] = "SELECT * FROM `SaleOperation`";
+        sqlArray[SqlQueryType.INSERT_NEW_SALE.getCode()] =
+                "INSERT INTO  `SaleOperation`(`SaleOperationID`, `TemplateName`, `BeginDate`, `EndDate`) VALUES (?,?,?,?);";
+
 
         /* *****************************************
          * ********** Discount Rates Queries ****************

@@ -163,7 +163,7 @@ public class SaleOperationTemplateBoundary implements Initializable {
         SaleOperationTemplate newTemplate = new SaleOperationTemplate
                 (String.valueOf(myController.getTemplateCounter()+1), TemplateName.getText(), (String)ChooseGasTypeComboSpecialization.getValue(), (String)DiscountPercentages.getText(), (String)DayComboSpecialization1.getValue(), Time.valueOf(StartHour.getValue()), Time.valueOf(EndHour.getValue()));
         myController.setTemplateInDB(newTemplate);
-        myController.getTemplatesTable(); //start the process that will ask server to execute quarry and get the table details
+        myController.getTemplatesTable(); //start the process that will ask server to execute quarry and get the table details//refresh
         detailsPane.setVisible(false);
 
         //clear all fileds:

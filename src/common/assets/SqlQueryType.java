@@ -25,6 +25,7 @@ public enum SqlQueryType {
     /* *****************************************
      * ********** Costumer Management Queries ****************
      * *****************************************/
+    UPDATE_COSTUMER_DETAIL(SqlExecutionType.UPDATE_QUERY),
 
     /* *****************************************
      * ********** Users Management Queries ****************
@@ -36,13 +37,14 @@ public enum SqlQueryType {
      * *****************************************/
     GET_ALL_TEMPLATES_TABLE(SqlExecutionType.EXECUTE_QUERY),
     INSERT_NEW_TEMPLATE(SqlExecutionType.UPDATE_QUERY),
-
-
+    GET_ALL_SALES_TABLE(SqlExecutionType.EXECUTE_QUERY),
+    INSERT_NEW_SALE(SqlExecutionType.UPDATE_QUERY),
 
     /* *****************************************
      * ********** Costumer Registration Queries ****************
      * *****************************************/
     INSERT_NEW_COSTUMER(SqlExecutionType.UPDATE_QUERY),
+    INSERT_NEW_VEHICLE(SqlExecutionType.UPDATE_QUERY),
 
     /* *****************************************
      * ********** Order From Supplier Queries ****************

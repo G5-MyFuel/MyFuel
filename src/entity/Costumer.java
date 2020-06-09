@@ -18,11 +18,11 @@ public class Costumer {
     private String Fname;
     private String CustomerPassword;
     private String CostumerType;
-    private Integer ID;
+    private String ID;
     private String servicePlan;
-    private boolean purchasePlan;
+    private String purchasePlan;
 
-    public Costumer(int ID, String CustomerPassword, String CostumerType, String Fname, String Lname, String emailAdress, CreditCard customerCreditCard, boolean purchasePlan, Vehicle CostumerVehicle,String servicePlan) {
+    public Costumer(String ID, String CustomerPassword, String CostumerType, String Fname, String Lname, String emailAdress, CreditCard customerCreditCard, String purchasePlan, Vehicle CostumerVehicle,String servicePlan) {
         this.CostumerCreditCard = customerCreditCard;
         this.purchasePlan = purchasePlan;
         this.CostumerVehicle.add(CostumerVehicle);
@@ -35,10 +35,10 @@ public class Costumer {
         this.ID = ID;
     }
 
-    public void setPurchasePlan(boolean purchasePlan) {
+    public void setPurchasePlan(String purchasePlan) {
         this.purchasePlan = purchasePlan;
     }
-    public boolean getPurchasePlan() {
+    public String getPurchasePlan() {
         return this.purchasePlan;
     }
 
@@ -50,7 +50,7 @@ public class Costumer {
         this.CostumerCreditCard = costumerCreditCard;
     }
 
-    public boolean isPurchasePlan() {
+    public String isPurchasePlan() {
         return purchasePlan;
     }
 
@@ -112,11 +112,11 @@ public class Costumer {
         CostumerType = costumerType;
     }
 
-    public Integer getID() {
+    public String getID() {
         return ID;
     }
 
-    public void setID(Integer ID) {
+    public void setID(String ID) {
         this.ID = ID;
     }
 

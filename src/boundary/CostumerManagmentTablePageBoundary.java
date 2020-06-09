@@ -1,25 +1,25 @@
 package boundary;
 
 import Contollers.CostumerManagementController;
-import client.ClientConsole;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
-import common.assets.SqlAction;
-import common.assets.SqlQueryType;
 import entity.Costumer;
-import entity.CreditCard;
+import entity.EditingCell;
 import entity.Vehicle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.util.Callback;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -29,9 +29,11 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
 
 
     private ArrayList<Vehicle> Vehicles;
-
+    private ArrayList<Costumer> costumers = new ArrayList<Costumer>();
+    private Alert ErrorAlert = new Alert(Alert.AlertType.ERROR);
     /** The supervisor boundary controller. */
     private CostumerManagementController myController = new CostumerManagementController(this);
+
 
 
     @FXML
@@ -68,25 +70,25 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
     private Button FinishButton1;
 
     @FXML
-    private TableColumn<Costumer, String> CostumerIDCol;
+    private TableColumn CostumerIDCol;
 
     @FXML
-    private TableColumn<Costumer, String> firstNameCol;
+    private TableColumn firstNameCol;
 
     @FXML
-    private TableColumn<Costumer, String> LastNameCol;
+    private TableColumn LastNameCol;
 
     @FXML
-    private TableColumn<Costumer, String> EmailAdressCol;
+    private TableColumn EmailAdressCol;
 
     @FXML
-    private TableColumn<Costumer, String> CostumerTypeCol;
+    private TableColumn CostumerTypeCol;
 
     @FXML
-    private TableColumn<Costumer, String> ServicePlanCol;
+    private TableColumn ServicePlanCol;
 
     @FXML
-    private TableColumn<Costumer, String> PurchasePlanCol;
+    private TableColumn PurchasePlanCol;
 
     @FXML
     private TableView<Costumer> CosManageTbale;
@@ -111,23 +113,116 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
     }
 
     /**
-     this method will set the costumer table
-     when we will initialize the page.
+     this method will set the costumer table and the cell edit functions
+     when the page initialized.
      */
     public void setCostumerTable(ArrayList<Costumer> cosArray){
-        //col oms parameters
-        CostumerIDCol.setCellValueFactory(new PropertyValueFactory<>("ID"));
-        firstNameCol.setCellValueFactory(new PropertyValueFactory<>("Fname"));
-        LastNameCol.setCellValueFactory(new PropertyValueFactory<>("Lname"));
-        EmailAdressCol.setCellValueFactory(new PropertyValueFactory<>("EmailAdress"));
-        CostumerTypeCol.setCellValueFactory(new PropertyValueFactory<>("CostumerType"));
-        ServicePlanCol.setCellValueFactory(new PropertyValueFactory<>("servicePlan"));
-        PurchasePlanCol.setCellValueFactory(new PropertyValueFactory<>("purchasePlan"));
+        costumers.addAll(cosArray);
+        //Create a customer cell factory so that cells can support editing.
+        Callback<TableColumn,TableCell> cellFactory = new Callback<TableColumn, TableCell>() {
+            @Override
+            public TableCell call(TableColumn p) {
+                return new EditingCell();
+            }
+        };
+
+        CostumerIDCol.setCellValueFactory(new PropertyValueFactory<Costumer, String>("ID"));
+        CostumerIDCol.setCellFactory(cellFactory);
+        firstNameCol.setCellValueFactory(new PropertyValueFactory<Costumer, String>("Fname"));
+        firstNameCol.setCellFactory(cellFactory);
+        LastNameCol.setCellValueFactory(new PropertyValueFactory<Costumer, String>("Lname"));
+        LastNameCol.setCellFactory(cellFactory);
+        EmailAdressCol.setCellValueFactory(new PropertyValueFactory<Costumer, String>("EmailAdress"));
+        EmailAdressCol.setCellFactory(cellFactory);
+        CostumerTypeCol.setCellValueFactory(new PropertyValueFactory<Costumer, String>("CostumerType"));
+        CostumerTypeCol.setCellFactory(cellFactory);
+        ServicePlanCol.setCellValueFactory(new PropertyValueFactory<Costumer, String>("servicePlan"));
+        ServicePlanCol.setCellFactory(cellFactory);
+        PurchasePlanCol.setCellValueFactory(new PropertyValueFactory<Costumer, String>("purchasePlan"));
+        PurchasePlanCol.setCellFactory(cellFactory);
         ObservableList<Costumer> data = FXCollections.observableArrayList(cosArray);
         CosManageTbale.setItems(data);
+        CosManageTbale.setEditable(true);
+
+        //Modifying the firstName property
+        firstNameCol.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Costumer, String>>() {
+            @Override
+            public void handle(TableColumn.CellEditEvent<Costumer, String> t) {
+                Costumer temp = ((Costumer) t.getTableView().getItems().get(t.getTablePosition().getRow()));
+                temp.setFname(t.getNewValue());
+                System.out.println(firstNameCol.toString());
+                myController.updateCostumerDetailsInDb(firstNameCol.toString(),temp.getID(),temp.getFname());
+            }
+        });
+        //Modifying the lastName property
+        LastNameCol.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Costumer, String>>() {
+            @Override
+            public void handle(TableColumn.CellEditEvent<Costumer, String> t) {
+                Costumer temp = ((Costumer) t.getTableView().getItems().get(t.getTablePosition().getRow()));
+                temp.setLname(t.getNewValue());
+                myController.updateCostumerDetailsInDb(LastNameCol.toString(),temp.getID(),temp.getLname());
+            }
+        });
+        //Modifying the Emailadress property
+        EmailAdressCol.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Costumer, String>>() {
+            @Override
+            public void handle(TableColumn.CellEditEvent<Costumer, String> t) {
+                Costumer temp = ((Costumer) t.getTableView().getItems().get(t.getTablePosition().getRow()));
+                temp.setEmailAdress(t.getNewValue());
+                myController.updateCostumerDetailsInDb(firstNameCol.toString(),temp.getID(),temp.getEmailAdress());
+            }
+        });
+        //Modifying the CostumerType property
+        CostumerTypeCol.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Costumer, String>>() {
+            @Override
+            public void handle(TableColumn.CellEditEvent<Costumer, String> t) {
+                Costumer temp = ((Costumer) t.getTableView().getItems().get(t.getTablePosition().getRow()));
+                temp.setCostumerType(t.getNewValue());
+                myController.updateCostumerDetailsInDb(firstNameCol.toString(),temp.getID(),temp.getCostumerType());
+            }
+        });
+        //Modifying the servicePlan property
+        ServicePlanCol.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Costumer, String>>() {
+            @Override
+            public void handle(TableColumn.CellEditEvent<Costumer, String> t) {
+                Costumer temp = ((Costumer) t.getTableView().getItems().get(t.getTablePosition().getRow()));
+                temp.setServicePlan(t.getNewValue());
+                myController.updateCostumerDetailsInDb(firstNameCol.toString(),temp.getID(),temp.getServicePlan());
+            }
+        });
+        //Modifying the purchasePlan property
+        PurchasePlanCol.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Costumer, String>>() {
+            @Override
+            public void handle(TableColumn.CellEditEvent<Costumer, String> t) {
+                Costumer temp = ((Costumer) t.getTableView().getItems().get(t.getTablePosition().getRow()));
+                temp.setPurchasePlan(t.getNewValue());
+                myController.updateCostumerDetailsInDb(firstNameCol.toString(),temp.getID(),temp.getServicePlan());
+            }
+        });
     }
 
+
+
     public void setVehicleTable(){
+
+    }
+    @FXML
+    void ClickSearchCostumer(MouseEvent event) {
+        Costumer cos = searchCostumerWithID(CostumerIDtxt.getText());
+
+        if(CostumerIDtxt.getText().isEmpty()){
+            ObservableList<Costumer> data = FXCollections.observableArrayList(costumers);
+            CosManageTbale.setItems(data);
+        }
+       else if( cos != null){
+           ObservableList<Costumer> data = FXCollections.observableArrayList(cos);
+           CosManageTbale.setItems(data);
+        }
+       else{
+           ErrorAlert.setTitle("Internal Error");
+           ErrorAlert.setHeaderText("Costumer not found.");
+           ErrorAlert.showAndWait();
+       }
 
     }
 
@@ -145,9 +240,9 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
 
     @FXML
     void onEditClick(ActionEvent event) {
-        System.out.println("need to edit that field");
-        CosManageTbale.setEditable(true);
     }
+
+
 
     @FXML
     void ClickSearchCostumerVehicles(MouseEvent event) {
@@ -166,5 +261,14 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
     @FXML
     void handleClicks(ActionEvent event) {
 
+    }
+
+
+    private Costumer searchCostumerWithID(String costumerID) {
+        for (Costumer cos : costumers) {
+            if (cos.getID().toString().equals(costumerID))
+                return cos;
+        }
+        return null;
     }
 }
