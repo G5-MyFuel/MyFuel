@@ -20,14 +20,11 @@ import java.util.ArrayList;
  */
 
 public class SaleOperationTemplateController extends BasicController  {
-    /**
-     * The boundary controlled by this controller
-     */
-    private SaleOperationTemplateBoundary myBoundary;
 
+    private SaleOperationTemplateBoundary myBoundary; /**     * The boundary controlled by this controller     */
    private SaleOperationTemplate tempTemplate;
+   private int TemplateCounter;
 
-    private int TemplateCounter;
     /**
      * Instantiates a new Template Management controller.
      *
@@ -74,7 +71,7 @@ public class SaleOperationTemplateController extends BasicController  {
                     null,null);
             cos.setBeginHour(Time.valueOf((String) a.get(5)));
             cos.setEndHour(Time.valueOf((String) a.get(6)));
-            TemplateCounter= Integer.parseInt((String) a.get(0));//????
+            TemplateCounter= Integer.parseInt((String) a.get(0));
             resultList.add(cos);
         }
         return resultList;

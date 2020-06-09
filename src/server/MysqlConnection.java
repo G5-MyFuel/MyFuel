@@ -177,6 +177,10 @@ public class MysqlConnection {
         sqlArray[SqlQueryType.INSERT_NEW_TEMPLATE.getCode()] =
                 "INSERT INTO `CampaignTemplates`(`templateID`, `templateName`, `fuelType`, `DiscountPercentages`, `day`,"+
                         " `beginHour`, `endHour`) VALUES (?,?,?,?,?,?,?);";
+        sqlArray[SqlQueryType.GET_ALL_SALES_TABLE.getCode()] = "SELECT * FROM `SaleOperation`";
+        sqlArray[SqlQueryType.INSERT_NEW_SALE.getCode()] =
+                "INSERT INTO  `SaleOperation`(`SaleOperationID`, `TemplateName`, `BeginDate`, `EndDate`) VALUES (?,?,?,?);";
+
 
         /* *****************************************
          * ********** Discount Rates Queries ****************

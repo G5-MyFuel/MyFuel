@@ -5,13 +5,13 @@ import java.sql.Date; // pay attention that i import the SQL class of date
 
 public class SaleOperation {
     private String saleOperationID;
-    private String templateID;
+    private String templateName;
     private Date beginDate;
     private Date endDate;
 
     public SaleOperation(String saleOperationID, String templateID ,Date beginDate, Date endDate) {
         this.saleOperationID = saleOperationID;
-        this.templateID = templateID;
+        this.templateName = templateID;
         this.beginDate = beginDate;
         this.endDate = endDate;
     }
@@ -20,8 +20,8 @@ public class SaleOperation {
         return saleOperationID;
     }
 
-    public String getTemplateID() {
-        return templateID;
+    public String getTemplateName() {
+        return templateName;
     }
 
     public Date getBeginDate() {
@@ -45,8 +45,8 @@ public class SaleOperation {
         this.endDate = endDate;
     }
 
-    public void setTemplateID(String templateID) {
-        this.templateID = templateID;
+    public void setTemplateName(String templateName) {
+        this.templateName = templateName;
     }
 
 
