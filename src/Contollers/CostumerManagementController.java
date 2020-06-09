@@ -34,13 +34,12 @@ public class CostumerManagementController extends BasicController {
         super.sendSqlActionToClient(sqlAction);
     }
 
-    public void updateCostumerDetailsInDb(String colm,String cosID,String val){
+    public void updateCostumerDetailsInDb(SqlQueryType colm,String cosID,String val){
         //set Costumer data into varArray
         ArrayList<Object> varArray = new ArrayList<>();
-        varArray.add(colm);
         varArray.add(val);
         varArray.add(cosID);
-        SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_COSTUMER_DETAIL, varArray);
+        SqlAction sqlAction = new SqlAction(colm, varArray);
         super.sendSqlActionToClient(sqlAction);
     }
 

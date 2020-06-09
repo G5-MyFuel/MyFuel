@@ -3,6 +3,7 @@ package boundary;
 import Contollers.CostumerManagementController;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import common.assets.SqlQueryType;
 import entity.Costumer;
 import entity.EditingCell;
 import entity.Vehicle;
@@ -106,10 +107,23 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
     private JFXTextField VehicleSearchCosIDtxt;
 
 
+
+
+
+    private JFXComboBox<String> CostumertypeChoiceBox = new JFXComboBox<>();
+
+
+    private JFXComboBox<String> ServicePlanChoiseBox;
+
+    private ObservableList<String> CostumerType = FXCollections.observableArrayList("Private", "Company");
+    private ObservableList<String> ServicePlanType = FXCollections.observableArrayList("Exclusive", "Multiple Stations");
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         VehicleInformationPane.setVisible(false);
         myController.getCostumerTable(); //start the process that will ask server to execute quarry and get the table details
+
     }
 
     /**
@@ -127,7 +141,7 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
         };
 
         CostumerIDCol.setCellValueFactory(new PropertyValueFactory<Costumer, String>("ID"));
-        CostumerIDCol.setCellFactory(cellFactory);
+        CostumerIDCol.setEditable(false);
         firstNameCol.setCellValueFactory(new PropertyValueFactory<Costumer, String>("Fname"));
         firstNameCol.setCellFactory(cellFactory);
         LastNameCol.setCellValueFactory(new PropertyValueFactory<Costumer, String>("Lname"));
@@ -140,6 +154,8 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
         ServicePlanCol.setCellFactory(cellFactory);
         PurchasePlanCol.setCellValueFactory(new PropertyValueFactory<Costumer, String>("purchasePlan"));
         PurchasePlanCol.setCellFactory(cellFactory);
+
+
         ObservableList<Costumer> data = FXCollections.observableArrayList(cosArray);
         CosManageTbale.setItems(data);
         CosManageTbale.setEditable(true);
@@ -150,7 +166,7 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
             public void handle(TableColumn.CellEditEvent<Costumer, String> t) {
                 Costumer temp = ((Costumer) t.getTableView().getItems().get(t.getTablePosition().getRow()));
                 temp.setFname(t.getNewValue());
-                myController.updateCostumerDetailsInDb("First Name",temp.getID(),temp.getFname());
+                myController.updateCostumerDetailsInDb(SqlQueryType.UPDATE_COSTUMER_FNAME,temp.getID(),temp.getFname());
             }
         });
         //Modifying the lastName property
@@ -159,7 +175,7 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
             public void handle(TableColumn.CellEditEvent<Costumer, String> t) {
                 Costumer temp = ((Costumer) t.getTableView().getItems().get(t.getTablePosition().getRow()));
                 temp.setLname(t.getNewValue());
-                myController.updateCostumerDetailsInDb("Last Name",temp.getID(),temp.getLname());
+                myController.updateCostumerDetailsInDb(SqlQueryType.UPDATE_COSTUMER_LNAME,temp.getID(),temp.getLname());
             }
         });
         //Modifying the Emailadress property
@@ -168,7 +184,7 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
             public void handle(TableColumn.CellEditEvent<Costumer, String> t) {
                 Costumer temp = ((Costumer) t.getTableView().getItems().get(t.getTablePosition().getRow()));
                 temp.setEmailAdress(t.getNewValue());
-                myController.updateCostumerDetailsInDb("Email Adress",temp.getID(),temp.getEmailAdress());
+                myController.updateCostumerDetailsInDb(SqlQueryType.UPDATE_COSTUMER_EMAIL,temp.getID(),temp.getEmailAdress());
             }
         });
         //Modifying the CostumerType property
@@ -177,7 +193,7 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
             public void handle(TableColumn.CellEditEvent<Costumer, String> t) {
                 Costumer temp = ((Costumer) t.getTableView().getItems().get(t.getTablePosition().getRow()));
                 temp.setCostumerType(t.getNewValue());
-                myController.updateCostumerDetailsInDb("Costumer Type",temp.getID(),temp.getCostumerType());
+                myController.updateCostumerDetailsInDb(SqlQueryType.UPDATE_COSTUMER_TYPE,temp.getID(),temp.getCostumerType());
             }
         });
         //Modifying the servicePlan property
@@ -186,7 +202,7 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
             public void handle(TableColumn.CellEditEvent<Costumer, String> t) {
                 Costumer temp = ((Costumer) t.getTableView().getItems().get(t.getTablePosition().getRow()));
                 temp.setServicePlan(t.getNewValue());
-                myController.updateCostumerDetailsInDb("Service Plan",temp.getID(),temp.getServicePlan());
+                myController.updateCostumerDetailsInDb(SqlQueryType.UPDATE_COSTUMER_SERVICE_PLAN,temp.getID(),temp.getServicePlan());
             }
         });
         //Modifying the purchasePlan property
@@ -195,7 +211,7 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
             public void handle(TableColumn.CellEditEvent<Costumer, String> t) {
                 Costumer temp = ((Costumer) t.getTableView().getItems().get(t.getTablePosition().getRow()));
                 temp.setPurchasePlan(t.getNewValue());
-                myController.updateCostumerDetailsInDb("Purchase Plan",temp.getID(),temp.getServicePlan());
+                myController.updateCostumerDetailsInDb(SqlQueryType.UPDATE_COSTUMER_PURCHASE_PLAN,temp.getID(),temp.getPurchasePlan());
             }
         });
     }

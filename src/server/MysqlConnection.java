@@ -152,11 +152,11 @@ public class MysqlConnection {
          * *****************************************/
         sqlArray[SqlQueryType.GET_ALL_COSTUMER_TABLE.getCode()] = "SELECT * FROM `Costumer`";
         sqlArray[SqlQueryType.UPDATE_COSTUMER_FNAME.getCode()] = "UPDATE `Costumer` SET `First Name` = ? WHERE ID =?";
-        sqlArray[SqlQueryType.UPDATE_COSTUMER_LNAME.getCode()] = "UPDATE `Costumer` SET `First Name` = ? WHERE ID =?";
-        sqlArray[SqlQueryType.UPDATE_COSTUMER_EMAIL.getCode()] = "UPDATE `Costumer` SET `First Name` = ? WHERE ID =?";
-        sqlArray[SqlQueryType.UPDATE_COSTUMER_SERVICE_PLAN.getCode()] = "UPDATE `Costumer` SET `First Name` = ? WHERE ID =?";
-        sqlArray[SqlQueryType.UPDATE_COSTUMER_PURCHASE_PLAN.getCode()] = "UPDATE `Costumer` SET `First Name` = ? WHERE ID =?";
-        sqlArray[SqlQueryType.UPDATE_COSTUMER_TYPE.getCode()] = "UPDATE `Costumer` SET `First Name` = ? WHERE ID =?";
+        sqlArray[SqlQueryType.UPDATE_COSTUMER_LNAME.getCode()] = "UPDATE `Costumer` SET `Last Name` = ? WHERE ID =?";
+        sqlArray[SqlQueryType.UPDATE_COSTUMER_EMAIL.getCode()] = "UPDATE `Costumer` SET `Email Adress` = ? WHERE ID =?";
+        sqlArray[SqlQueryType.UPDATE_COSTUMER_SERVICE_PLAN.getCode()] = "UPDATE `Costumer` SET `Service Plan` = ? WHERE ID =?";
+        sqlArray[SqlQueryType.UPDATE_COSTUMER_PURCHASE_PLAN.getCode()] = "UPDATE `Costumer` SET `Purchase Plan` = ? WHERE ID =?";
+        sqlArray[SqlQueryType.UPDATE_COSTUMER_TYPE.getCode()] = "UPDATE `Costumer` SET `Costumer Type` = ? WHERE ID =?";
 
 
 

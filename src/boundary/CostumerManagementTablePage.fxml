@@ -190,7 +190,7 @@
                                                 </ContextMenu>
                                              </contextMenu>
                                           </TableView>
-                                          <Label layoutX="14.0" layoutY="164.0" text="*Right Click To Edit / Remove" />
+                                          <Label layoutX="14.0" layoutY="164.0" text="*Double Click To Edit" />
                                        </children>
                                     </Pane>
                                  </children>
