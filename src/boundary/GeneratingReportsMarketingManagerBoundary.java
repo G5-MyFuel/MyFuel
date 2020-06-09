@@ -7,15 +7,20 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class GeneratingReportsMarketingManagerBoundary implements Initializable {
-    private static GeneratingReportsMarketingManagerBoundary Instance = null;
-    private GeneratingReportsMarketingManagerController generatingReportsMarketingManagerLogic;
+
+    /**
+     * The supervisor boundary controller.
+     */
+    private final GeneratingReportsMarketingManagerController myController = new GeneratingReportsMarketingManagerController(this);
     private FormValidation formValidation;
+    private final Alert ErrorAlert = new Alert(Alert.AlertType.ERROR);
 
     @FXML
     private Button btnOverview;
@@ -40,32 +45,14 @@ public class GeneratingReportsMarketingManagerBoundary implements Initializable 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.generatingReportsMarketingManagerLogic = GeneratingReportsMarketingManagerController.getInstance();
         this.formValidation = FormValidation.getValidator();
 
-        EnterOperationSaleTXT.setDisable(true);
-        //EnterOperationSaleTXT.setEditable(false);
-        btnGenerateReport.setDisable(true);
+        //btnApprovedRates.setDisable(true);
         /*ChooseSubscriptionTypeCombo.setItems(SubscriptionType);
         ShowCurrentRateTXT.setVisible(false);
-        ShowNewRateTXT.setVisible(false);
-        btnSetNewRate.setVisible(false);*/
-        //ChooseSubscriptionTypeCombo.set
-        //this.shippingIndicatorTAB1.setVisible(false);
+
         /*  set all fields validators */
         formValidation();
-        /* set form items */
-        //setShippingTab();
-    }
-
-    /**
-     * GeneratingReportsMarketingManagerController Instance getter using SingleTone DesignPatterns
-     * @return Instance of controller class
-     */
-    public static GeneratingReportsMarketingManagerBoundary getInstance() {
-        if (Instance == null)
-            Instance = new GeneratingReportsMarketingManagerBoundary();
-        return Instance;
     }
 
     private void formValidation() {
