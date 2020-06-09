@@ -6,6 +6,7 @@ import Contollers.FormValidation;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTimePicker;
+import com.sun.org.apache.xalan.internal.xsltc.compiler.Template;
 import entity.Costumer;
 import entity.Day;
 import entity.FuelTypes;
@@ -113,15 +114,6 @@ public class SaleOperationTemplateBoundary implements Initializable {
     @FXML
     private JFXComboBox<String> DayComboSpecialization1;
 
-/*  TableColumn templateIDColumn = new TableColumn("Template Number");
-    TableColumn templateNameColumn = new TableColumn("Template Name");
-    TableColumn fuelTypeColumn = new TableColumn("Fuel Type");
-    TableColumn DiscountPercentagesColumn = new TableColumn("Discount Percentages");
-    TableColumn MarketingAdForTemplateColumn = new TableColumn("Marketing Ad For Template");
-    TableColumn dayColumn = new TableColumn("Day");
-    TableColumn beginHourColumn = new TableColumn("Beginning Hour");
-    TableColumn endHourColumn = new TableColumn("End Hour");
-*/
     private ObservableList<String> DayType = FXCollections.observableArrayList("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday");
     private ObservableList<String> FuelType = FXCollections.observableArrayList("Gasoline", "Diesel", "ScooterFuel", "HomeHeatingFuel");
 
@@ -155,11 +147,9 @@ public class SaleOperationTemplateBoundary implements Initializable {
         TemplateTableView.setItems(data);
     }
 
-
     @FXML
     void handleBtnAddTemplate(ActionEvent event) {
         this.detailsPane.setVisible(true);
-
     }
 
     @FXML
@@ -169,8 +159,12 @@ public class SaleOperationTemplateBoundary implements Initializable {
 
     @FXML
     void handleSaveTemplate(ActionEvent event) {
-//TODO: save it in DB
         detailsPane.setVisible(false);
+
+        SaleOperationTemplate newTemplate = new SaleOperationTemplate
+                ("0006", TemplateName.getText(), (String)ChooseGasTypeComboSpecialization.getValue(), (String)DiscountPercentages.getText(), (String)DayComboSpecialization1.getValue(), Time.valueOf(StartHour.getValue()), Time.valueOf(EndHour.getValue()));
+        myController.setTemplateInDB(newTemplate);
+
     }
 
 

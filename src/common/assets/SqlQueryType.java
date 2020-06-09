@@ -1,7 +1,7 @@
 package common.assets;
 /**
  *
- * @author Hana wiener
+ * @author Hana Wiener
  * This enum will represent all the queries in our project
  */
 public enum SqlQueryType {
@@ -19,8 +19,12 @@ public enum SqlQueryType {
      * ********** Costumer Management Queries ****************
      * *****************************************/
     GET_ALL_COSTUMER_TABLE(SqlExecutionType.EXECUTE_QUERY),
-    GET_ALL_TEMPLATES_TABLE(SqlExecutionType.EXECUTE_QUERY),
 
+    /* *****************************************
+     * ********** Sales and Template Management Queries ****************
+     * *****************************************/
+    GET_ALL_TEMPLATES_TABLE(SqlExecutionType.EXECUTE_QUERY),
+    INSERT_NEW_TEMPLATE(SqlExecutionType.UPDATE_QUERY),
 
 
 
@@ -58,7 +62,7 @@ public enum SqlQueryType {
 
     /**
      *
-     * @author hana weiner
+     * @author Hana Wiener
      * This enum will represent which execution method need to
      * be used EXECUTE QUERY - will represent PreparedStatement ".executeQuery" method
      * Applicable for select queries

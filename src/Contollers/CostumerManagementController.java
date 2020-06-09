@@ -39,7 +39,7 @@ public class CostumerManagementController extends BasicController {
     public void getResultFromClient(SqlResult result) {
         Platform.runLater(() -> {
             switch (result.getActionType()) {
-                case GET_ALL_COSTUMER_TABLE:
+                case INSERT_NEW_TEMPLATE:
                     ArrayList<Costumer> resultList = new ArrayList<>();
                     resultList.addAll(this.changeResultToCostumer(result));
                     myBoundary.setCostumerTable(resultList);

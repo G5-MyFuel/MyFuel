@@ -24,6 +24,8 @@ public class SaleOperationTemplateController extends BasicController  {
      */
     private SaleOperationTemplateBoundary myBoundary;
 
+   private SaleOperationTemplate tempTemplate;
+
     /**
      * Instantiates a new Template Management controller.
      *
@@ -34,18 +36,11 @@ public class SaleOperationTemplateController extends BasicController  {
     }
 
 
-    public void getCostumerTable() {
-        SqlAction sqlAction = new SqlAction(SqlQueryType.GET_ALL_COSTUMER_TABLE);
-        super.sendSqlActionToClient(sqlAction);
-    }
-
-
     public void getTemplatesTable() {
         SqlAction sqlAction = new SqlAction(SqlQueryType.GET_ALL_TEMPLATES_TABLE);
         super.sendSqlActionToClient(sqlAction);
 
     }
-
 
     @Override
     public void getResultFromClient(SqlResult result) {
@@ -56,12 +51,12 @@ public class SaleOperationTemplateController extends BasicController  {
                     resultList.addAll(this.changeResultToTemplate(result));
                     myBoundary.setTemplateTable(resultList);
                     break;
-
                 default:
                     break;
             }
         });
     }
+
     /**
      * This method create array list of templates from the data base result.
      *
@@ -80,4 +75,20 @@ public class SaleOperationTemplateController extends BasicController  {
 
         return resultList;
     }
+
+    public void setTemplateInDB(SaleOperationTemplate template){
+        ArrayList<Object> varArray = new ArrayList<>();
+        varArray.add(template.getTemplateID());
+        varArray.add(template.getTemplateName());
+        varArray.add(template.getFuelType());
+        varArray.add(template.getDiscountPercentages());
+        varArray.add(template.getDay());
+        varArray.add(template.getBeginHour());
+        varArray.add(template.getEndHour());
+
+        SqlAction sqlAction = new SqlAction(SqlQueryType.INSERT_NEW_TEMPLATE, varArray);
+        super.sendSqlActionToClient(sqlAction);
+    }
+
+
 }

@@ -127,12 +127,12 @@
                                              <children>
                                                 <Button fx:id="btnNewTemplate" layoutX="349.0" layoutY="273.0" mnemonicParsing="false" onAction="#handleSaveTemplate" text="Save new template" />
                                                 <JFXTextField fx:id="TemplateName" focusColor="#00add8" labelFloat="true" layoutX="37.0" layoutY="54.0" prefHeight="31.0" prefWidth="342.0" promptText="Template Name" unFocusColor="#868282" />
-                                                <JFXComboBox fx:id="ChooseGasTypeComboSpecialization" accessibleHelp="vd" accessibleText="fv" layoutX="38.0" layoutY="130.0" prefHeight="40.0" prefWidth="341.0" promptText="Choose Gas Type:" />
+                                                <JFXComboBox fx:id="ChooseGasTypeComboSpecialization" accessibleHelp="vd" accessibleText="fv" layoutX="38.0" layoutY="130.0" prefHeight="40.0" prefWidth="341.0" promptText="Choose Fuel Type:" />
                                                 <JFXComboBox fx:id="DayComboSpecialization1" layoutX="453.0" layoutY="50.0" onAction="#handleChoseDayType" prefHeight="40.0" prefWidth="354.0" promptText="Day" />
                                                 <JFXTextField fx:id="MarketingAdForTemplate" focusColor="#00add8" labelFloat="true" layoutX="451.0" layoutY="211.0" prefHeight="33.0" prefWidth="355.0" promptText="Marketing Ad For Template" unFocusColor="#868282" />
                                                 <JFXTextField fx:id="DiscountPercentages" focusColor="#00add8" labelFloat="true" layoutX="35.0" layoutY="212.0" prefHeight="31.0" prefWidth="347.0" promptText="Discount Percentages" unFocusColor="#868282" />
                                                 <JFXTimePicker fx:id="StartHour" defaultColor="#32236f" layoutX="451.0" layoutY="135.0" prefHeight="31.0" prefWidth="168.0" promptText="Start Hour" />
-                                                <JFXTimePicker defaultColor="#32236f" layoutX="639.0" layoutY="139.0" prefHeight="31.0" prefWidth="168.0" promptText="End Hour" />
+                                                <JFXTimePicker fx:id="EndHour" defaultColor="#32236f" layoutX="639.0" layoutY="139.0" prefHeight="31.0" prefWidth="168.0" promptText="End Hour" />
                                              </children>
                                           </AnchorPane>
                                        </items>

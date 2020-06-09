@@ -12,6 +12,8 @@ public class SaleOperationTemplate {
     private Time beginHour;
     private Time endHour;
 
+    public SaleOperationTemplate(){}
+
     public SaleOperationTemplate(String templateID, String templateName, String fuelType, String discountPercentages, String day /*,String marketingAdForTemplate*/, Time beginHour, Time endHour) {
         this.templateID = templateID;
         this.templateName = templateName;

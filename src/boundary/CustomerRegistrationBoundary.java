@@ -29,7 +29,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-
 /**
  * @author itay
  * @see CustomerRegistrationBoundary - the form's Boundary class

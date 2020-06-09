@@ -171,6 +171,9 @@ public class MysqlConnection {
          * ********** Template Management Queries ****************
          * *****************************************/
         sqlArray[SqlQueryType.GET_ALL_TEMPLATES_TABLE.getCode()] = "SELECT * FROM `CampaignTemplates`";
+        sqlArray[SqlQueryType.INSERT_NEW_TEMPLATE.getCode()] =
+                "INSERT INTO `CampaignTemplates`(`templateID`, `templateName`, `fuelType`, `DiscountPercentages`, `day`,"+
+                        " `beginHour`, `endHour`) VALUES (?,?,?,?,?,?,?);";
 
         /* *****************************************
          * ********** Discount Rates Queries ****************
