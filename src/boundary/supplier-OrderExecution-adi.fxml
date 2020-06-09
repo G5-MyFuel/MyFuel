@@ -61,7 +61,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button fx:id="MenuOrderConfirmationBtn" graphicTextGap="22.0" mnemonicParsing="false" onContextMenuRequested="#OrderConfirmationCheck" prefHeight="42.0" prefWidth="259.0" style="-fx-font-family: 'Abel', sans-serif; -fx-font-size: 16; -fx-alignment: left;" stylesheets="@style.css" text="Order Confirmation">
+                        <Button fx:id="MenuOrderConfirmationBtn" graphicTextGap="22.0" mnemonicParsing="false" onContextMenuRequested="#OrderConfirmationCheck" onMouseClicked="#getOrderDetailsFromTableView" prefHeight="42.0" prefWidth="259.0" style="-fx-font-family: 'Abel', sans-serif; -fx-font-size: 16; -fx-alignment: left;" stylesheets="@style.css" text="Order Confirmation">
                            <graphic>
                               <ImageView fitHeight="23.0" fitWidth="27.0">
                                  <image>
@@ -200,12 +200,12 @@
                                  </image>
                               </ImageView>
                               <Label layoutX="123.0" layoutY="241.0" prefHeight="33.0" prefWidth="80.0" style="-fx-font-weight: bold;" styleClass="custom-white-label" text="Fuel Type: " textFill="WHITE" />
-                              <Label fx:id="QuantityField" layoutX="121.0" layoutY="299.0" prefHeight="33.0" prefWidth="74.0" style="-fx-font-weight: bold;" styleClass="custom-white-label" text="Quantity:" textFill="WHITE" />
+                              <Label layoutX="121.0" layoutY="299.0" prefHeight="33.0" prefWidth="74.0" style="-fx-font-weight: bold;" styleClass="custom-white-label" text="Quantity:" textFill="WHITE" />
                               <Label fx:id="StationManagerField" layoutX="250.0" layoutY="64.0" prefHeight="21.0" prefWidth="126.0" text="Label" textFill="WHITE" />
                               <Label fx:id="StationNumberField" layoutX="250.0" layoutY="125.0" prefHeight="21.0" prefWidth="126.0" text="Label" textFill="WHITE" />
                               <Label fx:id="OrderDateField" layoutX="250.0" layoutY="187.0" prefHeight="21.0" prefWidth="126.0" text="Label" textFill="WHITE" />
                               <Label fx:id="FuelTypeField" layoutX="250.0" layoutY="247.0" prefHeight="21.0" prefWidth="126.0" text="Label" textFill="WHITE" />
-                              <!--> <Label fx:id="QuantityField" layoutX="250.0" layoutY="305.0" prefHeight="21.0" prefWidth="126.0" text="Label" textFill="WHITE" /> <!-->
+                              <Label fx:id="QuantityField" layoutX="250.0" layoutY="305.0" prefHeight="21.0" prefWidth="126.0" text="Label" textFill="WHITE" />
                            </children>
                         </AnchorPane>
                      </children>
