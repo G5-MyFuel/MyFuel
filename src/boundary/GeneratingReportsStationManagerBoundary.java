@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -47,8 +48,8 @@ public class GeneratingReportsStationManagerBoundary implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.formValidation = FormValidation.getValidator();
-        ChooseReportToGenerateCombo.setItems(ReportsType);
-        btnGenerateReport.setDisable(true);
+        /*ChooseReportToGenerateCombo.setItems(ReportsType);
+        btnGenerateReport.setDisable(true);*/
 
         /*  set all fields validators */
         formValidation();
@@ -86,9 +87,12 @@ public class GeneratingReportsStationManagerBoundary implements Initializable {
 
     }
 
-    @FXML
-    void handleGenerateReport(ActionEvent event) {
-
+    public void handlePurchasesReport(ActionEvent actionEvent) {
     }
 
+    public void handleQuantityItemsInStockReport(ActionEvent actionEvent) {
+    }
+
+    public void handleQuarterlyRevenueReport(MouseEvent mouseEvent) {
+    }
 }

@@ -157,7 +157,7 @@
                            </contextMenu>
                         </TableView>
                         <Text layoutX="61.0" layoutY="634.0" strokeType="OUTSIDE" strokeWidth="0.0" text="* Status: In treatment / Done" wrappingWidth="317.6708984375" />
-                        <Button fx:id="DoneBtn" layoutX="713.0" layoutY="710.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="89.0" style="-fx-background-color: #2D4578; -fx-background-radius: 50;" text="Done" textFill="WHITE" />
+                        <Button fx:id="DoneBtn" layoutX="713.0" layoutY="710.0" mnemonicParsing="false" onMouseClicked="#ClickDoneBtn" prefHeight="40.0" prefWidth="89.0" style="-fx-background-color: #2D4578; -fx-background-radius: 50;" text="Done" textFill="WHITE" />
                         <HBox fx:id="hboxOrderConfirmation" alignment="CENTER_LEFT" layoutX="622.0" layoutY="616.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="53.0" prefWidth="285.0" style="-fx-background-color: #fcf8e8; -fx-border-color: #888888; -fx-background-radius: 5; -fx-background-insets: 0;">
                            <children>
                               <ImageView fx:id="checkBoxImage" fitHeight="35.0" fitWidth="35.0">
@@ -206,7 +206,7 @@
                               <Label fx:id="OrderDateField" layoutX="250.0" layoutY="187.0" prefHeight="21.0" prefWidth="126.0" text="Label" textFill="WHITE" />
                               <Label fx:id="FuelTypeField" layoutX="250.0" layoutY="247.0" prefHeight="21.0" prefWidth="126.0" text="Label" textFill="WHITE" />
                               <Label fx:id="QuantityField" layoutX="250.0" layoutY="305.0" prefHeight="21.0" prefWidth="126.0" text="Label" textFill="WHITE" />
-                              <Text fx:id="DoneMsgTxt" layoutX="81.0" layoutY="210.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-rotate: 320; -fx-opacity: 0.6;" text="Done" textAlignment="CENTER" wrappingWidth="244.67091536521912">
+                              <Text fx:id="DoneMsgTxt" layoutX="40.0" layoutY="220.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-rotate: 320; -fx-opacity: 0.6;" text="Done" textAlignment="CENTER" wrappingWidth="292.40420269966125">
                                  <font>
                                     <Font name="System Bold Italic" size="96.0" />
                                  </font>
