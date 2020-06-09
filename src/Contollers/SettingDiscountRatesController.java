@@ -69,7 +69,7 @@ public class SettingDiscountRatesController extends BasicController {
                     myBoundary.setData(this.changeResultToString(result));
                     break;
                 case INSERT_NEW_PRICE:
-                    //myBoundary.setData(this.changeResultToString(result));
+                    myBoundary.setData("");
                     break;
 
                 default:

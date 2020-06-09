@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 
 import java.net.URL;
@@ -23,6 +24,7 @@ public class SettingDiscountRatesBoundary implements Initializable {
      */
     private final SettingDiscountRatesController myController = new SettingDiscountRatesController(this);
     private FormValidation formValidation;
+    private Alert ErrorAlert = new Alert(Alert.AlertType.ERROR);
 
     @FXML
     private Button btnOverview;
@@ -68,20 +70,18 @@ public class SettingDiscountRatesBoundary implements Initializable {
         /*  New price validation */
 
         //formValidation.isContainsOnlyNumbers(ShowNewRateTXT, "New price");
-        formValidation.numberPositiveValidation(ShowNewRateTXT, "New price");
+        //formValidation.numberPositiveValidation(ShowNewRateTXT, "New price");
         FormValidation.isEmptyField(ShowNewRateTXT, "New price");
         //formValidation.maxLengthValidation(ShowNewRateTXT, "New price", 3);
         formValidation.maxSizeValidation(ShowNewRateTXT, "New price", 100);
         formValidation.minSizeValidation(ShowNewRateTXT, "New price", 1);
-        //לא לאפשר עדכון מחיר חדש אם הבדיקת לא תקינה!!
-
     }
 
     @FXML
     void handleChoseSubscriptionType(ActionEvent event) {
 
         myController.getDiscountRatesTable(ChooseSubscriptionTypeCombo.getValue()); //start the process that will ask server to execute quarry and get the table details
-        //ShowCurrentRateTXT.setText(SubscriptionType);
+        ShowNewRateTXT.clear();
         ShowCurrentRateTXT.setVisible(true);
         ShowCurrentRateTXT.setEditable(false);
         ShowNewRateTXT.setVisible(true);
@@ -89,7 +89,11 @@ public class SettingDiscountRatesBoundary implements Initializable {
     }
 
     public void setData(String currentRate) {
-        ShowCurrentRateTXT.setText(currentRate);
+        if(currentRate.isEmpty())
+             ShowCurrentRateTXT.setText(ShowNewRateTXT.getText());
+        else
+            ShowCurrentRateTXT.setText(currentRate);
+
     }
 
     @FXML
@@ -100,8 +104,15 @@ public class SettingDiscountRatesBoundary implements Initializable {
     @FXML
     void handleSetNewRate(ActionEvent event) {
 
-        myController.setNewPriceInDB(ShowNewRateTXT.getText(), ChooseSubscriptionTypeCombo.getValue());
-        //לרענן את שורת המחיר הנוכחי!!
+        Float NewRate = Float.parseFloat(ShowNewRateTXT.getText());
+        if (NewRate < 0 || NewRate > 100) {
+            ErrorAlert.setTitle("Price rate ERROR");
+            ErrorAlert.setHeaderText("Please insert between 0-100");
+            ErrorAlert.showAndWait();
+        } else {
+            myController.setNewPriceInDB(ShowNewRateTXT.getText(), ChooseSubscriptionTypeCombo.getValue());
+             //גם ככה יש שימוש בפונקציה סט דאטה. שם העדכון קורה אחרי שהשאליתה בוצעה
+        }
     }
 
     @FXML
@@ -113,5 +124,4 @@ public class SettingDiscountRatesBoundary implements Initializable {
     void handleShowNewRate(ActionEvent event) {
 
     }
-
 }
