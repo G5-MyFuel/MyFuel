@@ -38,8 +38,8 @@ public class CostumerManagementController extends BasicController {
         //set Costumer data into varArray
         ArrayList<Object> varArray = new ArrayList<>();
         varArray.add(colm);
-        varArray.add(cosID);
         varArray.add(val);
+        varArray.add(cosID);
         SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_COSTUMER_DETAIL, varArray);
         super.sendSqlActionToClient(sqlAction);
     }

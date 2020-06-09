@@ -25,7 +25,12 @@ public enum SqlQueryType {
     /* *****************************************
      * ********** Costumer Management Queries ****************
      * *****************************************/
-    UPDATE_COSTUMER_DETAIL(SqlExecutionType.UPDATE_QUERY),
+    UPDATE_COSTUMER_FNAME(SqlExecutionType.UPDATE_QUERY),
+    UPDATE_COSTUMER_LNAME(SqlExecutionType.UPDATE_QUERY),
+    UPDATE_COSTUMER_EMAIL(SqlExecutionType.UPDATE_QUERY),
+    UPDATE_COSTUMER_TYPE(SqlExecutionType.UPDATE_QUERY),
+    UPDATE_COSTUMER_SERVICE_PLAN(SqlExecutionType.UPDATE_QUERY),
+    UPDATE_COSTUMER_PURCHASE_PLAN(SqlExecutionType.UPDATE_QUERY),
 
 
     /* *****************************************

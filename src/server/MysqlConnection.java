@@ -129,7 +129,7 @@ public class MysqlConnection {
         } finally {
             this.disconnect();
         }
-
+        System.out.println(sqlArray[sqlAction.getActionType().getCode()].toString());
         return sqlResult;
     }
 
@@ -151,7 +151,13 @@ public class MysqlConnection {
          * ********** Costumer Management Queries ****************
          * *****************************************/
         sqlArray[SqlQueryType.GET_ALL_COSTUMER_TABLE.getCode()] = "SELECT * FROM `Costumer`";
-        sqlArray[SqlQueryType.UPDATE_COSTUMER_DETAIL.getCode()] = "UPDATE `Costumer` SET `?`= ? WHERE ID =?";
+        sqlArray[SqlQueryType.UPDATE_COSTUMER_FNAME.getCode()] = "UPDATE `Costumer` SET `First Name` = ? WHERE ID =?";
+        sqlArray[SqlQueryType.UPDATE_COSTUMER_LNAME.getCode()] = "UPDATE `Costumer` SET `First Name` = ? WHERE ID =?";
+        sqlArray[SqlQueryType.UPDATE_COSTUMER_EMAIL.getCode()] = "UPDATE `Costumer` SET `First Name` = ? WHERE ID =?";
+        sqlArray[SqlQueryType.UPDATE_COSTUMER_SERVICE_PLAN.getCode()] = "UPDATE `Costumer` SET `First Name` = ? WHERE ID =?";
+        sqlArray[SqlQueryType.UPDATE_COSTUMER_PURCHASE_PLAN.getCode()] = "UPDATE `Costumer` SET `First Name` = ? WHERE ID =?";
+        sqlArray[SqlQueryType.UPDATE_COSTUMER_TYPE.getCode()] = "UPDATE `Costumer` SET `First Name` = ? WHERE ID =?";
+
 
 
 
