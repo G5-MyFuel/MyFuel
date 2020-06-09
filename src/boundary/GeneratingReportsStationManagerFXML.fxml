@@ -135,17 +135,17 @@
                                     <Font name="System Bold" size="40.0" />
                                  </font>
                               </Label>
-                              <JFXButton fx:id="btnQuarterlyRevenueReport" buttonType="RAISED" layoutX="39.0" layoutY="313.0" onAction="#handleQuarterlyRevenueReport" prefHeight="38.0" prefWidth="280.0" stylesheets="@../../../../OneDrive/פרוייקט/משימה%203/GUI/דוגמאות%20לתוכנות/Javafx%20Examples/School-Management-System-master/School-Management-System-master/src/sms/view/fxml/css/RegStudent.css" text="Generate Quarterly revenue report" textFill="WHITE">
+                              <JFXButton fx:id="btnQuarterlyRevenueReport" buttonType="RAISED" layoutX="39.0" layoutY="313.0" onAction="#handleQuarterlyRevenueReport" prefHeight="38.0" prefWidth="280.0" styleClass="jfx-button" stylesheets="@GeneratingReportsStationManagerCSS.css" text="Generate Quarterly revenue report" textFill="WHITE">
                                  <font>
                                     <Font name="Calibri Bold" size="14.0" />
                                  </font>
                               </JFXButton>
-                              <JFXButton fx:id="btnPurchasesReport" buttonType="RAISED" layoutX="387.0" layoutY="313.0" onAction="#handlePurchasesReport" prefHeight="38.0" prefWidth="280.0" stylesheets="@../../../../OneDrive/פרוייקט/משימה%203/GUI/דוגמאות%20לתוכנות/Javafx%20Examples/School-Management-System-master/School-Management-System-master/src/sms/view/fxml/css/RegStudent.css" text="Generate Purchases report" textFill="WHITE">
+                              <JFXButton fx:id="btnPurchasesReport" buttonType="RAISED" layoutX="387.0" layoutY="313.0" onAction="#handlePurchasesReport" prefHeight="38.0" prefWidth="280.0" styleClass="jfx-button" stylesheets="@GeneratingReportsStationManagerCSS.css" text="Generate Purchases report" textFill="WHITE">
                                  <font>
                                     <Font name="Calibri Bold" size="14.0" />
                                  </font>
                               </JFXButton>
-                              <JFXButton fx:id="btnQuantityItemsInStockReport" buttonType="RAISED" layoutX="727.0" layoutY="313.0" onAction="#handleQuantityItemsInStockReport" prefHeight="38.0" prefWidth="280.0" stylesheets="@../../../../OneDrive/פרוייקט/משימה%203/GUI/דוגמאות%20לתוכנות/Javafx%20Examples/School-Management-System-master/School-Management-System-master/src/sms/view/fxml/css/RegStudent.css" text="Generate Quantity of items in stock report" textFill="WHITE">
+                              <JFXButton fx:id="btnQuantityItemsInStockReport" buttonType="RAISED" layoutX="727.0" layoutY="313.0" onAction="#handleQuantityItemsInStockReport" prefHeight="38.0" prefWidth="280.0" styleClass="jfx-button" stylesheets="@GeneratingReportsStationManagerCSS.css" text="Generate Quantity of items in stock report" textFill="WHITE">
                                  <font>
                                     <Font name="Calibri Bold" size="14.0" />
                                  </font>
