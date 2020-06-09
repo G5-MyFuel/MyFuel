@@ -3,18 +3,25 @@ package boundary;
 import Contollers.FormValidation;
 import Contollers.GeneratingReportsStationManagerController;
 import com.jfoenix.controls.JFXComboBox;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class GeneratingReportsStationManagerBoundary implements Initializable {
-    private static GeneratingReportsStationManagerBoundary Instance = null;
-    private GeneratingReportsStationManagerController generatingReportsStationManagerLogic;
+
+    /**
+     * The supervisor boundary controller.
+     */
+    private final GeneratingReportsStationManagerController myController = new GeneratingReportsStationManagerController(this);
     private FormValidation formValidation;
+    private final Alert ErrorAlert = new Alert(Alert.AlertType.ERROR);
 
     @FXML
     private Button btnOverview;
@@ -32,35 +39,19 @@ public class GeneratingReportsStationManagerBoundary implements Initializable {
     private Button btnGenerateReport;
 
     @FXML
-    private JFXComboBox<?> ChooseReportToGenerateCombo;
+    private JFXComboBox<String> ChooseReportToGenerateCombo;
+
+    private final ObservableList<String> ReportsType = FXCollections.observableArrayList("Quarterly revenue report",
+            "Purchases report", "Quantity of items in stock report");
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.generatingReportsStationManagerLogic = GeneratingReportsStationManagerController.getInstance();
         this.formValidation = FormValidation.getValidator();
-
+        ChooseReportToGenerateCombo.setItems(ReportsType);
         btnGenerateReport.setDisable(true);
-        /*ChooseSubscriptionTypeCombo.setItems(SubscriptionType);
-        ShowCurrentRateTXT.setVisible(false);
-        ShowNewRateTXT.setVisible(false);
-        btnSetNewRate.setVisible(false);
-        //ChooseSubscriptionTypeCombo.set
-        //this.shippingIndicatorTAB1.setVisible(false);
+
         /*  set all fields validators */
         formValidation();
-        /* set form items */
-        //setShippingTab();
-    }
-
-    /**
-     * GeneratingReportsStationManagerController Instance getter using SingleTone DesignPatterns
-     *
-     * @return Instance of controller class
-     */
-    public static GeneratingReportsStationManagerBoundary getInstance() {
-        if (Instance == null)
-            Instance = new GeneratingReportsStationManagerBoundary();
-        return Instance;
     }
 
     private void formValidation() {
@@ -78,6 +69,15 @@ public class GeneratingReportsStationManagerBoundary implements Initializable {
 
     @FXML
     void handleChooseReportToGenerate(ActionEvent event) {
+
+        /*
+        myController.getReportTable(ChooseSubscriptionTypeCombo.getValue()); //start the process that will ask server to execute quarry and get the table details
+        ShowNewRateTXT.clear();
+        ShowCurrentRateTXT.setVisible(true);
+        ShowCurrentRateTXT.setEditable(false);
+        ShowNewRateTXT.setVisible(true);
+        btnSetNewRate.setVisible(true);
+         */
 
     }
 

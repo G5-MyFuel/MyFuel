@@ -1,21 +1,47 @@
 package Contollers;
 
-import server.MysqlConnection;
+import boundary.GeneratingReportsStationManagerBoundary;
+import common.assets.SqlResult;
 
-public class GeneratingReportsStationManagerController {
+public class GeneratingReportsStationManagerController extends BasicController {
 
-    MysqlConnection mySqlConnector;
+    /**
+     * The boundary controlled by this controller
+     */
+    private final GeneratingReportsStationManagerBoundary myBoundary;
 
-    /*Logic Variables*/
-    private static GeneratingReportsStationManagerController Instance = null;
-    //private SettingDiscountRatesController settingDiscountRatesController = SettingDiscountRatesController.getInstance();
-
-    /*Logic Methods*/
-
-    public static GeneratingReportsStationManagerController getInstance() {
-
-        if (Instance == null)
-            Instance = new GeneratingReportsStationManagerController();
-        return Instance;
+    /**
+     * Instantiates a new Costumer Management controller.
+     *
+     * @param myBoundary the my boundary
+     */
+    public GeneratingReportsStationManagerController(GeneratingReportsStationManagerBoundary myBoundary) {
+        this.myBoundary = myBoundary;
     }
+
+    public void getReportTable(String ReportType) {
+        switch (ReportType) {
+            case "Quarterly revenue report":
+                /*SqlAction sqlAction = new SqlAction(SqlQueryType.GET_RegularSubscriptionSingleVehicle_PRICE);
+                super.sendSqlActionToClient(sqlAction);
+                break;*/
+            case "Purchases report":
+                /*sqlAction = new SqlAction(SqlQueryType.GET_FullSubscriptionSingleVehicle_PRICE);
+                super.sendSqlActionToClient(sqlAction);
+                break;*/
+            case "Quantity of items in stock report":
+                /*sqlAction = new SqlAction(SqlQueryType.GET_RegularSubscriptionMultiVehicle_PRICE);
+                super.sendSqlActionToClient(sqlAction);
+                break;*/
+            default:
+                break;
+        }
+    }
+
+
+    @Override
+    public void getResultFromClient(SqlResult result) {
+
+    }
+
 }

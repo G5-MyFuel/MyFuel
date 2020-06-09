@@ -1,11 +1,9 @@
 package boundary;
 
-import Contollers.CostumerManagementController;
 import Contollers.FormValidation;
 import Contollers.SettingDiscountRatesController;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
-import common.assets.ReturnMsgType;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
