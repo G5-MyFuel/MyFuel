@@ -37,7 +37,8 @@ public class FormValidation {
         reqInputValidator.setMessage(fieldName + " field is Required!");
         theField.getValidators().add(reqInputValidator);
         theField.focusedProperty().addListener((o, oldVal, newVal) -> {
-            if (!newVal) theField.validate();
+            if (!newVal)
+                theField.validate();
         });
     }
 
@@ -525,6 +526,7 @@ public class FormValidation {
 
 
     public void isEmptyDateField(JFXDatePicker dateField, String date) {
+
         RequiredFieldValidator reqInputValidator = new RequiredFieldValidator();
         reqInputValidator.setMessage(date + " field is Required!");
         dateField.getValidators().add(reqInputValidator);
@@ -535,7 +537,7 @@ public class FormValidation {
     }
 
 
-    public void isEmptyTimeField(JFXTimePicker timePicker, String time) {
+    public void isEmptyTimeField(JFXTimePicker timePicker, String time) { //doesnt work !
         RequiredFieldValidator reqInputValidator = new RequiredFieldValidator();
         reqInputValidator.setMessage(time + " field is Required!");
         timePicker.validate();

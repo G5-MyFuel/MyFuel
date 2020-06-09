@@ -37,6 +37,7 @@ public class SaleOperationTemplateBoundary implements Initializable {
     private SaleOperationTemplateController myController = new SaleOperationTemplateController(this);
 
     private FormValidation formValidation;
+    private boolean flagValidation=true;
 
     //gui variables:
     @FXML
@@ -159,12 +160,20 @@ public class SaleOperationTemplateBoundary implements Initializable {
 
     @FXML
     void handleSaveTemplate(ActionEvent event) {
+        SaleOperationTemplate newTemplate = new SaleOperationTemplate
+                (String.valueOf(myController.getTemplateCounter()+1), TemplateName.getText(), (String)ChooseGasTypeComboSpecialization.getValue(), (String)DiscountPercentages.getText(), (String)DayComboSpecialization1.getValue(), Time.valueOf(StartHour.getValue()), Time.valueOf(EndHour.getValue()));
+        myController.setTemplateInDB(newTemplate);
+        myController.getTemplatesTable(); //start the process that will ask server to execute quarry and get the table details
         detailsPane.setVisible(false);
 
-        SaleOperationTemplate newTemplate = new SaleOperationTemplate
-                ("0006", TemplateName.getText(), (String)ChooseGasTypeComboSpecialization.getValue(), (String)DiscountPercentages.getText(), (String)DayComboSpecialization1.getValue(), Time.valueOf(StartHour.getValue()), Time.valueOf(EndHour.getValue()));
-        myController.setTemplateInDB(newTemplate);
-
+        //clear all fileds:
+        TemplateName.clear();
+        MarketingAdForTemplate.clear();
+        DiscountPercentages.clear();
+        DayComboSpecialization1.getSelectionModel().clearSelection();
+        ChooseGasTypeComboSpecialization.getSelectionModel().clearSelection();
+        StartHour.getEditor().clear();
+        EndHour.getEditor().clear();
     }
 
 
@@ -178,7 +187,12 @@ public class SaleOperationTemplateBoundary implements Initializable {
         formValidation.isContainsOnlyNumbers(DiscountPercentages, "Discount Percentages");
         formValidation.numberPositiveValidation(DiscountPercentages, "Discount Percentages");
 
-        /*  Start Hour validation */
+        /*  Start Hour validation */ // פתרון זמני בלבד !!
+        if (StartHour.getValue() == null) {
+            flagValidation = false;
+
+        }
+
       //  formValidation.isEmptyTimeField(StartHour, "Start Hour");
 
         /*  End Hour validation */

@@ -2,6 +2,7 @@ package Contollers;
 
 import boundary.CostumerManagmentTablePageBoundary;
 import boundary.SaleOperationTemplateBoundary;
+import com.sun.org.apache.xalan.internal.xsltc.compiler.Template;
 import common.assets.SqlAction;
 import common.assets.SqlQueryType;
 import common.assets.SqlResult;
@@ -26,6 +27,7 @@ public class SaleOperationTemplateController extends BasicController  {
 
    private SaleOperationTemplate tempTemplate;
 
+    private int TemplateCounter;
     /**
      * Instantiates a new Template Management controller.
      *
@@ -51,6 +53,8 @@ public class SaleOperationTemplateController extends BasicController  {
                     resultList.addAll(this.changeResultToTemplate(result));
                     myBoundary.setTemplateTable(resultList);
                     break;
+                case INSERT_NEW_TEMPLATE:
+                    break;
                 default:
                     break;
             }
@@ -70,10 +74,14 @@ public class SaleOperationTemplateController extends BasicController  {
                     null,null);
             cos.setBeginHour(Time.valueOf((String) a.get(5)));
             cos.setEndHour(Time.valueOf((String) a.get(6)));
+            TemplateCounter= Integer.parseInt((String) a.get(0));//????
             resultList.add(cos);
         }
-
         return resultList;
+    }
+
+    public int getTemplateCounter() {
+        return TemplateCounter;
     }
 
     public void setTemplateInDB(SaleOperationTemplate template){
