@@ -20,13 +20,8 @@ import java.util.Date;
  */
 
 public class OrderFromSupplierController extends BasicController {
-
+    public ArrayList<OrderFuelFromSupplier> resultList=new ArrayList<>();
     private OrderExecutionBoundary myBoundary;
-
-
-    /*private static OrderFromSupplierController Instance= null;
-    private ArrayList<OrderFuelFromSupplier> orderSet;
-    private ResultSet rs;*/
 
     public OrderFromSupplierController(OrderExecutionBoundary myBoundary) {
         this.myBoundary = myBoundary;
@@ -53,7 +48,7 @@ public class OrderFromSupplierController extends BasicController {
     }
 
     private ArrayList<OrderFuelFromSupplier> changeResultToOrder(SqlResult result){
-        ArrayList<OrderFuelFromSupplier> resultList=new ArrayList<>();
+        /*ArrayList<OrderFuelFromSupplier> resultList=new ArrayList<>();*/
         for(ArrayList<Object> a: result.getResultData()) {
             OrderFuelFromSupplier x= new OrderFuelFromSupplier((String)a.get(0),(String)a.get(1),
                     (int)a.get(2),(Date)a.get(3),(int)a.get(4),(String)a.get(5),(String)a.get(6));
