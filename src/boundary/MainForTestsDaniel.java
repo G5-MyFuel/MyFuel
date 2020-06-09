@@ -28,7 +28,8 @@ public class MainForTestsDaniel extends Application {
         Pane root = null;
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource(ProjectPages.PURCHASE_FUEL_FOR_HOME_HEATING.getPath()));
+        //    loader.setLocation(getClass().getResource(ProjectPages.PURCHASE_FUEL_FOR_HOME_HEATING.getPath()));
+            loader.setLocation(getClass().getResource(ProjectPages.LOGIN_PAGE.getPath()));
             root = loader.load();
             Scene s1 = new Scene(root);
             primaryStage.setScene(s1);

@@ -50,7 +50,7 @@
                               </Text>
                               <ImageView fitHeight="64.0" fitWidth="70.0" layoutX="81.0" layoutY="-33.0">
                                  <image>
-                                    <Image url="@../../media/interface.png" />
+                                    <Image url="@../media/interface.png" />
                                  </image>
                               </ImageView>
                            </children>
@@ -66,7 +66,7 @@
                         </Label>
                         <ImageView fitHeight="139.0" fitWidth="191.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../media/avatars/customer_male_avatar.png" />
+                              <Image url="@../media/avatars/customer_male_avatar.png" />
                            </image>
                            <VBox.margin>
                               <Insets bottom="10.0" top="10.0" />
@@ -81,7 +81,7 @@
                            <graphic>
                               <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../media/icons/icons8_home_80px.png" />
+                                    <Image url="@../media/icons/icons8_home_80px.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -99,7 +99,7 @@
                            <graphic>
                               <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../media/icons/icons8_new_copy_96px_1.png" />
+                                    <Image url="@../media/icons/icons8_new_copy_96px_1.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -111,7 +111,7 @@
                            <graphic>
                               <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../media/icons/icons8_data_pending_80px_1.png" />
+                                    <Image url="@../media/icons/icons8_data_pending_80px_1.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -123,7 +123,7 @@
                            <graphic>
                               <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../media/icons/icons8_more_details_80px.png" />
+                                    <Image url="@../media/icons/icons8_more_details_80px.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -135,7 +135,7 @@
                            <graphic>
                               <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../media/icons/icons8_sign_out_80px.png" />
+                                    <Image url="@../media/icons/icons8_sign_out_80px.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -201,7 +201,7 @@
                                                          <children>
                                                             <ImageView fx:id="nextOrderDetailsBtn" accessibleRole="BUTTON" fitHeight="70.0" fitWidth="87.0" layoutX="390.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true">
                                                                <image>
-                                                                  <Image url="@../../media/CostumerRegisterationMedia/forward_button_40px.png" />
+                                                                  <Image url="@../media/CostumerRegisterationMedia/forward_button_40px.png" />
                                                                </image>
                                                                <effect>
                                                                   <Blend />
@@ -314,14 +314,14 @@
                                  <graphic>
                                     <ImageView fx:id="shippingIndicatorTAB" fitHeight="25.0" fitWidth="25.0" smooth="false" visible="false">
                                        <image>
-                                          <Image url="@../../media/icons/icons8_checked_48px.png" />
+                                          <Image url="@../media/icons/icons8_checked_48px.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
                                  <graphic>
                                     <ImageView fx:id="orderDetailsIndicatorTAB" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" visible="false">
                                        <image>
-                                          <Image url="@../../media/PurchaseMedia/ok.png" />
+                                          <Image url="@../media/PurchaseMedia/ok.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
@@ -346,12 +346,12 @@
                                                                <children>
                                                                   <ImageView fitHeight="25.0" fitWidth="25.0" visible="false">
                                                                      <image>
-                                                                        <Image url="@../../media/alerts/icons8_ok_48px.png" />
+                                                                        <Image url="@../media/alerts/icons8_ok_48px.png" />
                                                                      </image>
                                                                   </ImageView>
                                                                   <ImageView fx:id="WrongQuantity111111" fitHeight="25.0" fitWidth="25.0" visible="false">
                                                                      <image>
-                                                                        <Image url="@../../media/alerts/icons8_close_window_48px.png" />
+                                                                        <Image url="@../media/alerts/icons8_close_window_48px.png" />
                                                                      </image>
                                                                   </ImageView>
                                                                </children>
@@ -421,7 +421,7 @@
                                                          <children>
                                                             <ImageView accessibleRole="BUTTON" fitHeight="70.0" fitWidth="87.0" layoutX="899.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
                                                                <image>
-                                                                  <Image url="@../../media/CostumerRegisterationMedia/forward_button_40px.png" />
+                                                                  <Image url="@../media/CostumerRegisterationMedia/forward_button_40px.png" />
                                                                </image>
                                                                <effect>
                                                                   <Blend />
@@ -434,7 +434,7 @@
                                                                <graphic>
                                                                   <ImageView accessibleRole="BUTTON" fitHeight="70.0" fitWidth="94.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
                                                                      <image>
-                                                                        <Image url="@../../media/CostumerRegisterationMedia/forward_button_40px.png" />
+                                                                        <Image url="@../media/CostumerRegisterationMedia/forward_button_40px.png" />
                                                                      </image>
                                                                      <cursor>
                                                                         <Cursor fx:constant="OPEN_HAND" />
@@ -460,7 +460,7 @@
                                  <graphic>
                                     <ImageView fx:id="shippingIndicatorTAB1" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" visible="false">
                                        <image>
-                                          <Image url="@../../media/PurchaseMedia/ok.png" />
+                                          <Image url="@../media/PurchaseMedia/ok.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
@@ -591,7 +591,7 @@
                                              <graphic>
                                                 <ImageView accessibleRole="BUTTON" fitHeight="70.0" fitWidth="94.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
                                                    <image>
-                                                      <Image url="@../../media/CostumerRegisterationMedia/forward_button_40px.png" />
+                                                      <Image url="@../media/CostumerRegisterationMedia/forward_button_40px.png" />
                                                    </image>
                                                    <cursor>
                                                       <Cursor fx:constant="OPEN_HAND" />
@@ -614,7 +614,7 @@
                                  <graphic>
                                     <ImageView disable="true" fitHeight="25.0" fitWidth="25.0" visible="false">
                                        <image>
-                                          <Image url="@../../media/icons/icons8_checked_48px.png" />
+                                          <Image url="@../media/icons/icons8_checked_48px.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>

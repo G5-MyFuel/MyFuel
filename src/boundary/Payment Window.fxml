@@ -44,12 +44,12 @@
             <Hyperlink layoutX="108.0" layoutY="342.0" prefHeight="29.0" prefWidth="278.0" text="Add this credit card to my account." />
             <ImageView layoutX="86.0" layoutY="270.0">
                <image>
-                  <Image url="@../../media/CostumerRegisterationMedia/help_16px.png" />
+                  <Image url="@../media/CostumerRegisterationMedia/help_16px.png" />
                </image>
             </ImageView>
             <ImageView fx:id="addCardButton" accessibleRole="BUTTON" fitHeight="32.0" fitWidth="29.0" layoutX="72.0" layoutY="341.0">
                <image>
-                  <Image url="@../../media/CostumerRegisterationMedia/add_40px.png" />
+                  <Image url="@../media/CostumerRegisterationMedia/add_40px.png" />
                </image>
                <cursor>
                   <Cursor fx:constant="OPEN_HAND" />
@@ -58,7 +58,7 @@
             <Button fx:id="payButton" layoutX="151.0" layoutY="388.0" mnemonicParsing="false" onMouseClicked="#addCardOnClick" prefHeight="42.0" prefWidth="89.0" style="-fx-background-color: #2D4578; -fx-background-radius: 50;" stylesheets="@style.css" text="Pay" textFill="WHITE" />
             <ImageView fitHeight="70.0" fitWidth="136.0" layoutX="172.0" layoutY="250.0" mouseTransparent="true">
                <image>
-                  <Image url="@../../media/credit-card-cvv-code.png" />
+                  <Image url="@../media/credit-card-cvv-code.png" />
                </image>
             </ImageView>
          </children>

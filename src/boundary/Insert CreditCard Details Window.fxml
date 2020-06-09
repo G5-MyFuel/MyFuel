@@ -43,24 +43,24 @@
             <Hyperlink layoutX="84.0" layoutY="394.0" prefHeight="29.0" prefWidth="278.0" text="Add this credit card to my account." />
             <ImageView fitHeight="47.0" fitWidth="58.0" layoutX="184.0" layoutY="82.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../media/CostumerRegisterationMedia/card_security_40px.png" />
+                  <Image url="@../media/CostumerRegisterationMedia/card_security_40px.png" />
                </image>
             </ImageView>
             <ImageView layoutX="87.0" layoutY="322.0">
                <image>
-                  <Image url="@../../media/CostumerRegisterationMedia/help_16px.png" />
+                  <Image url="@../media/CostumerRegisterationMedia/help_16px.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="32.0" fitWidth="29.0" layoutX="54.0" layoutY="392.0">
                <image>
-                  <Image url="@../../media/CostumerRegisterationMedia/add_40px.png" />
+                  <Image url="@../media/CostumerRegisterationMedia/add_40px.png" />
                </image>
             </ImageView>
             <Button layoutX="255.0" layoutY="435.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="89.0" style="-fx-background-color: #2D4578; -fx-background-radius: 50;"
                     text="Pay" />
             <ImageView fitHeight="70.0" fitWidth="136.0" layoutX="172.0" layoutY="302.0" mouseTransparent="true">
                <image>
-                  <Image url="@../../media/credit-card-cvv-code.png" />
+                  <Image url="@../media/credit-card-cvv-code.png" />
                </image>
             </ImageView>
          </children>

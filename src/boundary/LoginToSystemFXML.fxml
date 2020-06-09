@@ -21,7 +21,7 @@
    <children>
       <ImageView fitHeight="600.0" fitWidth="807.0">
          <image>
-            <Image url="@../../media/BGs/3315591.png" />
+            <Image url="@../media/BGs/3315591.png" />
          </image>
       </ImageView>
       <BorderPane layoutX="7.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0">
@@ -32,7 +32,7 @@
                      <children>
                         <ImageView fitHeight="140.0" fitWidth="329.0" layoutX="25.0" layoutY="42.0" preserveRatio="true">
                            <image>
-                              <Image url="@../../media/2065573.png" />
+                              <Image url="@../media/2065573.png" />
                            </image>
                         </ImageView>
                      </children>
@@ -85,7 +85,7 @@
          <center>
             <ImageView fitHeight="321.0" fitWidth="330.0" preserveRatio="true" BorderPane.alignment="CENTER">
                <image>
-                  <Image url="@../../media/גרפיקות%20למערכת%20myfuel/22472%20%5BConverted%5D.png" />
+                  <Image url="@../media/גרפיקות%20למערכת%20myfuel/22472%20%5BConverted%5D.png" />
                </image>
             </ImageView>
          </center>

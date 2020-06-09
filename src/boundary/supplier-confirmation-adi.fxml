@@ -34,7 +34,7 @@
                         </Label>
                         <ImageView fitHeight="162.0" fitWidth="171.0">
                            <image>
-                              <Image url="@../../media/avatars/customer_male_avatar.png" />
+                              <Image url="@../media/avatars/customer_male_avatar.png" />
                            </image>
                         </ImageView>
                         <Label style="-fx-font-size: 22;" text="Avi Levi" textAlignment="CENTER" textFill="#e5e5e5">
@@ -55,7 +55,7 @@
                            <graphic>
                               <ImageView fitHeight="23.0" fitWidth="27.0">
                                  <image>
-                                    <Image url="@../../media/icons/icons8_home_80px.png" />
+                                    <Image url="@../media/icons/icons8_home_80px.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -67,7 +67,7 @@
                            <graphic>
                               <ImageView fitHeight="23.0" fitWidth="27.0">
                                  <image>
-                                    <Image url="@../../media/icons/form_40px.png" />
+                                    <Image url="@../media/icons/form_40px.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -76,7 +76,7 @@
                            <graphic>
                               <ImageView fitHeight="23.0" fitWidth="27.0">
                                  <image>
-                                    <Image url="@../../media/icons/checked_checkbox_40px.png" />
+                                    <Image url="@../media/icons/checked_checkbox_40px.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -91,7 +91,7 @@
                            <graphic>
                               <ImageView fitHeight="23.0" fitWidth="27.0">
                                  <image>
-                                    <Image url="@../../media/icons/icons8_sign_out_80px.png" />
+                                    <Image url="@../media/icons/icons8_sign_out_80px.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -108,7 +108,7 @@
                         </VBox>
                         <ImageView fitHeight="44.0" fitWidth="43.0" layoutX="14.0" layoutY="8.0">
                            <image>
-                              <Image url="@../../media/interface.png" />
+                              <Image url="@../media/interface.png" />
                            </image>
                         </ImageView>
                      </children>
@@ -126,7 +126,7 @@
                         </Text>
                         <ImageView fx:id="arrowImage" layoutX="472.0" layoutY="353.0">
                            <image>
-                              <Image url="@../../media/icons/arrow_100px.png" />
+                              <Image url="@../media/icons/arrow_100px.png" />
                            </image>
                         </ImageView>
                         <Text fill="#2d4578" layoutX="67.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Orders List" wrappingWidth="170.99999862909317">
@@ -163,7 +163,7 @@
                                     <Insets left="20.0" right="30.0" />
                                  </HBox.margin>
                                  <image>
-                                    <Image url="@../../media/icons/check_all_64px.png" />
+                                    <Image url="@../media/icons/check_all_64px.png" />
                                  </image>
                               </ImageView>
                               <Label prefHeight="21.0" prefWidth="136.0" text="Order completed">

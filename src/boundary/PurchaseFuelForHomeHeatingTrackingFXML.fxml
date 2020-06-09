@@ -46,7 +46,7 @@
                               </Text>
                               <ImageView fitHeight="64.0" fitWidth="70.0" layoutX="81.0" layoutY="-33.0">
                                  <image>
-                                    <Image url="@../../media/interface.png" />
+                                    <Image url="@../media/interface.png" />
                                  </image>
                               </ImageView>
                            </children>
@@ -62,7 +62,7 @@
                         </Label>
                         <ImageView fitHeight="139.0" fitWidth="191.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../media/avatars/customer_male_avatar.png" />
+                              <Image url="@../media/avatars/customer_male_avatar.png" />
                            </image>
                            <VBox.margin>
                               <Insets bottom="10.0" top="10.0" />
@@ -77,7 +77,7 @@
                            <graphic>
                               <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../media/icons/icons8_home_80px.png" />
+                                    <Image url="@../media/icons/icons8_home_80px.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -95,7 +95,7 @@
                            <graphic>
                               <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../media/icons/icons8_new_copy_96px_1.png" />
+                                    <Image url="@../media/icons/icons8_new_copy_96px_1.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -107,7 +107,7 @@
                            <graphic>
                               <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../media/icons/icons8_data_pending_80px_1.png" />
+                                    <Image url="@../media/icons/icons8_data_pending_80px_1.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -119,7 +119,7 @@
                            <graphic>
                               <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../media/icons/icons8_more_details_80px.png" />
+                                    <Image url="@../media/icons/icons8_more_details_80px.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -131,7 +131,7 @@
                            <graphic>
                               <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../media/icons/icons8_sign_out_80px.png" />
+                                    <Image url="@../media/icons/icons8_sign_out_80px.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -192,7 +192,7 @@
                                           </Label>
                                           <ImageView fitHeight="35.0" fitWidth="34.0" layoutX="101.0" layoutY="40.0">
                                              <image>
-                                                <Image url="@../../media/shipping/icons8_purchase_order_26px.png" />
+                                                <Image url="@../media/shipping/icons8_purchase_order_26px.png" />
                                              </image>
                                           </ImageView>
                                        </children>
@@ -206,7 +206,7 @@
                                           </Label>
                                           <ImageView fitHeight="35.0" fitWidth="34.0" layoutX="101.0" layoutY="41.0">
                                              <image>
-                                                <Image url="@../../media/shipping/icons8_oil_storage_tank_50px_1.png" />
+                                                <Image url="@../media/shipping/icons8_oil_storage_tank_50px_1.png" />
                                              </image>
                                           </ImageView>
                                        </children>
@@ -220,7 +220,7 @@
                                           </Label>
                                           <ImageView fitHeight="35.0" fitWidth="34.0" layoutX="100.0" layoutY="38.0">
                                              <image>
-                                                <Image url="@../../media/shipping/icons8_fuel_tank_30px.png" />
+                                                <Image url="@../media/shipping/icons8_fuel_tank_30px.png" />
                                              </image>
                                           </ImageView>
                                        </children>
@@ -234,7 +234,7 @@
                                           </Label>
                                           <ImageView fitHeight="35.0" fitWidth="34.0" layoutX="102.0" layoutY="40.0">
                                              <image>
-                                                <Image url="@../../media/shipping/icons8_task_completed_48px.png" />
+                                                <Image url="@../media/shipping/icons8_task_completed_48px.png" />
                                              </image>
                                           </ImageView>
                                        </children>
