@@ -155,6 +155,12 @@ public class OrderExecutionBoundary implements Initializable {
                         OrderDateField.setText("null");
                         FuelTypeField.setText(temp.getFuelType().toString());
                         QuantityField.setText(temp.getQuantity().toString());
+                        if(temp.getOrderStatus().equals("Done"))
+                            DoneMsgTxt.setVisible(true);
+                        if(temp.getOrderStatus().equals("In treatment")) {
+                            DoneMsgTxt.setVisible(false);
+                            hboxOrderConfirmation.setDisable(true);
+                        }
                     }
                 }
             }
