@@ -87,6 +87,9 @@ public class OrderExecutionBoundary implements Initializable {
     private HBox hboxOrderConfirmation;
 
     @FXML
+    private Text DoneMsgTxt;
+
+    @FXML
     private ImageView checkBoxImage;
 
     @FXML
@@ -112,10 +115,10 @@ public class OrderExecutionBoundary implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         hboxOrderConfirmation.setVisible(false);
-        arrowImage.setVisible(false);
         tableView.setVisible(true);
         DoneBtn.setVisible(false);
         DoneBtn.setDisable(true);
+        DoneMsgTxt.setVisible(false);
         OrderViewAnchorPane.setVisible(false);
         myController.getOrdersFromDB();
         System.out.println("Order Execution Page Is Open");
@@ -126,7 +129,6 @@ public class OrderExecutionBoundary implements Initializable {
     public void setOrderFuelFromSupplierTableView( ArrayList<OrderFuelFromSupplier> OrderArray) {
         orderCol.setCellValueFactory(new PropertyValueFactory<>("OrderNumber"));
         statusCol.setCellValueFactory(new PropertyValueFactory<>("OrderStatus"));
-        System.out.println(OrderArray);
         ObservableList<OrderFuelFromSupplier> data = FXCollections.observableArrayList(OrderArray);
         tableView.setEditable(true);
         tableView.setItems(data);
@@ -134,14 +136,14 @@ public class OrderExecutionBoundary implements Initializable {
 
 
     public void getOrderDetailsFromTableView() {
-        /*  get DB details for tableView  */
+        /*  get DB details for Order View  */
         tableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 OrderFuelFromSupplier temp = null;
-                for (int i = 0; i < OFFS.size(); i++) {
-                    if (OFFS.get(i).getOrderNumber().equals(tableView.getSelectionModel().getSelectedItem().getOrderNumber()))
-                        temp = OFFS.get(i);
+                for (int i = 0; i < myController.resultList.size(); i++) {
+                    if (myController.resultList.get(i).getOrderNumber().equals(tableView.getSelectionModel().getSelectedItem().getOrderNumber()))
+                        temp = myController.resultList.get(i);
                     if (temp != null) {
                         OrderViewAnchorPane.setVisible(true);
                         arrowImage.setVisible(true);
@@ -157,5 +159,10 @@ public class OrderExecutionBoundary implements Initializable {
                 }
             }
         });
+    }
+
+    public void handleDoneOrders(){
+        /*  If order is already Done */
+
     }
 }

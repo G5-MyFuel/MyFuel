@@ -53,9 +53,7 @@ public class OrderFuelFromSupplier {
     public void setQuantity(int quantity) {
         Quantity = quantity;
     }
-    public void setOrderDate(Date orderDate) {
-        OrderDate = orderDate;
-    }
+    public void setOrderDate(Date orderDate) { OrderDate = orderDate; }
     public void setOrderStatus(String orderStatus) {
         OrderStatus = orderStatus;
     }

@@ -136,7 +136,7 @@
                               <Font name="System Bold Italic" size="24.0" />
                            </font>
                         </Text>
-                        <TableView fx:id="tableView" layoutX="60.0" layoutY="221.0" onMouseClicked="#getOrderDetailsFromTableView" prefHeight="391.0" prefWidth="361.0" style="-fx-background-color: #fcf8e8; -fx-border-style: solid;">
+                        <TableView fx:id="tableView" layoutX="60.0" layoutY="221.0" onContextMenuRequested="#getOrderDetailsFromTableView" onMouseClicked="#getOrderDetailsFromTableView" prefHeight="391.0" prefWidth="361.0" style="-fx-background-color: #fcf8e8; -fx-border-style: solid;">
                            <columns>
                               <TableColumn fx:id="orderCol" prefWidth="242.0" text="Order" />
                               <TableColumn fx:id="statusCol" maxWidth="2500.0" prefWidth="115.0" text="Status" />
@@ -206,6 +206,11 @@
                               <Label fx:id="OrderDateField" layoutX="250.0" layoutY="187.0" prefHeight="21.0" prefWidth="126.0" text="Label" textFill="WHITE" />
                               <Label fx:id="FuelTypeField" layoutX="250.0" layoutY="247.0" prefHeight="21.0" prefWidth="126.0" text="Label" textFill="WHITE" />
                               <Label fx:id="QuantityField" layoutX="250.0" layoutY="305.0" prefHeight="21.0" prefWidth="126.0" text="Label" textFill="WHITE" />
+                              <Text fx:id="DoneMsgTxt" layoutX="81.0" layoutY="210.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-rotate: 320; -fx-opacity: 0.6;" text="Done" textAlignment="CENTER" wrappingWidth="244.67091536521912">
+                                 <font>
+                                    <Font name="System Bold Italic" size="96.0" />
+                                 </font>
+                              </Text>
                            </children>
                         </AnchorPane>
                      </children>
