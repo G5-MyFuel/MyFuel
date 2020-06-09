@@ -169,6 +169,7 @@ public class MysqlConnection {
          * ********** Orders From Supplier Queries ****************
          * *****************************************/
         sqlArray[SqlQueryType.GET_ALL_ORDERS_FROM_SUPPLIER_TABLE.getCode()]= "SELECT * FROM `OrderForStock`";
+        sqlArray[SqlQueryType.INSERT_STATUS_FOR_ORDER_TABLE.getCode()]="INSERT INTO `OrderFromStock` ('OrderStatus') VALUES (?)";
 
         /* *****************************************
          * ********** Template Management Queries ****************
