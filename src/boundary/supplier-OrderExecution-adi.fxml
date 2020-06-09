@@ -205,7 +205,7 @@
                               <Label fx:id="StationNumberField" layoutX="250.0" layoutY="125.0" prefHeight="21.0" prefWidth="126.0" text="Label" textFill="WHITE" />
                               <Label fx:id="OrderDateField" layoutX="250.0" layoutY="187.0" prefHeight="21.0" prefWidth="126.0" text="Label" textFill="WHITE" />
                               <Label fx:id="FuelTypeField" layoutX="250.0" layoutY="247.0" prefHeight="21.0" prefWidth="126.0" text="Label" textFill="WHITE" />
-                              <Label fx:id="QuantityField" layoutX="250.0" layoutY="305.0" prefHeight="21.0" prefWidth="126.0" text="Label" textFill="WHITE" />
+                              <!--> <Label fx:id="QuantityField" layoutX="250.0" layoutY="305.0" prefHeight="21.0" prefWidth="126.0" text="Label" textFill="WHITE" /> <!-->
                            </children>
                         </AnchorPane>
                      </children>
