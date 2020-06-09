@@ -97,8 +97,10 @@ public class OrderExecutionBoundary implements Initializable {
 
     @FXML
     void OrderConfirmationCheck(MouseEvent event) {
-        //TODO: if there a check mark - DontBtn is not disable + update status
-
+        /******* If there is a 'check' sign *******/
+        if(confirmationCheckBox.isSelected())
+            DoneBtn.setDisable(false);
+        else DoneBtn.setDisable(true);
     }
 
     @FXML
@@ -136,7 +138,7 @@ public class OrderExecutionBoundary implements Initializable {
 
 
     public void getOrderDetailsFromTableView() {
-        /*  get DB details for Order View  */
+        /******  get DB details for Order View  ********/
         tableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -150,17 +152,20 @@ public class OrderExecutionBoundary implements Initializable {
                         hboxOrderConfirmation.setVisible(true);
                         hboxOrderConfirmation.setDisable(false);
                         DoneBtn.setVisible(true);
+                        /************   Show details to the User  ***************/
                         StationManagerField.setText(temp.getStationManagerName().toString());
                         StationNumberField.setText(temp.getStationNum().toString());
                         OrderDateField.setText("null");
                         FuelTypeField.setText(temp.getFuelType().toString());
                         QuantityField.setText(temp.getQuantity().toString());
-                        if(temp.getOrderStatus().equals("Done"))
+
+                        /******* 'Done' status or 'In treatment' status *********/
+                        if(temp.getOrderStatus().equals("Done")) {
                             DoneMsgTxt.setVisible(true);
-                        if(temp.getOrderStatus().equals("In treatment")) {
-                            DoneMsgTxt.setVisible(false);
                             hboxOrderConfirmation.setDisable(true);
                         }
+                        if(temp.getOrderStatus().equals("In treatment"))
+                            DoneMsgTxt.setVisible(false);
                     }
                 }
             }
