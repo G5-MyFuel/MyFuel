@@ -19,8 +19,11 @@ public enum ProjectPages {
     SALE_OPERATION_TEMPLATE_PAGE("/boundary/SaleOperationTemplate.fxml"),
 
     //Nir pages:
-    SETTING_DISCOUNT_RATES_PAGE("/boundary/SettingDiscountRatesFXML.fxml");
+    SETTING_DISCOUNT_RATES_PAGE("/boundary/SettingDiscountRatesFXML.fxml"),
 
+    //Daniel pages:
+    PURCHASE_FUEL_FOR_HOME_HEATING("/boundary/NewPurchaseFuelForHomeHeatingFXML.fxml"),
+    LOGIN_PAGE("/boundary/LoginToSystemFXML.fxml");
 
     private String path;
 
