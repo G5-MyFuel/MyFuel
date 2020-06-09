@@ -131,15 +131,12 @@
                             <content>
                                 <Pane prefHeight="796.0" prefWidth="1062.0" style="-fx-position-shape: center; -fx-border-color: transparent;">
                                     <children>
-                                        <Text layoutX="39.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Discounts for a regular monthly subscription - single vehicle:" wrappingWidth="412.6708984375" />
-                                        <Text layoutX="36.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Discount for full monthly subscription (for single vehicle):" wrappingWidth="412.6708984375" />
-                                        <Text layoutX="39.0" layoutY="203.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Discount for a regular monthly subscription - number of vehicles" wrappingWidth="412.6708984375" />
                                         <Label layoutX="39.0" layoutY="55.0" text="Confirm Discount Rates" textFill="#2d4578">
                                             <font>
                                                 <Font name="System Bold" size="40.0" />
                                             </font>
                                         </Label>
-                                        <TableView fx:id="TableSubscriptionType" layoutX="36.0" layoutY="231.0" prefHeight="253.0" prefWidth="763.0">
+                                        <TableView fx:id="TableSubscriptionType" layoutX="39.0" layoutY="164.0" prefHeight="253.0" prefWidth="763.0">
                                             <columns>
                                                 <TableColumn prefWidth="53.0" text="V" />
                                                 <TableColumn prefWidth="488.0" text="Subscription type" />
@@ -147,7 +144,7 @@
                                                 <TableColumn prefWidth="119.0" text="New price" />
                                             </columns>
                                         </TableView>
-                                        <Button fx:id="btnApprovedRates" layoutX="428.0" layoutY="573.0" mnemonicParsing="false" onAction="#handleApprovedRates" prefHeight="42.0" prefWidth="89.0" style="-fx-background-color: #2D4578; -fx-background-radius: 50;" stylesheets="@style.css" text="Approved" />
+                                        <Button fx:id="btnApprovedRates" layoutX="393.0" layoutY="500.0" mnemonicParsing="false" onAction="#handleApprovedRates" prefHeight="42.0" prefWidth="89.0" style="-fx-background-color: #2D4578; -fx-background-radius: 50;" stylesheets="@style.css" text="Approved" />
                                     </children>
                                 </Pane>
                             </content>
