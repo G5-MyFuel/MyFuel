@@ -2,6 +2,7 @@ package Contollers;
 
 import boundary.GeneratingReportsStationManagerBoundary;
 import common.assets.SqlResult;
+import javafx.application.Platform;
 
 public class GeneratingReportsStationManagerController extends BasicController {
 
@@ -41,6 +42,25 @@ public class GeneratingReportsStationManagerController extends BasicController {
 
     @Override
     public void getResultFromClient(SqlResult result) {
+        /*Platform.runLater(() -> {
+            switch (result.getActionType()) {
+                case GET_RegularSubscriptionSingleVehicle_PRICE:
+                    myBoundary.setData(this.changeResultToString(result));
+                    break;
+                case GET_FullSubscriptionSingleVehicle_PRICE:
+                    myBoundary.setData(this.changeResultToString(result));
+                    break;
+                case GET_RegularSubscriptionMultiVehicle_PRICE:
+                    myBoundary.setData(this.changeResultToString(result));
+                    break;
+                case INSERT_NEW_PRICE:
+                    myBoundary.setData("");
+                    break;
+
+                default:
+                    break;
+            }
+        });*/
 
     }
 

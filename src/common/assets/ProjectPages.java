@@ -19,7 +19,9 @@ public enum ProjectPages {
     SALE_OPERATION_TEMPLATE_PAGE("/boundary/SaleOperationTemplate.fxml"),
 
     //Nir pages:
-    SETTING_DISCOUNT_RATES_PAGE("/boundary/SettingDiscountRatesFXML.fxml");
+    SETTING_DISCOUNT_RATES_PAGE("/boundary/SettingDiscountRatesFXML.fxml"),
+    CONFIRM_DISCOUNT_RATES_PAGE("/boundary/ConfirmDiscountRatesFXML.fxml");
+
 
 
     private String path;
