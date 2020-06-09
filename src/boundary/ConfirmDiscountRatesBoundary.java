@@ -5,6 +5,7 @@ import Contollers.FormValidation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
 
@@ -12,9 +13,13 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ConfirmDiscountRatesBoundary implements Initializable {
-    private static ConfirmDiscountRatesBoundary Instance = null;
-    private ConfirmDiscountRatesController confirmDiscountRatesLogic;
+
+    /**
+     * The supervisor boundary controller.
+     */
+    private final ConfirmDiscountRatesController myController = new ConfirmDiscountRatesController(this);
     private FormValidation formValidation;
+    private final Alert ErrorAlert = new Alert(Alert.AlertType.ERROR);
 
     @FXML
     private Button btnOverview;
@@ -36,31 +41,14 @@ public class ConfirmDiscountRatesBoundary implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.confirmDiscountRatesLogic = ConfirmDiscountRatesController.getInstance();
         this.formValidation = FormValidation.getValidator();
 
         btnApprovedRates.setDisable(true);
         /*ChooseSubscriptionTypeCombo.setItems(SubscriptionType);
         ShowCurrentRateTXT.setVisible(false);
-        ShowNewRateTXT.setVisible(false);
-        btnSetNewRate.setVisible(false);
-        //ChooseSubscriptionTypeCombo.set
-        //this.shippingIndicatorTAB1.setVisible(false);
+
         /*  set all fields validators */
         formValidation();
-        /* set form items */
-        //setShippingTab();
-    }
-
-    /**
-     * ConfirmDiscountRatesController Instance getter using SingleTone DesignPatterns
-     *
-     * @return Instance of controller class
-     */
-    public static ConfirmDiscountRatesBoundary getInstance() {
-        if (Instance == null)
-            Instance = new ConfirmDiscountRatesBoundary();
-        return Instance;
     }
 
     private void formValidation() {
