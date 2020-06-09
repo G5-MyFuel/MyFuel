@@ -43,11 +43,7 @@ public class OrderFromSupplierController extends BasicController {
                 case GET_ALL_ORDERS_FROM_SUPPLIER_TABLE:
                     ArrayList<OrderFuelFromSupplier> resultList = new ArrayList<>();
                     resultList.addAll(this.changeResultToOrder(result));
-                    try {
                         myBoundary.setOrderFuelFromSupplierTableView(resultList);
-                    } catch (SQLException throwables) {
-                        throwables.printStackTrace();
-                    }
                     break;
 
                 default:
@@ -59,40 +55,11 @@ public class OrderFromSupplierController extends BasicController {
     private ArrayList<OrderFuelFromSupplier> changeResultToOrder(SqlResult result){
         ArrayList<OrderFuelFromSupplier> resultList=new ArrayList<>();
         for(ArrayList<Object> a: result.getResultData()) {
-            OrderFuelFromSupplier OFFS = new OrderFuelFromSupplier((String)a.get(1),(String)a.get(2),
-                    (int)a.get(3),(Date)a.get(4),(int)a.get(5),(String)a.get(6),(String)a.get(7));
-
+            OrderFuelFromSupplier x= new OrderFuelFromSupplier((String)a.get(0),(String)a.get(1),
+                    (int)a.get(2),(Date)a.get(3),(int)a.get(4),(String)a.get(5),(String)a.get(6));
+            resultList.add(x);
         }
         return resultList;
     }
-    /*public ArrayList<OrderFuelFromSupplier> getOrderFromSupplierArrayList() {
-        return orderSet;
-    }
 
-     public void setOrder(ResultSet rs) throws SQLException {
-        while(rs.next()){
-            this.orderSet.add(new OrderFuelFromSupplier(rs.getString(1),rs.getString(2),rs.getString(3),rs.getInt(4),rs.getDate(5),rs.getInt(6),rs.getString(7)));
-        }
-         System.out.println(orderSet);
-    }
-
-
-    public static void setOrderFromSupplierArrayList(ArrayList<User> usersArrayList) {
-        LoginToSystemController.usersArrayList = usersArrayList;
-    }
-    public ResultSet getRs() {
-        return rs;
-    }
-
-    public void setRs(ResultSet rs) {
-        this.rs = rs;
-    }
-
-    public ArrayList<OrderFuelFromSupplier> getOrderSet() {
-        return orderSet;
-    }
-
-    public void setOrderSet(ArrayList<OrderFuelFromSupplier> orderSet) {
-        this.orderSet = orderSet;
-    }*/
 }

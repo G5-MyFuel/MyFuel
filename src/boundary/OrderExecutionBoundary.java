@@ -117,15 +117,16 @@ public class OrderExecutionBoundary implements Initializable {
         DoneBtn.setVisible(false);
         DoneBtn.setDisable(true);
         OrderViewAnchorPane.setVisible(false);
+        myController.getOrdersFromDB();
         System.out.println("Order Execution Page Is Open");
 
     }
 
 
-    public void setOrderFuelFromSupplierTableView( ArrayList<OrderFuelFromSupplier> OrderArray) throws SQLException {
+    public void setOrderFuelFromSupplierTableView( ArrayList<OrderFuelFromSupplier> OrderArray) {
         orderCol.setCellValueFactory(new PropertyValueFactory<>("OrderNumber"));
         statusCol.setCellValueFactory(new PropertyValueFactory<>("OrderStatus"));
-
+        System.out.println(OrderArray);
         ObservableList<OrderFuelFromSupplier> data = FXCollections.observableArrayList(OrderArray);
         tableView.setEditable(true);
         tableView.setItems(data);
@@ -133,7 +134,7 @@ public class OrderExecutionBoundary implements Initializable {
 
 
     public void getOrderDetailsFromTableView() {
-        /*  Show DB details in tableView  */
+        /*  get DB details for tableView  */
         tableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
