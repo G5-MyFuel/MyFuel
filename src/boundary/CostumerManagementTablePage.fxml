@@ -179,7 +179,6 @@
                                                 <ContextMenu>
                                                    <items>
                                                       <MenuItem mnemonicParsing="false" text="Refresh" />
-                                                      <MenuItem fx:id="EditMenuItem" mnemonicParsing="false" onAction="#onEditClick" text="Edit" />
                                                       <MenuItem fx:id="DeleteBtn" mnemonicParsing="false" onAction="#removeSelectedCostumer" text="Delete" />
                                                    </items>
                                                    <styleClass>

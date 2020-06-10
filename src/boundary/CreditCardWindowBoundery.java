@@ -68,6 +68,8 @@ public class CreditCardWindowBoundery implements DataInitializable {
          * */
 
 
+
+
         primStage.close();
 
     }
@@ -79,10 +81,6 @@ public class CreditCardWindowBoundery implements DataInitializable {
 
     @Override
     public void initData(Object data) {
-
-
-
-
         Stage primStage = (Stage) creditCardNumbertxt.getScene().getWindow();
         primStage.setTitle("Credit Card Window");
         primStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
