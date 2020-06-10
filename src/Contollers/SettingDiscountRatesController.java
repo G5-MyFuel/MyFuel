@@ -79,16 +79,16 @@ public class SettingDiscountRatesController extends BasicController {
     }
 
     /**
-     * This method create array list of costumers from the data base result.
+     * This method create String from the data base result.
      *
      * @param result the result
-     * @return Array list of costumers
+     * @return String
      */
     private String changeResultToString(SqlResult result) {
-        String currentRate = null;
-        ArrayList<Object> a = result.getResultData().get(0);
+        String revenue = null;
+        ArrayList<Object> a = result.getResultData().get(0); //Saves first line from result to a (get(0))
         //a = result.getResultData().get(0);
-        currentRate = (String) a.get(1);
-        return currentRate;
+        revenue = (String) a.get(1);    //Saves second column from a to revenue (get(1))
+        return revenue;
     }
 }
