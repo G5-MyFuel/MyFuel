@@ -2,27 +2,21 @@ package boundary;
 
 import Contollers.FormValidation;
 import Contollers.RunSaleOperationController;
-import Contollers.SaleOperationTemplateController;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import entity.SaleOperation;
-import entity.SaleOperationTemplate;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 
 import java.net.URL;
 import java.sql.Date;
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -40,6 +34,24 @@ public class RunSaleOperationBoundary implements Initializable {
     /*
     Gui variables:
     * */
+    @FXML
+    private TableView<SaleOperation> saleOperationTableView;
+
+    @FXML
+    private TableColumn<SaleOperation, String> saleIDColumn;
+
+    @FXML
+    private TableColumn<SaleOperation, String> TemplateNameColumn;
+
+    @FXML
+    private TableColumn<SaleOperation, String> StartDateColumn;
+
+    @FXML
+    private TableColumn<SaleOperation, String> EndDateColumn;
+
+
+    @FXML
+    private JFXComboBox<String> ChooseTemplateCombo;
 
     @FXML
     private Button btnOverview;
@@ -57,25 +69,19 @@ public class RunSaleOperationBoundary implements Initializable {
     private Button btnSignout;
 
     @FXML
-    private TableView<SaleOperation> saleOperationTableView;
-
-    @FXML
-    private TableColumn<SaleOperation, String> saleIDColumn;
-
-    @FXML
-    private TableColumn<SaleOperation, String> TemplateNameColumn;
-
-    @FXML
-    private TableColumn<SaleOperation, String> BeginHourColumn;
-
-    @FXML
-    private TableColumn<SaleOperation, String> EndHourColumn;
+    private Button btnADDnewSaleOperation1;
 
     @FXML
     private Pane detailsPane;
 
     @FXML
-    private JFXComboBox<String> ChooseTemplateCombo;
+    private SplitPane newTemplateDetails;
+
+    @FXML
+    private JFXDatePicker startDatePicker;
+
+    @FXML
+    private JFXDatePicker endDatePicker;
 
     @FXML
     private Label idFromDB;
@@ -96,34 +102,23 @@ public class RunSaleOperationBoundary implements Initializable {
     private Label endHourFromDB;
 
     @FXML
-    private JFXDatePicker startDatePicker;
-
-    @FXML
-    private JFXDatePicker endDatePicker;
-
-    @FXML
     private Button btnRunSaleOperation;
 
     @FXML
-    private Button btnAddNewSale;
+    private HBox templateDetaildVBOX;
 
-    @FXML
-    private Label EndHourTXT;
-
-
- private ObservableList<String> TemplateID = FXCollections.observableArrayList("0001","0002","0003","0004","0005","0006");
- //TODO: Change to template name from DB^
+    String choosenTemplate = new String();
 
     @Override
        public void initialize(URL location, ResourceBundle resources) {
         this.detailsPane.setVisible(false);
-        ChooseTemplateCombo.setItems(TemplateID);///to do from db
+        //ChooseTemplateCombo.setItems(TemplateName);///to do from db
 
         this.formValidation = FormValidation.getValidator();
         FormValidation();   // check all required fields are'nt empty
 
         myController.getSalesTable(); //start the process that will ask server to execute quarry and get the table details
-
+        myController.getTemplateList(); //start the process that will ask server to execute quarry and get the template list
     }
 
 
@@ -133,8 +128,8 @@ public class RunSaleOperationBoundary implements Initializable {
      public void setSalesTable(ArrayList<SaleOperation> cosArray) {
          saleIDColumn.setCellValueFactory(new PropertyValueFactory<>("SaleOperationID"));
          TemplateNameColumn.setCellValueFactory(new PropertyValueFactory<>("TemplateName"));
-         BeginHourColumn.setCellValueFactory(new PropertyValueFactory<>("BeginDate"));
-         EndHourColumn.setCellValueFactory(new PropertyValueFactory<>("EndDate"));
+         StartDateColumn.setCellValueFactory(new PropertyValueFactory<>("BeginDate"));
+         EndDateColumn.setCellValueFactory(new PropertyValueFactory<>("EndDate"));
 
          ObservableList<SaleOperation> data = FXCollections.observableArrayList(cosArray);
          saleOperationTableView.setItems(data);
@@ -142,29 +137,56 @@ public class RunSaleOperationBoundary implements Initializable {
 
 
     @FXML
-    public void handleChooseTemplate(javafx.event.ActionEvent actionEvent) {//no need
-
-    }
-
-    @FXML
     void handleBtnAddSale(ActionEvent event) {
-        detailsPane.setVisible(true);
-        btnAddNewSale.setVisible(false);
+        this.templateDetaildVBOX.setVisible(false);
+        this.endDatePicker.setVisible(false);
+        this.startDatePicker.setVisible(false);
+        btnADDnewSaleOperation1.setVisible(false);
 
+        detailsPane.setVisible(true);
      }
 
     @FXML
     void handleBtnRunSale(ActionEvent event) {
-        SaleOperation newSale = new SaleOperation(String.valueOf(myController.getSaleCounter()+1), (String)ChooseTemplateCombo.getValue(),  Date.valueOf(startDatePicker.getValue()), Date.valueOf(endDatePicker.getValue()));
+        SaleOperation newSale = new SaleOperation(String.valueOf(myController.getSaleCounter()+1),
+                (String)ChooseTemplateCombo.getValue(),
+                Date.valueOf(startDatePicker.getValue()),
+                Date.valueOf(endDatePicker.getValue()));
         myController.setSaleOperationInDB(newSale);
         myController.getSalesTable(); //start the process that will ask server to execute quarry and get the table details//refresh
-        detailsPane.setVisible(false);//?
+        detailsPane.setVisible(false);
 
         //clear all fileds:
         ChooseTemplateCombo.getSelectionModel().clearSelection();
         startDatePicker.getEditor().clear();
         startDatePicker.getEditor().clear();
     }
+
+    /**
+     this method will set the templates list to the combo choose
+     */
+    public void setTemplateList(ArrayList<String> cosArray) {
+        ObservableList<String> TemplateName = FXCollections.observableArrayList(cosArray);
+        ChooseTemplateCombo.setItems(TemplateName);
+    }
+
+
+    @FXML
+    void handleChooseTemplate(ActionEvent event) {
+        //שאילתה להביא את פרטי התבנית
+        myController.getTemplateList(); //start the process that will ask server to execute quarry and get the template details
+        choosenTemplate = ChooseTemplateCombo.getValue();
+
+        this.templateDetaildVBOX.setVisible(true);
+        this.endDatePicker.setVisible(true);
+        this.startDatePicker.setVisible(true);
+        btnADDnewSaleOperation1.setVisible(true);
+
+
+    }
+
+
+
 
     @FXML//?????????
     public void handleBtnRunSaleOperation(javafx.event.ActionEvent actionEvent) {
@@ -181,6 +203,4 @@ public class RunSaleOperationBoundary implements Initializable {
         formValidation.isEmptyDateField(startDatePicker, "Start Date");
         formValidation.isEmptyDateField(endDatePicker, "End Date");
     }
-
-
 }
