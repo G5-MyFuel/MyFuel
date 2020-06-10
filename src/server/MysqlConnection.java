@@ -203,7 +203,7 @@ public class MysqlConnection {
         /* *****************************************
          * ********** Station Manager Reports Queries ****************
          * *****************************************/
-        sqlArray[SqlQueryType.GET_Quarterly_Revenue.getCode()] = "SELECT * FROM `Purchase` WHERE `purchaseDate` BETWEEN '2020-01-01' AND '2020-03-31'";
+        sqlArray[SqlQueryType.GET_Quarterly_Revenue.getCode()] = "SELECT * FROM `Purchase` WHERE `purchaseDate` BETWEEN ? AND ?";
 
 
         /* *****************************************

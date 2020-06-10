@@ -3,6 +3,8 @@ package boundary;
 import Contollers.FormValidation;
 import Contollers.GeneratingReportsStationManagerController;
 import com.jfoenix.controls.JFXComboBox;
+import common.assets.SqlAction;
+import common.assets.SqlQueryType;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -20,6 +22,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class GeneratingReportsStationManagerBoundary implements Initializable {
@@ -66,9 +69,9 @@ public class GeneratingReportsStationManagerBoundary implements Initializable {
 
     private final ObservableList<String> ReportsType = FXCollections.observableArrayList("Quarterly revenue report",
             "Purchases report", "Quantity of items in stock report");
-    private final ObservableList<String> YearList = FXCollections.observableArrayList("2020","2019","2018","2017","2016","2015",
-            "2014","2013","2012","2011","2010");
-    private final ObservableList<String> quarterList = FXCollections.observableArrayList("First","Second","Third","Fourth");
+    private final ObservableList<String> YearList = FXCollections.observableArrayList("2020", "2019", "2018", "2017", "2016", "2015",
+            "2014", "2013", "2012", "2011", "2010");
+    private final ObservableList<String> quarterList = FXCollections.observableArrayList("First", "Second", "Third", "Fourth");
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -105,8 +108,29 @@ public class GeneratingReportsStationManagerBoundary implements Initializable {
     @FXML
     void handleChooseReportQuarter(ActionEvent event) {
 
-        myController.QuarterlyReportData("Quarterly revenue report",ChooseReportQuarterCombo.getValue(), ChooseReportQuarterCombo.getValue()); //start the process that will ask server to execute quarry and get the table details
-
+        String startDate = ChooseReportYearCombo.getValue();
+        String endDate = ChooseReportYearCombo.getValue();
+        switch (ChooseReportQuarterCombo.getValue()) {
+            case "First":
+                startDate = startDate + "-01-01";
+                endDate = endDate + "-03-31";
+                break;
+            case "Second":
+                startDate = startDate + "-04-01";
+                endDate = endDate + "-06-30";
+                break;
+            case "Third":
+                startDate = startDate + "-07-01";
+                endDate = endDate + "-09-30";
+                break;
+            case "Fourth":
+                startDate = startDate + "-10-01";
+                endDate = endDate + "-12-31";
+                break;
+            default:
+                break;
+        }
+        myController.QuarterlyReportData("Quarterly revenue report", startDate, endDate); //start the process that will ask server to execute quarry and get the table details
     }
 
     public void setData(String revenue) {
@@ -114,11 +138,6 @@ public class GeneratingReportsStationManagerBoundary implements Initializable {
         TotalRevenueLabel.setVisible(true);
         ShowTotalRevenueTXT.setVisible(true);
         ShowTotalRevenueTXT.setText(revenue);
-        /*if(revenue.isEmpty())
-            ShowCurrentRateTXT.setText(ShowNewRateTXT.getText());
-        else
-            ShowCurrentRateTXT.setText(revenue);*/
-
     }
 
     @FXML
@@ -128,6 +147,8 @@ public class GeneratingReportsStationManagerBoundary implements Initializable {
 
     @FXML
     void handlePurchasesReport(MouseEvent event) {
+
+
 
     }
 
@@ -141,7 +162,6 @@ public class GeneratingReportsStationManagerBoundary implements Initializable {
 
         ChooseReportYearCombo.setVisible(true);
         ChooseReportYearCombo.setItems(YearList);
-
     }
 
     @FXML
