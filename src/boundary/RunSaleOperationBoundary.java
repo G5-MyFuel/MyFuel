@@ -126,7 +126,8 @@ public class RunSaleOperationBoundary implements Initializable {
 
 
     String choosenTemplate = new String();
-
+    boolean flagSale = true;
+    SaleOperation newSale = new SaleOperation();
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.detailsPane.setVisible(false);
@@ -169,19 +170,26 @@ public class RunSaleOperationBoundary implements Initializable {
 
     @FXML
     void handleBtnRunSale(ActionEvent event) {
-        SaleOperation newSale = new SaleOperation(String.valueOf(myController.getSaleCounter() + 1), (String) ChooseTemplateCombo.getValue(), Date.valueOf(startDatePicker.getValue()),
+         newSale = new SaleOperation(String.valueOf(myController.getSaleCounter() + 1), (String) ChooseTemplateCombo.getValue(), Date.valueOf(startDatePicker.getValue()),
                 Date.valueOf(endDatePicker.getValue()));
-
         // chack if sale can run is this dates:
         myController.chackIfSaleCanRun(newSale);
-        boolean flagSale = myController.getFlagSale();
+    }
+    public void setFlagSale(boolean flagSale)
+    {
+        this.flagSale = flagSale;
+        System.out.println("set function");
+
+        //flagSale = myController.getFlagSale();
         if (flagSale==false) {
+            System.out.println("inside if");
             ERRORoverlap.setVisible(true);
             ERRORoverlap1.setVisible(true);
             startDatePicker.getEditor().clear();
-            startDatePicker.getEditor().clear();
+            endDatePicker.getEditor().clear();
         }
         else {
+            System.out.println("inside else");
             myController.setSaleOperationInDB(newSale);  //insert new sale to db
             myController.getSalesTable(); //refresh
             detailsPane.setVisible(false);
@@ -190,12 +198,10 @@ public class RunSaleOperationBoundary implements Initializable {
             //clear all fileds:
             ChooseTemplateCombo.getSelectionModel().clearSelection();
             startDatePicker.getEditor().clear();
-            startDatePicker.getEditor().clear();
+            endDatePicker.getEditor().clear();
             btnADDnewSaleOperation1.setVisible(true);
         }
-
     }
-
     /**
      * this method will set the templates list to the combo choose
      */
@@ -239,6 +245,8 @@ public class RunSaleOperationBoundary implements Initializable {
 
     @FXML
     void handleStartDate(ActionEvent event) {
+        ERRORoverlap.setVisible(false);
+        ERRORoverlap1.setVisible(false);
         //cant choose date before today:
         if (startDatePicker.getValue().isBefore(java.time.LocalDate.now()) == true) {
             ERRORalreadyPassedDate.setVisible(true);
@@ -248,11 +256,14 @@ public class RunSaleOperationBoundary implements Initializable {
     @FXML
     void handleStartDateNew(MouseEvent event) {
         ERRORalreadyPassedDate.setVisible(false);
-
+        ERRORoverlap.setVisible(false);
+        ERRORoverlap1.setVisible(false);
     }
 
     @FXML
     void handleEndDate(ActionEvent event) {
+        ERRORoverlap.setVisible(false);
+        ERRORoverlap1.setVisible(false);
         //cant choose end date earlier then start date
         if (endDatePicker.getValue().isBefore(startDatePicker.getValue()) == true) {
             ERRORendBeforStart.setVisible(true);
@@ -262,6 +273,8 @@ public class RunSaleOperationBoundary implements Initializable {
     @FXML
     void handleEndDateNew(MouseEvent event) {
         ERRORendBeforStart.setVisible(false);
+        ERRORoverlap.setVisible(false);
+        ERRORoverlap1.setVisible(false);
     }
 
 

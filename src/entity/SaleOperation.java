@@ -16,6 +16,9 @@ public class SaleOperation {
         this.endDate = endDate;
     }
 
+    public SaleOperation() {
+    }
+
     public String getSaleOperationID() {
         return saleOperationID;
     }

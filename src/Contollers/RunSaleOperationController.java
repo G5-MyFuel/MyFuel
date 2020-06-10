@@ -59,7 +59,9 @@ public class RunSaleOperationController extends BasicController {
                     myBoundary.setChosenTemplateDetails(templateChosenList);
                     break;
                 case GET_ALL_SALES_TO_CHACK_SALE:
-                    this.changeResultToSaleAndCheck(result);
+                    flagSale = true;
+                    System.out.println(this.changeResultToSaleAndCheck(result) + "in the case");
+                    myBoundary.setFlagSale(this.changeResultToSaleAndCheck(result));
                     break;
 
                 default:
@@ -67,8 +69,6 @@ public class RunSaleOperationController extends BasicController {
             }
         });
     }
-
-
 
     public void getSalesTable() {
         SqlAction sqlAction = new SqlAction(SqlQueryType.GET_ALL_SALES_TABLE);
@@ -156,7 +156,9 @@ public class RunSaleOperationController extends BasicController {
         super.sendSqlActionToClient(sqlAction);
     }
 
-    private void changeResultToSaleAndCheck(SqlResult result){
+    private boolean changeResultToSaleAndCheck(SqlResult result){
+        System.out.println(newSale.getBeginDate());
+        System.out.println(newSale.getEndDate());
 
         for(ArrayList<Object> a: result.getResultData()) {
             //if the dates are overlap - flag=false.
@@ -168,12 +170,11 @@ public class RunSaleOperationController extends BasicController {
                             ( newSale.getEndDate().before(Date.valueOf((String) a.get(3)))) ==true ))
             {
                flagSale = false;
-                break;
+                System.out.println(flagSale);
             }
-            System.out.println(flagSale + "WHAT IS GOING ON? ");
             System.out.println(flagSale);
-
         }
+        return flagSale;
     }
 
     public boolean getFlagSale() { return flagSale;   }
