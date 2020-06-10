@@ -335,9 +335,6 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
         }
     }
 
-    @FXML
-    void onEditClick(ActionEvent event) {
-    }
 
     @FXML
     void removeSelectedCostumer() {
