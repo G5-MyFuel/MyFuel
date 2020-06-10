@@ -1,5 +1,6 @@
 package boundary;
 
+import Contollers.CostumerManagementController;
 import com.jfoenix.controls.JFXTextField;
 import entity.CreditCard;
 import javafx.fxml.FXML;
@@ -12,11 +13,12 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class pymentWindowControllerForRegistarBoundary implements Initializable {
+public class CreditCardWindowBoundery implements Initializable {
 
     private CustomerRegistrationBoundary CRC;
-    private static pymentWindowControllerForRegistarBoundary Instance = null;
     private CreditCard tempCreditCard;
+
+
     @FXML
     private JFXTextField creditCardNumbertxt;
 
@@ -32,15 +34,6 @@ public class pymentWindowControllerForRegistarBoundary implements Initializable 
     @FXML
     public Button payButton;
 
-    /**
-     * CustomerRegistrationFXML1Logic Instance getter using SingleTone DesignPatterns
-     * @return Instance of logic class
-     */
-    public static pymentWindowControllerForRegistarBoundary getInstance() {
-        if (Instance == null)
-            Instance = new pymentWindowControllerForRegistarBoundary();
-        return Instance;
-    }
 
 
 
@@ -49,7 +42,7 @@ public class pymentWindowControllerForRegistarBoundary implements Initializable 
         payButton.setText("Add Card");
     }
 
-    public void addCardOnClick(MouseEvent event) throws IOException {
+    public void addCardOnClick(MouseEvent event) {
 
     }
 

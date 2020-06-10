@@ -129,7 +129,7 @@ public class MysqlConnection {
         } finally {
             this.disconnect();
         }
-
+        System.out.println(sqlArray[sqlAction.getActionType().getCode()].toString());
         return sqlResult;
     }
 
@@ -151,7 +151,16 @@ public class MysqlConnection {
          * ********** Costumer Management Queries ****************
          * *****************************************/
         sqlArray[SqlQueryType.GET_ALL_COSTUMER_TABLE.getCode()] = "SELECT * FROM `Costumer`";
-        sqlArray[SqlQueryType.UPDATE_COSTUMER_DETAIL.getCode()] = "UPDATE `Costumer` SET `?`= ? WHERE ID =?";
+        sqlArray[SqlQueryType.UPDATE_COSTUMER_FNAME.getCode()] = "UPDATE `Costumer` SET `First Name` = ? WHERE ID =?";
+        sqlArray[SqlQueryType.UPDATE_COSTUMER_LNAME.getCode()] = "UPDATE `Costumer` SET `Last Name` = ? WHERE ID =?";
+        sqlArray[SqlQueryType.UPDATE_COSTUMER_EMAIL.getCode()] = "UPDATE `Costumer` SET `Email Adress` = ? WHERE ID =?";
+        sqlArray[SqlQueryType.UPDATE_COSTUMER_SERVICE_PLAN.getCode()] = "UPDATE `Costumer` SET `Service Plan` = ? WHERE ID =?";
+        sqlArray[SqlQueryType.UPDATE_COSTUMER_PURCHASE_PLAN.getCode()] = "UPDATE `Costumer` SET `Purchase Plan` = ? WHERE ID =?";
+        sqlArray[SqlQueryType.UPDATE_COSTUMER_TYPE.getCode()] = "UPDATE `Costumer` SET `Costumer Type` = ? WHERE ID =?";
+        sqlArray[SqlQueryType.GET_ALL_COSTUMER_VEHICLES.getCode()] = "SELECT `Vehicle ID`, `Fuel Type`, `Owner ID` FROM `Vehicle` WHERE `Owner ID` = ?";
+        sqlArray[SqlQueryType.REMOVE_VEHICLE.getCode()] = "DELETE FROM `Vehicle` WHERE `Vehicle ID` = ?";
+        sqlArray[SqlQueryType.REMOVE_COSTUMER.getCode()] = "DELETE FROM `Costumer` WHERE `ID` = ?";
+
 
 
 
@@ -192,9 +201,18 @@ public class MysqlConnection {
         sqlArray[SqlQueryType.GET_FullSubscriptionSingleVehicle_PRICE.getCode()] = "SELECT * FROM `DiscountRates` WHERE `Subscription type` LIKE \"Full monthly subscription (for single vehicle)\"";
         sqlArray[SqlQueryType.GET_RegularSubscriptionMultiVehicle_PRICE.getCode()] = "SELECT * FROM `DiscountRates` WHERE `Subscription type` LIKE \"Regular monthly subscription - number of vehicles\"";
         sqlArray[SqlQueryType.INSERT_NEW_PRICE.getCode()] = "UPDATE `DiscountRates` SET `Current price`= ? WHERE `Subscription type` LIKE ?";
-    //"INSERT INTO `DiscountRates`(`Subscription type`, `Current price`) VALUES (?,?);"; //"INSERT INTO `DiscountRates`(`Current price`) VALUES (?);";
-                //"INSERT INTO `DiscountRates`(`Subscription type`, `Current price`) VALUES (?,?);";
-        //UPDATE `DiscountRates` SET `Current price`=9 WHERE `Subscription type` LIKE "Full monthly subscription (for single vehicle)"
+
+        /* *****************************************
+         * ********** Station Manager Reports Queries ****************
+         * *****************************************/
+        sqlArray[SqlQueryType.GET_Quarterly_Revenue.getCode()] = "SELECT * FROM `Purchase` WHERE `purchaseDate` BETWEEN ? AND ?";
+
+
+        /* *****************************************
+         * ********** Login Page Queries ****************
+         * *****************************************/
+        sqlArray[SqlQueryType.GET_ALL_USERS_TABLE.getCode()] = "SELECT * FROM Users;";
+        sqlArray[SqlQueryType.UPDATE_USER_FIELD.getCode()] = "UPDATE `Users` SET `loginAttempts` = '5' WHERE `Users`.`userID` = 601983543 AND `Users`.`userType` = 1;";
     }
 
     public Connection getConnection() {

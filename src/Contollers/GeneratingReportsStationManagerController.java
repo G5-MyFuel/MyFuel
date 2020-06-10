@@ -1,8 +1,12 @@
 package Contollers;
 
 import boundary.GeneratingReportsStationManagerBoundary;
+import common.assets.SqlAction;
+import common.assets.SqlQueryType;
 import common.assets.SqlResult;
 import javafx.application.Platform;
+
+import java.util.ArrayList;
 
 public class GeneratingReportsStationManagerController extends BasicController {
 
@@ -20,12 +24,15 @@ public class GeneratingReportsStationManagerController extends BasicController {
         this.myBoundary = myBoundary;
     }
 
-    public void QuarterlyReportData(String ReportType, String ReportYear, String Quarter) {
+    public void QuarterlyReportData(String ReportType, String startDate, String endDate) {
         switch (ReportType) {
             case "Quarterly revenue report":
-                /*SqlAction sqlAction = new SqlAction(SqlQueryType.GET_RegularSubscriptionSingleVehicle_PRICE);
+                ArrayList<Object> varArray = new ArrayList<>();
+                varArray.add(startDate);
+                varArray.add(endDate);
+                SqlAction sqlAction = new SqlAction(SqlQueryType.GET_Quarterly_Revenue, varArray);
                 super.sendSqlActionToClient(sqlAction);
-                break;*/
+                break;
             case "Purchases report":
                 /*sqlAction = new SqlAction(SqlQueryType.GET_FullSubscriptionSingleVehicle_PRICE);
                 super.sendSqlActionToClient(sqlAction);
@@ -42,12 +49,12 @@ public class GeneratingReportsStationManagerController extends BasicController {
 
     @Override
     public void getResultFromClient(SqlResult result) {
-        /*Platform.runLater(() -> {
+        Platform.runLater(() -> {
             switch (result.getActionType()) {
-                case GET_RegularSubscriptionSingleVehicle_PRICE:
+                case GET_Quarterly_Revenue:
                     myBoundary.setData(this.changeResultToString(result));
                     break;
-                case GET_FullSubscriptionSingleVehicle_PRICE:
+                /*case GET_FullSubscriptionSingleVehicle_PRICE:
                     myBoundary.setData(this.changeResultToString(result));
                     break;
                 case GET_RegularSubscriptionMultiVehicle_PRICE:
@@ -55,13 +62,29 @@ public class GeneratingReportsStationManagerController extends BasicController {
                     break;
                 case INSERT_NEW_PRICE:
                     myBoundary.setData("");
-                    break;
+                    break;*/
 
                 default:
                     break;
             }
-        });*/
+        });
 
+    }
+
+    /**
+     * This method create String from the data base result.
+     *
+     * @param result the result
+     * @return String
+     */
+    private String changeResultToString(SqlResult result) {
+
+        Float TotalPrice = new Float(0);
+        //ArrayList<String> revenue = new ArrayList<>();
+        for (ArrayList<Object> a : result.getResultData()) {
+            TotalPrice += Float.parseFloat((String) a.get(4));
+        }
+        return TotalPrice.toString();
     }
 
 }

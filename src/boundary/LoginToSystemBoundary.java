@@ -1,6 +1,7 @@
 package boundary;
 
 import Contollers.FormValidation;
+import Contollers.LoginToSystemController;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
@@ -21,6 +22,16 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class LoginToSystemBoundary extends Application {
+    /* variables: */
+    private static LoginToSystemBoundary Instance;
+    private ActionEvent event = null;
+    Contollers.LoginToSystemController loginToSystemLogic; //logic instance
+    FormValidation formValidation;
+    private ArrayList<User> allDBUsersArrayList;
+    private LoginToSystemController myController = new LoginToSystemController(this);
+    private Alert ErrorAlert = new Alert(Alert.AlertType.ERROR);
+    int userType = 0;
+
     /*  fxml file object variables: */
     @FXML
     private ResourceBundle resources;
@@ -43,13 +54,6 @@ public class LoginToSystemBoundary extends Application {
     @FXML
     public Stage primaryStage;
 
-    private static LoginToSystemBoundary Instance;
-
-    /*  other variables: */
-    private ActionEvent event = null;
-    Contollers.LoginToSystemController loginToSystemLogic; //logic instance
-    FormValidation formValidation;
-
 
     public static LoginToSystemBoundary getInstance() {
         if (Instance == null)
@@ -59,11 +63,10 @@ public class LoginToSystemBoundary extends Application {
 
     @FXML
     void initialize() {
+        myController.getUsersTable();   //start the process that will ask server to execute query and get the Users table details
         formValidation = FormValidation.getValidator(); //for form validation instance
         loginAsComboBox.getItems().addAll("Customer", "Employee", "Supplier");  //set the user types
         LoginValidation();
-        Contollers.LoginToSystemController.getInstance().importAllUsersToArrayListInLogicClass();   //before login - get instance of all users in the system
-
     }
 
     //מתודה שמאתחלת את בדיקות הקלט לטופס הלוגין
@@ -73,43 +76,88 @@ public class LoginToSystemBoundary extends Application {
         formValidation.isContainsOnlyNumbers(userIDTextField, "user ID");
         formValidation.maxLengthValidation(userIDTextField, "user ID", 9);
         //password validation
+        System.out.println(allDBUsersArrayList);
         formValidation.isEmptyPasswordField(passwordField, "Password");
     }
 
     @FXML
     void clickLoginBtn() {
         System.out.println("-->clickLoginBtn method");
+        System.out.println(allDBUsersArrayList);
         checkInputs();
     }
 
     public void checkInputs() {
-        int userType = 0;
-        switch (loginAsComboBox.getValue().toString()) {
-            case "Customer":
-                userType = 1;
-                break;
-            case "Employee":
-                userType = 2;
-                break;
-            case "Supplier":
-                userType = 3;
-                break;
+        if (!loginAsComboBox.getSelectionModel().isEmpty()) {
+            switch (loginAsComboBox.getValue()) {
+                case "Customer":
+                    userType = 1;
+                    break;
+                case "Employee":
+                    userType = 2;
+                    break;
+                case "Supplier":
+                    userType = 3;
+                    break;
+                default:
+                    userType = 0;
+                    break;
+            }
         }
-        System.out.println(loginAsComboBox.getValue() + " " + userType);
+
+        //check if user type selected
+        if (userType == 0) {
+            ErrorAlert.setTitle("Login Error");
+            ErrorAlert.setHeaderText("User type cannot be empty, Please select user type");
+            ErrorAlert.showAndWait();
+        }
 
         //check if userID exist in DB
-//        String getAllUsers = "Select * from Users";
-//        ClientApp.client.handleMessageFromClientUI(new Message(OperationType.getAllUsersTable, getAllUsers));
-        System.out.println("bdika11");
-        boolean result = Contollers.LoginToSystemController.getInstance().searchUserIdAndUserTypeInArrayList(Integer.parseInt(userIDTextField.getText()), userType);
-        System.out.println("result of Login is:" + result);
-        //todo: להמשיך מפה! זיהוי לקוח בוצע בהצלחה - כעת לממש שגיאות קלט והודעות בהתאם
+        if (checkIfUserNameAndUserTypeInDb(userIDTextField.getText(), userType)) {
+            if (checkIfPasswordMatches(userIDTextField.getText(), passwordField.getText())) {
+                //todo: כאן נגדיר מה יקרה כאשר המשתמש הזין נתונים נכונים ויכול להתחבר למערכת
+                System.out.println("ther userid and password matches!");
+            }
+        }
     }
 
-    public void setUsersDetailsArrayList(Object object) {
-        System.out.println("----->setUsersDetailsArrayList");
-        Contollers.LoginToSystemController.getInstance().setUsersArrayList((ArrayList<User>) object);
-        //System.out.println(LoginToSystemLogic.getInstance().getUsersArrayList().toString());
+    private boolean checkIfUserNameAndUserTypeInDb(String userID, int UserType) {
+        for (User u : allDBUsersArrayList) {
+            if (Integer.toString(u.getUserID()).equals(userID) && userType == u.getUserType()) {
+                System.out.println("the user and its type correct");//tet
+                return true;
+            }
+        }
+        ErrorAlert.setTitle("User ID does'nt exist in the system");
+        ErrorAlert.setHeaderText("User " + userIDTextField.getText() + " does not exist on the system, please try again!");
+        ErrorAlert.showAndWait();
+        return false;
+    }
+
+    private int loginAttempts = 3;
+
+    private boolean checkIfPasswordMatches(String userID, String password) {
+        if (loginAttempts > 0) {
+            for (User u : allDBUsersArrayList) {
+                if (Integer.toString(u.getUserID()).equals(userID)) {
+                    if (u.getUserPassword().equals(password)) {
+                        System.out.println("the userId & password matches");
+                        return true;
+                    } else break;
+                }
+            }
+            ErrorAlert.setTitle("The password is incorrect! try again");
+            loginAttempts--;
+            ErrorAlert.setHeaderText("Login failed! There are " + loginAttempts + " login attempts left");
+            ErrorAlert.showAndWait();
+            return false;
+        } else {
+            myController.setNewUserFieldValue("loginAttempts", "0", userIDTextField.getText(), Integer.toString(userType));
+            ErrorAlert.setTitle("Account blocked!");
+            ErrorAlert.setHeaderText("Contact a marketing representative to unblock the user");
+            ErrorAlert.showAndWait();
+        }
+        return false;
     }
 
     public static Optional<ButtonType> messageWindow(Alert.AlertType alertType, String win, String mes, String mes1) {
@@ -150,8 +198,13 @@ public class LoginToSystemBoundary extends Application {
         return loginAsComboBox;
     }
 
-    public void SetUsersTable(Object object) {
-        Contollers.LoginToSystemController.getInstance().setUsersArrayList((ArrayList<User>) object);
+    public ArrayList<User> getAllDBUsersArrayList() {
+        return allDBUsersArrayList;
     }
+
+    public void setAllDBUsersArrayList(ArrayList<User> allDBUsersArrayList) {
+        this.allDBUsersArrayList = allDBUsersArrayList;
+    }
+
 }
 

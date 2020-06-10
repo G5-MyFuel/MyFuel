@@ -311,18 +311,6 @@
                                           </AnchorPane>
                                       </content>
                                     </ScrollPane>
-                                    <ImageView fx:id="addVehicleButton" accessibleRole="BUTTON" fitHeight="33.0" fitWidth="35.0" layoutX="24.0" layoutY="173.0" onMouseClicked="#setVehicleInfoVisible" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../media/CostumerRegisterationMedia/add_40px.png" />
-                                       </image>
-                                       <cursor>
-                                          <Cursor fx:constant="OPEN_HAND" />
-                                       </cursor>
-                                    </ImageView>
-                                    <Label layoutX="65.0" layoutY="181.0" onMouseClicked="#setVehicleInfoVisible" text="Add Vehicle">
-                                       <cursor>
-                                          <Cursor fx:constant="HAND" />
-                                       </cursor></Label>
                                     <ImageView fx:id="backButtonVehicalToPersonal" accessibleRole="BUTTON" fitHeight="70.0" fitWidth="94.0" layoutX="50.0" layoutY="562.0" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#FirstBackwardButtonOnClick" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../media/CostumerRegisterationMedia/forward_button_40px.png" />
@@ -339,7 +327,7 @@
                                           <Cursor fx:constant="OPEN_HAND" />
                                        </cursor>
                                     </ImageView>
-                                    <Pane fx:id="VehicleInformationPane" layoutX="492.0" layoutY="198.0" prefHeight="256.0" prefWidth="364.0" style="-fx-border-color: #2D4578; -fx-border-width: 4;">
+                                    <Pane fx:id="VehicleInformationPane" layoutX="492.0" layoutY="215.0" prefHeight="256.0" prefWidth="364.0" style="-fx-border-color: #2D4578; -fx-border-width: 4;">
                                        <children>
                                           <SplitPane dividerPositions="0.16161616161616163" layoutX="9.0" layoutY="6.0" orientation="VERTICAL" prefHeight="245.0" prefWidth="347.0">
                                             <items>
@@ -359,19 +347,36 @@
                                           </SplitPane>
                                        </children>
                                     </Pane>
-                                    <ImageView fitHeight="29.0" fitWidth="31.0" layoutX="142.0" layoutY="175.0" onMouseClicked="#RemoveSelectedVe" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../media/CostumerRegisterationMedia/minus_80px.png" />
-                                       </image>
+                                    <Button fx:id="SearchButton1121" layoutX="561.0" layoutY="163.0" mnemonicParsing="false" onMouseClicked="#setVehicleInfoVisible" prefHeight="37.0" prefWidth="226.0" style="-fx-background-color: #2D4578; -fx-background-radius: 50;" stylesheets="@style.css" text="Click To Add New Vehicle" textAlignment="RIGHT" textFill="WHITE">
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
-                                    </ImageView>
-                                    <Label layoutX="185.0" layoutY="181.0" onMouseClicked="#RemoveSelectedVe" text="Remove Selected Vehicle">
+                                       <graphic>
+                                          <ImageView fx:id="addVehicleButton" accessibleRole="BUTTON" fitHeight="33.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../media/CostumerRegisterationMedia/add_40px.png" />
+                                             </image>
+                                             <cursor>
+                                                <Cursor fx:constant="OPEN_HAND" />
+                                             </cursor>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                    <Button fx:id="SearchButton112" layoutX="29.0" layoutY="163.0" mnemonicParsing="false" onMouseClicked="#RemoveSelectedVe" prefHeight="37.0" prefWidth="226.0" style="-fx-background-color: #2D4578; -fx-background-radius: 50;" stylesheets="@style.css" text="Click To Remove Selected Vehicle" textAlignment="RIGHT" textFill="WHITE">
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
-                                    </Label>
+                                       <graphic>
+                                          <ImageView fitHeight="29.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../media/CostumerRegisterationMedia/minus_80px.png" />
+                                             </image>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
                                  </children>
                               </AnchorPane>
                            </content>

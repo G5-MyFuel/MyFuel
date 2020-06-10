@@ -21,16 +21,30 @@ public enum SqlQueryType {
     GET_RegularSubscriptionMultiVehicle_PRICE(SqlExecutionType.EXECUTE_QUERY),
     INSERT_NEW_PRICE(SqlExecutionType.UPDATE_QUERY),
 
+    /* *****************************************
+     * ********** Station Manager Reports Queries ****************
+     * *****************************************/
+    GET_Quarterly_Revenue(SqlExecutionType.EXECUTE_QUERY),
+
 
     /* *****************************************
      * ********** Costumer Management Queries ****************
      * *****************************************/
-    UPDATE_COSTUMER_DETAIL(SqlExecutionType.UPDATE_QUERY),
+    UPDATE_COSTUMER_FNAME(SqlExecutionType.UPDATE_QUERY),
+    UPDATE_COSTUMER_LNAME(SqlExecutionType.UPDATE_QUERY),
+    UPDATE_COSTUMER_EMAIL(SqlExecutionType.UPDATE_QUERY),
+    UPDATE_COSTUMER_TYPE(SqlExecutionType.UPDATE_QUERY),
+    UPDATE_COSTUMER_SERVICE_PLAN(SqlExecutionType.UPDATE_QUERY),
+    UPDATE_COSTUMER_PURCHASE_PLAN(SqlExecutionType.UPDATE_QUERY),
+    GET_ALL_COSTUMER_VEHICLES(SqlExecutionType.EXECUTE_QUERY),
+    REMOVE_VEHICLE(SqlExecutionType.UPDATE_QUERY),
+    REMOVE_COSTUMER(SqlExecutionType.UPDATE_QUERY),
 
     /* *****************************************
      * ********** Users Management Queries ****************
      * *****************************************/
     GET_ALL_USERS_TABLE(SqlExecutionType.EXECUTE_QUERY),
+    UPDATE_USER_FIELD(SqlExecutionType.UPDATE_QUERY),
 
     /* *****************************************
      * ********** Sales and Template Management Queries ****************

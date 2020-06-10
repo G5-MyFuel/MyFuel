@@ -10,6 +10,7 @@ public class User implements Serializable {
     private String userFirstName;
     private String userLastName;
     private String userEmail;
+    private int loginAttempts;
 
     public User(int userID, int userType, String userFirstName, String userLastName, String userEmail) {
         this.userID = userID;
@@ -20,13 +21,14 @@ public class User implements Serializable {
         this.userPassword = Integer.toString(userID);
     }
 
-    public User(int userID, int userType, String userPassword, String userFirstName, String userLastName, String userEmail) {
+    public User(int userID, int userType, String userPassword, String userFirstName, String userLastName, String userEmail,int loginAttempts) {
         this.userID = userID;
         this.userType = userType;
         this.userPassword = userPassword;
         this.userFirstName = userFirstName;
         this.userLastName = userLastName;
         this.userEmail = userEmail;
+        this.loginAttempts = loginAttempts;
     }
 
 
@@ -86,6 +88,13 @@ public class User implements Serializable {
         this.userEmail = userEmail;
     }
 
+    public int getLoginAttempts() {
+        return loginAttempts;
+    }
+
+    public void setLoginAttempts(int loginAttempts) {
+        this.loginAttempts = loginAttempts;
+    }
 
     @Override
     public String toString() {
@@ -97,6 +106,7 @@ public class User implements Serializable {
                 ", userFirstName='" + userFirstName + '\'' +
                 ", userLastName='" + userLastName + '\'' +
                 ", userEmail='" + userEmail + '\'' +
+                ", loginAttempts=" + loginAttempts +
                 '}';
     }
 }
