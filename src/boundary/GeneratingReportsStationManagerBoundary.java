@@ -3,8 +3,7 @@ package boundary;
 import Contollers.FormValidation;
 import Contollers.GeneratingReportsStationManagerController;
 import com.jfoenix.controls.JFXComboBox;
-import common.assets.SqlAction;
-import common.assets.SqlQueryType;
+import entity.SaleOperation;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -12,7 +11,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -20,6 +21,8 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -67,6 +70,19 @@ public class GeneratingReportsStationManagerBoundary implements Initializable {
     @FXML
     private JFXTextField ShowTotalRevenueTXT;
 
+    @FXML
+    private TableView<String> PurchasesReportTable;
+
+    @FXML
+    private TableColumn<String, String> FuelTypeColumn;
+
+    @FXML
+    private TableColumn<String, String> QuantityPurchasedColumn;
+
+    @FXML
+    private TableColumn<String, String> SalesAmountColumn;
+
+
     private final ObservableList<String> ReportsType = FXCollections.observableArrayList("Quarterly revenue report",
             "Purchases report", "Quantity of items in stock report");
     private final ObservableList<String> YearList = FXCollections.observableArrayList("2020", "2019", "2018", "2017", "2016", "2015",
@@ -80,6 +96,7 @@ public class GeneratingReportsStationManagerBoundary implements Initializable {
         ChooseReportQuarterCombo.setVisible(false);
         TotalRevenueLabel.setVisible(false);
         ShowTotalRevenueTXT.setVisible(false);
+        PurchasesReportTable.setVisible(false);
 
         /*  set all fields validators */
         formValidation();
@@ -130,15 +147,26 @@ public class GeneratingReportsStationManagerBoundary implements Initializable {
             default:
                 break;
         }
-        myController.QuarterlyReportData("Quarterly revenue report", startDate, endDate); //start the process that will ask server to execute quarry and get the table details
+        myController.GetReportData("Quarterly revenue report", startDate, endDate); //start the process that will ask server to execute quarry and get the table details
     }
 
-    public void setData(String revenue) {
-
+    public void setQuarterlyData(String revenue) {
         TotalRevenueLabel.setVisible(true);
         ShowTotalRevenueTXT.setVisible(true);
         ShowTotalRevenueTXT.setText(revenue);
     }
+
+    public void setPurchasesData(ArrayList<String> PurchasesArray) {
+
+        PurchasesReportTable.setVisible(true);
+        FuelTypeColumn.setCellValueFactory(new PropertyValueFactory<>("Fuel type"));
+        QuantityPurchasedColumn.setCellValueFactory(new PropertyValueFactory<>(" Quantity Purchased"));
+        SalesAmountColumn.setCellValueFactory(new PropertyValueFactory<>("Sales Amount"));
+
+        ObservableList<String> data = FXCollections.observableArrayList(PurchasesArray);
+        PurchasesReportTable.setItems(data);
+    }
+
 
     @FXML
     void handleClicks(ActionEvent event) {
@@ -148,8 +176,10 @@ public class GeneratingReportsStationManagerBoundary implements Initializable {
     @FXML
     void handlePurchasesReport(MouseEvent event) {
 
-
-
+        PurchasesReportTable.setVisible(true);
+        myController.GetReportData("Purchases report","Diesel",""); //start the process that will ask server to execute quarry and get the table details
+        myController.GetReportData("Purchases report","Gasoline 95",""); //start the process that will ask server to execute quarry and get the table details
+        myController.GetReportData("Purchases report","Scooter fuel",""); //start the process that will ask server to execute quarry and get the table details
     }
 
     @FXML

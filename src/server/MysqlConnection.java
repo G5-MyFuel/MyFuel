@@ -171,21 +171,21 @@ public class MysqlConnection {
         sqlArray[SqlQueryType.INSERT_NEW_COSTUMER.getCode()] =
                 "INSERT INTO `Costumer`(`ID`, `Password`, `Type`, `First Name`, `Last Name`, `Email Adress`, `Credit Card Number`, `CreditCardExperationDate`, `CVV`," +
                         " `purchasePlan`, `Vehicle ID`, `Vehicale GasType`, `Service Plan`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?);";
-        sqlArray[SqlQueryType.INSERT_NEW_VEHICLE.getCode()] = "INSERT INTO `Vehicle`(`Vehicle ID`, `Fuel Type`, `Owner ID`) VALUES (?,?,?);" ;
+        sqlArray[SqlQueryType.INSERT_NEW_VEHICLE.getCode()] = "INSERT INTO `Vehicle`(`Vehicle ID`, `Fuel Type`, `Owner ID`) VALUES (?,?,?);";
 
 
         /* *****************************************
          * ********** Orders From Supplier Queries ****************
          * *****************************************/
-        sqlArray[SqlQueryType.GET_ALL_ORDERS_FROM_SUPPLIER_TABLE.getCode()]= "SELECT * FROM `OrderForStock`";
-        sqlArray[SqlQueryType.INSERT_STATUS_FOR_ORDER_TABLE.getCode()]="INSERT INTO `OrderFromStock` ('OrderStatus') VALUES (?)";
+        sqlArray[SqlQueryType.GET_ALL_ORDERS_FROM_SUPPLIER_TABLE.getCode()] = "SELECT * FROM `OrderForStock`";
+        sqlArray[SqlQueryType.INSERT_STATUS_FOR_ORDER_TABLE.getCode()] = "INSERT INTO `OrderFromStock` ('OrderStatus') VALUES (?)";
 
         /* *****************************************
          * ********** Template Management Queries ****************
          * *****************************************/
         sqlArray[SqlQueryType.GET_ALL_TEMPLATES_TABLE.getCode()] = "SELECT * FROM `CampaignTemplates`";
         sqlArray[SqlQueryType.INSERT_NEW_TEMPLATE.getCode()] =
-                "INSERT INTO `CampaignTemplates`(`templateID`, `templateName`, `fuelType`, `DiscountPercentages`, `day`,"+
+                "INSERT INTO `CampaignTemplates`(`templateID`, `templateName`, `fuelType`, `DiscountPercentages`, `day`," +
                         " `beginHour`, `endHour`) VALUES (?,?,?,?,?,?,?);";
         sqlArray[SqlQueryType.GET_ALL_SALES_TABLE.getCode()] = "SELECT * FROM `SaleOperation`";
         sqlArray[SqlQueryType.INSERT_NEW_SALE.getCode()] =
@@ -206,7 +206,7 @@ public class MysqlConnection {
          * ********** Station Manager Reports Queries ****************
          * *****************************************/
         sqlArray[SqlQueryType.GET_Quarterly_Revenue.getCode()] = "SELECT * FROM `Purchase` WHERE `purchaseDate` BETWEEN ? AND ?";
-
+        sqlArray[SqlQueryType.GET_Purchases_Report.getCode()] = "SELECT * FROM `Purchase` WHERE `Fuel type` LIKE ?";
 
         /* *****************************************
          * ********** Login Page Queries ****************
