@@ -109,7 +109,7 @@ public class CustomerRegistrationController extends BasicController {
 
     }
 
-    public void getVehicaleTable() {
+    public void getVehicleTable() {
         SqlAction sqlAction = new SqlAction(SqlQueryType.GET_ALL_VEHICLE_TABLE);
         super.sendSqlActionToClient(sqlAction);
     }

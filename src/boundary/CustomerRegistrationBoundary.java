@@ -347,7 +347,7 @@ public class CustomerRegistrationBoundary implements Initializable {
                 vehicleMangTAB.setDisable(false);
                 personalInfoTAB.setDisable(true);
                 vehicleMangTAB.getTabPane().getSelectionModel().selectNext();
-                myController.getVehicaleTable();
+                myController.getVehicleTable();
             }
         }
 

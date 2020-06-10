@@ -31,6 +31,8 @@ public enum SqlQueryType {
     UPDATE_COSTUMER_TYPE(SqlExecutionType.UPDATE_QUERY),
     UPDATE_COSTUMER_SERVICE_PLAN(SqlExecutionType.UPDATE_QUERY),
     UPDATE_COSTUMER_PURCHASE_PLAN(SqlExecutionType.UPDATE_QUERY),
+    GET_ALL_COSTUMER_VEHICLES(SqlExecutionType.EXECUTE_QUERY),
+    REMOVE_VEHICLE(SqlExecutionType.UPDATE_QUERY),
 
 
     /* *****************************************
