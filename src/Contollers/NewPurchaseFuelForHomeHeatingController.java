@@ -3,6 +3,8 @@ package Contollers;
 import boundary.NewPurchaseFuelForHomeHeatingBoundary;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
+import common.assets.SqlAction;
+import common.assets.SqlQueryType;
 import common.assets.SqlResult;
 import entity.User;
 import javafx.application.Platform;
@@ -55,22 +57,14 @@ public class NewPurchaseFuelForHomeHeatingController extends BasicController{
         Platform.runLater(()->{
             switch(result.getActionType()){
                 case GET_ALL_USERS_TABLE:
+                    System.out.println("NewPurchaseFuelForHomeHeatingController -> myController.getUsersTable();");
                 ArrayList<User> resultListUsers = new ArrayList<>();
-                resultListUsers.addAll(this.changeResultToUsers(result));
-                myBoundary.setAllDBUsersArrayList(resultListUsers);
+//                resultListUsers.addAll(this.changeResultToUsers(result));
+//                myBoundary.setAllDBUsersArrayList(resultListUsers);
                 break;
                 //
-                
+
             }
         });
-    }
-
-    private ArrayList<User> changeResultToUsers(SqlResult result){
-        ArrayList<User> resultList = new ArrayList<>();
-        for(ArrayList<Object> a:result.getResultData()){
-            User user = new User((int)a.get(0),(int)a.get(1),(String)a.get(4),(String)a.get(5),(String)a.get(6));
-            resultList.add(user);
-        }
-        return resultList;
     }
 }

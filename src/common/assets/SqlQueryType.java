@@ -31,6 +31,7 @@ public enum SqlQueryType {
      * ********** Users Management Queries ****************
      * *****************************************/
     GET_ALL_USERS_TABLE(SqlExecutionType.EXECUTE_QUERY),
+    UPDATE_USER_FIELD(SqlExecutionType.UPDATE_QUERY),
 
     /* *****************************************
      * ********** Sales and Template Management Queries ****************

@@ -30,11 +30,9 @@ import java.util.ResourceBundle;
  */
 public class NewPurchaseFuelForHomeHeatingBoundary implements Initializable {
     private NewPurchaseFuelForHomeHeatingController myController = new NewPurchaseFuelForHomeHeatingController(this);
-    private ArrayList<User> allDBUsersArrayList;
 
 
     private static NewPurchaseFuelForHomeHeatingBoundary Instance = null;
-    private NewPurchaseFuelForHomeHeatingController newPurchaseFuelForHomeHeatingLogic;
     private FormValidation formValidation;
 
     //gui variables:
@@ -251,7 +249,7 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements Initializable {
         guiObjects.add(zipCodeTXT);
         //
         for(Object guiObj:guiObjects){
-            if(!newPurchaseFuelForHomeHeatingLogic.validatePage(guiObj)){
+            if(!myController.validatePage(guiObj)){
                 orderDetailsIndicatorTAB.setImage(new Image("media/PurchaseMedia/cancel.png"));
                 break;
             }
@@ -277,11 +275,4 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements Initializable {
        // ClientApp.chatClient.handleMessageFromClientUI(new Message(OperationType.updateRequirement,initialShippingDatesQUERY));
     }
 
-    public ArrayList<User> getAllDBUsersArrayList() {
-        return allDBUsersArrayList;
-    }
-
-    public void setAllDBUsersArrayList(ArrayList<User> allDBUsersArrayList) {
-        this.allDBUsersArrayList = allDBUsersArrayList;
-    }
 }
