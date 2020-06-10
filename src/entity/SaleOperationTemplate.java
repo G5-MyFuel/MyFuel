@@ -25,8 +25,6 @@ public class SaleOperationTemplate {
         this.endHour = endHour;
     }
 
-
-
     public String getTemplateID() {
         return templateID;
     }

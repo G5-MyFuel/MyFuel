@@ -4,7 +4,9 @@ import Contollers.FormValidation;
 import Contollers.RunSaleOperationController;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
+import com.sun.xml.internal.ws.api.message.saaj.SAAJMessageHeaders;
 import entity.SaleOperation;
+import entity.SaleOperationTemplate;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -160,6 +162,8 @@ public class RunSaleOperationBoundary implements Initializable {
         ChooseTemplateCombo.getSelectionModel().clearSelection();
         startDatePicker.getEditor().clear();
         startDatePicker.getEditor().clear();
+        btnADDnewSaleOperation1.setVisible(true);
+
     }
 
     /**
@@ -170,18 +174,30 @@ public class RunSaleOperationBoundary implements Initializable {
         ChooseTemplateCombo.setItems(TemplateName);
     }
 
-
     @FXML
     void handleChooseTemplate(ActionEvent event) {
-        //שאילתה להביא את פרטי התבנית
-        myController.getTemplateList(); //start the process that will ask server to execute quarry and get the template details
         choosenTemplate = ChooseTemplateCombo.getValue();
+        //Query to get from the db the chosen template information:
+        myController.getChoosenTemplateDetails(); //start the process that will ask server to execute quarry and get the template details
 
         this.templateDetaildVBOX.setVisible(true);
         this.endDatePicker.setVisible(true);
         this.startDatePicker.setVisible(true);
-        btnADDnewSaleOperation1.setVisible(true);
+    }
 
+    public String getChoosenTemplate() {
+        return choosenTemplate;
+    }
+
+    public void setChosenTemplateDetails(ArrayList<SaleOperationTemplate> cosArray){
+        SaleOperationTemplate my = new SaleOperationTemplate();
+        my = cosArray.get(0);
+        idFromDB.setText(my.getTemplateID());
+        typeFromDB.setText(my.getFuelType());
+        discountFromDB.setText(String.valueOf(my.getDiscountPercentages())+ "%");
+        dayFromDB.setText(my.getDay());
+        beginHourFromDB.setText(String.valueOf(my.getBeginHour()));
+        endHourFromDB.setText(String.valueOf(my.getEndHour()));
 
     }
 

@@ -9,6 +9,7 @@ import entity.SaleOperationTemplate;
 import javafx.application.Platform;
 
 import java.sql.Date;
+import java.sql.Time;
 import java.util.ArrayList;
 
 /**
@@ -61,6 +62,11 @@ public class RunSaleOperationController extends BasicController {
                     templateList.addAll(this.changeResultToTemplateList(result));
                     myBoundary.setTemplateList(templateList);
                     break;
+                case GET_CHOSEN_TEMPLATE_DETAILS:
+                    ArrayList<SaleOperationTemplate> templateChosenList = new ArrayList<>();
+                    templateChosenList.addAll(this.changeResultToChoosenTemplateDetails(result));
+                    myBoundary.setChosenTemplateDetails(templateChosenList);
+                    break;
 
                 default:
                     break;
@@ -112,6 +118,27 @@ public class RunSaleOperationController extends BasicController {
             String tempTemplate = new String((String) a.get(1));
             resultList.add(tempTemplate);
         }
+        return resultList;
+    }
+
+    //get choosen template details:
+    public void getChoosenTemplateDetails() {
+        SqlAction sqlAction = new SqlAction(SqlQueryType.GET_CHOSEN_TEMPLATE_DETAILS);
+        super.sendSqlActionToClient(sqlAction);
+    }
+
+    private ArrayList<SaleOperationTemplate> changeResultToChoosenTemplateDetails(SqlResult result){
+        String myCchosenTemplate = myBoundary.getChoosenTemplate();
+        ArrayList<SaleOperationTemplate> resultList = new ArrayList<>();
+        for(ArrayList<Object> a: result.getResultData()) {
+            if (myCchosenTemplate.equals((String)a.get(1))) {
+                SaleOperationTemplate cos = new SaleOperationTemplate((String) a.get(0),(String)a.get(1),(String) a.get(2),(String) a.get(3),(String) a.get(4),
+                        null,null);
+                cos.setBeginHour(Time.valueOf((String) a.get(5)));
+                cos.setEndHour(Time.valueOf((String) a.get(6)));
+                resultList.add(cos);
+            }//end if
+        }//end for
         return resultList;
     }
 }

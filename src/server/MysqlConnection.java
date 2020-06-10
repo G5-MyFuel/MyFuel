@@ -181,6 +181,8 @@ public class MysqlConnection {
         sqlArray[SqlQueryType.GET_ALL_SALES_TABLE.getCode()] = "SELECT * FROM `SaleOperation`";
         sqlArray[SqlQueryType.INSERT_NEW_SALE.getCode()] =
                 "INSERT INTO  `SaleOperation`(`SaleOperationID`, `TemplateName`, `BeginDate`, `EndDate`) VALUES (?,?,?,?);";
+        sqlArray[SqlQueryType.GET_CHOSEN_TEMPLATE_DETAILS.getCode()] = "SELECT * FROM `CampaignTemplates`";
+
 
 
         /* *****************************************
