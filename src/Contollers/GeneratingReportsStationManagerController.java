@@ -20,7 +20,7 @@ public class GeneratingReportsStationManagerController extends BasicController {
         this.myBoundary = myBoundary;
     }
 
-    public void getReportTable(String ReportType) {
+    public void QuarterlyReportData(String ReportType, String ReportYear, String Quarter) {
         switch (ReportType) {
             case "Quarterly revenue report":
                 /*SqlAction sqlAction = new SqlAction(SqlQueryType.GET_RegularSubscriptionSingleVehicle_PRICE);

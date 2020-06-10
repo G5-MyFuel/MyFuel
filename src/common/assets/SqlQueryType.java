@@ -34,6 +34,10 @@ public enum SqlQueryType {
     GET_ALL_COSTUMER_VEHICLES(SqlExecutionType.EXECUTE_QUERY),
     REMOVE_VEHICLE(SqlExecutionType.UPDATE_QUERY),
 
+    /* *****************************************
+     * ********** Users Management Queries ****************
+     * *****************************************/
+    GET_ALL_USERS_TABLE(SqlExecutionType.EXECUTE_QUERY),
 
     /* *****************************************
      * ********** Sales and Template Management Queries ****************

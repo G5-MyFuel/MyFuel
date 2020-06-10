@@ -5,6 +5,7 @@ import common.assets.SqlAction;
 import common.assets.SqlQueryType;
 import common.assets.SqlResult;
 import entity.SaleOperation;
+import entity.SaleOperationTemplate;
 import javafx.application.Platform;
 
 import java.sql.Date;
@@ -55,6 +56,12 @@ public class RunSaleOperationController extends BasicController {
                     break;
                 case INSERT_NEW_SALE:
                     break;
+                case GET_ALL_TEMPLATES_TABLE:
+                    ArrayList<String> templateList = new ArrayList<>();
+                    templateList.addAll(this.changeResultToTemplateList(result));
+                    myBoundary.setTemplateList(templateList);
+                    break;
+
                 default:
                     break;
             }
@@ -93,5 +100,18 @@ public class RunSaleOperationController extends BasicController {
        super.sendSqlActionToClient(sqlAction);
     }
 
+    //get template list:
+    public void getTemplateList() {
+        SqlAction sqlAction = new SqlAction(SqlQueryType.GET_ALL_TEMPLATES_TABLE);
+        super.sendSqlActionToClient(sqlAction);
+    }
 
+    private ArrayList<String> changeResultToTemplateList(SqlResult result){
+        ArrayList<String> resultList = new ArrayList<>();
+        for(ArrayList<Object> a: result.getResultData()) {
+            String tempTemplate = new String((String) a.get(1));
+            resultList.add(tempTemplate);
+        }
+        return resultList;
+    }
 }

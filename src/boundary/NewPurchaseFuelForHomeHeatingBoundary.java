@@ -1,12 +1,12 @@
 package boundary;
 
-import client.ClientApp;
 import Contollers.FormValidation;
 import Contollers.NewPurchaseFuelForHomeHeatingController;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
+import entity.User;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -28,9 +28,12 @@ import java.util.ResourceBundle;
  * @author daniel
  * @see NewPurchaseFuelForHomeHeatingController - the form's logic class
  */
-public class NewPurchaseFuelForHomeHeatingControllerBoundary implements Initializable {
+public class NewPurchaseFuelForHomeHeatingBoundary implements Initializable {
+    private NewPurchaseFuelForHomeHeatingController myController = new NewPurchaseFuelForHomeHeatingController(this);
+    private ArrayList<User> allDBUsersArrayList;
 
-    private static NewPurchaseFuelForHomeHeatingControllerBoundary Instance = null;
+
+    private static NewPurchaseFuelForHomeHeatingBoundary Instance = null;
     private NewPurchaseFuelForHomeHeatingController newPurchaseFuelForHomeHeatingLogic;
     private FormValidation formValidation;
 
@@ -184,7 +187,6 @@ public class NewPurchaseFuelForHomeHeatingControllerBoundary implements Initiali
     //
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.newPurchaseFuelForHomeHeatingLogic = NewPurchaseFuelForHomeHeatingController.getInstance();
         this.formValidation = FormValidation.getValidator();
         this.orderDetailsIndicatorTAB.setVisible(false);
         this.shippingIndicatorTAB1.setVisible(false);
@@ -198,9 +200,9 @@ public class NewPurchaseFuelForHomeHeatingControllerBoundary implements Initiali
      * NewPurchaseFuelForHomeHeatingController Instance getter using SingleTone DesignPatterns
      * @return Instance of controller class
      */
-    public NewPurchaseFuelForHomeHeatingControllerBoundary getInstance() {
+    public NewPurchaseFuelForHomeHeatingBoundary getInstance() {
         if (Instance == null)
-            Instance = new NewPurchaseFuelForHomeHeatingControllerBoundary();
+            Instance = new NewPurchaseFuelForHomeHeatingBoundary();
         return Instance;
     }
 
@@ -273,5 +275,13 @@ public class NewPurchaseFuelForHomeHeatingControllerBoundary implements Initiali
         Date date = new Date(Calendar.getInstance().getTime().getTime());
         String initialShippingDatesQUERY = "INSERT INTO `bpsdc8o22sikrlpvvxqm`.`ShippingOptionalDates` (`DayAndDate`, `T1`, `T2`, `T3`, `T4`, `T5`, `T6`) VALUES ('2020-05-31', '1', '1', '1', '1', '1', '1');";
        // ClientApp.chatClient.handleMessageFromClientUI(new Message(OperationType.updateRequirement,initialShippingDatesQUERY));
+    }
+
+    public ArrayList<User> getAllDBUsersArrayList() {
+        return allDBUsersArrayList;
+    }
+
+    public void setAllDBUsersArrayList(ArrayList<User> allDBUsersArrayList) {
+        this.allDBUsersArrayList = allDBUsersArrayList;
     }
 }
