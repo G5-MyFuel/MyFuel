@@ -201,6 +201,13 @@ public class MysqlConnection {
     //"INSERT INTO `DiscountRates`(`Subscription type`, `Current price`) VALUES (?,?);"; //"INSERT INTO `DiscountRates`(`Current price`) VALUES (?);";
                 //"INSERT INTO `DiscountRates`(`Subscription type`, `Current price`) VALUES (?,?);";
         //UPDATE `DiscountRates` SET `Current price`=9 WHERE `Subscription type` LIKE "Full monthly subscription (for single vehicle)"
+
+
+        /* *****************************************
+         * ********** Login Page Queries ****************
+         * *****************************************/
+        sqlArray[SqlQueryType.GET_ALL_USERS_TABLE.getCode()] = "SELECT * FROM Users;";
+        sqlArray[SqlQueryType.UPDATE_USER_FIELD.getCode()] = "UPDATE `Users` SET `loginAttempts` = '5' WHERE `Users`.`userID` = 601983543 AND `Users`.`userType` = 1;";
     }
 
     public Connection getConnection() {
