@@ -187,7 +187,6 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements Initializable {
     //
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-//        this.newPurchaseFuelForHomeHeatingLogic = NewPurchaseFuelForHomeHeatingController.getInstance();
         this.formValidation = FormValidation.getValidator();
         this.orderDetailsIndicatorTAB.setVisible(false);
         this.shippingIndicatorTAB1.setVisible(false);
