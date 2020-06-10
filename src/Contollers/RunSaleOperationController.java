@@ -9,6 +9,7 @@ import entity.SaleOperationTemplate;
 import javafx.application.Platform;
 
 import java.sql.Date;
+import java.sql.Time;
 import java.util.ArrayList;
 
 /**
@@ -21,10 +22,10 @@ public class RunSaleOperationController extends BasicController {
      * The boundary controlled by this controller
      */
     private RunSaleOperationBoundary myBoundary;
-
     private SaleOperation tempSaleOperation;
-
+    private boolean flagSale = true;
     private int SaleCounter;
+    SaleOperation newSale;
     /**
      * Instantiates a new Sale-Operation Management controller.
      *
@@ -34,16 +35,7 @@ public class RunSaleOperationController extends BasicController {
         this.myBoundary = myBoundary;
     }
 
-    /*Logic Variables*/
-    //private static RunSaleOperationController Instance = null;
-
    /*Logic Methods*/
-
-    public void getSalesTable() {
-        SqlAction sqlAction = new SqlAction(SqlQueryType.GET_ALL_SALES_TABLE);
-        super.sendSqlActionToClient(sqlAction);
-    }
-
     @Override
     public void getResultFromClient(SqlResult result) {
 
@@ -61,12 +53,28 @@ public class RunSaleOperationController extends BasicController {
                     templateList.addAll(this.changeResultToTemplateList(result));
                     myBoundary.setTemplateList(templateList);
                     break;
+                case GET_CHOSEN_TEMPLATE_DETAILS:
+                    ArrayList<SaleOperationTemplate> templateChosenList = new ArrayList<>();
+                    templateChosenList.addAll(this.changeResultToChosenTemplateDetails(result));
+                    myBoundary.setChosenTemplateDetails(templateChosenList);
+                    break;
+                case GET_ALL_SALES_TO_CHACK_SALE:
+                    this.changeResultToSaleAndCheck(result);
+                    break;
 
                 default:
                     break;
             }
         });
     }
+
+
+
+    public void getSalesTable() {
+        SqlAction sqlAction = new SqlAction(SqlQueryType.GET_ALL_SALES_TABLE);
+        super.sendSqlActionToClient(sqlAction);
+    }
+
     /**
      * This method create array list of templates from the data base result.
      *
@@ -114,4 +122,61 @@ public class RunSaleOperationController extends BasicController {
         }
         return resultList;
     }
+
+    //get choosen template details:
+    public void getChoosenTemplateDetails() {
+        SqlAction sqlAction = new SqlAction(SqlQueryType.GET_CHOSEN_TEMPLATE_DETAILS);
+        super.sendSqlActionToClient(sqlAction);
+    }
+
+    private ArrayList<SaleOperationTemplate> changeResultToChosenTemplateDetails(SqlResult result){
+        String myCchosenTemplate = myBoundary.getChoosenTemplate();
+        ArrayList<SaleOperationTemplate> resultList = new ArrayList<>();
+        for(ArrayList<Object> a: result.getResultData()) {
+            if (myCchosenTemplate.equals((String)a.get(1))) {
+                SaleOperationTemplate cos = new SaleOperationTemplate((String) a.get(0),
+                        (String)a.get(1),
+                        (String) a.get(2),
+                        (String) a.get(3),
+                        (String) a.get(4),
+                        null,null);
+                cos.setBeginHour(Time.valueOf((String) a.get(5)));
+                cos.setEndHour(Time.valueOf((String) a.get(6)));
+                resultList.add(cos);
+            }//end if
+        }//end for
+        return resultList;
+    }
+
+    //CHACK IF SALE CAN RUN: according to its date and day
+    public void chackIfSaleCanRun(SaleOperation newSale) {
+        this.newSale = newSale;
+        //get all sales from db:
+        SqlAction sqlAction = new SqlAction(SqlQueryType.GET_ALL_SALES_TO_CHACK_SALE);
+        super.sendSqlActionToClient(sqlAction);
+    }
+
+    private void changeResultToSaleAndCheck(SqlResult result){
+
+        for(ArrayList<Object> a: result.getResultData()) {
+            //if the dates are overlap - flag=false.
+           System.out.println(Date.valueOf((String) a.get(2)));
+            System.out.println(Date.valueOf((String) a.get(3)));
+            if ( (( newSale.getBeginDate().after(Date.valueOf((String) a.get(2)))) ==true &&
+                    ( newSale.getBeginDate().before(Date.valueOf((String) a.get(3)))) ==true ) ||
+                    (( newSale.getEndDate().after(Date.valueOf((String) a.get(2)))) ==true &&
+                            ( newSale.getEndDate().before(Date.valueOf((String) a.get(3)))) ==true ))
+            {
+               flagSale = false;
+                break;
+            }
+            System.out.println(flagSale + "WHAT IS GOING ON? ");
+            System.out.println(flagSale);
+
+        }
+    }
+
+    public boolean getFlagSale() { return flagSale;   }
+
+
 }

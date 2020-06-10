@@ -24,10 +24,13 @@ public class GeneratingReportsStationManagerController extends BasicController {
         this.myBoundary = myBoundary;
     }
 
-    public void QuarterlyReportData(String ReportType, String ReportYear, String Quarter) {
+    public void QuarterlyReportData(String ReportType, String startDate, String endDate) {
         switch (ReportType) {
             case "Quarterly revenue report":
-                SqlAction sqlAction = new SqlAction(SqlQueryType.GET_Quarterly_Revenue);
+                ArrayList<Object> varArray = new ArrayList<>();
+                varArray.add(startDate);
+                varArray.add(endDate);
+                SqlAction sqlAction = new SqlAction(SqlQueryType.GET_Quarterly_Revenue, varArray);
                 super.sendSqlActionToClient(sqlAction);
                 break;
             case "Purchases report":

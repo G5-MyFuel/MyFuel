@@ -190,6 +190,8 @@ public class MysqlConnection {
         sqlArray[SqlQueryType.GET_ALL_SALES_TABLE.getCode()] = "SELECT * FROM `SaleOperation`";
         sqlArray[SqlQueryType.INSERT_NEW_SALE.getCode()] =
                 "INSERT INTO  `SaleOperation`(`SaleOperationID`, `TemplateName`, `BeginDate`, `EndDate`) VALUES (?,?,?,?);";
+        sqlArray[SqlQueryType.GET_CHOSEN_TEMPLATE_DETAILS.getCode()] = "SELECT * FROM `CampaignTemplates`";
+        sqlArray[SqlQueryType.GET_ALL_SALES_TO_CHACK_SALE.getCode()] = "SELECT * FROM `SaleOperation`";
 
 
         /* *****************************************
@@ -203,7 +205,7 @@ public class MysqlConnection {
         /* *****************************************
          * ********** Station Manager Reports Queries ****************
          * *****************************************/
-        sqlArray[SqlQueryType.GET_Quarterly_Revenue.getCode()] = "SELECT * FROM `Purchase` WHERE `purchaseDate` BETWEEN '2020-01-01' AND '2020-03-31'";
+        sqlArray[SqlQueryType.GET_Quarterly_Revenue.getCode()] = "SELECT * FROM `Purchase` WHERE `purchaseDate` BETWEEN ? AND ?";
 
 
         /* *****************************************
