@@ -54,6 +54,7 @@ public enum SqlQueryType {
     GET_ALL_SALES_TABLE(SqlExecutionType.EXECUTE_QUERY),
     INSERT_NEW_SALE(SqlExecutionType.UPDATE_QUERY),
     GET_CHOSEN_TEMPLATE_DETAILS(SqlExecutionType.EXECUTE_QUERY),
+    GET_ALL_SALES_TO_CHACK_SALE(SqlExecutionType.EXECUTE_QUERY),
 
     /* *****************************************
      * ********** Costumer Registration Queries ****************

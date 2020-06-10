@@ -14,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
@@ -28,7 +29,9 @@ import java.util.ResourceBundle;
  */
 
 public class RunSaleOperationBoundary implements Initializable {
-    /** The supervisor boundary controller. */
+    /**
+     * The supervisor boundary controller.
+     */
     private RunSaleOperationController myController = new RunSaleOperationController(this);
 
     private FormValidation formValidation;
@@ -109,12 +112,28 @@ public class RunSaleOperationBoundary implements Initializable {
     @FXML
     private HBox templateDetaildVBOX;
 
+    @FXML
+    private Label ERRORalreadyPassedDate;
+
+    @FXML
+    private Label ERRORendBeforStart;
+
+    @FXML
+    private Label ERRORoverlap;
+
+    @FXML
+    private Label ERRORoverlap1;
+
+
     String choosenTemplate = new String();
 
     @Override
-       public void initialize(URL location, ResourceBundle resources) {
+    public void initialize(URL location, ResourceBundle resources) {
         this.detailsPane.setVisible(false);
-        //ChooseTemplateCombo.setItems(TemplateName);///to do from db
+        ERRORalreadyPassedDate.setVisible(false);
+        ERRORendBeforStart.setVisible(false);
+        ERRORoverlap.setVisible(false);
+        ERRORoverlap1.setVisible(false);
 
         this.formValidation = FormValidation.getValidator();
         FormValidation();   // check all required fields are'nt empty
@@ -125,17 +144,17 @@ public class RunSaleOperationBoundary implements Initializable {
 
 
     /**
-     this method will set the templates table when we will initialize the page.
+     * this method will set the templates table when we will initialize the page.
      */
-     public void setSalesTable(ArrayList<SaleOperation> cosArray) {
-         saleIDColumn.setCellValueFactory(new PropertyValueFactory<>("SaleOperationID"));
-         TemplateNameColumn.setCellValueFactory(new PropertyValueFactory<>("TemplateName"));
-         StartDateColumn.setCellValueFactory(new PropertyValueFactory<>("BeginDate"));
-         EndDateColumn.setCellValueFactory(new PropertyValueFactory<>("EndDate"));
+    public void setSalesTable(ArrayList<SaleOperation> cosArray) {
+        saleIDColumn.setCellValueFactory(new PropertyValueFactory<>("SaleOperationID"));
+        TemplateNameColumn.setCellValueFactory(new PropertyValueFactory<>("TemplateName"));
+        StartDateColumn.setCellValueFactory(new PropertyValueFactory<>("BeginDate"));
+        EndDateColumn.setCellValueFactory(new PropertyValueFactory<>("EndDate"));
 
-         ObservableList<SaleOperation> data = FXCollections.observableArrayList(cosArray);
-         saleOperationTableView.setItems(data);
-     }
+        ObservableList<SaleOperation> data = FXCollections.observableArrayList(cosArray);
+        saleOperationTableView.setItems(data);
+    }
 
 
     @FXML
@@ -146,28 +165,39 @@ public class RunSaleOperationBoundary implements Initializable {
         btnADDnewSaleOperation1.setVisible(false);
 
         detailsPane.setVisible(true);
-     }
+    }
 
     @FXML
     void handleBtnRunSale(ActionEvent event) {
-        SaleOperation newSale = new SaleOperation(String.valueOf(myController.getSaleCounter()+1),
-                (String)ChooseTemplateCombo.getValue(),
-                Date.valueOf(startDatePicker.getValue()),
+        SaleOperation newSale = new SaleOperation(String.valueOf(myController.getSaleCounter() + 1), (String) ChooseTemplateCombo.getValue(), Date.valueOf(startDatePicker.getValue()),
                 Date.valueOf(endDatePicker.getValue()));
-        myController.setSaleOperationInDB(newSale);
-        myController.getSalesTable(); //start the process that will ask server to execute quarry and get the table details//refresh
-        detailsPane.setVisible(false);
 
-        //clear all fileds:
-        ChooseTemplateCombo.getSelectionModel().clearSelection();
-        startDatePicker.getEditor().clear();
-        startDatePicker.getEditor().clear();
-        btnADDnewSaleOperation1.setVisible(true);
+        // chack if sale can run is this dates:
+        myController.chackIfSaleCanRun(newSale);
+        boolean flagSale = myController.getFlagSale();
+        if (flagSale==false) {
+            ERRORoverlap.setVisible(true);
+            ERRORoverlap1.setVisible(true);
+            startDatePicker.getEditor().clear();
+            startDatePicker.getEditor().clear();
+        }
+        else {
+            myController.setSaleOperationInDB(newSale);  //insert new sale to db
+            myController.getSalesTable(); //refresh
+            detailsPane.setVisible(false);
+            ERRORoverlap.setVisible(false);
+            ERRORoverlap1.setVisible(false);
+            //clear all fileds:
+            ChooseTemplateCombo.getSelectionModel().clearSelection();
+            startDatePicker.getEditor().clear();
+            startDatePicker.getEditor().clear();
+            btnADDnewSaleOperation1.setVisible(true);
+        }
 
     }
 
     /**
-     this method will set the templates list to the combo choose
+     * this method will set the templates list to the combo choose
      */
     public void setTemplateList(ArrayList<String> cosArray) {
         ObservableList<String> TemplateName = FXCollections.observableArrayList(cosArray);
@@ -189,12 +219,12 @@ public class RunSaleOperationBoundary implements Initializable {
         return choosenTemplate;
     }
 
-    public void setChosenTemplateDetails(ArrayList<SaleOperationTemplate> cosArray){
+    public void setChosenTemplateDetails(ArrayList<SaleOperationTemplate> cosArray) {
         SaleOperationTemplate my = new SaleOperationTemplate();
         my = cosArray.get(0);
         idFromDB.setText(my.getTemplateID());
         typeFromDB.setText(my.getFuelType());
-        discountFromDB.setText(String.valueOf(my.getDiscountPercentages())+ "%");
+        discountFromDB.setText(String.valueOf(my.getDiscountPercentages()) + "%");
         dayFromDB.setText(my.getDay());
         beginHourFromDB.setText(String.valueOf(my.getBeginHour()));
         endHourFromDB.setText(String.valueOf(my.getEndHour()));
@@ -202,21 +232,43 @@ public class RunSaleOperationBoundary implements Initializable {
     }
 
 
-
-
-    @FXML//?????????
-    public void handleBtnRunSaleOperation(javafx.event.ActionEvent actionEvent) {
-
-    }
-
     @FXML
     void handleClicks(ActionEvent event) {
 
     }
+
+    @FXML
+    void handleStartDate(ActionEvent event) {
+        //cant choose date before today:
+        if (startDatePicker.getValue().isBefore(java.time.LocalDate.now()) == true) {
+            ERRORalreadyPassedDate.setVisible(true);
+        }
+    }
+
+    @FXML
+    void handleStartDateNew(MouseEvent event) {
+        ERRORalreadyPassedDate.setVisible(false);
+
+    }
+
+    @FXML
+    void handleEndDate(ActionEvent event) {
+        //cant choose end date earlier then start date
+        if (endDatePicker.getValue().isBefore(startDatePicker.getValue()) == true) {
+            ERRORendBeforStart.setVisible(true);
+        }
+    }
+
+    @FXML
+    void handleEndDateNew(MouseEvent event) {
+        ERRORendBeforStart.setVisible(false);
+    }
+
 
     private void FormValidation() {
         /*  Template Name validation */
         formValidation.isEmptyDateField(startDatePicker, "Start Date");
         formValidation.isEmptyDateField(endDatePicker, "End Date");
     }
+
 }
