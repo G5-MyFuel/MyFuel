@@ -261,6 +261,7 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
             myController.addVehicleToDB(OwnerIDtxt1.getText(), VehicleIDtxt.getText(), GasTypeChoiseBox.getValue());
             Vehicle insertItem = new Vehicle(OwnerIDtxt1.getText(), VehicleIDtxt.getText(), GasTypeChoiseBox.getValue());
             VehicleTable.getItems().add(insertItem);
+            VehicleTable.refresh();
         }
     }
 
