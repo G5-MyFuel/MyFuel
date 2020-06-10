@@ -15,7 +15,7 @@
    <children>
       <Pane fx:id="CreditCardWindow" layoutX="70.0" layoutY="-17.0" prefHeight="417.0" prefWidth="501.0" style="-fx-border-color: #2D4578; -fx-border-width: 3;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label layoutX="20.0" layoutY="16.0" text="Payment" textFill="#2d4578">
+            <Label layoutX="20.0" layoutY="16.0" text="Credit-Card" textFill="#2d4578">
                <font>
                   <Font name="System Bold Italic" size="34.0" />
                </font>
@@ -30,7 +30,7 @@
                   <Insets bottom="10.0" top="10.0" />
                </padding>
             </JFXTextField>
-            <JFXTextField fx:id="experationDatetxt" focusColor="#00add8" labelFloat="true" layoutX="38.0" layoutY="206.0" prefHeight="41.0" prefWidth="105.0" promptText="Expiration date" text="          /" unFocusColor="#868282">
+            <JFXTextField fx:id="experationDate" accessibleRole="DATE_PICKER" focusColor="#00add8" labelFloat="true" layoutX="38.0" layoutY="206.0" prefHeight="41.0" prefWidth="95.0" promptText="Expiration date" text="          /" unFocusColor="#868282">
                <padding>
                   <Insets bottom="10.0" top="10.0" />
                </padding>
@@ -40,22 +40,17 @@
                   <Insets bottom="10.0" top="10.0" />
                </padding>
             </JFXTextField>
-            <ImageView layoutX="68.0" layoutY="275.0">
-               <image>
-                  <Image url="@../media/CostumerRegisterationMedia/help_16px.png" />
-               </image>
-            </ImageView>
             <ImageView fitHeight="70.0" fitWidth="136.0" layoutX="162.0" layoutY="248.0" mouseTransparent="true">
                <image>
                   <Image url="@../media/credit-card-cvv-code.png" />
                </image>
             </ImageView>
-            <Button fx:id="SearchButton1121" layoutX="67.0" layoutY="355.0" mnemonicParsing="false" onMouseClicked="#addCardOnClick" prefHeight="37.0" prefWidth="226.0" style="-fx-background-color: #2D4578; -fx-background-radius: 50;" stylesheets="@style.css" text="Click To Add CreditCard" textAlignment="RIGHT" textFill="WHITE">
+            <Button fx:id="addCardBtn" layoutX="67.0" layoutY="355.0" mnemonicParsing="false" onMouseClicked="#addCardOnClick" prefHeight="37.0" prefWidth="226.0" style="-fx-background-color: #2D4578; -fx-background-radius: 50;" stylesheets="@style.css" text="Click To Add CreditCard" textAlignment="RIGHT" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
                <graphic>
-                  <ImageView fx:id="addVehicleButton" accessibleRole="BUTTON" fitHeight="33.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView accessibleRole="BUTTON" fitHeight="33.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../media/CostumerRegisterationMedia/add_40px.png" />
                      </image>

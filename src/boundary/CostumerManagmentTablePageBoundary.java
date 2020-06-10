@@ -1,6 +1,7 @@
 package boundary;
 
 import Contollers.CostumerManagementController;
+import Contollers.PagingController;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import common.assets.ProjectPages;
@@ -9,6 +10,8 @@ import entity.Costumer;
 import entity.EditingCell;
 import entity.Vehicle;
 import javafx.application.Platform;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,6 +21,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.ComboBoxTableCell;
+import javafx.scene.control.cell.ComboBoxTreeTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -119,6 +124,15 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
     @FXML
     private JFXTextField VehicleSearchCosIDtxt;
 
+    @FXML
+    private TreeTableColumn<?, ?> CostumerTypeTreeCol;
+
+    @FXML
+    private TreeTableColumn<?, ?> ServicePlanTreeCol;
+
+    @FXML
+    private TreeTableColumn<?, ?> PurchasePlanTreeCol;
+
 
     private JFXComboBox<String> CostumertypeChoiceBox = new JFXComboBox<>();
 
@@ -127,11 +141,12 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
 
     private ObservableList<String> CostumerType = FXCollections.observableArrayList("Private", "Company");
     private ObservableList<String> ServicePlanType = FXCollections.observableArrayList("Exclusive", "Multiple Stations");
-
+    private ObservableList<String> GasType = FXCollections.observableArrayList("Gasoline-95", "Diesel", "Scooter Fuel");
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         VehicleInformationPane.setVisible(false);
+        GasTypeChoiseBox.setItems(GasType);
         myController.getCostumerTable(); //start the process that will ask server to execute quarry and get the table details
         myController.getVehicleTable();
     }
@@ -142,30 +157,8 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
      */
     public void setCostumerTable(ArrayList<Costumer> cosArray) {
         costumers.addAll(cosArray);
-        //Create a customer cell factory so that cells can support editing.
-        Callback<TableColumn, TableCell> cellFactory = new Callback<TableColumn, TableCell>() {
-            @Override
-            public TableCell call(TableColumn p) {
-                return new EditingCell();
-            }
-        };
 
-        CostumerIDCol.setCellValueFactory(new PropertyValueFactory<Costumer, String>("ID"));
-        CostumerIDCol.setEditable(false);
-        firstNameCol.setCellValueFactory(new PropertyValueFactory<Costumer, String>("Fname"));
-        firstNameCol.setCellFactory(cellFactory);
-        LastNameCol.setCellValueFactory(new PropertyValueFactory<Costumer, String>("Lname"));
-        LastNameCol.setCellFactory(cellFactory);
-        EmailAdressCol.setCellValueFactory(new PropertyValueFactory<Costumer, String>("EmailAdress"));
-        EmailAdressCol.setCellFactory(cellFactory);
-        CostumerTypeCol.setCellValueFactory(new PropertyValueFactory<Costumer, String>("CostumerType"));
-        CostumerTypeCol.setCellFactory(cellFactory);
-        ServicePlanCol.setCellValueFactory(new PropertyValueFactory<Costumer, String>("servicePlan"));
-        ServicePlanCol.setCellFactory(cellFactory);
-        PurchasePlanCol.setCellValueFactory(new PropertyValueFactory<Costumer, String>("purchasePlan"));
-        PurchasePlanCol.setCellFactory(cellFactory);
-
-
+        setColomsCells();
         ObservableList<Costumer> data = FXCollections.observableArrayList(cosArray);
         CosManageTbale.setItems(data);
         CosManageTbale.setEditable(true);
@@ -226,6 +219,71 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
         });
     }
 
+    private void setColomsCells() {
+
+        //Create a customer cell factory so that cells can support editing.
+        Callback<TableColumn, TableCell> cellFactory = new Callback<TableColumn, TableCell>() {
+            @Override
+            public TableCell call(TableColumn p) {
+                return new EditingCell();
+            }
+        };
+
+
+        PurchasePlanCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Costumer, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Costumer, String> param) {
+                Costumer treeItem = param.getValue();
+                Costumer costumer = treeItem;
+
+                String temp = costumer.getPurchasePlan();
+                return new SimpleObjectProperty<String>(temp);
+            }
+        });
+
+        ServicePlanCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Costumer, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Costumer, String> param) {
+                Costumer treeItem = param.getValue();
+                Costumer costumer = treeItem;
+
+                String temp = costumer.getServicePlan();
+                return new SimpleObjectProperty<String>(temp);
+            }
+        });
+        CostumerTypeCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Costumer, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Costumer, String> param) {
+                Costumer treeItem = param.getValue();
+                Costumer costumer = treeItem;
+
+                String temp = costumer.getCostumerType();
+                return new SimpleObjectProperty<String>(temp);
+            }
+        });
+
+
+        CostumerIDCol.setCellValueFactory(new PropertyValueFactory<Costumer, String>("ID"));
+        CostumerIDCol.setEditable(false);
+        firstNameCol.setCellValueFactory(new PropertyValueFactory<Costumer, String>("Fname"));
+        firstNameCol.setCellFactory(cellFactory);
+        LastNameCol.setCellValueFactory(new PropertyValueFactory<Costumer, String>("Lname"));
+        LastNameCol.setCellFactory(cellFactory);
+        EmailAdressCol.setCellValueFactory(new PropertyValueFactory<Costumer, String>("EmailAdress"));
+        EmailAdressCol.setCellFactory(cellFactory);
+
+        CostumerTypeCol.setCellValueFactory(new PropertyValueFactory<Costumer, String>("CostumerType"));
+        CostumerTypeCol.setCellFactory(ComboBoxTableCell.forTableColumn(CostumerType));
+
+        ServicePlanCol.setCellValueFactory(new PropertyValueFactory<Costumer, String>("servicePlan"));
+        ServicePlanCol.setCellFactory(ComboBoxTableCell.forTableColumn(ServicePlanType));
+
+        PurchasePlanCol.setCellValueFactory(new PropertyValueFactory<Costumer, String>("purchasePlan"));
+        ObservableList<String> purchasePlan = FXCollections.observableArrayList("true", "false");
+        PurchasePlanCol.setCellFactory(ComboBoxTableCell.forTableColumn(purchasePlan));
+
+
+    }
 
     public void setVehicleTable(ArrayList<Vehicle> vArr) {
         VehicleIDCol.setCellValueFactory(new PropertyValueFactory<>("VehicleID"));
@@ -269,12 +327,13 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
             Vehicle insertItem = new Vehicle(OwnerIDtxt1.getText(), VehicleIDtxt.getText(), GasTypeChoiseBox.getValue());
             VehicleTable.getItems().add(insertItem);
             VehicleTable.refresh();
+            OwnerIDtxt1.clear();
+            VehicleIDtxt.clear();
+            VehicleInformationPane.setVisible(false);
         }
+
     }
 
-    @FXML
-    void onEditClick(ActionEvent event) {
-    }
 
     @FXML
     void removeSelectedCostumer() {
@@ -319,42 +378,44 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
     @FXML
     void removeSelectedVehicle(MouseEvent event) {
 
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.getButtonTypes().remove(ButtonType.OK);
-        alert.getButtonTypes().add(ButtonType.CANCEL);
-        alert.getButtonTypes().add(ButtonType.YES);
-        alert.setTitle("Remove Vehicle");
-        alert.setContentText(String.format("Are you sure you want to remove this Vehicle?\nonce you click YES vehicle will be removed permanently!"));
-        Optional<ButtonType> res = alert.showAndWait();
-
-        if (res.get().getText().equals("Yes")) {
-            myController.removeVehicle(VehicleTable.getSelectionModel().getSelectedItem().getVehicleID());
-            Vehicle selectedItem = VehicleTable.getSelectionModel().getSelectedItem();
-            VehicleTable.getItems().remove(selectedItem);
+        if (!VehicleTable.getSelectionModel().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.getButtonTypes().remove(ButtonType.OK);
+            alert.getButtonTypes().add(ButtonType.CANCEL);
+            alert.getButtonTypes().add(ButtonType.YES);
+            alert.setTitle("Remove Vehicle");
+            alert.setContentText(String.format("Are you sure you want to remove this Vehicle?\nonce you click YES vehicle will be removed permanently!"));
+            Optional<ButtonType> res = alert.showAndWait();
+            if (res.get().getText().equals("Yes")) {
+                myController.removeVehicle(VehicleTable.getSelectionModel().getSelectedItem().getVehicleID());
+                Vehicle selectedItem = VehicleTable.getSelectionModel().getSelectedItem();
+                VehicleTable.getItems().remove(selectedItem);
+            }
         }
-
     }
 
     @FXML
     void setVehicleInfoVisible(MouseEvent event) {
-        VehicleInformationPane.setVisible(true);
+        if (!(VehicleSearchCosIDtxt.getText().isEmpty())) {
+            OwnerIDtxt1.setText(VehicleSearchCosIDtxt.getText());
+        }
+        if (VehicleInformationPane.isVisible())
+            VehicleInformationPane.setVisible(false);
+        else
+            VehicleInformationPane.setVisible(true);
     }
 
     @FXML
     void showCreditCard(MouseEvent event) {
-//        Pane root = null;
-//        final Stage dialog = new Stage();
-//        FXMLLoader loader = new FXMLLoader();
-//        dialog.initModality(Modality.APPLICATION_MODAL);
-//        loader.setLocation(getClass().getResource(ProjectPages.CREDIT_CARD_DIALOG_PAGE.getPath()));
-//        root = loader.load();
-//        dialog.initOwner(scene);
-//
-//        Scene dialogScene = new Scene(dialogVbox, 300, 200);
-//        dialog.setScene(dialogScene);
-//        dialog.show();
-
-
+        PagingController pc = new PagingController();
+        if (CosManageTbale.getSelectionModel().isEmpty()) {
+            ErrorAlert.setTitle("Internal Error");
+            ErrorAlert.setHeaderText("Please Select Costumer.");
+            ErrorAlert.showAndWait();
+        } else {
+            Costumer cos = CosManageTbale.getSelectionModel().getSelectedItem();
+            pc.loadAdditionalStage(ProjectPages.CREDIT_CARD_DIALOG_PAGE.getPath(), cos);
+        }
     }
 
 

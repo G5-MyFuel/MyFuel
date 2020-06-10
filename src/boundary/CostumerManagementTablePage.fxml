@@ -165,7 +165,7 @@
                                                 <Cursor fx:constant="HAND" />
                                              </cursor>
                                           </Button>
-                                          <TableView fx:id="CosManageTbale" layoutX="51.0" layoutY="214.0" prefHeight="261.0" prefWidth="846.0" style="-fx-background-color: #fcf8e8; -fx-border-width: 4; -fx-border-color: #2D4578;">
+                                          <TableView fx:id="CosManageTbale" layoutX="51.0" layoutY="214.0" prefHeight="261.0" prefWidth="854.0" style="-fx-background-color: #fcf8e8; -fx-border-width: 4; -fx-border-color: #2D4578;">
                                             <columns>
                                               <TableColumn fx:id="CostumerIDCol" maxWidth="90.0" prefWidth="90.0" text="Costumer ID" />
                                               <TableColumn fx:id="firstNameCol" prefWidth="81.0" text="First Name" />
@@ -179,7 +179,6 @@
                                                 <ContextMenu>
                                                    <items>
                                                       <MenuItem mnemonicParsing="false" text="Refresh" />
-                                                      <MenuItem fx:id="EditMenuItem" mnemonicParsing="false" onAction="#onEditClick" text="Edit" />
                                                       <MenuItem fx:id="DeleteBtn" mnemonicParsing="false" onAction="#removeSelectedCostumer" text="Delete" />
                                                    </items>
                                                    <styleClass>
@@ -190,12 +189,7 @@
                                              </contextMenu>
                                           </TableView>
                                           <Label layoutX="51.0" layoutY="173.0" text="*Double Click To Edit" />
-                                          <Button layoutX="51.0" layoutY="487.0" mnemonicParsing="false" onMouseClicked="#removeSelectedCostumer" prefHeight="33.0" prefWidth="293.0" style="-fx-background-color: #2D4578; -fx-background-radius: 50;" stylesheets="@style.css" text="Click To Remove Selected Cotumer" textFill="WHITE">
-                                             <cursor>
-                                                <Cursor fx:constant="HAND" />
-                                             </cursor>
-                                          </Button>
-                                          <Button fx:id="SearchButton111" layoutX="604.0" layoutY="487.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="293.0" style="-fx-background-color: #2D4578; -fx-background-radius: 50;" stylesheets="@style.css" text="Click To View Selected Costumer Credit Card Details" textFill="WHITE">
+                                          <Button fx:id="SearchButton111" layoutX="51.0" layoutY="500.0" mnemonicParsing="false" onMouseClicked="#showCreditCard" prefHeight="33.0" prefWidth="293.0" style="-fx-background-color: #2D4578; -fx-background-radius: 50;" stylesheets="@style.css" text="Click To View Selected Costumer Credit Card Details" textFill="WHITE">
                                              <cursor>
                                                 <Cursor fx:constant="HAND" />
                                              </cursor>
