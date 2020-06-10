@@ -10,6 +10,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
+
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -36,19 +42,31 @@ public class GeneratingReportsStationManagerBoundary implements Initializable {
     private Button btnSignout;
 
     @FXML
-    private Button btnGenerateReport;
+    private JFXButton btnQuarterlyRevenueReport;
 
     @FXML
-    private JFXComboBox<String> ChooseReportToGenerateCombo;
+    private JFXButton btnPurchasesReport;
+
+    @FXML
+    private JFXButton btnQuantityItemsInStockReport;
+
+    @FXML
+    private JFXComboBox<String> ChooseReportYearCombo;
+
+    @FXML
+    private JFXComboBox<String> ChooseReportQuarterCombo;
 
     private final ObservableList<String> ReportsType = FXCollections.observableArrayList("Quarterly revenue report",
             "Purchases report", "Quantity of items in stock report");
+    private final ObservableList<String> YearList = FXCollections.observableArrayList("2020","2019","2018","2017","2016","2015",
+            "2014","2013","2012","2011","2010");
+    private final ObservableList<String> quarterList = FXCollections.observableArrayList("First","Second","Third","Fourth");
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.formValidation = FormValidation.getValidator();
-        ChooseReportToGenerateCombo.setItems(ReportsType);
-        btnGenerateReport.setDisable(true);
+        ChooseReportYearCombo.setVisible(false);
+        ChooseReportQuarterCombo.setVisible(false);
 
         /*  set all fields validators */
         formValidation();
@@ -68,16 +86,16 @@ public class GeneratingReportsStationManagerBoundary implements Initializable {
     }
 
     @FXML
-    void handleChooseReportToGenerate(ActionEvent event) {
+    void handleChooseReportQuarter(ActionEvent event) {
 
-        /*
-        myController.getReportTable(ChooseSubscriptionTypeCombo.getValue()); //start the process that will ask server to execute quarry and get the table details
-        ShowNewRateTXT.clear();
-        ShowCurrentRateTXT.setVisible(true);
-        ShowCurrentRateTXT.setEditable(false);
-        ShowNewRateTXT.setVisible(true);
-        btnSetNewRate.setVisible(true);
-         */
+    }
+
+    @FXML
+    void handleChooseReportYear(ActionEvent event) {
+
+        ChooseReportQuarterCombo.setVisible(true);
+        ChooseReportQuarterCombo.setItems(quarterList);
+        myController.QuarterlyReportData("Quarterly revenue report",ChooseReportQuarterCombo.getValue(), ChooseReportQuarterCombo.getValue()); //start the process that will ask server to execute quarry and get the table details
 
     }
 
@@ -87,8 +105,20 @@ public class GeneratingReportsStationManagerBoundary implements Initializable {
     }
 
     @FXML
-    void handleGenerateReport(ActionEvent event) {
+    void handlePurchasesReport(MouseEvent event) {
 
     }
 
+    @FXML
+    void handleQuantityItemsInStockReport(MouseEvent event) {
+
+    }
+
+    @FXML
+    void handleQuarterlyRevenueReport(MouseEvent event) {
+
+        ChooseReportYearCombo.setVisible(true);
+        ChooseReportYearCombo.setItems(YearList);
+
+    }
 }

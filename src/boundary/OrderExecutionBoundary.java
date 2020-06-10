@@ -113,6 +113,14 @@ public class OrderExecutionBoundary implements Initializable {
 
     }
 
+    @FXML
+    void ClickDoneBtn(MouseEvent event) {
+        if(confirmationCheckBox.isSelected())
+        {
+
+        }
+    }
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -126,7 +134,6 @@ public class OrderExecutionBoundary implements Initializable {
         System.out.println("Order Execution Page Is Open");
 
     }
-
 
     public void setOrderFuelFromSupplierTableView( ArrayList<OrderFuelFromSupplier> OrderArray) {
         orderCol.setCellValueFactory(new PropertyValueFactory<>("OrderNumber"));
@@ -172,8 +179,4 @@ public class OrderExecutionBoundary implements Initializable {
         });
     }
 
-    public void handleDoneOrders(){
-        /*  If order is already Done */
-
-    }
 }
