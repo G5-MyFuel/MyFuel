@@ -21,6 +21,11 @@ public enum SqlQueryType {
     GET_RegularSubscriptionMultiVehicle_PRICE(SqlExecutionType.EXECUTE_QUERY),
     INSERT_NEW_PRICE(SqlExecutionType.UPDATE_QUERY),
 
+    /* *****************************************
+     * ********** Station Manager Reports Queries ****************
+     * *****************************************/
+    GET_Quarterly_Revenue(SqlExecutionType.EXECUTE_QUERY),
+
 
     /* *****************************************
      * ********** Costumer Management Queries ****************

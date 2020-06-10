@@ -14,8 +14,10 @@ import javafx.scene.input.MouseEvent;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -56,6 +58,12 @@ public class GeneratingReportsStationManagerBoundary implements Initializable {
     @FXML
     private JFXComboBox<String> ChooseReportQuarterCombo;
 
+    @FXML
+    private Label TotalRevenueLabel;
+
+    @FXML
+    private JFXTextField ShowTotalRevenueTXT;
+
     private final ObservableList<String> ReportsType = FXCollections.observableArrayList("Quarterly revenue report",
             "Purchases report", "Quantity of items in stock report");
     private final ObservableList<String> YearList = FXCollections.observableArrayList("2020","2019","2018","2017","2016","2015",
@@ -67,6 +75,8 @@ public class GeneratingReportsStationManagerBoundary implements Initializable {
         this.formValidation = FormValidation.getValidator();
         ChooseReportYearCombo.setVisible(false);
         ChooseReportQuarterCombo.setVisible(false);
+        TotalRevenueLabel.setVisible(false);
+        ShowTotalRevenueTXT.setVisible(false);
 
         /*  set all fields validators */
         formValidation();
@@ -86,16 +96,28 @@ public class GeneratingReportsStationManagerBoundary implements Initializable {
     }
 
     @FXML
-    void handleChooseReportQuarter(ActionEvent event) {
-
-    }
-
-    @FXML
     void handleChooseReportYear(ActionEvent event) {
 
         ChooseReportQuarterCombo.setVisible(true);
         ChooseReportQuarterCombo.setItems(quarterList);
+    }
+
+    @FXML
+    void handleChooseReportQuarter(ActionEvent event) {
+
         myController.QuarterlyReportData("Quarterly revenue report",ChooseReportQuarterCombo.getValue(), ChooseReportQuarterCombo.getValue()); //start the process that will ask server to execute quarry and get the table details
+
+    }
+
+    public void setData(String revenue) {
+
+        TotalRevenueLabel.setVisible(true);
+        ShowTotalRevenueTXT.setVisible(true);
+        ShowTotalRevenueTXT.setText(revenue);
+        /*if(revenue.isEmpty())
+            ShowCurrentRateTXT.setText(ShowNewRateTXT.getText());
+        else
+            ShowCurrentRateTXT.setText(revenue);*/
 
     }
 
@@ -119,6 +141,11 @@ public class GeneratingReportsStationManagerBoundary implements Initializable {
 
         ChooseReportYearCombo.setVisible(true);
         ChooseReportYearCombo.setItems(YearList);
+
+    }
+
+    @FXML
+    void handleTotalRevenue(ActionEvent event) {
 
     }
 }
