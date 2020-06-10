@@ -61,6 +61,14 @@ public class CostumerManagementController extends BasicController {
         super.sendSqlActionToClient(sqlAction);
     }
 
+    public void removeCostumer(String CostumerID){
+        ArrayList<Object> varArray = new ArrayList<>();
+        varArray.add(CostumerID);
+        System.out.println(CostumerID);
+        SqlAction sqlAction = new SqlAction(SqlQueryType.REMOVE_COSTUMER, varArray);
+        super.sendSqlActionToClient(sqlAction);
+    }
+
     public void addVehicleToDB(String OwnerID,String VehicleID,String fuelType){
         ArrayList<Object> varArray = new ArrayList<>();
         varArray.add(VehicleID);

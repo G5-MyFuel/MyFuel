@@ -3,20 +3,27 @@ package boundary;
 import Contollers.CostumerManagementController;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import common.assets.ProjectPages;
 import common.assets.SqlQueryType;
 import entity.Costumer;
 import entity.EditingCell;
 import entity.Vehicle;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Callback;
 import javafx.scene.control.TableCell;
@@ -262,13 +269,32 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
             Vehicle insertItem = new Vehicle(OwnerIDtxt1.getText(), VehicleIDtxt.getText(), GasTypeChoiseBox.getValue());
             VehicleTable.getItems().add(insertItem);
             VehicleTable.refresh();
-            VehicleTable.refresh();
-            VehicleTable.refresh();
         }
     }
 
     @FXML
     void onEditClick(ActionEvent event) {
+    }
+
+    @FXML
+    void removeSelectedCostumer() {
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.getButtonTypes().remove(ButtonType.OK);
+        alert.getButtonTypes().add(ButtonType.CANCEL);
+        alert.getButtonTypes().add(ButtonType.YES);
+        alert.setTitle("Remove Costumer");
+        alert.setContentText(String.format("Are you sure you want to remove this Costumer?\nonce you click YES Costumer will be removed permanently!"));
+        Optional<ButtonType> res = alert.showAndWait();
+
+        if (res.get().getText().equals("Yes")) {
+            myController.removeCostumer(CosManageTbale.getSelectionModel().getSelectedItem().getID());
+            Costumer selectedItem = CosManageTbale.getSelectionModel().getSelectedItem();
+            CosManageTbale.getItems().remove(selectedItem);
+            CosManageTbale.refresh();
+        }
+
+
     }
 
 
@@ -312,6 +338,23 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
     @FXML
     void setVehicleInfoVisible(MouseEvent event) {
         VehicleInformationPane.setVisible(true);
+    }
+
+    @FXML
+    void showCreditCard(MouseEvent event) {
+//        Pane root = null;
+//        final Stage dialog = new Stage();
+//        FXMLLoader loader = new FXMLLoader();
+//        dialog.initModality(Modality.APPLICATION_MODAL);
+//        loader.setLocation(getClass().getResource(ProjectPages.CREDIT_CARD_DIALOG_PAGE.getPath()));
+//        root = loader.load();
+//        dialog.initOwner(scene);
+//
+//        Scene dialogScene = new Scene(dialogVbox, 300, 200);
+//        dialog.setScene(dialogScene);
+//        dialog.show();
+
+
     }
 
 

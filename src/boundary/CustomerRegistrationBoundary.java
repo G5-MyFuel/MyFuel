@@ -47,7 +47,7 @@ public class CustomerRegistrationBoundary implements Initializable {
     @FXML
     private FXMLLoader PRCLoader;
     @FXML
-    private pymentWindowControllerForRegistarBoundary PRC;
+    private CreditCardWindowBoundery PRC;
 
     /*Gui variables:
      * */
