@@ -95,10 +95,12 @@ public class OrderExecutionBoundary implements Initializable {
     @FXML
     private CheckBox confirmationCheckBox;
 
+    private ObservableList<OrderFuelFromSupplier> tableData;
+
     @FXML
     void OrderConfirmationCheck(MouseEvent event) {
         /******* If there is a 'check' sign *******/
-        if(confirmationCheckBox.isSelected())
+        if (confirmationCheckBox.isSelected())
             DoneBtn.setDisable(false);
         else DoneBtn.setDisable(true);
     }
@@ -115,13 +117,16 @@ public class OrderExecutionBoundary implements Initializable {
 
     @FXML
     void ClickDoneBtn(MouseEvent event) {
-        if(confirmationCheckBox.isSelected())
-        {
-            for (int i = 0; i < myController.resultList.size(); i++) {
-                if (myController.resultList.get(i).getOrderNumber().equals(tableView.getSelectionModel().getSelectedItem().getOrderNumber())) {
-                    myController.setNewStatus(myController.resultList.get(i).getOrderNumber());
-                    break;
-                }
+        for (int i = 0; i < myController.resultList.size(); i++) {
+            if (myController.resultList.get(i).getOrderNumber().equals(tableView.getSelectionModel().getSelectedItem().getOrderNumber())) {
+                myController.resultList.get(i).setOrderStatus("done");
+                myController.setNewStatus(myController.resultList.get(i).getOrderNumber());
+                tableData = FXCollections.observableArrayList(myController.resultList);
+                tableView.setItems(tableData);
+                DoneMsgTxt.setVisible(true);
+                DoneBtn.setDisable(true);
+                tableView.refresh();
+                break;
             }
         }
     }
@@ -140,12 +145,12 @@ public class OrderExecutionBoundary implements Initializable {
 
     }
 
-    public void setOrderFuelFromSupplierTableView( ArrayList<OrderFuelFromSupplier> OrderArray) {
+    public void setOrderFuelFromSupplierTableView(ArrayList<OrderFuelFromSupplier> OrderArray) {
         orderCol.setCellValueFactory(new PropertyValueFactory<>("OrderNumber"));
         statusCol.setCellValueFactory(new PropertyValueFactory<>("OrderStatus"));
-        ObservableList<OrderFuelFromSupplier> data = FXCollections.observableArrayList(OrderArray);
+        tableData = FXCollections.observableArrayList(OrderArray);
         tableView.setEditable(true);
-        tableView.setItems(data);
+        tableView.setItems(tableData);
     }
 
     /******  get DB details for Order View  ********/
@@ -171,11 +176,11 @@ public class OrderExecutionBoundary implements Initializable {
                         QuantityField.setText(temp.getQuantity().toString());
 
                         /******* 'Done' status or 'In treatment' status *********/
-                        if(temp.getOrderStatus().equals("Done")) {
+                        if (temp.getOrderStatus().equals("Done")) {
                             DoneMsgTxt.setVisible(true);
                             hboxOrderConfirmation.setDisable(true);
                         }
-                        if(temp.getOrderStatus().equals("In treatment"))
+                        if (temp.getOrderStatus().equals("In treatment"))
                             DoneMsgTxt.setVisible(false);
                     }
                 }
@@ -184,7 +189,7 @@ public class OrderExecutionBoundary implements Initializable {
     }
 
     /******  set new status for in DB and tableView  ********/
-    public void handleSetNewStatus(){
+    public void handleSetNewStatus() {
 
     }
 

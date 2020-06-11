@@ -69,7 +69,8 @@ public enum SqlQueryType {
      * ********** Order From Supplier Queries ****************
      * *****************************************/
     GET_ALL_ORDERS_FROM_SUPPLIER_TABLE(SqlExecutionType.EXECUTE_QUERY),
-    INSERT_STATUS_FOR_ORDER_TABLE(SqlExecutionType.UPDATE_QUERY),
+    UPDATE_STATUS_TO_DONE(SqlExecutionType.UPDATE_QUERY),
+    GET_FUEL_AMOUNT(SqlExecutionType.EXECUTE_QUERY),
 
     /* DO NOT CHANGE THE LOCATION OF MAX_SQL_QUERY!!! */
     /* DO NOT CHANGE THE LOCATION OF MAX_SQL_QUERY!!! */
