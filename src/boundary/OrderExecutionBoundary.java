@@ -117,7 +117,12 @@ public class OrderExecutionBoundary implements Initializable {
     void ClickDoneBtn(MouseEvent event) {
         if(confirmationCheckBox.isSelected())
         {
-
+            for (int i = 0; i < myController.resultList.size(); i++) {
+                if (myController.resultList.get(i).getOrderNumber().equals(tableView.getSelectionModel().getSelectedItem().getOrderNumber())) {
+                    myController.setNewStatus(myController.resultList.get(i).getOrderNumber());
+                    break;
+                }
+            }
         }
     }
 
@@ -143,9 +148,8 @@ public class OrderExecutionBoundary implements Initializable {
         tableView.setItems(data);
     }
 
-
+    /******  get DB details for Order View  ********/
     public void getOrderDetailsFromTableView() {
-        /******  get DB details for Order View  ********/
         tableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -179,8 +183,9 @@ public class OrderExecutionBoundary implements Initializable {
         });
     }
 
+    /******  set new status for in DB and tableView  ********/
     public void handleSetNewStatus(){
-        myController.setNewStatus();
+
     }
 
 }
