@@ -123,6 +123,10 @@ public class RunMarketingCampaignBoundary implements Initializable {
     @FXML
     private Label ERRORoverlap1;
 
+    @FXML
+    private Label ERRORnoTemplate;
+
+
 
     String choosenTemplate = new String();
     boolean flagSale = true;
@@ -134,6 +138,7 @@ public class RunMarketingCampaignBoundary implements Initializable {
         ERRORendBeforStart.setVisible(false);
         ERRORoverlap.setVisible(false);
         ERRORoverlap1.setVisible(false);
+        ERRORnoTemplate.setVisible(false);
 
         this.formValidation = FormValidation.getValidator();
         FormValidation();   // check all required fields are'nt empty
@@ -172,11 +177,17 @@ public class RunMarketingCampaignBoundary implements Initializable {
 
     @FXML
     void handleBtnRunSale(ActionEvent event) {
-         newSale = new MarketingCampaign(String.valueOf(myController.getSaleCounter() + 1), (String) ChooseTemplateCombo.getValue(), Date.valueOf(startDatePicker.getValue()),
-                Date.valueOf(endDatePicker.getValue()));
-        // chack if sale can run is this dates:
-        myController.chackIfSaleCanRun(newSale);
+        if (ChooseTemplateCombo.getSelectionModel().isEmpty()) {
+            ERRORnoTemplate.setVisible(true);
+        }
+         else {
+            newSale = new MarketingCampaign(String.valueOf(myController.getSaleCounter() + 1), (String) ChooseTemplateCombo.getValue(), Date.valueOf(startDatePicker.getValue()),
+                    Date.valueOf(endDatePicker.getValue()));
+            // chack if sale can run is this dates:
+            myController.chackIfSaleCanRun(newSale);
+        }
     }
+
     public void setFlagSale(boolean flagSale)
     {
         this.flagSale = flagSale;
@@ -214,10 +225,12 @@ public class RunMarketingCampaignBoundary implements Initializable {
 
     @FXML
     void handleChooseTemplate(ActionEvent event) {
+        ERRORnoTemplate.setVisible(false);
         choosenTemplate = ChooseTemplateCombo.getValue();
         //Query to get from the db the chosen template information:
         myController.getChoosenTemplateDetails(); //start the process that will ask server to execute quarry and get the template details
 
+        btnRunSaleOperation.setDisable(false);
         this.templateDetaildVBOX.setVisible(true);
         this.endDatePicker.setVisible(true);
         this.startDatePicker.setVisible(true);
@@ -245,7 +258,7 @@ public class RunMarketingCampaignBoundary implements Initializable {
         ERRORoverlap.setVisible(false);
         ERRORoverlap1.setVisible(false);
         //cant choose date before today:
-        if (startDatePicker.getValue().isBefore(java.time.LocalDate.now()) == true) {
+        if (startDatePicker.getValue().isBefore(java.time.LocalDate.now()) == true ) {
             ERRORalreadyPassedDate.setVisible(true);
         }
     }

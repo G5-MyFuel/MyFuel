@@ -138,16 +138,13 @@ public class RunMarketingCampaignController extends BasicController {
         String myCchosenTemplate = myBoundary.getChoosenTemplate();
         ArrayList<MarketingCampaignTemplate> resultList = new ArrayList<>();
         for(ArrayList<Object> a: result.getResultData()) {
-            if (myCchosenTemplate == ((String)a.get(1))) {
-                MarketingCampaignTemplate cos = new MarketingCampaignTemplate((String) a.get(0),
-                        (String)a.get(1),
-                        (String) a.get(2),
-                        (String) a.get(3),
-                        (String) a.get(4),
-                        null,null);
+            if (myCchosenTemplate.equals((String)a.get(1))) {
+                MarketingCampaignTemplate cos = new MarketingCampaignTemplate((String) a.get(0), (String)a.get(1), (String) a.get(2),
+                        (String) a.get(3),(String) a.get(4), null,null);
                 cos.setBeginHour(Time.valueOf((String) a.get(5)));
                 cos.setEndHour(Time.valueOf((String) a.get(6)));
                 resultList.add(cos);
+                System.out.println("lats see" + resultList);
             }//end if
         }//end for
         return resultList;
@@ -162,13 +159,18 @@ public class RunMarketingCampaignController extends BasicController {
     }
 
     private boolean changeResultToSaleAndCheck(SqlResult result){
-
         for(ArrayList<Object> a: result.getResultData()) {
             //if the dates are overlap - flag=false.
             if ( (( newSale.getBeginDate().after(Date.valueOf((String) a.get(2)))) ==true &&
                     ( newSale.getBeginDate().before(Date.valueOf((String) a.get(3)))) ==true ) ||
                     (( newSale.getEndDate().after(Date.valueOf((String) a.get(2)))) ==true &&
-                            ( newSale.getEndDate().before(Date.valueOf((String) a.get(3)))) ==true ))
+                            ( newSale.getEndDate().before(Date.valueOf((String) a.get(3)))) ==true )||
+                    newSale.getBeginDate().equals(Date.valueOf((String) a.get(2)))  ||
+                    newSale.getBeginDate().equals(Date.valueOf((String) a.get(3))) ||
+                    newSale.getEndDate().equals(Date.valueOf((String) a.get(2)))  ||
+                    newSale.getEndDate().equals(Date.valueOf((String) a.get(3)))   ||
+                    ( newSale.getBeginDate().before(Date.valueOf((String) a.get(2))) ==true &&
+                            newSale.getEndDate().after(Date.valueOf((String) a.get(3))) ) )
             {
                flagSale = false;
             }
