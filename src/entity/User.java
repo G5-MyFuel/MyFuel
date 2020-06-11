@@ -19,6 +19,7 @@ public class User implements Serializable {
         this.userLastName = userLastName;
         this.userEmail = userEmail;
         this.userPassword = this.userID; //the default password is the userID
+        //
     }
 
     public User(String userID, int userType, String userPassword, String userFirstName, String userLastName, String userEmail) {
