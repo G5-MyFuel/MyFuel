@@ -1,12 +1,11 @@
 package boundary;
 
 import Contollers.FormValidation;
-import Contollers.RunSaleOperationController;
+import Contollers.RunMarketingCampaignController;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
-import com.sun.xml.internal.ws.api.message.saaj.SAAJMessageHeaders;
-import entity.SaleOperation;
-import entity.SaleOperationTemplate;
+import entity.MarketingCampaign;
+import entity.MarketingCampaignTemplate;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -25,14 +24,14 @@ import java.util.ResourceBundle;
 
 /**
  * @author Hana Wiener
- * @see Contollers.RunSaleOperationController - the form's logic class
+ * @see RunMarketingCampaignController - the form's logic class
  */
 
-public class RunSaleOperationBoundary implements Initializable {
+public class RunMarketingCampaignBoundary implements Initializable {
     /**
      * The supervisor boundary controller.
      */
-    private RunSaleOperationController myController = new RunSaleOperationController(this);
+    private RunMarketingCampaignController myController = new RunMarketingCampaignController(this);
 
     private FormValidation formValidation;
 
@@ -40,19 +39,19 @@ public class RunSaleOperationBoundary implements Initializable {
     Gui variables:
     * */
     @FXML
-    private TableView<SaleOperation> saleOperationTableView;
+    private TableView<MarketingCampaign> saleOperationTableView;
 
     @FXML
-    private TableColumn<SaleOperation, String> saleIDColumn;
+    private TableColumn<MarketingCampaign, String> saleIDColumn;
 
     @FXML
-    private TableColumn<SaleOperation, String> TemplateNameColumn;
+    private TableColumn<MarketingCampaign, String> TemplateNameColumn;
 
     @FXML
-    private TableColumn<SaleOperation, String> StartDateColumn;
+    private TableColumn<MarketingCampaign, String> StartDateColumn;
 
     @FXML
-    private TableColumn<SaleOperation, String> EndDateColumn;
+    private TableColumn<MarketingCampaign, String> EndDateColumn;
 
 
     @FXML
@@ -127,7 +126,7 @@ public class RunSaleOperationBoundary implements Initializable {
 
     String choosenTemplate = new String();
     boolean flagSale = true;
-    SaleOperation newSale = new SaleOperation();
+    MarketingCampaign newSale = new MarketingCampaign();
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.detailsPane.setVisible(false);
@@ -147,14 +146,17 @@ public class RunSaleOperationBoundary implements Initializable {
     /**
      * this method will set the templates table when we will initialize the page.
      */
-    public void setSalesTable(ArrayList<SaleOperation> cosArray) {
-        saleIDColumn.setCellValueFactory(new PropertyValueFactory<>("SaleOperationID"));
+    public void setSalesTable(ArrayList<MarketingCampaign> cosArray) {
+
+        saleIDColumn.setCellValueFactory(new PropertyValueFactory<>("CampaignID"));
         TemplateNameColumn.setCellValueFactory(new PropertyValueFactory<>("TemplateName"));
         StartDateColumn.setCellValueFactory(new PropertyValueFactory<>("BeginDate"));
         EndDateColumn.setCellValueFactory(new PropertyValueFactory<>("EndDate"));
 
-        ObservableList<SaleOperation> data = FXCollections.observableArrayList(cosArray);
+        ObservableList<MarketingCampaign> data = FXCollections.observableArrayList(cosArray);
         saleOperationTableView.setItems(data);
+        System.out.println("finish with table");
+
     }
 
 
@@ -170,7 +172,7 @@ public class RunSaleOperationBoundary implements Initializable {
 
     @FXML
     void handleBtnRunSale(ActionEvent event) {
-         newSale = new SaleOperation(String.valueOf(myController.getSaleCounter() + 1), (String) ChooseTemplateCombo.getValue(), Date.valueOf(startDatePicker.getValue()),
+         newSale = new MarketingCampaign(String.valueOf(myController.getSaleCounter() + 1), (String) ChooseTemplateCombo.getValue(), Date.valueOf(startDatePicker.getValue()),
                 Date.valueOf(endDatePicker.getValue()));
         // chack if sale can run is this dates:
         myController.chackIfSaleCanRun(newSale);
@@ -225,8 +227,8 @@ public class RunSaleOperationBoundary implements Initializable {
         return choosenTemplate;
     }
 
-    public void setChosenTemplateDetails(ArrayList<SaleOperationTemplate> cosArray) {
-        SaleOperationTemplate my = new SaleOperationTemplate();
+    public void setChosenTemplateDetails(ArrayList<MarketingCampaignTemplate> cosArray) {
+        MarketingCampaignTemplate my = new MarketingCampaignTemplate();
         my = cosArray.get(0);
         idFromDB.setText(my.getTemplateID());
         typeFromDB.setText(my.getFuelType());
@@ -237,11 +239,6 @@ public class RunSaleOperationBoundary implements Initializable {
 
     }
 
-
-    @FXML
-    void handleClicks(ActionEvent event) {
-
-    }
 
     @FXML
     void handleStartDate(ActionEvent event) {
@@ -279,9 +276,18 @@ public class RunSaleOperationBoundary implements Initializable {
 
 
     private void FormValidation() {
-        /*  Template Name validation */
-        formValidation.isEmptyDateField(startDatePicker, "Start Date");
-        formValidation.isEmptyDateField(endDatePicker, "End Date");
+        /*  Template Date validation */ //not work so well
+      //  formValidation.isEmptyDateField(startDatePicker, "Start Date");
+        //formValidation.isEmptyDateField(endDatePicker, "End Date");
+
+
     }
+
+    @FXML
+    void handleClicks(ActionEvent event) {
+
+    }
+
+
 
 }

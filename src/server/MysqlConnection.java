@@ -181,17 +181,19 @@ public class MysqlConnection {
         sqlArray[SqlQueryType.INSERT_STATUS_FOR_ORDER_TABLE.getCode()]="INSERT INTO `OrderFromStock` ('OrderStatus') VALUES (?)";
 
         /* *****************************************
-         * ********** Template Management Queries ****************
+         * ********** Templates+Campaigns Management Queries ****************
          * *****************************************/
         sqlArray[SqlQueryType.GET_ALL_TEMPLATES_TABLE.getCode()] = "SELECT * FROM `CampaignTemplates`";
         sqlArray[SqlQueryType.INSERT_NEW_TEMPLATE.getCode()] =
                 "INSERT INTO `CampaignTemplates`(`templateID`, `templateName`, `fuelType`, `DiscountPercentages`, `day`,"+
                         " `beginHour`, `endHour`) VALUES (?,?,?,?,?,?,?);";
-        sqlArray[SqlQueryType.GET_ALL_SALES_TABLE.getCode()] = "SELECT * FROM `SaleOperation`";
-        sqlArray[SqlQueryType.INSERT_NEW_SALE.getCode()] =
-                "INSERT INTO  `SaleOperation`(`SaleOperationID`, `TemplateName`, `BeginDate`, `EndDate`) VALUES (?,?,?,?);";
         sqlArray[SqlQueryType.GET_CHOSEN_TEMPLATE_DETAILS.getCode()] = "SELECT * FROM `CampaignTemplates`";
-        sqlArray[SqlQueryType.GET_ALL_SALES_TO_CHACK_SALE.getCode()] = "SELECT * FROM `SaleOperation`";
+
+
+        sqlArray[SqlQueryType.GET_ALL_SALES_TABLE.getCode()] = "SELECT * FROM `MarketingCampaign`";
+        sqlArray[SqlQueryType.INSERT_NEW_SALE.getCode()] =
+                "INSERT INTO  `MarketingCampaign`(`CampaignID`, `TemplateName`, `BeginDate`, `EndDate`) VALUES (?,?,?,?);";
+        sqlArray[SqlQueryType.GET_ALL_SALES_TO_CHACK_SALE.getCode()] = "SELECT * FROM `MarketingCampaign`";
 
 
         /* *****************************************

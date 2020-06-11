@@ -3,24 +3,24 @@ package entity;
 
 import java.sql.Date; // pay attention that i import the SQL class of date
 
-public class SaleOperation {
-    private String saleOperationID;
+public class MarketingCampaign {
+    private String CampaignID;
     private String templateName;
     private Date beginDate;
     private Date endDate;
 
-    public SaleOperation(String saleOperationID, String templateID ,Date beginDate, Date endDate) {
-        this.saleOperationID = saleOperationID;
+    public MarketingCampaign(String marketingCampaignID, String templateID , Date beginDate, Date endDate) {
+        this.CampaignID = marketingCampaignID;
         this.templateName = templateID;
         this.beginDate = beginDate;
         this.endDate = endDate;
     }
 
-    public SaleOperation() {
+    public MarketingCampaign() {
     }
 
-    public String getSaleOperationID() {
-        return saleOperationID;
+    public String getCampaignID() {
+        return CampaignID;
     }
 
     public String getTemplateName() {
@@ -35,9 +35,9 @@ public class SaleOperation {
         return endDate;
     }
 
-    public SaleOperation getSaleOperation () {return this;}
-    public void setSaleOperationID(String saleOperationID) {
-        this.saleOperationID = saleOperationID;
+    public MarketingCampaign getSaleOperation () {return this;}
+    public void setCampaignID(String campaignID) {
+        this.CampaignID = campaignID;
     }
 
     public void setBeginDate(Date beginDate) {

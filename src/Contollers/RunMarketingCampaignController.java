@@ -1,11 +1,11 @@
 package Contollers;
 
-import boundary.RunSaleOperationBoundary;
+import boundary.RunMarketingCampaignBoundary;
 import common.assets.SqlAction;
 import common.assets.SqlQueryType;
 import common.assets.SqlResult;
-import entity.SaleOperation;
-import entity.SaleOperationTemplate;
+import entity.MarketingCampaign;
+import entity.MarketingCampaignTemplate;
 import javafx.application.Platform;
 
 import java.sql.Date;
@@ -14,24 +14,24 @@ import java.util.ArrayList;
 
 /**
  * @author hani
- * @see RunSaleOperationController - the form's logic class
+ * @see RunMarketingCampaignController - the form's logic class
  */
 
-public class RunSaleOperationController extends BasicController {
+public class RunMarketingCampaignController extends BasicController {
     /**
      * The boundary controlled by this controller
      */
-    private RunSaleOperationBoundary myBoundary;
-    private SaleOperation tempSaleOperation;
+    private RunMarketingCampaignBoundary myBoundary;
+    private MarketingCampaign tempSaleOperation;
     private boolean flagSale = true;
     private int SaleCounter;
-    SaleOperation newSale;
+    MarketingCampaign newSale;
     /**
      * Instantiates a new Sale-Operation Management controller.
      *
      * @param myBoundary the my boundary
      */
-    public RunSaleOperationController(RunSaleOperationBoundary myBoundary) {
+    public RunMarketingCampaignController(RunMarketingCampaignBoundary myBoundary) {
         this.myBoundary = myBoundary;
     }
 
@@ -42,7 +42,7 @@ public class RunSaleOperationController extends BasicController {
         Platform.runLater(() -> {
             switch (result.getActionType()) {
                 case GET_ALL_SALES_TABLE:
-                    ArrayList<SaleOperation> resultList = new ArrayList<>();
+                    ArrayList<MarketingCampaign> resultList = new ArrayList<>();
                     resultList.addAll(this.changeResultToSale(result));
                     myBoundary.setSalesTable(resultList);
                     break;
@@ -54,13 +54,12 @@ public class RunSaleOperationController extends BasicController {
                     myBoundary.setTemplateList(templateList);
                     break;
                 case GET_CHOSEN_TEMPLATE_DETAILS:
-                    ArrayList<SaleOperationTemplate> templateChosenList = new ArrayList<>();
+                    ArrayList<MarketingCampaignTemplate> templateChosenList = new ArrayList<>();
                     templateChosenList.addAll(this.changeResultToChosenTemplateDetails(result));
                     myBoundary.setChosenTemplateDetails(templateChosenList);
                     break;
                 case GET_ALL_SALES_TO_CHACK_SALE:
                     flagSale = true;
-                    System.out.println(this.changeResultToSaleAndCheck(result) + "in the case");
                     myBoundary.setFlagSale(this.changeResultToSaleAndCheck(result));
                     break;
 
@@ -81,13 +80,19 @@ public class RunSaleOperationController extends BasicController {
      * @param result the result
      * @return Array list of costumers
      */
-    private ArrayList<SaleOperation> changeResultToSale(SqlResult result){
-        ArrayList<SaleOperation> resultList = new ArrayList<>();
+    private ArrayList<MarketingCampaign> changeResultToSale(SqlResult result){
+
+        ArrayList<MarketingCampaign> resultList = new ArrayList<>();
         for(ArrayList<Object> a: result.getResultData()) {
-            SaleOperation cos = new SaleOperation((String) a.get(0),(String)a.get(1),null,null);
+            MarketingCampaign cos = new MarketingCampaign((String) a.get(0),(String)a.get(1),null,null);
             cos.setBeginDate(Date.valueOf((String) a.get(2)));
             cos.setEndDate(Date.valueOf((String) a.get(3)));
-            SaleCounter= Integer.parseInt((String) a.get(0));
+
+            //if (((String) a.get(0)).equals("") == false) {
+            SaleCounter = Integer.parseInt((String) a.get(0));
+            /*}
+            else { SaleCounter=1; }*/
+
             resultList.add(cos);
         }
         return resultList;
@@ -97,9 +102,9 @@ public class RunSaleOperationController extends BasicController {
         return SaleCounter;
     }
 
-    public void setSaleOperationInDB(SaleOperation operation) {
+    public void setSaleOperationInDB(MarketingCampaign operation) {
         ArrayList<Object> varArray = new ArrayList<>();
-        varArray.add(operation.getSaleOperationID());
+        varArray.add(operation.getCampaignID());
         varArray.add(operation.getTemplateName());
         varArray.add(operation.getBeginDate());
         varArray.add(operation.getEndDate());
@@ -129,12 +134,12 @@ public class RunSaleOperationController extends BasicController {
         super.sendSqlActionToClient(sqlAction);
     }
 
-    private ArrayList<SaleOperationTemplate> changeResultToChosenTemplateDetails(SqlResult result){
+    private ArrayList<MarketingCampaignTemplate> changeResultToChosenTemplateDetails(SqlResult result){
         String myCchosenTemplate = myBoundary.getChoosenTemplate();
-        ArrayList<SaleOperationTemplate> resultList = new ArrayList<>();
+        ArrayList<MarketingCampaignTemplate> resultList = new ArrayList<>();
         for(ArrayList<Object> a: result.getResultData()) {
-            if (myCchosenTemplate.equals((String)a.get(1))) {
-                SaleOperationTemplate cos = new SaleOperationTemplate((String) a.get(0),
+            if (myCchosenTemplate == ((String)a.get(1))) {
+                MarketingCampaignTemplate cos = new MarketingCampaignTemplate((String) a.get(0),
                         (String)a.get(1),
                         (String) a.get(2),
                         (String) a.get(3),
@@ -149,7 +154,7 @@ public class RunSaleOperationController extends BasicController {
     }
 
     //CHACK IF SALE CAN RUN: according to its date and day
-    public void chackIfSaleCanRun(SaleOperation newSale) {
+    public void chackIfSaleCanRun(MarketingCampaign newSale) {
         this.newSale = newSale;
         //get all sales from db:
         SqlAction sqlAction = new SqlAction(SqlQueryType.GET_ALL_SALES_TO_CHACK_SALE);
@@ -157,22 +162,16 @@ public class RunSaleOperationController extends BasicController {
     }
 
     private boolean changeResultToSaleAndCheck(SqlResult result){
-        System.out.println(newSale.getBeginDate());
-        System.out.println(newSale.getEndDate());
 
         for(ArrayList<Object> a: result.getResultData()) {
             //if the dates are overlap - flag=false.
-           System.out.println(Date.valueOf((String) a.get(2)));
-            System.out.println(Date.valueOf((String) a.get(3)));
             if ( (( newSale.getBeginDate().after(Date.valueOf((String) a.get(2)))) ==true &&
                     ( newSale.getBeginDate().before(Date.valueOf((String) a.get(3)))) ==true ) ||
                     (( newSale.getEndDate().after(Date.valueOf((String) a.get(2)))) ==true &&
                             ( newSale.getEndDate().before(Date.valueOf((String) a.get(3)))) ==true ))
             {
                flagSale = false;
-                System.out.println(flagSale);
             }
-            System.out.println(flagSale);
         }
         return flagSale;
     }

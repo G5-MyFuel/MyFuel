@@ -1,16 +1,14 @@
 package boundary;
 
-import Contollers.SaleOperationTemplateController;
+import Contollers.MarketingCampaignTemplateController;
 import Contollers.FormValidation;
 
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTimePicker;
-import com.sun.org.apache.xalan.internal.xsltc.compiler.Template;
-import entity.Costumer;
 import entity.Day;
 import entity.FuelTypes;
-import entity.SaleOperationTemplate;
+import entity.MarketingCampaignTemplate;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -29,12 +27,12 @@ import java.util.ResourceBundle;
 
 /**
  * @author Hana Wiener
- * @see SaleOperationTemplateController - the form's logic class
+ * @see MarketingCampaignTemplateController - the form's logic class
  */
-public class SaleOperationTemplateBoundary implements Initializable {
+public class MarketingCampaignTemplateBoundary implements Initializable {
 
     /** The supervisor boundary controller. */
-    private SaleOperationTemplateController myController = new SaleOperationTemplateController(this);
+    private MarketingCampaignTemplateController myController = new MarketingCampaignTemplateController(this);
 
     private FormValidation formValidation;
     private boolean flagValidation=true;
@@ -83,28 +81,28 @@ public class SaleOperationTemplateBoundary implements Initializable {
     private JFXTimePicker EndHour;
 
      @FXML
-    private TableView<SaleOperationTemplate> TemplateTableView;
+    private TableView<MarketingCampaignTemplate> TemplateTableView;
 
     @FXML
-    private TableColumn<SaleOperationTemplate, String> TemplateIDColumn;
+    private TableColumn<MarketingCampaignTemplate, String> TemplateIDColumn;
 
     @FXML
-    private TableColumn<SaleOperationTemplate, String> TemplateNameColumn;
+    private TableColumn<MarketingCampaignTemplate, String> TemplateNameColumn;
 
     @FXML
-    private TableColumn<SaleOperationTemplate, FuelTypes> FuelTypeColumn;
+    private TableColumn<MarketingCampaignTemplate, FuelTypes> FuelTypeColumn;
 
     @FXML
-    private TableColumn<SaleOperationTemplate, Float> DiscountPercentagesColumn;
+    private TableColumn<MarketingCampaignTemplate, Float> DiscountPercentagesColumn;
 
     @FXML
-    private TableColumn<SaleOperationTemplate, Day> dayColumn;
+    private TableColumn<MarketingCampaignTemplate, Day> dayColumn;
 
     @FXML
-    private TableColumn<SaleOperationTemplate, Time> BeginHourColumn;
+    private TableColumn<MarketingCampaignTemplate, Time> BeginHourColumn;
 
     @FXML
-    private TableColumn<SaleOperationTemplate, Time> EndHourColumn;
+    private TableColumn<MarketingCampaignTemplate, Time> EndHourColumn;
 
    /* @FXML
     private TableColumn<SaleOperationTemplate, String> MarketingAdColumn;
@@ -133,7 +131,7 @@ public class SaleOperationTemplateBoundary implements Initializable {
     /**
      this method will set the templates table when we will initialize the page.
      */
-    public void setTemplateTable(ArrayList<SaleOperationTemplate> cosArray){
+    public void setTemplateTable(ArrayList<MarketingCampaignTemplate> cosArray){
         //col oms parameters
         TemplateIDColumn.setCellValueFactory(new PropertyValueFactory<>("templateID"));
         TemplateNameColumn.setCellValueFactory(new PropertyValueFactory<>("templateName"));
@@ -144,7 +142,7 @@ public class SaleOperationTemplateBoundary implements Initializable {
         EndHourColumn.setCellValueFactory(new PropertyValueFactory<>("endHour"));
      //   MarketingAdColumn.setCellValueFactory(new PropertyValueFactory<>("Marketing ad"));
 
-        ObservableList<SaleOperationTemplate> data = FXCollections.observableArrayList(cosArray);
+        ObservableList<MarketingCampaignTemplate> data = FXCollections.observableArrayList(cosArray);
         TemplateTableView.setItems(data);
     }
 
@@ -160,7 +158,7 @@ public class SaleOperationTemplateBoundary implements Initializable {
 
     @FXML
     void handleSaveTemplate(ActionEvent event) {
-        SaleOperationTemplate newTemplate = new SaleOperationTemplate
+        MarketingCampaignTemplate newTemplate = new MarketingCampaignTemplate
                 (String.valueOf(myController.getTemplateCounter()+1), TemplateName.getText(), (String)ChooseGasTypeComboSpecialization.getValue(), (String)DiscountPercentages.getText(), (String)DayComboSpecialization1.getValue(), Time.valueOf(StartHour.getValue()), Time.valueOf(EndHour.getValue()));
         myController.setTemplateInDB(newTemplate);
         myController.getTemplatesTable(); //start the process that will ask server to execute quarry and get the table details//refresh

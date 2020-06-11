@@ -2,7 +2,7 @@ package entity;
 
 import java.sql.Time;
 
-public class SaleOperationTemplate {
+public class MarketingCampaignTemplate {
     private String templateID;
     private String templateName;
     private String fuelType;
@@ -12,9 +12,9 @@ public class SaleOperationTemplate {
     private Time beginHour;
     private Time endHour;
 
-    public SaleOperationTemplate(){}
+    public MarketingCampaignTemplate(){}
 
-    public SaleOperationTemplate(String templateID, String templateName, String fuelType, String discountPercentages, String day /*,String marketingAdForTemplate*/, Time beginHour, Time endHour) {
+    public MarketingCampaignTemplate(String templateID, String templateName, String fuelType, String discountPercentages, String day /*,String marketingAdForTemplate*/, Time beginHour, Time endHour) {
         this.templateID = templateID;
         this.templateName = templateName;
         this.fuelType = fuelType;

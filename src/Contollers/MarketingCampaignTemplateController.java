@@ -1,16 +1,11 @@
 package Contollers;
 
-import boundary.CostumerManagmentTablePageBoundary;
-import boundary.SaleOperationTemplateBoundary;
-import com.sun.org.apache.xalan.internal.xsltc.compiler.Template;
+import boundary.MarketingCampaignTemplateBoundary;
 import common.assets.SqlAction;
 import common.assets.SqlQueryType;
 import common.assets.SqlResult;
-import entity.Day;
-import entity.FuelTypes;
-import entity.SaleOperationTemplate;
+import entity.MarketingCampaignTemplate;
 import javafx.application.Platform;
-import server.MysqlConnection;
 
 import java.sql.Time;
 import java.util.ArrayList;
@@ -19,10 +14,10 @@ import java.util.ArrayList;
  * @author Hana Wiener
  */
 
-public class SaleOperationTemplateController extends BasicController  {
+public class MarketingCampaignTemplateController extends BasicController  {
 
-    private SaleOperationTemplateBoundary myBoundary; /**     * The boundary controlled by this controller     */
-   private SaleOperationTemplate tempTemplate;
+    private MarketingCampaignTemplateBoundary myBoundary; /**     * The boundary controlled by this controller     */
+   private MarketingCampaignTemplate tempTemplate;
    private int TemplateCounter;
 
     /**
@@ -30,7 +25,7 @@ public class SaleOperationTemplateController extends BasicController  {
      *
      * @param myBoundary the my boundary
      */
-    public SaleOperationTemplateController(SaleOperationTemplateBoundary myBoundary) {
+    public MarketingCampaignTemplateController(MarketingCampaignTemplateBoundary myBoundary) {
         this.myBoundary = myBoundary;
     }
 
@@ -46,7 +41,7 @@ public class SaleOperationTemplateController extends BasicController  {
         Platform.runLater(() -> {
             switch (result.getActionType()) {
                 case GET_ALL_TEMPLATES_TABLE:
-                    ArrayList<SaleOperationTemplate> resultList = new ArrayList<>();
+                    ArrayList<MarketingCampaignTemplate> resultList = new ArrayList<>();
                     resultList.addAll(this.changeResultToTemplate(result));
                     myBoundary.setTemplateTable(resultList);
                     break;
@@ -64,10 +59,10 @@ public class SaleOperationTemplateController extends BasicController  {
      * @param result the result
      * @return Array list of costumers
      */
-    private ArrayList<SaleOperationTemplate> changeResultToTemplate(SqlResult result){
-        ArrayList<SaleOperationTemplate> resultList = new ArrayList<>();
+    private ArrayList<MarketingCampaignTemplate> changeResultToTemplate(SqlResult result){
+        ArrayList<MarketingCampaignTemplate> resultList = new ArrayList<>();
         for(ArrayList<Object> a: result.getResultData()) {
-            SaleOperationTemplate cos = new SaleOperationTemplate((String) a.get(0),(String)a.get(1),(String) a.get(2),(String) a.get(3),(String) a.get(4),
+            MarketingCampaignTemplate cos = new MarketingCampaignTemplate((String) a.get(0),(String)a.get(1),(String) a.get(2),(String) a.get(3),(String) a.get(4),
                     null,null);
             cos.setBeginHour(Time.valueOf((String) a.get(5)));
             cos.setEndHour(Time.valueOf((String) a.get(6)));
@@ -81,7 +76,7 @@ public class SaleOperationTemplateController extends BasicController  {
         return TemplateCounter;
     }
 
-    public void setTemplateInDB(SaleOperationTemplate template){
+    public void setTemplateInDB(MarketingCampaignTemplate template){
         ArrayList<Object> varArray = new ArrayList<>();
         varArray.add(template.getTemplateID());
         varArray.add(template.getTemplateName());

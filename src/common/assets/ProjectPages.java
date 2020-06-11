@@ -17,8 +17,8 @@ public enum ProjectPages {
 
 
     //hani pages:
-    SALE_OPERATION_TEMPLATE_PAGE("/boundary/SaleOperationTemplate.fxml"),
-    RUN_SALE_OPERATION_PAGE("/boundary/RunSaleOperationFXMLnew.fxml"),
+    SALE_OPERATION_TEMPLATE_PAGE("/boundary/MarketingCampaignTemplate.fxml"),
+    RUN_SALE_OPERATION_PAGE("/boundary/MarketingCampaignFXML.fxml"),
 
     //Nir pages:
     SETTING_DISCOUNT_RATES_PAGE("/boundary/SettingDiscountRatesFXML.fxml"),
