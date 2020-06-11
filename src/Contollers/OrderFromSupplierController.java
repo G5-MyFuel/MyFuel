@@ -32,6 +32,11 @@ public class OrderFromSupplierController extends BasicController {
             super.sendSqlActionToClient(sqlAction);
         }
 
+    public void setNewStatus() {
+        SqlAction sqlAction = new SqlAction(SqlQueryType.INSERT_STATUS_FOR_ORDER_TABLE);
+        super.sendSqlActionToClient(sqlAction);
+    }
+
     public void getResultFromClient(SqlResult result) {
         Platform.runLater(() -> {
             switch (result.getActionType()) {
@@ -56,5 +61,7 @@ public class OrderFromSupplierController extends BasicController {
         }
         return resultList;
     }
+
+
 
 }

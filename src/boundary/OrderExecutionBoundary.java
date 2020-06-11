@@ -179,4 +179,8 @@ public class OrderExecutionBoundary implements Initializable {
         });
     }
 
+    public void handleSetNewStatus(){
+        myController.setNewStatus();
+    }
+
 }
