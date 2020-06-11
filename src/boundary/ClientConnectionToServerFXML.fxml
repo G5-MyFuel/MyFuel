@@ -11,8 +11,8 @@
         <AnchorPane prefHeight="248.0" prefWidth="399.0">
             <children>
                 <Button fx:id="btnConnect" layoutX="170.0" layoutY="186.0" mnemonicParsing="false" onAction="#setServerIP" onMouseClicked="#setServerIP" text="connect" textAlignment="RIGHT" />
-                <TextField fx:id="port" layoutX="142.0" layoutY="112.0" />
-                <Text layoutX="47.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="port" textAlignment="CENTER" wrappingWidth="73.00000223517418">
+                <TextField fx:id="ServerIp" layoutX="142.0" layoutY="112.0" text="127.0.0.1" />
+                <Text layoutX="47.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Server IP" textAlignment="CENTER" wrappingWidth="73.00000223517418">
                     <font>
                         <Font size="16.0" />
                     </font>

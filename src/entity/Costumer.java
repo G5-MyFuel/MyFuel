@@ -23,6 +23,7 @@ public class Costumer {
     private String purchasePlan;
 
     public Costumer(String ID, String CustomerPassword, String CostumerType, String Fname, String Lname, String emailAdress, CreditCard customerCreditCard, String purchasePlan, Vehicle CostumerVehicle,String servicePlan) {
+        super();
         this.CostumerCreditCard = customerCreditCard;
         this.purchasePlan = purchasePlan;
         this.CostumerVehicle.add(CostumerVehicle);

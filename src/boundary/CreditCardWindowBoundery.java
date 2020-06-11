@@ -26,13 +26,14 @@ public class CreditCardWindowBoundery implements DataInitializable {
     private CreditCard tempCreditCard = new CreditCard();
     private Alert ErrorAlert = new Alert(Alert.AlertType.ERROR);
     private FormValidation formValidation;
+    private Stage primStage;
 
     /**
      * The supervisor boundary controller.
      */
     private CreditCardController myController = new CreditCardController(this);
     private CustomerRegistrationBoundary registrationBoundary;
-    private  CostumerManagmentTablePageBoundary managmentBoundary;
+    private CostumerManagmentTablePageBoundary managmentBoundary;
     private String experationDate;
 
     @FXML
@@ -53,8 +54,8 @@ public class CreditCardWindowBoundery implements DataInitializable {
     @FXML
     private Button addCardBtn;
 
-    private ObservableList<String> Years = FXCollections.observableArrayList("20", "21","22","23","24","25","26","27","28","29");
-    private ObservableList<String> Month = FXCollections.observableArrayList("January", "February","March","April","May","June","July","August","September","October","November","December");
+    private ObservableList<String> Years = FXCollections.observableArrayList("20", "21", "22", "23", "24", "25", "26", "27", "28", "29");
+    private ObservableList<String> Month = FXCollections.observableArrayList("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
 
 
     @Override
@@ -67,7 +68,6 @@ public class CreditCardWindowBoundery implements DataInitializable {
         formValidation.isDoubleNumberValidation(CVVtxt, "CVV");
         formValidation.maxLengthValidation(CVVtxt, "CVV", 3);
         formValidation.minLengthValidationShort(CVVtxt, "CVV", 3);
-
     }
 
 
@@ -83,7 +83,7 @@ public class CreditCardWindowBoundery implements DataInitializable {
             ErrorAlert.setHeaderText("Please insert all Credit Card Information.");
             ErrorAlert.showAndWait();
         } else {
-            experationDate = MonthCombo.getValue() +" / " + YearCombo.getValue();
+            experationDate = "20" + YearCombo.getValue() + "-" + MonthCombo.getValue();
             tempCreditCard.setCardNumber(creditCardNumbertxt.getText());
             tempCreditCard.setExperationDate(experationDate);
             tempCreditCard.setCardSecurityNumber(CVVtxt.getText());
@@ -108,24 +108,8 @@ public class CreditCardWindowBoundery implements DataInitializable {
     public void initData(Object data) {
         YearCombo.setItems(Years);
         MonthCombo.setItems(Month);
-        Stage primStage = (Stage) creditCardNumbertxt.getScene().getWindow();
+        primStage = (Stage) creditCardNumbertxt.getScene().getWindow();
         primStage.setTitle("Credit Card Window");
-        primStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-            @Override
-            public void handle(WindowEvent e) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.getButtonTypes().remove(ButtonType.OK);
-                alert.getButtonTypes().add(ButtonType.CANCEL);
-                alert.getButtonTypes().add(ButtonType.YES);
-                alert.setTitle("Quit application");
-                alert.setContentText(String.format("Are you sure you want to quit?\nBy clicking YES all new inserted data will be lost"));
-                Optional<ButtonType> res = alert.showAndWait();
-                if (res.get().equals(ButtonType.CANCEL))
-                    e.consume();
-                else
-                    primStage.close();
-            }
-        });
 
         if (data instanceof CostumerManagmentTablePageBoundary) {
             managmentBoundary = (CostumerManagmentTablePageBoundary) data;
@@ -142,6 +126,26 @@ public class CreditCardWindowBoundery implements DataInitializable {
             registrationBoundary = (CustomerRegistrationBoundary) data;
         }
 
+
+    }
+
+    private void closeWindowEvent(WindowEvent event) {
+        primStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent e) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.getButtonTypes().remove(ButtonType.OK);
+                alert.getButtonTypes().add(ButtonType.CANCEL);
+                alert.getButtonTypes().add(ButtonType.YES);
+                alert.setTitle("Quit application");
+                alert.setContentText(String.format("Are you sure you want to quit?\nBy clicking YES all new inserted data will be lost"));
+                Optional<ButtonType> res = alert.showAndWait();
+                if (res.get().equals(ButtonType.CANCEL))
+                    e.consume();
+                else
+                    primStage.close();
+            }
+        });
 
     }
 

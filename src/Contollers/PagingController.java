@@ -4,6 +4,7 @@ package Contollers;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import boundary.mainProjectFX;
 import boundary.DataInitializable;
 import common.assets.SqlAction;
 import common.assets.SqlQueryType;
@@ -31,15 +32,14 @@ public class PagingController extends BasicController {
      * @param path the path
      */
     @SuppressWarnings("static-access")
-    public void loadBoundary (String path)
-    {
+    public void loadBoundary(String path) {
         FXMLLoader loader = new FXMLLoader();
         Pane root;
         try {
             root = loader.load(getClass().getResource(path));
             Scene scene = new Scene(root);
-           // MAINPAGE.mainStage.setScene(scene);
-           // MAINPAGE.mainStage.show();
+            mainProjectFX.mainStage.setScene(scene);
+            mainProjectFX.mainStage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -49,19 +49,18 @@ public class PagingController extends BasicController {
      * Load boundary.
      *
      * @param path the path
-     * @param obj the obj
+     * @param obj  the obj
      */
-    public void loadBoundary (String path, Object obj)
-    {
+    public void loadBoundary(String path, Object obj) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
         Pane root;
         try {
             root = loader.load();
-//            DataInitializable boundary = loader.getController();
-//            boundary.initData(obj);
-//            Scene scene = new Scene(root);
-//            ProjectFX.mainStage.setScene(scene);
-//            ProjectFX.mainStage.show();
+            DataInitializable boundary = loader.getController();
+            boundary.initData(obj);
+            Scene scene = new Scene(root);
+            mainProjectFX.mainStage.setScene(scene);
+            mainProjectFX.mainStage.show();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -74,8 +73,7 @@ public class PagingController extends BasicController {
      * @param path the path
      * @return the stage
      */
-    public Stage loadAdditionalStage(String path)
-    {
+    public Stage loadAdditionalStage(String path) {
         Stage stage = null;
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
@@ -97,8 +95,7 @@ public class PagingController extends BasicController {
      * @param data the data
      * @return the stage
      */
-    public Stage loadAdditionalStage(String path, Object data)
-    {
+    public Stage loadAdditionalStage(String path, Object data) {
         Stage stage = null;
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
@@ -121,8 +118,7 @@ public class PagingController extends BasicController {
      * @param path the path
      * @return the pane
      */
-    public Pane loadBoundaryInPane(String path)
-    {
+    public Pane loadBoundaryInPane(String path) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
         Pane root = null;
         try {
@@ -136,14 +132,13 @@ public class PagingController extends BasicController {
     /**
      * User logout.
      */
-    public void userLogout()
-    {
+    public void userLogout() {
         ArrayList<Object> varArray = new ArrayList<>();
         varArray.add(false);
-//        varArray.add(ProjectFX.currentUser.getUserID());
-//        SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_USER_LOGIN_STATUS, varArray);
-//
-//        this.sendSqlActionToClient(sqlAction);
+        varArray.add(mainProjectFX.currentUser.getUserID());
+        SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_USER_LOGIN_STATUS, varArray);
+
+        this.sendSqlActionToClient(sqlAction);
     }
 
     /* (non-Javadoc)

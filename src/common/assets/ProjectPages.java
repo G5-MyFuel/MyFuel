@@ -14,6 +14,7 @@ public enum ProjectPages {
     COSTUMER_REGISTRATION_PAGE("/boundary/CustomerRegistrationFXML2.fxml"),
     FAST_FUEL_PAGE("/boundary/CustomerRegistrationFXML2.fxml"),
     CREDIT_CARD_DIALOG_PAGE("/boundary/CreditCardDialogWindow.fxml"),
+    GENERAL_DASH_BOARD("/boundary/generalDashBoard.fxml"),
 
 
     //hani pages:

@@ -52,23 +52,19 @@ public class mainProjectFX extends Application {
         Pane pane;
         try {
             FXMLLoader loader = new FXMLLoader();
-            //loader.setLocation(getClass().getResource(ProjectPages.CONNECT_TO_SERVER_PAGE.getPath()));
+            loader.setLocation(getClass().getResource(ProjectPages.CLIENT_CONNECT_TO_SERVER_PAGE.getPath()));
             pane = loader.load();
-
         } catch (IOException e) {
             e.printStackTrace();
             return;
         }
-
         Scene scene = new Scene(pane);
-        stage.setTitle("ICM");
+        stage.setTitle("MyFuel");
         stage.setScene(scene);
         stage.show();
         mainStage = stage;
         pagingController = new PagingController();
-
         mainStage.getScene().getWindow().addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, this::closeWindowEvent);
-
     }
 
     /**

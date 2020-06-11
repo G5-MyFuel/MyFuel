@@ -140,6 +140,16 @@ public class MysqlConnection {
     public static void initSqlArray() {
         sqlArray = new String[SqlQueryType.MAX_SQL_QUERY.getCode()];
 
+
+        /* *****************************************************
+         * *************** Login Queries ****************
+         * *****************************************************/
+        sqlArray[SqlQueryType.UPDATE_USER_LOGIN_STATUS.getCode()] = "UPDATE `Users` "
+                + "SET isLoginIndicator = ? WHERE userID = ? AND userType = ?";
+
+
+
+
         /* *****************************************************
          * *************** Common Queries ****************
          * *****************************************************/
