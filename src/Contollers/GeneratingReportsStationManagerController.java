@@ -5,6 +5,7 @@ import common.assets.SqlAction;
 import common.assets.SqlQueryType;
 import common.assets.SqlResult;
 import entity.PurchasesReport;
+import entity.QuantityItemsStockReport;
 import javafx.application.Platform;
 
 import java.util.ArrayList;
@@ -39,9 +40,9 @@ public class GeneratingReportsStationManagerController extends BasicController {
                 super.sendSqlActionToClient(sqlAction);
                 break;
             case "Quantity of items in stock report":
-                /*sqlAction = new SqlAction(SqlQueryType.GET_RegularSubscriptionMultiVehicle_PRICE);
+                sqlAction = new SqlAction(SqlQueryType.GET_QuantityItemsStock_Report, varArray);
                 super.sendSqlActionToClient(sqlAction);
-                break;*/
+                break;
             default:
                 break;
         }
@@ -55,17 +56,13 @@ public class GeneratingReportsStationManagerController extends BasicController {
                     myBoundary.setQuarterlyData(this.changeResultToQuarterlyReport(result));
                     break;
                 case GET_Purchases_Report:
-                    PurchasesReport resultList = getDieselPurchaseID(result);
+                    PurchasesReport resultList = changeResultToPurchasesReport(result);
                     myBoundary.setPurchasesData(resultList);
 
                     break;
-                /*case GET_RegularSubscriptionMultiVehicle_PRICE:
-                    myBoundary.setData(this.changeResultToString(result));
+                case GET_QuantityItemsStock_Report:
+                    myBoundary.setQuantityItemsStockData(changeResultToQuantityItemsStockReport(result));
                     break;
-                case INSERT_NEW_PRICE:
-                    myBoundary.setData("");
-                    break;*/
-
                 default:
                     break;
             }
@@ -88,7 +85,7 @@ public class GeneratingReportsStationManagerController extends BasicController {
         return TotalPrice.toString();
     }
 
-    private PurchasesReport getDieselPurchaseID(SqlResult result) {
+    private PurchasesReport changeResultToPurchasesReport(SqlResult result) {
 
         //PurchasesReport resultList = new PurchasesReport();
         Integer salesAmount = 0;
@@ -102,4 +99,16 @@ public class GeneratingReportsStationManagerController extends BasicController {
         PurchasesReport resultList = new PurchasesReport(FuelType, TotalPrice.toString() + " liters", salesAmount.toString() + " purchase");
         return resultList;
     }
+
+    private ArrayList<QuantityItemsStockReport> changeResultToQuantityItemsStockReport(SqlResult result) {
+
+        ArrayList<QuantityItemsStockReport> resultList = new ArrayList<>();
+
+        for (ArrayList<Object> a : result.getResultData()) {
+            QuantityItemsStockReport tempReport = new QuantityItemsStockReport((String) a.get(0), (String) a.get(1), (String) a.get(2));
+            resultList.add(tempReport);
+        }
+        return resultList;
+    }
+
 }

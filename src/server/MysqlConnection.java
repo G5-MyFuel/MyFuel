@@ -190,7 +190,8 @@ public class MysqlConnection {
          * ********** Orders From Supplier Queries ****************
          * *****************************************/
         sqlArray[SqlQueryType.GET_ALL_ORDERS_FROM_SUPPLIER_TABLE.getCode()] = "SELECT * FROM `OrderForStock`";
-        sqlArray[SqlQueryType.INSERT_STATUS_FOR_ORDER_TABLE.getCode()] = "INSERT INTO `OrderFromStock` ('OrderStatus') VALUES (?)";
+        sqlArray[SqlQueryType.INSERT_STATUS_FOR_ORDER_TABLE.getCode()] = "UPDATE `OrderForStock` SET `OrderStatus`= ? WHERE `OrderNumber` LIKE ?";
+
 
         /* *****************************************
          * ********** Templates+Campaigns Management Queries ****************
@@ -221,6 +222,7 @@ public class MysqlConnection {
          * *****************************************/
         sqlArray[SqlQueryType.GET_Quarterly_Revenue.getCode()] = "SELECT * FROM `Purchase` WHERE `purchaseDate` BETWEEN ? AND ?";
         sqlArray[SqlQueryType.GET_Purchases_Report.getCode()] = "SELECT * FROM `Purchase` WHERE `Fuel type` LIKE ?";
+        sqlArray[SqlQueryType.GET_QuantityItemsStock_Report.getCode()] = "SELECT * FROM `FuelInventory` WHERE `Company Name` LIKE ?";
 
         /* *****************************************
          * ********** Login Page Queries ****************

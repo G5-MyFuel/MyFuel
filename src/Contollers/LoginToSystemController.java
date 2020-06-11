@@ -18,11 +18,6 @@ public class LoginToSystemController extends BasicController {
         this.myBoundary = myBoundary;
     }
 
-    //בקשה לשליפת כל היוזרים במערכת - מקבלת את כל הנתונים בarraylist של יוזרים שיחכה בlogic
-    public void importAllUsersToArrayListInLogicClass() {
-        //ClientApp.chatClient.handleMessageFromClientUI(new Message(OperationType.getAllUsersTable, "SELECT * FROM Users as U;"));
-    }
-
     public ArrayList<User> getUsersArrayList() {
         return usersArrayList;
     }
@@ -31,7 +26,7 @@ public class LoginToSystemController extends BasicController {
         this.usersArrayList = usersArrayList;
     }
 
-    public boolean searchUserIdAndUserTypeInArrayList(int userId, int userType) {
+    public boolean searchUserIdAndUserTypeInArrayList(String userId, int userType) {
         if (userType == 0) {
             System.err.println("user type not detected");
         }
@@ -67,7 +62,7 @@ public class LoginToSystemController extends BasicController {
     private ArrayList<User> changeResultToUsers(SqlResult result) {
         ArrayList<User> resultList = new ArrayList<>();
         for (ArrayList<Object> a : result.getResultData()) {
-            User user = new User((int) a.get(0), (int) a.get(1), (String) a.get(2), (String) a.get(4), (String) a.get(5), (String) a.get(6),(int)a.get(7));
+            User user = new User((String) a.get(0), (int) a.get(1), (String) a.get(2), (String) a.get(4), (String) a.get(5), (String) a.get(6),(int)a.get(7));
             resultList.add(user);
         }
         return resultList;

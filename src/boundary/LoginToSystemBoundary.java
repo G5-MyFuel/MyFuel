@@ -123,7 +123,7 @@ public class LoginToSystemBoundary extends Application {
 
     private boolean checkIfUserNameAndUserTypeInDb(String userID, int UserType) {
         for (User u : allDBUsersArrayList) {
-            if (Integer.toString(u.getUserID()).equals(userID) && userType == u.getUserType()) {
+            if (u.getUserID().equals(userID) && userType == u.getUserType()) {
                 System.out.println("the user and its type correct");//tet
                 return true;
             }
@@ -139,7 +139,7 @@ public class LoginToSystemBoundary extends Application {
     private boolean checkIfPasswordMatches(String userID, String password) {
         if (loginAttempts > 0) {
             for (User u : allDBUsersArrayList) {
-                if (Integer.toString(u.getUserID()).equals(userID)) {
+                if (u.getUserID().equals(userID)) {
                     if (u.getUserPassword().equals(password)) {
                         System.out.println("the userId & password matches");
                         return true;

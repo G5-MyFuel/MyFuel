@@ -3,7 +3,7 @@ package entity;
 import java.io.Serializable;
 
 public class User implements Serializable {
-    private int userID;
+    private String userID;
     private int userType;
     private String userPassword;
     private int isLoginIndicator;
@@ -12,16 +12,16 @@ public class User implements Serializable {
     private String userEmail;
     private int loginAttempts;
 
-    public User(int userID, int userType, String userFirstName, String userLastName, String userEmail) {
+    public User(String userID, int userType, String userFirstName, String userLastName, String userEmail) {
         this.userID = userID;
         this.userType = userType;
         this.userFirstName = userFirstName;
         this.userLastName = userLastName;
         this.userEmail = userEmail;
-        this.userPassword = Integer.toString(userID);
+        this.userPassword = this.userID; //the default password is the userID
     }
 
-    public User(int userID, int userType, String userPassword, String userFirstName, String userLastName, String userEmail,int loginAttempts) {
+    public User(String userID, int userType, String userPassword, String userFirstName, String userLastName, String userEmail,int loginAttempts) {
         this.userID = userID;
         this.userType = userType;
         this.userPassword = userPassword;
@@ -32,7 +32,7 @@ public class User implements Serializable {
     }
 
 
-    public int getUserID() {
+    public String getUserID() {
         return userID;
     }
 
@@ -60,7 +60,7 @@ public class User implements Serializable {
         return userEmail;
     }
 
-    public void setUserID(int userID) {
+    public void setUserID(String userID) {
         this.userID = userID;
     }
 

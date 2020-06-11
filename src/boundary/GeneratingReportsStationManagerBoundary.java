@@ -6,6 +6,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import entity.PurchasesReport;
+import entity.QuantityItemsStockReport;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -74,6 +75,17 @@ public class GeneratingReportsStationManagerBoundary implements Initializable {
     @FXML
     private TableColumn<PurchasesReport, String> SalesAmountColumn;
 
+    @FXML
+    private Label QuantityItemsStockTxt;
+
+    @FXML
+    private TableView<QuantityItemsStockReport> QuantityReportTable;
+
+    @FXML
+    private TableColumn<QuantityItemsStockReport, String> FuelTypeQuantityReportColumn;
+
+    @FXML
+    private TableColumn<QuantityItemsStockReport, String> AvailableInventoryColumn;
 
     private final ObservableList<String> ReportsType = FXCollections.observableArrayList("Quarterly revenue report",
             "Purchases report", "Quantity of items in stock report");
@@ -89,6 +101,8 @@ public class GeneratingReportsStationManagerBoundary implements Initializable {
         TotalRevenueLabel.setVisible(false);
         ShowTotalRevenueTXT.setVisible(false);
         PurchasesReportTable.setVisible(false);
+        QuantityItemsStockTxt.setVisible(false);
+        QuantityReportTable.setVisible(false);
 
         /*  set all fields validators */
         formValidation();
@@ -105,6 +119,13 @@ public class GeneratingReportsStationManagerBoundary implements Initializable {
         formValidation.maxSizeValidation(ShowNewRateTXT, "New price", 100);
         formValidation.minSizeValidation(ShowNewRateTXT, "New price", 1);
 */
+    }
+
+    @FXML
+    void handleQuarterlyRevenueReport(MouseEvent event) {
+
+        ChooseReportYearCombo.setVisible(true);
+        ChooseReportYearCombo.setItems(YearList);
     }
 
     @FXML
@@ -148,25 +169,6 @@ public class GeneratingReportsStationManagerBoundary implements Initializable {
         ShowTotalRevenueTXT.setText(revenue);
     }
 
-    public void setPurchasesData(PurchasesReport resultList) {
-
-        PurchasesArray.add(resultList);
-        System.out.println(resultList);
-        PurchasesReportTable.setVisible(true);
-        FuelTypeColumn.setCellValueFactory(new PropertyValueFactory<>("FuelType"));
-        QuantityPurchasedColumn.setCellValueFactory(new PropertyValueFactory<>("QuantityPurchased"));
-        SalesAmountColumn.setCellValueFactory(new PropertyValueFactory<>("SalesAmount"));
-
-        ObservableList<PurchasesReport> data = FXCollections.observableArrayList(PurchasesArray);
-        PurchasesReportTable.setItems(data);
-    }
-
-
-    @FXML
-    void handleClicks(ActionEvent event) {
-
-    }
-
     @FXML
     void handlePurchasesReport(MouseEvent event) {
 
@@ -176,16 +178,48 @@ public class GeneratingReportsStationManagerBoundary implements Initializable {
         myController.GetReportData("Purchases report", "Scooter fuel", ""); //start the process that will ask server to execute quarry and get the table details
     }
 
-    @FXML
-    void handleQuantityItemsInStockReport(MouseEvent event) {
+    public void setPurchasesData(PurchasesReport resultList) {
 
+        PurchasesArray.add(resultList);
+        //PurchasesReportTable.setVisible(true);
+        FuelTypeColumn.setCellValueFactory(new PropertyValueFactory<>("fuelType"));
+        QuantityPurchasedColumn.setCellValueFactory(new PropertyValueFactory<>("quantityPurchased"));
+        SalesAmountColumn.setCellValueFactory(new PropertyValueFactory<>("salesAmount"));
+
+        ObservableList<PurchasesReport> data = FXCollections.observableArrayList(PurchasesArray);
+        PurchasesReportTable.setItems(data);
     }
 
     @FXML
-    void handleQuarterlyRevenueReport(MouseEvent event) {
+    void handleQuantityItemsInStockReport(MouseEvent event) {
 
-        ChooseReportYearCombo.setVisible(true);
-        ChooseReportYearCombo.setItems(YearList);
+        //QuantityReportTable.setVisible(true);
+        QuantityItemsStockTxt.setText("Quantity of items in stock for Sonol:");
+        /*
+         * שם החברה,סונול בדוגמא הזאת, יילקח מאובייקט של מנהל תחנה
+         * ("Quantity of items in stock for" + getCompanyName+":");
+         * */
+        QuantityItemsStockTxt.setVisible(true);
+
+        myController.GetReportData("Quantity of items in stock report", "Sonol", ""); //start the process that will ask server to execute quarry and get the table details
+        /*שם החברה,סונול בדוגמא הזאת, יילקח מאובייקט של מנהל תחנה*/
+    }
+
+    public void setQuantityItemsStockData(ArrayList<QuantityItemsStockReport> resultList) {
+
+        System.out.println(resultList);
+        QuantityReportTable.setVisible(true);
+        FuelTypeQuantityReportColumn.setCellValueFactory(new PropertyValueFactory<>("fuelType"));
+        AvailableInventoryColumn.setCellValueFactory(new PropertyValueFactory<>("availableInventory"));
+
+        ObservableList<QuantityItemsStockReport> data = FXCollections.observableArrayList(resultList);
+        QuantityReportTable.setItems(data);
+    }
+
+
+        @FXML
+    void handleClicks(ActionEvent event) {
+
     }
 
     @FXML
