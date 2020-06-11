@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
@@ -15,32 +16,27 @@
    <children>
       <Pane fx:id="CreditCardWindow" layoutX="70.0" layoutY="-17.0" prefHeight="417.0" prefWidth="501.0" style="-fx-border-color: #2D4578; -fx-border-width: 3;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label layoutX="20.0" layoutY="16.0" text="Credit-Card" textFill="#2d4578">
+            <Label layoutX="10.0" layoutY="14.0" text="Credit-Card" textFill="#2d4578">
                <font>
                   <Font name="System Bold Italic" size="34.0" />
                </font>
             </Label>
-            <Label layoutX="21.0" layoutY="71.0" text="Fill in the required information">
+            <Label layoutX="14.0" layoutY="58.0" text="Fill in the required information">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <JFXTextField fx:id="creditCardNumbertxt" focusColor="#00add8" labelFloat="true" layoutX="38.0" layoutY="131.0" prefHeight="41.0" prefWidth="284.0" promptText="Card number" text="                -                -                -                " unFocusColor="#868282">
+            <JFXTextField fx:id="creditCardNumbertxt" focusColor="#00add8" labelFloat="true" layoutX="14.0" layoutY="98.0" prefHeight="41.0" prefWidth="242.0" promptText="Card number" unFocusColor="#868282">
                <padding>
                   <Insets bottom="10.0" top="10.0" />
                </padding>
             </JFXTextField>
-            <JFXTextField fx:id="experationDate" accessibleRole="DATE_PICKER" focusColor="#00add8" labelFloat="true" layoutX="38.0" layoutY="206.0" prefHeight="41.0" prefWidth="95.0" promptText="Expiration date" text="          /" unFocusColor="#868282">
+            <JFXTextField fx:id="CVVtxt" focusColor="#00add8" labelFloat="true" layoutX="23.0" layoutY="259.0" prefHeight="41.0" prefWidth="89.0" promptText="CVV" text=" " unFocusColor="#868282">
                <padding>
                   <Insets bottom="10.0" top="10.0" />
                </padding>
             </JFXTextField>
-            <JFXTextField fx:id="CVVtxt" focusColor="#00add8" labelFloat="true" layoutX="39.0" layoutY="283.0" prefHeight="41.0" prefWidth="104.0" promptText="CVV" text=" " unFocusColor="#868282">
-               <padding>
-                  <Insets bottom="10.0" top="10.0" />
-               </padding>
-            </JFXTextField>
-            <ImageView fitHeight="70.0" fitWidth="136.0" layoutX="162.0" layoutY="248.0" mouseTransparent="true">
+            <ImageView fitHeight="84.0" fitWidth="145.0" layoutX="146.0" layoutY="232.0" mouseTransparent="true">
                <image>
                   <Image url="@../media/credit-card-cvv-code.png" />
                </image>
@@ -60,6 +56,11 @@
                   </ImageView>
                </graphic>
             </Button>
+            <JFXComboBox fx:id="YearCombo" layoutX="312.0" layoutY="154.0" prefHeight="25.0" prefWidth="56.0" />
+            <JFXComboBox fx:id="MonthCombo" layoutX="170.0" layoutY="154.0" prefHeight="25.0" prefWidth="111.0" />
+            <Label layoutX="135.0" layoutY="158.0" text="Month" />
+            <Label layoutX="291.0" layoutY="158.0" text="Year" />
+            <Label layoutX="21.0" layoutY="158.0" text="Exparation Date:" />
          </children>
       </Pane>
    </children>

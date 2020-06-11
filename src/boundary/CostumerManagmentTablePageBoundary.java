@@ -9,27 +9,23 @@ import common.assets.SqlQueryType;
 import entity.Costumer;
 import entity.EditingCell;
 import entity.Vehicle;
-import javafx.application.Platform;
+
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
+
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
+
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
+
 import javafx.scene.control.*;
 import javafx.scene.control.cell.ComboBoxTableCell;
-import javafx.scene.control.cell.ComboBoxTreeTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
+
 import javafx.util.Callback;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -46,6 +42,7 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
     private ArrayList<Vehicle> Vehicles = new ArrayList<>();
     private ArrayList<Costumer> costumers = new ArrayList<Costumer>();
     private Alert ErrorAlert = new Alert(Alert.AlertType.ERROR);
+    private Costumer cos;
     /**
      * The supervisor boundary controller.
      */
@@ -292,6 +289,9 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
         VehicleTable.setItems(data);
     }
 
+    public void refreshTable(){
+        myController.getCostumerTable();;
+    }
 
     @FXML
     void ClickSearchCostumer(MouseEvent event) {
@@ -310,7 +310,6 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
         }
 
     }
-
 
     @FXML
     void ClickSaveVehicleButton(MouseEvent event) {
@@ -337,7 +336,6 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
 
     @FXML
     void removeSelectedCostumer() {
-
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.getButtonTypes().remove(ButtonType.OK);
         alert.getButtonTypes().add(ButtonType.CANCEL);
@@ -352,8 +350,6 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
             CosManageTbale.getItems().remove(selectedItem);
             CosManageTbale.refresh();
         }
-
-
     }
 
 
@@ -413,11 +409,18 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
             ErrorAlert.setHeaderText("Please Select Costumer.");
             ErrorAlert.showAndWait();
         } else {
-            Costumer cos = CosManageTbale.getSelectionModel().getSelectedItem();
-            pc.loadAdditionalStage(ProjectPages.CREDIT_CARD_DIALOG_PAGE.getPath(), cos);
+            cos = CosManageTbale.getSelectionModel().getSelectedItem();
+            pc.loadAdditionalStage(ProjectPages.CREDIT_CARD_DIALOG_PAGE.getPath(), this);
         }
     }
 
+    public Costumer getCos() {
+        return cos;
+    }
+
+    public void setCos(Costumer cos) {
+        this.cos = cos;
+    }
 
     private Costumer searchCostumerWithID(String costumerID) {
         for (Costumer cos : costumers) {

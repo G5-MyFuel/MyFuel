@@ -25,8 +25,6 @@ public class CustomerRegistrationController extends BasicController {
     private CustomerRegistrationBoundary myBoundary;
 
 
-    MysqlConnection mySqlConnector;
-    private boolean insertCostumerFlag;
     private Costumer tempCostumer;
 
 
@@ -37,7 +35,6 @@ public class CustomerRegistrationController extends BasicController {
     /*Logic Methods*/
 
     public void setCostumerInDB(Costumer costumer) {
-
         //set Costumer data into varArray
         ArrayList<Object> varArray = new ArrayList<>();
         varArray.add(costumer.getID());
@@ -56,24 +53,22 @@ public class CustomerRegistrationController extends BasicController {
             varArray.add("No Card Exists");
         }
         varArray.add(costumer.getPurchasePlan());
+        varArray.add(costumer.getServicePlan());
         if (costumer.getCostumerVehicle().size() > 1) {
             ArrayList<Object> vehicleArray = new ArrayList<>();
             for (Vehicle v : costumer.getCostumerVehicle()) {
                 vehicleArray.add(v.getVehicleID());
                 vehicleArray.add(v.getGasType());
                 vehicleArray.add(v.getOwnerID());
-                System.out.println(vehicleArray);
                 SqlAction sqlActionForVehicle = new SqlAction(SqlQueryType.INSERT_NEW_VEHICLE, vehicleArray);
                 super.sendSqlActionToClient(sqlActionForVehicle);
                 vehicleArray.clear();
             }
         }
-        varArray.add(costumer.getCostumerVehicle().get(0).getVehicleID());
-        varArray.add(costumer.getCostumerVehicle().get(0).getGasType());
-        varArray.add(costumer.getServicePlan());
         SqlAction sqlAction = new SqlAction(SqlQueryType.INSERT_NEW_COSTUMER, varArray);
         super.sendSqlActionToClient(sqlAction);
         tempCostumer.getCostumerVehicle().clear();
+        tempCostumer = null;
     }
 
     public void addCostumerCreditCard(CreditCard card) {
@@ -138,11 +133,9 @@ public class CustomerRegistrationController extends BasicController {
         ArrayList<Costumer> resultList = new ArrayList<>();
         for (ArrayList<Object> a : result.getResultData()) {
             Costumer cos = new Costumer((String) a.get(0), (String) a.get(1), (String) a.get(2),
-                    (String) a.get(3), (String) a.get(4), (String) a.get(5), null, (String) a.get(9), null, (String) a.get(12));
+                    (String) a.get(3), (String) a.get(4), (String) a.get(5), null, (String) a.get(9), null, (String) a.get(10));
             CreditCard card = new CreditCard(cos, (String) a.get(6), (String) a.get(7), (String) a.get(8));
-            Vehicle vehicle = new Vehicle(cos.getID().toString(), (String) a.get(10), (String) a.get(11)); //here i need to find a way to get all vehicles and not just 1 of them.
             cos.setCostumerCreditCard(card);
-            cos.addCostumerVehicle(vehicle);
             resultList.add(cos);
         }
         return resultList;

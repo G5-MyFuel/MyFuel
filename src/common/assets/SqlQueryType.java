@@ -40,6 +40,7 @@ public enum SqlQueryType {
     GET_ALL_COSTUMER_VEHICLES(SqlExecutionType.EXECUTE_QUERY),
     REMOVE_VEHICLE(SqlExecutionType.UPDATE_QUERY),
     REMOVE_COSTUMER(SqlExecutionType.UPDATE_QUERY),
+    UPDATE_COSTUMER_CREDIT_CARD(SqlExecutionType.UPDATE_QUERY),
 
     /* *****************************************
      * ********** Users Management Queries ****************
