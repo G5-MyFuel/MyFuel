@@ -4,7 +4,7 @@ import boundary.GeneratingReportsStationManagerBoundary;
 import common.assets.SqlAction;
 import common.assets.SqlQueryType;
 import common.assets.SqlResult;
-import entity.SaleOperation;
+import entity.MarketingCampaign;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
