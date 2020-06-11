@@ -1,6 +1,8 @@
 package entity;
 
 
+import javafx.scene.control.CustomMenuItem;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -9,7 +11,7 @@ import java.util.Objects;
  * @see Costumer - the form's entity class
  */
 
-public class Costumer {
+public class Costumer extends User{
 
     private CreditCard CostumerCreditCard;
     private ArrayList<Vehicle> CostumerVehicle = new ArrayList<Vehicle>();
@@ -23,7 +25,7 @@ public class Costumer {
     private String purchasePlan;
 
     public Costumer(String ID, String CustomerPassword, String CostumerType, String Fname, String Lname, String emailAdress, CreditCard customerCreditCard, String purchasePlan, Vehicle CostumerVehicle,String servicePlan) {
-        super();
+        super(ID,1, CustomerPassword,Fname,Lname,emailAdress);
         this.CostumerCreditCard = customerCreditCard;
         this.purchasePlan = purchasePlan;
         this.CostumerVehicle.add(CostumerVehicle);

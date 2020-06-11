@@ -84,10 +84,12 @@ public class LoginToSystemBoundary extends Application {
     void clickLoginBtn() {
         System.out.println("-->clickLoginBtn method");
         System.out.println(allDBUsersArrayList);
-        checkInputs();
+        if(checkInputs()){
+
+        }
     }
 
-    public void checkInputs() {
+    public boolean checkInputs() {
         if (!loginAsComboBox.getSelectionModel().isEmpty()) {
             switch (loginAsComboBox.getValue()) {
                 case "Customer":
@@ -115,10 +117,11 @@ public class LoginToSystemBoundary extends Application {
         //check if userID exist in DB
         if (checkIfUserNameAndUserTypeInDb(userIDTextField.getText(), userType)) {
             if (checkIfPasswordMatches(userIDTextField.getText(), passwordField.getText())) {
-                //todo: כאן נגדיר מה יקרה כאשר המשתמש הזין נתונים נכונים ויכול להתחבר למערכת
                 System.out.println("ther userid and password matches!");
+                return true;
             }
         }
+        return false;
     }
 
     private boolean checkIfUserNameAndUserTypeInDb(String userID, int UserType) {
