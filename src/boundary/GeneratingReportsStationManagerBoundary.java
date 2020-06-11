@@ -3,7 +3,7 @@ package boundary;
 import Contollers.FormValidation;
 import Contollers.GeneratingReportsStationManagerController;
 import com.jfoenix.controls.JFXComboBox;
-import entity.MarketingCampaign;
+import entity.PurchasesReport;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,7 +16,6 @@ import javafx.scene.input.MouseEvent;
 
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -36,6 +35,7 @@ public class GeneratingReportsStationManagerBoundary implements Initializable {
     private final GeneratingReportsStationManagerController myController = new GeneratingReportsStationManagerController(this);
     private FormValidation formValidation;
     private final Alert ErrorAlert = new Alert(Alert.AlertType.ERROR);
+    ArrayList<PurchasesReport> PurchasesArray = new ArrayList<>();
 
     @FXML
     private Button btnOverview;
@@ -71,16 +71,16 @@ public class GeneratingReportsStationManagerBoundary implements Initializable {
     private JFXTextField ShowTotalRevenueTXT;
 
     @FXML
-    private TableView<String> PurchasesReportTable;
+    private TableView<PurchasesReport> PurchasesReportTable;
 
     @FXML
-    private TableColumn<String, String> FuelTypeColumn;
+    private TableColumn<PurchasesReport, String> FuelTypeColumn;
 
     @FXML
-    private TableColumn<String, String> QuantityPurchasedColumn;
+    private TableColumn<PurchasesReport, String> QuantityPurchasedColumn;
 
     @FXML
-    private TableColumn<String, String> SalesAmountColumn;
+    private TableColumn<PurchasesReport, String> SalesAmountColumn;
 
 
     private final ObservableList<String> ReportsType = FXCollections.observableArrayList("Quarterly revenue report",
@@ -156,14 +156,16 @@ public class GeneratingReportsStationManagerBoundary implements Initializable {
         ShowTotalRevenueTXT.setText(revenue);
     }
 
-    public void setPurchasesData(ArrayList<String> PurchasesArray) {
+    public void setPurchasesData(PurchasesReport resultList) {
 
+        PurchasesArray.add(resultList);
+        System.out.println(resultList);
         PurchasesReportTable.setVisible(true);
-        FuelTypeColumn.setCellValueFactory(new PropertyValueFactory<>("Fuel type"));
-        QuantityPurchasedColumn.setCellValueFactory(new PropertyValueFactory<>(" Quantity Purchased"));
-        SalesAmountColumn.setCellValueFactory(new PropertyValueFactory<>("Sales Amount"));
+        FuelTypeColumn.setCellValueFactory(new PropertyValueFactory<>("FuelType"));
+        QuantityPurchasedColumn.setCellValueFactory(new PropertyValueFactory<>("QuantityPurchased"));
+        SalesAmountColumn.setCellValueFactory(new PropertyValueFactory<>("SalesAmount"));
 
-        ObservableList<String> data = FXCollections.observableArrayList(PurchasesArray);
+        ObservableList<PurchasesReport> data = FXCollections.observableArrayList(PurchasesArray);
         PurchasesReportTable.setItems(data);
     }
 

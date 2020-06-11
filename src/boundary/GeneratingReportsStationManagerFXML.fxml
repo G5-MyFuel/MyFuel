@@ -196,15 +196,15 @@
                                     <Insets bottom="5.0" top="20.0" />
                                  </padding>
                               </JFXTextField>
-                              <ScrollPane layoutX="363.0" layoutY="410.0" prefHeight="304.0" prefWidth="497.0">
+                              <ScrollPane layoutX="363.0" layoutY="410.0" prefHeight="150.0" prefWidth="393.0">
                                 <content>
-                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="301.0" prefWidth="493.0">
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="148.0" prefWidth="391.0">
                                        <children>
-                                          <TableView fx:id="PurchasesReportTable" prefHeight="303.0" prefWidth="496.0">
+                                          <TableView fx:id="PurchasesReportTable" prefHeight="147.0" prefWidth="390.0">
                                             <columns>
                                               <TableColumn fx:id="FuelTypeColumn" prefWidth="116.0" text="Fuel type" />
-                                              <TableColumn fx:id="QuantityPurchasedColumn" prefWidth="230.0" text="Quantity purchased (liters)" />
-                                                <TableColumn fx:id="SalesAmountColumn" prefWidth="149.0" text="Sales amount" />
+                                              <TableColumn fx:id="QuantityPurchasedColumn" prefWidth="157.0" text="Quantity purchased" />
+                                                <TableColumn fx:id="SalesAmountColumn" prefWidth="115.0" text="Sales amount" />
                                             </columns>
                                           </TableView>
                                        </children>

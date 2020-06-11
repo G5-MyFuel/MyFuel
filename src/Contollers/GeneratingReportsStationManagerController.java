@@ -4,7 +4,7 @@ import boundary.GeneratingReportsStationManagerBoundary;
 import common.assets.SqlAction;
 import common.assets.SqlQueryType;
 import common.assets.SqlResult;
-import entity.MarketingCampaign;
+import entity.PurchasesReport;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -49,14 +49,6 @@ public class GeneratingReportsStationManagerController extends BasicController {
         }
     }
 
-    /*public void PurchasesReportData(String ReportType, String startDate) {
-
-        ArrayList<Object> varArray = new ArrayList<>();
-        varArray.add(startDate);
-        SqlAction sqlAction = new SqlAction(SqlQueryType.GET_Purchases_Report, varArray);
-        super.sendSqlActionToClient(sqlAction);
-    }*/
-
     @Override
     public void getResultFromClient(SqlResult result) {
         Platform.runLater(() -> {
@@ -65,9 +57,7 @@ public class GeneratingReportsStationManagerController extends BasicController {
                     myBoundary.setQuarterlyData(this.changeResultToQuarterlyReport(result));
                     break;
                 case GET_Purchases_Report:
-                    ArrayList<String> resultList = new ArrayList<>();
-                    resultList.addAll(this.getDieselpurchaseID(result));
-                    //int salesAmount = 0;
+                    PurchasesReport resultList = getDieselPurchaseID(result);
                     myBoundary.setPurchasesData(resultList);
 
                     break;
@@ -100,20 +90,18 @@ public class GeneratingReportsStationManagerController extends BasicController {
         return TotalPrice.toString();
     }
 
-    private ArrayList<String> getDieselpurchaseID(SqlResult result) {
+    private PurchasesReport getDieselPurchaseID(SqlResult result) {
 
-        ArrayList<String> resultList = new ArrayList<>();
+        //PurchasesReport resultList = new PurchasesReport();
         Integer salesAmount = 0;
         Float TotalPrice = new Float(0);
-        //ArrayList<String> purchaseID = new ArrayList<>();
+        String FuelType = new String();
         for (ArrayList<Object> a : result.getResultData()) {
+            FuelType = (String) a.get(5);
             TotalPrice += Float.parseFloat((String) a.get(3));
             salesAmount++;
-            //purchaseID.add((String) a.get(0));
         }
-        resultList.add(TotalPrice.toString());
-        resultList.add(salesAmount.toString());
+        PurchasesReport resultList = new PurchasesReport(FuelType, TotalPrice.toString()+" liters", salesAmount.toString()+" purchase");
         return resultList;
     }
-
 }
