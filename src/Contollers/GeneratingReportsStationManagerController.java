@@ -6,8 +6,6 @@ import common.assets.SqlQueryType;
 import common.assets.SqlResult;
 import entity.PurchasesReport;
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 
@@ -101,7 +99,7 @@ public class GeneratingReportsStationManagerController extends BasicController {
             TotalPrice += Float.parseFloat((String) a.get(3));
             salesAmount++;
         }
-        PurchasesReport resultList = new PurchasesReport(FuelType, TotalPrice.toString()+" liters", salesAmount.toString()+" purchase");
+        PurchasesReport resultList = new PurchasesReport(FuelType, TotalPrice.toString() + " liters", salesAmount.toString() + " purchase");
         return resultList;
     }
 }

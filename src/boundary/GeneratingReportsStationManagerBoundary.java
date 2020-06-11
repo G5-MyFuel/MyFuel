@@ -2,26 +2,18 @@ package boundary;
 
 import Contollers.FormValidation;
 import Contollers.GeneratingReportsStationManagerController;
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXTextField;
 import entity.PurchasesReport;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-
-
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXTextField;
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -179,9 +171,9 @@ public class GeneratingReportsStationManagerBoundary implements Initializable {
     void handlePurchasesReport(MouseEvent event) {
 
         PurchasesReportTable.setVisible(true);
-        myController.GetReportData("Purchases report","Diesel",""); //start the process that will ask server to execute quarry and get the table details
-        myController.GetReportData("Purchases report","Gasoline 95",""); //start the process that will ask server to execute quarry and get the table details
-        myController.GetReportData("Purchases report","Scooter fuel",""); //start the process that will ask server to execute quarry and get the table details
+        myController.GetReportData("Purchases report", "Diesel", ""); //start the process that will ask server to execute quarry and get the table details
+        myController.GetReportData("Purchases report", "Gasoline 95", ""); //start the process that will ask server to execute quarry and get the table details
+        myController.GetReportData("Purchases report", "Scooter fuel", ""); //start the process that will ask server to execute quarry and get the table details
     }
 
     @FXML
