@@ -196,7 +196,7 @@
                                     <Insets bottom="5.0" top="20.0" />
                                  </padding>
                               </JFXTextField>
-                              <ScrollPane layoutX="363.0" layoutY="410.0" prefHeight="150.0" prefWidth="393.0">
+                              <ScrollPane layoutX="363.0" layoutY="421.0" prefHeight="150.0" prefWidth="393.0">
                                 <content>
                                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="148.0" prefWidth="391.0">
                                        <children>
@@ -210,6 +210,21 @@
                                        </children>
                                     </AnchorPane>
                                 </content>
+                              </ScrollPane>
+                              <Label fx:id="QuantityItemsStockTxt" layoutX="779.0" layoutY="390.0" text="Quantity of items in stock" />
+                              <ScrollPane layoutX="762.0" layoutY="421.0" prefHeight="150.0" prefWidth="279.0">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="148.0" prefWidth="277.0">
+                                       <children>
+                                          <TableView fx:id="QuantityReportTable" prefHeight="147.0" prefWidth="275.0">
+                                             <columns>
+                                                <TableColumn fx:id="FuelTypeQuantityReportColumn" prefWidth="116.0" text="Fuel type" />
+                                                <TableColumn fx:id="AvailableInventoryColumn" prefWidth="157.0" text="Available inventory" />
+                                             </columns>
+                                          </TableView>
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
                               </ScrollPane>
                            </children>
                         </Pane>
