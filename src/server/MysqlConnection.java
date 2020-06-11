@@ -160,6 +160,8 @@ public class MysqlConnection {
         sqlArray[SqlQueryType.GET_ALL_COSTUMER_VEHICLES.getCode()] = "SELECT `Vehicle ID`, `Fuel Type`, `Owner ID` FROM `Vehicle` WHERE `Owner ID` = ?";
         sqlArray[SqlQueryType.REMOVE_VEHICLE.getCode()] = "DELETE FROM `Vehicle` WHERE `Vehicle ID` = ?";
         sqlArray[SqlQueryType.REMOVE_COSTUMER.getCode()] = "DELETE FROM `Costumer` WHERE `ID` = ?";
+        sqlArray[SqlQueryType.UPDATE_COSTUMER_CREDIT_CARD.getCode()] = "UPDATE `Costumer` SET `Credit Card Number` = ? ,`CreditCardExperationDate` = ? ,`CVV` = ?" +
+                "WHERE ID =?";
 
 
 
@@ -169,8 +171,8 @@ public class MysqlConnection {
          * ********** Costumer Registration Queries ****************
          * *****************************************/
         sqlArray[SqlQueryType.INSERT_NEW_COSTUMER.getCode()] =
-                "INSERT INTO `Costumer`(`ID`, `Password`, `Type`, `First Name`, `Last Name`, `Email Adress`, `Credit Card Number`, `CreditCardExperationDate`, `CVV`," +
-                        " `purchasePlan`, `Vehicle ID`, `Vehicale GasType`, `Service Plan`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?);";
+                "INSERT INTO `Costumer`(`ID`, `Password`, `Costumer Type`, `First Name`, `Last Name`, `Email Adress`, `Credit Card Number`," +
+                        " `CreditCardExperationDate`, `CVV`, `Purchase Plan`, `Service Plan`) VALUES (?,?,?,?,?,?,?,?,?,?,?);";
         sqlArray[SqlQueryType.INSERT_NEW_VEHICLE.getCode()] = "INSERT INTO `Vehicle`(`Vehicle ID`, `Fuel Type`, `Owner ID`) VALUES (?,?,?);";
 
 
@@ -209,6 +211,7 @@ public class MysqlConnection {
          * *****************************************/
         sqlArray[SqlQueryType.GET_Quarterly_Revenue.getCode()] = "SELECT * FROM `Purchase` WHERE `purchaseDate` BETWEEN ? AND ?";
         sqlArray[SqlQueryType.GET_Purchases_Report.getCode()] = "SELECT * FROM `Purchase` WHERE `Fuel type` LIKE ?";
+        sqlArray[SqlQueryType.GET_QuantityItemsStock_Report.getCode()] = "SELECT * FROM `FuelInventory` WHERE `Company Name` LIKE ?";
 
         /* *****************************************
          * ********** Login Page Queries ****************

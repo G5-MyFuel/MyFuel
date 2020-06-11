@@ -2,49 +2,49 @@ package entity;
 
 public class PurchasesReport {
 
-    private String FuelType;
-    private String QuantityPurchased;
-    private String SalesAmount;
+    private String fuelType;
+    private String quantityPurchased;
+    private String salesAmount;
 
     public PurchasesReport() {
     }
 
     public PurchasesReport(String fuelType, String quantityPurchased, String salesAmount) {
-        this.FuelType = fuelType;
-        this.QuantityPurchased = quantityPurchased;
-        this.SalesAmount = salesAmount;
+        this.fuelType = fuelType;
+        this.quantityPurchased = quantityPurchased;
+        this.salesAmount = salesAmount;
     }
 
     public String getFuelType() {
-        return FuelType;
+        return fuelType;
     }
 
     public void setFuelType(String fuelType) {
-        this.FuelType = fuelType;
+        this.fuelType = fuelType;
     }
 
     public String getQuantityPurchased() {
-        return QuantityPurchased;
+        return quantityPurchased;
     }
 
     public void setQuantityPurchased(String quantityPurchased) {
-        this.QuantityPurchased = quantityPurchased;
+        this.quantityPurchased = quantityPurchased;
     }
 
     public String getSalesAmount() {
-        return SalesAmount;
+        return salesAmount;
     }
 
     public void setSalesAmount(String salesAmount) {
-        this.SalesAmount = salesAmount;
+        this.salesAmount = salesAmount;
     }
 
     @Override
     public String toString() {
         return "PurchasesReport{" +
-                "FuelType='" + FuelType + '\'' +
-                ", QuantityPurchased='" + QuantityPurchased + '\'' +
-                ", SalesAmount='" + SalesAmount + '\'' +
+                "FuelType='" + fuelType + '\'' +
+                ", QuantityPurchased='" + quantityPurchased + '\'' +
+                ", SalesAmount='" + salesAmount + '\'' +
                 '}';
     }
 }

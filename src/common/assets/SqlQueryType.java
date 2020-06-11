@@ -1,6 +1,6 @@
 package common.assets;
+
 /**
- *
  * @author Hana Wiener
  * This enum will represent all the queries in our project
  */
@@ -26,7 +26,7 @@ public enum SqlQueryType {
      * *****************************************/
     GET_Quarterly_Revenue(SqlExecutionType.EXECUTE_QUERY),
     GET_Purchases_Report(SqlExecutionType.EXECUTE_QUERY),
-
+    GET_QuantityItemsStock_Report(SqlExecutionType.EXECUTE_QUERY),
 
     /* *****************************************
      * ********** Costumer Management Queries ****************
@@ -40,6 +40,7 @@ public enum SqlQueryType {
     GET_ALL_COSTUMER_VEHICLES(SqlExecutionType.EXECUTE_QUERY),
     REMOVE_VEHICLE(SqlExecutionType.UPDATE_QUERY),
     REMOVE_COSTUMER(SqlExecutionType.UPDATE_QUERY),
+    UPDATE_COSTUMER_CREDIT_CARD(SqlExecutionType.UPDATE_QUERY),
 
     /* *****************************************
      * ********** Users Management Queries ****************
@@ -92,7 +93,6 @@ public enum SqlQueryType {
     }
 
     /**
-     *
      * @author Hana Wiener
      * This enum will represent which execution method need to
      * be used EXECUTE QUERY - will represent PreparedStatement ".executeQuery" method
