@@ -35,6 +35,7 @@ public class Costumer extends User {
         this.CustomerPassword = CustomerPassword;
         this.CostumerType = CostumerType;
         this.ID = ID;
+        //
     }
 
     public void setPurchasePlan(String purchasePlan) {
