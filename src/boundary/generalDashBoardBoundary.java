@@ -4,6 +4,7 @@ import common.assets.ProjectPages;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
@@ -31,7 +32,7 @@ public class generalDashBoardBoundary implements DataInitializable {
     private Button btnSignout;
 
     @FXML
-    private Pane HomePagePane;
+    private ImageView myFuelLogo;
 
     @FXML
     private Pane currentPagePane;
@@ -50,18 +51,24 @@ public class generalDashBoardBoundary implements DataInitializable {
 
     @FXML
     void addCostumerClick(MouseEvent event) {
-        mainProjectFX.pagingController.loadBoundaryInPane(ProjectPages.COSTUMER_REGISTRATION_PAGE.getPath());
+        currentPagePane.setVisible(true);
+        currentPagePane.getChildren().clear();
+        currentPagePane.getChildren().setAll(mainProjectFX.pagingController.loadBoundaryInPane(ProjectPages.COSTUMER_REGISTRATION_PAGE.getPath()));
+        myFuelLogo.setVisible(false);
     }
 
     @FXML
     void costumerMenagmentClick(MouseEvent event) {
-        mainProjectFX.pagingController.loadBoundary(ProjectPages.COSTUMER_MANAGEMENT_TABLE_PAGE.getPath());
-
+        currentPagePane.setVisible(true);
+        currentPagePane.getChildren().clear();
+        currentPagePane.getChildren().setAll(mainProjectFX.pagingController.loadBoundaryInPane(ProjectPages.COSTUMER_MANAGEMENT_TABLE_PAGE.getPath()));
+        myFuelLogo.setVisible(false);
     }
 
     @FXML
     void homePageClick(MouseEvent event) {
-        currentPagePane = HomePagePane;
+        currentPagePane.setVisible(false);
+        myFuelLogo.setVisible(true);
     }
 
     @FXML
