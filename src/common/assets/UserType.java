@@ -1,12 +1,22 @@
 package common.assets;
 
 public enum UserType {
-    COMPANY_MANAGER,
     CUSTOMER,
     DALKAN,
+    COMPANY_MANAGER,
     MARKETING_DEPARTMENT_WORKER,
     MARKETING_MANAGER,
     MARKETING_REPRESENTATIVE,
     STATION_MANAGER,
-    SUPPLIER
+    SUPPLIER;
+
+    public static UserType asUserType(String str) {
+        for (UserType me : UserType.values()) {
+            if (me.name().equalsIgnoreCase(str))
+                return me;
+        }
+        return null;
+    }
 }
+
+

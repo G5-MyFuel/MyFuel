@@ -12,7 +12,7 @@ public enum SqlQueryType {
     GET_ALL_COSTUMER_TABLE(SqlExecutionType.EXECUTE_QUERY),
     GET_ALL_VEHICLE_TABLE(SqlExecutionType.EXECUTE_QUERY),
     UPDATE_USER_LOGIN_STATUS(SqlExecutionType.UPDATE_QUERY),
-
+    GET_EMPLOYEE_TABLE(SqlExecutionType.EXECUTE_QUERY),
 
     /* *****************************************
      * ********** Discount Rates Queries ****************

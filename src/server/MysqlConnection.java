@@ -146,9 +146,11 @@ public class MysqlConnection {
          * *****************************************************/
         sqlArray[SqlQueryType.UPDATE_USER_LOGIN_STATUS.getCode()] = "UPDATE `Users` "
                 + "SET isLoginIndicator = ? WHERE userID = ? AND userType = ?";
-
-
-
+        sqlArray[SqlQueryType.GET_ALL_USERS_TABLE.getCode()] = "SELECT * FROM Users;";
+        sqlArray[SqlQueryType.UPDATE_USER_FIELD.getCode()] = "UPDATE `Users` SET `loginAttempts` = '5' WHERE `Users`.`userID` = 601983543 AND `Users`.`userType` = 1;";
+        sqlArray[SqlQueryType.GET_EMPLOYEE_TABLE.getCode()] = "SELECT E.employeeID,E.jobTitle,E.fuelCompany,U.userFirstName,U.userLastName,U.userEmail\n" +
+                "FROM Employee AS E, Users AS U\n" +
+                "WHERE E.employeeID = U.userID;";
 
         /* *****************************************************
          * *************** Common Queries ****************
@@ -223,12 +225,6 @@ public class MysqlConnection {
         sqlArray[SqlQueryType.GET_Quarterly_Revenue.getCode()] = "SELECT * FROM `Purchase` WHERE `purchaseDate` BETWEEN ? AND ?";
         sqlArray[SqlQueryType.GET_Purchases_Report.getCode()] = "SELECT * FROM `Purchase` WHERE `Fuel type` LIKE ?";
         sqlArray[SqlQueryType.GET_QuantityItemsStock_Report.getCode()] = "SELECT * FROM `FuelInventory` WHERE `Company Name` LIKE ?";
-
-        /* *****************************************
-         * ********** Login Page Queries ****************
-         * *****************************************/
-        sqlArray[SqlQueryType.GET_ALL_USERS_TABLE.getCode()] = "SELECT * FROM Users;";
-        sqlArray[SqlQueryType.UPDATE_USER_FIELD.getCode()] = "UPDATE `Users` SET `loginAttempts` = '5' WHERE `Users`.`userID` = 601983543 AND `Users`.`userType` = 1;";
     }
 
     public Connection getConnection() {
