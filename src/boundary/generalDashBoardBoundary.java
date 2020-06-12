@@ -105,7 +105,10 @@ public class generalDashBoardBoundary implements DataInitializable {
         mainProjectFX.pagingController.loadBoundary(ProjectPages.LOGIN_PAGE.getPath());
     }
 
-
+    /**
+     * This method run a thread that count and update the correct time
+     * @return void
+     */
     private void clockFuntion() {
         Thread clock = new Thread() {
             int second, minute, hour;
@@ -133,6 +136,10 @@ public class generalDashBoardBoundary implements DataInitializable {
         clock.start();
     }
 
+    /**
+     * This method get and day and the correct date and update it.
+     * @return void
+     */
     private void weekDay() {
         Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
         LocalDate date = LocalDate.now();
