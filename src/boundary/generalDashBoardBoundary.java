@@ -48,10 +48,10 @@ public class generalDashBoardBoundary implements DataInitializable {
     private Button btnSignout;
 
     @FXML
-    private ImageView myFuelLogo;
+    public ImageView myFuelLogo;
 
     @FXML
-    private Pane currentPagePane;
+    public Pane currentPagePane;
 
     @FXML
     private Text time;
