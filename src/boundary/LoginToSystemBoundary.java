@@ -5,6 +5,7 @@ import Contollers.LoginToSystemController;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import common.assets.PermissionsManagement;
 import entity.User;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -24,6 +25,7 @@ import java.util.ResourceBundle;
 public class LoginToSystemBoundary extends Application {
     /* variables: */
     private static LoginToSystemBoundary Instance;
+    private PermissionsManagement permissionsManagement = new PermissionsManagement();
     private ActionEvent event = null;
     Contollers.LoginToSystemController loginToSystemLogic; //logic instance
     FormValidation formValidation;
@@ -64,6 +66,7 @@ public class LoginToSystemBoundary extends Application {
     @FXML
     void initialize() {
         myController.getUsersTable();   //start the process that will ask server to execute query and get the Users table details
+        permissionsManagement.getEmployeeTable();
         formValidation = FormValidation.getValidator(); //for form validation instance
         loginAsComboBox.getItems().addAll("Customer", "Employee", "Supplier");  //set the user types
         LoginValidation();
@@ -85,7 +88,9 @@ public class LoginToSystemBoundary extends Application {
         System.out.println("-->clickLoginBtn method");
         System.out.println(allDBUsersArrayList);
         if(checkInputs()){
-
+            permissionsManagement.setUserID(userIDTextField.getText());
+            permissionsManagement.setUserTypeAsNumber(userType);
+            permissionsManagement.openDashBoard();
         }
     }
 

@@ -28,6 +28,7 @@ public enum ProjectPages {
     GENERATING_REPORTS_MARKETING_MANAGER_PAGE("/boundary/GeneratingReportsMarketingManagerFXML.fxml"),
 
     //Daniel pages:
+    //PURCHASE_FUEL_FOR_HOME_HEATING,TRACKING_FUEL_FOR_HOME_HEATING,
     PURCHASE_FUEL_FOR_HOME_HEATING("/boundary/NewPurchaseFuelForHomeHeatingFXML.fxml"),
     LOGIN_PAGE("/boundary/LoginToSystemFXML.fxml");
 

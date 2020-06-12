@@ -1,6 +1,7 @@
 package boundary;
 
 import client.ClientConsole;
+import common.assets.PermissionsManagement;
 import common.assets.ProjectPages;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -14,6 +15,7 @@ public class MainForTestsDaniel extends Application {
     private AnchorPane root;
 
     public static void main(String[] args) {
+
         launch(args);
     }
 
@@ -24,6 +26,7 @@ public class MainForTestsDaniel extends Application {
         String serverIp = "127.0.0.1";
         String [] args = {serverIp};
         ClientConsole.connection(args);
+     //   PermissionsManagement pm = new PermissionsManagement("201718668",2);
 
         Pane root = null;
         try {

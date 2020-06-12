@@ -7,11 +7,22 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class generalDashBoardBoundary implements DataInitializable {
+    private generalDashBoardBoundary Instance = null;
+    public generalDashBoardBoundary getInstance(){
+        if(Instance==null){
+            Instance = new generalDashBoardBoundary();
+        }
+        return Instance;
+    }
+    @FXML
+    private VBox allDashButtons;
 
     @FXML
     private Label userPermissionsTitel;
@@ -40,7 +51,11 @@ public class generalDashBoardBoundary implements DataInitializable {
 
     @Override
     public void initData(Object data) {
-
+        ArrayList<Button> buttonArrayList = (ArrayList<Button>)data;
+        for(Button b:buttonArrayList){
+            allDashButtons.getChildren().add(b);
+            System.out.println(b.getText() + "added");
+        }
     }
 
     @Override
@@ -49,7 +64,7 @@ public class generalDashBoardBoundary implements DataInitializable {
     }
 
 
-    @FXML
+
     void addCostumerClick(MouseEvent event) {
         currentPagePane.setVisible(true);
         currentPagePane.getChildren().clear();
@@ -57,7 +72,7 @@ public class generalDashBoardBoundary implements DataInitializable {
         myFuelLogo.setVisible(false);
     }
 
-    @FXML
+
     void costumerMenagmentClick(MouseEvent event) {
         currentPagePane.setVisible(true);
         currentPagePane.getChildren().clear();
