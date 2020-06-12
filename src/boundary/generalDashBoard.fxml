@@ -93,8 +93,13 @@
                         </VBox>
                         <VBox layoutX="6.0" layoutY="707.0" prefHeight="85.0" prefWidth="226.0" style="-fx-border-color: linear-gradient(to left, white, orange);">
                            <children>
-                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 35; -fx-font-family: 'Abel', sans-serif;;" text="13:00" textAlignment="CENTER" wrappingWidth="221.6215419769287" />
-                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 25; -fx-font-family: 'Abel', sans-serif;;" text="Friday 15/05/20" textAlignment="CENTER" wrappingWidth="223.39935874938965" />
+                              <Text fx:id="time" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 35; -fx-font-family: 'Abel', sans-serif;;" text="13:00" textAlignment="CENTER" wrappingWidth="221.6215419769287" />
+                              <HBox prefHeight="36.0" prefWidth="351.0">
+                                 <children>
+                                    <Text fx:id="currectDay" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 25; -fx-font-family: 'Abel', sans-serif;;" text="Friday" textAlignment="CENTER" wrappingWidth="97.39935874938965" />
+                                    <Text fx:id="currectDate" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 25; -fx-font-family: 'Abel', sans-serif;;" text="15/05/20" textAlignment="CENTER" wrappingWidth="129.39935874938965" />
+                                 </children>
+                              </HBox>
                            </children>
                         </VBox>
                      </children>

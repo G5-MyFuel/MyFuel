@@ -8,19 +8,25 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.ResourceBundle;
 
 public class generalDashBoardBoundary implements DataInitializable {
     private generalDashBoardBoundary Instance = null;
-    public generalDashBoardBoundary getInstance(){
-        if(Instance==null){
+
+    public generalDashBoardBoundary getInstance() {
+        if (Instance == null) {
             Instance = new generalDashBoardBoundary();
         }
         return Instance;
     }
+
     @FXML
     private VBox allDashButtons;
 
@@ -48,11 +54,14 @@ public class generalDashBoardBoundary implements DataInitializable {
     @FXML
     private Pane currentPagePane;
 
+    @FXML
+    private Text time;
+
 
     @Override
     public void initData(Object data) {
-        ArrayList<Button> buttonArrayList = (ArrayList<Button>)data;
-        for(Button b:buttonArrayList){
+        ArrayList<Button> buttonArrayList = (ArrayList<Button>) data;
+        for (Button b : buttonArrayList) {
             allDashButtons.getChildren().add(b);
             System.out.println(b.getText() + "added");
         }
@@ -60,9 +69,8 @@ public class generalDashBoardBoundary implements DataInitializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        clockFuntion();
     }
-
 
 
     void addCostumerClick(MouseEvent event) {
@@ -88,10 +96,36 @@ public class generalDashBoardBoundary implements DataInitializable {
 
     @FXML
     void signOutClick(MouseEvent event) {
-            mainProjectFX.pagingController.loadBoundary(ProjectPages.LOGIN_PAGE.getPath());
+        mainProjectFX.pagingController.loadBoundary(ProjectPages.LOGIN_PAGE.getPath());
     }
 
 
+    private void clockFuntion() {
+        Thread clock = new Thread() {
+            int second, minute, hour;
+
+            public void run() {
+                for (; ; ) {
+                    DateFormat dateFormat = new SimpleDateFormat("hh:mm a");
+                    Calendar cal = Calendar.getInstance();
+
+                    second = cal.get(Calendar.SECOND);
+                    minute = cal.get(Calendar.MINUTE);
+                    hour = cal.get(Calendar.HOUR_OF_DAY);
+                    System.out.println(hour + ":" + (minute) + ":" + second);
+                    if (minute < 10)
+                        time.setText(hour + ":" + "0" + (minute) + ":" + second);
+                    time.setText(hour + ":" + (minute) + ":" + second);
+                    try {
+                        sleep(1000);
+                    } catch (InterruptedException ex) {
+                        //...
+                    }
+                }
+            }
+        };
+        clock.start();
+    }
 
 
 }
