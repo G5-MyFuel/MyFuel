@@ -19,7 +19,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundary.CostumerManagmentTablePageBoundary">
+<Pane prefHeight="796.0" prefWidth="1062.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundary.CostumerManagmentTablePageBoundary">
    <children>
       <Pane prefHeight="780.0" prefWidth="1022.0">
          <children>
@@ -31,7 +31,7 @@
                            <children>
                               <Pane layoutY="25.0" style="-fx-background-color: white;">
                                  <children>
-                                    <Label layoutX="14.0" layoutY="29.0" style="-fx-background-color: #f2f2f2; -fx-opacity: 1; -fx-background-radius: 30;" text="Costumer">
+                                    <Label layoutX="14.0" layoutY="29.0" style="-fx-background-color: #f2f2f2; -fx-opacity: 1; -fx-background-radius: 30;" text="Costumers Table">
                                        <font>
                                           <Font name="System Bold" size="24.0" />
                                        </font>

@@ -192,8 +192,8 @@ public class MysqlConnection {
          * ********** Orders From Supplier Queries ****************
          * *****************************************/
         sqlArray[SqlQueryType.GET_ALL_ORDERS_FROM_SUPPLIER_TABLE.getCode()] = "SELECT * FROM `OrderForStock`";
-        sqlArray[SqlQueryType.INSERT_STATUS_FOR_ORDER_TABLE.getCode()] = "UPDATE `OrderForStock` SET `OrderStatus`= ? WHERE `OrderNumber` LIKE ?";
-
+        sqlArray[SqlQueryType.UPDATE_STATUS_TO_DONE.getCode()] = "UPDATE `OrderForStock` SET `OrderStatus`= \"Done\" WHERE `OrderNumber`= ?";
+        sqlArray[SqlQueryType.GET_FUEL_AMOUNT.getCode()]=
 
         /* *****************************************
          * ********** Templates+Campaigns Management Queries ****************

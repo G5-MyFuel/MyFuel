@@ -149,15 +149,6 @@ public class CustomerRegistrationBoundary implements Initializable {
         GasTypeColom.setCellValueFactory(new PropertyValueFactory<>("GasType"));
         //
         CardClickFlag = false;
-    }
-
-
-    /**
-     * This method initialize all relevant fields
-     * before the registration process starts.
-     */
-    @FXML
-    void addNewCostumerOnClick(MouseEvent event) {
         //get all costumer from DB for validations:
         myController.getCostumerTable();
         //
@@ -175,6 +166,7 @@ public class CustomerRegistrationBoundary implements Initializable {
         CardClickFlag = false;
         tempCreditCard = null;
     }
+
 
     /**
      * This method saves the vehicle information after clicking save button
