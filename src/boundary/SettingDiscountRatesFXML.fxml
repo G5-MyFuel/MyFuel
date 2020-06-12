@@ -17,13 +17,13 @@
       </Label>
       <Label layoutX="56.0" layoutY="138.0" text="Please Choose Subscription Type:" />
       <JFXComboBox fx:id="ChooseSubscriptionTypeCombo" layoutX="301.0" layoutY="133.0" onAction="#handleChoseSubscriptionType" prefHeight="31.0" prefWidth="366.0" />
-      <JFXTextField fx:id="ShowCurrentRateTXT" focusColor="#00add8" labelFloat="true" layoutX="301.0" layoutY="201.0" onAction="#handleShowCurrentRate" prefHeight="52.0" prefWidth="139.0" promptText="Current price:" unFocusColor="#868282">
+      <JFXTextField fx:id="ShowCurrentRateTXT" focusColor="#00add8" labelFloat="true" layoutX="301.0" layoutY="201.0" onAction="#handleShowCurrentRate" prefHeight="52.0" prefWidth="169.0" promptText="Current Discount Rate:" unFocusColor="#868282">
          <padding>
             <Insets bottom="5.0" top="20.0" />
          </padding>
       </JFXTextField>
       <Button fx:id="btnSetNewRate" layoutX="301.0" layoutY="398.0" mnemonicParsing="false" onAction="#handleSetNewRate" prefHeight="42.0" prefWidth="122.0" style="-fx-background-color: #2D4578; -fx-background-radius: 50;" stylesheets="@style.css" text="Set New Rate" />
-      <JFXTextField fx:id="ShowNewRateTXT" focusColor="#00add8" labelFloat="true" layoutX="301.0" layoutY="286.0" onAction="#handleShowNewRate" prefHeight="52.0" prefWidth="139.0" promptText="New price:" unFocusColor="#868282">
+      <JFXTextField fx:id="ShowNewRateTXT" focusColor="#00add8" labelFloat="true" layoutX="301.0" layoutY="286.0" onAction="#handleShowNewRate" prefHeight="52.0" prefWidth="169.0" promptText="New Discount Rate:" unFocusColor="#868282">
          <padding>
             <Insets bottom="5.0" top="20.0" />
          </padding>
