@@ -9,7 +9,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-public class MainForTestsNirGeneratingReportsMarketingManagerBoundary extends Application {
+public class MainForTestsNir extends Application {
 
     //File test for SettingDiscountRatesController
 
@@ -31,7 +31,13 @@ public class MainForTestsNirGeneratingReportsMarketingManagerBoundary extends Ap
 
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource(ProjectPages.GENERATING_REPORTS_MARKETING_MANAGER_PAGE.getPath()));
+            loader.setLocation(getClass().getResource(ProjectPages.SETTING_DISCOUNT_RATES_PAGE.getPath()));
+            /*
+            CONFIRM_DISCOUNT_RATES_PAGE
+            SETTING_DISCOUNT_RATES_PAGE
+            GENERATING_REPORTS_MARKETING_MANAGER_PAGE
+            GENERATING_REPORTS_STATION_MANAGER_PAGE
+             */
             root = loader.load();
             Scene s1 = new Scene(root);
             primaryStage.setScene(s1);
