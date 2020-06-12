@@ -10,7 +10,10 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.ResourceBundle;
 
 public class generalDashBoardBoundary implements DataInitializable {
@@ -91,6 +94,30 @@ public class generalDashBoardBoundary implements DataInitializable {
             mainProjectFX.pagingController.loadBoundary(ProjectPages.LOGIN_PAGE.getPath());
     }
 
+
+    private void clockFuntion(){
+        Thread clock = new Thread() {
+            public void run() {
+                for (;;) {
+                    DateFormat dateFormat = new SimpleDateFormat("hh:mm a");
+                    Calendar cal = Calendar.getInstance();
+
+                    second = cal.get(Calendar.SECOND);
+                    minute = cal.get(Calendar.MINUTE);
+                    hour = cal.get(Calendar.HOUR);
+                    //System.out.println(hour + ":" + (minute) + ":" + second);
+                    time.setText(hour + ":" + (minute) + ":" + second);
+
+                    try {
+                        sleep(1000);
+                    } catch (InterruptedException ex) {
+                        //...
+                    }
+                }
+            }
+        };
+        clock.start();
+    }
 
 
 
