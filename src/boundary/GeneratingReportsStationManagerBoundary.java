@@ -128,6 +128,9 @@ public class GeneratingReportsStationManagerBoundary implements Initializable {
     @FXML
     void handleQuarterlyRevenueReport(MouseEvent event) {
 
+        ShowTotalRevenueTXT.clear();
+        /*ChooseReportYearCombo.getItems().clear();
+        ChooseReportQuarterCombo.getItems().clear();*/
         ChooseReportYearCombo.setVisible(true);
         ChooseReportYearCombo.setItems(YearList);
         PurchasesReportTable.setVisible(false);
@@ -189,6 +192,7 @@ public class GeneratingReportsStationManagerBoundary implements Initializable {
     @FXML
     void handlePurchasesReport(MouseEvent event) {
 
+        PurchasesReportTable.getItems().clear();
         ReportSentMessageLabel.setVisible(false);
         ChooseReportYearCombo.setVisible(false);
         ChooseReportQuarterCombo.setVisible(false);
@@ -218,6 +222,7 @@ public class GeneratingReportsStationManagerBoundary implements Initializable {
     @FXML
     void handleQuantityItemsInStockReport(MouseEvent event) {
 
+        QuantityReportTable.getItems().clear();
         ReportSentMessageLabel.setVisible(false);
         //QuantityReportTable.setVisible(true);
         ChooseReportYearCombo.setVisible(false);
