@@ -57,6 +57,12 @@ public class generalDashBoardBoundary implements DataInitializable {
     @FXML
     private Text time;
 
+    @FXML
+    private Text currectDay;
+
+    @FXML
+    private Text currectDate;
+
 
     @Override
     public void initData(Object data) {
