@@ -79,6 +79,9 @@ public class GeneratingReportsStationManagerBoundary implements Initializable {
     private Label QuantityItemsStockTxt;
 
     @FXML
+    private Label ReportSentMessageLabel;
+
+    @FXML
     private TableView<QuantityItemsStockReport> QuantityReportTable;
 
     @FXML
@@ -103,6 +106,7 @@ public class GeneratingReportsStationManagerBoundary implements Initializable {
         PurchasesReportTable.setVisible(false);
         QuantityItemsStockTxt.setVisible(false);
         QuantityReportTable.setVisible(false);
+        ReportSentMessageLabel.setVisible(false);
 
         /*  set all fields validators */
         formValidation();
@@ -126,6 +130,10 @@ public class GeneratingReportsStationManagerBoundary implements Initializable {
 
         ChooseReportYearCombo.setVisible(true);
         ChooseReportYearCombo.setItems(YearList);
+        PurchasesReportTable.setVisible(false);
+        QuantityItemsStockTxt.setVisible(false);
+        QuantityReportTable.setVisible(false);
+
     }
 
     @FXML
@@ -161,6 +169,7 @@ public class GeneratingReportsStationManagerBoundary implements Initializable {
                 break;
         }
         myController.GetReportData("Quarterly revenue report", startDate, endDate); //start the process that will ask server to execute quarry and get the table details
+        ReportSentMessageLabel.setVisible(true);
     }
 
     public void setQuarterlyData(String revenue) {
@@ -172,10 +181,18 @@ public class GeneratingReportsStationManagerBoundary implements Initializable {
     @FXML
     void handlePurchasesReport(MouseEvent event) {
 
+        ReportSentMessageLabel.setVisible(false);
         PurchasesReportTable.setVisible(true);
+        ChooseReportYearCombo.setVisible(false);
+        ChooseReportQuarterCombo.setVisible(false);
+        TotalRevenueLabel.setVisible(false);
+        ShowTotalRevenueTXT.setVisible(false);
+        QuantityItemsStockTxt.setVisible(false);
+        QuantityReportTable.setVisible(false);
         myController.GetReportData("Purchases report", "Diesel", ""); //start the process that will ask server to execute quarry and get the table details
         myController.GetReportData("Purchases report", "Gasoline 95", ""); //start the process that will ask server to execute quarry and get the table details
         myController.GetReportData("Purchases report", "Scooter fuel", ""); //start the process that will ask server to execute quarry and get the table details
+        ReportSentMessageLabel.setVisible(true);
     }
 
     public void setPurchasesData(PurchasesReport resultList) {
@@ -193,7 +210,13 @@ public class GeneratingReportsStationManagerBoundary implements Initializable {
     @FXML
     void handleQuantityItemsInStockReport(MouseEvent event) {
 
+        ReportSentMessageLabel.setVisible(false);
         //QuantityReportTable.setVisible(true);
+        ChooseReportYearCombo.setVisible(false);
+        ChooseReportQuarterCombo.setVisible(false);
+        TotalRevenueLabel.setVisible(false);
+        ShowTotalRevenueTXT.setVisible(false);
+        PurchasesReportTable.setVisible(false);
         QuantityItemsStockTxt.setText("Quantity of items in stock for Sonol:");
         /*
          * שם החברה,סונול בדוגמא הזאת, יילקח מאובייקט של מנהל תחנה
@@ -203,6 +226,7 @@ public class GeneratingReportsStationManagerBoundary implements Initializable {
 
         myController.GetReportData("Quantity of items in stock report", "Sonol", ""); //start the process that will ask server to execute quarry and get the table details
         /*שם החברה,סונול בדוגמא הזאת, יילקח מאובייקט של מנהל תחנה*/
+        ReportSentMessageLabel.setVisible(true);
     }
 
     public void setQuantityItemsStockData(ArrayList<QuantityItemsStockReport> resultList) {
