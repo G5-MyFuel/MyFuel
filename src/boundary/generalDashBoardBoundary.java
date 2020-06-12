@@ -13,9 +13,8 @@ import javafx.scene.text.Text;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.ResourceBundle;
+import java.time.LocalDate;
+import java.util.*;
 
 public class generalDashBoardBoundary implements DataInitializable {
     private generalDashBoardBoundary Instance = null;
@@ -76,6 +75,7 @@ public class generalDashBoardBoundary implements DataInitializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         clockFuntion();
+        weekDay();
     }
 
 
@@ -131,6 +131,46 @@ public class generalDashBoardBoundary implements DataInitializable {
             }
         };
         clock.start();
+    }
+
+    private void weekDay() {
+        Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
+        LocalDate date = LocalDate.now();
+
+        int dayOfMonth = calendar.get(Calendar.DATE);
+        //Note: +1 the month for current month
+        int month = calendar.get(Calendar.MONTH) + 1;
+        int year = calendar.get(Calendar.YEAR);
+        //set the day into string
+        switch (date.getDayOfWeek().getValue()) {
+            case 0:
+                currectDay.setText("Sunday");
+                break;
+            case 1:
+                currectDay.setText("Monday");
+                break;
+            case 2:
+                currectDay.setText("Tuesday");
+                break;
+            case 3:
+                currectDay.setText("Wednesday");
+                break;
+            case 4:
+                currectDay.setText("Thursday");
+                break;
+            case 5:
+                currectDay.setText("Friday");
+                break;
+            case 6:
+                currectDay.setText("Saturday");
+                break;
+            default:
+                break;
+        }
+        if (month < 10)
+            currectDate.setText(String.valueOf(dayOfMonth) + "/0" + String.valueOf(month) + "/" + String.valueOf(year));
+        else
+            currectDate.setText(String.valueOf(dayOfMonth) + "/" + String.valueOf(month) + "/" + String.valueOf(year));
     }
 
 
