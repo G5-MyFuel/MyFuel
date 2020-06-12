@@ -2,10 +2,12 @@ package boundary;
 
 import Contollers.FormValidation;
 import Contollers.LoginToSystemController;
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import common.assets.PermissionsManagement;
+import common.assets.ProjectPages;
 import entity.User;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -90,7 +92,8 @@ public class LoginToSystemBoundary extends Application {
         if(checkInputs()){
             permissionsManagement.setUserID(userIDTextField.getText());
             permissionsManagement.setUserTypeAsNumber(userType);
-            permissionsManagement.openDashBoard();
+            ArrayList<JFXButton> allButtons = permissionsManagement.openDashBoard();
+            mainProjectFX.pagingController.loadBoundary(ProjectPages.GENERAL_DASH_BOARD.getPath(),allButtons);
         }
     }
 

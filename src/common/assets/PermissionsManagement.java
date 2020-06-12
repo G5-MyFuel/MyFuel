@@ -2,6 +2,8 @@ package common.assets;
 
 
 import Contollers.BasicController;
+import boundary.generalDashBoardBoundary;
+import boundary.mainProjectFX;
 import com.jfoenix.controls.JFXButton;
 import entity.Employee;
 import javafx.application.Platform;
@@ -10,6 +12,7 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
 
@@ -19,7 +22,7 @@ public class PermissionsManagement extends BasicController {
     private int userTypeAsNumber;
     private UserType userType;
     private String userID;
-
+    private generalDashBoardBoundary generalDashBoardBoundaryInstance;
     public PermissionsManagement() {
 
     }
@@ -133,11 +136,15 @@ public class PermissionsManagement extends BasicController {
                 EventHandler event1 = new EventHandler() {
                     @Override
                     public void handle(Event event) {
-
+                        Pane currentPagePane = generalDashBoardBoundaryInstance.getInstance().currentPagePane;
+                        currentPagePane.setVisible(true);
+                        currentPagePane.getChildren().clear();
+                        currentPagePane.getChildren().setAll(mainProjectFX.pagingController.loadBoundaryInPane(ProjectPages.PURCHASE_FUEL_FOR_HOME_HEATING.getPath()));
+                        generalDashBoardBoundaryInstance.getInstance().myFuelLogo.setVisible(false);
                     }
                 };
-                Button purchase_fuel_for_home_heating_button = getButton("New purchase fuel for home heating", event1, new Image("..\\media\\ButtonsDashBoardMedia\\icons8_return_purchase_40px.png"));
-
+                JFXButton purchase_fuel_for_home_heating_button = getButton("New purchase fuel for home heating", event1, null);
+                buttonArrayList.add(purchase_fuel_for_home_heating_button);
                 break;
             case SUPPLIER:
 
