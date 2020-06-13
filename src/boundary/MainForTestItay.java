@@ -1,7 +1,5 @@
 package boundary;
 
-import client.ChatClient;
-import client.ClientApp;
 import client.ClientConsole;
 import common.assets.ProjectPages;
 import javafx.application.Application;
@@ -15,7 +13,6 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
-import java.io.IOException;
 import java.util.Optional;
 
 public class MainForTestItay extends Application {

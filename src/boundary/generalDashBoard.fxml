@@ -89,7 +89,7 @@
                               </Pane>
                            </children>
                         </VBox>
-                        <VBox layoutX="6.0" layoutY="707.0" prefHeight="137.0" prefWidth="228.0" style="-fx-border-color: linear-gradient(to left, white, orange);">
+                        <VBox layoutX="6.0" layoutY="707.0" prefHeight="128.0" prefWidth="228.0" style="-fx-border-color: linear-gradient(to left, white, orange);">
                            <children>
                               <Text fx:id="time" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 35; -fx-font-family: 'Abel', sans-serif;;" text="13:00" textAlignment="CENTER" wrappingWidth="223.6215419769287" />
                               <Text fx:id="currectDate" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 25; -fx-font-family: 'Abel', sans-serif;;" text="15/05/20" textAlignment="CENTER" wrappingWidth="225.39935874938965" />

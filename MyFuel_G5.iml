@@ -26,5 +26,8 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="Java EE 6-Java EE 6" level="project" />
+    <orderEntry type="library" name="javax.mail" level="project" />
+    <orderEntry type="library" name="twilio-0.0.1-jar-with-dependencies" level="project" />
   </component>
 </module>

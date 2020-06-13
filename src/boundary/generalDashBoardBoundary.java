@@ -121,7 +121,6 @@ public class generalDashBoardBoundary implements DataInitializable {
                     second = cal.get(Calendar.SECOND);
                     minute = cal.get(Calendar.MINUTE);
                     hour = cal.get(Calendar.HOUR_OF_DAY);
-                    System.out.println(hour + ":" + (minute) + ":" + second);
                     if (minute < 10)
                         time.setText(hour + ":" + "0" + (minute) + ":" + second);
                     time.setText(hour + ":" + (minute) + ":" + second);
