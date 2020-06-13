@@ -42,10 +42,16 @@ public class ManagerSupplyConfirmationBoundary implements Initializable {
     private TableView<?> tableView;
 
     @FXML
-    private TableColumn<?, ?> titleCol;
+    private TableColumn<?, ?> OrderCol;
 
     @FXML
-    private TableColumn<?, ?> idCol;
+    private TableColumn<?, ?> FuelTypeCol;
+
+    @FXML
+    private TableColumn<?, ?> AmountCol;
+
+    @FXML
+    private TableColumn<?, ?> StatusCol;
 
     @FXML
     private HBox hboxOrderConfirmation;

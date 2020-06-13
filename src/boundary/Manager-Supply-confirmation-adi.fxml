@@ -124,8 +124,10 @@
                         </Text>
                         <TableView fx:id="tableView" layoutX="60.0" layoutY="221.0" prefHeight="391.0" prefWidth="361.0" style="-fx-background-color: #fcf8e8; -fx-border-style: solid; -fx-border-color: #000000;">
                            <columns>
-                              <TableColumn fx:id="titleCol" prefWidth="246.0" text="Order" />
-                              <TableColumn fx:id="idCol" maxWidth="2500.0" prefWidth="111.0" text="Status" />
+                              <TableColumn fx:id="OrderCol" prefWidth="48.0" text="Order" />
+                              <TableColumn fx:id="FuelTypeCol" prefWidth="48.0" text="Fuel Type" />
+                              <TableColumn fx:id="AmountCol" prefWidth="110.0" text="Amount" />
+                              <TableColumn fx:id="StatusCol" prefWidth="69.0" text="Status" />
                            </columns>
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
