@@ -19,7 +19,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundary.OrderConfirmationController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundary.ManagerSupplyConfirmationController">
    <children>
       <HBox prefHeight="805.0" prefWidth="1280.0">
          <children>
@@ -27,7 +27,7 @@
                <children>
                   <VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="235.0" style="-fx-background-color: #2D4578;">
                      <children>
-                        <Label style="-fx-font-size: 22;" text="Supplier" textAlignment="CENTER" textFill="#e5e5e5">
+                        <Label style="-fx-font-size: 22;" text="Manager" textAlignment="CENTER" textFill="#e5e5e5">
                            <VBox.margin>
                               <Insets top="10.0" />
                            </VBox.margin>
@@ -60,19 +60,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button fx:id="btnSupplyForm" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" onMouseClicked="#supplyFormPage" prefHeight="42.0" prefWidth="259.0" style="-fx-font-family: 'Abel', sans-serif; -fx-font-size: 16; -fx-alignment: left;" stylesheets="@style.css" text="Supply Form">
-                           <padding>
-                              <Insets left="30.0" />
-                           </padding>
-                           <graphic>
-                              <ImageView fitHeight="23.0" fitWidth="27.0">
-                                 <image>
-                                    <Image url="@../media/icons/form_40px.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button fx:id="btnOrderConfirmation" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" onMouseClicked="#orderConfirmationPage" prefHeight="42.0" prefWidth="259.0" style="-fx-font-family: 'Abel', sans-serif; -fx-font-size: 16; -fx-alignment: left;" stylesheets="@style.css" text="Order Confirmation">
+                        <Button fx:id="btnOrderConfirmation" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" onMouseClicked="#orderConfirmationPage" prefHeight="42.0" prefWidth="259.0" style="-fx-font-family: 'Abel', sans-serif; -fx-font-size: 16; -fx-alignment: left;" stylesheets="@style.css" text="Approve Inventory">
                            <graphic>
                               <ImageView fitHeight="23.0" fitWidth="27.0">
                                  <image>
@@ -119,7 +107,7 @@
                <children>
                   <Pane prefHeight="805.0" prefWidth="1044.0">
                      <children>
-                        <Text fill="#2d4578" layoutX="67.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Order Confirmation">
+                        <Text fill="#2d4578" layoutX="67.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Approve Inventory">
                            <font>
                               <Font name="System Bold Italic" size="40.0" />
                            </font>
@@ -156,7 +144,7 @@
                               </ContextMenu>
                            </contextMenu>
                         </TableView>
-                        <HBox fx:id="hboxOrderConfirmation" alignment="CENTER_LEFT" layoutX="643.0" layoutY="360.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="63.0" prefWidth="285.0" style="-fx-background-color: #fcf8e8; -fx-border-color: #888888; -fx-background-radius: 5; -fx-background-insets: 0;">
+                        <HBox fx:id="hboxOrderConfirmation" alignment="CENTER_LEFT" layoutX="631.0" layoutY="290.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="63.0" prefWidth="285.0" style="-fx-background-color: #fcf8e8; -fx-border-color: #888888; -fx-background-radius: 5; -fx-background-insets: 0;">
                            <children>
                               <ImageView fx:id="checkBoxImage" fitHeight="35.0" fitWidth="35.0">
                                  <HBox.margin>
@@ -166,7 +154,7 @@
                                     <Image url="@../media/icons/check_all_64px.png" />
                                  </image>
                               </ImageView>
-                              <Label prefHeight="21.0" prefWidth="136.0" text="Order completed">
+                              <Label prefHeight="21.0" prefWidth="136.0" text="Send To Supplier">
                                  <HBox.margin>
                                     <Insets />
                                  </HBox.margin>
@@ -181,8 +169,8 @@
                               <DropShadow blurType="GAUSSIAN" height="5.0" radius="2.0" width="5.0" />
                            </effect>
                         </HBox>
-                        <Button fx:id="btnDone" layoutX="741.0" layoutY="539.0" mnemonicParsing="false" onMouseClicked="#finalOrderConfirmation" prefHeight="42.0" prefWidth="89.0" style="-fx-background-color: #2D4578; -fx-background-radius: 50;" text="Done" />
-                        <Text layoutX="60.0" layoutY="639.0" strokeType="OUTSIDE" strokeWidth="0.0" text="* Status: In treatment / Complete" wrappingWidth="226.6708984375" />
+                        <Button fx:id="SendBtn" layoutX="729.0" layoutY="443.0" mnemonicParsing="false" onMouseClicked="#SendConfirmationToSupplier" prefHeight="42.0" prefWidth="89.0" style="-fx-background-color: #2D4578; -fx-background-radius: 50;" text="Send" textFill="WHITE" />
+                        <Text layoutX="60.0" layoutY="639.0" strokeType="OUTSIDE" strokeWidth="0.0" text="* Status: New / Open " wrappingWidth="226.6708984375" />
                      </children>
                   </Pane>
                </children>
