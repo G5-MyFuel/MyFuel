@@ -1,7 +1,10 @@
 package boundary;
 
+import Contollers.ManagerSupplyConfirmationController;
+import Contollers.OrderFromSupplierController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableColumn;
@@ -10,12 +13,18 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 /**
  * @author Adi Lampert
  * @see ManagerSupplyConfirmationBoundary - the from's logic class
  */
 
-public class ManagerSupplyConfirmationBoundary {
+public class ManagerSupplyConfirmationBoundary implements Initializable {
+
+    private ManagerSupplyConfirmationController myController = new ManagerSupplyConfirmationController(this);
+
 
     @FXML
     private Button btnOverview;
@@ -93,6 +102,16 @@ public class ManagerSupplyConfirmationBoundary {
     @FXML
     void signOut(MouseEvent event) {
 
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        hboxOrderConfirmation.setVisible(false);
+        tableView.setVisible(true);
+        SendBtn.setVisible(false);
+        SendBtn.setDisable(true);
+        /*myController.getOrdersFromDB();*/
+        System.out.println("Manager Supply Confirmation Page Is Open");
     }
 
 }
