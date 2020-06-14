@@ -21,7 +21,9 @@ import java.util.ResourceBundle;
 
 public class GeneratingReportsStationManagerBoundary implements DataInitializable {
 
-    String userID;
+    String managerID;
+    String managerCompany;
+    String managerStation;
     /**
      * The supervisor boundary controller.
      */
@@ -98,12 +100,15 @@ public class GeneratingReportsStationManagerBoundary implements DataInitializabl
 
     @Override
     public void initData(Object data) {
-        this.userID = (String) data;
+        this.managerID = (String) data;
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        managerID = "109268386";
+        myController.GetReportData("Get Manager data", managerID, ""); //start the process that will ask server to execute quarry and get the table details
+        //SELECT * FROM Employee WHERE Employee.employeeID LIKE "109268386"
         this.formValidation = FormValidation.getValidator();
         ChooseReportYearCombo.setVisible(false);
         ChooseReportQuarterCombo.setVisible(false);
@@ -255,15 +260,8 @@ public class GeneratingReportsStationManagerBoundary implements DataInitializabl
         TotalRevenueLabel.setVisible(false);
         ShowTotalRevenueTXT.setVisible(false);
         PurchasesReportTable.setVisible(false);
-        QuantityItemsStockTxt.setText("Quantity of items in stock for Sonol:");
-        /*
-         * שם החברה,סונול בדוגמא הזאת, יילקח מאובייקט של מנהל תחנה
-         * ("Quantity of items in stock for" + getCompanyName+":");
-         * */
-
-        myController.GetReportData("Quantity of items in stock report", "Sonol", ""); //start the process that will ask server to execute quarry and get the table details
-        /*שם החברה,סונול בדוגמא הזאת, יילקח מאובייקט של מנהל תחנה*/
-
+        QuantityItemsStockTxt.setText("Quantity of items in stock for" + managerCompany + " in Station " + managerStation + ":");
+        myController.GetReportData("Quantity of items in stock report", managerCompany, ""); //start the process that will ask server to execute quarry and get the table details
     }
 
     public void setQuantityItemsStockData(ArrayList<QuantityItemsStockReport> resultList) {
@@ -276,6 +274,12 @@ public class GeneratingReportsStationManagerBoundary implements DataInitializabl
         QuantityReportTable.setItems(data);
         QuantityItemsStockTxt.setVisible(true);
         ReportSentMessageLabel.setVisible(true);
+    }
+
+    public void setManagerData(ArrayList<String> resultList) {
+
+        managerCompany = resultList.get(0);
+        managerStation = resultList.get(1);
     }
 
 

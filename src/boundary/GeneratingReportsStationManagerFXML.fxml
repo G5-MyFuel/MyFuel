@@ -76,7 +76,7 @@
             <Insets bottom="5.0" top="20.0" />
          </padding>
       </JFXTextField>
-      <Label fx:id="QuantityItemsStockTxt" layoutX="779.0" layoutY="390.0" text="Quantity of items in stock" />
+      <Label fx:id="QuantityItemsStockTxt" layoutX="730.0" layoutY="390.0" text="Quantity of items in stock" />
       <Label fx:id="ReportSentMessageLabel" layoutX="40.0" layoutY="665.0" text="*The report was sent to the Administrator" textFill="#ff0f02">
          <font>
             <Font name="System Bold Italic" size="18.0" />
@@ -89,7 +89,7 @@
             <TableColumn fx:id="SalesAmountColumn" prefWidth="115.0" text="Sales amount" />
          </columns>
       </TableView>
-      <TableView fx:id="QuantityReportTable" layoutX="750.0" layoutY="423.0" prefHeight="147.0" prefWidth="275.0">
+      <TableView fx:id="QuantityReportTable" layoutX="730.0" layoutY="423.0" prefHeight="147.0" prefWidth="275.0">
          <columns>
             <TableColumn fx:id="FuelTypeQuantityReportColumn" prefWidth="116.0" text="Fuel type" />
             <TableColumn fx:id="AvailableInventoryColumn" prefWidth="157.0" text="Available inventory" />

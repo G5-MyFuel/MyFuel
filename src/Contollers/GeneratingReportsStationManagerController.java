@@ -30,9 +30,13 @@ public class GeneratingReportsStationManagerController extends BasicController {
         ArrayList<Object> varArray = new ArrayList<>();
         varArray.add(startDate);
         switch (ReportType) {
+            case "Get Manager data":
+                SqlAction sqlAction = new SqlAction(SqlQueryType.GET_Manager_Data, varArray);
+                super.sendSqlActionToClient(sqlAction);
+                break;
             case "Quarterly revenue report":
                 varArray.add(endDate);
-                SqlAction sqlAction = new SqlAction(SqlQueryType.GET_Quarterly_Revenue, varArray);
+                sqlAction = new SqlAction(SqlQueryType.GET_Quarterly_Revenue, varArray);
                 super.sendSqlActionToClient(sqlAction);
                 break;
             case "Purchases report":
@@ -52,6 +56,9 @@ public class GeneratingReportsStationManagerController extends BasicController {
     public void getResultFromClient(SqlResult result) {
         Platform.runLater(() -> {
             switch (result.getActionType()) {
+                case GET_Manager_Data:
+                    myBoundary.setManagerData(this.changeResultToManagerData(result));
+                    break;
                 case GET_Quarterly_Revenue:
                     myBoundary.setQuarterlyData(this.changeResultToQuarterlyReport(result));
                     break;
@@ -111,4 +118,14 @@ public class GeneratingReportsStationManagerController extends BasicController {
         return resultList;
     }
 
+    private ArrayList<String> changeResultToManagerData(SqlResult result) {
+
+        ArrayList<String> resultList = new ArrayList<>();
+
+        for (ArrayList<Object> a : result.getResultData()) {
+            resultList.add((String) a.get(1));
+            resultList.add((String) a.get(2));
+        }
+        return resultList;
+    }
 }

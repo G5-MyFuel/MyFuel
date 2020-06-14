@@ -28,6 +28,7 @@ public enum SqlQueryType {
     GET_Quarterly_Revenue(SqlExecutionType.EXECUTE_QUERY),
     GET_Purchases_Report(SqlExecutionType.EXECUTE_QUERY),
     GET_QuantityItemsStock_Report(SqlExecutionType.EXECUTE_QUERY),
+    GET_Manager_Data(SqlExecutionType.EXECUTE_QUERY),
 
     /* *****************************************
      * ********** Costumer Management Queries ****************
