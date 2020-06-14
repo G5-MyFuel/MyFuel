@@ -8,7 +8,6 @@ import entity.Costumer;
 import entity.CreditCard;
 import entity.Vehicle;
 import javafx.application.Platform;
-import server.MysqlConnection;
 
 import java.util.ArrayList;
 
@@ -23,7 +22,7 @@ public class CustomerRegistrationController extends BasicController {
      * The boundary controlled by this controller
      */
     private CustomerRegistrationBoundary myBoundary;
-
+    private String companyName;
 
     private Costumer tempCostumer;
 
@@ -37,23 +36,26 @@ public class CustomerRegistrationController extends BasicController {
     public void setCostumerInDB(Costumer costumer) {
         //set Costumer data into varArray
         ArrayList<Object> varArray = new ArrayList<>();
-        varArray.add(costumer.getID());
-        varArray.add("Aa" + costumer.getCustomerPassword());
-        varArray.add(costumer.getCostumerType());
-        varArray.add(costumer.getFname());
-        varArray.add(costumer.getLname());
-        varArray.add(costumer.getEmailAdress());
+        varArray.add(costumer.getUserID());
         if (costumer.getCostumerCreditCard() != null) {
             varArray.add(costumer.getCostumerCreditCard().getCardNumber());
             varArray.add(costumer.getCostumerCreditCard().getExperationDate());
             varArray.add(costumer.getCostumerCreditCard().getCardSecurityNumber());
         } else {
-            varArray.add("No Card Exists");
-            varArray.add("No Card Exists");
-            varArray.add("No Card Exists");
+            for (int i = 0; i < 3; i++)
+                varArray.add("No Card Exists");
         }
+        varArray.add(costumer.getCostumerType());
         varArray.add(costumer.getPurchasePlan());
         varArray.add(costumer.getServicePlan());
+        varArray.add(costumer.getUserID());
+        varArray.add("Aa" + costumer.getUserPassword());
+        varArray.add(costumer.getUserFirstName());
+        varArray.add(costumer.getUserLastName());
+        varArray.add(costumer.getUserEmail());
+        varArray.add(companyName);
+
+
         if (costumer.getCostumerVehicle().size() > 1) {
             ArrayList<Object> vehicleArray = new ArrayList<>();
             for (Vehicle v : costumer.getCostumerVehicle()) {
@@ -132,9 +134,9 @@ public class CustomerRegistrationController extends BasicController {
     private ArrayList<Costumer> changeResultToCostumer(SqlResult result) {
         ArrayList<Costumer> resultList = new ArrayList<>();
         for (ArrayList<Object> a : result.getResultData()) {
-            Costumer cos = new Costumer((String) a.get(0), (String) a.get(1), (String) a.get(2),
-                    (String) a.get(3), (String) a.get(4), (String) a.get(5), null, (String) a.get(9), null, (String) a.get(10));
-            CreditCard card = new CreditCard(cos, (String) a.get(6), (String) a.get(7), (String) a.get(8));
+            Costumer cos = new Costumer((String) a.get(0), (String) a.get(9), (String) a.get(4),
+                    (String) a.get(11), (String) a.get(12), (String) a.get(13), null, (String) a.get(5), null, (String) a.get(6));
+            CreditCard card = new CreditCard(cos, (String) a.get(1), (String) a.get(2), (String) a.get(3));
             cos.setCostumerCreditCard(card);
             resultList.add(cos);
         }
@@ -154,5 +156,9 @@ public class CustomerRegistrationController extends BasicController {
             resultList.add(vehicle);
         }
         return resultList;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
     }
 }

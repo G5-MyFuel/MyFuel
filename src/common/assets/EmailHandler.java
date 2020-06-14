@@ -151,4 +151,5 @@ public class EmailHandler {
         return this.sendMessage(toRecipientsList, bccRecipientsList, subject, message);
     }
 
-}
+
+    }

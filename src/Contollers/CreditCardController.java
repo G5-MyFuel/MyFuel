@@ -34,7 +34,7 @@ public class CreditCardController extends BasicController {
             varArray.add("No Card Exists");
             varArray.add("No Card Exists");
         }
-        varArray.add(card.getCardOwner().getID());
+        varArray.add(card.getCardOwner().getUserID());
         SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_COSTUMER_CREDIT_CARD, varArray);
         super.sendSqlActionToClient(sqlAction);
     }

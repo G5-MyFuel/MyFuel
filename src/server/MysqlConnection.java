@@ -106,7 +106,6 @@ public class MysqlConnection {
                     ps.setBoolean(i, bool);
                 }
             }
-
             switch (sqlAction.getActionType().getExecutionType()) {
                 case EXECUTE_QUERY:
                     sqlResult = new SqlResult(ps.executeQuery(), sqlAction.getActionType());
@@ -121,7 +120,6 @@ public class MysqlConnection {
                 default:
                     break;
             }
-
 
         } catch (SQLException e) {
             // TODO Auto-generated catch block
@@ -160,16 +158,17 @@ public class MysqlConnection {
         /* *****************************************
          * ********** Costumer Management Queries ****************
          * *****************************************/
-        sqlArray[SqlQueryType.GET_ALL_COSTUMER_TABLE.getCode()] = "SELECT * FROM `Costumer`";
-        sqlArray[SqlQueryType.UPDATE_COSTUMER_FNAME.getCode()] = "UPDATE `Costumer` SET `First Name` = ? WHERE ID =?";
-        sqlArray[SqlQueryType.UPDATE_COSTUMER_LNAME.getCode()] = "UPDATE `Costumer` SET `Last Name` = ? WHERE ID =?";
-        sqlArray[SqlQueryType.UPDATE_COSTUMER_EMAIL.getCode()] = "UPDATE `Costumer` SET `Email Adress` = ? WHERE ID =?";
+        sqlArray[SqlQueryType.GET_ALL_COSTUMER_TABLE.getCode()] = "SELECT* FROM Costumer AS C, User AS U WHERE C.ID = U.userID";
+        sqlArray[SqlQueryType.UPDATE_COSTUMER_FNAME.getCode()] = "UPDATE `User` SET `userFirstName` = ? WHERE userID =?";
+        sqlArray[SqlQueryType.UPDATE_COSTUMER_LNAME.getCode()] = "UPDATE `User` SET `userLastName` = ? WHERE userID =?";
+        sqlArray[SqlQueryType.UPDATE_COSTUMER_EMAIL.getCode()] = "UPDATE `User` SET `userEmail` = ? WHERE userID =?";
         sqlArray[SqlQueryType.UPDATE_COSTUMER_SERVICE_PLAN.getCode()] = "UPDATE `Costumer` SET `Service Plan` = ? WHERE ID =?";
         sqlArray[SqlQueryType.UPDATE_COSTUMER_PURCHASE_PLAN.getCode()] = "UPDATE `Costumer` SET `Purchase Plan` = ? WHERE ID =?";
-        sqlArray[SqlQueryType.UPDATE_COSTUMER_TYPE.getCode()] = "UPDATE `Costumer` SET `Costumer Type` = ? WHERE ID =?";
+        sqlArray[SqlQueryType.UPDATE_COSTUMER_TYPE.getCode()] = "UPDATE `Costumer` SET `customerType` = ? WHERE ID =?";
         sqlArray[SqlQueryType.GET_ALL_COSTUMER_VEHICLES.getCode()] = "SELECT `Vehicle ID`, `Fuel Type`, `Owner ID` FROM `Vehicle` WHERE `Owner ID` = ?";
         sqlArray[SqlQueryType.REMOVE_VEHICLE.getCode()] = "DELETE FROM `Vehicle` WHERE `Vehicle ID` = ?";
-        sqlArray[SqlQueryType.REMOVE_COSTUMER.getCode()] = "DELETE FROM `Costumer` WHERE `ID` = ?";
+        sqlArray[SqlQueryType.REMOVE_COSTUMER.getCode()] = "DELETE FROM `Costumer` WHERE `ID` = ?" +
+                "DELETE FROM `User` WHERE `ID` = ?";
         sqlArray[SqlQueryType.UPDATE_COSTUMER_CREDIT_CARD.getCode()] = "UPDATE `Costumer` SET `Credit Card Number` = ? ,`CreditCardExperationDate` = ? ,`CVV` = ?" +
                 "WHERE ID =?";
 
@@ -181,8 +180,9 @@ public class MysqlConnection {
          * ********** Costumer Registration Queries ****************
          * *****************************************/
         sqlArray[SqlQueryType.INSERT_NEW_COSTUMER.getCode()] =
-                "INSERT INTO `Costumer`(`ID`, `Password`, `Costumer Type`, `First Name`, `Last Name`, `Email Adress`, `Credit Card Number`," +
-                        " `CreditCardExperationDate`, `CVV`, `Purchase Plan`, `Service Plan`) VALUES (?,?,?,?,?,?,?,?,?,?,?);";
+                        "INSERT INTO `Costumer`(`ID`, `Credit Card Number`, `CreditCardExperationDate`, `CVV`, `customerType`, `Purchase Plan`, `Service Plan`) VALUES (?,?,?,?,?,?,?);" +
+                        "INSERT INTO `User`(`userID`, `userType`, `userPassword`, `isLoginIndicator`, `userFirstName`, `userLastName`, `userEmail`, `FuelCompany1`) VALUES (?,'CUSTOMER',?,0,?,?,?,?);";
+
         sqlArray[SqlQueryType.INSERT_NEW_VEHICLE.getCode()] = "INSERT INTO `Vehicle`(`Vehicle ID`, `Fuel Type`, `Owner ID`) VALUES (?,?,?);";
 
 

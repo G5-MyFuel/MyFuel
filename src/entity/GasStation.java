@@ -33,6 +33,7 @@ public class GasStation {
      *
      * @return void
      */
+    //maybie we will check only after some1 purchase the amount of fuel and not in that way ************
     private void checkLimit() {
         Thread fuelAmountLimitCheck = new Thread() {
             public void run() {

@@ -44,6 +44,7 @@ public class MainForTestItay extends Application {
             primaryStage.setScene(s1);
             primaryStage.setResizable(false);
             primaryStage.show();
+
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("ERR at App.Start");
