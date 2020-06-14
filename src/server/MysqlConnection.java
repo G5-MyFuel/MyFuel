@@ -167,12 +167,10 @@ public class MysqlConnection {
         sqlArray[SqlQueryType.UPDATE_COSTUMER_TYPE.getCode()] = "UPDATE `Costumer` SET `customerType` = ? WHERE ID =?";
         sqlArray[SqlQueryType.GET_ALL_COSTUMER_VEHICLES.getCode()] = "SELECT `Vehicle ID`, `Fuel Type`, `Owner ID` FROM `Vehicle` WHERE `Owner ID` = ?";
         sqlArray[SqlQueryType.REMOVE_VEHICLE.getCode()] = "DELETE FROM `Vehicle` WHERE `Vehicle ID` = ?";
-        sqlArray[SqlQueryType.REMOVE_COSTUMER.getCode()] = "DELETE FROM `Costumer` WHERE `ID` = ?" +
-                "DELETE FROM `User` WHERE `ID` = ?";
+        sqlArray[SqlQueryType.REMOVE_COSTUMER.getCode()] =
+                "DELETE `Costumer`, `User` FROM `Costumer` INNER JOIN `User` ON Costumer.ID = User.userID WHERE `Costumer`.ID = ?";
         sqlArray[SqlQueryType.UPDATE_COSTUMER_CREDIT_CARD.getCode()] = "UPDATE `Costumer` SET `Credit Card Number` = ? ,`CreditCardExperationDate` = ? ,`CVV` = ?" +
                 "WHERE ID =?";
-
-
 
 
 
@@ -180,9 +178,9 @@ public class MysqlConnection {
          * ********** Costumer Registration Queries ****************
          * *****************************************/
         sqlArray[SqlQueryType.INSERT_NEW_COSTUMER.getCode()] =
-                        "INSERT INTO `Costumer`(`ID`, `Credit Card Number`, `CreditCardExperationDate`, `CVV`, `customerType`, `Purchase Plan`, `Service Plan`) VALUES (?,?,?,?,?,?,?);" +
-                        "INSERT INTO `User`(`userID`, `userType`, `userPassword`, `isLoginIndicator`, `userFirstName`, `userLastName`, `userEmail`, `FuelCompany1`) VALUES (?,'CUSTOMER',?,0,?,?,?,?);";
-
+                "INSERT INTO `Costumer`(`ID`, `Credit Card Number`, `CreditCardExperationDate`, `CVV`, `customerType`, `Purchase Plan`, `Service Plan`) VALUES (?,?,?,?,?,?,?)";
+        sqlArray[SqlQueryType.INSERT_NEW_COSTUMER_USER.getCode()] =
+                "INSERT INTO `User`(`userID`, `userType`, `userPassword`, `isLoginIndicator`, `userFirstName`, `userLastName`, `userEmail`, `FuelCompany1`) VALUES (?,'CUSTOMER',?,0,?,?,?,?)";
         sqlArray[SqlQueryType.INSERT_NEW_VEHICLE.getCode()] = "INSERT INTO `Vehicle`(`Vehicle ID`, `Fuel Type`, `Owner ID`) VALUES (?,?,?);";
 
 

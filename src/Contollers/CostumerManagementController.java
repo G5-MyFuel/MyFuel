@@ -64,7 +64,6 @@ public class CostumerManagementController extends BasicController {
     public void removeCostumer(String CostumerID){
         ArrayList<Object> varArray = new ArrayList<>();
         varArray.add(CostumerID);
-        varArray.add(CostumerID);
         SqlAction sqlAction = new SqlAction(SqlQueryType.REMOVE_COSTUMER, varArray);
         super.sendSqlActionToClient(sqlAction);
     }
@@ -95,7 +94,6 @@ public class CostumerManagementController extends BasicController {
                 case GET_ALL_VEHICLE_TABLE:
                     this.changeResultToVehicle(result);
                     break;
-
                 default:
                     break;
             }

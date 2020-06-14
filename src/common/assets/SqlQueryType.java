@@ -65,6 +65,7 @@ public enum SqlQueryType {
      * *****************************************/
     INSERT_NEW_COSTUMER(SqlExecutionType.UPDATE_QUERY),
     INSERT_NEW_VEHICLE(SqlExecutionType.UPDATE_QUERY),
+    INSERT_NEW_COSTUMER_USER(SqlExecutionType.UPDATE_QUERY),
 
     /* *****************************************
      * ********** Order From Supplier Queries ****************

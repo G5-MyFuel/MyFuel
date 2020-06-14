@@ -9,32 +9,26 @@ import common.assets.SqlQueryType;
 import entity.Costumer;
 import entity.EditingCell;
 import entity.Vehicle;
-
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-
 import javafx.fxml.Initializable;
-
 import javafx.scene.control.*;
 import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-
 import javafx.util.Callback;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
+
+import static java.lang.Thread.sleep;
 
 public class CostumerManagmentTablePageBoundary implements Initializable {
 
@@ -154,7 +148,6 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
      */
     public void setCostumerTable(ArrayList<Costumer> cosArray) {
         costumers.addAll(cosArray);
-
         setColomsCells();
         ObservableList<Costumer> data = FXCollections.observableArrayList(cosArray);
         CosManageTbale.setItems(data);
@@ -283,6 +276,7 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
     }
 
     public void setVehicleTable(ArrayList<Vehicle> vArr) {
+        Vehicles.addAll(vArr);
         VehicleIDCol.setCellValueFactory(new PropertyValueFactory<>("VehicleID"));
         GasTypeCol.setCellValueFactory(new PropertyValueFactory<>("GasType"));
         ObservableList<Vehicle> data = FXCollections.observableArrayList(vArr);
@@ -324,6 +318,8 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
         } else {
             myController.addVehicleToDB(OwnerIDtxt1.getText(), VehicleIDtxt.getText(), GasTypeChoiseBox.getValue());
             Vehicle insertItem = new Vehicle(OwnerIDtxt1.getText(), VehicleIDtxt.getText(), GasTypeChoiseBox.getValue());
+            Costumer cos = searchCostumerWithID(OwnerIDtxt1.getText());
+            cos.getCostumerVehicle().add(insertItem);
             VehicleTable.getItems().add(insertItem);
             VehicleTable.refresh();
             OwnerIDtxt1.clear();
@@ -345,10 +341,22 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
         Optional<ButtonType> res = alert.showAndWait();
 
         if (res.get().getText().equals("Yes")) {
-            myController.removeCostumer(CosManageTbale.getSelectionModel().getSelectedItem().getUserID());
             Costumer selectedItem = CosManageTbale.getSelectionModel().getSelectedItem();
+            myController.getCostumerVehicles(selectedItem.getUserID());
+            myController.removeCostumer(CosManageTbale.getSelectionModel().getSelectedItem().getUserID());
+            costumers.remove(selectedItem);
             CosManageTbale.getItems().remove(selectedItem);
             CosManageTbale.refresh();
+            VehicleTable.getItems().clear();
+            try {//wait for the quarry to execute
+                sleep(2000);
+            } catch (InterruptedException ex) {
+                //...
+            }
+
+            for (Vehicle v: Vehicles) {
+                myController.removeVehicle(v.getVehicleID());
+            }
         }
     }
 
@@ -356,7 +364,6 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
     @FXML
     void ClickSearchCostumerVehicles(MouseEvent event) {
         Costumer cos = searchCostumerWithID(VehicleSearchCosIDtxt.getText());
-
         if (VehicleSearchCosIDtxt.getText().isEmpty()) {
             ErrorAlert.setTitle("Internal Error");
             ErrorAlert.setHeaderText("Please insert Costumer ID");

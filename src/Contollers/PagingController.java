@@ -1,21 +1,19 @@
 package Contollers;
 
 
-import java.io.IOException;
-import java.util.ArrayList;
-
-import boundary.mainProjectFX;
 import boundary.DataInitializable;
+import boundary.mainProjectFX;
 import common.assets.SqlAction;
 import common.assets.SqlQueryType;
 import common.assets.SqlResult;
-
-import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.util.ArrayList;
 
 
 /**
@@ -39,6 +37,7 @@ public class PagingController extends BasicController {
             root = loader.load(getClass().getResource(path));
             Scene scene = new Scene(root);
             mainProjectFX.mainStage.setScene(scene);
+            mainProjectFX.mainStage.centerOnScreen();
             mainProjectFX.mainStage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -60,6 +59,7 @@ public class PagingController extends BasicController {
             boundary.initData(obj);
             Scene scene = new Scene(root);
             mainProjectFX.mainStage.setScene(scene);
+            mainProjectFX.mainStage.centerOnScreen();
             mainProjectFX.mainStage.show();
 
         } catch (IOException e) {
@@ -92,6 +92,7 @@ public class PagingController extends BasicController {
             root = (Parent) loader.load();
             stage = new Stage();
             stage.setScene(new Scene(root));
+            stage.centerOnScreen();
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -115,6 +116,7 @@ public class PagingController extends BasicController {
             stage = new Stage();
             stage.setScene(new Scene(root));
             DataInitializable boundary = loader.getController();
+            stage.centerOnScreen();
             stage.show();
             boundary.initData(data);
         } catch (IOException e) {

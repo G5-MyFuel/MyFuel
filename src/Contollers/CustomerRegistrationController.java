@@ -22,7 +22,7 @@ public class CustomerRegistrationController extends BasicController {
      * The boundary controlled by this controller
      */
     private CustomerRegistrationBoundary myBoundary;
-    private String companyName;
+    private String companyName = "";
 
     private Costumer tempCostumer;
 
@@ -34,28 +34,32 @@ public class CustomerRegistrationController extends BasicController {
     /*Logic Methods*/
 
     public void setCostumerInDB(Costumer costumer) {
-        //set Costumer data into varArray
-        ArrayList<Object> varArray = new ArrayList<>();
-        varArray.add(costumer.getUserID());
+        //set Costumer data into CostumerTablevarArray
+        ArrayList<Object> CostumerTablevarArray = new ArrayList<>();
+        //bulding customer
+        CostumerTablevarArray.add(costumer.getUserID());
         if (costumer.getCostumerCreditCard() != null) {
-            varArray.add(costumer.getCostumerCreditCard().getCardNumber());
-            varArray.add(costumer.getCostumerCreditCard().getExperationDate());
-            varArray.add(costumer.getCostumerCreditCard().getCardSecurityNumber());
+            CostumerTablevarArray.add(costumer.getCostumerCreditCard().getCardNumber());
+            CostumerTablevarArray.add(costumer.getCostumerCreditCard().getExperationDate());
+            CostumerTablevarArray.add(costumer.getCostumerCreditCard().getCardSecurityNumber());
         } else {
             for (int i = 0; i < 3; i++)
-                varArray.add("No Card Exists");
+                CostumerTablevarArray.add("No Card Exists");
         }
-        varArray.add(costumer.getCostumerType());
-        varArray.add(costumer.getPurchasePlan());
-        varArray.add(costumer.getServicePlan());
-        varArray.add(costumer.getUserID());
-        varArray.add("Aa" + costumer.getUserPassword());
-        varArray.add(costumer.getUserFirstName());
-        varArray.add(costumer.getUserLastName());
-        varArray.add(costumer.getUserEmail());
-        varArray.add(companyName);
-
-
+        CostumerTablevarArray.add(costumer.getCostumerType());
+        CostumerTablevarArray.add(costumer.getPurchasePlan());
+        CostumerTablevarArray.add(costumer.getServicePlan());
+        //
+        //building user.
+        ArrayList<Object> UserTablevarArray = new ArrayList<>();
+        UserTablevarArray.add(costumer.getUserID());
+        UserTablevarArray.add("Aa" + costumer.getUserPassword());
+        UserTablevarArray.add(costumer.getUserFirstName());
+        UserTablevarArray.add(costumer.getUserLastName());
+        UserTablevarArray.add(costumer.getUserEmail());
+        UserTablevarArray.add(companyName);
+        //
+        //inserting costumer vehicles
         if (costumer.getCostumerVehicle().size() > 1) {
             ArrayList<Object> vehicleArray = new ArrayList<>();
             for (Vehicle v : costumer.getCostumerVehicle()) {
@@ -67,8 +71,11 @@ public class CustomerRegistrationController extends BasicController {
                 vehicleArray.clear();
             }
         }
-        SqlAction sqlAction = new SqlAction(SqlQueryType.INSERT_NEW_COSTUMER, varArray);
+        //execute quarry
+        SqlAction sqlAction = new SqlAction(SqlQueryType.INSERT_NEW_COSTUMER, CostumerTablevarArray);
         super.sendSqlActionToClient(sqlAction);
+        SqlAction sqlAction2 = new SqlAction(SqlQueryType.INSERT_NEW_COSTUMER_USER, UserTablevarArray);
+        super.sendSqlActionToClient(sqlAction2);
         tempCostumer.getCostumerVehicle().clear();
         tempCostumer = null;
     }
