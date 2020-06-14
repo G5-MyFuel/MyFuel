@@ -4,6 +4,7 @@ import boundary.LoginToSystemBoundary;
 import common.assets.SqlAction;
 import common.assets.SqlQueryType;
 import common.assets.SqlResult;
+import entity.FuelCompany;
 import entity.User;
 import javafx.application.Platform;
 
@@ -100,6 +101,15 @@ public class LoginToSystemController extends BasicController {
         return "failed full user name";
     }
 
+    public String getFuelCompanyBuUserID(String userID){
+        for (User u : myBoundary.getAllDBUsersArrayList()) {
+            if (u.getUserID().equals(userID)) {
+                return u.getFuelCompany()[0];
+            }
+        }
+        return "failed full user name";
+    }
+
     public ArrayList<String> getUserButtons(LoginToSystemBoundary loginToSystemBoundary, String userType) {
         ArrayList<String> buttonNameArrayList = new ArrayList<>();
         String temp;
@@ -109,6 +119,7 @@ public class LoginToSystemController extends BasicController {
                 temp = myBoundary.getUserIDTextField().getText();
                 buttonNameArrayList.add(temp);
                 buttonNameArrayList.add(getFullUserNameByUserId(temp));
+                buttonNameArrayList.add(getFuelCompanyBuUserID(temp));
                 buttonNameArrayList.add("PURCHASE_FUEL_FOR_HOME_HEATING");
 //                buttonNameArrayList.add("COSTUMER_MANAGEMENT_TABLE_PAGE");
 //                buttonNameArrayList.add("GENERATING_REPORTS_STATION_MANAGER_PAGE");
@@ -118,6 +129,7 @@ public class LoginToSystemController extends BasicController {
                 temp = myBoundary.getUserIDTextField().getText();
                 buttonNameArrayList.add(temp);
                 buttonNameArrayList.add(getFullUserNameByUserId(temp));
+                buttonNameArrayList.add(getFuelCompanyBuUserID(temp));
                 //buttonNameArrayList.add("");
                 break;
             case "DALKAN":
@@ -125,6 +137,7 @@ public class LoginToSystemController extends BasicController {
                 temp = myBoundary.getUserIDTextField().getText();
                 buttonNameArrayList.add(temp);
                 buttonNameArrayList.add(getFullUserNameByUserId(temp));
+                buttonNameArrayList.add(getFuelCompanyBuUserID(temp));
                 buttonNameArrayList.add("FAST_FUEL_PAGE");
                 break;
             case "COMPANY_MANAGER":
@@ -135,6 +148,7 @@ public class LoginToSystemController extends BasicController {
                 temp = myBoundary.getUserIDTextField().getText();
                 buttonNameArrayList.add(temp);
                 buttonNameArrayList.add(getFullUserNameByUserId(temp));
+                buttonNameArrayList.add(getFuelCompanyBuUserID(temp));
                 buttonNameArrayList.add("GENERATING_REPORTS_STATION_MANAGER_PAGE");
                 break;
             case "MARKETING_MANAGER":
@@ -145,11 +159,18 @@ public class LoginToSystemController extends BasicController {
                 temp = myBoundary.getUserIDTextField().getText();
                 buttonNameArrayList.add(temp);
                 buttonNameArrayList.add(getFullUserNameByUserId(temp));
+                buttonNameArrayList.add(getFuelCompanyBuUserID(temp));
                 buttonNameArrayList.add("COSTUMER_MANAGEMENT_TABLE_PAGE");
                 buttonNameArrayList.add("COSTUMER_REGISTRATION_PAGE");
                 break;
             case "MARKETING_DEPARTMENT_WORKER":
-
+                buttonNameArrayList.add("Marketing department worker");
+                temp = myBoundary.getUserIDTextField().getText();
+                buttonNameArrayList.add(temp);
+                buttonNameArrayList.add(getFullUserNameByUserId(temp));
+                buttonNameArrayList.add(getFuelCompanyBuUserID(temp));
+//                buttonNameArrayList.add("COSTUMER_MANAGEMENT_TABLE_PAGE");
+//                buttonNameArrayList.add("COSTUMER_REGISTRATION_PAGE");
                 break;
 
             default:

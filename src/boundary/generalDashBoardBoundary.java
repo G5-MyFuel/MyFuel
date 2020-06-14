@@ -24,6 +24,7 @@ public class generalDashBoardBoundary implements DataInitializable {
 
     //global variables:
     private String userID;
+    private String fuelCompany;
 
     @FXML
     private Label userPermissionsTitel;
@@ -87,9 +88,11 @@ public class generalDashBoardBoundary implements DataInitializable {
         String userPermission = pageNameArrayList.get(0);
         this.userID = pageNameArrayList.get(1);
         String userFullName = pageNameArrayList.get(2);
+        this.fuelCompany = pageNameArrayList.get(3);
         userPermissionsTitel.setText(userPermission);
         userFirstName.setText(userFullName);
         Button currentBtn = null;
+        pageNameArrayList.remove(0);
         pageNameArrayList.remove(0);
         pageNameArrayList.remove(0);
         pageNameArrayList.remove(0);
@@ -312,7 +315,8 @@ public class generalDashBoardBoundary implements DataInitializable {
     void addCostumerClick() {
         currentPagePane.setVisible(true);
         currentPagePane.getChildren().clear();
-        currentPagePane.getChildren().setAll(mainProjectFX.pagingController.loadBoundaryInPane(ProjectPages.COSTUMER_REGISTRATION_PAGE.getPath()));
+        String marketingRepCompanyName = null;
+        currentPagePane.getChildren().setAll(mainProjectFX.pagingController.loadBoundaryInPane(ProjectPages.COSTUMER_REGISTRATION_PAGE.getPath(),marketingRepCompanyName));
         myFuelLogo.setVisible(false);
     }
 
