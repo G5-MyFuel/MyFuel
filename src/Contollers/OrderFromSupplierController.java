@@ -28,6 +28,10 @@ public class OrderFromSupplierController extends BasicController {
         super.sendSqlActionToClient(sqlAction);
     }
 
+
+    /**
+     This function sets a new status after we done take care of the order
+     */
     public void setNewStatus(String OrderNumber) {
         ArrayList<Object> varArray = new ArrayList<>();
         varArray.add(OrderNumber);

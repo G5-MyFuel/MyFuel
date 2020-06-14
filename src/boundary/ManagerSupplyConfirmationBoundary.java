@@ -72,6 +72,7 @@ public class ManagerSupplyConfirmationBoundary implements Initializable {
 
     @FXML
     void SendConfirmationToSupplier(MouseEvent event) {
+        //TODO after we press on "Send" - update the "OrderForStock" table + Take it down from "Inventory" table
 
     }
 

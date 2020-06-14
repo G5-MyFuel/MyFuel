@@ -144,7 +144,9 @@ public class OrderExecutionBoundary implements Initializable {
         System.out.println("Order Execution Page Is Open");
 
     }
-
+     /**
+      This function set the details from DB to TabeView
+      **/
     public void setOrderFuelFromSupplierTableView(ArrayList<OrderFuelFromSupplier> OrderArray) {
         orderCol.setCellValueFactory(new PropertyValueFactory<>("OrderNumber"));
         statusCol.setCellValueFactory(new PropertyValueFactory<>("OrderStatus"));
@@ -153,7 +155,9 @@ public class OrderExecutionBoundary implements Initializable {
         tableView.setItems(tableData);
     }
 
-    /******  get DB details for Order View  ********/
+    /**
+     Get DB details for Order View after we choose an order from the table
+     **/
     public void getOrderDetailsFromTableView() {
         tableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
