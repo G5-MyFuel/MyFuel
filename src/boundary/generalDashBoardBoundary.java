@@ -376,34 +376,34 @@ public class generalDashBoardBoundary implements DataInitializable {
      * @return void
      */
     private void weekDay() {
-        Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
+        Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT"));
         LocalDate date = LocalDate.now();
 
-        int dayOfMonth = calendar.get(Calendar.DATE);
+        int dayOfMonth = date.getDayOfMonth();
         //Note: +1 the month for current month
         int month = calendar.get(Calendar.MONTH) + 1;
         int year = calendar.get(Calendar.YEAR);
         //set the day into string
-        switch (Calendar.DAY_OF_WEEK) {
-            case Calendar.SUNDAY:
+        switch (date.getDayOfWeek()) {
+            case SUNDAY:
                 currectDay.setText("Sunday");
                 break;
-            case Calendar.MONDAY:
+            case MONDAY:
                 currectDay.setText("Monday");
                 break;
-            case Calendar.TUESDAY:
+            case TUESDAY:
                 currectDay.setText("Tuesday");
                 break;
-            case Calendar.WEDNESDAY:
+            case WEDNESDAY:
                 currectDay.setText("Wednesday");
                 break;
-            case Calendar.THURSDAY:
+            case THURSDAY:
                 currectDay.setText("Thursday");
                 break;
-            case Calendar.FRIDAY:
+            case FRIDAY:
                 currectDay.setText("Friday");
                 break;
-            case Calendar.SATURDAY:
+            case SATURDAY:
                 currectDay.setText("Saturday");
                 break;
             default:

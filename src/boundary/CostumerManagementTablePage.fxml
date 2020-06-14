@@ -89,7 +89,7 @@
                         </ImageView>
                      </graphic>
                   </Tab>
-                  <Tab closable="false" text="Update Vehicle Management">
+                  <Tab closable="false" onSelectionChanged="#refreshVehicleTable" text="Update Vehicle Management">
                      <content>
                         <AnchorPane disable="true" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="992.0">
                            <children>
@@ -134,9 +134,7 @@
                                        <contextMenu>
                                           <ContextMenu>
                                              <items>
-                                                <MenuItem mnemonicParsing="false" text="Refresh" />
-                                                <MenuItem mnemonicParsing="false" text="Edit" />
-                                                <MenuItem mnemonicParsing="false" text="Delete" />
+                                                <MenuItem mnemonicParsing="false" onAction="#refreshVehicleTable" text="Refresh" />
                                              </items>
                                              <styleClass>
                                                 <String fx:value="table-context" />

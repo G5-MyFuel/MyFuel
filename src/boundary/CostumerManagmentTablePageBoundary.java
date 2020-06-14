@@ -19,6 +19,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.util.Callback;
@@ -123,6 +124,9 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
 
     @FXML
     private TreeTableColumn<?, ?> PurchasePlanTreeCol;
+
+    @FXML
+    private ImageView loadingImg;
 
 
     private JFXComboBox<String> CostumertypeChoiceBox = new JFXComboBox<>();
@@ -283,8 +287,9 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
         VehicleTable.setItems(data);
     }
 
-    public void refreshTable(){
-        myController.getCostumerTable();;
+    public void refreshTable() {
+        myController.getCostumerTable();
+        ;
     }
 
     @FXML
@@ -341,25 +346,36 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
         Optional<ButtonType> res = alert.showAndWait();
 
         if (res.get().getText().equals("Yes")) {
-            Costumer selectedItem = CosManageTbale.getSelectionModel().getSelectedItem();
-            myController.getCostumerVehicles(selectedItem.getUserID());
-            myController.removeCostumer(CosManageTbale.getSelectionModel().getSelectedItem().getUserID());
-            costumers.remove(selectedItem);
-            CosManageTbale.getItems().remove(selectedItem);
-            CosManageTbale.refresh();
-            VehicleTable.getItems().clear();
-            try {//wait for the quarry to execute
-                sleep(2000);
-            } catch (InterruptedException ex) {
-                //...
-            }
-
-            for (Vehicle v: Vehicles) {
-                myController.removeVehicle(v.getVehicleID());
+            if (!CosManageTbale.getSelectionModel().isEmpty()) {
+                Costumer selectedItem = CosManageTbale.getSelectionModel().getSelectedItem();
+                myController.getCostumerVehicles(selectedItem.getUserID());
+                myController.removeCostumer(CosManageTbale.getSelectionModel().getSelectedItem().getUserID());
+                costumers.remove(selectedItem);
+                CosManageTbale.getItems().remove(selectedItem);
+                CosManageTbale.refresh();
+                VehicleTable.getItems().clear();
+                VehicleTable.refresh();
+                try {//wait for the quarry to execute
+                    sleep(2000);
+                } catch (InterruptedException ex) {
+                    //...
+                }
+                for (Vehicle v : Vehicles) {
+                    myController.removeVehicle(v.getVehicleID());
+                }
             }
         }
     }
 
+    @FXML
+    void refreshVehicleTable() {
+        if (!VehicleTable.getItems().isEmpty()) {
+            VehicleTable.getItems().clear();
+            VehicleSearchCosIDtxt.clear();
+        }
+        VehicleTable.refresh();
+
+    }
 
     @FXML
     void ClickSearchCostumerVehicles(MouseEvent event) {
