@@ -178,7 +178,7 @@ public class GeneratingReportsStationManagerBoundary implements DataInitializabl
 
     void GetQuarterlyData() {
 
-        String startDate = ChooseReportYearCombo.getValue();
+        /*String startDate = ChooseReportYearCombo.getValue();
         String endDate = ChooseReportYearCombo.getValue();
         switch (ChooseReportQuarterCombo.getValue()) {
             case "First":
@@ -199,13 +199,13 @@ public class GeneratingReportsStationManagerBoundary implements DataInitializabl
                 break;
             default:
                 break;
-        }
+        }*/
         ArrayList<String> paramArray = new ArrayList<>();
         paramArray.add("Quarterly revenue report");
         paramArray.add(managerStation);
         paramArray.add(managerCompany);
-        paramArray.add(startDate);
-        paramArray.add(endDate);
+        //paramArray.add(startDate);
+        //paramArray.add(endDate);
         myController.GetReportData(paramArray); //start the process that will ask server to execute quarry and get the table details
     }
 

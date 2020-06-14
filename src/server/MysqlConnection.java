@@ -223,7 +223,7 @@ public class MysqlConnection {
          * *****************************************/
         sqlArray[SqlQueryType.GET_Quarterly_Revenue.getCode()] = "select p.totalPrice from FastFuel as ff, Purchase as p " +
                 "WHERE ff.purchaseID LIKE p.purchaseID AND ff.StationNumber LIKE ? AND ff.companyName LIKE ? " +
-                "AND p.purchaseDate BETWEEN ? AND ?";
+                "AND quarter(p.purchaseDate) LIKE quarter(curdate())";
         sqlArray[SqlQueryType.GET_Purchases_Report.getCode()] = "select ff.FuelType, p.fuelAmount from FastFuel as ff, Purchase as p " +
                 "WHERE ff.purchaseID LIKE p.purchaseID " +
                 "AND ff.StationNumber LIKE ? " +
