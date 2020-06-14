@@ -394,7 +394,7 @@ public class generalDashBoardBoundary implements DataInitializable {
             case Calendar.TUESDAY:
                 currectDay.setText("Tuesday");
                 break;
-            case Calendar.WEDNESDAY;
+            case Calendar.WEDNESDAY:
                 currectDay.setText("Wednesday");
                 break;
             case Calendar.THURSDAY:
