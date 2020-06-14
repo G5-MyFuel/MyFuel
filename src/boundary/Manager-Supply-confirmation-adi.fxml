@@ -27,7 +27,7 @@
                <children>
                   <VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="235.0" style="-fx-background-color: #2D4578;">
                      <children>
-                        <Label style="-fx-font-size: 22;" text="Manager" textAlignment="CENTER" textFill="#e5e5e5">
+                        <Label style="-fx-font-size: 22;" text="Station Manager" textAlignment="CENTER" textFill="#e5e5e5">
                            <VBox.margin>
                               <Insets top="10.0" />
                            </VBox.margin>
@@ -94,11 +94,20 @@
                               <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 25; -fx-font-family: 'Abel', sans-serif;;" text="Friday 15/05/20" textAlignment="CENTER" wrappingWidth="236.43639183044434" />
                            </children>
                         </VBox>
-                        <ImageView fitHeight="44.0" fitWidth="43.0" layoutX="14.0" layoutY="8.0">
-                           <image>
-                              <Image url="@../media/interface.png" />
-                           </image>
-                        </ImageView>
+                        <Pane layoutX="7.0" prefHeight="137.0" prefWidth="226.0" style="-fx-background-color: gray; -fx-border-color: linear-gradient(to left, white, orange);">
+                           <children>
+                              <Text fill="#ffdf21" layoutX="5.0" layoutY="59.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" text="You have new orders to approve !" textAlignment="CENTER" wrappingWidth="216.27685182262212">
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                              </Text>
+                              <ImageView fitHeight="64.0" fitWidth="70.0" layoutX="81.0" layoutY="-33.0">
+                                 <image>
+                                    <Image url="@../media/interface.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
                      </children>
                   </Pane>
                </children>
@@ -127,7 +136,6 @@
                               <TableColumn fx:id="OrderCol" prefWidth="48.0" text="Order" />
                               <TableColumn fx:id="FuelTypeCol" prefWidth="48.0" text="Fuel Type" />
                               <TableColumn fx:id="AmountCol" prefWidth="110.0" text="Amount" />
-                              <TableColumn fx:id="StatusCol" prefWidth="69.0" text="Status" />
                            </columns>
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

@@ -180,11 +180,11 @@ public class OrderExecutionBoundary implements Initializable {
                         QuantityField.setText(temp.getQuantity().toString());
 
                         /******* 'Done' status or 'In treatment' status *********/
-                        if (temp.getOrderStatus().equals("Done")) {
+                        while (temp.getOrderStatus().equals("Done")) {
                             DoneMsgTxt.setVisible(true);
                             hboxOrderConfirmation.setDisable(true);
                         }
-                        if (temp.getOrderStatus().equals("In treatment"))
+                        while (temp.getOrderStatus().equals("In treatment"))
                             DoneMsgTxt.setVisible(false);
                     }
                 }
