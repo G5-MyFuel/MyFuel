@@ -2,7 +2,6 @@ package boundary;
 
 import Contollers.FormValidation;
 import Contollers.LoginToSystemController;
-import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
@@ -88,8 +87,8 @@ public class LoginToSystemBoundary extends Application {
     void clickLoginBtn() {
         System.out.println("-->clickLoginBtn method");
         //System.out.println(allDBUsersArrayList);
-        if (checkInputs()) {//if the user exist in the db
-            ArrayList<String> allButtons = myController.getUserButtons(this,userType);
+        if (checkInputs()) {    //if the user exist in the db
+            ArrayList<String> allButtons = myController.getUserButtons(this, userType);
             mainProjectFX.pagingController.loadBoundary(ProjectPages.GENERAL_DASH_BOARD.getPath(), allButtons);
         }
     }
@@ -107,7 +106,7 @@ public class LoginToSystemBoundary extends Application {
         }
 
         //check if userID exist in DB
-        if (checkIfUserNameAndUserTypeInDb(userIDTextField.getText(), userType)) {
+        if (checkIfUserNameAndUserTypeInDb(userIDTextField.getText(), loginAsComboBox.getValue().toUpperCase())) {
             if (checkIfPasswordMatches(userIDTextField.getText(), passwordField.getText())) {
                 System.out.println("ther userid and password matches!");
                 return true;
@@ -119,12 +118,21 @@ public class LoginToSystemBoundary extends Application {
     private boolean checkIfUserNameAndUserTypeInDb(String userID, String UserType) {
         for (User u : allDBUsersArrayList) {
             if (u.getUserID().equals(userID)) {
-                userType = u.getUserType();
-                System.out.println("the user and its type correct");//test
-                return true;
-
+                if (u.getUserType().equals("CUSTOMER") && userType.equals("CUSTOMER")) {
+                    return true;
+                } else if (u.getUserType().equals("SUPPLIER") && userType.equals("SUPPLIER")) {
+                    return true;
+                } else if (userType.equals("EMPLOYEE")) {
+                    if (u.getUserType().equals("COMPANY_MANAGER") || u.getUserType().equals("MARKETING_DEPARTMENT_WORKER") || u.getUserType().equals("MARKETING_MANAGER") || u.getUserType().equals("MARKETING_REPRESENTATIVE") || u.getUserType().equals("STATION_MANAGER")) {
+                        userType = u.getUserType();
+                        return true;
+                    } else break;
+                } else {
+                    break;
+                }
             }
         }
+
         ErrorAlert.setTitle("User ID does'nt exist in the system");
         ErrorAlert.setHeaderText("User " + userIDTextField.getText() + " does not exist on the system, please try again!");
         ErrorAlert.showAndWait();
@@ -134,25 +142,13 @@ public class LoginToSystemBoundary extends Application {
     private int loginAttempts = 3;
 
     private boolean checkIfPasswordMatches(String userID, String password) {
-        if (loginAttempts > 0) {
-            for (User u : allDBUsersArrayList) {
-                if (u.getUserID().equals(userID)) {
-                    if (u.getUserPassword().equals(password)) {
-                        System.out.println("the userId & password matches");
-                        return true;
-                    } else break;
-                }
+        for (User u : allDBUsersArrayList) {
+            if (u.getUserID().equals(userID)) {
+                if (u.getUserPassword().equals(password)) {
+                    System.out.println("the userId & password matches");
+                    return true;
+                } else break;
             }
-            ErrorAlert.setTitle("The password is incorrect! try again");
-            loginAttempts--;
-            ErrorAlert.setHeaderText("Login failed! There are " + loginAttempts + " login attempts left");
-            ErrorAlert.showAndWait();
-            return false;
-        } else {
-            myController.setNewUserFieldValue("loginAttempts", "0", userIDTextField.getText(), userType);
-            ErrorAlert.setTitle("Account blocked!");
-            ErrorAlert.setHeaderText("Contact a marketing representative to unblock the user");
-            ErrorAlert.showAndWait();
         }
         return false;
     }
