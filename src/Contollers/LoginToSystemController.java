@@ -109,15 +109,23 @@ public class LoginToSystemController extends BasicController {
                 temp = myBoundary.getUserIDTextField().getText();
                 buttonNameArrayList.add(temp);
                 buttonNameArrayList.add(getFullUserNameByUserId(temp));
-              //  buttonNameArrayList.add("PURCHASE_FUEL_FOR_HOME_HEATING");
-                buttonNameArrayList.add("COSTUMER_MANAGEMENT_TABLE_PAGE");
-                buttonNameArrayList.add("GENERATING_REPORTS_STATION_MANAGER_PAGE");
+                buttonNameArrayList.add("PURCHASE_FUEL_FOR_HOME_HEATING");
+//                buttonNameArrayList.add("COSTUMER_MANAGEMENT_TABLE_PAGE");
+//                buttonNameArrayList.add("GENERATING_REPORTS_STATION_MANAGER_PAGE");
                 break;
             case "SUPPLIER":
-
+                buttonNameArrayList.add("Supplier");
+                temp = myBoundary.getUserIDTextField().getText();
+                buttonNameArrayList.add(temp);
+                buttonNameArrayList.add(getFullUserNameByUserId(temp));
+                //buttonNameArrayList.add("");
                 break;
             case "DALKAN":
-
+                buttonNameArrayList.add("Dalkan");
+                temp = myBoundary.getUserIDTextField().getText();
+                buttonNameArrayList.add(temp);
+                buttonNameArrayList.add(getFullUserNameByUserId(temp));
+                buttonNameArrayList.add("FAST_FUEL_PAGE");
                 break;
             case "COMPANY_MANAGER":
 
@@ -133,7 +141,12 @@ public class LoginToSystemController extends BasicController {
 
                 break;
             case "MARKETING_REPRESENTATIVE":
-
+                buttonNameArrayList.add("Marketing representative");
+                temp = myBoundary.getUserIDTextField().getText();
+                buttonNameArrayList.add(temp);
+                buttonNameArrayList.add(getFullUserNameByUserId(temp));
+                buttonNameArrayList.add("COSTUMER_MANAGEMENT_TABLE_PAGE");
+                buttonNameArrayList.add("COSTUMER_REGISTRATION_PAGE");
                 break;
             case "MARKETING_DEPARTMENT_WORKER":
 

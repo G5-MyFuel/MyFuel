@@ -94,12 +94,19 @@ public class generalDashBoardBoundary implements DataInitializable {
         pageNameArrayList.remove(0);
         pageNameArrayList.remove(0);
         for (String pn : pageNameArrayList) {
-            if(button1.getText().equals("b1")) currentBtn = button1;
-            else if(button2.getText().equals("b2")) currentBtn = button2;
-            else if(button3.getText().equals("b3")) currentBtn = button3;
+            if (button1.getText().equals("b1")) currentBtn = button1;
+            else if (button2.getText().equals("b2")) currentBtn = button2;
+            else if (button3.getText().equals("b3")) currentBtn = button3;
             //
             switch (pn) {
                 case "CONFIRM_DISCOUNT_RATE_PAGE":
+                    currentBtn.setText("Confirm discount rate");
+                    currentBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent event) {
+                            CONFIRM_DISCOUNT_RATE_PAGE();
+                        }
+                    });
                     break;
 
                 case "COSTUMER_MANAGEMENT_TABLE_PAGE":
@@ -113,21 +120,63 @@ public class generalDashBoardBoundary implements DataInitializable {
                     break;
 
                 case "COSTUMER_REGISTRATION_PAGE":
+                    currentBtn.setText("New customer registration");
+                    currentBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent event) {
+                            addCostumerClick();
+                        }
+                    });
                     break;
 
                 case "FAST_FUEL_PAGE":
+                    currentBtn.setText("Fast fueling");
+                    currentBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent event) {
+                            FAST_FUEL_PAGE();
+                        }
+                    });
                     break;
 
                 case "SALE_OPERATION_TEMPLATE_PAGE":
+                    currentBtn.setText("Sale operation template");
+                    currentBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent event) {
+                            SALE_OPERATION_TEMPLATE_PAGE();
+                        }
+                    });
                     break;
 
                 case "RUN_SALE_OPERATION_PAGE":
+                    currentBtn.setText("Run sale operation page");
+                    currentBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent event) {
+                            RUN_SALE_OPERATION_PAGE();
+                        }
+                    });
                     break;
 
                 case "SETTING_DISCOUNT_RATES_PAGE":
+                    currentBtn.setText("Setting discount rate page");
+                    currentBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent event) {
+                            SETTING_DISCOUNT_RATES_PAGE();
+                        }
+                    });
                     break;
 
                 case "CONFIRM_DISCOUNT_RATES_PAGE":
+                    currentBtn.setText("Confirm discount rates");
+                    currentBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent event) {
+                            CONFIRM_DISCOUNT_RATES_PAGE();
+                        }
+                    });
                     break;
 
                 case "GENERATING_REPORTS_STATION_MANAGER_PAGE":
@@ -142,6 +191,13 @@ public class generalDashBoardBoundary implements DataInitializable {
 
 
                 case "GENERATING_REPORTS_MARKETING_MANAGER_PAGE":
+                    currentBtn.setText("Generating reports");
+                    currentBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent event) {
+                            GENERATING_REPORTS_MARKETING_MANAGER_PAGE();
+                        }
+                    });
                     break;
 
                 case "PURCHASE_FUEL_FOR_HOME_HEATING":
@@ -159,6 +215,21 @@ public class generalDashBoardBoundary implements DataInitializable {
                     break;
             }
         }
+        if (button1.getText().equals("b1")) {
+            button1 = btnSignout;
+            button2.setVisible(false);
+            button3.setVisible(false);
+        }
+        else if (button2.getText().equals("b2")){
+            button2 = btnSignout;
+            button3.setVisible(false);
+        }
+        else if (button3.getText().equals("b3")){
+            button3.setText(btnSignout.getText());
+            button3.setOnMouseClicked(btnSignout.getOnMouseClicked());
+            button3.setGraphic(btnSignout.getGraphic());
+            btnSignout.setVisible(false);
+        }
     }
 
 
@@ -168,10 +239,66 @@ public class generalDashBoardBoundary implements DataInitializable {
         weekDay();
     }
 
-    void GENERATING_REPORTS_STATION_MANAGER_PAGE(){
+    void GENERATING_REPORTS_MARKETING_MANAGER_PAGE(){
         currentPagePane.setVisible(true);
         currentPagePane.getChildren().clear();
-        currentPagePane.getChildren().setAll(mainProjectFX.pagingController.loadBoundaryInPane(ProjectPages.GENERATING_REPORTS_STATION_MANAGER_PAGE.getPath(),userID));
+        currentPagePane.getChildren().setAll(mainProjectFX.pagingController.loadBoundaryInPane(ProjectPages.GENERATING_REPORTS_MARKETING_MANAGER_PAGE.getPath(), userID));
+        myFuelLogo.setVisible(false);
+    }
+
+    void CONFIRM_DISCOUNT_RATES_PAGE() {
+        currentPagePane.setVisible(true);
+        currentPagePane.getChildren().clear();
+        currentPagePane.getChildren().setAll(mainProjectFX.pagingController.loadBoundaryInPane(ProjectPages.CONFIRM_DISCOUNT_RATES_PAGE.getPath(), userID));
+        myFuelLogo.setVisible(false);
+    }
+
+    void SETTING_DISCOUNT_RATES_PAGE() {
+        currentPagePane.setVisible(true);
+        currentPagePane.getChildren().clear();
+        currentPagePane.getChildren().setAll(mainProjectFX.pagingController.loadBoundaryInPane(ProjectPages.SETTING_DISCOUNT_RATES_PAGE.getPath(), userID));
+        myFuelLogo.setVisible(false);
+    }
+
+    void RUN_SALE_OPERATION_PAGE() {
+        currentPagePane.setVisible(true);
+        currentPagePane.getChildren().clear();
+        currentPagePane.getChildren().setAll(mainProjectFX.pagingController.loadBoundaryInPane(ProjectPages.RUN_SALE_OPERATION_PAGE.getPath(), userID));
+        myFuelLogo.setVisible(false);
+    }
+
+    void COSTUMER_REGISTRATION_PAGE() {
+        currentPagePane.setVisible(true);
+        currentPagePane.getChildren().clear();
+        currentPagePane.getChildren().setAll(mainProjectFX.pagingController.loadBoundaryInPane(ProjectPages.COSTUMER_REGISTRATION_PAGE.getPath(), userID));
+        myFuelLogo.setVisible(false);
+    }
+
+    void CONFIRM_DISCOUNT_RATE_PAGE() {
+        currentPagePane.setVisible(true);
+        currentPagePane.getChildren().clear();
+        currentPagePane.getChildren().setAll(mainProjectFX.pagingController.loadBoundaryInPane(ProjectPages.CONFIRM_DISCOUNT_RATE_PAGE.getPath(), userID));
+        myFuelLogo.setVisible(false);
+    }
+
+    void SALE_OPERATION_TEMPLATE_PAGE() {
+        currentPagePane.setVisible(true);
+        currentPagePane.getChildren().clear();
+        currentPagePane.getChildren().setAll(mainProjectFX.pagingController.loadBoundaryInPane(ProjectPages.SALE_OPERATION_TEMPLATE_PAGE.getPath(), userID));
+        myFuelLogo.setVisible(false);
+    }
+
+    void FAST_FUEL_PAGE() {
+        currentPagePane.setVisible(true);
+        currentPagePane.getChildren().clear();
+        currentPagePane.getChildren().setAll(mainProjectFX.pagingController.loadBoundaryInPane(ProjectPages.FAST_FUEL_PAGE.getPath(), userID));
+        myFuelLogo.setVisible(false);
+    }
+
+    void GENERATING_REPORTS_STATION_MANAGER_PAGE() {
+        currentPagePane.setVisible(true);
+        currentPagePane.getChildren().clear();
+        currentPagePane.getChildren().setAll(mainProjectFX.pagingController.loadBoundaryInPane(ProjectPages.GENERATING_REPORTS_STATION_MANAGER_PAGE.getPath(), userID));
         myFuelLogo.setVisible(false);
     }
 
