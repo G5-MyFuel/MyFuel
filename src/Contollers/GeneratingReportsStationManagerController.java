@@ -68,7 +68,6 @@ public class GeneratingReportsStationManagerController extends BasicController {
                 case GET_Purchases_Report:
                     PurchasesReport resultList = changeResultToPurchasesReport(result);
                     myBoundary.setPurchasesData(resultList);
-
                     break;
                 case GET_QuantityItemsStock_Report:
                     myBoundary.setQuantityItemsStockData(changeResultToQuantityItemsStockReport(result));
@@ -97,7 +96,6 @@ public class GeneratingReportsStationManagerController extends BasicController {
 
     private PurchasesReport changeResultToPurchasesReport(SqlResult result) {
 
-        //PurchasesReport resultList = new PurchasesReport();
         Integer salesAmount = 0;
         Float quantityPurchased = new Float(0);
         String FuelType = new String();
@@ -115,8 +113,9 @@ public class GeneratingReportsStationManagerController extends BasicController {
         ArrayList<QuantityItemsStockReport> resultList = new ArrayList<>();
 
         for (ArrayList<Object> a : result.getResultData()) {
-            QuantityItemsStockReport tempReport = new QuantityItemsStockReport((String) a.get(0), (String) a.get(1), (String) a.get(2));
-            resultList.add(tempReport);
+            resultList.add(new QuantityItemsStockReport((String )a.get(0)));
+            resultList.add(new QuantityItemsStockReport((String )a.get(1)));
+            resultList.add(new QuantityItemsStockReport((String )a.get(2)));
         }
         return resultList;
     }

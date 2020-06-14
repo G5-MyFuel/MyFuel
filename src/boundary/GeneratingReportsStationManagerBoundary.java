@@ -242,12 +242,12 @@ public class GeneratingReportsStationManagerBoundary implements DataInitializabl
         myController.GetReportData(paramArray); //start the process that will ask server to execute quarry and get the table details
     }
 
-    private void cleanArray(ArrayList<PurchasesReport> purchasesArray) {
+    /*private void cleanArray(ArrayList<PurchasesReport> purchasesArray) {
 
         for (int i = 0; i < 3; i++)
             PurchasesArray.remove(0);
 
-    }
+    }*/
 
     public void setPurchasesData(PurchasesReport resultList) {
 
@@ -258,14 +258,16 @@ public class GeneratingReportsStationManagerBoundary implements DataInitializabl
             FuelTypeColumn.setCellValueFactory(new PropertyValueFactory<>("fuelType"));
             QuantityPurchasedColumn.setCellValueFactory(new PropertyValueFactory<>("quantityPurchased"));
             SalesAmountColumn.setCellValueFactory(new PropertyValueFactory<>("salesAmount"));
-            for(int i=0; i< PurchasesArray.size();i++)
-                if(PurchasesArray.get(i).getFuelType().equals(""))
+            for (int i = 0; i < PurchasesArray.size(); i++)
+                if (PurchasesArray.get(i).getFuelType().equals(""))
                     PurchasesArray.remove(i);
             ObservableList<PurchasesReport> data = FXCollections.observableArrayList(PurchasesArray);
             PurchasesReportTable.setItems(data);
             PurchasesReportTable.setVisible(true);
             ReportSentMessageLabel.setVisible(true);
-            cleanArray(PurchasesArray);
+            /*if (PurchasesArray.size() == 3)
+                cleanArray(PurchasesArray);*/
+            PurchasesArray.clear();
         }
     }
 
@@ -283,16 +285,19 @@ public class GeneratingReportsStationManagerBoundary implements DataInitializabl
         PurchasesReportTable.setVisible(false);
         QuantityItemsStockTxt.setText("Quantity of items in stock for" + managerCompany + " in Station " + managerStation + ":");
         ArrayList<String> paramArray = new ArrayList<>();
-        paramArray.add("Purchases report");
-        paramArray.add(managerStation);
+        paramArray.add("Quantity of items in stock report");
         paramArray.add(managerCompany);
-        
-        //myController.GetReportData("Quantity of items in stock report", managerCompany, ""); //start the process that will ask server to execute quarry and get the table details
+        paramArray.add(managerStation);
+        myController.GetReportData(paramArray); //start the process that will ask server to execute quarry and get the table details
     }
 
     public void setQuantityItemsStockData(ArrayList<QuantityItemsStockReport> resultList) {
 
         QuantityReportTable.setVisible(true);
+        System.out.println(resultList);
+        resultList.get(0).setFuelType("Gasoline 95");
+        resultList.get(1).setFuelType("Diesel");
+        resultList.get(2).setFuelType("Scooter fuel");
         FuelTypeQuantityReportColumn.setCellValueFactory(new PropertyValueFactory<>("fuelType"));
         AvailableInventoryColumn.setCellValueFactory(new PropertyValueFactory<>("availableInventory"));
 
@@ -318,6 +323,5 @@ public class GeneratingReportsStationManagerBoundary implements DataInitializabl
     void handleTotalRevenue(ActionEvent event) {
 
     }
-
 
 }
