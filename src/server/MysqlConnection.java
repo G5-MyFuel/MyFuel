@@ -191,10 +191,11 @@ public class MysqlConnection {
          * *****************************************/
         sqlArray[SqlQueryType.GET_ALL_ORDERS_FROM_SUPPLIER_TABLE.getCode()] = "SELECT * FROM `OrderForStock`";
         sqlArray[SqlQueryType.UPDATE_STATUS_TO_DONE.getCode()] = "UPDATE `OrderForStock` SET `OrderStatus`= \"Done\" WHERE `OrderNumber`= ?";
-        sqlArray[SqlQueryType.GET_FUEL_AMOUNT.getCode()]=
+        sqlArray[SqlQueryType.GET_GAS_STATION_TABLE.getCode()]= "SELECT `gasStationID`, `companyID`, `gasStationName`, `managerID`, `inventory_95`, `inventory_scooter`, `inventory_diesel` FROM `GasStation`";
 
         /* *****************************************
-         * ********** Templates+Campaigns Management Queries ****************
+         * ********** Templates+Campaigns Management Queries ***************
+         *
          * *****************************************/
         sqlArray[SqlQueryType.GET_ALL_TEMPLATES_TABLE.getCode()] = "SELECT * FROM `CampaignTemplates`";
         sqlArray[SqlQueryType.INSERT_NEW_TEMPLATE.getCode()] =
