@@ -221,8 +221,14 @@ public class MysqlConnection {
         /* *****************************************
          * ********** Station Manager Reports Queries ****************
          * *****************************************/
-        sqlArray[SqlQueryType.GET_Quarterly_Revenue.getCode()] = "SELECT * FROM `Purchase` WHERE `purchaseDate` BETWEEN ? AND ?";
-        sqlArray[SqlQueryType.GET_Purchases_Report.getCode()] = "SELECT * FROM `Purchase` WHERE `Fuel type` LIKE ?";
+        sqlArray[SqlQueryType.GET_Quarterly_Revenue.getCode()] = "select p.totalPrice from FastFuel as ff, Purchase as p " +
+                "where ff.purchaseID LIKE p.purchaseID AND ff.StationNumber LIKE ? AND ff.companyName LIKE ? " +
+                "AND p.purchaseDate BETWEEN ? AND ?";
+        sqlArray[SqlQueryType.GET_Purchases_Report.getCode()] = "select ff.FuelType, p.fuelAmount from FastFuel as ff, Purchase as p " +
+                "where ff.purchaseID LIKE p.purchaseID " +
+                "AND ff.StationNumber LIKE ? " +
+                "AND ff.companyName LIKE ? " +
+                "AND ff.FuelType LIKE ?";
         sqlArray[SqlQueryType.GET_QuantityItemsStock_Report.getCode()] = "SELECT * FROM `FuelInventory` WHERE `Company Name` LIKE ?";
         sqlArray[SqlQueryType.GET_Manager_Data.getCode()] = "SELECT * FROM Employee WHERE Employee.employeeID LIKE ?";
     }

@@ -26,16 +26,19 @@ public class GeneratingReportsStationManagerController extends BasicController {
         this.myBoundary = myBoundary;
     }
 
-    public void GetReportData(String ReportType, String startDate, String endDate) {
+    public void GetReportData(ArrayList<String> paramArray/*String ReportType, String startDate, String endDate*/) {
         ArrayList<Object> varArray = new ArrayList<>();
-        varArray.add(startDate);
-        switch (ReportType) {
+        varArray.addAll(paramArray);
+        varArray.remove(0);
+        System.out.println(paramArray);
+        System.out.println(varArray);
+        switch (paramArray.get(0)) {
             case "Get Manager data":
                 SqlAction sqlAction = new SqlAction(SqlQueryType.GET_Manager_Data, varArray);
                 super.sendSqlActionToClient(sqlAction);
                 break;
             case "Quarterly revenue report":
-                varArray.add(endDate);
+                //varArray.add(endDate);
                 sqlAction = new SqlAction(SqlQueryType.GET_Quarterly_Revenue, varArray);
                 super.sendSqlActionToClient(sqlAction);
                 break;
@@ -87,7 +90,7 @@ public class GeneratingReportsStationManagerController extends BasicController {
 
         Float TotalPrice = new Float(0);
         for (ArrayList<Object> a : result.getResultData()) {
-            TotalPrice += Float.parseFloat((String) a.get(4));
+            TotalPrice += Float.parseFloat((String) a.get(0));
         }
         return TotalPrice.toString();
     }
@@ -96,14 +99,14 @@ public class GeneratingReportsStationManagerController extends BasicController {
 
         //PurchasesReport resultList = new PurchasesReport();
         Integer salesAmount = 0;
-        Float TotalPrice = new Float(0);
+        Float quantityPurchased = new Float(0);
         String FuelType = new String();
         for (ArrayList<Object> a : result.getResultData()) {
-            FuelType = (String) a.get(5);
-            TotalPrice += Float.parseFloat((String) a.get(3));
+            FuelType = (String) a.get(0);
+            quantityPurchased += Float.parseFloat((String) a.get(1));
             salesAmount++;
         }
-        PurchasesReport resultList = new PurchasesReport(FuelType, TotalPrice.toString() + " liters", salesAmount.toString() + " purchase");
+        PurchasesReport resultList = new PurchasesReport(FuelType, quantityPurchased.toString() + " liters", salesAmount.toString() + " purchase");
         return resultList;
     }
 
