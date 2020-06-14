@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 public class PermissionsManagement extends BasicController {
     private PermissionsManagement Instance = null;
-    private ArrayList<Employee> employeeArrayList = new ArrayList<>();
+//    private ArrayList<Employee> employeeArrayList = new ArrayList<>();
     private int userTypeAsNumber;
     private UserType userType;
     private String userID;
@@ -30,7 +30,7 @@ public class PermissionsManagement extends BasicController {
     public PermissionsManagement(String userID, int userType) throws InterruptedException {
         this.userID = userID;
         this.userTypeAsNumber = userType;
-        this.userType = getUserTypeByNumber(userTypeAsNumber);
+//        this.userType = getUserTypeByNumber(userTypeAsNumber);
 
     }
 
@@ -40,68 +40,83 @@ public class PermissionsManagement extends BasicController {
         return Instance;
     }
 
-    private UserType getUserTypeByNumber(int userTypeAsNumber) {
-        switch (userTypeAsNumber) {
-            case 1:
-                return UserType.CUSTOMER;
-            case 2:
-                for (Employee e : employeeArrayList) {
-                    if (e.getUserID() == userID) {
-                        if (UserType.asUserType(e.getJobTitle()) != null) {
-                            return UserType.asUserType(e.getJobTitle());
-                        } else System.err.println("employee jobTitle doesn't exist");
-                    } else System.err.println("Employee doesn't exist");
-                }
-                break;
-            case 3:
-                return UserType.SUPPLIER;
-        }
-        return null;
-    }
+//    private UserType getUserTypeByNumber(int userTypeAsNumber) {
+//        switch (userTypeAsNumber) {
+//            case 1:
+//                return UserType.CUSTOMER;
+//            case 2:
+//                for (Employee e : employeeArrayList) {
+//                    if (e.getUserID() == userID) {
+//                        if (UserType.asUserType(e.getJobTitle()) != null) {
+//                            return UserType.asUserType(e.getJobTitle());
+//                        } else System.err.println("employee jobTitle doesn't exist");
+//                    } else System.err.println("Employee doesn't exist");
+//                }
+//                break;
+//            case 3:
+//                return UserType.SUPPLIER;
+//        }
+//        return null;
+//    }
 
-    public void getEmployeeTable() {
-        SqlAction sqlAction = new SqlAction(SqlQueryType.GET_EMPLOYEE_TABLE);
-        super.sendSqlActionToClient(sqlAction);
-    }
+//    public void getEmployeeTable() {
+//        SqlAction sqlAction = new SqlAction(SqlQueryType.GET_EMPLOYEE_TABLE);
+//        super.sendSqlActionToClient(sqlAction);
+//    }
 
-    @Override
-    public void getResultFromClient(SqlResult result) {
-        Platform.runLater(() -> {
-            switch (result.getActionType()) {
-                case GET_EMPLOYEE_TABLE:
-                    System.out.println("PermissionsManagement -> GET_EMPLOYEE_TABLE query");
-                    employeeArrayList.addAll(this.changeResultToEmployees(result));
-                    System.out.println(employeeArrayList);
-                    break;
-                default:
-                    break;
-            }
-        });
+//    @Override
+//    public void getResultFromClient(SqlResult result) {
+//        Platform.runLater(() -> {
+//            switch (result.getActionType()) {
+//                case GET_EMPLOYEE_TABLE:
+//                    System.out.println("PermissionsManagement -> GET_EMPLOYEE_TABLE query");
+//                    employeeArrayList.addAll(this.changeResultToEmployees(result));
+//                    System.out.println(employeeArrayList);
+//                    break;
+//                default:
+//                    System.out.println("PermissionsManagement -> default");
+//                    break;
+//            }
+//        });
+//
+//    }
 
-    }
-
-    private ArrayList<Employee> changeResultToEmployees(SqlResult result) {
-        ArrayList<Employee> resultList = new ArrayList<>();
-        for (ArrayList<Object> a : result.getResultData()) {
-            //id,jobTitle,fuelCompany,userFirstName,userLastName,userEmail
-            Employee employee = new Employee((String) a.get(0), "", (String) a.get(3), (String) a.get(4), (String) a.get(5), (String) a.get(1), (String) a.get(2));
-            resultList.add(employee);
-        }
-        return resultList;
-    }
+//    private ArrayList<Employee> changeResultToEmployees(SqlResult result) {
+//        ArrayList<Employee> resultList = new ArrayList<>();
+//        for (ArrayList<Object> a : result.getResultData()) {
+//            //id,jobTitle,fuelCompany,userFirstName,userLastName,userEmail
+//            String fc;
+//            switch((int)a.get(6)){
+//                case 1:
+//                    fc = "PAZ";
+//                    break;
+//                case 2:
+//                    fc = "SONOL";
+//                    break;
+//                case 3:
+//                    fc = "YELLOW";
+//                    break;
+//                default:
+//                    throw new IllegalStateException("Unexpected value: " + (int) a.get(6));
+//            }
+//            Employee employee = new Employee((String) a.get(0), "", (String)a.get(2), (String) a.get(3),(String)a.get(4),(String)a.get(1),fc);
+//            resultList.add(employee);
+//        }
+//        return resultList;
+//    }
 
 //    private Button getButton() {
 //
 //    }
 
 
-    public ArrayList<Employee> getEmployeeArrayList() {
-        return employeeArrayList;
-    }
-
-    public void setEmployeeArrayList(ArrayList<Employee> employeeArrayList) {
-        this.employeeArrayList = employeeArrayList;
-    }
+//    public ArrayList<Employee> getEmployeeArrayList() {
+//        return employeeArrayList;
+//    }
+//
+//    public void setEmployeeArrayList(ArrayList<Employee> employeeArrayList) {
+//        this.employeeArrayList = employeeArrayList;
+//    }
 
     public int getUserTypeAsNumber() {
         return userTypeAsNumber;
@@ -129,7 +144,7 @@ public class PermissionsManagement extends BasicController {
 
     public ArrayList<JFXButton> openDashBoard() {
         ArrayList<JFXButton> buttonArrayList = new ArrayList<>();
-        UserType userType = getUserTypeByNumber(userTypeAsNumber);
+//        UserType userType = getUserTypeByNumber(userTypeAsNumber);
         switch (userType) {
             case CUSTOMER:
                 //homepage,
@@ -179,5 +194,10 @@ public class PermissionsManagement extends BasicController {
         b.setGraphic(new ImageView(buttonIcon));
         b.setOnAction(eventHandler);
         return b;
+    }
+
+    @Override
+    public void getResultFromClient(SqlResult result) {
+
     }
 }

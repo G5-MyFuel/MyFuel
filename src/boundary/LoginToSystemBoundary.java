@@ -68,7 +68,7 @@ public class LoginToSystemBoundary extends Application {
     @FXML
     void initialize() {
         myController.getUsersTable();   //start the process that will ask server to execute query and get the Users table details
-        permissionsManagement.getEmployeeTable();
+        myController.getEmployeeTable();
         formValidation = FormValidation.getValidator(); //for form validation instance
         loginAsComboBox.getItems().addAll("Customer", "Employee", "Supplier");  //set the user types
         LoginValidation();
