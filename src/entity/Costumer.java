@@ -24,7 +24,7 @@ public class Costumer extends User {
     private String purchasePlan;
 
     public Costumer(String ID, String CustomerPassword, String CostumerType, String Fname, String Lname, String emailAdress, CreditCard customerCreditCard, String purchasePlan, Vehicle CostumerVehicle,String servicePlan) {
-        super(ID,1,CustomerPassword,Fname,Lname,emailAdress);
+        super(ID,CostumerType,CustomerPassword,0,Fname,Lname,emailAdress,null);
         this.CostumerCreditCard = customerCreditCard;
         this.purchasePlan = purchasePlan;
         this.CostumerVehicle.add(CostumerVehicle);

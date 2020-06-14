@@ -34,7 +34,7 @@ public class LoginToSystemBoundary extends Application {
     private ArrayList<User> allDBUsersArrayList;
     private LoginToSystemController myController = new LoginToSystemController(this);
     private Alert ErrorAlert = new Alert(Alert.AlertType.ERROR);
-    int userType = 0;
+    String userType = "";
 
     /*  fxml file object variables: */
     @FXML
@@ -68,7 +68,6 @@ public class LoginToSystemBoundary extends Application {
     @FXML
     void initialize() {
         myController.getUsersTable();   //start the process that will ask server to execute query and get the Users table details
-        myController.getEmployeeTable();
         formValidation = FormValidation.getValidator(); //for form validation instance
         loginAsComboBox.getItems().addAll("Customer", "Employee", "Supplier");  //set the user types
         LoginValidation();
@@ -88,35 +87,20 @@ public class LoginToSystemBoundary extends Application {
     @FXML
     void clickLoginBtn() {
         System.out.println("-->clickLoginBtn method");
-        System.out.println(allDBUsersArrayList);
-        if(checkInputs()){
-            permissionsManagement.setUserID(userIDTextField.getText());
-            permissionsManagement.setUserTypeAsNumber(userType);
-            ArrayList<JFXButton> allButtons = permissionsManagement.openDashBoard();
-            mainProjectFX.pagingController.loadBoundary(ProjectPages.GENERAL_DASH_BOARD.getPath(),allButtons);
+        //System.out.println(allDBUsersArrayList);
+        if (checkInputs()) {//if the user exist in the db
+            ArrayList<String> allButtons = myController.getUserButtons(this,userType);
+            mainProjectFX.pagingController.loadBoundary(ProjectPages.GENERAL_DASH_BOARD.getPath(), allButtons);
         }
     }
 
     public boolean checkInputs() {
         if (!loginAsComboBox.getSelectionModel().isEmpty()) {
-            switch (loginAsComboBox.getValue()) {
-                case "Customer":
-                    userType = 1;
-                    break;
-                case "Employee":
-                    userType = 2;
-                    break;
-                case "Supplier":
-                    userType = 3;
-                    break;
-                default:
-                    userType = 0;
-                    break;
-            }
+            userType = loginAsComboBox.getValue().toUpperCase();
         }
 
         //check if user type selected
-        if (userType == 0) {
+        else {
             ErrorAlert.setTitle("Login Error");
             ErrorAlert.setHeaderText("User type cannot be empty, Please select user type");
             ErrorAlert.showAndWait();
@@ -132,11 +116,13 @@ public class LoginToSystemBoundary extends Application {
         return false;
     }
 
-    private boolean checkIfUserNameAndUserTypeInDb(String userID, int UserType) {
+    private boolean checkIfUserNameAndUserTypeInDb(String userID, String UserType) {
         for (User u : allDBUsersArrayList) {
-            if (u.getUserID().equals(userID) && userType == u.getUserType()) {
-                System.out.println("the user and its type correct");//tet
+            if (u.getUserID().equals(userID)) {
+                userType = u.getUserType();
+                System.out.println("the user and its type correct");//test
                 return true;
+
             }
         }
         ErrorAlert.setTitle("User ID does'nt exist in the system");
@@ -163,7 +149,7 @@ public class LoginToSystemBoundary extends Application {
             ErrorAlert.showAndWait();
             return false;
         } else {
-            myController.setNewUserFieldValue("loginAttempts", "0", userIDTextField.getText(), Integer.toString(userType));
+            myController.setNewUserFieldValue("loginAttempts", "0", userIDTextField.getText(), userType);
             ErrorAlert.setTitle("Account blocked!");
             ErrorAlert.setHeaderText("Contact a marketing representative to unblock the user");
             ErrorAlert.showAndWait();

@@ -11,7 +11,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
@@ -20,8 +19,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class GeneratingReportsStationManagerBoundary implements Initializable {
+public class GeneratingReportsStationManagerBoundary implements DataInitializable {
 
+    String userID;
     /**
      * The supervisor boundary controller.
      */
@@ -97,7 +97,13 @@ public class GeneratingReportsStationManagerBoundary implements Initializable {
     private final ObservableList<String> quarterList = FXCollections.observableArrayList("First", "Second", "Third", "Fourth");
 
     @Override
+    public void initData(Object data) {
+        this.userID = (String) data;
+    }
+
+    @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         this.formValidation = FormValidation.getValidator();
         ChooseReportYearCombo.setVisible(false);
         ChooseReportQuarterCombo.setVisible(false);
@@ -282,4 +288,6 @@ public class GeneratingReportsStationManagerBoundary implements Initializable {
     void handleTotalRevenue(ActionEvent event) {
 
     }
+
+
 }

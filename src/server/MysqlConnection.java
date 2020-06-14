@@ -146,7 +146,7 @@ public class MysqlConnection {
          * *****************************************************/
         sqlArray[SqlQueryType.UPDATE_USER_LOGIN_STATUS.getCode()] = "UPDATE `Users` "
                 + "SET isLoginIndicator = ? WHERE userID = ? AND userType = ?";
-        sqlArray[SqlQueryType.GET_ALL_USERS_TABLE.getCode()] = "SELECT * FROM Users;";
+        sqlArray[SqlQueryType.GET_ALL_USERS_TABLE.getCode()] = "SELECT * FROM User;";
         sqlArray[SqlQueryType.UPDATE_USER_FIELD.getCode()] = "UPDATE `Users` SET `loginAttempts` = '5' WHERE `Users`.`userID` = 601983543 AND `Users`.`userType` = 1;";
         sqlArray[SqlQueryType.GET_EMPLOYEE_TABLE.getCode()] = "select employeeID,jobTitle,userFirstName,userLastName,userEmail,companyID,gasStationID from Users as u , Employee as e where u.userID=e.employeeID";
 

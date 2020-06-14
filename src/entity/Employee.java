@@ -4,36 +4,12 @@ package entity;
 import common.assets.UserType;
 
 public class Employee extends User {
-    private String jobTitle;
-    private String fuelCompany;
-
-    public Employee(String userID, String userPassword, String userFirstName, String userLastName, String userEmail,String jobTitle,String fuelCompany) {
-        super(userID, 2, userPassword, userFirstName, userLastName, userEmail);
-        this.jobTitle = jobTitle;
-        this.fuelCompany = fuelCompany;
+    String fuelCompanyName;
+    String gasStatinID;
+    public Employee(String userID, String userType, String userPassword, int isLoginIndicator, String userFirstName, String userLastName, String userEmail, String[] fuelCompany,String fuelCompanyName,String gasStatinID) {
+        super(userID, userType, userPassword, isLoginIndicator, userFirstName, userLastName, userEmail, fuelCompany);
+        this.fuelCompanyName = fuelCompanyName;
+        this.gasStatinID = gasStatinID;
     }
 
-    public String getJobTitle() {
-        return jobTitle;
-    }
-
-    public void setJobTitle(String jobTitle) {
-        this.jobTitle = jobTitle;
-    }
-
-    public String getFuelCompany() {
-        return fuelCompany;
-    }
-
-    public void setFuelCompany(String fuelCompany) {
-        this.fuelCompany = fuelCompany;
-    }
-
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "jobTitle='" + jobTitle + '\'' +
-                ", fuelCompany='" + fuelCompany + '\'' +
-                '}';
-    }
 }

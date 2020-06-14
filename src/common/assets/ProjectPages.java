@@ -41,4 +41,5 @@ public enum ProjectPages {
     public String getPath() {
         return path;
     }
+
 }

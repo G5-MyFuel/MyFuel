@@ -66,7 +66,18 @@ public class PagingController extends BasicController {
             e.printStackTrace();
         }
     }
-
+    public Pane loadBoundaryInPane(String path,Object obj) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
+        Pane root = null;
+        try {
+            root = loader.load();
+            DataInitializable boubdary = loader.getController();
+            boubdary.initData(obj);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return root;
+    }
     /**
      * Load additional stage.
      *
@@ -128,6 +139,8 @@ public class PagingController extends BasicController {
         }
         return root;
     }
+
+
 
     /**
      * User logout.
