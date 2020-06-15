@@ -248,6 +248,8 @@ public class MysqlConnection {
                 "VALUES (?,?,CURRENT_TIME(),quarter(curdate()),?,?,?)," +
                 "(?,?,CURRENT_TIME(),quarter(curdate()),?,?,?)," +
                 "(?,?,CURRENT_TIME(),quarter(curdate()),?,?,?)";
+
+        //sqlArray[SqlQueryType.INSERT_NEW_QuantityItemsStock_Report.getCode()] =
     }
 
     public Connection getConnection() {
