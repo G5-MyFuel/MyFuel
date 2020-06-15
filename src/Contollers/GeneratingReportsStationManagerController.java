@@ -4,11 +4,13 @@ import boundary.GeneratingReportsStationManagerBoundary;
 import common.assets.SqlAction;
 import common.assets.SqlQueryType;
 import common.assets.SqlResult;
+import entity.FuelTypes;
 import entity.PurchasesReport;
 import entity.QuantityItemsStockReport;
 import javafx.application.Platform;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class GeneratingReportsStationManagerController extends BasicController {
 
@@ -66,8 +68,8 @@ public class GeneratingReportsStationManagerController extends BasicController {
                     myBoundary.setQuarterlyData(this.changeResultToQuarterlyReport(result));
                     break;
                 case GET_Purchases_Report:
-                    PurchasesReport resultList = changeResultToPurchasesReport(result);
-                    myBoundary.setPurchasesData(resultList);
+                    //PurchasesReport resultList = changeResultToPurchasesReport(result);
+                    myBoundary.setPurchasesData(changeResultToPurchasesReport(result));
                     break;
                 case GET_QuantityItemsStock_Report:
                     myBoundary.setQuantityItemsStockData(changeResultToQuantityItemsStockReport(result));
@@ -94,17 +96,32 @@ public class GeneratingReportsStationManagerController extends BasicController {
         return TotalPrice.toString();
     }
 
-    private PurchasesReport changeResultToPurchasesReport(SqlResult result) {
+    private ArrayList<PurchasesReport> changeResultToPurchasesReport(SqlResult result) {
 
-        Integer salesAmount = 0;
-        Float quantityPurchased = new Float(0);
-        String FuelType = new String();
+        Float[] fuelAmount = new Float[]{Float.valueOf(0),Float.valueOf(0),Float.valueOf(0)};
+        Integer[] salesAmount = new Integer[]{0,0,0};
+        ArrayList<PurchasesReport> resultList = new ArrayList<>();
         for (ArrayList<Object> a : result.getResultData()) {
-            FuelType = (String) a.get(0);
-            quantityPurchased += Float.parseFloat((String) a.get(1));
-            salesAmount++;
+            if (((String) a.get(0)).equals("Gasoline 95")) {
+                fuelAmount[0] += Float.parseFloat((String) a.get(1));
+                salesAmount[0]++;
+            }
+            if (((String) a.get(0)).equals("Diesel")) {
+                fuelAmount[1] += Float.parseFloat((String) a.get(1));
+                salesAmount[1]++;
+            }
+            if (((String) a.get(0)).equals("Scooter fuel")) {
+                fuelAmount[2] += Float.parseFloat((String) a.get(1));
+                salesAmount[2]++;
+            }
         }
-        PurchasesReport resultList = new PurchasesReport(FuelType, quantityPurchased.toString() + " liters", salesAmount.toString() + " purchase");
+        resultList.add(new PurchasesReport("Gasoline 95"));
+        resultList.add(new PurchasesReport("Diesel"));
+        resultList.add(new PurchasesReport("Scooter fuel"));
+        for (int i = 0; i < 3; i++) {
+            resultList.get(i).setQuantityPurchased(fuelAmount[i].toString() + " liters");
+            resultList.get(i).setSalesAmount(salesAmount[i].toString() + " purchase");
+        }
         return resultList;
     }
 
@@ -113,9 +130,9 @@ public class GeneratingReportsStationManagerController extends BasicController {
         ArrayList<QuantityItemsStockReport> resultList = new ArrayList<>();
 
         for (ArrayList<Object> a : result.getResultData()) {
-            resultList.add(new QuantityItemsStockReport((String )a.get(0)+" liters"));
-            resultList.add(new QuantityItemsStockReport((String )a.get(1)+" liters"));
-            resultList.add(new QuantityItemsStockReport((String )a.get(2)+" liters"));
+            resultList.add(new QuantityItemsStockReport((String) a.get(0) + " liters"));
+            resultList.add(new QuantityItemsStockReport((String) a.get(1) + " liters"));
+            resultList.add(new QuantityItemsStockReport((String) a.get(2) + " liters"));
         }
         return resultList;
     }

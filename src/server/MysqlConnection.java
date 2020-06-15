@@ -227,12 +227,15 @@ public class MysqlConnection {
         sqlArray[SqlQueryType.GET_Purchases_Report.getCode()] = "select ff.FuelType, p.fuelAmount from FastFuel as ff, Purchase as p " +
                 "WHERE ff.purchaseID LIKE p.purchaseID " +
                 "AND ff.StationNumber LIKE ? " +
-                "AND ff.companyName LIKE ? " +
-                "AND ff.FuelType LIKE ?";
+                "AND ff.companyName LIKE ?";
         sqlArray[SqlQueryType.GET_QuantityItemsStock_Report.getCode()] = "SELECT gs.inventory_95, gs.inventory_diesel, gs.inventory_scooter from GasStation as gs " +
                 "WHERE gs.companyName LIKE ?" +
                 "AND gs.StationNumber LIKE ?";
         sqlArray[SqlQueryType.GET_Manager_Data.getCode()] = "SELECT * FROM Employee WHERE Employee.employeeID LIKE ?";
+        /*
+        INSERT INTO `ViewReportsForAdmin`
+(`TotalRevenue`, `FuelType`, `LitersPurchased`, `SalesAmount`, `AvailableInventory`, `companyName`, `StationNumber`, `Date`, `Quarterly`) VALUES ("100","Diesel","20","2","400","Paz","3","2020-06-01","2")
+         */
     }
 
     public Connection getConnection() {
