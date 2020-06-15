@@ -15,6 +15,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Text;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -49,13 +50,16 @@ public class ManagerSupplyConfirmationBoundary implements Initializable {
     private TableColumn<?, ?> OrderCol;
 
     @FXML
+    private TableColumn<?, ?> CompanyCol;
+
+    @FXML
+    private TableColumn<?, ?> OrderCol1;
+
+    @FXML
     private TableColumn<?, ?> FuelTypeCol;
 
     @FXML
     private TableColumn<?, ?> AmountCol;
-
-    @FXML
-    private TableColumn<?, ?> StatusCol;
 
     @FXML
     private HBox hboxOrderConfirmation;
@@ -68,6 +72,9 @@ public class ManagerSupplyConfirmationBoundary implements Initializable {
 
     @FXML
     private Button SendBtn;
+
+    @FXML
+    private Text ApprovalTxt;
 
     @FXML
     void OrderConfirmationCheck(MouseEvent event) {
@@ -119,6 +126,7 @@ public class ManagerSupplyConfirmationBoundary implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         hboxOrderConfirmation.setVisible(false);
         tableView.setVisible(true);
+        ApprovalTxt.setVisible(false);
         SendBtn.setVisible(false);
         SendBtn.setDisable(true);
         myController.getOrdersFromDB();
