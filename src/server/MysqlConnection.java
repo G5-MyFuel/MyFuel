@@ -234,10 +234,13 @@ public class MysqlConnection {
                 "WHERE gs.companyName LIKE ?" +
                 "AND gs.StationNumber LIKE ?";
         sqlArray[SqlQueryType.GET_Manager_Data.getCode()] = "SELECT * FROM Employee WHERE Employee.employeeID LIKE ?";
-        /*
-        INSERT INTO `ViewReportsForAdmin`
-(`TotalRevenue`, `FuelType`, `LitersPurchased`, `SalesAmount`, `AvailableInventory`, `companyName`, `StationNumber`, `Date`, `Quarterly`) VALUES ("100","Diesel","20","2","400","Paz","3","2020-06-01","2")
-         */
+        sqlArray[SqlQueryType.INSERT_NEW_Quarterly_Report.getCode()] = "INSERT INTO `ViewQuarterlyReportsForAdmin`" +
+                "(`companyName`, `StationNumber`, `Date`, `Quarterly`, `TotalRevenue`) " +
+                "VALUES (?,?,CURRENT_TIME(),quarter(curdate()),?)";
+        /*CURRENT_TIME() = curdate()
+        לשנות גם בDATA BASE
+        * */
+
     }
 
     public Connection getConnection() {
