@@ -23,8 +23,8 @@ public class CustomerRegistrationController extends BasicController {
      */
     private CustomerRegistrationBoundary myBoundary;
     private String companyName = "";
-    private ArrayList<Costumer> allDBCostumerArray;
-    private ArrayList<Vehicle> allVehicleArray;
+    private ArrayList<Costumer> allDBCostumerArray = new ArrayList<>();
+    private ArrayList<Vehicle> allVehicleArray = new ArrayList<>();
     private Costumer tempCostumer;
 
 
@@ -99,11 +99,9 @@ public class CustomerRegistrationController extends BasicController {
         Platform.runLater(() -> {
             switch (result.getActionType()) {
                 case GET_ALL_COSTUMER_TABLE:
-                    ArrayList<Costumer> allDBCostumerArray = new ArrayList<>();
                     allDBCostumerArray.addAll(this.changeResultToCostumer(result));
                     break;
                 case GET_ALL_VEHICLE_TABLE:
-                    ArrayList<Vehicle> allVehicleArray = new ArrayList<>();
                     allVehicleArray.addAll(this.changeResultToVehicle(result));
                 default:
                     break;

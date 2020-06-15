@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
  */
 public class FormValidation {
     private static FormValidation Validator = null;
-    private boolean EmptyField;
+    private static boolean EmptyField;
     private boolean NumberPositive;
     private boolean DoubleNumber;
     private boolean EmailAddress;
@@ -26,8 +26,8 @@ public class FormValidation {
     private boolean minLengthIndicator;
     private boolean ExactlyInLength;
     private boolean ContainsChars;
-    private boolean ContainsOnlyNumbers;
-    private boolean ContainsOnlyLetters;
+    private boolean onlyNumbers;
+    private boolean onlyLetters;
     private boolean maxLengthTextArea;
     private boolean phoneNumber;
     private boolean EmptyPassword;
@@ -54,7 +54,7 @@ public class FormValidation {
         theField.getValidators().add(reqInputValidator);
         theField.focusedProperty().addListener((o, oldVal, newVal) -> {
             if (!newVal)
-                theField.validate();
+                setEmptyField(theField.validate());
         });
     }
 
@@ -208,7 +208,7 @@ public class FormValidation {
      * @param Length    -  the max and min len
      */
     public void ExactlyInLengthValidation(JFXTextField theField, String fieldName, int Length) {
-        theField.getValidators().add(new ValidatorBase("The " + fieldName + " field length should be exactly(" + Length + ") characters") {
+        theField.getValidators().add(new ValidatorBase("The " + fieldName + " length should be" + Length+".") {
             @Override
             protected void eval() {
                 if (this.srcControl.get() instanceof TextInputControl) {
@@ -286,7 +286,7 @@ public class FormValidation {
      * @param theField  - the field to validate
      * @param fieldName - the name of the field
      */
-    public void isContainsOnlyNumbers(JFXTextField theField, String fieldName) {
+    public void isOnlyNumbers(JFXTextField theField, String fieldName) {
         theField.getValidators().add(new ValidatorBase(fieldName + " field can only contain digits") {
             @Override
             protected void eval() {
@@ -294,7 +294,6 @@ public class FormValidation {
                     this.evalTextInputField();
                 }
             }
-
             private void evalTextInputField() {
                 TextInputControl textField = (TextInputControl) this.srcControl.get();
                 boolean result = StringUtils.isNumeric(textField.getText());
@@ -302,10 +301,10 @@ public class FormValidation {
                 try {
                     if (result) {
                         this.hasErrors.set(false);
-                        ContainsOnlyNumbers = true;
+                        onlyNumbers = true;
                     } else {
                         this.hasErrors.set(true);
-                        ContainsOnlyNumbers = false;
+                        onlyNumbers = false;
                     }
                 } catch (Exception var3) {
                     this.hasErrors.set(true);
@@ -343,10 +342,10 @@ public class FormValidation {
                 try {
                     if (result) {
                         this.hasErrors.set(false);
-                        ContainsOnlyLetters = true;
+                        onlyLetters = true;
                     } else {
                         this.hasErrors.set(true);
-                        ContainsOnlyLetters = false;
+                        onlyLetters = false;
                     }
                 } catch (Exception var3) {
                     this.hasErrors.set(true);
@@ -672,12 +671,12 @@ public class FormValidation {
         return ContainsChars;
     }
 
-    public boolean isContainsOnlyNumbers() {
-        return ContainsOnlyNumbers;
+    public boolean isOnlyNumbers() {
+        return onlyNumbers;
     }
 
-    public boolean isContainsOnlyLetters() {
-        return ContainsOnlyLetters;
+    public boolean isOnlyLetters() {
+        return onlyLetters;
     }
 
     public boolean isMaxLengthTextArea() {
@@ -698,6 +697,10 @@ public class FormValidation {
 
     public boolean isMinSizeIndicator() {
         return minSizeIndicator;
+    }
+
+    public static void setEmptyField(boolean emptyField) {
+        EmptyField = emptyField;
     }
 }
 

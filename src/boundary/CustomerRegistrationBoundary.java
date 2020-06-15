@@ -32,7 +32,7 @@ import java.util.ResourceBundle;
 
 public class CustomerRegistrationBoundary implements DataInitializable {
 
-    private ArrayList<Vehicle> tempVehicleArray = new ArrayList<>();
+    private ArrayList<Vehicle> tempVehicleArray;
     private CreditCard tempCreditCard = null;
 
     private CustomerRegistrationController myController = new CustomerRegistrationController(this);
@@ -101,7 +101,6 @@ public class CustomerRegistrationBoundary implements DataInitializable {
     public void initialize(URL location, ResourceBundle resources) {
         formValidation = FormValidation.getValidator();
         giValidation();
-        formValidation.
         //
         tempVehicleArray = new ArrayList<Vehicle>();
         //clear all fields section:
@@ -154,38 +153,37 @@ public class CustomerRegistrationBoundary implements DataInitializable {
 
     @Override
     public void initData(Object data) {
-        if(data instanceof String)
-            myController.setCompanyName((String)data);
+        if (data instanceof String)
+            myController.setCompanyName((String) data);
     }
 
     @FXML
     void FirstForwardButtonOnClick(MouseEvent event) {
 
-        if (CostumerIDtxt.getText().isEmpty() || FirstNametxt.getText().isEmpty() || LastNametxt.getText().isEmpty() || EmailAdresstxt.getText().isEmpty()) {//check fields
-            ErrorAlert.setTitle("Fields Error");
-            ErrorAlert.setHeaderText("Please fill all require information");
+        if (myController.isCostumerExist(CostumerIDtxt.getText())) { //check if costumer is on system already
+            ErrorAlert.setTitle("ID Error");
+            ErrorAlert.setHeaderText("Costumer ID already Exists,\nPlease Chose Different ID.");
             ErrorAlert.showAndWait();
-        } else {
-            if (myController.isCostumerExist(CostumerIDtxt.getText())) { //check if costumer is on system already
-                ErrorAlert.setTitle("ID Error");
-                ErrorAlert.setHeaderText("Costumer ID already Exists,\nPlease Chose Different ID.");
-                ErrorAlert.showAndWait();
-            } else {//build costumer
-                Costumer costumer = new Costumer(CostumerIDtxt.getText(), CostumerIDtxt.getText(), "", FirstNametxt.getText(),
-                        LastNametxt.getText(), EmailAdresstxt.getText(), null, "true", null, null);
-                if (CardClickFlag) {
-                    costumer.setCostumerCreditCard(tempCreditCard);
-                    if(tempCreditCard != null)
-                        tempCreditCard.setCardOwner(costumer);
-                }
-                myController.setCostumerFirstPhase(costumer);
-                myController.getVehicleTable();
-                vehicleMangTAB.setDisable(false);
-                personalInfoTAB.setDisable(true);
-                vehicleMangTAB.getTabPane().getSelectionModel().selectNext();
+        } else if (!validateInputFirstPhase()) {//check fields
+            ErrorAlert.setTitle("Fields Error");
+            ErrorAlert.setHeaderText("Make sure all fields are correct");
+            ErrorAlert.showAndWait();
+        } else {//build costumer
+            Costumer costumer = new Costumer(CostumerIDtxt.getText(), CostumerIDtxt.getText(), "", FirstNametxt.getText(),
+                    LastNametxt.getText(), EmailAdresstxt.getText(), null, "", null, null);
+            if (CardClickFlag) {
+                costumer.setCostumerCreditCard(tempCreditCard);
+                if (tempCreditCard != null)
+                    tempCreditCard.setCardOwner(costumer);
             }
+            myController.setCostumerFirstPhase(costumer);
+            myController.getVehicleTable();
+            vehicleMangTAB.setDisable(false);
+            personalInfoTAB.setDisable(true);
+            vehicleMangTAB.getTabPane().getSelectionModel().selectNext();
         }
     }
+
 
     @FXML
     void SecondForwardButtonOnClick(MouseEvent event) {
@@ -232,11 +230,15 @@ public class CustomerRegistrationBoundary implements DataInitializable {
             ErrorAlert.setTitle("Vehicle ID Error");
             ErrorAlert.setHeaderText("Vehicle ID exists in system");
             ErrorAlert.showAndWait();
-        } else {
+        } else if(validateVehicleIDField()) {
             Vehicle vehicle = new Vehicle(CostumerIDtxt.getText(), VehicleIDtxt.getText(), GasTypeChoiseBox.getValue());
             tempVehicleArray.add(vehicle);
             ObservableList<Vehicle> data = FXCollections.observableArrayList(tempVehicleArray);
             VehicleTable.setItems(data);
+        }else {
+            ErrorAlert.setTitle("Fields Error");
+            ErrorAlert.setHeaderText("Please make sure Vehicle ID is correct.");
+            ErrorAlert.showAndWait();
         }
     }
 
@@ -280,31 +282,6 @@ public class CustomerRegistrationBoundary implements DataInitializable {
         return false;
     }
 
-    private void giValidation() {
-        //costumer ID field check
-        formValidation.isDoubleNumberValidation(CostumerIDtxt, "Costumer ID");
-        formValidation.maxLengthValidation(CostumerIDtxt, "Costumer ID", 9);
-        formValidation.minLengthValidationShort(CostumerIDtxt, "Costumer ID", 9);
-        //have to add minimum 9 ID len
-
-        //first Name field check
-        formValidation.isContainsOnlyLetters(FirstNametxt, "First Name");
-        formValidation.isContainsOnlyLetters(FirstNametxt, "First Name");
-
-        //last Name field check
-        formValidation.isContainsOnlyLetters(LastNametxt, "Last Name");
-        formValidation.isContainsOnlyLetters(LastNametxt, "Last Name");
-
-        //email adress field check
-        formValidation.emailAddressValidation(EmailAdresstxt, "Email Adress");
-
-        //Vehicle fields check
-        formValidation.isDoubleNumberValidation(VehicleIDtxt, "Vehicle ID");
-        formValidation.maxLengthValidation(VehicleIDtxt, "Vehicle ID", 7);
-        formValidation.minLengthValidationShort(VehicleIDtxt, "Vehicle ID", 7);
-
-    }
-
     public void setTempCreditCard(CreditCard tempCreditCard) {
         this.tempCreditCard = tempCreditCard;
     }
@@ -342,8 +319,44 @@ public class CustomerRegistrationBoundary implements DataInitializable {
         return thisToolTip;
     }
 
-    private void validateInputFirstPhase(){
+    private void giValidation() {
+        //costumer ID field check
+        formValidation.isOnlyNumbers(CostumerIDtxt, "Costumer ID");
+        formValidation.ExactlyInLengthValidation(CostumerIDtxt, "Costumer ID", 9);
+        formValidation.isEmptyFieldValidation(CostumerIDtxt, "Costumer ID");
 
+        //first Name field check
+        formValidation.isContainsOnlyLetters(FirstNametxt, "First Name");
+        formValidation.isEmptyFieldValidation(FirstNametxt, "First Name");
+
+        //last Name field check
+        formValidation.isContainsOnlyLetters(LastNametxt, "Last Name");
+        formValidation.isEmptyFieldValidation(LastNametxt, "Last Name");
+
+
+        //email adress field check
+        formValidation.emailAddressValidation(EmailAdresstxt, "Email Address");
+        formValidation.isEmptyFieldValidation(EmailAdresstxt, "Email Address");
+
+        //Vehicle fields check
+        formValidation.isOnlyNumbers(VehicleIDtxt, "Vehicle ID");
+        formValidation.ExactlyInLengthValidation(VehicleIDtxt, "Vehicle ID", 7);
+        formValidation.isEmptyFieldValidation(VehicleIDtxt, "Vehicle ID");
+
+
+    }
+    private boolean validateVehicleIDField(){
+        if(formValidation.isEmptyField() && formValidation.isExactlyInLength() && formValidation.isOnlyNumbers())
+            return true;
+        else
+            return false;
+    }
+
+    private boolean validateInputFirstPhase() {
+        if (formValidation.isOnlyNumbers() && formValidation.isExactlyInLength() && formValidation.isOnlyLetters() && formValidation.isEmailAddress() && formValidation.isEmptyField())
+            return true;
+        else
+            return false;
     }
 
 }

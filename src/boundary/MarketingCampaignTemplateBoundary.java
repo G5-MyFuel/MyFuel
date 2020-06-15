@@ -182,7 +182,7 @@ public class MarketingCampaignTemplateBoundary implements Initializable {
 
         /*  Discount Percentages validation */
         formValidation.isEmptyFieldValidation(DiscountPercentages, "Discount Percentages");
-        formValidation.isContainsOnlyNumbers(DiscountPercentages, "Discount Percentages");
+        formValidation.isOnlyNumbers(DiscountPercentages, "Discount Percentages");
         formValidation.numberPositiveValidation(DiscountPercentages, "Discount Percentages");
 
         /*  Start Hour validation */ // פתרון זמני בלבד !!

@@ -61,33 +61,41 @@ public class CreditCardWindowBoundary implements DataInitializable {
     @FXML
     private Button addCardBtn;
 
-    private ObservableList<String> Years = FXCollections.observableArrayList("20", "21", "22", "23", "24", "25", "26", "27", "28", "29");
+    private ObservableList<String> Years = FXCollections.observableArrayList("21", "22", "23", "24", "25", "26", "27", "28", "29", "30");
     private ObservableList<String> Month = FXCollections.observableArrayList("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         formValidation = FormValidation.getValidator();
-        //credit card field check
-        formValidation.isDoubleNumberValidation(creditCardNumbertxt, "Card number");
-        formValidation.maxLengthValidation(creditCardNumbertxt, "Card number", 16);
-        formValidation.minLengthValidationShort(creditCardNumbertxt, "Card number", 16);
-        formValidation.isDoubleNumberValidation(CVVtxt, "CVV");
-        formValidation.maxLengthValidation(CVVtxt, "CVV", 3);
-        formValidation.minLengthValidationShort(CVVtxt, "CVV", 3);
+        //credit card number check
+        formValidation.isOnlyNumbers(creditCardNumbertxt, "Card number");
+        formValidation.ExactlyInLengthValidation(creditCardNumbertxt, "Card number", 16);
+        //cvv
+        formValidation.isOnlyNumbers(CVVtxt, "CVV");
+        formValidation.ExactlyInLengthValidation(CVVtxt, "CVV", 3);
     }
 
+    private boolean validateCardFields() {
+        if (formValidation.isOnlyNumbers() && formValidation.isExactlyInLength())
+            return true;
+        else
+            return false;
+    }
 
     @FXML
     public void addCardOnClick(MouseEvent event) {
         Stage primStage = (Stage) addCardBtn.getScene().getWindow();
         /*validate card and insert it to db
          * */
-
         //Update process
-        if (creditCardNumbertxt.getText().isEmpty() || CVVtxt.getText().isEmpty()) { //here have to add more validations to card
+        if (creditCardNumbertxt.getText().isEmpty() || CVVtxt.getText().isEmpty() || YearCombo.getValue().isEmpty() || MonthCombo.getValue().isEmpty()) { //here have to add more validations to card
             ErrorAlert.setTitle("Credit Card Fields Error");
             ErrorAlert.setHeaderText("Please insert all Credit Card Information.");
+            ErrorAlert.showAndWait();
+        } else if (!validateCardFields()) {
+            ErrorAlert.setTitle("Fields Error");
+            ErrorAlert.setHeaderText("Please make sure all fields are correct.");
             ErrorAlert.showAndWait();
         } else {
             experationDate = "20" + YearCombo.getValue() + "-" + MonthCombo.getValue();

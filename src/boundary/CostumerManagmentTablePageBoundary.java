@@ -146,11 +146,19 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
         myController.getVehicleTable();
     }
 
+    private void tableStyle() {
+        //CosManageTbale.setStyle("-fx-selection-bar: red; -fx-selection-bar-non-focused: salmon;");
+        }
+
+
+
     /**
      * this method will set the costumer table and the cell edit functions
      * when the page initialized.
      */
     public void setCostumerTable(ArrayList<Costumer> cosArray) {
+
+
         costumers.addAll(cosArray);
         setColomsCells();
         ObservableList<Costumer> data = FXCollections.observableArrayList(cosArray);

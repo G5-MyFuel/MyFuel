@@ -218,7 +218,7 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements Initializable {
         /*  apartment number validation */
         formValidation.isEmptyFieldValidation(ApartmentNumberTXT, "Apartment Number");
         formValidation.maxLengthValidation(ApartmentNumberTXT, "Street Name", 5);
-        formValidation.isContainsOnlyNumbers(ApartmentNumberTXT,"Apartment Number");
+        formValidation.isOnlyNumbers(ApartmentNumberTXT,"Apartment Number");
         /* city name validation */
         formValidation.isEmptyFieldValidation(cityTXT, "City");
         formValidation.maxLengthValidation(cityTXT, "City", 15);
@@ -226,7 +226,7 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements Initializable {
         /* zip code validation */
         formValidation.isEmptyFieldValidation(zipCodeTXT, "Zip code");
         formValidation.maxLengthValidation(zipCodeTXT, "Zip code", 7);
-        formValidation.isContainsOnlyNumbers(zipCodeTXT,"Zip code");
+        formValidation.isOnlyNumbers(zipCodeTXT,"Zip code");
         /* phone number validation */
         formValidation.phoneNumberValidation(anotherContactPhoneNumberTXT,"Phone Number");
         /* note validation */

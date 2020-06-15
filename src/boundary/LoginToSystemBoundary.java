@@ -76,7 +76,7 @@ public class LoginToSystemBoundary extends Application {
     public void LoginValidation() {
         //username validation
         formValidation.isEmptyFieldValidation(userIDTextField, "User ID");
-        formValidation.isContainsOnlyNumbers(userIDTextField, "user ID");
+        formValidation.isOnlyNumbers(userIDTextField, "user ID");
         formValidation.maxLengthValidation(userIDTextField, "user ID", 9);
         //password validation
         System.out.println(allDBUsersArrayList);
