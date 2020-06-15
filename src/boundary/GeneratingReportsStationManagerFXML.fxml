@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -64,17 +64,13 @@
             <Image url="@../media/CostumerRegisterationMedia/help_16px.png" />
          </image>
       </ImageView>
-      <JFXComboBox fx:id="ChooseReportYearCombo" layoutX="52.0" layoutY="421.0" onAction="#handleChooseReportYear" prefHeight="31.0" prefWidth="204.0" promptText="Please select a year" />
-      <JFXComboBox fx:id="ChooseReportQuarterCombo" layoutX="52.0" layoutY="472.0" onAction="#handleChooseReportQuarter" promptText="Please Select a quarter" />
-      <Label fx:id="TotalRevenueLabel" layoutX="52.0" layoutY="542.0" text="Total revenue for the selected quarter is:">
-         <font>
-            <Font name="System Bold Italic" size="15.0" />
-         </font>
-      </Label>
-      <JFXTextField fx:id="ShowTotalRevenueTXT" focusColor="#00add8" labelFloat="true" layoutX="52.0" layoutY="578.0" onAction="#handleTotalRevenue" prefHeight="52.0" prefWidth="139.0" promptText="Current price:" unFocusColor="#868282">
+      <JFXTextField fx:id="ShowTotalRevenueTXT" focusColor="#00add8" labelFloat="true" layoutX="46.0" layoutY="423.0" onAction="#handleTotalRevenue" prefHeight="52.0" prefWidth="283.0" promptText="Total revenue for the last quarter is:" unFocusColor="#868282">
          <padding>
             <Insets bottom="5.0" top="20.0" />
          </padding>
+         <font>
+            <Font name="System Bold Italic" size="15.0" />
+         </font>
       </JFXTextField>
       <Label fx:id="QuantityItemsStockTxt" layoutX="730.0" layoutY="390.0" text="Quantity of items in stock" />
       <Label fx:id="ReportSentMessageLabel" layoutX="40.0" layoutY="665.0" text="*The report was sent to the Administrator" textFill="#ff0f02">
@@ -95,5 +91,6 @@
             <TableColumn fx:id="AvailableInventoryColumn" prefWidth="157.0" text="Available inventory" />
          </columns>
       </TableView>
+      <Button fx:id="btnSaveReport" layoutX="471.0" layoutY="604.0" mnemonicParsing="false" onAction="#handleSaveReportBtn" prefHeight="42.0" prefWidth="89.0" style="-fx-background-color: #2D4578; -fx-background-radius: 50;" stylesheets="@style.css" text="Save Data" />
    </children>
 </Pane>

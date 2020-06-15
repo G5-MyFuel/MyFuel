@@ -33,18 +33,6 @@ public class GeneratingReportsStationManagerBoundary implements DataInitializabl
     ArrayList<PurchasesReport> PurchasesArray = new ArrayList<>();
 
     @FXML
-    private Button btnOverview;
-
-    @FXML
-    private Button btnCustomers;
-
-    @FXML
-    private Button btnPackages;
-
-    @FXML
-    private Button btnSignout;
-
-    @FXML
     private JFXButton btnQuarterlyRevenueReport;
 
     @FXML
@@ -54,16 +42,13 @@ public class GeneratingReportsStationManagerBoundary implements DataInitializabl
     private JFXButton btnQuantityItemsInStockReport;
 
     @FXML
-    private JFXComboBox<String> ChooseReportYearCombo;
-
-    @FXML
-    private JFXComboBox<String> ChooseReportQuarterCombo;
-
-    @FXML
-    private Label TotalRevenueLabel;
-
-    @FXML
     private JFXTextField ShowTotalRevenueTXT;
+
+    @FXML
+    private Label QuantityItemsStockTxt;
+
+    @FXML
+    private Label ReportSentMessageLabel;
 
     @FXML
     private TableView<PurchasesReport> PurchasesReportTable;
@@ -78,12 +63,6 @@ public class GeneratingReportsStationManagerBoundary implements DataInitializabl
     private TableColumn<PurchasesReport, String> SalesAmountColumn;
 
     @FXML
-    private Label QuantityItemsStockTxt;
-
-    @FXML
-    private Label ReportSentMessageLabel;
-
-    @FXML
     private TableView<QuantityItemsStockReport> QuantityReportTable;
 
     @FXML
@@ -91,6 +70,9 @@ public class GeneratingReportsStationManagerBoundary implements DataInitializabl
 
     @FXML
     private TableColumn<QuantityItemsStockReport, String> AvailableInventoryColumn;
+
+    @FXML
+    private Button btnSaveReport;
 
     private final ObservableList<String> ReportsType = FXCollections.observableArrayList("Quarterly revenue report",
             "Purchases report", "Quantity of items in stock report");
@@ -113,14 +95,15 @@ public class GeneratingReportsStationManagerBoundary implements DataInitializabl
         myController.GetReportData(paramArray); //start the process that will ask server to execute quarry and get the table details
         //SELECT * FROM Employee WHERE Employee.employeeID LIKE "109268386"
         this.formValidation = FormValidation.getValidator();
-        ChooseReportYearCombo.setVisible(false);
+        /*ChooseReportYearCombo.setVisible(false);
         ChooseReportQuarterCombo.setVisible(false);
-        TotalRevenueLabel.setVisible(false);
+        TotalRevenueLabel.setVisible(false);*/
         ShowTotalRevenueTXT.setVisible(false);
         PurchasesReportTable.setVisible(false);
         QuantityItemsStockTxt.setVisible(false);
         QuantityReportTable.setVisible(false);
         ReportSentMessageLabel.setVisible(false);
+        btnSaveReport.setVisible(false);
 
         /*  set all fields validators */
         formValidation();
@@ -142,38 +125,50 @@ public class GeneratingReportsStationManagerBoundary implements DataInitializabl
     @FXML
     void handleQuarterlyRevenueReport(MouseEvent event) {
 
+        ShowTotalRevenueTXT.setVisible(false);
         PurchasesReportTable.setVisible(false);
         QuantityItemsStockTxt.setVisible(false);
         QuantityReportTable.setVisible(false);
-        ChooseReportYearCombo.setVisible(false);
-        ChooseReportQuarterCombo.setVisible(false);
-        TotalRevenueLabel.setVisible(false);
-        ShowTotalRevenueTXT.setVisible(false);
         ReportSentMessageLabel.setVisible(false);
+        btnSaveReport.setVisible(false);
+        //ChooseReportYearCombo.setVisible(false);
+        //ChooseReportQuarterCombo.setVisible(false);
+        //TotalRevenueLabel.setVisible(false);
+        //ShowTotalRevenueTXT.setVisible(false);
+        //ReportSentMessageLabel.setVisible(false);
         ShowTotalRevenueTXT.clear();
         //ChooseReportYearCombo.getItems().clear();
         //ChooseReportQuarterCombo.getItems().clear();
         //ChooseReportYearCombo.setPromptText("Please select a year");
-        ChooseReportYearCombo.setItems(YearList);
-        ChooseReportYearCombo.setVisible(true);
 
+        /*ChooseReportYearCombo.setItems(YearList);
+        ChooseReportYearCombo.setVisible(true);*/
+
+        //GetQuarterlyData();
+
+        ArrayList<String> paramArray = new ArrayList<>();
+        paramArray.add("Quarterly revenue report");
+        paramArray.add(managerStation);
+        paramArray.add(managerCompany);
+        myController.GetReportData(paramArray); //start the process that will ask server to execute quarry and get the table details
     }
 
     @FXML
     void handleChooseReportYear(ActionEvent event) {
 
         //ChooseReportQuarterCombo.setPromptText("Please Select a quarter");
-        ChooseReportQuarterCombo.setItems(quarterList);
+
+        /*ChooseReportQuarterCombo.setItems(quarterList);
         ChooseReportQuarterCombo.setVisible(true);
         if (ChooseReportQuarterCombo.getValue() != null)
-            GetQuarterlyData();
+            GetQuarterlyData();*/
 
     }
 
     @FXML
     void handleChooseReportQuarter(ActionEvent event) {
 
-        GetQuarterlyData();
+        //GetQuarterlyData();
     }
 
     void GetQuarterlyData() {
@@ -199,36 +194,42 @@ public class GeneratingReportsStationManagerBoundary implements DataInitializabl
                 break;
             default:
                 break;
-                check check check
         }*/
-        ArrayList<String> paramArray = new ArrayList<>();
+        /*ArrayList<String> paramArray = new ArrayList<>();
         paramArray.add("Quarterly revenue report");
         paramArray.add(managerStation);
-        paramArray.add(managerCompany);
+        paramArray.add(managerCompany);*/
         //paramArray.add(startDate);
         //paramArray.add(endDate);
-        myController.GetReportData(paramArray); //start the process that will ask server to execute quarry and get the table details
+        //myController.GetReportData(paramArray); //start the process that will ask server to execute quarry and get the table details
     }
 
     public void setQuarterlyData(String revenue) {
-        TotalRevenueLabel.setVisible(true);
+        //TotalRevenueLabel.setVisible(true);
         ShowTotalRevenueTXT.setText(revenue);
         ShowTotalRevenueTXT.setVisible(true);
         ReportSentMessageLabel.setVisible(true);
+        btnSaveReport.setVisible(true);
     }
 
     @FXML
     void handlePurchasesReport(MouseEvent event) {
 
-        PurchasesReportTable.setVisible(false);
+        /*PurchasesReportTable.setVisible(false);
         PurchasesReportTable.getItems().clear();
-        ReportSentMessageLabel.setVisible(false);
-        ChooseReportYearCombo.setVisible(false);
+        ReportSentMessageLabel.setVisible(false);*/
+        /*ChooseReportYearCombo.setVisible(false);
         ChooseReportQuarterCombo.setVisible(false);
-        TotalRevenueLabel.setVisible(false);
+        TotalRevenueLabel.setVisible(false);*/
+        /*ShowTotalRevenueTXT.setVisible(false);
+        QuantityItemsStockTxt.setVisible(false);
+        QuantityReportTable.setVisible(false);*/
         ShowTotalRevenueTXT.setVisible(false);
+        PurchasesReportTable.setVisible(false);
         QuantityItemsStockTxt.setVisible(false);
         QuantityReportTable.setVisible(false);
+        ReportSentMessageLabel.setVisible(false);
+        btnSaveReport.setVisible(false);
         ArrayList<String> paramArray = new ArrayList<>();
         paramArray.add("Purchases report");
         paramArray.add(managerStation);
@@ -266,6 +267,7 @@ public class GeneratingReportsStationManagerBoundary implements DataInitializabl
             PurchasesReportTable.setItems(data);
             PurchasesReportTable.setVisible(true);
             ReportSentMessageLabel.setVisible(true);
+            btnSaveReport.setVisible(true);
             /*if (PurchasesArray.size() == 3)
                 cleanArray(PurchasesArray);*/
             PurchasesArray.clear();
@@ -275,15 +277,21 @@ public class GeneratingReportsStationManagerBoundary implements DataInitializabl
     @FXML
     void handleQuantityItemsInStockReport(MouseEvent event) {
 
-        QuantityReportTable.setVisible(false);
-        QuantityItemsStockTxt.setVisible(false);
+        /*QuantityReportTable.setVisible(false);
+        QuantityItemsStockTxt.setVisible(false);*/
         QuantityReportTable.getItems().clear();
-        ReportSentMessageLabel.setVisible(false);
+        /*ReportSentMessageLabel.setVisible(false);
         ChooseReportYearCombo.setVisible(false);
         ChooseReportQuarterCombo.setVisible(false);
         TotalRevenueLabel.setVisible(false);
         ShowTotalRevenueTXT.setVisible(false);
+        PurchasesReportTable.setVisible(false);*/
+        ShowTotalRevenueTXT.setVisible(false);
         PurchasesReportTable.setVisible(false);
+        QuantityItemsStockTxt.setVisible(false);
+        QuantityReportTable.setVisible(false);
+        ReportSentMessageLabel.setVisible(false);
+        btnSaveReport.setVisible(false);
         QuantityItemsStockTxt.setText("Quantity of items in stock for" + managerCompany + " in Station " + managerStation + ":");
         ArrayList<String> paramArray = new ArrayList<>();
         paramArray.add("Quantity of items in stock report");
@@ -294,8 +302,7 @@ public class GeneratingReportsStationManagerBoundary implements DataInitializabl
 
     public void setQuantityItemsStockData(ArrayList<QuantityItemsStockReport> resultList) {
 
-        QuantityReportTable.setVisible(true);
-        System.out.println(resultList);
+        //QuantityReportTable.setVisible(true);
         resultList.get(0).setFuelType("Gasoline 95");
         resultList.get(1).setFuelType("Diesel");
         resultList.get(2).setFuelType("Scooter fuel");
@@ -304,8 +311,10 @@ public class GeneratingReportsStationManagerBoundary implements DataInitializabl
 
         ObservableList<QuantityItemsStockReport> data = FXCollections.observableArrayList(resultList);
         QuantityReportTable.setItems(data);
+        QuantityReportTable.setVisible(true);
         QuantityItemsStockTxt.setVisible(true);
         ReportSentMessageLabel.setVisible(true);
+        btnSaveReport.setVisible(true);
     }
 
     public void setManagerData(ArrayList<String> resultList) {
@@ -317,6 +326,11 @@ public class GeneratingReportsStationManagerBoundary implements DataInitializabl
 
     @FXML
     void handleClicks(ActionEvent event) {
+
+    }
+
+    @FXML
+    void handleSaveReportBtn(ActionEvent event) {
 
     }
 
