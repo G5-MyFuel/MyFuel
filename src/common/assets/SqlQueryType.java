@@ -84,6 +84,9 @@ public enum SqlQueryType {
      * *****************************************/
     GET_ALL_ORDERS_FROM_SUPPLIER_TABLE(SqlExecutionType.EXECUTE_QUERY),
     UPDATE_STATUS_TO_DONE(SqlExecutionType.UPDATE_QUERY),
+    UPDATE_95_INVENTORY(SqlExecutionType.UPDATE_QUERY),
+    UPDATE_DIESEL_INVENTORY(SqlExecutionType.UPDATE_QUERY),
+    UPDATE_SCOOTER_INVENTORY(SqlExecutionType.UPDATE_QUERY),
 
     /* DO NOT CHANGE THE LOCATION OF MAX_SQL_QUERY!!! */
     /* DO NOT CHANGE THE LOCATION OF MAX_SQL_QUERY!!! */

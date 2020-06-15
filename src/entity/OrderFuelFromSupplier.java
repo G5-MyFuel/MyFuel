@@ -59,11 +59,11 @@ public class OrderFuelFromSupplier {
     }
 
 
-    public Integer getStationNumber() {
+    public int getStationNumber() {
         return StationNumber;
     }
 
-    public Integer getQuantity() {
+    public int getQuantity() {
         return Quantity;
     }
 
