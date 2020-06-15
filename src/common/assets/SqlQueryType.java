@@ -82,7 +82,6 @@ public enum SqlQueryType {
      * *****************************************/
     GET_ALL_ORDERS_FROM_SUPPLIER_TABLE(SqlExecutionType.EXECUTE_QUERY),
     UPDATE_STATUS_TO_DONE(SqlExecutionType.UPDATE_QUERY),
-    GET_GAS_STATION_TABLE(SqlExecutionType.EXECUTE_QUERY),
 
     /* DO NOT CHANGE THE LOCATION OF MAX_SQL_QUERY!!! */
     /* DO NOT CHANGE THE LOCATION OF MAX_SQL_QUERY!!! */
