@@ -60,6 +60,11 @@ public enum SqlQueryType {
     GET_ALL_SALES_TO_CHACK_SALE(SqlExecutionType.EXECUTE_QUERY),
 
     /* *****************************************
+     * ********** Analitic Data Queries ****************
+     * *****************************************/
+    GET_ALL_RATING_TABLE(SqlExecutionType.EXECUTE_QUERY),
+
+    /* *****************************************
      * ********** Costumer Registration Queries ****************
      * *****************************************/
     INSERT_NEW_COSTUMER(SqlExecutionType.UPDATE_QUERY),

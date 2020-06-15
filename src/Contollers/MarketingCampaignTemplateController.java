@@ -30,12 +30,6 @@ public class MarketingCampaignTemplateController extends BasicController  {
     }
 
 
-    public void getTemplatesTable() {
-        SqlAction sqlAction = new SqlAction(SqlQueryType.GET_ALL_TEMPLATES_TABLE);
-        super.sendSqlActionToClient(sqlAction);
-
-    }
-
     @Override
     public void getResultFromClient(SqlResult result) {
         Platform.runLater(() -> {
@@ -53,6 +47,10 @@ public class MarketingCampaignTemplateController extends BasicController  {
         });
     }
 
+    public void getTemplatesTable() {
+        SqlAction sqlAction = new SqlAction(SqlQueryType.GET_ALL_TEMPLATES_TABLE);
+        super.sendSqlActionToClient(sqlAction);
+    }
     /**
      * This method create array list of templates from the data base result.
      *
