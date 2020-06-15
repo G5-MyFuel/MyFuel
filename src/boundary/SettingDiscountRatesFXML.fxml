@@ -22,11 +22,16 @@
             <Insets bottom="5.0" top="20.0" />
          </padding>
       </JFXTextField>
-      <Button fx:id="btnSetNewRate" layoutX="301.0" layoutY="398.0" mnemonicParsing="false" onAction="#handleSetNewRate" prefHeight="42.0" prefWidth="122.0" style="-fx-background-color: #2D4578; -fx-background-radius: 50;" stylesheets="@style.css" text="Set New Rate" />
+      <Button fx:id="btnSetNewRate" layoutX="301.0" layoutY="398.0" mnemonicParsing="false" onAction="#handleSetNewRate" prefHeight="42.0" prefWidth="156.0" style="-fx-background-color: #2D4578; -fx-background-radius: 50;" stylesheets="@style.css" text="Send to confirm" />
       <JFXTextField fx:id="ShowNewRateTXT" focusColor="#00add8" labelFloat="true" layoutX="301.0" layoutY="286.0" onAction="#handleShowNewRate" prefHeight="52.0" prefWidth="169.0" promptText="New Discount Rate:" unFocusColor="#868282">
          <padding>
             <Insets bottom="5.0" top="20.0" />
          </padding>
       </JFXTextField>
+      <Label fx:id="RequestSentMessageLabel" layoutX="56.0" layoutY="555.0" text="*The new discount rate request was sent for permission from your administrator" textFill="#ff0f02">
+         <font>
+            <Font name="System Bold Italic" size="18.0" />
+         </font>
+      </Label>
    </children>
 </Pane>

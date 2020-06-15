@@ -69,7 +69,7 @@ public class SettingDiscountRatesBoundary implements Initializable {
 
         //formValidation.isContainsOnlyNumbers(ShowNewRateTXT, "New price");
         //formValidation.numberPositiveValidation(ShowNewRateTXT, "New price");
-        FormValidation.isEmptyField(ShowNewRateTXT, "New price");
+        FormValidation.isEmptyFieldValidation(ShowNewRateTXT, "New price");
         //formValidation.maxLengthValidation(ShowNewRateTXT, "New price", 3);
         formValidation.maxSizeValidation(ShowNewRateTXT, "New price", 100);
         formValidation.minSizeValidation(ShowNewRateTXT, "New price", 1);

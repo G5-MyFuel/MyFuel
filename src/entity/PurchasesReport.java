@@ -15,6 +15,10 @@ public class PurchasesReport {
         this.salesAmount = salesAmount;
     }
 
+    public PurchasesReport(String fuelType) {
+        this.fuelType = fuelType;
+    }
+
     public String getFuelType() {
         return fuelType;
     }

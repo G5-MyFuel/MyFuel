@@ -23,7 +23,8 @@ public class CustomerRegistrationController extends BasicController {
      */
     private CustomerRegistrationBoundary myBoundary;
     private String companyName = "";
-
+    private ArrayList<Costumer> allDBCostumerArray = new ArrayList<>();
+    private ArrayList<Vehicle> allVehicleArray = new ArrayList<>();
     private Costumer tempCostumer;
 
 
@@ -98,14 +99,10 @@ public class CustomerRegistrationController extends BasicController {
         Platform.runLater(() -> {
             switch (result.getActionType()) {
                 case GET_ALL_COSTUMER_TABLE:
-                    ArrayList<Costumer> cosArray = new ArrayList<>();
-                    cosArray.addAll(this.changeResultToCostumer(result));
-                    myBoundary.setAllDBCostumerArray(cosArray);
+                    allDBCostumerArray.addAll(this.changeResultToCostumer(result));
                     break;
                 case GET_ALL_VEHICLE_TABLE:
-                    ArrayList<Vehicle> vehicleArray = new ArrayList<>();
-                    vehicleArray.addAll(this.changeResultToVehicle(result));
-                    myBoundary.setAllVehicleArray(vehicleArray);
+                    allVehicleArray.addAll(this.changeResultToVehicle(result));
                 default:
                     break;
             }
@@ -149,6 +146,23 @@ public class CustomerRegistrationController extends BasicController {
         }
         return resultList;
     }
+
+    public boolean isCostumerExist(String cosID) {
+        for (Costumer cos : allDBCostumerArray) {
+            if (cos.getUserID().toString().equals(cosID))
+                return true;
+        }
+        return false;
+    }
+
+    public boolean isVehicleExistInDb(String vehicleID) {
+        for (Vehicle v : allVehicleArray) {
+            if (v.getVehicleID().equals(vehicleID))
+                return true;
+        }
+        return false;
+    }
+
 
     /**
      * This method create array list of Vehicles from the data base result.

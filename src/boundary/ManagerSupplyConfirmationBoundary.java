@@ -1,6 +1,7 @@
 package boundary;
 
 import Contollers.ManagerSupplyConfirmationController;
+import entity.ManagerSupplyConfirmation;
 import entity.OrderFuelFromSupplier;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,6 +16,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Text;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -25,11 +27,11 @@ import java.util.ResourceBundle;
  * @see ManagerSupplyConfirmationBoundary - the from's logic class
  */
 
-public class ManagerSupplyConfirmationBoundary implements Initializable {
+public class ManagerSupplyConfirmationBoundary implements DataInitializable {
 
     private ManagerSupplyConfirmationController myController = new ManagerSupplyConfirmationController(this);
-    private ObservableList<OrderFuelFromSupplier> tableData;
-
+    private ObservableList<ManagerSupplyConfirmation> tableData;
+    private String stationManagerID = "800300579";
     @FXML
     private Button btnOverview;
 
@@ -43,19 +45,22 @@ public class ManagerSupplyConfirmationBoundary implements Initializable {
     private ImageView arrowImage;
 
     @FXML
-    private TableView<OrderFuelFromSupplier> tableView;
+    private TableView<ManagerSupplyConfirmation> tableView;
 
     @FXML
     private TableColumn<?, ?> OrderCol;
+
+    @FXML
+    private TableColumn<?, ?> CompanyCol;
+
+    @FXML
+    private TableColumn<?, ?> StationCol;
 
     @FXML
     private TableColumn<?, ?> FuelTypeCol;
 
     @FXML
     private TableColumn<?, ?> AmountCol;
-
-    @FXML
-    private TableColumn<?, ?> StatusCol;
 
     @FXML
     private HBox hboxOrderConfirmation;
@@ -68,6 +73,9 @@ public class ManagerSupplyConfirmationBoundary implements Initializable {
 
     @FXML
     private Button SendBtn;
+
+    @FXML
+    private Text ApprovalTxt;
 
     @FXML
     void OrderConfirmationCheck(MouseEvent event) {
@@ -116,17 +124,25 @@ public class ManagerSupplyConfirmationBoundary implements Initializable {
     }
 
     @Override
+    public void initData(Object data) {
+        stationManagerID = (String)data;
+    }
+
+    @Override
     public void initialize(URL location, ResourceBundle resources) {
+        myController.getOrdersFromDB(stationManagerID);
         hboxOrderConfirmation.setVisible(false);
         tableView.setVisible(true);
+        ApprovalTxt.setVisible(false);
         SendBtn.setVisible(false);
         SendBtn.setDisable(true);
-        myController.getOrdersFromDB();
         System.out.println("Manager Supply Confirmation Page Is Open");
     }
 
-    public void setOrderForManagerTableView(ArrayList<OrderFuelFromSupplier> OrderArray) {
+    public void setOrderForManagerTableView(ArrayList<ManagerSupplyConfirmation> OrderArray) {
         OrderCol.setCellValueFactory(new PropertyValueFactory<>("OrderNumber"));
+        CompanyCol.setCellValueFactory(new PropertyValueFactory<>("GasCompanyName"));
+        StationCol.setCellValueFactory(new PropertyValueFactory<>("StationNum"));
         FuelTypeCol.setCellValueFactory(new PropertyValueFactory<>("FuelType"));
         AmountCol.setCellValueFactory(new PropertyValueFactory<>("Quantity"));
         tableData = FXCollections.observableArrayList(OrderArray);

@@ -18,6 +18,22 @@ import java.util.regex.Pattern;
  */
 public class FormValidation {
     private static FormValidation Validator = null;
+    private static boolean EmptyField;
+    private boolean NumberPositive;
+    private boolean DoubleNumber;
+    private boolean EmailAddress;
+    private boolean maxLengthIndicator;
+    private boolean minLengthIndicator;
+    private boolean ExactlyInLength;
+    private boolean ContainsChars;
+    private boolean onlyNumbers;
+    private boolean onlyLetters;
+    private boolean maxLengthTextArea;
+    private boolean phoneNumber;
+    private boolean EmptyPassword;
+    private boolean maxSizeIndicator;
+    private boolean minSizeIndicator;
+
 
     public static FormValidation getValidator() {
         if (Validator == null) {
@@ -32,13 +48,13 @@ public class FormValidation {
      * @param theField  - the field to validate
      * @param fieldName - the name of field
      */
-    public static void isEmptyField(JFXTextField theField, String fieldName) {
+    public static void isEmptyFieldValidation(JFXTextField theField, String fieldName) {
         RequiredFieldValidator reqInputValidator = new RequiredFieldValidator();
         reqInputValidator.setMessage(fieldName + " field is Required!");
         theField.getValidators().add(reqInputValidator);
         theField.focusedProperty().addListener((o, oldVal, newVal) -> {
             if (!newVal)
-                theField.validate();
+                setEmptyField(theField.validate());
         });
     }
 
@@ -61,10 +77,13 @@ public class FormValidation {
             private void evalTextInputField() {
                 TextInputControl textField = (TextInputControl) this.srcControl.get();
                 try {
-                    if (Double.parseDouble(textField.getText()) > 0)
+                    if (Double.parseDouble(textField.getText()) > 0) {
                         this.hasErrors.set(false);
-                    else
+                        NumberPositive = true;
+                    } else {
                         this.hasErrors.set(true);
+                        NumberPositive = false;
+                    }
                 } catch (Exception var3) {
                     this.hasErrors.set(true);
                 }
@@ -120,10 +139,13 @@ public class FormValidation {
                 if (textField.getText().isEmpty()) result = true;
                 System.out.println(result);
                 try {
-                    if (result)
+                    if (result) {
                         this.hasErrors.set(false);
-                    else
+                        EmailAddress = true;
+                    } else {
                         this.hasErrors.set(true);
+                        EmailAddress = false;
+                    }
                 } catch (Exception var3) {
                     this.hasErrors.set(true);
                 }
@@ -158,10 +180,53 @@ public class FormValidation {
                 boolean result = textField.getLength() > maxLength ? false : true;
                 System.out.println(result);
                 try {
-                    if (result)
+                    if (result) {
                         this.hasErrors.set(false);
-                    else
+                        maxLengthIndicator = true;
+                    } else {
                         this.hasErrors.set(true);
+                        maxLengthIndicator = false;
+                    }
+                } catch (Exception var3) {
+                    this.hasErrors.set(true);
+                }
+            }
+        });
+        //  add listener to the txtField
+        theField.focusedProperty().addListener((o, oldVal, newVal) -> {
+            if (!newVal) {
+                theField.validate();
+            }
+        });
+    }
+
+    /**
+     * A method that checks if the input length is exactly a given number
+     *
+     * @param theField  - the field to validate
+     * @param fieldName - the name of the field
+     * @param Length    -  the max and min len
+     */
+    public void ExactlyInLengthValidation(JFXTextField theField, String fieldName, int Length) {
+        theField.getValidators().add(new ValidatorBase("The " + fieldName + " length should be" + Length+".") {
+            @Override
+            protected void eval() {
+                if (this.srcControl.get() instanceof TextInputControl) {
+                    this.evalTextInputField();
+                }
+            }
+
+            private void evalTextInputField() {
+                TextInputControl textField = (TextInputControl) this.srcControl.get();
+                boolean result = textField.getLength() > Length || textField.getLength() < Length ? false : true;
+                try {
+                    if (result) {
+                        this.hasErrors.set(false);
+                        ExactlyInLength = true;
+                    } else {
+                        this.hasErrors.set(true);
+                        ExactlyInLength = false;
+                    }
                 } catch (Exception var3) {
                     this.hasErrors.set(true);
                 }
@@ -195,10 +260,13 @@ public class FormValidation {
                 TextInputControl textField = (TextInputControl) this.srcControl.get();
                 boolean result = textField.getText().matches(theChars);
                 try {
-                    if (result)
+                    if (result) {
                         this.hasErrors.set(false);
-                    else
+                        ContainsChars = true;
+                    } else {
                         this.hasErrors.set(true);
+                        ContainsChars = false;
+                    }
                 } catch (Exception var3) {
                     this.hasErrors.set(true);
                 }
@@ -218,7 +286,7 @@ public class FormValidation {
      * @param theField  - the field to validate
      * @param fieldName - the name of the field
      */
-    public void isContainsOnlyNumbers(JFXTextField theField, String fieldName) {
+    public void isOnlyNumbers(JFXTextField theField, String fieldName) {
         theField.getValidators().add(new ValidatorBase(fieldName + " field can only contain digits") {
             @Override
             protected void eval() {
@@ -226,16 +294,18 @@ public class FormValidation {
                     this.evalTextInputField();
                 }
             }
-
             private void evalTextInputField() {
                 TextInputControl textField = (TextInputControl) this.srcControl.get();
                 boolean result = StringUtils.isNumeric(textField.getText());
                 if (textField.getText().isEmpty()) result = true;
                 try {
-                    if (result)
+                    if (result) {
                         this.hasErrors.set(false);
-                    else
+                        onlyNumbers = true;
+                    } else {
                         this.hasErrors.set(true);
+                        onlyNumbers = false;
+                    }
                 } catch (Exception var3) {
                     this.hasErrors.set(true);
                 }
@@ -270,10 +340,13 @@ public class FormValidation {
                 if (textField.getText().isEmpty()) result = true;
                 if (textField.getText().contains(" ")) result = true;
                 try {
-                    if (result)
+                    if (result) {
                         this.hasErrors.set(false);
-                    else
+                        onlyLetters = true;
+                    } else {
                         this.hasErrors.set(true);
+                        onlyLetters = false;
+                    }
                 } catch (Exception var3) {
                     this.hasErrors.set(true);
                 }
@@ -308,10 +381,13 @@ public class FormValidation {
                 boolean result = textField.getLength() > maxLength ? false : true;
                 System.out.println(result);
                 try {
-                    if (result)
+                    if (result) {
                         this.hasErrors.set(false);
-                    else
+                        maxLengthTextArea = true;
+                    } else {
                         this.hasErrors.set(true);
+                        maxLengthTextArea = false;
+                    }
                 } catch (Exception var3) {
                     this.hasErrors.set(true);
                 }
@@ -348,10 +424,13 @@ public class FormValidation {
                 if (textField.getText().isEmpty()) result = true;
                 if (textField.getText().contains(" ")) result = true;
                 try {
-                    if (result)
+                    if (result) {
                         this.hasErrors.set(false);
-                    else
+                        phoneNumber = true;
+                    } else {
                         this.hasErrors.set(true);
+                        phoneNumber = false;
+                    }
                 } catch (Exception var3) {
                     this.hasErrors.set(true);
                 }
@@ -394,10 +473,13 @@ public class FormValidation {
                 boolean result = Integer.parseInt(textField.getText()) > mazSize ? false : true;
                 System.out.println(result);
                 try {
-                    if (result)
+                    if (result) {
                         this.hasErrors.set(false);
-                    else
+                        maxSizeIndicator = true;
+                    } else {
                         this.hasErrors.set(true);
+                        maxSizeIndicator = false;
+                    }
                 } catch (Exception var3) {
                     this.hasErrors.set(true);
                 }
@@ -431,10 +513,13 @@ public class FormValidation {
                 boolean result = Integer.parseInt(textField.getText()) < minSize ? false : true;
                 System.out.println(result);
                 try {
-                    if (result)
+                    if (result) {
                         this.hasErrors.set(false);
-                    else
+                        minSizeIndicator = true;
+                    } else {
                         this.hasErrors.set(true);
+                        minSizeIndicator = false;
+                    }
                 } catch (Exception var3) {
                     this.hasErrors.set(true);
                 }
@@ -469,10 +554,13 @@ public class FormValidation {
                 boolean result = textField.getLength() < minLength ? false : true;
                 System.out.println(result);
                 try {
-                    if (result)
+                    if (result) {
                         this.hasErrors.set(false);
-                    else
+                        minLengthIndicator = true;
+                    } else {
                         this.hasErrors.set(true);
+                        minLengthIndicator = false;
+                    }
                 } catch (Exception var3) {
                     this.hasErrors.set(true);
                 }
@@ -507,10 +595,13 @@ public class FormValidation {
                 boolean result = textField.getLength() > maxLength ? false : true;
                 System.out.println(result);
                 try {
-                    if (result)
+                    if (result) {
                         this.hasErrors.set(false);
-                    else
+                        maxLengthIndicator = true;
+                    } else {
                         this.hasErrors.set(true);
+                        maxLengthIndicator = false;
+                    }
                 } catch (Exception var3) {
                     this.hasErrors.set(true);
                 }
@@ -548,6 +639,68 @@ public class FormValidation {
         });
     }
 
+    public boolean isEmptyField() {
+        return EmptyField;
+    }
 
+    public boolean isNumberPositive() {
+        return NumberPositive;
+    }
+
+    public boolean isDoubleNumber() {
+        return DoubleNumber;
+    }
+
+    public boolean isEmailAddress() {
+        return EmailAddress;
+    }
+
+    public boolean isMaxLengthIndicator() {
+        return maxLengthIndicator;
+    }
+
+    public boolean isMinLengthIndicator() {
+        return minLengthIndicator;
+    }
+
+    public boolean isExactlyInLength() {
+        return ExactlyInLength;
+    }
+
+    public boolean isContainsChars() {
+        return ContainsChars;
+    }
+
+    public boolean isOnlyNumbers() {
+        return onlyNumbers;
+    }
+
+    public boolean isOnlyLetters() {
+        return onlyLetters;
+    }
+
+    public boolean isMaxLengthTextArea() {
+        return maxLengthTextArea;
+    }
+
+    public boolean isPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public boolean isEmptyPassword() {
+        return EmptyPassword;
+    }
+
+    public boolean isMaxSizeIndicator() {
+        return maxSizeIndicator;
+    }
+
+    public boolean isMinSizeIndicator() {
+        return minSizeIndicator;
+    }
+
+    public static void setEmptyField(boolean emptyField) {
+        EmptyField = emptyField;
+    }
 }
 

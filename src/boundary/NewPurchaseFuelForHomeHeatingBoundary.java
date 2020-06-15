@@ -6,7 +6,6 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
-import entity.User;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -208,26 +207,26 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements Initializable {
     private void FormValidation() {
         //order details page - start
         /*  fuel quantity validation */
-        formValidation.isEmptyField(fuelQuantityTXT, "Fuel Quantity");
+        formValidation.isEmptyFieldValidation(fuelQuantityTXT, "Fuel Quantity");
         formValidation.isDoubleNumberValidation(fuelQuantityTXT, "fuel Quantity");
         formValidation.numberPositiveValidation(fuelQuantityTXT, "Fuel Quantity");
         /*  email address validation */
         formValidation.emailAddressValidation(emailAddressTXT, "Email");
         /*  street name validation */
-        formValidation.isEmptyField(streetNameTXT, "Street Name");
+        formValidation.isEmptyFieldValidation(streetNameTXT, "Street Name");
         formValidation.maxLengthValidation(streetNameTXT, "Street Name", 25);
         /*  apartment number validation */
-        formValidation.isEmptyField(ApartmentNumberTXT, "Apartment Number");
+        formValidation.isEmptyFieldValidation(ApartmentNumberTXT, "Apartment Number");
         formValidation.maxLengthValidation(ApartmentNumberTXT, "Street Name", 5);
-        formValidation.isContainsOnlyNumbers(ApartmentNumberTXT,"Apartment Number");
+        formValidation.isOnlyNumbers(ApartmentNumberTXT,"Apartment Number");
         /* city name validation */
-        formValidation.isEmptyField(cityTXT, "City");
+        formValidation.isEmptyFieldValidation(cityTXT, "City");
         formValidation.maxLengthValidation(cityTXT, "City", 15);
         formValidation.isContainsOnlyLetters(cityTXT,"City");
         /* zip code validation */
-        formValidation.isEmptyField(zipCodeTXT, "Zip code");
+        formValidation.isEmptyFieldValidation(zipCodeTXT, "Zip code");
         formValidation.maxLengthValidation(zipCodeTXT, "Zip code", 7);
-        formValidation.isContainsOnlyNumbers(zipCodeTXT,"Zip code");
+        formValidation.isOnlyNumbers(zipCodeTXT,"Zip code");
         /* phone number validation */
         formValidation.phoneNumberValidation(anotherContactPhoneNumberTXT,"Phone Number");
         /* note validation */

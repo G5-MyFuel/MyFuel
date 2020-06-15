@@ -3,6 +3,7 @@ package boundary;
 import Contollers.CustomerRegistrationController;
 import Contollers.FormValidation;
 import Contollers.PagingController;
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
@@ -12,7 +13,6 @@ import entity.CreditCard;
 import entity.Vehicle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -33,15 +33,13 @@ import java.util.ResourceBundle;
 
 public class CustomerRegistrationBoundary implements DataInitializable {
 
-    private ArrayList<Vehicle> tempVehicleArray = new ArrayList<>();
-    private ArrayList<Vehicle> allVehicleArray;
+    private ArrayList<Vehicle> tempVehicleArray;
     private CreditCard tempCreditCard = null;
 
     private CustomerRegistrationController myController = new CustomerRegistrationController(this);
     private FormValidation formValidation;
     private boolean CardClickFlag;
     private Alert ErrorAlert = new Alert(Alert.AlertType.ERROR);
-    private ArrayList<Costumer> allDBCostumerArray;
 
 
     /*Gui variables:
@@ -71,25 +69,13 @@ public class CustomerRegistrationBoundary implements DataInitializable {
     @FXML
     private JFXComboBox<String> CostumertypeChoiceBox;
     @FXML
-    private JFXComboBox<String> ServicePlanChoiseBox;
+    private JFXComboBox<String> PurchasePlanChoiseBox;
     @FXML
     private Pane mainPane;
     @FXML
     private TableColumn<Vehicle, String> VehicleIdColom;
     @FXML
     private TableColumn<Vehicle, String> GasTypeColom;
-    @FXML
-    private JFXRadioButton yesButton;
-    @FXML
-    private Pane CreditCardWindow;
-    @FXML
-    private JFXTextField creditCardNumbertxt;
-    @FXML
-    private JFXTextField experationDatetxt;
-    @FXML
-    private JFXTextField CVVtxt;
-    @FXML
-    private Tooltip typeTT;
     @FXML
     private ImageView CostumerTypeInfo;
     @FXML
@@ -98,6 +84,23 @@ public class CustomerRegistrationBoundary implements DataInitializable {
     private ImageView ServicePlanInfo;
     @FXML
     private ImageView CreditCardLinkTT;
+    @FXML
+    private ImageView StationsInfo;
+    @FXML
+    private Pane stationPane;
+    @FXML
+    private Label choseStationLable;
+    @FXML
+    private JFXRadioButton PAZbtn;
+    @FXML
+    private JFXRadioButton YELLOWbtn;
+    @FXML
+    private JFXRadioButton SONOLbtn;
+    @FXML
+    private JFXComboBox<String> PricingModelChoiseBox1;
+    @FXML
+    private JFXButton clearSelectionbtn;
+
 
     /*
     Initialize ObservableList in order to display does strings
@@ -105,15 +108,18 @@ public class CustomerRegistrationBoundary implements DataInitializable {
      * * */
     private ObservableList<String> CostumerType = FXCollections.observableArrayList("Private", "Company");
 
-    private ObservableList<String> ServicePlanType = FXCollections.observableArrayList("Exclusive", "Multiple Stations");
+    private ObservableList<String> PurchasePlanType = FXCollections.observableArrayList("Exclusive", "Multiple Stations", "None");
 
     private ObservableList<String> GasType = FXCollections.observableArrayList("Gasoline-95", "Diesel", "Scooter Fuel");
+
+    private ObservableList<String> SingelVehicle = FXCollections.observableArrayList("Casual fueling", "Regular monthly subscription", "Full monthly subscription");
+    private ObservableList<String> ModelTypes2 = FXCollections.observableArrayList("Casual fueling", "Regular monthly subscription");
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         formValidation = FormValidation.getValidator();
-        PersonalInfoValidation();
+        giValidation();
         //
         tempVehicleArray = new ArrayList<Vehicle>();
         //clear all fields section:
@@ -125,6 +131,7 @@ public class CustomerRegistrationBoundary implements DataInitializable {
         VehicleTable.getItems().clear();
         //
         //Tooltip initialize Section:
+        Tooltip.install(StationsInfo, createToolTip("Please Chose Station according to your plan."));
         Tooltip.install(CostumerTypeInfo, createToolTip("There are two Customer Type, Private and Company, you may chose one."));
         Tooltip.install(PurchasePlanInffo, createToolTip("Chose weather you have purchase plan or not"));
         Tooltip.install(ServicePlanInfo, createToolTip("Chose your service plan type"));
@@ -139,7 +146,7 @@ public class CustomerRegistrationBoundary implements DataInitializable {
         //set Observable items into combo box:
         GasTypeChoiseBox.setItems(GasType);
         CostumertypeChoiceBox.setItems(CostumerType);
-        ServicePlanChoiseBox.setItems(ServicePlanType);
+        PurchasePlanChoiseBox.setItems(PurchasePlanType);
         //
         //set vehicle table cells
         VehicleIdColom.setCellValueFactory(new PropertyValueFactory<>("VehicleID"));
@@ -162,32 +169,77 @@ public class CustomerRegistrationBoundary implements DataInitializable {
         VehicleTable.getItems().clear();
         CardClickFlag = false;
         tempCreditCard = null;
+        stationPane.setVisible(false);
+        PurchasePlanChoiseBox.valueProperty().addListener((composant, oldValue, newValue) -> {
+            PAZbtn.setSelected(false);
+            YELLOWbtn.setSelected(false);
+            SONOLbtn.setSelected(false);
+            stationPane.setVisible(true);
+            if (PurchasePlanChoiseBox.getValue().equals("Multiple Stations")) {
+                ToggleGroup q1 = new ToggleGroup();
+                ToggleGroup q2 = new ToggleGroup();
+                ToggleGroup q3 = new ToggleGroup();
+                clearSelectionbtn.setVisible(true);
+                PAZbtn.setToggleGroup(q1);
+                YELLOWbtn.setToggleGroup(q2);
+                SONOLbtn.setToggleGroup(q3);
+                choseStationLable.setText("You may chose 2 or 3 stations.");
+            } else if (PurchasePlanChoiseBox.getValue().equals("Exclusive")) {
+                ToggleGroup q1 = new ToggleGroup();
+                clearSelectionbtn.setVisible(false);
+                PAZbtn.setToggleGroup(q1);
+                YELLOWbtn.setToggleGroup(q1);
+                SONOLbtn.setToggleGroup(q1);
+                choseStationLable.setText("You may chose only one station.");
+            } else {
+                stationPane.setVisible(false);
+            }
+        });
     }
 
     @Override
     public void initData(Object data) {
-        if(data instanceof String)
-            myController.setCompanyName((String)data);
+        if (data instanceof String)
+            myController.setCompanyName((String) data);
+    }
+
+    @FXML
+    void FirstForwardButtonOnClick(MouseEvent event) {
+        planInfoTAB.setDisable(false);
+        vehicleMangTAB.setDisable(true);
+        vehicleMangTAB.getTabPane().getSelectionModel().selectNext();
+
+//        if (myController.isCostumerExist(CostumerIDtxt.getText())) { //check if costumer is on system already
+//            ErrorAlert.setTitle("ID Error");
+//            ErrorAlert.setHeaderText("Costumer ID already Exists,\nPlease Chose Different ID.");
+//            ErrorAlert.showAndWait();
+//        } else if (!validateInputFirstPhase()) {//check fields
+//            ErrorAlert.setTitle("Fields Error");
+//            ErrorAlert.setHeaderText("Make sure all fields are correct");
+//            ErrorAlert.showAndWait();
+//        } else {//build costumer
+//            Costumer costumer = new Costumer(CostumerIDtxt.getText(), CostumerIDtxt.getText(), "", FirstNametxt.getText(),
+//                    LastNametxt.getText(), EmailAdresstxt.getText(), null, "", null, null);
+//            if (CardClickFlag) {
+//                costumer.setCostumerCreditCard(tempCreditCard);
+//                if (tempCreditCard != null)
+//                    tempCreditCard.setCardOwner(costumer);
+//            }
+//            myController.setCostumerFirstPhase(costumer);
+//            myController.getVehicleTable();
+//            vehicleMangTAB.setDisable(false);
+//            personalInfoTAB.setDisable(true);
+//            vehicleMangTAB.getTabPane().getSelectionModel().selectNext();
+//        }
     }
 
 
-    /**
-     * This method saves the vehicle information after clicking save button
-     * in temp array and display that vehicle in vehicle table.
-     */
     @FXML
-    void ClickSaveVehicleButton(MouseEvent event) {
-        VehicleTable.setEditable(true);
-        if (isVehicleExistInDb() || isVehicleExistInTempVehicleArr()) {//in case of vehicle id error
-            ErrorAlert.setTitle("Vehicle ID Error");
-            ErrorAlert.setHeaderText("Vehicle ID exists in system");
-            ErrorAlert.showAndWait();
-        } else {
-            Vehicle vehicle = new Vehicle(CostumerIDtxt.getText(), VehicleIDtxt.getText(), GasTypeChoiseBox.getValue());
-            tempVehicleArray.add(vehicle);
-            ObservableList<Vehicle> data = FXCollections.observableArrayList(tempVehicleArray);
-            VehicleTable.setItems(data);
-        }
+    void SecondForwardButtonOnClick(MouseEvent event) {
+        myController.setCostumerSecoundPhase(tempVehicleArray);
+        planInfoTAB.setDisable(false);
+        vehicleMangTAB.setDisable(true);
+        vehicleMangTAB.getTabPane().getSelectionModel().selectNext();
     }
 
     /**
@@ -197,13 +249,11 @@ public class CustomerRegistrationBoundary implements DataInitializable {
     @FXML
     void ClickFinishButton(MouseEvent event) {
         Costumer tempCos = myController.getTempCostumer();
-        if (yesButton.isSelected())
-            tempCos.setPurchasePlan("true");
-        else
-            tempCos.setPurchasePlan("false");
+
+
         //set costumer final details.
         tempCos.setCostumerType(CostumertypeChoiceBox.getSelectionModel().getSelectedItem());
-        tempCos.setServicePlan(ServicePlanChoiseBox.getSelectionModel().getSelectedItem());
+        tempCos.setServicePlan(PurchasePlanChoiseBox.getSelectionModel().getSelectedItem());
         tempCos.setCostumerVehicle(tempVehicleArray);
         tempCos.setCostumerCreditCard(tempCreditCard);
         myController.setCostumerInDB(tempCos);
@@ -215,7 +265,28 @@ public class CustomerRegistrationBoundary implements DataInitializable {
         vehicleMangTAB.getTabPane().getSelectionModel().selectPrevious();
     }
 
-
+    /**
+     * This method saves the vehicle information after clicking save button
+     * in temp array and display that vehicle in vehicle table.
+     */
+    @FXML
+    void ClickSaveVehicleButton(MouseEvent event) {
+        VehicleTable.setEditable(true);
+        if (myController.isVehicleExistInDb(VehicleIDtxt.getText()) || isVehicleExistInTempVehicleArr()) {//in case of vehicle id error
+            ErrorAlert.setTitle("Vehicle ID Error");
+            ErrorAlert.setHeaderText("Vehicle ID exists in system");
+            ErrorAlert.showAndWait();
+        } else if (validateVehicleIDField()) {
+            Vehicle vehicle = new Vehicle(CostumerIDtxt.getText(), VehicleIDtxt.getText(), GasTypeChoiseBox.getValue());
+            tempVehicleArray.add(vehicle);
+            ObservableList<Vehicle> data = FXCollections.observableArrayList(tempVehicleArray);
+            VehicleTable.setItems(data);
+        } else {
+            ErrorAlert.setTitle("Fields Error");
+            ErrorAlert.setHeaderText("Please make sure Vehicle ID is correct.");
+            ErrorAlert.showAndWait();
+        }
+    }
 
     @FXML
     void setVehicleInfoVisible(MouseEvent event) {
@@ -226,44 +297,6 @@ public class CustomerRegistrationBoundary implements DataInitializable {
     void creditCardLinkOnClick(MouseEvent event) {
         PagingController pc = new PagingController();
         pc.loadAdditionalStage(ProjectPages.CREDIT_CARD_DIALOG_PAGE.getPath(), this);
-    }
-
-
-    @FXML
-    void FirstForwardButtonOnClick(MouseEvent event) {
-
-        if (CostumerIDtxt.getText().isEmpty() || FirstNametxt.getText().isEmpty() || LastNametxt.getText().isEmpty() || EmailAdresstxt.getText().isEmpty()) {//check fields
-            ErrorAlert.setTitle("Fields Error");
-            ErrorAlert.setHeaderText("Please fill all require information");
-            ErrorAlert.showAndWait();
-        } else {
-            if (isCostumerExist()) { //check if costumer is on system already
-                ErrorAlert.setTitle("ID Error");
-                ErrorAlert.setHeaderText("Costumer ID already Exists,\nPlease Chose Different ID.");
-                ErrorAlert.showAndWait();
-            } else {//build costumer
-                Costumer costumer = new Costumer(CostumerIDtxt.getText(), CostumerIDtxt.getText(), "", FirstNametxt.getText(),
-                        LastNametxt.getText(), EmailAdresstxt.getText(), null, "true", null, null);
-                if (CardClickFlag) {
-                    costumer.setCostumerCreditCard(tempCreditCard);
-                    if(tempCreditCard != null)
-                        tempCreditCard.setCardOwner(costumer);
-                }
-                myController.setCostumerFirstPhase(costumer);
-                myController.getVehicleTable();
-                vehicleMangTAB.setDisable(false);
-                personalInfoTAB.setDisable(true);
-                vehicleMangTAB.getTabPane().getSelectionModel().selectNext();
-            }
-        }
-}
-
-    @FXML
-    void SecondForwardButtonOnClick(MouseEvent event) {
-        myController.setCostumerSecoundPhase(tempVehicleArray);
-        planInfoTAB.setDisable(false);
-        vehicleMangTAB.setDisable(true);
-        vehicleMangTAB.getTabPane().getSelectionModel().selectNext();
     }
 
     @FXML
@@ -280,12 +313,6 @@ public class CustomerRegistrationBoundary implements DataInitializable {
         vehicleMangTAB.getTabPane().getSelectionModel().selectPrevious();
     }
 
-
-    @FXML
-    void handleClicks(ActionEvent event) {
-
-    }
-
     @FXML
     void RemoveSelectedVe(MouseEvent event) {
         tempVehicleArray.remove(VehicleTable.getSelectionModel().getSelectedItem());
@@ -293,21 +320,14 @@ public class CustomerRegistrationBoundary implements DataInitializable {
         VehicleTable.setItems(data);
     }
 
-    private boolean isCostumerExist() {
-        for (Costumer cos : allDBCostumerArray) {
-            if (cos.getUserID().toString().equals(CostumerIDtxt.getText()))
-                return true;
-        }
-        return false;
+    @FXML
+    void clearSelection(MouseEvent event) {
+        PAZbtn.setSelected(false);
+        SONOLbtn.setSelected(false);
+        YELLOWbtn.setSelected(false);
+
     }
 
-    private boolean isVehicleExistInDb() {
-        for (Vehicle v : allVehicleArray) {
-            if (v.getVehicleID().equals(VehicleIDtxt.getText()))
-                return true;
-        }
-        return false;
-    }
 
     private boolean isVehicleExistInTempVehicleArr() {
         for (Vehicle v : tempVehicleArray) {
@@ -315,31 +335,6 @@ public class CustomerRegistrationBoundary implements DataInitializable {
                 return true;
         }
         return false;
-    }
-
-    private void PersonalInfoValidation() {
-        //costumer ID field check
-        formValidation.isDoubleNumberValidation(CostumerIDtxt, "Costumer ID");
-        formValidation.maxLengthValidation(CostumerIDtxt, "Costumer ID", 9);
-        formValidation.minLengthValidationShort(CostumerIDtxt, "Costumer ID", 9);
-        //have to add minimum 9 ID len
-
-        //first Name field check
-        formValidation.isContainsOnlyLetters(FirstNametxt, "First Name");
-        formValidation.isContainsOnlyLetters(FirstNametxt, "First Name");
-
-        //last Name field check
-        formValidation.isContainsOnlyLetters(LastNametxt, "Last Name");
-        formValidation.isContainsOnlyLetters(LastNametxt, "Last Name");
-
-        //email adress field check
-        formValidation.emailAddressValidation(EmailAdresstxt, "Email Adress");
-
-        //Vehicle fields check
-        formValidation.isDoubleNumberValidation(VehicleIDtxt, "Vehicle ID");
-        formValidation.maxLengthValidation(VehicleIDtxt, "Vehicle ID", 7);
-        formValidation.minLengthValidationShort(VehicleIDtxt, "Vehicle ID", 7);
-
     }
 
     public void setTempCreditCard(CreditCard tempCreditCard) {
@@ -380,21 +375,45 @@ public class CustomerRegistrationBoundary implements DataInitializable {
     }
 
 
-    public ArrayList<Costumer> getAllDBCostumerArray() {
-        return allDBCostumerArray;
+    private void giValidation() {
+        //costumer ID field check
+        formValidation.isOnlyNumbers(CostumerIDtxt, "Costumer ID");
+        formValidation.ExactlyInLengthValidation(CostumerIDtxt, "Costumer ID", 9);
+        formValidation.isEmptyFieldValidation(CostumerIDtxt, "Costumer ID");
+
+        //first Name field check
+        formValidation.isContainsOnlyLetters(FirstNametxt, "First Name");
+        formValidation.isEmptyFieldValidation(FirstNametxt, "First Name");
+
+        //last Name field check
+        formValidation.isContainsOnlyLetters(LastNametxt, "Last Name");
+        formValidation.isEmptyFieldValidation(LastNametxt, "Last Name");
+
+
+        //email adress field check
+        formValidation.emailAddressValidation(EmailAdresstxt, "Email Address");
+        formValidation.isEmptyFieldValidation(EmailAdresstxt, "Email Address");
+
+        //Vehicle fields check
+        formValidation.isOnlyNumbers(VehicleIDtxt, "Vehicle ID");
+        formValidation.ExactlyInLengthValidation(VehicleIDtxt, "Vehicle ID", 7);
+        formValidation.isEmptyFieldValidation(VehicleIDtxt, "Vehicle ID");
+
+
     }
 
-    public void setAllDBCostumerArray(ArrayList<Costumer> allDBCostumerArray) {
-        this.allDBCostumerArray = allDBCostumerArray;
+    private boolean validateVehicleIDField() {
+        if (formValidation.isEmptyField() && formValidation.isExactlyInLength() && formValidation.isOnlyNumbers())
+            return true;
+        else
+            return false;
     }
 
-    public ArrayList<Vehicle> getAllVehicleArray() {
-        return allVehicleArray;
+    private boolean validateInputFirstPhase() {
+        if (formValidation.isOnlyNumbers() && formValidation.isExactlyInLength() && formValidation.isOnlyLetters() && formValidation.isEmailAddress() && formValidation.isEmptyField())
+            return true;
+        else
+            return false;
     }
-
-    public void setAllVehicleArray(ArrayList<Vehicle> allVehicleArray) {
-        this.allVehicleArray = allVehicleArray;
-    }
-
 
 }

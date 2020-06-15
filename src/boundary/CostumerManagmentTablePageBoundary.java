@@ -1,6 +1,7 @@
 package boundary;
 
 import Contollers.CostumerManagementController;
+import Contollers.FormValidation;
 import Contollers.PagingController;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
@@ -38,6 +39,8 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
     private ArrayList<Costumer> costumers = new ArrayList<Costumer>();
     private Alert ErrorAlert = new Alert(Alert.AlertType.ERROR);
     private Costumer cos;
+    private FormValidation formValidation;
+
     /**
      * The supervisor boundary controller.
      */
@@ -144,13 +147,22 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
         GasTypeChoiseBox.setItems(GasType);
         myController.getCostumerTable(); //start the process that will ask server to execute quarry and get the table details
         myController.getVehicleTable();
+        tableStyle();
+
     }
+
+    private void tableStyle() {
+        CosManageTbale.setStyle("-fx-font-weight: bold;");
+    }
+
 
     /**
      * this method will set the costumer table and the cell edit functions
      * when the page initialized.
      */
     public void setCostumerTable(ArrayList<Costumer> cosArray) {
+
+
         costumers.addAll(cosArray);
         setColomsCells();
         ObservableList<Costumer> data = FXCollections.observableArrayList(cosArray);
@@ -162,8 +174,15 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
             @Override
             public void handle(TableColumn.CellEditEvent<Costumer, String> t) {
                 Costumer temp = ((Costumer) t.getTableView().getItems().get(t.getTablePosition().getRow()));
-                temp.setUserFirstName(t.getNewValue());
-                myController.updateCostumerDetailsInDb(SqlQueryType.UPDATE_COSTUMER_FNAME, temp.getUserID(), temp.getUserFirstName());
+                if (t.getNewValue().isEmpty() || t.getNewValue().matches(".*\\d.*")) {
+                    ErrorAlert.setTitle("Fields Error");
+                    ErrorAlert.setHeaderText("First Name field Error. Please try again.");
+                    ErrorAlert.showAndWait();
+                    CosManageTbale.refresh();
+                } else {
+                    temp.setUserFirstName(t.getNewValue());
+                    myController.updateCostumerDetailsInDb(SqlQueryType.UPDATE_COSTUMER_FNAME, temp.getUserID(), temp.getUserFirstName());
+                }
             }
         });
         //Modifying the lastName property
@@ -171,8 +190,15 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
             @Override
             public void handle(TableColumn.CellEditEvent<Costumer, String> t) {
                 Costumer temp = ((Costumer) t.getTableView().getItems().get(t.getTablePosition().getRow()));
-                temp.setUserLastName(t.getNewValue());
-                myController.updateCostumerDetailsInDb(SqlQueryType.UPDATE_COSTUMER_LNAME, temp.getUserID(), temp.getUserLastName());
+                if (t.getNewValue().isEmpty() || t.getNewValue().matches(".*\\d.*")) {
+                    ErrorAlert.setTitle("Fields Error");
+                    ErrorAlert.setHeaderText("Last Name field Error. Please try again.");
+                    ErrorAlert.showAndWait();
+                    CosManageTbale.refresh();
+                } else {
+                    temp.setUserLastName(t.getNewValue());
+                    myController.updateCostumerDetailsInDb(SqlQueryType.UPDATE_COSTUMER_LNAME, temp.getUserID(), temp.getUserLastName());
+                }
             }
         });
         //Modifying the Emailadress property
@@ -180,8 +206,15 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
             @Override
             public void handle(TableColumn.CellEditEvent<Costumer, String> t) {
                 Costumer temp = ((Costumer) t.getTableView().getItems().get(t.getTablePosition().getRow()));
-                temp.setUserEmail(t.getNewValue());
-                myController.updateCostumerDetailsInDb(SqlQueryType.UPDATE_COSTUMER_EMAIL, temp.getUserID(), temp.getUserEmail());
+                if (t.getNewValue().isEmpty()) {
+                    ErrorAlert.setTitle("Fields Error");
+                    ErrorAlert.setHeaderText("Email field Error. Please try again.");
+                    ErrorAlert.showAndWait();
+                    CosManageTbale.refresh();
+                } else {
+                    temp.setUserEmail(t.getNewValue());
+                    myController.updateCostumerDetailsInDb(SqlQueryType.UPDATE_COSTUMER_EMAIL, temp.getUserID(), temp.getUserEmail());
+                }
             }
         });
         //Modifying the CostumerType property

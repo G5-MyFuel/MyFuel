@@ -29,6 +29,9 @@ public enum SqlQueryType {
     GET_Purchases_Report(SqlExecutionType.EXECUTE_QUERY),
     GET_QuantityItemsStock_Report(SqlExecutionType.EXECUTE_QUERY),
     GET_Manager_Data(SqlExecutionType.EXECUTE_QUERY),
+    INSERT_NEW_Quarterly_Report(SqlExecutionType.UPDATE_QUERY),
+    INSERT_NEW_Purchases_Report(SqlExecutionType.UPDATE_QUERY),
+    INSERT_NEW_QuantityItemsStock_Report(SqlExecutionType.UPDATE_QUERY),
 
     /* *****************************************
      * ********** Costumer Management Queries ****************
@@ -74,12 +77,19 @@ public enum SqlQueryType {
     INSERT_NEW_VEHICLE(SqlExecutionType.UPDATE_QUERY),
     INSERT_NEW_COSTUMER_USER(SqlExecutionType.UPDATE_QUERY),
 
+    /* *****************************************************
+     * *************** Station Manager Queries ****************
+     * *****************************************************/
+    GET_ALL_ORDER_TO_SUPPLY_FOR_STATION_MANAGER(SqlExecutionType.EXECUTE_QUERY),
+
     /* *****************************************
      * ********** Order From Supplier Queries ****************
      * *****************************************/
     GET_ALL_ORDERS_FROM_SUPPLIER_TABLE(SqlExecutionType.EXECUTE_QUERY),
     UPDATE_STATUS_TO_DONE(SqlExecutionType.UPDATE_QUERY),
-    GET_GAS_STATION_TABLE(SqlExecutionType.EXECUTE_QUERY),
+    UPDATE_95_INVENTORY(SqlExecutionType.UPDATE_QUERY),
+    UPDATE_DIESEL_INVENTORY(SqlExecutionType.UPDATE_QUERY),
+    UPDATE_SCOOTER_INVENTORY(SqlExecutionType.UPDATE_QUERY),
 
     /* DO NOT CHANGE THE LOCATION OF MAX_SQL_QUERY!!! */
     /* DO NOT CHANGE THE LOCATION OF MAX_SQL_QUERY!!! */

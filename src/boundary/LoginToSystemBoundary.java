@@ -18,6 +18,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -75,8 +76,8 @@ public class LoginToSystemBoundary extends Application {
     //מתודה שמאתחלת את בדיקות הקלט לטופס הלוגין
     public void LoginValidation() {
         //username validation
-        formValidation.isEmptyField(userIDTextField, "User ID");
-        formValidation.isContainsOnlyNumbers(userIDTextField, "user ID");
+        formValidation.isEmptyFieldValidation(userIDTextField, "User ID");
+        formValidation.isOnlyNumbers(userIDTextField, "user ID");
         formValidation.maxLengthValidation(userIDTextField, "user ID", 9);
         //password validation
         System.out.println(allDBUsersArrayList);
@@ -94,25 +95,28 @@ public class LoginToSystemBoundary extends Application {
     }
 
     public boolean checkInputs() {
-        if (!loginAsComboBox.getSelectionModel().isEmpty()) {
-            userType = loginAsComboBox.getValue().toUpperCase();
-        }
-
-        //check if user type selected
-        else {
-            ErrorAlert.setTitle("Login Error");
-            ErrorAlert.setHeaderText("User type cannot be empty, Please select user type");
-            ErrorAlert.showAndWait();
-        }
-
-        //check if userID exist in DB
-        if (checkIfUserNameAndUserTypeInDb(userIDTextField.getText(), loginAsComboBox.getValue().toUpperCase())) {
-            if (checkIfPasswordMatches(userIDTextField.getText(), passwordField.getText())) {
-                System.out.println("ther userid and password matches!");
-                return true;
+        try {
+            if (!loginAsComboBox.getSelectionModel().isEmpty()) {
+                userType = loginAsComboBox.getValue().toUpperCase();
             }
+
+            //check if user type selected
+            else {
+                ErrorAlert.setTitle("Login Error");
+                ErrorAlert.setHeaderText("User type cannot be empty, Please select user type");
+                ErrorAlert.showAndWait();
+            }
+            //check if userID exist in DB
+            if (checkIfUserNameAndUserTypeInDb(userIDTextField.getText(), loginAsComboBox.getValue().toUpperCase())) {
+                if (checkIfPasswordMatches(userIDTextField.getText(), passwordField.getText())) {
+                    System.out.println("ther userid and password matches!");
+                    return true;
+                }
+            }
+            return false;
+        }catch (RuntimeException l){
+            return false;
         }
-        return false;
     }
 
     private boolean checkIfUserNameAndUserTypeInDb(String userID, String UserType) {
@@ -138,8 +142,6 @@ public class LoginToSystemBoundary extends Application {
         ErrorAlert.showAndWait();
         return false;
     }
-
-    private int loginAttempts = 3;
 
     private boolean checkIfPasswordMatches(String userID, String password) {
         for (User u : allDBUsersArrayList) {
