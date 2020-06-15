@@ -25,10 +25,11 @@ import java.util.ResourceBundle;
  * @author Adi Lampert
  * @see OrderExecutionBoundary - the from's logic class
  */
-public class OrderExecutionBoundary implements Initializable {
+public class OrderExecutionBoundary implements DataInitializable {
 
     private OrderExecutionBoundary OrderExecutionController;
     private OrderFromSupplierController myController = new OrderFromSupplierController(this);
+    private String SupplierID="";
 
     private ArrayList<OrderFuelFromSupplier> OFFS;
 
@@ -70,6 +71,9 @@ public class OrderExecutionBoundary implements Initializable {
 
     @FXML
     private Label StationManagerField;
+
+    @FXML
+    private Label CompanyNameField;
 
     @FXML
     private Label StationNumberField;
@@ -130,7 +134,10 @@ public class OrderExecutionBoundary implements Initializable {
             }
         }
     }
-
+    @Override
+    public void initData(Object data) {
+        SupplierID = (String)data;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -145,7 +152,7 @@ public class OrderExecutionBoundary implements Initializable {
 
     }
      /**
-      This function set the details from DB to TabeView
+      This function set the details from DB to TableView
       **/
     public void setOrderFuelFromSupplierTableView(ArrayList<OrderFuelFromSupplier> OrderArray) {
         orderCol.setCellValueFactory(new PropertyValueFactory<>("OrderNumber"));
@@ -172,19 +179,21 @@ public class OrderExecutionBoundary implements Initializable {
                         hboxOrderConfirmation.setVisible(true);
                         hboxOrderConfirmation.setDisable(false);
                         DoneBtn.setVisible(true);
+
                         /************   Show details to the User  ***************/
-                        StationManagerField.setText(temp.getStationManagerName().toString());
-                        StationNumberField.setText(temp.getStationNum().toString());
-                        OrderDateField.setText("null");
+                        StationManagerField.setText(temp.getUserFirstName().toString()+" "+temp.getUserLastName());
+                        StationNumberField.setText(temp.getStationNumber().toString());
+                        CompanyNameField.setText(temp.getGasCompanyName().toString());
+                        OrderDateField.setText(temp.getOrderDate().toString());
                         FuelTypeField.setText(temp.getFuelType().toString());
                         QuantityField.setText(temp.getQuantity().toString());
 
                         /******* 'Done' status or 'In treatment' status *********/
-                        while (temp.getOrderStatus().equals("Done")) {
+                        if (temp.getOrderStatus().equals("Done")) {
                             DoneMsgTxt.setVisible(true);
                             hboxOrderConfirmation.setDisable(true);
                         }
-                        while (temp.getOrderStatus().equals("In treatment"))
+                        if (temp.getOrderStatus().equals("In treatment"))
                             DoneMsgTxt.setVisible(false);
                     }
                 }
