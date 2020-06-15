@@ -49,17 +49,17 @@
             <Image url="@../media/GeneratingReports/purches.jpeg" />
          </image>
       </ImageView>
-      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="26.0" layoutY="428.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="QuestionMark2" fitHeight="25.0" fitWidth="25.0" layoutX="26.0" layoutY="428.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../media/CostumerRegisterationMedia/help_16px.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="374.0" layoutY="428.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="QuestionMark3" fitHeight="25.0" fitWidth="25.0" layoutX="374.0" layoutY="428.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../media/CostumerRegisterationMedia/help_16px.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="714.0" layoutY="428.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="QuestionMark4" fitHeight="25.0" fitWidth="25.0" layoutX="714.0" layoutY="428.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../media/CostumerRegisterationMedia/help_16px.png" />
          </image>
@@ -85,7 +85,7 @@
             <Insets bottom="5.0" top="20.0" />
          </padding>
       </JFXTextField>
-      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="322.0" layoutY="158.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="QuestionMark1" fitHeight="25.0" fitWidth="25.0" layoutX="322.0" layoutY="158.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../media/CostumerRegisterationMedia/help_16px.png" />
          </image>

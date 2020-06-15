@@ -90,6 +90,19 @@ public class VieReportsBoundary implements Initializable {
     @FXML
     private ImageView imgViewQuarterlyRevenueReport;
 
+    @FXML
+    private ImageView QuestionMark1;
+
+    @FXML
+    private ImageView QuestionMark2;
+
+    @FXML
+    private ImageView QuestionMark3;
+
+    @FXML
+    private ImageView QuestionMark4;
+
+
     private final ObservableList<String> ReportsType = FXCollections.observableArrayList("Quarterly revenue report",
             "Purchases report", "Quantity of items in stock report");
     private final ObservableList<String> YearList = FXCollections.observableArrayList("2020", "2019", "2018", "2017", "2016", "2015",
@@ -113,6 +126,10 @@ public class VieReportsBoundary implements Initializable {
         imgViewQuantityItemsInStockReport.setVisible(false);
         imgViewPurchasesReport.setVisible(false);
         imgViewQuarterlyRevenueReport.setVisible(false);
+        QuestionMark1.setVisible(false);
+        QuestionMark2.setVisible(false);
+        QuestionMark3.setVisible(false);
+        QuestionMark4.setVisible(false);
     }
 
     @FXML
@@ -125,6 +142,10 @@ public class VieReportsBoundary implements Initializable {
         imgViewQuantityItemsInStockReport.setVisible(true);
         imgViewPurchasesReport.setVisible(true);
         imgViewQuarterlyRevenueReport.setVisible(true);
+        QuestionMark1.setVisible(true);
+        QuestionMark2.setVisible(true);
+        QuestionMark3.setVisible(true);
+        QuestionMark4.setVisible(true);
         ChooseReportYearCombo.setVisible(false);
         ChooseReportQuarterCombo.setVisible(false);
         QuantityItemsStockTxt.setVisible(false);
