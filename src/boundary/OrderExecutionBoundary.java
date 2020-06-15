@@ -131,6 +131,7 @@ public class OrderExecutionBoundary implements DataInitializable {
                 DoneMsgTxt.setVisible(true);
                 DoneBtn.setVisible(false);
                 tableView.refresh();
+                addToStock(myController.resultList.get(i).getQuantity(),myController.resultList.get(i).getFuelType());
                 break;
             }
         }
@@ -202,9 +203,17 @@ public class OrderExecutionBoundary implements DataInitializable {
         });
     }
 
-    /******  set new status for in DB and tableView  ********/
-    public void handleSetNewStatus() {
-
+    /**
+     * Update the inventory after the supplier confirm
+     * @param quantity
+     */
+    public void addToStock(int quantity,String fuelType) {
+        if(fuelType.equals("95"))
+            myController.setNewInventory95(quantity);
+        else if (fuelType.equals("diesel"))
+            myController.setNewInventoryDiesel(quantity);
+        else if (fuelType.equals("scooter"))
+            myController.setNewInventoryScooter(quantity);
     }
 
 }

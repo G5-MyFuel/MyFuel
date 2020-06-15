@@ -28,7 +28,6 @@ public class OrderFromSupplierController extends BasicController {
         super.sendSqlActionToClient(sqlAction);
     }
 
-
     /**
      This function sets a new status after we done take care of the order
      */
@@ -36,6 +35,27 @@ public class OrderFromSupplierController extends BasicController {
         ArrayList<Object> varArray = new ArrayList<>();
         varArray.add(OrderNumber);
         SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_STATUS_TO_DONE, varArray);
+        super.sendSqlActionToClient(sqlAction);
+    }
+
+    public void setNewInventory95(int quantity){
+        ArrayList<Object> varArray = new ArrayList<>();
+        varArray.add(quantity);
+        SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_95_INVENTORY, varArray);
+        super.sendSqlActionToClient(sqlAction);
+    }
+
+    public void setNewInventoryDiesel(int quantity){
+        ArrayList<Object> varArray = new ArrayList<>();
+        varArray.add(quantity);
+        SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_DIESEL_INVENTORY, varArray);
+        super.sendSqlActionToClient(sqlAction);
+    }
+
+    public void setNewInventoryScooter(int quantity){
+        ArrayList<Object> varArray = new ArrayList<>();
+        varArray.add(quantity);
+        SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_SCOOTER_INVENTORY, varArray);
         super.sendSqlActionToClient(sqlAction);
     }
 
