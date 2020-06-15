@@ -11,8 +11,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class SettingDiscountRatesBoundary implements Initializable {
@@ -25,18 +27,6 @@ public class SettingDiscountRatesBoundary implements Initializable {
     private Alert ErrorAlert = new Alert(Alert.AlertType.ERROR);
 
     @FXML
-    private Button btnOverview;
-
-    @FXML
-    private Button btnCustomers;
-
-    @FXML
-    private Button btnPackages;
-
-    @FXML
-    private Button btnSignout;
-
-    @FXML
     private JFXComboBox<String> ChooseSubscriptionTypeCombo;
 
     @FXML
@@ -47,6 +37,9 @@ public class SettingDiscountRatesBoundary implements Initializable {
 
     @FXML
     private JFXTextField ShowNewRateTXT;
+
+    @FXML
+    private Label RequestSentMessageLabel;
 
     private final ObservableList<String> SubscriptionType = FXCollections.observableArrayList("Regular monthly subscription - single vehicle",
             "Full monthly subscription (for single vehicle)", "Regular monthly subscription - number of vehicles");
@@ -72,26 +65,25 @@ public class SettingDiscountRatesBoundary implements Initializable {
         FormValidation.isEmptyFieldValidation(ShowNewRateTXT, "New price");
         //formValidation.maxLengthValidation(ShowNewRateTXT, "New price", 3);
         formValidation.maxSizeValidation(ShowNewRateTXT, "New price", 100);
-        formValidation.minSizeValidation(ShowNewRateTXT, "New price", 1);
+        formValidation.minSizeValidation(ShowNewRateTXT, "New price", 0);
     }
 
     @FXML
     void handleChoseSubscriptionType(ActionEvent event) {
 
-        myController.getDiscountRatesTable(ChooseSubscriptionTypeCombo.getValue()); //start the process that will ask server to execute quarry and get the table details
+        ArrayList<String> paramArray = new ArrayList<>();
+        paramArray.add(ChooseSubscriptionTypeCombo.getValue());
+        myController.getDiscountRatesTable(paramArray); //start the process that will ask server to execute quarry and get the table details
         ShowNewRateTXT.clear();
         ShowCurrentRateTXT.setVisible(true);
         ShowCurrentRateTXT.setEditable(false);
         ShowNewRateTXT.setVisible(true);
         btnSetNewRate.setVisible(true);
+        RequestSentMessageLabel.setVisible(false);
     }
 
     public void setData(String currentRate) {
-        if(currentRate.isEmpty())
-             ShowCurrentRateTXT.setText(ShowNewRateTXT.getText());
-        else
-            ShowCurrentRateTXT.setText(currentRate);
-
+        ShowCurrentRateTXT.setText(currentRate + "%");
     }
 
     @FXML
@@ -102,14 +94,28 @@ public class SettingDiscountRatesBoundary implements Initializable {
     @FXML
     void handleSetNewRate(ActionEvent event) {
 
+        RequestSentMessageLabel.setVisible(false);
+        /*try
+        {
+            Thread.sleep(400);
+        }
+        catch(InterruptedException ex)
+        {
+            Thread.currentThread().interrupt();
+        }*/
         Float NewRate = Float.parseFloat(ShowNewRateTXT.getText());
         if (NewRate < 0 || NewRate > 100) {
             ErrorAlert.setTitle("Price rate ERROR");
             ErrorAlert.setHeaderText("Please insert between 0-100");
             ErrorAlert.showAndWait();
         } else {
-            myController.setNewPriceInDB(ShowNewRateTXT.getText(), ChooseSubscriptionTypeCombo.getValue());
-             //גם ככה יש שימוש בפונקציה סט דאטה. שם העדכון קורה אחרי שהשאליתה בוצעה
+            ArrayList<String> paramArray = new ArrayList<>();
+            paramArray.add("Insert NewRate");
+            paramArray.add(ShowNewRateTXT.getText());
+            paramArray.add(ChooseSubscriptionTypeCombo.getValue());
+            System.out.println(paramArray);
+            myController.getDiscountRatesTable(paramArray); //start the process that will ask server to execute quarry and get the table details
+            RequestSentMessageLabel.setVisible(true);
         }
     }
 

@@ -26,19 +26,26 @@ public class SettingDiscountRatesController extends BasicController {
 
     /*Logic Methods*/
 
-    public void getDiscountRatesTable(String SubscriptionType) {
+    public void getDiscountRatesTable(ArrayList<String> paramArray /*String SubscriptionType*/) {
+        ArrayList<Object> varArray = new ArrayList<>();
+        varArray.addAll(paramArray);
+        varArray.remove(0);
 
-        switch (SubscriptionType) {
+        switch (paramArray.get(0)) {
             case "Regular monthly subscription - single vehicle":   //20
-                SqlAction sqlAction = new SqlAction(SqlQueryType.GET_RegularSubscriptionSingleVehicle_PRICE);
+                SqlAction sqlAction = new SqlAction(SqlQueryType.GET_RegularSubscriptionSingleVehicle_PRICE, varArray);
                 super.sendSqlActionToClient(sqlAction);
                 break;
             case "Full monthly subscription (for single vehicle)":  //7
-                sqlAction = new SqlAction(SqlQueryType.GET_FullSubscriptionSingleVehicle_PRICE);
+                sqlAction = new SqlAction(SqlQueryType.GET_FullSubscriptionSingleVehicle_PRICE, varArray);
                 super.sendSqlActionToClient(sqlAction);
                 break;
             case "Regular monthly subscription - number of vehicles":   //15
-                sqlAction = new SqlAction(SqlQueryType.GET_RegularSubscriptionMultiVehicle_PRICE);
+                sqlAction = new SqlAction(SqlQueryType.GET_RegularSubscriptionMultiVehicle_PRICE, varArray);
+                super.sendSqlActionToClient(sqlAction);
+                break;
+            case "Insert NewRate":
+                sqlAction = new SqlAction(SqlQueryType.INSERT_NEW_PRICE, varArray);
                 super.sendSqlActionToClient(sqlAction);
                 break;
             default:
@@ -46,14 +53,14 @@ public class SettingDiscountRatesController extends BasicController {
         }
     }
 
-    public void setNewPriceInDB(String newPrice, String subscriptionType) {
+    /*public void setNewPriceInDB(String newPrice, String subscriptionType) {
 
         ArrayList<Object> varArray = new ArrayList<>();
         varArray.add(newPrice);
         varArray.add(subscriptionType);
         SqlAction sqlAction = new SqlAction(SqlQueryType.INSERT_NEW_PRICE, varArray);
         super.sendSqlActionToClient(sqlAction);
-    }
+    }*/
 
     @Override
     public void getResultFromClient(SqlResult result) {
@@ -68,9 +75,9 @@ public class SettingDiscountRatesController extends BasicController {
                 case GET_RegularSubscriptionMultiVehicle_PRICE:
                     myBoundary.setData(this.changeResultToString(result));
                     break;
-                case INSERT_NEW_PRICE:
+                /*case INSERT_NEW_PRICE:
                     myBoundary.setData("");
-                    break;
+                    break;*/
 
                 default:
                     break;

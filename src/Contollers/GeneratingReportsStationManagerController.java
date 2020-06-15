@@ -28,7 +28,7 @@ public class GeneratingReportsStationManagerController extends BasicController {
         this.myBoundary = myBoundary;
     }
 
-    public void GetReportData(ArrayList<String> paramArray/*String ReportType, String startDate, String endDate*/) {
+    public void GetReportData(ArrayList<String> paramArray) {
         ArrayList<Object> varArray = new ArrayList<>();
         varArray.addAll(paramArray);
         varArray.remove(0);
