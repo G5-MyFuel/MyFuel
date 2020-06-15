@@ -3,12 +3,11 @@ package entity;
 import java.util.Date;
 
 public class OrderFuelFromSupplier {
-    private String OrderNumber, FuelType, StationManagerName;
+    private String OrderNumber, FuelType, StationManagerName,OrderStatus,GasCompanyName;
     private int StationNum,Quantity;
     private Date OrderDate;
-    private String OrderStatus;
 
-    public OrderFuelFromSupplier(String OrderNumber, String StationManagerName, int StationNum, Date OrderDate, int Quantity,String OrderStatus,String FuelType){
+    public OrderFuelFromSupplier(String OrderNumber, String StationManagerName, int StationNum, Date OrderDate, int Quantity,String OrderStatus,String FuelType,String GasCompanyName){
         this.OrderNumber=OrderNumber;
         this.Quantity=Quantity;
         this.StationManagerName=StationManagerName;
@@ -16,6 +15,7 @@ public class OrderFuelFromSupplier {
         this.OrderDate = OrderDate;
         this.OrderStatus = OrderStatus;
         this.FuelType=FuelType;
+        this.GasCompanyName=GasCompanyName;
     }
 
     public String getOrderNumber() {
@@ -57,4 +57,6 @@ public class OrderFuelFromSupplier {
     public void setOrderStatus(String orderStatus) {
         OrderStatus = orderStatus;
     }
+
+
 }

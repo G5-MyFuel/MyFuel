@@ -308,7 +308,7 @@ public class generalDashBoardBoundary implements DataInitializable {
     void newPurchaseFuelForHomeHeatingClick() {
         currentPagePane.setVisible(true);
         currentPagePane.getChildren().clear();
-        currentPagePane.getChildren().setAll(mainProjectFX.pagingController.loadBoundaryInPane(ProjectPages.PURCHASE_FUEL_FOR_HOME_HEATING.getPath()));
+        currentPagePane.getChildren().setAll(mainProjectFX.pagingController.loadBoundaryInPane(ProjectPages.PURCHASE_FUEL_FOR_HOME_HEATING.getPath(),userID));
         myFuelLogo.setVisible(false);
     }
 
@@ -324,7 +324,7 @@ public class generalDashBoardBoundary implements DataInitializable {
     void costumerMenagmentClick() {
         currentPagePane.setVisible(true);
         currentPagePane.getChildren().clear();
-        currentPagePane.getChildren().setAll(mainProjectFX.pagingController.loadBoundaryInPane(ProjectPages.COSTUMER_MANAGEMENT_TABLE_PAGE.getPath()));
+        currentPagePane.getChildren().setAll(mainProjectFX.pagingController.loadBoundaryInPane(ProjectPages.COSTUMER_MANAGEMENT_TABLE_PAGE.getPath(),userID));
         myFuelLogo.setVisible(false);
     }
 

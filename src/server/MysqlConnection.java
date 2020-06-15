@@ -137,7 +137,10 @@ public class MysqlConnection {
      */
     public static void initSqlArray() {
         sqlArray = new String[SqlQueryType.MAX_SQL_QUERY.getCode()];
-
+        /* *****************************************************
+         * *************** Station Manager Queries ****************
+         * *****************************************************/
+        sqlArray[SqlQueryType.GET_ALL_ORDER_TO_SUPPLY_FOR_STATION_MANAGER.getCode()] = "SELECT OrderNumber,companyName,StationNum,FuelType,Quantity FROM OrderForStock as ofs, GasStation as gs WHERE ofs.StationNum=gs.StationNumber and ofs.GasCompanyName=gs.companyName and ofs.OrderStatus like \"New\" and managerID= ?";
 
         /* *****************************************************
          * *************** Login Queries ****************
@@ -187,9 +190,8 @@ public class MysqlConnection {
         /* *****************************************
          * ********** Orders From Supplier Queries ****************
          * *****************************************/
-        sqlArray[SqlQueryType.GET_ALL_ORDERS_FROM_SUPPLIER_TABLE.getCode()] = "SELECT * FROM `OrderForStock`";
+        sqlArray[SqlQueryType.GET_ALL_ORDERS_FROM_SUPPLIER_TABLE.getCode()] = "SELECT OrderNumber,OrderStatus,userFirstName,userLastName,StationNumber,OrderDate,FuelType,Quantity FROM OrderForStock as ofs, GasStation as gs, User as u WHERE ofs.StationNum=gs.StationNumber and ofs.GasCompanyName=gs.companyName and ofs.OrderStatus=\"In treatment\" and gs.managerID=u.userID";
         sqlArray[SqlQueryType.UPDATE_STATUS_TO_DONE.getCode()] = "UPDATE `OrderForStock` SET `OrderStatus`= \"Done\" WHERE `OrderNumber`= ?";
-        sqlArray[SqlQueryType.GET_GAS_STATION_TABLE.getCode()]= "SELECT `gasStationID`, `companyID`, `gasStationName`, `managerID`, `inventory_95`, `inventory_scooter`, `inventory_diesel` FROM `GasStation`";
 
         /* *****************************************
          * ********** Templates+Campaigns Management Queries ***************
