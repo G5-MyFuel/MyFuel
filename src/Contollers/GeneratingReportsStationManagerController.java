@@ -113,9 +113,9 @@ public class GeneratingReportsStationManagerController extends BasicController {
         ArrayList<QuantityItemsStockReport> resultList = new ArrayList<>();
 
         for (ArrayList<Object> a : result.getResultData()) {
-            resultList.add(new QuantityItemsStockReport((String )a.get(0)));
-            resultList.add(new QuantityItemsStockReport((String )a.get(1)));
-            resultList.add(new QuantityItemsStockReport((String )a.get(2)));
+            resultList.add(new QuantityItemsStockReport((String )a.get(0)+" liters"));
+            resultList.add(new QuantityItemsStockReport((String )a.get(1)+" liters"));
+            resultList.add(new QuantityItemsStockReport((String )a.get(2)+" liters"));
         }
         return resultList;
     }
