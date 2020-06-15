@@ -183,16 +183,18 @@ public class MysqlConnection {
         sqlArray[SqlQueryType.INSERT_NEW_COSTUMER.getCode()] =
                 "INSERT INTO `Costumer`(`ID`, `Credit Card Number`, `CreditCardExperationDate`, `CVV`, `customerType`, `Purchase Plan`, `Service Plan`) VALUES (?,?,?,?,?,?,?)";
         sqlArray[SqlQueryType.INSERT_NEW_COSTUMER_USER.getCode()] =
-                "INSERT INTO `User`(`userID`, `userType`, `userPassword`, `isLoginIndicator`, `userFirstName`, `userLastName`, `userEmail`, `FuelCompany1`) VALUES (?,'CUSTOMER',?,0,?,?,?,?)";
+                "INSERT INTO `User`(`userID`, `userType`, `userPassword`, `isLoginIndicator`, `userFirstName`, `userLastName`, `userEmail`, `FuelCompany1`, `FuelCompany2`, `FuelCompany3`) VALUES (?,'CUSTOMER',?,0,?,?,?,?,?,?)";
         sqlArray[SqlQueryType.INSERT_NEW_VEHICLE.getCode()] = "INSERT INTO `Vehicle`(`Vehicle ID`, `Fuel Type`, `Owner ID`) VALUES (?,?,?);";
 
 
         /* *****************************************
          * ********** Orders From Supplier Queries ****************
          * *****************************************/
-        sqlArray[SqlQueryType.GET_ALL_ORDERS_FROM_SUPPLIER_TABLE.getCode()] = "SELECT * FROM `OrderForStock`";
+        sqlArray[SqlQueryType.GET_ALL_ORDERS_FROM_SUPPLIER_TABLE.getCode()] = "SELECT OrderNumber,OrderStatus,userFirstName,userLastName,StationNumber,OrderDate,FuelType,Quantity,GasCompanyName FROM OrderForStock as ofs, GasStation as gs, User as u WHERE ofs.StationNum=gs.StationNumber and ofs.GasCompanyName=gs.companyName and ofs.OrderStatus=\"In treatment\" and gs.managerID=u.userID";
         sqlArray[SqlQueryType.UPDATE_STATUS_TO_DONE.getCode()] = "UPDATE `OrderForStock` SET `OrderStatus`= \"Done\" WHERE `OrderNumber`= ?";
-        sqlArray[SqlQueryType.GET_GAS_STATION_TABLE.getCode()]= "SELECT `gasStationID`, `companyID`, `gasStationName`, `managerID`, `inventory_95`, `inventory_scooter`, `inventory_diesel` FROM `GasStation`";
+        sqlArray[SqlQueryType.UPDATE_95_INVENTORY.getCode()]="UPDATE `GasStation` SET `inventory_95`=?";
+        sqlArray[SqlQueryType.UPDATE_DIESEL_INVENTORY.getCode()]="UPDATE `GasStation` SET `inventory_diesel`=?";
+        sqlArray[SqlQueryType.UPDATE_SCOOTER_INVENTORY.getCode()]="UPDATE `GasStation` SET `inventory_scooter`=?";
 
         /* *****************************************
          * ********** Templates+Campaigns Management Queries ***************
@@ -211,7 +213,12 @@ public class MysqlConnection {
         sqlArray[SqlQueryType.GET_ALL_SALES_TO_CHACK_SALE.getCode()] = "SELECT * FROM `MarketingCampaign`";
 
 
+        /* *****************************************
+         * ********** Analytic system Queries *********
+         * *****************************************/
         sqlArray[SqlQueryType.GET_ALL_RATING_TABLE.getCode()] = "SELECT * FROM `Rating`";
+        sqlArray[SqlQueryType.GET_CUSTOMER_AND_PURCHASE_TABLE.getCode()] = "select * from Costumer as c, Purchase as p WHERE p.customerID LIKE c.ID ";
+
 
         /* *****************************************
          * ********** Discount Rates Queries ****************
@@ -219,7 +226,7 @@ public class MysqlConnection {
         sqlArray[SqlQueryType.GET_RegularSubscriptionSingleVehicle_PRICE.getCode()] = "SELECT * FROM `DiscountRates` WHERE `Subscription type` LIKE \"Regular monthly subscription - single vehicle\"";
         sqlArray[SqlQueryType.GET_FullSubscriptionSingleVehicle_PRICE.getCode()] = "SELECT * FROM `DiscountRates` WHERE `Subscription type` LIKE \"Full monthly subscription (for single vehicle)\"";
         sqlArray[SqlQueryType.GET_RegularSubscriptionMultiVehicle_PRICE.getCode()] = "SELECT * FROM `DiscountRates` WHERE `Subscription type` LIKE \"Regular monthly subscription - number of vehicles\"";
-        sqlArray[SqlQueryType.INSERT_NEW_PRICE.getCode()] = "UPDATE `DiscountRates` SET `Current price`= ? WHERE `Subscription type` LIKE ?";
+        sqlArray[SqlQueryType.INSERT_NEW_PRICE.getCode()] = "UPDATE `DiscountRates` SET `NewDiscountRate`= ?,`Status`= \"Pending approval\" WHERE `Subscription type` LIKE ?";
 
         /* *****************************************
          * ********** Station Manager Reports Queries ****************
@@ -230,12 +237,34 @@ public class MysqlConnection {
         sqlArray[SqlQueryType.GET_Purchases_Report.getCode()] = "select ff.FuelType, p.fuelAmount from FastFuel as ff, Purchase as p " +
                 "WHERE ff.purchaseID LIKE p.purchaseID " +
                 "AND ff.StationNumber LIKE ? " +
-                "AND ff.companyName LIKE ? " +
-                "AND ff.FuelType LIKE ?";
+                "AND ff.companyName LIKE ?";
         sqlArray[SqlQueryType.GET_QuantityItemsStock_Report.getCode()] = "SELECT gs.inventory_95, gs.inventory_diesel, gs.inventory_scooter from GasStation as gs " +
                 "WHERE gs.companyName LIKE ?" +
                 "AND gs.StationNumber LIKE ?";
         sqlArray[SqlQueryType.GET_Manager_Data.getCode()] = "SELECT * FROM Employee WHERE Employee.employeeID LIKE ?";
+        sqlArray[SqlQueryType.INSERT_NEW_Quarterly_Report.getCode()] = "INSERT INTO `ViewQuarterlyReportsForAdmin`" +
+                "(`companyName`, `StationNumber`, `Date`, `Quarterly`, `TotalRevenue`) " +
+                "VALUES (?,?,CURRENT_TIME(),quarter(curdate()),?)";
+        /*CURRENT_TIME() = curdate()
+        לשנות גם בDATA BASE
+        * */
+        sqlArray[SqlQueryType.INSERT_NEW_Purchases_Report.getCode()] = "INSERT INTO `ViewPurchasesReportsForAdmin`" +
+                "(`companyName`, `StationNumber`, `Date`, `Quarterly`, `FuelType`, `LitersPurchased`, `SalesAmount`) " +
+                "VALUES (?,?,CURRENT_TIME(),quarter(curdate()),?,?,?)," +
+                "(?,?,CURRENT_TIME(),quarter(curdate()),?,?,?)," +
+                "(?,?,CURRENT_TIME(),quarter(curdate()),?,?,?)";
+        /*CURRENT_TIME() = curdate()
+        לשנות גם בDATA BASE
+        * */
+
+        sqlArray[SqlQueryType.INSERT_NEW_QuantityItemsStock_Report.getCode()] = "INSERT INTO `ViewQuantityItemsStockReportsForAdmin`" +
+                "(`companyName`, `StationNumber`, `Date`, `Quarterly`, `FuelType`, `AvailableInventory`) " +
+                "VALUES (?,?,CURRENT_TIME(),quarter(curdate()),?,?)," +
+                "(?,?,CURRENT_TIME(),quarter(curdate()),?,?)," +
+                "(?,?,CURRENT_TIME(),quarter(curdate()),?,?)";
+        /*CURRENT_TIME() = curdate()
+        לשנות גם בDATA BASE
+        * */
     }
 
     public Connection getConnection() {

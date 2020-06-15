@@ -29,6 +29,7 @@ import java.util.ResourceBundle;
  * @author Hana Wiener
  * @see MarketingCampaignTemplateController - the form's logic class
  */
+
 public class MarketingCampaignTemplateBoundary implements Initializable {
 
     /** The supervisor boundary controller. */
@@ -132,7 +133,7 @@ public class MarketingCampaignTemplateBoundary implements Initializable {
      this method will set the templates table when we will initialize the page.
      */
     public void setTemplateTable(ArrayList<MarketingCampaignTemplate> cosArray){
-        //col oms parameters
+        //
         TemplateIDColumn.setCellValueFactory(new PropertyValueFactory<>("templateID"));
         TemplateNameColumn.setCellValueFactory(new PropertyValueFactory<>("templateName"));
         FuelTypeColumn.setCellValueFactory(new PropertyValueFactory<>("fuelType"));
@@ -140,7 +141,6 @@ public class MarketingCampaignTemplateBoundary implements Initializable {
         dayColumn.setCellValueFactory(new PropertyValueFactory<>("Day"));
         BeginHourColumn.setCellValueFactory(new PropertyValueFactory<>("beginHour"));
         EndHourColumn.setCellValueFactory(new PropertyValueFactory<>("endHour"));
-     //   MarketingAdColumn.setCellValueFactory(new PropertyValueFactory<>("Marketing ad"));
 
         ObservableList<MarketingCampaignTemplate> data = FXCollections.observableArrayList(cosArray);
         TemplateTableView.setItems(data);

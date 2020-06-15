@@ -192,7 +192,7 @@
                            <children>
                               <Pane layoutX="-1.0" prefHeight="325.0" prefWidth="23.0" style="-fx-background-color: #007390;" />
                               <Label layoutX="124.0" layoutY="57.0" prefHeight="35.0" prefWidth="126.0" style="-fx-font-weight: bold;" styleClass="custom-white-title-label" text="Station Manager: " textFill="WHITE" />
-                              <Label layoutX="122.0" layoutY="120.0" prefHeight="31.0" prefWidth="126.0" style="-fx-font-weight: bold;" styleClass="custom-white-label" text="Station Number:" textFill="WHITE" />
+                              <Label layoutX="122.0" layoutY="120.0" prefHeight="31.0" prefWidth="126.0" style="-fx-font-weight: bold;" styleClass="custom-white-label" text="Company:" textFill="WHITE" />
                               <Label layoutX="124.0" layoutY="181.0" prefHeight="33.0" prefWidth="89.0" style="-fx-font-weight: bold;" styleClass="custom-white-label" text="Order Date:" textFill="WHITE" />
                               <ImageView fitHeight="83.0" fitWidth="89.0" layoutX="30.0">
                                  <image>
@@ -202,11 +202,13 @@
                               <Label layoutX="123.0" layoutY="241.0" prefHeight="33.0" prefWidth="80.0" style="-fx-font-weight: bold;" styleClass="custom-white-label" text="Fuel Type: " textFill="WHITE" />
                               <Label layoutX="121.0" layoutY="299.0" prefHeight="33.0" prefWidth="74.0" style="-fx-font-weight: bold;" styleClass="custom-white-label" text="Quantity:" textFill="WHITE" />
                               <Label fx:id="StationManagerField" layoutX="250.0" layoutY="64.0" prefHeight="21.0" prefWidth="126.0" text="Label" textFill="WHITE" />
-                              <Label fx:id="StationNumberField" layoutX="250.0" layoutY="125.0" prefHeight="21.0" prefWidth="126.0" text="Label" textFill="WHITE" />
+                              <Label fx:id="CompanyNameField" layoutX="199.0" layoutY="125.0" prefHeight="21.0" prefWidth="74.0" text="Label" textFill="WHITE" />
                               <Label fx:id="OrderDateField" layoutX="250.0" layoutY="187.0" prefHeight="21.0" prefWidth="126.0" text="Label" textFill="WHITE" />
                               <Label fx:id="FuelTypeField" layoutX="250.0" layoutY="247.0" prefHeight="21.0" prefWidth="126.0" text="Label" textFill="WHITE" />
                               <Label fx:id="QuantityField" layoutX="250.0" layoutY="305.0" prefHeight="21.0" prefWidth="126.0" text="Label" textFill="WHITE" />
-                              <Text fx:id="DoneMsgTxt" layoutX="40.0" layoutY="220.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-rotate: 320; -fx-opacity: 0.6;" text="Done" textAlignment="CENTER" wrappingWidth="292.40420269966125">
+                              <Label layoutX="276.0" layoutY="120.0" prefHeight="31.0" prefWidth="111.0" style="-fx-font-weight: bold;" styleClass="custom-white-label" text="Station: " textFill="WHITE" />
+                              <Label fx:id="StationNumberField1" layoutX="335.0" layoutY="125.0" prefHeight="21.0" prefWidth="50.0" text="Label" textFill="WHITE" />
+                              <Text fx:id="DoneMsgTxt" layoutX="48.0" layoutY="218.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-rotate: 320; -fx-opacity: 0.6;" text="Done" textAlignment="CENTER" wrappingWidth="292.40420269966125">
                                  <font>
                                     <Font name="System Bold Italic" size="96.0" />
                                  </font>

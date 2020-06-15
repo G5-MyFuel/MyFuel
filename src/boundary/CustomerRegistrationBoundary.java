@@ -68,15 +68,13 @@ public class CustomerRegistrationBoundary implements DataInitializable {
     @FXML
     private JFXComboBox<String> CostumertypeChoiceBox;
     @FXML
-    private JFXComboBox<String> ServicePlanChoiseBox;
+    private JFXComboBox<String> PurchasePlanChoiseBox;
     @FXML
     private Pane mainPane;
     @FXML
     private TableColumn<Vehicle, String> VehicleIdColom;
     @FXML
     private TableColumn<Vehicle, String> GasTypeColom;
-    @FXML
-    private JFXRadioButton yesButton;
     @FXML
     private ImageView CostumerTypeInfo;
     @FXML
@@ -85,6 +83,23 @@ public class CustomerRegistrationBoundary implements DataInitializable {
     private ImageView ServicePlanInfo;
     @FXML
     private ImageView CreditCardLinkTT;
+    @FXML
+    private ImageView StationsInfo;
+    @FXML
+    private Pane stationPane;
+    @FXML
+    private Label choseStationLable;
+    @FXML
+    private JFXRadioButton PAZbtn;
+    @FXML
+    private JFXRadioButton YELLOWbtn;
+    @FXML
+    private JFXRadioButton SONOLbtn;
+    @FXML
+    private JFXComboBox<String> PricingModelChoiseBox1;
+    @FXML
+    private Button clearSelectionbtn;
+
 
     /*
     Initialize ObservableList in order to display does strings
@@ -92,9 +107,12 @@ public class CustomerRegistrationBoundary implements DataInitializable {
      * * */
     private ObservableList<String> CostumerType = FXCollections.observableArrayList("Private", "Company");
 
-    private ObservableList<String> ServicePlanType = FXCollections.observableArrayList("Exclusive", "Multiple Stations");
+    private ObservableList<String> PurchasePlanType = FXCollections.observableArrayList("Exclusive", "Multiple Stations", "None");
 
     private ObservableList<String> GasType = FXCollections.observableArrayList("Gasoline-95", "Diesel", "Scooter Fuel");
+
+    private ObservableList<String> SingelVehicle = FXCollections.observableArrayList("Casual fueling", "Regular monthly subscription", "Full monthly subscription");
+    private ObservableList<String> ModelTypes2 = FXCollections.observableArrayList("Casual fueling", "Regular monthly subscription");
 
 
     @Override
@@ -112,6 +130,7 @@ public class CustomerRegistrationBoundary implements DataInitializable {
         VehicleTable.getItems().clear();
         //
         //Tooltip initialize Section:
+        Tooltip.install(StationsInfo, createToolTip("Please Chose Station according to your plan."));
         Tooltip.install(CostumerTypeInfo, createToolTip("There are two Customer Type, Private and Company, you may chose one."));
         Tooltip.install(PurchasePlanInffo, createToolTip("Chose weather you have purchase plan or not"));
         Tooltip.install(ServicePlanInfo, createToolTip("Chose your service plan type"));
@@ -126,7 +145,7 @@ public class CustomerRegistrationBoundary implements DataInitializable {
         //set Observable items into combo box:
         GasTypeChoiseBox.setItems(GasType);
         CostumertypeChoiceBox.setItems(CostumerType);
-        ServicePlanChoiseBox.setItems(ServicePlanType);
+        PurchasePlanChoiseBox.setItems(PurchasePlanType);
         //
         //set vehicle table cells
         VehicleIdColom.setCellValueFactory(new PropertyValueFactory<>("VehicleID"));
@@ -149,6 +168,35 @@ public class CustomerRegistrationBoundary implements DataInitializable {
         VehicleTable.getItems().clear();
         CardClickFlag = false;
         tempCreditCard = null;
+        stationPane.setVisible(false);
+        PricingModelChoiseBox1.setItems(SingelVehicle);
+
+
+        PurchasePlanChoiseBox.valueProperty().addListener((composant, oldValue, newValue) -> {
+            PAZbtn.setSelected(false);
+            YELLOWbtn.setSelected(false);
+            SONOLbtn.setSelected(false);
+            stationPane.setVisible(true);
+            if (PurchasePlanChoiseBox.getValue().equals("Multiple Stations")) {
+                ToggleGroup q1 = new ToggleGroup();
+                ToggleGroup q2 = new ToggleGroup();
+                ToggleGroup q3 = new ToggleGroup();
+                clearSelectionbtn.setVisible(true);
+                PAZbtn.setToggleGroup(q1);
+                YELLOWbtn.setToggleGroup(q2);
+                SONOLbtn.setToggleGroup(q3);
+                choseStationLable.setText("You may chose 2 or 3 stations.");
+            } else if (PurchasePlanChoiseBox.getValue().equals("Exclusive")) {
+                ToggleGroup q1 = new ToggleGroup();
+                clearSelectionbtn.setVisible(false);
+                PAZbtn.setToggleGroup(q1);
+                YELLOWbtn.setToggleGroup(q1);
+                SONOLbtn.setToggleGroup(q1);
+                choseStationLable.setText("You may chose only one station.");
+            } else {
+                stationPane.setVisible(false);
+            }
+        });
     }
 
     @Override
@@ -159,7 +207,6 @@ public class CustomerRegistrationBoundary implements DataInitializable {
 
     @FXML
     void FirstForwardButtonOnClick(MouseEvent event) {
-
         if (myController.isCostumerExist(CostumerIDtxt.getText())) { //check if costumer is on system already
             ErrorAlert.setTitle("ID Error");
             ErrorAlert.setHeaderText("Costumer ID already Exists,\nPlease Chose Different ID.");
@@ -200,13 +247,11 @@ public class CustomerRegistrationBoundary implements DataInitializable {
     @FXML
     void ClickFinishButton(MouseEvent event) {
         Costumer tempCos = myController.getTempCostumer();
-        if (yesButton.isSelected())
-            tempCos.setPurchasePlan("true");
-        else
-            tempCos.setPurchasePlan("false");
+
+
         //set costumer final details.
         tempCos.setCostumerType(CostumertypeChoiceBox.getSelectionModel().getSelectedItem());
-        tempCos.setServicePlan(ServicePlanChoiseBox.getSelectionModel().getSelectedItem());
+        tempCos.setServicePlan(PurchasePlanChoiseBox.getSelectionModel().getSelectedItem());
         tempCos.setCostumerVehicle(tempVehicleArray);
         tempCos.setCostumerCreditCard(tempCreditCard);
         myController.setCostumerInDB(tempCos);
@@ -217,7 +262,6 @@ public class CustomerRegistrationBoundary implements DataInitializable {
         vehicleMangTAB.getTabPane().getSelectionModel().selectPrevious();
         vehicleMangTAB.getTabPane().getSelectionModel().selectPrevious();
     }
-
 
     /**
      * This method saves the vehicle information after clicking save button
@@ -230,12 +274,12 @@ public class CustomerRegistrationBoundary implements DataInitializable {
             ErrorAlert.setTitle("Vehicle ID Error");
             ErrorAlert.setHeaderText("Vehicle ID exists in system");
             ErrorAlert.showAndWait();
-        } else if(validateVehicleIDField()) {
+        } else if (validateVehicleIDField()) {
             Vehicle vehicle = new Vehicle(CostumerIDtxt.getText(), VehicleIDtxt.getText(), GasTypeChoiseBox.getValue());
             tempVehicleArray.add(vehicle);
             ObservableList<Vehicle> data = FXCollections.observableArrayList(tempVehicleArray);
             VehicleTable.setItems(data);
-        }else {
+        } else {
             ErrorAlert.setTitle("Fields Error");
             ErrorAlert.setHeaderText("Please make sure Vehicle ID is correct.");
             ErrorAlert.showAndWait();
@@ -273,6 +317,15 @@ public class CustomerRegistrationBoundary implements DataInitializable {
         ObservableList<Vehicle> data = FXCollections.observableArrayList(tempVehicleArray);
         VehicleTable.setItems(data);
     }
+
+    @FXML
+    void clearSelection(MouseEvent event) {
+        PAZbtn.setSelected(false);
+        SONOLbtn.setSelected(false);
+        YELLOWbtn.setSelected(false);
+
+    }
+
 
     private boolean isVehicleExistInTempVehicleArr() {
         for (Vehicle v : tempVehicleArray) {
@@ -319,6 +372,7 @@ public class CustomerRegistrationBoundary implements DataInitializable {
         return thisToolTip;
     }
 
+
     private void giValidation() {
         //costumer ID field check
         formValidation.isOnlyNumbers(CostumerIDtxt, "Costumer ID");
@@ -345,8 +399,9 @@ public class CustomerRegistrationBoundary implements DataInitializable {
 
 
     }
-    private boolean validateVehicleIDField(){
-        if(formValidation.isEmptyField() && formValidation.isExactlyInLength() && formValidation.isOnlyNumbers())
+
+    private boolean validateVehicleIDField() {
+        if (formValidation.isEmptyField() && formValidation.isExactlyInLength() && formValidation.isOnlyNumbers())
             return true;
         else
             return false;

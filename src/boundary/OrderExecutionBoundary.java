@@ -25,10 +25,11 @@ import java.util.ResourceBundle;
  * @author Adi Lampert
  * @see OrderExecutionBoundary - the from's logic class
  */
-public class OrderExecutionBoundary implements Initializable {
+public class OrderExecutionBoundary implements DataInitializable {
 
     private OrderExecutionBoundary OrderExecutionController;
     private OrderFromSupplierController myController = new OrderFromSupplierController(this);
+    private String SupplierID="";
 
     private ArrayList<OrderFuelFromSupplier> OFFS;
 
@@ -70,6 +71,9 @@ public class OrderExecutionBoundary implements Initializable {
 
     @FXML
     private Label StationManagerField;
+
+    @FXML
+    private Label CompanyNameField;
 
     @FXML
     private Label StationNumberField;
@@ -123,14 +127,19 @@ public class OrderExecutionBoundary implements Initializable {
                 myController.setNewStatus(myController.resultList.get(i).getOrderNumber());
                 tableData = FXCollections.observableArrayList(myController.resultList);
                 tableView.setItems(tableData);
+                hboxOrderConfirmation.setVisible(false);
                 DoneMsgTxt.setVisible(true);
-                DoneBtn.setDisable(true);
+                DoneBtn.setVisible(false);
                 tableView.refresh();
+                addToStock(myController.resultList.get(i).getQuantity(),myController.resultList.get(i).getFuelType());
                 break;
             }
         }
     }
-
+    @Override
+    public void initData(Object data) {
+        SupplierID = (String)data;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -145,7 +154,7 @@ public class OrderExecutionBoundary implements Initializable {
 
     }
      /**
-      This function set the details from DB to TabeView
+      This function set the details from DB to TableView
       **/
     public void setOrderFuelFromSupplierTableView(ArrayList<OrderFuelFromSupplier> OrderArray) {
         orderCol.setCellValueFactory(new PropertyValueFactory<>("OrderNumber"));
@@ -172,19 +181,21 @@ public class OrderExecutionBoundary implements Initializable {
                         hboxOrderConfirmation.setVisible(true);
                         hboxOrderConfirmation.setDisable(false);
                         DoneBtn.setVisible(true);
+
                         /************   Show details to the User  ***************/
-                        StationManagerField.setText(temp.getStationManagerName().toString());
-                        StationNumberField.setText(temp.getStationNum().toString());
-                        OrderDateField.setText("null");
+                        StationManagerField.setText(temp.getUserFirstName().toString()+" "+temp.getUserLastName());
+                        StationNumberField.setText(String.valueOf(temp.getStationNumber()));
+                        CompanyNameField.setText(temp.getGasCompanyName().toString());
+                        OrderDateField.setText(temp.getOrderDate().toString());
                         FuelTypeField.setText(temp.getFuelType().toString());
-                        QuantityField.setText(temp.getQuantity().toString());
+                        QuantityField.setText(String.valueOf(temp.getQuantity()));
 
                         /******* 'Done' status or 'In treatment' status *********/
-                        while (temp.getOrderStatus().equals("Done")) {
+                        if (temp.getOrderStatus().equals("Done") ) {
                             DoneMsgTxt.setVisible(true);
                             hboxOrderConfirmation.setDisable(true);
                         }
-                        while (temp.getOrderStatus().equals("In treatment"))
+                        if (temp.getOrderStatus().equals("In treatment")&& event.isSecondaryButtonDown())
                             DoneMsgTxt.setVisible(false);
                     }
                 }
@@ -192,9 +203,17 @@ public class OrderExecutionBoundary implements Initializable {
         });
     }
 
-    /******  set new status for in DB and tableView  ********/
-    public void handleSetNewStatus() {
-
+    /**
+     * Update the inventory after the supplier confirm
+     * @param quantity
+     */
+    public void addToStock(int quantity,String fuelType) {
+        if(fuelType.equals("95"))
+            myController.setNewInventory95(quantity);
+        else if (fuelType.equals("diesel"))
+            myController.setNewInventoryDiesel(quantity);
+        else if (fuelType.equals("scooter"))
+            myController.setNewInventoryScooter(quantity);
     }
 
 }

@@ -20,7 +20,6 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -136,7 +135,7 @@
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="232.0" prefWidth="234.0">
                                  <children>
-                                    <TableView fx:id="VehicleTable" prefHeight="234.0" prefWidth="238.0" style="-fx-background-color: #fcf8e8;" AnchorPane.bottomAnchor="-34.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-4.0" AnchorPane.topAnchor="0.0">
+                                    <TableView fx:id="VehicleTable" prefHeight="234.0" prefWidth="238.0" AnchorPane.bottomAnchor="-34.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-4.0" AnchorPane.topAnchor="0.0">
                                        <columns>
                                           <TableColumn fx:id="VehicleIdColom" prefWidth="115.0" text="Vehicle ID" />
                                           <TableColumn fx:id="GasTypeColom" prefWidth="120.0" text="Gas Type" />
@@ -166,12 +165,12 @@
                            <children>
                               <SplitPane dividerPositions="0.16161616161616163" layoutX="9.0" layoutY="6.0" orientation="VERTICAL" prefHeight="245.0" prefWidth="347.0">
                                  <items>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="35.0" prefWidth="335.0" style="-fx-background-color: #fcf8e8;">
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="35.0" prefWidth="335.0">
                                        <children>
                                           <Label alignment="CENTER" layoutX="96.0" layoutY="7.0" style="-fx-font-weight: Bold;" text="Fill in Vehicle Information" />
                                        </children>
                                     </AnchorPane>
-                                    <AnchorPane style="-fx-background-color: #fcf8e8;">
+                                    <AnchorPane>
                                        <children>
                                           <Button fx:id="saveVehicleButton" layoutX="152.0" layoutY="151.0" mnemonicParsing="false" onMouseClicked="#ClickSaveVehicleButton" text="Save" />
                                           <JFXTextField fx:id="VehicleIDtxt" focusColor="#00add8" labelFloat="true" layoutX="32.0" layoutY="28.0" prefHeight="25.0" prefWidth="281.0" promptText="Vehicle ID" unFocusColor="#868282" />
@@ -225,7 +224,7 @@
             </Tab>
             <Tab fx:id="planInfoTAB" closable="false" text="Plan Information">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="993.0">
                      <children>
                         <Label layoutX="30.0" layoutY="80.0" text="Plan Information" textFill="#2d4578">
                            <font>
@@ -233,17 +232,17 @@
                            </font>
                         </Label>
                         <Label layoutX="30.0" layoutY="135.0" text="Please Chose Plan Type" />
-                        <VBox layoutX="55.0" layoutY="210.0" prefHeight="296.0" prefWidth="500.0">
+                        <VBox layoutX="14.0" layoutY="159.0">
                            <children>
                               <Pane prefHeight="75.0" prefWidth="500.0">
                                  <children>
-                                    <Label layoutY="30.0" style="-fx-text-fill: #868282;" text="Costumer Type">
+                                    <Label layoutX="31.0" layoutY="31.0" style="-fx-text-fill: #868282;" text="Costumer Type">
                                        <tooltip>
                                           <Tooltip fx:id="typeTT" text="informationToolTip" />
                                        </tooltip>
                                     </Label>
-                                    <JFXComboBox fx:id="CostumertypeChoiceBox" layoutX="180.0" layoutY="18.0" prefHeight="40.0" prefWidth="306.0" />
-                                    <ImageView fx:id="CostumerTypeInfo" fitHeight="18.0" fitWidth="16.0" layoutX="87.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
+                                    <JFXComboBox fx:id="CostumertypeChoiceBox" layoutX="217.0" layoutY="19.0" prefHeight="40.0" prefWidth="146.0" />
+                                    <ImageView fx:id="CostumerTypeInfo" fitHeight="18.0" fitWidth="16.0" layoutX="6.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../media/CostumerRegisterationMedia/help_16px.png" />
                                        </image>
@@ -253,11 +252,11 @@
                                     </ImageView>
                                  </children>
                               </Pane>
-                              <Pane prefHeight="75.0" prefWidth="500.0">
+                              <Pane prefHeight="64.0" prefWidth="367.0">
                                  <children>
-                                    <Label layoutY="30.0" style="-fx-text-fill: #868282;" text="Service Plan" />
-                                    <JFXComboBox fx:id="ServicePlanChoiseBox" layoutX="180.0" layoutY="18.0" prefHeight="40.0" prefWidth="306.0" />
-                                    <ImageView fx:id="ServicePlanInfo" fitHeight="18.0" fitWidth="16.0" layoutX="72.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
+                                    <Label layoutX="32.0" layoutY="30.0" style="-fx-text-fill: #868282;" text="Purchase Plan" />
+                                    <JFXComboBox fx:id="PurchasePlanChoiseBox" layoutX="213.0" layoutY="9.0" prefHeight="40.0" prefWidth="150.0" />
+                                    <ImageView fx:id="PurchasePlanInffo" fitHeight="18.0" fitWidth="16.0" layoutX="6.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../media/CostumerRegisterationMedia/help_16px.png" />
                                        </image>
@@ -267,23 +266,14 @@
                                     </ImageView>
                                  </children>
                               </Pane>
-                              <Pane fx:id="PurchhasePlanChoseBox" prefHeight="75.0" prefWidth="345.0">
+                              <Pane fx:id="stationPane">
                                  <children>
-                                    <HBox alignment="CENTER_LEFT" layoutX="266.0" layoutY="40.0" prefHeight="42.0" prefWidth="191.0" spacing="30.0">
-                                       <children>
-                                          <JFXRadioButton fx:id="yesButton" selected="true" text="YES">
-                                             <toggleGroup>
-                                                <ToggleGroup fx:id="q" />
-                                             </toggleGroup>
-                                          </JFXRadioButton>
-                                          <JFXRadioButton fx:id="noButton" layoutX="10.0" layoutY="10.0" text="NO" toggleGroup="$q" />
-                                       </children>
+                                    <Label fx:id="choseStationLable" layoutX="30.0" layoutY="18.0" prefHeight="23.0" prefWidth="184.0" text="Chosen Stations:">
                                        <padding>
-                                          <Insets left="100.0" right="20.0" />
+                                          <Insets bottom="10.0" />
                                        </padding>
-                                    </HBox>
-                                    <Label layoutY="30.0" style="-fx-text-fill: #868282;" text="Purchase Plan" />
-                                    <ImageView fx:id="PurchasePlanInffo" fitHeight="18.0" fitWidth="16.0" layoutX="80.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
+                                    </Label>
+                                    <ImageView fx:id="StationsInfo" layoutX="6.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../media/CostumerRegisterationMedia/help_16px.png" />
                                        </image>
@@ -291,7 +281,54 @@
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
                                     </ImageView>
+                                    <VBox layoutX="214.0" layoutY="19.0">
+                                       <children>
+                                          <JFXRadioButton fx:id="YELLOWbtn" text="YELLOW">
+                                             <padding>
+                                                <Insets bottom="10.0" />
+                                             </padding>
+                                             <toggleGroup>
+                                                <ToggleGroup fx:id="q2" />
+                                             </toggleGroup>
+                                             <graphic>
+                                                <ImageView fx:id="YELLOWimg" fitHeight="37.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../media/CostumerRegisterationMedia/yellowLogo.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </JFXRadioButton>
+                                          <JFXRadioButton fx:id="PAZbtn" prefHeight="63.0" prefWidth="109.0" text="PAZ" textAlignment="RIGHT" toggleGroup="$q2">
+                                             <padding>
+                                                <Insets bottom="10.0" />
+                                             </padding>
+                                             <graphic>
+                                                <ImageView fx:id="PAZimg" fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../media/CostumerRegisterationMedia/pazLogoimg.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </JFXRadioButton>
+                                          <JFXRadioButton fx:id="SONOLbtn" text="SONOL" toggleGroup="$q2">
+                                             <graphic>
+                                                <ImageView fx:id="SONOLimg" fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../media/CostumerRegisterationMedia/sonollogoimg.jpg" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic></JFXRadioButton>
+                                       </children>
+                                    </VBox>
+                                    <Button fx:id="clearSelectionbtn" layoutX="352.0" layoutY="60.0" mnemonicParsing="false" onMouseClicked="#clearSelection" style="-fx-background-color: #2D4578; -fx-background-radius: 50;" stylesheets="@style.css" text="Clear Selection" textFill="WHITE">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </Button>
                                  </children>
+                                 <padding>
+                                    <Insets bottom="20.0" top="20.0" />
+                                 </padding>
                               </Pane>
                            </children>
                         </VBox>
@@ -308,6 +345,23 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
+                        <Pane layoutX="513.0" layoutY="159.0">
+                           <children>
+                              <Label layoutX="22.0" layoutY="24.0" style="-fx-text-fill: #868282;" text="Pricing Model" />
+                              <ImageView fx:id="ServicePlanInfo" fitHeight="16.0" fitWidth="23.0" layoutX="6.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../media/CostumerRegisterationMedia/help_16px.png" />
+                                 </image>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </ImageView>
+                              <JFXComboBox fx:id="PricingModelChoiseBox1" layoutX="115.0" layoutY="11.0" prefHeight="35.0" prefWidth="272.0" />
+                           </children>
+                           <padding>
+                              <Insets bottom="20.0" />
+                           </padding>
+                        </Pane>
                      </children>
                   </AnchorPane>
                </content>

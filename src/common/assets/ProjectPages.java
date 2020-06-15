@@ -35,6 +35,7 @@ public enum ProjectPages {
     //Adi pages:
     MANAGER_SUPPLY_CONFIRMATION_PAGE("/boundary/Manager-Supply-confirmation-adi.fxml");
 
+
     private String path;
 
     private ProjectPages(String path) {

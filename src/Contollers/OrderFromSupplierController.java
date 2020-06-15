@@ -28,7 +28,6 @@ public class OrderFromSupplierController extends BasicController {
         super.sendSqlActionToClient(sqlAction);
     }
 
-
     /**
      This function sets a new status after we done take care of the order
      */
@@ -36,6 +35,27 @@ public class OrderFromSupplierController extends BasicController {
         ArrayList<Object> varArray = new ArrayList<>();
         varArray.add(OrderNumber);
         SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_STATUS_TO_DONE, varArray);
+        super.sendSqlActionToClient(sqlAction);
+    }
+
+    public void setNewInventory95(int quantity){
+        ArrayList<Object> varArray = new ArrayList<>();
+        varArray.add(quantity);
+        SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_95_INVENTORY, varArray);
+        super.sendSqlActionToClient(sqlAction);
+    }
+
+    public void setNewInventoryDiesel(int quantity){
+        ArrayList<Object> varArray = new ArrayList<>();
+        varArray.add(quantity);
+        SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_DIESEL_INVENTORY, varArray);
+        super.sendSqlActionToClient(sqlAction);
+    }
+
+    public void setNewInventoryScooter(int quantity){
+        ArrayList<Object> varArray = new ArrayList<>();
+        varArray.add(quantity);
+        SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_SCOOTER_INVENTORY, varArray);
         super.sendSqlActionToClient(sqlAction);
     }
 
@@ -57,7 +77,7 @@ public class OrderFromSupplierController extends BasicController {
     private ArrayList<OrderFuelFromSupplier> changeResultToOrder(SqlResult result) {
         for (ArrayList<Object> a : result.getResultData()) {
             OrderFuelFromSupplier x = new OrderFuelFromSupplier((String) a.get(0), (String) a.get(1),
-                    (int) a.get(2), (Date) a.get(3), (int) a.get(4), (String) a.get(5), (String) a.get(6));
+                    (String) a.get(2), (String) a.get(3), (int) a.get(4), (Date) a.get(5), (String) a.get(6),(int)a.get(7),(String)a.get(8));
             resultList.add(x);
         }
         return resultList;

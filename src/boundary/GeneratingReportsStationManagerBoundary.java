@@ -30,7 +30,9 @@ public class GeneratingReportsStationManagerBoundary implements DataInitializabl
     private final GeneratingReportsStationManagerController myController = new GeneratingReportsStationManagerController(this);
     private FormValidation formValidation;
     private final Alert ErrorAlert = new Alert(Alert.AlertType.ERROR);
-    ArrayList<PurchasesReport> PurchasesArray = new ArrayList<>();
+    String sendRevenue;
+    ArrayList<PurchasesReport> sendPurchases = new ArrayList<>();
+    ArrayList<QuantityItemsStockReport> sendQuantityItemsStockReport = new ArrayList<>();
 
     @FXML
     private JFXButton btnQuarterlyRevenueReport;
@@ -72,7 +74,13 @@ public class GeneratingReportsStationManagerBoundary implements DataInitializabl
     private TableColumn<QuantityItemsStockReport, String> AvailableInventoryColumn;
 
     @FXML
-    private Button btnSaveReport;
+    private Button btnSaveQuarterlyReport;
+
+    @FXML
+    private Button btnSaveQuantityReport;
+
+    @FXML
+    private Button btnSavePurchasesReport;
 
     private final ObservableList<String> ReportsType = FXCollections.observableArrayList("Quarterly revenue report",
             "Purchases report", "Quantity of items in stock report");
@@ -93,17 +101,16 @@ public class GeneratingReportsStationManagerBoundary implements DataInitializabl
         paramArray.add("Get Manager data");
         paramArray.add(managerID);
         myController.GetReportData(paramArray); //start the process that will ask server to execute quarry and get the table details
-        //SELECT * FROM Employee WHERE Employee.employeeID LIKE "109268386"
         this.formValidation = FormValidation.getValidator();
-        /*ChooseReportYearCombo.setVisible(false);
-        ChooseReportQuarterCombo.setVisible(false);
-        TotalRevenueLabel.setVisible(false);*/
+
         ShowTotalRevenueTXT.setVisible(false);
         PurchasesReportTable.setVisible(false);
         QuantityItemsStockTxt.setVisible(false);
         QuantityReportTable.setVisible(false);
         ReportSentMessageLabel.setVisible(false);
-        btnSaveReport.setVisible(false);
+        btnSaveQuarterlyReport.setVisible(false);
+        btnSavePurchasesReport.setVisible(false);
+        btnSaveQuantityReport.setVisible(false);
 
         /*  set all fields validators */
         formValidation();
@@ -130,21 +137,9 @@ public class GeneratingReportsStationManagerBoundary implements DataInitializabl
         QuantityItemsStockTxt.setVisible(false);
         QuantityReportTable.setVisible(false);
         ReportSentMessageLabel.setVisible(false);
-        btnSaveReport.setVisible(false);
-        //ChooseReportYearCombo.setVisible(false);
-        //ChooseReportQuarterCombo.setVisible(false);
-        //TotalRevenueLabel.setVisible(false);
-        //ShowTotalRevenueTXT.setVisible(false);
-        //ReportSentMessageLabel.setVisible(false);
-        ShowTotalRevenueTXT.clear();
-        //ChooseReportYearCombo.getItems().clear();
-        //ChooseReportQuarterCombo.getItems().clear();
-        //ChooseReportYearCombo.setPromptText("Please select a year");
-
-        /*ChooseReportYearCombo.setItems(YearList);
-        ChooseReportYearCombo.setVisible(true);*/
-
-        //GetQuarterlyData();
+        btnSaveQuarterlyReport.setVisible(false);
+        btnSavePurchasesReport.setVisible(false);
+        btnSaveQuantityReport.setVisible(false);
 
         ArrayList<String> paramArray = new ArrayList<>();
         paramArray.add("Quarterly revenue report");
@@ -153,145 +148,57 @@ public class GeneratingReportsStationManagerBoundary implements DataInitializabl
         myController.GetReportData(paramArray); //start the process that will ask server to execute quarry and get the table details
     }
 
-    @FXML
-    void handleChooseReportYear(ActionEvent event) {
-
-        //ChooseReportQuarterCombo.setPromptText("Please Select a quarter");
-
-        /*ChooseReportQuarterCombo.setItems(quarterList);
-        ChooseReportQuarterCombo.setVisible(true);
-        if (ChooseReportQuarterCombo.getValue() != null)
-            GetQuarterlyData();*/
-
-    }
-
-    @FXML
-    void handleChooseReportQuarter(ActionEvent event) {
-
-        //GetQuarterlyData();
-    }
-
-    void GetQuarterlyData() {
-
-        /*String startDate = ChooseReportYearCombo.getValue();
-        String endDate = ChooseReportYearCombo.getValue();
-        switch (ChooseReportQuarterCombo.getValue()) {
-            case "First":
-                startDate = startDate + "-01-01";
-                endDate = endDate + "-03-31";
-                break;
-            case "Second":
-                startDate = startDate + "-04-01";
-                endDate = endDate + "-06-30";
-                break;
-            case "Third":
-                startDate = startDate + "-07-01";
-                endDate = endDate + "-09-30";
-                break;
-            case "Fourth":
-                startDate = startDate + "-10-01";
-                endDate = endDate + "-12-31";
-                break;
-            default:
-                break;
-        }*/
-        /*ArrayList<String> paramArray = new ArrayList<>();
-        paramArray.add("Quarterly revenue report");
-        paramArray.add(managerStation);
-        paramArray.add(managerCompany);*/
-        //paramArray.add(startDate);
-        //paramArray.add(endDate);
-        //myController.GetReportData(paramArray); //start the process that will ask server to execute quarry and get the table details
-    }
-
     public void setQuarterlyData(String revenue) {
-        //TotalRevenueLabel.setVisible(true);
         ShowTotalRevenueTXT.setText(revenue);
+        sendRevenue = revenue;
         ShowTotalRevenueTXT.setVisible(true);
-        ReportSentMessageLabel.setVisible(true);
-        btnSaveReport.setVisible(true);
+        btnSaveQuarterlyReport.setVisible(true);
     }
 
     @FXML
     void handlePurchasesReport(MouseEvent event) {
 
-        /*PurchasesReportTable.setVisible(false);
-        PurchasesReportTable.getItems().clear();
-        ReportSentMessageLabel.setVisible(false);*/
-        /*ChooseReportYearCombo.setVisible(false);
-        ChooseReportQuarterCombo.setVisible(false);
-        TotalRevenueLabel.setVisible(false);*/
-        /*ShowTotalRevenueTXT.setVisible(false);
-        QuantityItemsStockTxt.setVisible(false);
-        QuantityReportTable.setVisible(false);*/
         ShowTotalRevenueTXT.setVisible(false);
         PurchasesReportTable.setVisible(false);
         QuantityItemsStockTxt.setVisible(false);
         QuantityReportTable.setVisible(false);
         ReportSentMessageLabel.setVisible(false);
-        btnSaveReport.setVisible(false);
+        btnSaveQuarterlyReport.setVisible(false);
+        btnSavePurchasesReport.setVisible(false);
+        btnSaveQuantityReport.setVisible(false);
+
         ArrayList<String> paramArray = new ArrayList<>();
         paramArray.add("Purchases report");
         paramArray.add(managerStation);
         paramArray.add(managerCompany);
-        paramArray.add("Diesel");
-        myController.GetReportData(paramArray); //start the process that will ask server to execute quarry and get the table details
-        paramArray.remove(3);
-        paramArray.add("Gasoline 95");
-        myController.GetReportData(paramArray); //start the process that will ask server to execute quarry and get the table details
-        paramArray.remove(3);
-        paramArray.add("Scooter fuel");
         myController.GetReportData(paramArray); //start the process that will ask server to execute quarry and get the table details
     }
 
-    /*private void cleanArray(ArrayList<PurchasesReport> purchasesArray) {
+    public void setPurchasesData(ArrayList<PurchasesReport> resultList) {
 
-        for (int i = 0; i < 3; i++)
-            PurchasesArray.remove(0);
+        sendPurchases.addAll(resultList);
+        FuelTypeColumn.setCellValueFactory(new PropertyValueFactory<>("fuelType"));
+        QuantityPurchasedColumn.setCellValueFactory(new PropertyValueFactory<>("quantityPurchased"));
+        SalesAmountColumn.setCellValueFactory(new PropertyValueFactory<>("salesAmount"));
 
-    }*/
-
-    public void setPurchasesData(PurchasesReport resultList) {
-
-        PurchasesArray.add(resultList);
-        //PurchasesReportTable.setVisible(true);
-        if (PurchasesArray.size() == 3) {
-
-            FuelTypeColumn.setCellValueFactory(new PropertyValueFactory<>("fuelType"));
-            QuantityPurchasedColumn.setCellValueFactory(new PropertyValueFactory<>("quantityPurchased"));
-            SalesAmountColumn.setCellValueFactory(new PropertyValueFactory<>("salesAmount"));
-            for (int i = 0; i < PurchasesArray.size(); i++)
-                if (PurchasesArray.get(i).getFuelType().equals(""))
-                    PurchasesArray.remove(i);
-            ObservableList<PurchasesReport> data = FXCollections.observableArrayList(PurchasesArray);
-            PurchasesReportTable.setItems(data);
-            PurchasesReportTable.setVisible(true);
-            ReportSentMessageLabel.setVisible(true);
-            btnSaveReport.setVisible(true);
-            /*if (PurchasesArray.size() == 3)
-                cleanArray(PurchasesArray);*/
-            PurchasesArray.clear();
-        }
+        ObservableList<PurchasesReport> data = FXCollections.observableArrayList(resultList);
+        PurchasesReportTable.setItems(data);
+        PurchasesReportTable.setVisible(true);
+        btnSavePurchasesReport.setVisible(true);
     }
 
     @FXML
     void handleQuantityItemsInStockReport(MouseEvent event) {
 
-        /*QuantityReportTable.setVisible(false);
-        QuantityItemsStockTxt.setVisible(false);*/
-        QuantityReportTable.getItems().clear();
-        /*ReportSentMessageLabel.setVisible(false);
-        ChooseReportYearCombo.setVisible(false);
-        ChooseReportQuarterCombo.setVisible(false);
-        TotalRevenueLabel.setVisible(false);
-        ShowTotalRevenueTXT.setVisible(false);
-        PurchasesReportTable.setVisible(false);*/
         ShowTotalRevenueTXT.setVisible(false);
         PurchasesReportTable.setVisible(false);
         QuantityItemsStockTxt.setVisible(false);
         QuantityReportTable.setVisible(false);
         ReportSentMessageLabel.setVisible(false);
-        btnSaveReport.setVisible(false);
+        btnSaveQuarterlyReport.setVisible(false);
+        btnSavePurchasesReport.setVisible(false);
+        btnSaveQuantityReport.setVisible(false);
+
         QuantityItemsStockTxt.setText("Quantity of items in stock for" + managerCompany + " in Station " + managerStation + ":");
         ArrayList<String> paramArray = new ArrayList<>();
         paramArray.add("Quantity of items in stock report");
@@ -302,10 +209,10 @@ public class GeneratingReportsStationManagerBoundary implements DataInitializabl
 
     public void setQuantityItemsStockData(ArrayList<QuantityItemsStockReport> resultList) {
 
-        //QuantityReportTable.setVisible(true);
         resultList.get(0).setFuelType("Gasoline 95");
         resultList.get(1).setFuelType("Diesel");
         resultList.get(2).setFuelType("Scooter fuel");
+        sendQuantityItemsStockReport.addAll(resultList);
         FuelTypeQuantityReportColumn.setCellValueFactory(new PropertyValueFactory<>("fuelType"));
         AvailableInventoryColumn.setCellValueFactory(new PropertyValueFactory<>("availableInventory"));
 
@@ -313,8 +220,7 @@ public class GeneratingReportsStationManagerBoundary implements DataInitializabl
         QuantityReportTable.setItems(data);
         QuantityReportTable.setVisible(true);
         QuantityItemsStockTxt.setVisible(true);
-        ReportSentMessageLabel.setVisible(true);
-        btnSaveReport.setVisible(true);
+        btnSaveQuantityReport.setVisible(true);
     }
 
     public void setManagerData(ArrayList<String> resultList) {
@@ -330,8 +236,50 @@ public class GeneratingReportsStationManagerBoundary implements DataInitializabl
     }
 
     @FXML
-    void handleSaveReportBtn(ActionEvent event) {
+    void handleSaveQuarterlyReportBtn(ActionEvent event) {
 
+        ArrayList<String> paramArray = new ArrayList<>();
+        paramArray.add("Send Quarterly revenue report");
+        paramArray.add(managerCompany);
+        paramArray.add(managerStation);
+        paramArray.add(sendRevenue);
+
+        myController.GetReportData(paramArray); //start the process that will ask server to execute quarry and get the table details
+        ReportSentMessageLabel.setVisible(true);
+    }
+
+    @FXML
+    void handleSavePurchasesReportBtn(ActionEvent event) {
+
+
+        ArrayList<String> paramArray = new ArrayList<>();
+        paramArray.add("Send Purchases report");
+        for (PurchasesReport a : sendPurchases){
+            paramArray.add(managerCompany);
+            paramArray.add(managerStation);
+            paramArray.add(a.getFuelType());
+            paramArray.add(a.getQuantityPurchased());
+            paramArray.add(a.getSalesAmount());
+        }
+
+        myController.GetReportData(paramArray); //start the process that will ask server to execute quarry and get the table details
+        ReportSentMessageLabel.setVisible(true);
+    }
+
+    @FXML
+    void handleSaveQuantityReportBtn(ActionEvent event) {
+
+        ArrayList<String> paramArray = new ArrayList<>();
+        paramArray.add("Send Quantity of items in stock report");
+        for (QuantityItemsStockReport a : sendQuantityItemsStockReport){
+            paramArray.add(managerCompany);
+            paramArray.add(managerStation);
+            paramArray.add(a.getFuelType());
+            paramArray.add(a.getAvailableInventory());
+        }
+
+        myController.GetReportData(paramArray); //start the process that will ask server to execute quarry and get the table details
+        ReportSentMessageLabel.setVisible(true);
     }
 
     @FXML

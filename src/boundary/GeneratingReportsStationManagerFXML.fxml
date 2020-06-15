@@ -91,6 +91,8 @@
             <TableColumn fx:id="AvailableInventoryColumn" prefWidth="157.0" text="Available inventory" />
          </columns>
       </TableView>
-      <Button fx:id="btnSaveReport" layoutX="471.0" layoutY="604.0" mnemonicParsing="false" onAction="#handleSaveReportBtn" prefHeight="42.0" prefWidth="89.0" style="-fx-background-color: #2D4578; -fx-background-radius: 50;" stylesheets="@style.css" text="Save Data" />
+      <Button fx:id="btnSaveQuarterlyReport" layoutX="105.0" layoutY="549.0" mnemonicParsing="false" onAction="#handleSaveQuarterlyReportBtn" prefHeight="42.0" prefWidth="132.0" style="-fx-background-color: #2D4578; -fx-background-radius: 50;" stylesheets="@style.css" text="Save to Admin" />
+      <Button fx:id="btnSaveQuantityReport" layoutX="788.0" layoutY="604.0" mnemonicParsing="false" onAction="#handleSaveQuantityReportBtn" prefHeight="42.0" prefWidth="132.0" style="-fx-background-color: #2D4578; -fx-background-radius: 50;" stylesheets="@style.css" text="Save to Admin" />
+      <Button fx:id="btnSavePurchasesReport" layoutX="465.0" layoutY="604.0" mnemonicParsing="false" onAction="#handleSavePurchasesReportBtn" prefHeight="42.0" prefWidth="132.0" style="-fx-background-color: #2D4578; -fx-background-radius: 50;" stylesheets="@style.css" text="Save to Admin" />
    </children>
 </Pane>

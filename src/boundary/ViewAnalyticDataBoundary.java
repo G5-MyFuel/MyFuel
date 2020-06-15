@@ -4,6 +4,8 @@ import Contollers.FormValidation;
 import Contollers.MarketingCampaignTemplateController;
 import Contollers.ViewAnalyticDataController;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
+import com.sun.deploy.panel.RuleSetViewerDialog;
 import entity.MarketingCampaignTemplate;
 import entity.Rating;
 import javafx.collections.FXCollections;
@@ -24,31 +26,22 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+
+/**
+ * @author Hana Wiener
+ * @see ViewAnalyticDataController - the form's logic class
+ */
+
 public class ViewAnalyticDataBoundary implements Initializable {
     /** The supervisor boundary controller. */
     private ViewAnalyticDataController myController = new ViewAnalyticDataController(this);
     private FormValidation formValidation;
 
     @FXML
-    private Label lastCalcDateTXT;
-
-    @FXML
     private Button btnGenerateAnalyticData;
 
     @FXML
     private JFXButton btnCustomerType;
-
-    @FXML
-    private TableView<Rating> RatingTable;
-
-    @FXML
-    private TableColumn<Rating, Integer> customerIdCulomn;
-
-    @FXML
-    private TableColumn<Rating, Integer> ratingCulomn;
-
-    @FXML
-    private TableColumn<Rating, String> customerTypeCulomn;
 
     @FXML
     private ImageView imageRefuelHour;
@@ -63,21 +56,75 @@ public class ViewAnalyticDataBoundary implements Initializable {
     private JFXButton btnFuleType;
 
     @FXML
-    private Pane paneChart;
-
-    @FXML
     private ImageView imageCustomerType;
 
+    @FXML
+    private Pane paneByTime;
+
+    @FXML
+    private TableView<Rating> RatingTableForTimeRange;
+
+    @FXML
+    private TableColumn<Rating, String> customerIdCulomn;
+
+    @FXML
+    private TableColumn<Rating, Integer> ratingCulomn;
+
+    @FXML
+    private JFXComboBox<String> TimeRangeCombo;
+
+    @FXML
+    private Label selectedTimeRange;
+
+    @FXML
+    private Pane paneByCustomerType;
+
+    @FXML
+    private TableView<Rating> RatingTableForCustomerType;
+
+    @FXML
+    private TableColumn<Rating, String> customerIdCulomn1;
+
+    @FXML
+    private TableColumn<Rating, Integer> ratingCulomn1;
+
+    @FXML
+    private JFXComboBox<String> customerTypeCombo;
+
+    @FXML
+    private Label selectedCustomerType;
+
+    @FXML
+    private Pane paneByCustomerType1;
+
+    @FXML
+    private TableView<Rating> RatingTableForFuelType;
+
+    @FXML
+    private TableColumn<Rating, String> customerIdCulomn11;
+
+    @FXML
+    private TableColumn<Rating, Integer> ratingCulomn11;
+
+    @FXML
+    private JFXComboBox<String> fuelTypeCombo1;
+
+    @FXML
+    private Label selectedFuelTypeTXT;
+
+    @FXML
+    private Label lastCalcDateTXT;
+
+    private ObservableList<String> CustomerType = FXCollections.observableArrayList("PRIVATE" , "COMPANY");
+    private ObservableList<String> FuelType = FXCollections.observableArrayList("Gasoline", "Diesel", "ScooterFuel", "HomeHeatingFuel");
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.paneChart.setVisible(false);
         //this.RatingTable.setVisible(false);
 
-        myController.getRatingTable();  //start the process that will ask server to execute quarry and get the table details
+      //  myController.getRatingTable();  //start the process that will ask server to execute quarry and get the table details
 
     }
-
 
 
     private void formValidation() {
@@ -88,10 +135,6 @@ public class ViewAnalyticDataBoundary implements Initializable {
 
     }
 
-    @FXML
-    void handleClicks(ActionEvent event) {
-
-    }
 
     @FXML
     void handleBtnCustomerType(MouseEvent event) { // chack mouse event import
@@ -115,18 +158,31 @@ public class ViewAnalyticDataBoundary implements Initializable {
     /**
      this method will set the templates table when we will initialize the page.
      */
-    public void setRatingTable(ArrayList<Rating> resultList) {
-
-
-    }
-
-    public void setTemplateTable(ArrayList<Rating> cosArray){
-        //col oms parameters
-        customerIdCulomn.setCellValueFactory(new PropertyValueFactory<>("customerID"));
+    public void setRatingTable(ArrayList<Rating> cosArray){
+        //fix it
+       /* customerIdCulomn.setCellValueFactory(new PropertyValueFactory<>("customerID"));
         ratingCulomn.setCellValueFactory(new PropertyValueFactory<>("rating"));
-        customerTypeCulomn.setCellValueFactory(new PropertyValueFactory<>("rating"));
 
         ObservableList<Rating> data = FXCollections.observableArrayList(cosArray);
         RatingTable.setItems(data);
+    */
     }
+
+
+    @FXML
+    void handleFuelTypeCombo(ActionEvent event) {
+
+    }
+
+
+    @FXML
+    void handleTimeRangeCombo(ActionEvent event) {
+
+    }
+
+    @FXML
+    void handlecustomerTypeCombo(ActionEvent event) {
+
+    }
+
 }

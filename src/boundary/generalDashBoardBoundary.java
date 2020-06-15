@@ -1,5 +1,7 @@
 package boundary;
 
+import Contollers.GeneralDashBoardController;
+import Contollers.MarketingCampaignTemplateController;
 import common.assets.ProjectPages;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -21,6 +23,8 @@ import java.util.ResourceBundle;
 import java.util.TimeZone;
 
 public class generalDashBoardBoundary implements DataInitializable {
+
+    private GeneralDashBoardController myController = new GeneralDashBoardController(this);
 
     //global variables:
     private String userID;
@@ -359,6 +363,10 @@ public class generalDashBoardBoundary implements DataInitializable {
                     if (minute < 10)
                         time.setText(hour + ":" + "0" + (minute) + ":" + second);
                     time.setText(hour + ":" + (minute) + ":" + second);
+                    //Calculate Analytical Data every sunday at 00:00:00:
+                    if (time.getText().equals("00:00:00") && (LocalDate.now().getDayOfWeek().equals("SUNDAY")))
+                        CalculateAnalyticalData();
+
                     try {
                         sleep(1000);
                     } catch (InterruptedException ex) {
@@ -422,4 +430,14 @@ public class generalDashBoardBoundary implements DataInitializable {
     public void setUserID(String userID) {
         this.userID = userID;
     }
+
+
+
+    //ANALITIC SYSTEM CALC :
+    private void CalculateAnalyticalData()
+    {
+
+
+    }
+
 }

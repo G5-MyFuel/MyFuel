@@ -54,7 +54,7 @@ public class ManagerSupplyConfirmationBoundary implements DataInitializable {
     private TableColumn<?, ?> CompanyCol;
 
     @FXML
-    private TableColumn<?, ?> OrderCol1;
+    private TableColumn<?, ?> StationCol;
 
     @FXML
     private TableColumn<?, ?> FuelTypeCol;
@@ -141,6 +141,8 @@ public class ManagerSupplyConfirmationBoundary implements DataInitializable {
 
     public void setOrderForManagerTableView(ArrayList<ManagerSupplyConfirmation> OrderArray) {
         OrderCol.setCellValueFactory(new PropertyValueFactory<>("OrderNumber"));
+        CompanyCol.setCellValueFactory(new PropertyValueFactory<>("GasCompanyName"));
+        StationCol.setCellValueFactory(new PropertyValueFactory<>("StationNum"));
         FuelTypeCol.setCellValueFactory(new PropertyValueFactory<>("FuelType"));
         AmountCol.setCellValueFactory(new PropertyValueFactory<>("Quantity"));
         tableData = FXCollections.observableArrayList(OrderArray);
