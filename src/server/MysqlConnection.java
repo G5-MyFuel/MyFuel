@@ -248,8 +248,18 @@ public class MysqlConnection {
                 "VALUES (?,?,CURRENT_TIME(),quarter(curdate()),?,?,?)," +
                 "(?,?,CURRENT_TIME(),quarter(curdate()),?,?,?)," +
                 "(?,?,CURRENT_TIME(),quarter(curdate()),?,?,?)";
+        /*CURRENT_TIME() = curdate()
+        לשנות גם בDATA BASE
+        * */
 
-        //sqlArray[SqlQueryType.INSERT_NEW_QuantityItemsStock_Report.getCode()] =
+        sqlArray[SqlQueryType.INSERT_NEW_QuantityItemsStock_Report.getCode()] = "INSERT INTO `ViewQuantityItemsStockReportsForAdmin`" +
+                "(`companyName`, `StationNumber`, `Date`, `Quarterly`, `FuelType`, `AvailableInventory`) " +
+                "VALUES (?,?,CURRENT_TIME(),quarter(curdate()),?,?)," +
+                "(?,?,CURRENT_TIME(),quarter(curdate()),?,?)," +
+                "(?,?,CURRENT_TIME(),quarter(curdate()),?,?)";
+        /*CURRENT_TIME() = curdate()
+        לשנות גם בDATA BASE
+        * */
     }
 
     public Connection getConnection() {

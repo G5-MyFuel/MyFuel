@@ -33,6 +33,7 @@ public class GeneratingReportsStationManagerBoundary implements DataInitializabl
     //ArrayList<PurchasesReport> PurchasesArray = new ArrayList<>();
     String sendRevenue;
     ArrayList<PurchasesReport> sendPurchases = new ArrayList<>();
+    ArrayList<QuantityItemsStockReport> sendQuantityItemsStockReport = new ArrayList<>();
 
     @FXML
     private JFXButton btnQuarterlyRevenueReport;
@@ -218,6 +219,7 @@ public class GeneratingReportsStationManagerBoundary implements DataInitializabl
         resultList.get(0).setFuelType("Gasoline 95");
         resultList.get(1).setFuelType("Diesel");
         resultList.get(2).setFuelType("Scooter fuel");
+        sendQuantityItemsStockReport.addAll(resultList);
         FuelTypeQuantityReportColumn.setCellValueFactory(new PropertyValueFactory<>("fuelType"));
         AvailableInventoryColumn.setCellValueFactory(new PropertyValueFactory<>("availableInventory"));
 
@@ -279,28 +281,25 @@ public class GeneratingReportsStationManagerBoundary implements DataInitializabl
             paramArray.add(a.getQuantityPurchased());
             paramArray.add(a.getSalesAmount());
         }
-        /*paramArray.add(managerCompany);
-        paramArray.add(managerStation);
-        paramArray.add(sendPurchases.get(0).getFuelType());
-        paramArray.add(sendPurchases.get(0).getQuantityPurchased());
-        paramArray.add(sendPurchases.get(0).getSalesAmount());
-        paramArray.add(sendPurchases.get(1).toString());
-        paramArray.add(managerCompany);
-        paramArray.add(managerStation);
-        paramArray.add(sendPurchases.get(2).toString());*/
-        System.out.println("My data"+ paramArray);
-        //paramArray.add(sendRevenue);
 
         myController.GetReportData(paramArray); //start the process that will ask server to execute quarry and get the table details
         ReportSentMessageLabel.setVisible(true);
-
-
-
     }
 
     @FXML
     void handleSaveQuantityReportBtn(ActionEvent event) {
 
+        ArrayList<String> paramArray = new ArrayList<>();
+        paramArray.add("Send Quantity of items in stock report");
+        for (QuantityItemsStockReport a : sendQuantityItemsStockReport){
+            paramArray.add(managerCompany);
+            paramArray.add(managerStation);
+            paramArray.add(a.getFuelType());
+            paramArray.add(a.getAvailableInventory());
+        }
+
+        myController.GetReportData(paramArray); //start the process that will ask server to execute quarry and get the table details
+        ReportSentMessageLabel.setVisible(true);
     }
 
     @FXML

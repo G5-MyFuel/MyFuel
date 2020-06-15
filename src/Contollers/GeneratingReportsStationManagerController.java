@@ -60,6 +60,10 @@ public class GeneratingReportsStationManagerController extends BasicController {
                 sqlAction = new SqlAction(SqlQueryType.INSERT_NEW_Purchases_Report, varArray);
                 super.sendSqlActionToClient(sqlAction);
                 break;
+            case "Send Quantity of items in stock report":
+                sqlAction = new SqlAction(SqlQueryType.INSERT_NEW_QuantityItemsStock_Report, varArray);
+                super.sendSqlActionToClient(sqlAction);
+                break;
             default:
                 break;
         }
