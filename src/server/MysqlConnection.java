@@ -208,7 +208,12 @@ public class MysqlConnection {
         sqlArray[SqlQueryType.GET_ALL_SALES_TO_CHACK_SALE.getCode()] = "SELECT * FROM `MarketingCampaign`";
 
 
+        /* *****************************************
+         * ********** Analytic system Queries *********
+         * *****************************************/
         sqlArray[SqlQueryType.GET_ALL_RATING_TABLE.getCode()] = "SELECT * FROM `Rating`";
+        sqlArray[SqlQueryType.GET_CUSTOMER_AND_PURCHASE_TABLE.getCode()] = "select * from Costumer as c, Purchase as p WHERE p.customerID LIKE c.ID ";
+
 
         /* *****************************************
          * ********** Discount Rates Queries ****************

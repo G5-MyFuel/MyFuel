@@ -64,6 +64,8 @@ public enum SqlQueryType {
      * ********** Analitic Data Queries ****************
      * *****************************************/
     GET_ALL_RATING_TABLE(SqlExecutionType.EXECUTE_QUERY),
+    GET_CUSTOMER_AND_PURCHASE_TABLE(SqlExecutionType.EXECUTE_QUERY),
+
 
     /* *****************************************
      * ********** Costumer Registration Queries ****************
