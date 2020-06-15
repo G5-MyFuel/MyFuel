@@ -10,12 +10,12 @@ import java.util.Date;
  */
 
 public class OrderFuelFromSupplier {
-    private String OrderNumber, FuelType, userFirstName,userLastName, OrderStatus, GasCompanyName;
+    private String OrderNum, FuelType, userFirstName,userLastName, OrderStatus,GasCompanyName;
     private int StationNumber, Quantity;
     private Date OrderDate;
 
-    public OrderFuelFromSupplier(String OrderNumber, String OrderStatus, String userFirstName, String userLastName, int StationNumber, Date OrderDate, String FuelType, int Quantity ) {
-        this.OrderNumber = OrderNumber;
+    public OrderFuelFromSupplier(String OrderNumber, String OrderStatus, String userFirstName, String userLastName, int StationNumber, Date OrderDate, String FuelType, int Quantity, String GasCompanyName) {
+        this.OrderNum = OrderNumber;
         this.OrderStatus=OrderStatus;
         this.userFirstName=userFirstName;
         this.userLastName=userLastName;
@@ -23,14 +23,23 @@ public class OrderFuelFromSupplier {
         this.OrderDate=OrderDate;
         this.FuelType=FuelType;
         this.Quantity=Quantity;
+        this.GasCompanyName=GasCompanyName;
     }
 
     /**
-     Setters
+     Getters
      */
 
+    public String getOrderNum() {
+        return OrderNum;
+    }
+
+    public String getGasCompanyName() {
+        return GasCompanyName;
+    }
+
     public String getOrderNumber() {
-        return OrderNumber;
+        return OrderNum;
     }
 
     public String getFuelType() {
@@ -49,9 +58,6 @@ public class OrderFuelFromSupplier {
         return OrderStatus;
     }
 
-    public String getGasCompanyName() {
-        return GasCompanyName;
-    }
 
     public Integer getStationNumber() {
         return StationNumber;
@@ -66,10 +72,10 @@ public class OrderFuelFromSupplier {
     }
 
     /**
-     Getters
+     Setter
      */
-    public void setOrderNumber(String orderNumber) {
-        OrderNumber = orderNumber;
+    public void setOrderNum(String orderNum) {
+        OrderNum = orderNum;
     }
 
     public void setFuelType(String fuelType) {
@@ -88,10 +94,6 @@ public class OrderFuelFromSupplier {
         OrderStatus = orderStatus;
     }
 
-    public void setGasCompanyName(String gasCompanyName) {
-        GasCompanyName = gasCompanyName;
-    }
-
     public void setStationNumber(int stationNumber) {
         StationNumber = stationNumber;
     }
@@ -104,18 +106,21 @@ public class OrderFuelFromSupplier {
         OrderDate = orderDate;
     }
 
+    public void setGasCompanyName(String gasCompanyName) {
+        GasCompanyName = gasCompanyName;
+    }
+
     /**
      To String
      */
     @Override
     public String toString() {
         return "OrderFuelFromSupplier{" +
-                "OrderNumber='" + OrderNumber + '\'' +
+                "OrderNumber='" + OrderNum + '\'' +
                 ", FuelType='" + FuelType + '\'' +
                 ", userFirstName='" + userFirstName + '\'' +
                 ", userLastName='" + userLastName + '\'' +
                 ", OrderStatus='" + OrderStatus + '\'' +
-                ", GasCompanyName='" + GasCompanyName + '\'' +
                 ", StationNumber=" + StationNumber +
                 ", Quantity=" + Quantity +
                 ", OrderDate=" + OrderDate +

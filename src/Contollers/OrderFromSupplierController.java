@@ -57,7 +57,7 @@ public class OrderFromSupplierController extends BasicController {
     private ArrayList<OrderFuelFromSupplier> changeResultToOrder(SqlResult result) {
         for (ArrayList<Object> a : result.getResultData()) {
             OrderFuelFromSupplier x = new OrderFuelFromSupplier((String) a.get(0), (String) a.get(1),
-                    (String) a.get(2), (String) a.get(3), (int) a.get(4), (Date) a.get(5), (String) a.get(6),(int)a.get(7));
+                    (String) a.get(2), (String) a.get(3), (int) a.get(4), (Date) a.get(5), (String) a.get(6),(int)a.get(7),(String)a.get(8));
             resultList.add(x);
         }
         return resultList;
