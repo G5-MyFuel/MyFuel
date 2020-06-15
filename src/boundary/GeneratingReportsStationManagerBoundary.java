@@ -30,8 +30,9 @@ public class GeneratingReportsStationManagerBoundary implements DataInitializabl
     private final GeneratingReportsStationManagerController myController = new GeneratingReportsStationManagerController(this);
     private FormValidation formValidation;
     private final Alert ErrorAlert = new Alert(Alert.AlertType.ERROR);
-    ArrayList<PurchasesReport> PurchasesArray = new ArrayList<>();
+    //ArrayList<PurchasesReport> PurchasesArray = new ArrayList<>();
     String sendRevenue;
+    ArrayList<PurchasesReport> sendPurchases = new ArrayList<>();
 
     @FXML
     private JFXButton btnQuarterlyRevenueReport;
@@ -152,7 +153,7 @@ public class GeneratingReportsStationManagerBoundary implements DataInitializabl
         ShowTotalRevenueTXT.setText(revenue);
         sendRevenue = revenue;
         ShowTotalRevenueTXT.setVisible(true);
-        ReportSentMessageLabel.setVisible(true);
+        //ReportSentMessageLabel.setVisible(true);
         btnSaveQuarterlyReport.setVisible(true);
     }
 
@@ -177,6 +178,8 @@ public class GeneratingReportsStationManagerBoundary implements DataInitializabl
 
     public void setPurchasesData(ArrayList<PurchasesReport> resultList) {
 
+        //System.out.println("My data"+ resultList);
+        sendPurchases.addAll(resultList);
         FuelTypeColumn.setCellValueFactory(new PropertyValueFactory<>("fuelType"));
         QuantityPurchasedColumn.setCellValueFactory(new PropertyValueFactory<>("quantityPurchased"));
         SalesAmountColumn.setCellValueFactory(new PropertyValueFactory<>("salesAmount"));
@@ -241,14 +244,15 @@ public class GeneratingReportsStationManagerBoundary implements DataInitializabl
     @FXML
     void handleSaveQuarterlyReportBtn(ActionEvent event) {
 
-        ShowTotalRevenueTXT.setVisible(false);
+        /*ShowTotalRevenueTXT.setVisible(false);
         PurchasesReportTable.setVisible(false);
         QuantityItemsStockTxt.setVisible(false);
         QuantityReportTable.setVisible(false);
         ReportSentMessageLabel.setVisible(false);
         btnSaveQuarterlyReport.setVisible(false);
         btnSavePurchasesReport.setVisible(false);
-        btnSaveQuantityReport.setVisible(false);
+        btnSaveQuantityReport.setVisible(false);*/
+
 
         ArrayList<String> paramArray = new ArrayList<>();
         paramArray.add("Send Quarterly revenue report");
@@ -259,10 +263,37 @@ public class GeneratingReportsStationManagerBoundary implements DataInitializabl
         paramArray.add(sendRevenue);
 
         myController.GetReportData(paramArray); //start the process that will ask server to execute quarry and get the table details
+        ReportSentMessageLabel.setVisible(true);
     }
 
     @FXML
     void handleSavePurchasesReportBtn(ActionEvent event) {
+
+
+        ArrayList<String> paramArray = new ArrayList<>();
+        paramArray.add("Send Purchases report");
+        for (PurchasesReport a : sendPurchases){
+            paramArray.add(managerCompany);
+            paramArray.add(managerStation);
+            paramArray.add(a.getFuelType());
+            paramArray.add(a.getQuantityPurchased());
+            paramArray.add(a.getSalesAmount());
+        }
+        /*paramArray.add(managerCompany);
+        paramArray.add(managerStation);
+        paramArray.add(sendPurchases.get(0).getFuelType());
+        paramArray.add(sendPurchases.get(0).getQuantityPurchased());
+        paramArray.add(sendPurchases.get(0).getSalesAmount());
+        paramArray.add(sendPurchases.get(1).toString());
+        paramArray.add(managerCompany);
+        paramArray.add(managerStation);
+        paramArray.add(sendPurchases.get(2).toString());*/
+        System.out.println("My data"+ paramArray);
+        //paramArray.add(sendRevenue);
+
+        myController.GetReportData(paramArray); //start the process that will ask server to execute quarry and get the table details
+        ReportSentMessageLabel.setVisible(true);
+
 
 
     }

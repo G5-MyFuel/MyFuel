@@ -240,7 +240,11 @@ public class MysqlConnection {
         /*CURRENT_TIME() = curdate()
         לשנות גם בDATA BASE
         * */
-
+        sqlArray[SqlQueryType.INSERT_NEW_Purchases_Report.getCode()] = "INSERT INTO `ViewPurchasesReportsForAdmin`" +
+                "(`companyName`, `StationNumber`, `Date`, `Quarterly`, `FuelType`, `LitersPurchased`, `SalesAmount`) " +
+                "VALUES (?,?,CURRENT_TIME(),quarter(curdate()),?,?,?)," +
+                "(?,?,CURRENT_TIME(),quarter(curdate()),?,?,?)," +
+                "(?,?,CURRENT_TIME(),quarter(curdate()),?,?,?)";
     }
 
     public Connection getConnection() {
