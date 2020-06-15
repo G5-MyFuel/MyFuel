@@ -74,6 +74,7 @@ public class CreditCardWindowBoundary implements DataInitializable {
         //cvv
         formValidation.isOnlyNumbers(CVVtxt, "CVV");
         formValidation.ExactlyInLengthValidation(CVVtxt, "CVV", 3);
+
     }
 
     private boolean validateCardFields() {
@@ -141,10 +142,6 @@ public class CreditCardWindowBoundary implements DataInitializable {
             registrationBoundary = (CustomerRegistrationBoundary) data;
         }
 
-
-    }
-
-    private void closeWindowEvent(WindowEvent event) {
         primStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent e) {
@@ -161,6 +158,7 @@ public class CreditCardWindowBoundary implements DataInitializable {
                     primStage.close();
             }
         });
+
 
     }
 
