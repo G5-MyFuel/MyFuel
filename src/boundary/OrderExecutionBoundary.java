@@ -127,8 +127,9 @@ public class OrderExecutionBoundary implements DataInitializable {
                 myController.setNewStatus(myController.resultList.get(i).getOrderNumber());
                 tableData = FXCollections.observableArrayList(myController.resultList);
                 tableView.setItems(tableData);
+                hboxOrderConfirmation.setVisible(false);
                 DoneMsgTxt.setVisible(true);
-                DoneBtn.setDisable(true);
+                DoneBtn.setVisible(false);
                 tableView.refresh();
                 break;
             }
@@ -182,18 +183,18 @@ public class OrderExecutionBoundary implements DataInitializable {
 
                         /************   Show details to the User  ***************/
                         StationManagerField.setText(temp.getUserFirstName().toString()+" "+temp.getUserLastName());
-                        StationNumberField.setText(temp.getStationNumber().toString());
+                        StationNumberField.setText(String.valueOf(temp.getStationNumber()));
                         CompanyNameField.setText(temp.getGasCompanyName().toString());
                         OrderDateField.setText(temp.getOrderDate().toString());
                         FuelTypeField.setText(temp.getFuelType().toString());
-                        QuantityField.setText(temp.getQuantity().toString());
+                        QuantityField.setText(String.valueOf(temp.getQuantity()));
 
                         /******* 'Done' status or 'In treatment' status *********/
-                        if (temp.getOrderStatus().equals("Done")) {
+                        if (temp.getOrderStatus().equals("Done") ) {
                             DoneMsgTxt.setVisible(true);
                             hboxOrderConfirmation.setDisable(true);
                         }
-                        if (temp.getOrderStatus().equals("In treatment"))
+                        if (temp.getOrderStatus().equals("In treatment")&& event.isSecondaryButtonDown())
                             DoneMsgTxt.setVisible(false);
                     }
                 }
