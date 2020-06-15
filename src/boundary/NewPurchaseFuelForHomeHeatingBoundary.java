@@ -7,9 +7,6 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -17,71 +14,40 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 import java.net.URL;
-import java.sql.Date;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.ResourceBundle;
+import java.time.LocalDate;
+import java.util.*;
 
 /**
  * @author daniel
  * @see NewPurchaseFuelForHomeHeatingController - the form's logic class
  */
-public class NewPurchaseFuelForHomeHeatingBoundary implements Initializable {
+public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable {
     private NewPurchaseFuelForHomeHeatingController myController = new NewPurchaseFuelForHomeHeatingController(this);
+    private String currentCustomerId;
+    private String dateAndDayPattern = "";
 
-
-    private static NewPurchaseFuelForHomeHeatingBoundary Instance = null;
     private FormValidation formValidation;
 
     //gui variables:
-    @FXML
-    private Button btnOverview;
-
-    @FXML
-    private Button btnCustomers;
-
-    @FXML
-    private Button btnMenus;
-
-    @FXML
-    private Button btnPackages;
-
-    @FXML
-    private Button btnSignout;
 
     @FXML
     private JFXTextField anotherContactPhoneNumberTXT;
 
     @FXML
-    private ImageView WrongQuantity1111141;
+    private JFXTextArea noteTXT;
 
     @FXML
-    private JFXTextArea noteTXT;
+    private ImageView nextOrderDetailsBtn;
 
     @FXML
     private JFXTextField emailAddressTXT;
 
     @FXML
-    private ImageView WrongQuantity11111211;
-
-    @FXML
     private JFXTextField fuelQuantityTXT;
 
     @FXML
-    private ImageView WrongQuantity1111111;
-
-    @FXML
-    private Text incorrectFuelQtyMSG;
-
-    @FXML
-    private ImageView WrongQuantity111112111;
-
-    @FXML
-    private Text incorrectEmailMSG;
-
-    @FXML
-    private JFXTextField customerGenericDetailsTXT;
+    private Text fuelLimitForOrder;
 
     @FXML
     private JFXTextField streetNameTXT;
@@ -96,28 +62,22 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements Initializable {
     private JFXTextField zipCodeTXT;
 
     @FXML
-    private ImageView WrongQuantity111111;
-
-    @FXML
-    private ImageView WrongQuantity111112;
-
-    @FXML
-    private ImageView WrongQuantity111113;
-
-    @FXML
-    private ImageView WrongQuantity111114;
-
-    @FXML
-    private Text EmptyStreetMSG;
-
-    @FXML
     private ImageView orderDetailsIndicatorTAB;
 
     @FXML
     private JFXComboBox<String> shippingMethodComboBOX;
 
     @FXML
-    private ComboBox<?> dayAndDateComboBox;
+    private ImageView WrongQuantity111111;
+
+    @FXML
+    private VBox whenPane;
+
+    @FXML
+    private JFXComboBox<String> dayAndDateComboBox;
+
+    @FXML
+    private GridPane optionalDatesForShippingGridPane;
 
     @FXML
     private JFXButton t17to19BTN;
@@ -136,6 +96,9 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements Initializable {
 
     @FXML
     private JFXButton t7to9BTN;
+
+    @FXML
+    private VBox shippingOverviewPane;
 
     @FXML
     private Text shippingSummeryDetailsTXT;
@@ -167,23 +130,15 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements Initializable {
     @FXML
     private Text deliveryAddressTXT;
 
-    @FXML
-    private ImageView nextOrderDetails;
 
-    @FXML
-    private ImageView reviewIndicatorTAB;
+    @Override
+    public void initData(Object data) {
+        this.currentCustomerId = (String) data;
+    }
 
-    @FXML
-    private VBox whenPane;
-
-    @FXML
-    private VBox shippingOverviewPane;
-
-    @FXML
-    private GridPane optionalDatesForShippingGridPane;
-    //
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        setDayAndDateComboBox();
         this.formValidation = FormValidation.getValidator();
         this.orderDetailsIndicatorTAB.setVisible(false);
         this.shippingIndicatorTAB1.setVisible(false);
@@ -193,17 +148,7 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements Initializable {
         SetShippingTab();
     }
 
-    /**
-     * NewPurchaseFuelForHomeHeatingController Instance getter using SingleTone DesignPatterns
-     * @return Instance of controller class
-     */
-    public NewPurchaseFuelForHomeHeatingBoundary getInstance() {
-        if (Instance == null)
-            Instance = new NewPurchaseFuelForHomeHeatingBoundary();
-        return Instance;
-    }
 
-    //
     private void FormValidation() {
         //order details page - start
         /*  fuel quantity validation */
@@ -218,28 +163,32 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements Initializable {
         /*  apartment number validation */
         formValidation.isEmptyFieldValidation(ApartmentNumberTXT, "Apartment Number");
         formValidation.maxLengthValidation(ApartmentNumberTXT, "Street Name", 5);
-        formValidation.isOnlyNumbers(ApartmentNumberTXT,"Apartment Number");
+        formValidation.isOnlyNumbers(ApartmentNumberTXT, "Apartment Number");
         /* city name validation */
         formValidation.isEmptyFieldValidation(cityTXT, "City");
         formValidation.maxLengthValidation(cityTXT, "City", 15);
-        formValidation.isContainsOnlyLetters(cityTXT,"City");
+        formValidation.isContainsOnlyLetters(cityTXT, "City");
         /* zip code validation */
         formValidation.isEmptyFieldValidation(zipCodeTXT, "Zip code");
         formValidation.maxLengthValidation(zipCodeTXT, "Zip code", 7);
-        formValidation.isOnlyNumbers(zipCodeTXT,"Zip code");
+        formValidation.isOnlyNumbers(zipCodeTXT, "Zip code");
         /* phone number validation */
-        formValidation.phoneNumberValidation(anotherContactPhoneNumberTXT,"Phone Number");
+        formValidation.phoneNumberValidation(anotherContactPhoneNumberTXT, "Phone Number");
         /* note validation */
-        formValidation.maxLengthValidationTextArea(noteTXT,"Note",150);
+        formValidation.maxLengthValidationTextArea(noteTXT, "Note", 150);
         //order details page - end
         //
         //shipping - start
-       // InitialAndResetAllShippingDates();
+        // InitialAndResetAllShippingDates();
 
     }
 
+    private void setDayAndDateComboBox() {
+        String currentDayAndDate = LocalDate.now().getDayOfWeek().name() +" "+ new SimpleDateFormat("dd-mm-yyyy").format(new Date());
+        //TODO: להמשיך לממש ימים + שבועיים קדימה ולשלוח לקומבו בוקס
+    }
 
-    public void CheckOrderDetails(){
+    public void CheckOrderDetails() {
         ArrayList<Object> guiObjects = new ArrayList<Object>();
         guiObjects.add(fuelQuantityTXT);
         guiObjects.add(streetNameTXT);
@@ -247,8 +196,8 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements Initializable {
         guiObjects.add(cityTXT);
         guiObjects.add(zipCodeTXT);
         //
-        for(Object guiObj:guiObjects){
-            if(!myController.validatePage(guiObj)){
+        for (Object guiObj : guiObjects) {
+            if (!myController.validatePage(guiObj)) {
                 orderDetailsIndicatorTAB.setImage(new Image("media/PurchaseMedia/cancel.png"));
                 break;
             }
@@ -257,8 +206,8 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements Initializable {
     }
 
     //todo: להמשיך להגדיר את התאריכים האופציונלים שיובאו מהדטהבייס מטבלת ShippingOptionalDates
-    public void SetShippingTab(){
-        shippingMethodComboBOX.getItems().addAll("Fast Shipping (40$)","Standard Shipping (15$)");
+    public void SetShippingTab() {
+        shippingMethodComboBOX.getItems().addAll("Fast Shipping (40$)", "Standard Shipping (15$)");
         whenPane.setVisible(false);
         shippingOverviewPane.setVisible(false);
         optionalDatesForShippingGridPane.setVisible(false);
@@ -267,11 +216,10 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements Initializable {
 //        ClientApp.client.handleMessageFromClientUI(new Message(OperationType.getRequirementData,""));
     }
 
-    public void InitialAndResetAllShippingDates(){
+    public void InitialAndResetAllShippingDates() {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date date = new Date(Calendar.getInstance().getTime().getTime());
         String initialShippingDatesQUERY = "INSERT INTO `bpsdc8o22sikrlpvvxqm`.`ShippingOptionalDates` (`DayAndDate`, `T1`, `T2`, `T3`, `T4`, `T5`, `T6`) VALUES ('2020-05-31', '1', '1', '1', '1', '1', '1');";
-       // ClientApp.chatClient.handleMessageFromClientUI(new Message(OperationType.updateRequirement,initialShippingDatesQUERY));
+        // ClientApp.chatClient.handleMessageFromClientUI(new Message(OperationType.updateRequirement,initialShippingDatesQUERY));
     }
-
 }
