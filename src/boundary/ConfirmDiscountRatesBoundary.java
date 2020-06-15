@@ -65,6 +65,11 @@ public class ConfirmDiscountRatesBoundary implements Initializable {
 
     }
 
+    public void setDiscountRatesData(String revenue) {
+
+
+    }
+
     @FXML
     void handleApprovedRates(ActionEvent event) {
 
