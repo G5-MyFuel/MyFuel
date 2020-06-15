@@ -3,7 +3,6 @@ package boundary;
 import Contollers.CustomerRegistrationController;
 import Contollers.FormValidation;
 import Contollers.PagingController;
-import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
@@ -99,7 +98,7 @@ public class CustomerRegistrationBoundary implements DataInitializable {
     @FXML
     private JFXComboBox<String> PricingModelChoiseBox1;
     @FXML
-    private JFXButton clearSelectionbtn;
+    private Button clearSelectionbtn;
 
 
     /*
@@ -170,6 +169,9 @@ public class CustomerRegistrationBoundary implements DataInitializable {
         CardClickFlag = false;
         tempCreditCard = null;
         stationPane.setVisible(false);
+        PricingModelChoiseBox1.setItems(SingelVehicle);
+
+
         PurchasePlanChoiseBox.valueProperty().addListener((composant, oldValue, newValue) -> {
             PAZbtn.setSelected(false);
             YELLOWbtn.setSelected(false);
@@ -205,32 +207,28 @@ public class CustomerRegistrationBoundary implements DataInitializable {
 
     @FXML
     void FirstForwardButtonOnClick(MouseEvent event) {
-        planInfoTAB.setDisable(false);
-        vehicleMangTAB.setDisable(true);
-        vehicleMangTAB.getTabPane().getSelectionModel().selectNext();
-
-//        if (myController.isCostumerExist(CostumerIDtxt.getText())) { //check if costumer is on system already
-//            ErrorAlert.setTitle("ID Error");
-//            ErrorAlert.setHeaderText("Costumer ID already Exists,\nPlease Chose Different ID.");
-//            ErrorAlert.showAndWait();
-//        } else if (!validateInputFirstPhase()) {//check fields
-//            ErrorAlert.setTitle("Fields Error");
-//            ErrorAlert.setHeaderText("Make sure all fields are correct");
-//            ErrorAlert.showAndWait();
-//        } else {//build costumer
-//            Costumer costumer = new Costumer(CostumerIDtxt.getText(), CostumerIDtxt.getText(), "", FirstNametxt.getText(),
-//                    LastNametxt.getText(), EmailAdresstxt.getText(), null, "", null, null);
-//            if (CardClickFlag) {
-//                costumer.setCostumerCreditCard(tempCreditCard);
-//                if (tempCreditCard != null)
-//                    tempCreditCard.setCardOwner(costumer);
-//            }
-//            myController.setCostumerFirstPhase(costumer);
-//            myController.getVehicleTable();
-//            vehicleMangTAB.setDisable(false);
-//            personalInfoTAB.setDisable(true);
-//            vehicleMangTAB.getTabPane().getSelectionModel().selectNext();
-//        }
+        if (myController.isCostumerExist(CostumerIDtxt.getText())) { //check if costumer is on system already
+            ErrorAlert.setTitle("ID Error");
+            ErrorAlert.setHeaderText("Costumer ID already Exists,\nPlease Chose Different ID.");
+            ErrorAlert.showAndWait();
+        } else if (!validateInputFirstPhase()) {//check fields
+            ErrorAlert.setTitle("Fields Error");
+            ErrorAlert.setHeaderText("Make sure all fields are correct");
+            ErrorAlert.showAndWait();
+        } else {//build costumer
+            Costumer costumer = new Costumer(CostumerIDtxt.getText(), CostumerIDtxt.getText(), "", FirstNametxt.getText(),
+                    LastNametxt.getText(), EmailAdresstxt.getText(), null, "", null, null);
+            if (CardClickFlag) {
+                costumer.setCostumerCreditCard(tempCreditCard);
+                if (tempCreditCard != null)
+                    tempCreditCard.setCardOwner(costumer);
+            }
+            myController.setCostumerFirstPhase(costumer);
+            myController.getVehicleTable();
+            vehicleMangTAB.setDisable(false);
+            personalInfoTAB.setDisable(true);
+            vehicleMangTAB.getTabPane().getSelectionModel().selectNext();
+        }
     }
 
 

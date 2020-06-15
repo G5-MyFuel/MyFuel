@@ -290,16 +290,37 @@
                                              <toggleGroup>
                                                 <ToggleGroup fx:id="q2" />
                                              </toggleGroup>
+                                             <graphic>
+                                                <ImageView fx:id="YELLOWimg" fitHeight="37.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../media/CostumerRegisterationMedia/yellowLogo.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
                                           </JFXRadioButton>
-                                          <JFXRadioButton fx:id="PAZbtn" text="PAZ" textAlignment="RIGHT" toggleGroup="$q2">
+                                          <JFXRadioButton fx:id="PAZbtn" prefHeight="63.0" prefWidth="109.0" text="PAZ" textAlignment="RIGHT" toggleGroup="$q2">
                                              <padding>
                                                 <Insets bottom="10.0" />
                                              </padding>
+                                             <graphic>
+                                                <ImageView fx:id="PAZimg" fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../media/CostumerRegisterationMedia/pazLogoimg.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
                                           </JFXRadioButton>
-                                          <JFXRadioButton fx:id="SONOLbtn" text="SONOL" toggleGroup="$q2" />
+                                          <JFXRadioButton fx:id="SONOLbtn" text="SONOL" toggleGroup="$q2">
+                                             <graphic>
+                                                <ImageView fx:id="SONOLimg" fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../media/CostumerRegisterationMedia/sonollogoimg.jpg" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic></JFXRadioButton>
                                        </children>
                                     </VBox>
-                                    <Button fx:id="clearSelectionbtn" layoutX="330.0" layoutY="41.0" mnemonicParsing="false" onMouseClicked="#clearSelection" style="-fx-background-color: #2D4578; -fx-background-radius: 50;" stylesheets="@style.css" text="Clear Selection" textFill="WHITE">
+                                    <Button fx:id="clearSelectionbtn" layoutX="352.0" layoutY="60.0" mnemonicParsing="false" onMouseClicked="#clearSelection" style="-fx-background-color: #2D4578; -fx-background-radius: 50;" stylesheets="@style.css" text="Clear Selection" textFill="WHITE">
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
