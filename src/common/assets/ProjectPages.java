@@ -25,6 +25,7 @@ public enum ProjectPages {
     CONFIRM_DISCOUNT_RATES_PAGE("/boundary/ConfirmDiscountRatesFXML.fxml"),
     GENERATING_REPORTS_STATION_MANAGER_PAGE("/boundary/GeneratingReportsStationManagerFXML.fxml"),
     GENERATING_REPORTS_MARKETING_MANAGER_PAGE("/boundary/GeneratingReportsMarketingManagerFXML.fxml"),
+    VIEW_REPORTS_PAGE("/boundary/ViewReportsFXML.fxml"),
 
     //Daniel pages:
     //PURCHASE_FUEL_FOR_HOME_HEATING,TRACKING_FUEL_FOR_HOME_HEATING,

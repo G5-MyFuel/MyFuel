@@ -34,6 +34,11 @@ public enum SqlQueryType {
     INSERT_NEW_QuantityItemsStock_Report(SqlExecutionType.UPDATE_QUERY),
 
     /* *****************************************
+     * ********** Admin View Reports Queries ****************
+     * *****************************************/
+    View_Quarterly_Revenue(SqlExecutionType.EXECUTE_QUERY),
+
+    /* *****************************************
      * ********** Costumer Management Queries ****************
      * *****************************************/
     UPDATE_COSTUMER_FNAME(SqlExecutionType.UPDATE_QUERY),

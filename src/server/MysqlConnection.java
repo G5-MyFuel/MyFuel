@@ -265,6 +265,12 @@ public class MysqlConnection {
         /*CURRENT_TIME() = curdate()
         לשנות גם בDATA BASE
         * */
+
+        /* *****************************************
+         * ********** Admin View Reports Queries ****************
+         * *****************************************/
+        sqlArray[SqlQueryType.View_Quarterly_Revenue.getCode()] = "SELECT `TotalRevenue` FROM `ViewQuarterlyReportsForAdmin` " +
+                "WHERE `companyName` = ? AND `StationNumber` = ? AND `Quarterly` = quarter(?)";
     }
 
     public Connection getConnection() {
