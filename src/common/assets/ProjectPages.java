@@ -19,7 +19,7 @@ public enum ProjectPages {
     //hani pages:
     SALE_OPERATION_TEMPLATE_PAGE("/boundary/MarketingCampaignTemplate.fxml"),
     RUN_SALE_OPERATION_PAGE("/boundary/MarketingCampaignFXML.fxml"),
-
+    VIEW_ANALITIC_DATA("/boundary/ViewAnalyticDataFXML.fxml"),
     //Nir pages:
     SETTING_DISCOUNT_RATES_PAGE("/boundary/SettingDiscountRatesFXML.fxml"),
     CONFIRM_DISCOUNT_RATES_PAGE("/boundary/ConfirmDiscountRatesFXML.fxml"),
