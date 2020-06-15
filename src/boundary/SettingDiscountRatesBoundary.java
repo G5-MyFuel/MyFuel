@@ -64,8 +64,8 @@ public class SettingDiscountRatesBoundary implements Initializable {
         //formValidation.numberPositiveValidation(ShowNewRateTXT, "New price");
         FormValidation.isEmptyFieldValidation(ShowNewRateTXT, "New price");
         //formValidation.maxLengthValidation(ShowNewRateTXT, "New price", 3);
-        formValidation.maxSizeValidation(ShowNewRateTXT, "New price", 100);
-        formValidation.minSizeValidation(ShowNewRateTXT, "New price", 0);
+        formValidation.maxFloatSizeValidation(ShowNewRateTXT, "New price", 100);
+        formValidation.minFloatSizeValidation(ShowNewRateTXT, "New price", 0);
     }
 
     @FXML
@@ -95,14 +95,6 @@ public class SettingDiscountRatesBoundary implements Initializable {
     void handleSetNewRate(ActionEvent event) {
 
         RequestSentMessageLabel.setVisible(false);
-        /*try
-        {
-            Thread.sleep(400);
-        }
-        catch(InterruptedException ex)
-        {
-            Thread.currentThread().interrupt();
-        }*/
         Float NewRate = Float.parseFloat(ShowNewRateTXT.getText());
         if (NewRate < 0 || NewRate > 100) {
             ErrorAlert.setTitle("Price rate ERROR");
