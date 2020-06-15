@@ -25,10 +25,11 @@ import java.util.ResourceBundle;
  * @author Adi Lampert
  * @see OrderExecutionBoundary - the from's logic class
  */
-public class OrderExecutionBoundary implements Initializable {
+public class OrderExecutionBoundary implements DataInitializable {
 
     private OrderExecutionBoundary OrderExecutionController;
     private OrderFromSupplierController myController = new OrderFromSupplierController(this);
+    private String SupplierID="";
 
     private ArrayList<OrderFuelFromSupplier> OFFS;
 
@@ -130,7 +131,10 @@ public class OrderExecutionBoundary implements Initializable {
             }
         }
     }
-
+    @Override
+    public void initData(Object data) {
+        SupplierID = (String)data;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
