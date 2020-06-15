@@ -12,7 +12,6 @@ import entity.CreditCard;
 import entity.Vehicle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -34,14 +33,12 @@ import java.util.ResourceBundle;
 public class CustomerRegistrationBoundary implements DataInitializable {
 
     private ArrayList<Vehicle> tempVehicleArray = new ArrayList<>();
-    private ArrayList<Vehicle> allVehicleArray;
     private CreditCard tempCreditCard = null;
 
     private CustomerRegistrationController myController = new CustomerRegistrationController(this);
     private FormValidation formValidation;
     private boolean CardClickFlag;
     private Alert ErrorAlert = new Alert(Alert.AlertType.ERROR);
-    private ArrayList<Costumer> allDBCostumerArray;
 
 
     /*Gui variables:
@@ -81,16 +78,6 @@ public class CustomerRegistrationBoundary implements DataInitializable {
     @FXML
     private JFXRadioButton yesButton;
     @FXML
-    private Pane CreditCardWindow;
-    @FXML
-    private JFXTextField creditCardNumbertxt;
-    @FXML
-    private JFXTextField experationDatetxt;
-    @FXML
-    private JFXTextField CVVtxt;
-    @FXML
-    private Tooltip typeTT;
-    @FXML
     private ImageView CostumerTypeInfo;
     @FXML
     private ImageView PurchasePlanInffo;
@@ -113,7 +100,8 @@ public class CustomerRegistrationBoundary implements DataInitializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         formValidation = FormValidation.getValidator();
-        PersonalInfoValidation();
+        giValidation();
+        formValidation.
         //
         tempVehicleArray = new ArrayList<Vehicle>();
         //clear all fields section:
@@ -170,24 +158,41 @@ public class CustomerRegistrationBoundary implements DataInitializable {
             myController.setCompanyName((String)data);
     }
 
-
-    /**
-     * This method saves the vehicle information after clicking save button
-     * in temp array and display that vehicle in vehicle table.
-     */
     @FXML
-    void ClickSaveVehicleButton(MouseEvent event) {
-        VehicleTable.setEditable(true);
-        if (isVehicleExistInDb() || isVehicleExistInTempVehicleArr()) {//in case of vehicle id error
-            ErrorAlert.setTitle("Vehicle ID Error");
-            ErrorAlert.setHeaderText("Vehicle ID exists in system");
+    void FirstForwardButtonOnClick(MouseEvent event) {
+
+        if (CostumerIDtxt.getText().isEmpty() || FirstNametxt.getText().isEmpty() || LastNametxt.getText().isEmpty() || EmailAdresstxt.getText().isEmpty()) {//check fields
+            ErrorAlert.setTitle("Fields Error");
+            ErrorAlert.setHeaderText("Please fill all require information");
             ErrorAlert.showAndWait();
         } else {
-            Vehicle vehicle = new Vehicle(CostumerIDtxt.getText(), VehicleIDtxt.getText(), GasTypeChoiseBox.getValue());
-            tempVehicleArray.add(vehicle);
-            ObservableList<Vehicle> data = FXCollections.observableArrayList(tempVehicleArray);
-            VehicleTable.setItems(data);
+            if (myController.isCostumerExist(CostumerIDtxt.getText())) { //check if costumer is on system already
+                ErrorAlert.setTitle("ID Error");
+                ErrorAlert.setHeaderText("Costumer ID already Exists,\nPlease Chose Different ID.");
+                ErrorAlert.showAndWait();
+            } else {//build costumer
+                Costumer costumer = new Costumer(CostumerIDtxt.getText(), CostumerIDtxt.getText(), "", FirstNametxt.getText(),
+                        LastNametxt.getText(), EmailAdresstxt.getText(), null, "true", null, null);
+                if (CardClickFlag) {
+                    costumer.setCostumerCreditCard(tempCreditCard);
+                    if(tempCreditCard != null)
+                        tempCreditCard.setCardOwner(costumer);
+                }
+                myController.setCostumerFirstPhase(costumer);
+                myController.getVehicleTable();
+                vehicleMangTAB.setDisable(false);
+                personalInfoTAB.setDisable(true);
+                vehicleMangTAB.getTabPane().getSelectionModel().selectNext();
+            }
         }
+    }
+
+    @FXML
+    void SecondForwardButtonOnClick(MouseEvent event) {
+        myController.setCostumerSecoundPhase(tempVehicleArray);
+        planInfoTAB.setDisable(false);
+        vehicleMangTAB.setDisable(true);
+        vehicleMangTAB.getTabPane().getSelectionModel().selectNext();
     }
 
     /**
@@ -216,6 +221,24 @@ public class CustomerRegistrationBoundary implements DataInitializable {
     }
 
 
+    /**
+     * This method saves the vehicle information after clicking save button
+     * in temp array and display that vehicle in vehicle table.
+     */
+    @FXML
+    void ClickSaveVehicleButton(MouseEvent event) {
+        VehicleTable.setEditable(true);
+        if (myController.isVehicleExistInDb(VehicleIDtxt.getText()) || isVehicleExistInTempVehicleArr()) {//in case of vehicle id error
+            ErrorAlert.setTitle("Vehicle ID Error");
+            ErrorAlert.setHeaderText("Vehicle ID exists in system");
+            ErrorAlert.showAndWait();
+        } else {
+            Vehicle vehicle = new Vehicle(CostumerIDtxt.getText(), VehicleIDtxt.getText(), GasTypeChoiseBox.getValue());
+            tempVehicleArray.add(vehicle);
+            ObservableList<Vehicle> data = FXCollections.observableArrayList(tempVehicleArray);
+            VehicleTable.setItems(data);
+        }
+    }
 
     @FXML
     void setVehicleInfoVisible(MouseEvent event) {
@@ -226,44 +249,6 @@ public class CustomerRegistrationBoundary implements DataInitializable {
     void creditCardLinkOnClick(MouseEvent event) {
         PagingController pc = new PagingController();
         pc.loadAdditionalStage(ProjectPages.CREDIT_CARD_DIALOG_PAGE.getPath(), this);
-    }
-
-
-    @FXML
-    void FirstForwardButtonOnClick(MouseEvent event) {
-
-        if (CostumerIDtxt.getText().isEmpty() || FirstNametxt.getText().isEmpty() || LastNametxt.getText().isEmpty() || EmailAdresstxt.getText().isEmpty()) {//check fields
-            ErrorAlert.setTitle("Fields Error");
-            ErrorAlert.setHeaderText("Please fill all require information");
-            ErrorAlert.showAndWait();
-        } else {
-            if (isCostumerExist()) { //check if costumer is on system already
-                ErrorAlert.setTitle("ID Error");
-                ErrorAlert.setHeaderText("Costumer ID already Exists,\nPlease Chose Different ID.");
-                ErrorAlert.showAndWait();
-            } else {//build costumer
-                Costumer costumer = new Costumer(CostumerIDtxt.getText(), CostumerIDtxt.getText(), "", FirstNametxt.getText(),
-                        LastNametxt.getText(), EmailAdresstxt.getText(), null, "true", null, null);
-                if (CardClickFlag) {
-                    costumer.setCostumerCreditCard(tempCreditCard);
-                    if(tempCreditCard != null)
-                        tempCreditCard.setCardOwner(costumer);
-                }
-                myController.setCostumerFirstPhase(costumer);
-                myController.getVehicleTable();
-                vehicleMangTAB.setDisable(false);
-                personalInfoTAB.setDisable(true);
-                vehicleMangTAB.getTabPane().getSelectionModel().selectNext();
-            }
-        }
-}
-
-    @FXML
-    void SecondForwardButtonOnClick(MouseEvent event) {
-        myController.setCostumerSecoundPhase(tempVehicleArray);
-        planInfoTAB.setDisable(false);
-        vehicleMangTAB.setDisable(true);
-        vehicleMangTAB.getTabPane().getSelectionModel().selectNext();
     }
 
     @FXML
@@ -280,33 +265,11 @@ public class CustomerRegistrationBoundary implements DataInitializable {
         vehicleMangTAB.getTabPane().getSelectionModel().selectPrevious();
     }
 
-
-    @FXML
-    void handleClicks(ActionEvent event) {
-
-    }
-
     @FXML
     void RemoveSelectedVe(MouseEvent event) {
         tempVehicleArray.remove(VehicleTable.getSelectionModel().getSelectedItem());
         ObservableList<Vehicle> data = FXCollections.observableArrayList(tempVehicleArray);
         VehicleTable.setItems(data);
-    }
-
-    private boolean isCostumerExist() {
-        for (Costumer cos : allDBCostumerArray) {
-            if (cos.getUserID().toString().equals(CostumerIDtxt.getText()))
-                return true;
-        }
-        return false;
-    }
-
-    private boolean isVehicleExistInDb() {
-        for (Vehicle v : allVehicleArray) {
-            if (v.getVehicleID().equals(VehicleIDtxt.getText()))
-                return true;
-        }
-        return false;
     }
 
     private boolean isVehicleExistInTempVehicleArr() {
@@ -317,7 +280,7 @@ public class CustomerRegistrationBoundary implements DataInitializable {
         return false;
     }
 
-    private void PersonalInfoValidation() {
+    private void giValidation() {
         //costumer ID field check
         formValidation.isDoubleNumberValidation(CostumerIDtxt, "Costumer ID");
         formValidation.maxLengthValidation(CostumerIDtxt, "Costumer ID", 9);
@@ -379,22 +342,8 @@ public class CustomerRegistrationBoundary implements DataInitializable {
         return thisToolTip;
     }
 
+    private void validateInputFirstPhase(){
 
-    public ArrayList<Costumer> getAllDBCostumerArray() {
-        return allDBCostumerArray;
     }
-
-    public void setAllDBCostumerArray(ArrayList<Costumer> allDBCostumerArray) {
-        this.allDBCostumerArray = allDBCostumerArray;
-    }
-
-    public ArrayList<Vehicle> getAllVehicleArray() {
-        return allVehicleArray;
-    }
-
-    public void setAllVehicleArray(ArrayList<Vehicle> allVehicleArray) {
-        this.allVehicleArray = allVehicleArray;
-    }
-
 
 }

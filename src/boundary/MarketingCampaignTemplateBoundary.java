@@ -177,11 +177,11 @@ public class MarketingCampaignTemplateBoundary implements Initializable {
 
     private void FormValidation() {
         /*  Template Name validation */
-        formValidation.isEmptyField(TemplateName, "Template Name");
+        formValidation.isEmptyFieldValidation(TemplateName, "Template Name");
         formValidation.maxLengthValidationShort(TemplateName, "Template Name", 45);
 
         /*  Discount Percentages validation */
-        formValidation.isEmptyField(DiscountPercentages, "Discount Percentages");
+        formValidation.isEmptyFieldValidation(DiscountPercentages, "Discount Percentages");
         formValidation.isContainsOnlyNumbers(DiscountPercentages, "Discount Percentages");
         formValidation.numberPositiveValidation(DiscountPercentages, "Discount Percentages");
 
@@ -197,7 +197,7 @@ public class MarketingCampaignTemplateBoundary implements Initializable {
        // formValidation.isEmptyTimeField(EndHour, "End Hour");
 
         /*  Marketing Ad For Template validation */
-        formValidation.isEmptyField(MarketingAdForTemplate, "Marketing Ad For Template");
+        formValidation.isEmptyFieldValidation(MarketingAdForTemplate, "Marketing Ad For Template");
 
         //TODO: add more validation.. לבדוק אורך השדה בשעות ואת הטקסט שקשור
     }

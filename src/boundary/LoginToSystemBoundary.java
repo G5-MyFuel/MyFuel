@@ -75,7 +75,7 @@ public class LoginToSystemBoundary extends Application {
     //מתודה שמאתחלת את בדיקות הקלט לטופס הלוגין
     public void LoginValidation() {
         //username validation
-        formValidation.isEmptyField(userIDTextField, "User ID");
+        formValidation.isEmptyFieldValidation(userIDTextField, "User ID");
         formValidation.isContainsOnlyNumbers(userIDTextField, "user ID");
         formValidation.maxLengthValidation(userIDTextField, "user ID", 9);
         //password validation
