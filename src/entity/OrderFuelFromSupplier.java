@@ -57,4 +57,6 @@ public class OrderFuelFromSupplier {
     public void setOrderStatus(String orderStatus) {
         OrderStatus = orderStatus;
     }
+
+
 }

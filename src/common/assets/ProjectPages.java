@@ -30,7 +30,10 @@ public enum ProjectPages {
     //PURCHASE_FUEL_FOR_HOME_HEATING,TRACKING_FUEL_FOR_HOME_HEATING,
     FAST_FUEL_PAGE("/boundary/CustomerRegistrationFXML2.fxml"),
     PURCHASE_FUEL_FOR_HOME_HEATING("/boundary/NewPurchaseFuelForHomeHeatingFXML.fxml"),
-    LOGIN_PAGE("/boundary/LoginToSystemFXML.fxml");
+    LOGIN_PAGE("/boundary/LoginToSystemFXML.fxml"),
+
+    //Adi pages:
+    MANAGER_SUPPLY_CONFIRMATION_PAGE("/boundary/Manager-Supply-confirmation-adi.fxml");
 
     private String path;
 

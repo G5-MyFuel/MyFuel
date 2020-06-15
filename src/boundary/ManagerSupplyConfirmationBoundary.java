@@ -1,6 +1,7 @@
 package boundary;
 
 import Contollers.ManagerSupplyConfirmationController;
+import entity.ManagerSupplyConfirmation;
 import entity.OrderFuelFromSupplier;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -26,11 +27,11 @@ import java.util.ResourceBundle;
  * @see ManagerSupplyConfirmationBoundary - the from's logic class
  */
 
-public class ManagerSupplyConfirmationBoundary implements Initializable {
+public class ManagerSupplyConfirmationBoundary implements DataInitializable {
 
     private ManagerSupplyConfirmationController myController = new ManagerSupplyConfirmationController(this);
-    private ObservableList<OrderFuelFromSupplier> tableData;
-
+    private ObservableList<ManagerSupplyConfirmation> tableData;
+    private String stationManagerID = "800300579";
     @FXML
     private Button btnOverview;
 
@@ -44,7 +45,7 @@ public class ManagerSupplyConfirmationBoundary implements Initializable {
     private ImageView arrowImage;
 
     @FXML
-    private TableView<OrderFuelFromSupplier> tableView;
+    private TableView<ManagerSupplyConfirmation> tableView;
 
     @FXML
     private TableColumn<?, ?> OrderCol;
@@ -123,17 +124,22 @@ public class ManagerSupplyConfirmationBoundary implements Initializable {
     }
 
     @Override
+    public void initData(Object data) {
+        stationManagerID = (String)data;
+    }
+
+    @Override
     public void initialize(URL location, ResourceBundle resources) {
+        myController.getOrdersFromDB(stationManagerID);
         hboxOrderConfirmation.setVisible(false);
         tableView.setVisible(true);
         ApprovalTxt.setVisible(false);
         SendBtn.setVisible(false);
         SendBtn.setDisable(true);
-        myController.getOrdersFromDB();
         System.out.println("Manager Supply Confirmation Page Is Open");
     }
 
-    public void setOrderForManagerTableView(ArrayList<OrderFuelFromSupplier> OrderArray) {
+    public void setOrderForManagerTableView(ArrayList<ManagerSupplyConfirmation> OrderArray) {
         OrderCol.setCellValueFactory(new PropertyValueFactory<>("OrderNumber"));
         FuelTypeCol.setCellValueFactory(new PropertyValueFactory<>("FuelType"));
         AmountCol.setCellValueFactory(new PropertyValueFactory<>("Quantity"));

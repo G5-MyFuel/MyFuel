@@ -1,15 +1,13 @@
 package Contollers;
 
 import boundary.ManagerSupplyConfirmationBoundary;
-import boundary.OrderExecutionBoundary;
 import common.assets.SqlAction;
 import common.assets.SqlQueryType;
 import common.assets.SqlResult;
-import entity.OrderFuelFromSupplier;
+import entity.ManagerSupplyConfirmation;
 import javafx.application.Platform;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
  * @author Adi Lampert
@@ -18,23 +16,26 @@ import java.util.Date;
 public class ManagerSupplyConfirmationController extends BasicController {
 
     private ManagerSupplyConfirmationBoundary myBoundary;
-    public ArrayList<OrderFuelFromSupplier> resultList = new ArrayList<>();
+    public ArrayList<ManagerSupplyConfirmation> resultList = new ArrayList<>();
 
     public ManagerSupplyConfirmationController(ManagerSupplyConfirmationBoundary myBoundary) {
         this.myBoundary = myBoundary;
     }
 
-    public void getOrdersFromDB() {
-        SqlAction sqlAction = new SqlAction(SqlQueryType.GET_ALL_ORDERS_FROM_SUPPLIER_TABLE);
+    public void getOrdersFromDB(String stationManagerID) {
+        ArrayList<Object> al = new ArrayList<>();
+        al.add(stationManagerID);
+        SqlAction sqlAction = new SqlAction(SqlQueryType.GET_ALL_ORDER_TO_SUPPLY_FOR_STATION_MANAGER,al);
         super.sendSqlActionToClient(sqlAction);
     }
 
     public void getResultFromClient(SqlResult result) {
         Platform.runLater(() -> {
             switch (result.getActionType()) {
-                case GET_ALL_ORDERS_FROM_SUPPLIER_TABLE:
-                    ArrayList<OrderFuelFromSupplier> resultList = new ArrayList<>();
+                case GET_ALL_ORDER_TO_SUPPLY_FOR_STATION_MANAGER:
+                    ArrayList<ManagerSupplyConfirmation> resultList = new ArrayList<>();
                     resultList.addAll(this.changeResultToOrder(result));
+                    System.out.println(resultList);
                     myBoundary.setOrderForManagerTableView(resultList);
                     break;
 
@@ -44,10 +45,10 @@ public class ManagerSupplyConfirmationController extends BasicController {
         });
     }
 
-    private ArrayList<OrderFuelFromSupplier> changeResultToOrder(SqlResult result) {
+    //OrderNumber,companyName,StationNum,FuelType,Quantity
+    private ArrayList<ManagerSupplyConfirmation> changeResultToOrder(SqlResult result) {
         for (ArrayList<Object> a : result.getResultData()) {
-            OrderFuelFromSupplier x = new OrderFuelFromSupplier((String) a.get(0), (String) a.get(1),
-                    (int) a.get(2), (Date) a.get(3), (int) a.get(4), (String) a.get(5), (String) a.get(6));
+            ManagerSupplyConfirmation x = new ManagerSupplyConfirmation((String) a.get(0), (String) a.get(1), (int) a.get(2), (String) a.get(3), (int) a.get(4));
             resultList.add(x);
         }
         return resultList;
