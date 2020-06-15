@@ -64,7 +64,6 @@ public class CostumerManagementController extends BasicController {
     public void removeCostumer(String CostumerID){
         ArrayList<Object> varArray = new ArrayList<>();
         varArray.add(CostumerID);
-        System.out.println(CostumerID);
         SqlAction sqlAction = new SqlAction(SqlQueryType.REMOVE_COSTUMER, varArray);
         super.sendSqlActionToClient(sqlAction);
     }
@@ -95,7 +94,6 @@ public class CostumerManagementController extends BasicController {
                 case GET_ALL_VEHICLE_TABLE:
                     this.changeResultToVehicle(result);
                     break;
-
                 default:
                     break;
             }
@@ -118,12 +116,12 @@ public class CostumerManagementController extends BasicController {
      * @param result the result
      * @return Array list of costumers
      */
-    private ArrayList<Costumer> changeResultToCostumer(SqlResult result){
-        ArrayList<Costumer> resultList=new ArrayList<>();
-        for(ArrayList<Object> a: result.getResultData()) {
-            Costumer cos = new Costumer((String) a.get(0), (String)a.get(1),(String)a.get(2),
-                    (String)a.get(3),(String)a.get(4),(String)a.get(5),null,(String)a.get(9),null,(String)a.get(10));
-            CreditCard card = new CreditCard(cos,(String)a.get(6),(String)a.get(7),(String)a.get(8));
+    private ArrayList<Costumer> changeResultToCostumer(SqlResult result) {
+        ArrayList<Costumer> resultList = new ArrayList<>();
+        for (ArrayList<Object> a : result.getResultData()) {
+            Costumer cos = new Costumer((String) a.get(0), (String) a.get(9), (String) a.get(4),
+                    (String) a.get(11), (String) a.get(12), (String) a.get(13), null, (String) a.get(5), null, (String) a.get(6));
+            CreditCard card = new CreditCard(cos, (String) a.get(1), (String) a.get(2), (String) a.get(3));
             cos.setCostumerCreditCard(card);
             resultList.add(cos);
         }

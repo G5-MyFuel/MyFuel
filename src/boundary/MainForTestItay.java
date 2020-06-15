@@ -1,7 +1,5 @@
 package boundary;
 
-import client.ChatClient;
-import client.ClientApp;
 import client.ClientConsole;
 import common.assets.ProjectPages;
 import javafx.application.Application;
@@ -15,7 +13,6 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
-import java.io.IOException;
 import java.util.Optional;
 
 public class MainForTestItay extends Application {
@@ -41,12 +38,13 @@ public class MainForTestItay extends Application {
         Pane root = null;
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource(ProjectPages.COSTUMER_MANAGEMENT_TABLE_PAGE.getPath()));
+            loader.setLocation(getClass().getResource(ProjectPages.GENERAL_DASH_BOARD.getPath()));
             root = loader.load();
             Scene s1 = new Scene(root);
             primaryStage.setScene(s1);
             primaryStage.setResizable(false);
             primaryStage.show();
+
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("ERR at App.Start");

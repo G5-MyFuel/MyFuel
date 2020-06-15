@@ -14,8 +14,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
@@ -23,7 +21,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
-
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -34,11 +31,11 @@ import java.util.ResourceBundle;
  * @see CustomerRegistrationBoundary - the form's Boundary class
  */
 
-public class CustomerRegistrationBoundary implements Initializable {
+public class CustomerRegistrationBoundary implements DataInitializable {
 
     private ArrayList<Vehicle> tempVehicleArray = new ArrayList<>();
     private ArrayList<Vehicle> allVehicleArray;
-    CreditCard tempCreditCard = null;
+    private CreditCard tempCreditCard = null;
 
     private CustomerRegistrationController myController = new CustomerRegistrationController(this);
     private FormValidation formValidation;
@@ -167,6 +164,12 @@ public class CustomerRegistrationBoundary implements Initializable {
         tempCreditCard = null;
     }
 
+    @Override
+    public void initData(Object data) {
+        if(data instanceof String)
+            myController.setCompanyName((String)data);
+    }
+
 
     /**
      * This method saves the vehicle information after clicking save button
@@ -199,8 +202,8 @@ public class CustomerRegistrationBoundary implements Initializable {
         else
             tempCos.setPurchasePlan("false");
         //set costumer final details.
-        tempCos.setCostumerType(CostumertypeChoiceBox.getSelectionModel().getSelectedItem().toString());
-        tempCos.setServicePlan(ServicePlanChoiseBox.getSelectionModel().getSelectedItem().toString());
+        tempCos.setCostumerType(CostumertypeChoiceBox.getSelectionModel().getSelectedItem());
+        tempCos.setServicePlan(ServicePlanChoiseBox.getSelectionModel().getSelectedItem());
         tempCos.setCostumerVehicle(tempVehicleArray);
         tempCos.setCostumerCreditCard(tempCreditCard);
         myController.setCostumerInDB(tempCos);
@@ -228,6 +231,7 @@ public class CustomerRegistrationBoundary implements Initializable {
 
     @FXML
     void FirstForwardButtonOnClick(MouseEvent event) {
+
         if (CostumerIDtxt.getText().isEmpty() || FirstNametxt.getText().isEmpty() || LastNametxt.getText().isEmpty() || EmailAdresstxt.getText().isEmpty()) {//check fields
             ErrorAlert.setTitle("Fields Error");
             ErrorAlert.setHeaderText("Please fill all require information");
@@ -242,7 +246,8 @@ public class CustomerRegistrationBoundary implements Initializable {
                         LastNametxt.getText(), EmailAdresstxt.getText(), null, "true", null, null);
                 if (CardClickFlag) {
                     costumer.setCostumerCreditCard(tempCreditCard);
-                    tempCreditCard.setCardOwner(costumer);
+                    if(tempCreditCard != null)
+                        tempCreditCard.setCardOwner(costumer);
                 }
                 myController.setCostumerFirstPhase(costumer);
                 myController.getVehicleTable();
@@ -290,7 +295,7 @@ public class CustomerRegistrationBoundary implements Initializable {
 
     private boolean isCostumerExist() {
         for (Costumer cos : allDBCostumerArray) {
-            if (cos.getID().toString().equals(CostumerIDtxt.getText()))
+            if (cos.getUserID().toString().equals(CostumerIDtxt.getText()))
                 return true;
         }
         return false;
@@ -390,4 +395,6 @@ public class CustomerRegistrationBoundary implements Initializable {
     public void setAllVehicleArray(ArrayList<Vehicle> allVehicleArray) {
         this.allVehicleArray = allVehicleArray;
     }
+
+
 }

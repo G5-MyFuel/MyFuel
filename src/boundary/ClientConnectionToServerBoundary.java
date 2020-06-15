@@ -25,6 +25,7 @@ public class ClientConnectionToServerBoundary {
         //initialize ip & port of MyFuel Server
         String[] args = {ServerIp.getText()};
         ClientConsole.connection(args);
-        mainProjectFX.pagingController.loadBoundary(ProjectPages.GENERAL_DASH_BOARD.getPath());
+
+        mainProjectFX.pagingController.loadBoundary(ProjectPages.LOGIN_PAGE.getPath());
     }
 }

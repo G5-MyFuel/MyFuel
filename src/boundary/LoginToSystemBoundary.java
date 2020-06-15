@@ -5,6 +5,8 @@ import Contollers.LoginToSystemController;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import common.assets.PermissionsManagement;
+import common.assets.ProjectPages;
 import entity.User;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -24,13 +26,14 @@ import java.util.ResourceBundle;
 public class LoginToSystemBoundary extends Application {
     /* variables: */
     private static LoginToSystemBoundary Instance;
+    private PermissionsManagement permissionsManagement = new PermissionsManagement();
     private ActionEvent event = null;
     Contollers.LoginToSystemController loginToSystemLogic; //logic instance
     FormValidation formValidation;
     private ArrayList<User> allDBUsersArrayList;
     private LoginToSystemController myController = new LoginToSystemController(this);
     private Alert ErrorAlert = new Alert(Alert.AlertType.ERROR);
-    int userType = 0;
+    String userType = "";
 
     /*  fxml file object variables: */
     @FXML
@@ -83,39 +86,27 @@ public class LoginToSystemBoundary extends Application {
     @FXML
     void clickLoginBtn() {
         System.out.println("-->clickLoginBtn method");
-        System.out.println(allDBUsersArrayList);
-        if(checkInputs()){
-
+        //System.out.println(allDBUsersArrayList);
+        if (checkInputs()) {    //if the user exist in the db
+            ArrayList<String> allButtons = myController.getUserButtons(this, userType);
+            mainProjectFX.pagingController.loadBoundary(ProjectPages.GENERAL_DASH_BOARD.getPath(), allButtons);
         }
     }
 
     public boolean checkInputs() {
         if (!loginAsComboBox.getSelectionModel().isEmpty()) {
-            switch (loginAsComboBox.getValue()) {
-                case "Customer":
-                    userType = 1;
-                    break;
-                case "Employee":
-                    userType = 2;
-                    break;
-                case "Supplier":
-                    userType = 3;
-                    break;
-                default:
-                    userType = 0;
-                    break;
-            }
+            userType = loginAsComboBox.getValue().toUpperCase();
         }
 
         //check if user type selected
-        if (userType == 0) {
+        else {
             ErrorAlert.setTitle("Login Error");
             ErrorAlert.setHeaderText("User type cannot be empty, Please select user type");
             ErrorAlert.showAndWait();
         }
 
         //check if userID exist in DB
-        if (checkIfUserNameAndUserTypeInDb(userIDTextField.getText(), userType)) {
+        if (checkIfUserNameAndUserTypeInDb(userIDTextField.getText(), loginAsComboBox.getValue().toUpperCase())) {
             if (checkIfPasswordMatches(userIDTextField.getText(), passwordField.getText())) {
                 System.out.println("ther userid and password matches!");
                 return true;
@@ -124,13 +115,24 @@ public class LoginToSystemBoundary extends Application {
         return false;
     }
 
-    private boolean checkIfUserNameAndUserTypeInDb(String userID, int UserType) {
+    private boolean checkIfUserNameAndUserTypeInDb(String userID, String UserType) {
         for (User u : allDBUsersArrayList) {
-            if (u.getUserID().equals(userID) && userType == u.getUserType()) {
-                System.out.println("the user and its type correct");//tet
-                return true;
+            if (u.getUserID().equals(userID)) {
+                if (u.getUserType().equals("CUSTOMER") && userType.equals("CUSTOMER")) {
+                    return true;
+                } else if (u.getUserType().equals("SUPPLIER") && userType.equals("SUPPLIER")) {
+                    return true;
+                } else if (userType.equals("EMPLOYEE")) {
+                    if (u.getUserType().equals("COMPANY_MANAGER") || u.getUserType().equals("MARKETING_DEPARTMENT_WORKER") || u.getUserType().equals("MARKETING_MANAGER") || u.getUserType().equals("MARKETING_REPRESENTATIVE") || u.getUserType().equals("STATION_MANAGER")) {
+                        userType = u.getUserType();
+                        return true;
+                    } else break;
+                } else {
+                    break;
+                }
             }
         }
+
         ErrorAlert.setTitle("User ID does'nt exist in the system");
         ErrorAlert.setHeaderText("User " + userIDTextField.getText() + " does not exist on the system, please try again!");
         ErrorAlert.showAndWait();
@@ -140,25 +142,13 @@ public class LoginToSystemBoundary extends Application {
     private int loginAttempts = 3;
 
     private boolean checkIfPasswordMatches(String userID, String password) {
-        if (loginAttempts > 0) {
-            for (User u : allDBUsersArrayList) {
-                if (u.getUserID().equals(userID)) {
-                    if (u.getUserPassword().equals(password)) {
-                        System.out.println("the userId & password matches");
-                        return true;
-                    } else break;
-                }
+        for (User u : allDBUsersArrayList) {
+            if (u.getUserID().equals(userID)) {
+                if (u.getUserPassword().equals(password)) {
+                    System.out.println("the userId & password matches");
+                    return true;
+                } else break;
             }
-            ErrorAlert.setTitle("The password is incorrect! try again");
-            loginAttempts--;
-            ErrorAlert.setHeaderText("Login failed! There are " + loginAttempts + " login attempts left");
-            ErrorAlert.showAndWait();
-            return false;
-        } else {
-            myController.setNewUserFieldValue("loginAttempts", "0", userIDTextField.getText(), Integer.toString(userType));
-            ErrorAlert.setTitle("Account blocked!");
-            ErrorAlert.setHeaderText("Contact a marketing representative to unblock the user");
-            ErrorAlert.showAndWait();
         }
         return false;
     }

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane prefHeight="796.0" prefWidth="1062.0" style="-fx-position-shape: center; -fx-border-color: transparent;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundary.VieReportsBoundary">
+   <children>
+      <Label layoutX="39.0" layoutY="55.0" text="View Reports" textFill="#2d4578">
+         <font>
+            <Font name="System Bold" size="40.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="btnViewQuarterlyRevenueReport" buttonType="RAISED" layoutX="39.0" layoutY="313.0" onMouseClicked="#handleViewQuarterlyRevenueReport" prefHeight="38.0" prefWidth="280.0" styleClass="jfx-button" stylesheets="@GeneratingReportsStationManagerCSS.css" text="View Quarterly revenue report" textFill="WHITE">
+         <font>
+            <Font name="Calibri Bold" size="14.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btnViewPurchasesReport" buttonType="RAISED" layoutX="387.0" layoutY="313.0" onMouseClicked="#handleViewPurchasesReport" prefHeight="38.0" prefWidth="280.0" styleClass="jfx-button" stylesheets="@GeneratingReportsStationManagerCSS.css" text="View Purchases report" textFill="WHITE">
+         <font>
+            <Font name="Calibri Bold" size="14.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btnViewQuantityItemsInStockReport" buttonType="RAISED" layoutX="727.0" layoutY="313.0" onMouseClicked="#handleViewQuantityItemsInStockReport" prefHeight="38.0" prefWidth="280.0" styleClass="jfx-button" stylesheets="@GeneratingReportsStationManagerCSS.css" text="View Quantity of items in stock report" textFill="WHITE">
+         <font>
+            <Font name="Calibri Bold" size="14.0" />
+         </font>
+      </JFXButton>
+      <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="770.0" layoutY="140.0" onMouseClicked="#handleViewQuantityItemsInStockReport">
+         <image>
+            <Image url="@../media/GeneratingReports/items.jpeg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="453.0" layoutY="140.0" onMouseClicked="#handleViewPurchasesReport">
+         <image>
+            <Image url="@../media/GeneratingReports/moneyBag.jpeg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="96.0" layoutY="140.0" onMouseClicked="#handleViewQuarterlyRevenueReport">
+         <image>
+            <Image url="@../media/GeneratingReports/purches.jpeg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="27.0" layoutY="363.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../media/CostumerRegisterationMedia/help_16px.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="375.0" layoutY="363.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../media/CostumerRegisterationMedia/help_16px.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="715.0" layoutY="363.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../media/CostumerRegisterationMedia/help_16px.png" />
+         </image>
+      </ImageView>
+      <JFXComboBox fx:id="ChooseReportYearCombo" layoutX="52.0" layoutY="421.0" onAction="#handleChooseReportYear" prefHeight="31.0" prefWidth="204.0" promptText="Please select a year" />
+      <JFXComboBox fx:id="ChooseReportQuarterCombo" layoutX="52.0" layoutY="472.0" onAction="#handleChooseReportQuarter" promptText="Please Select a quarter" />
+      <Label fx:id="TotalRevenueLabel" layoutX="52.0" layoutY="542.0" text="Total revenue for the selected quarter is:">
+         <font>
+            <Font name="System Bold Italic" size="15.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="ViewTotalRevenueTXT" focusColor="#00add8" labelFloat="true" layoutX="52.0" layoutY="578.0" onAction="#handleViewTotalRevenue" prefHeight="52.0" prefWidth="139.0" promptText="Current price:" unFocusColor="#868282">
+         <padding>
+            <Insets bottom="5.0" top="20.0" />
+         </padding>
+      </JFXTextField>
+      <Label fx:id="QuantityItemsStockTxt" layoutX="779.0" layoutY="390.0" text="Quantity of items in stock" />
+      <TableView fx:id="ViewPurchasesReportTable" layoutX="350.0" layoutY="423.0" prefHeight="147.0" prefWidth="390.0">
+         <columns>
+            <TableColumn fx:id="FuelTypeColumn" prefWidth="116.0" text="Fuel type" />
+            <TableColumn fx:id="QuantityPurchasedColumn" prefWidth="157.0" text="Quantity purchased" />
+            <TableColumn fx:id="SalesAmountColumn" prefWidth="115.0" text="Sales amount" />
+         </columns>
+      </TableView>
+      <TableView fx:id="ViewQuantityReportTable" layoutX="750.0" layoutY="423.0" prefHeight="147.0" prefWidth="275.0">
+         <columns>
+            <TableColumn fx:id="FuelTypeQuantityReportColumn" prefWidth="116.0" text="Fuel type" />
+            <TableColumn fx:id="AvailableInventoryColumn" prefWidth="157.0" text="Available inventory" />
+         </columns>
+      </TableView>
+   </children>
+</Pane>

@@ -9,32 +9,27 @@ import common.assets.SqlQueryType;
 import entity.Costumer;
 import entity.EditingCell;
 import entity.Vehicle;
-
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-
 import javafx.fxml.Initializable;
-
 import javafx.scene.control.*;
 import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-
 import javafx.util.Callback;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
+
+import static java.lang.Thread.sleep;
 
 public class CostumerManagmentTablePageBoundary implements Initializable {
 
@@ -130,6 +125,9 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
     @FXML
     private TreeTableColumn<?, ?> PurchasePlanTreeCol;
 
+    @FXML
+    private ImageView loadingImg;
+
 
     private JFXComboBox<String> CostumertypeChoiceBox = new JFXComboBox<>();
 
@@ -154,7 +152,6 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
      */
     public void setCostumerTable(ArrayList<Costumer> cosArray) {
         costumers.addAll(cosArray);
-
         setColomsCells();
         ObservableList<Costumer> data = FXCollections.observableArrayList(cosArray);
         CosManageTbale.setItems(data);
@@ -165,8 +162,8 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
             @Override
             public void handle(TableColumn.CellEditEvent<Costumer, String> t) {
                 Costumer temp = ((Costumer) t.getTableView().getItems().get(t.getTablePosition().getRow()));
-                temp.setFname(t.getNewValue());
-                myController.updateCostumerDetailsInDb(SqlQueryType.UPDATE_COSTUMER_FNAME, temp.getID(), temp.getFname());
+                temp.setUserFirstName(t.getNewValue());
+                myController.updateCostumerDetailsInDb(SqlQueryType.UPDATE_COSTUMER_FNAME, temp.getUserID(), temp.getUserFirstName());
             }
         });
         //Modifying the lastName property
@@ -174,8 +171,8 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
             @Override
             public void handle(TableColumn.CellEditEvent<Costumer, String> t) {
                 Costumer temp = ((Costumer) t.getTableView().getItems().get(t.getTablePosition().getRow()));
-                temp.setLname(t.getNewValue());
-                myController.updateCostumerDetailsInDb(SqlQueryType.UPDATE_COSTUMER_LNAME, temp.getID(), temp.getLname());
+                temp.setUserLastName(t.getNewValue());
+                myController.updateCostumerDetailsInDb(SqlQueryType.UPDATE_COSTUMER_LNAME, temp.getUserID(), temp.getUserLastName());
             }
         });
         //Modifying the Emailadress property
@@ -183,8 +180,8 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
             @Override
             public void handle(TableColumn.CellEditEvent<Costumer, String> t) {
                 Costumer temp = ((Costumer) t.getTableView().getItems().get(t.getTablePosition().getRow()));
-                temp.setEmailAdress(t.getNewValue());
-                myController.updateCostumerDetailsInDb(SqlQueryType.UPDATE_COSTUMER_EMAIL, temp.getID(), temp.getEmailAdress());
+                temp.setUserEmail(t.getNewValue());
+                myController.updateCostumerDetailsInDb(SqlQueryType.UPDATE_COSTUMER_EMAIL, temp.getUserID(), temp.getUserEmail());
             }
         });
         //Modifying the CostumerType property
@@ -193,7 +190,7 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
             public void handle(TableColumn.CellEditEvent<Costumer, String> t) {
                 Costumer temp = ((Costumer) t.getTableView().getItems().get(t.getTablePosition().getRow()));
                 temp.setCostumerType(t.getNewValue());
-                myController.updateCostumerDetailsInDb(SqlQueryType.UPDATE_COSTUMER_TYPE, temp.getID(), temp.getCostumerType());
+                myController.updateCostumerDetailsInDb(SqlQueryType.UPDATE_COSTUMER_TYPE, temp.getUserID(), temp.getCostumerType());
             }
         });
         //Modifying the servicePlan property
@@ -202,7 +199,7 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
             public void handle(TableColumn.CellEditEvent<Costumer, String> t) {
                 Costumer temp = ((Costumer) t.getTableView().getItems().get(t.getTablePosition().getRow()));
                 temp.setServicePlan(t.getNewValue());
-                myController.updateCostumerDetailsInDb(SqlQueryType.UPDATE_COSTUMER_SERVICE_PLAN, temp.getID(), temp.getServicePlan());
+                myController.updateCostumerDetailsInDb(SqlQueryType.UPDATE_COSTUMER_SERVICE_PLAN, temp.getUserID(), temp.getServicePlan());
             }
         });
         //Modifying the purchasePlan property
@@ -211,7 +208,7 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
             public void handle(TableColumn.CellEditEvent<Costumer, String> t) {
                 Costumer temp = ((Costumer) t.getTableView().getItems().get(t.getTablePosition().getRow()));
                 temp.setPurchasePlan(t.getNewValue());
-                myController.updateCostumerDetailsInDb(SqlQueryType.UPDATE_COSTUMER_PURCHASE_PLAN, temp.getID(), temp.getPurchasePlan());
+                myController.updateCostumerDetailsInDb(SqlQueryType.UPDATE_COSTUMER_PURCHASE_PLAN, temp.getUserID(), temp.getPurchasePlan());
             }
         });
     }
@@ -260,13 +257,13 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
         });
 
 
-        CostumerIDCol.setCellValueFactory(new PropertyValueFactory<Costumer, String>("ID"));
+        CostumerIDCol.setCellValueFactory(new PropertyValueFactory<Costumer, String>("userID"));
         CostumerIDCol.setEditable(false);
-        firstNameCol.setCellValueFactory(new PropertyValueFactory<Costumer, String>("Fname"));
+        firstNameCol.setCellValueFactory(new PropertyValueFactory<Costumer, String>("userFirstName"));
         firstNameCol.setCellFactory(cellFactory);
-        LastNameCol.setCellValueFactory(new PropertyValueFactory<Costumer, String>("Lname"));
+        LastNameCol.setCellValueFactory(new PropertyValueFactory<Costumer, String>("userLastName"));
         LastNameCol.setCellFactory(cellFactory);
-        EmailAdressCol.setCellValueFactory(new PropertyValueFactory<Costumer, String>("EmailAdress"));
+        EmailAdressCol.setCellValueFactory(new PropertyValueFactory<Costumer, String>("userEmail"));
         EmailAdressCol.setCellFactory(cellFactory);
 
         CostumerTypeCol.setCellValueFactory(new PropertyValueFactory<Costumer, String>("CostumerType"));
@@ -283,14 +280,16 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
     }
 
     public void setVehicleTable(ArrayList<Vehicle> vArr) {
+        Vehicles.addAll(vArr);
         VehicleIDCol.setCellValueFactory(new PropertyValueFactory<>("VehicleID"));
         GasTypeCol.setCellValueFactory(new PropertyValueFactory<>("GasType"));
         ObservableList<Vehicle> data = FXCollections.observableArrayList(vArr);
         VehicleTable.setItems(data);
     }
 
-    public void refreshTable(){
-        myController.getCostumerTable();;
+    public void refreshTable() {
+        myController.getCostumerTable();
+        ;
     }
 
     @FXML
@@ -324,6 +323,8 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
         } else {
             myController.addVehicleToDB(OwnerIDtxt1.getText(), VehicleIDtxt.getText(), GasTypeChoiseBox.getValue());
             Vehicle insertItem = new Vehicle(OwnerIDtxt1.getText(), VehicleIDtxt.getText(), GasTypeChoiseBox.getValue());
+            Costumer cos = searchCostumerWithID(OwnerIDtxt1.getText());
+            cos.getCostumerVehicle().add(insertItem);
             VehicleTable.getItems().add(insertItem);
             VehicleTable.refresh();
             OwnerIDtxt1.clear();
@@ -345,18 +346,40 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
         Optional<ButtonType> res = alert.showAndWait();
 
         if (res.get().getText().equals("Yes")) {
-            myController.removeCostumer(CosManageTbale.getSelectionModel().getSelectedItem().getID());
-            Costumer selectedItem = CosManageTbale.getSelectionModel().getSelectedItem();
-            CosManageTbale.getItems().remove(selectedItem);
-            CosManageTbale.refresh();
+            if (!CosManageTbale.getSelectionModel().isEmpty()) {
+                Costumer selectedItem = CosManageTbale.getSelectionModel().getSelectedItem();
+                myController.getCostumerVehicles(selectedItem.getUserID());
+                myController.removeCostumer(CosManageTbale.getSelectionModel().getSelectedItem().getUserID());
+                costumers.remove(selectedItem);
+                CosManageTbale.getItems().remove(selectedItem);
+                CosManageTbale.refresh();
+                VehicleTable.getItems().clear();
+                VehicleTable.refresh();
+                try {//wait for the quarry to execute
+                    sleep(2000);
+                } catch (InterruptedException ex) {
+                    //...
+                }
+                for (Vehicle v : Vehicles) {
+                    myController.removeVehicle(v.getVehicleID());
+                }
+            }
         }
     }
 
+    @FXML
+    void refreshVehicleTable() {
+        if (!VehicleTable.getItems().isEmpty()) {
+            VehicleTable.getItems().clear();
+            VehicleSearchCosIDtxt.clear();
+        }
+        VehicleTable.refresh();
+
+    }
 
     @FXML
     void ClickSearchCostumerVehicles(MouseEvent event) {
         Costumer cos = searchCostumerWithID(VehicleSearchCosIDtxt.getText());
-
         if (VehicleSearchCosIDtxt.getText().isEmpty()) {
             ErrorAlert.setTitle("Internal Error");
             ErrorAlert.setHeaderText("Please insert Costumer ID");
@@ -424,7 +447,7 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
 
     private Costumer searchCostumerWithID(String costumerID) {
         for (Costumer cos : costumers) {
-            if (cos.getID().equals(costumerID))
+            if (cos.getUserID().equals(costumerID))
                 return cos;
         }
         return null;

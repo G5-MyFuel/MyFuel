@@ -2,74 +2,113 @@ package common.assets;
 
 
 import Contollers.BasicController;
-import entity.Employee;
-import javafx.application.Platform;
+import boundary.generalDashBoardBoundary;
+import boundary.mainProjectFX;
+import com.jfoenix.controls.JFXButton;
+import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
 
 public class PermissionsManagement extends BasicController {
-    private ArrayList<Employee> employeeArrayList;
-    private int userType;
+    private PermissionsManagement Instance = null;
+    //    private ArrayList<Employee> employeeArrayList = new ArrayList<>();
     private String userID;
+    private String userType;
+    //private UserType userType;
+    private generalDashBoardBoundary generalDashBoardBoundaryInstance;
 
-    public PermissionsManagement(String userID, int userType) {
+    public PermissionsManagement() {
+
+    }
+
+    public PermissionsManagement(String userID, String userType) throws InterruptedException {
         this.userID = userID;
+//        this.userType = getUserTypeByNumber(userTypeAsNumber);
+
+    }
+
+    public PermissionsManagement getInstance() {
+        if (Instance == null)
+            Instance = new PermissionsManagement();
+        return Instance;
+    }
+
+    public void setUserType(String userType) {
         this.userType = userType;
-        getEmployeeTable();
     }
 
-    private UserType getUserTypeByNumber(int userTypeAsNumber) {
-        switch (userTypeAsNumber) {
-            case 1:
-                return UserType.CUSTOMER;
-            case 2:
-                for (Employee e : employeeArrayList) {
-                    if (e.getUserID() == userID) {
-                         if(UserType.asUserType(e.getJobTitle())!=null){
-                             return UserType.asUserType(e.getJobTitle());
-                         }else System.err.println("employee jobTitle doesn't exist");
-                    } else System.err.println("Employee doesn't exist");
-                }
+    public String getUserType() {
+        return userType;
+    }
+
+
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
+
+    public ArrayList<Button> openDashBoard() {
+        ArrayList<Button> buttonArrayList = new ArrayList<>();
+        switch (userType) {
+            case "CUSTOMER":
+                //homepage,
+                EventHandler event1 = new EventHandler() {
+                    @Override
+                    public void handle(Event event) {
+                        generalDashBoardBoundaryInstance.currentPagePane.setVisible(true);
+                        generalDashBoardBoundaryInstance.currentPagePane.getChildren().clear();
+                        generalDashBoardBoundaryInstance.currentPagePane.getChildren().setAll(mainProjectFX.pagingController.loadBoundaryInPane(ProjectPages.COSTUMER_MANAGEMENT_TABLE_PAGE.getPath()));
+                        generalDashBoardBoundaryInstance.myFuelLogo.setVisible(false);
+                    }
+                };
+                Button purchase_fuel_for_home_heating_button = getButton("New purchase fuel for home heating", event1, null);
+                buttonArrayList.add(purchase_fuel_for_home_heating_button);
                 break;
-            case 3:
-                return UserType.SUPPLIER;
+            case "SUPPLIER":
+
+                break;
+            case "DALKAN":
+
+                break;
+            case "COMPANY_MANAGER":
+
+                break;
+            case "STATION_MANAGER":
+
+                break;
+            case "MARKETING_MANAGER":
+
+                break;
+            case "MARKETING_REPRESENTATIVE":
+
+                break;
+            case "MARKETING_DEPARTMENT_WORKER":
+
+                break;
+
+            default:
+                System.err.println("user type err - > openDashBoard failed!");
         }
-        return null;
+        return buttonArrayList;
     }
 
-    public void getEmployeeTable() {
-        SqlAction sqlAction = new SqlAction(SqlQueryType.GET_EMPLOYEE_TABLE);
-        super.sendSqlActionToClient(sqlAction);
+    private Button getButton(String title, EventHandler eventHandler, Image buttonIcon) {
+        Button b = new JFXButton(title);
+        b.setGraphic(new ImageView(buttonIcon));
+        b.setOnAction(eventHandler);
+        return b;
     }
 
     @Override
     public void getResultFromClient(SqlResult result) {
-        Platform.runLater(() -> {
-            switch (result.getActionType()) {
-                case GET_EMPLOYEE_TABLE:
-                    System.out.println("PermissionsManagement -> GET_EMPLOYEE_TABLE query");
-                    this.employeeArrayList = new ArrayList<>();
-                    employeeArrayList.addAll(this.changeResultToEmployees(result));
-                    System.out.println(employeeArrayList);
-                    break;
-                default:
-                    break;
-            }
-        });
 
     }
-
-    private ArrayList<Employee> changeResultToEmployees(SqlResult result) {
-        ArrayList<Employee> resultList = new ArrayList<>();
-        for (ArrayList<Object> a : result.getResultData()) {
-            //id,jobTitle,fuelCompany,userFirstName,userLastName,userEmail
-            Employee employee = new Employee((String) a.get(0), "", (String) a.get(3), (String) a.get(4), (String) a.get(5), (String) a.get(1), (String) a.get(2));
-            resultList.add(employee);
-        }
-        return resultList;
-    }
-
-//    private Button getButton() {
-//
-//    }
 }

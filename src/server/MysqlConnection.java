@@ -106,7 +106,6 @@ public class MysqlConnection {
                     ps.setBoolean(i, bool);
                 }
             }
-
             switch (sqlAction.getActionType().getExecutionType()) {
                 case EXECUTE_QUERY:
                     sqlResult = new SqlResult(ps.executeQuery(), sqlAction.getActionType());
@@ -121,7 +120,6 @@ public class MysqlConnection {
                 default:
                     break;
             }
-
 
         } catch (SQLException e) {
             // TODO Auto-generated catch block
@@ -146,11 +144,9 @@ public class MysqlConnection {
          * *****************************************************/
         sqlArray[SqlQueryType.UPDATE_USER_LOGIN_STATUS.getCode()] = "UPDATE `Users` "
                 + "SET isLoginIndicator = ? WHERE userID = ? AND userType = ?";
-        sqlArray[SqlQueryType.GET_ALL_USERS_TABLE.getCode()] = "SELECT * FROM Users;";
+        sqlArray[SqlQueryType.GET_ALL_USERS_TABLE.getCode()] = "SELECT * FROM User;";
         sqlArray[SqlQueryType.UPDATE_USER_FIELD.getCode()] = "UPDATE `Users` SET `loginAttempts` = '5' WHERE `Users`.`userID` = 601983543 AND `Users`.`userType` = 1;";
-        sqlArray[SqlQueryType.GET_EMPLOYEE_TABLE.getCode()] = "SELECT E.employeeID,E.jobTitle,E.fuelCompany,U.userFirstName,U.userLastName,U.userEmail\n" +
-                "FROM Employee AS E, Users AS U\n" +
-                "WHERE E.employeeID = U.userID;";
+        sqlArray[SqlQueryType.GET_EMPLOYEE_TABLE.getCode()] = "select employeeID,jobTitle,userFirstName,userLastName,userEmail,companyID,gasStationID from Users as u , Employee as e where u.userID=e.employeeID";
 
         /* *****************************************************
          * *************** Common Queries ****************
@@ -162,20 +158,19 @@ public class MysqlConnection {
         /* *****************************************
          * ********** Costumer Management Queries ****************
          * *****************************************/
-        sqlArray[SqlQueryType.GET_ALL_COSTUMER_TABLE.getCode()] = "SELECT * FROM `Costumer`";
-        sqlArray[SqlQueryType.UPDATE_COSTUMER_FNAME.getCode()] = "UPDATE `Costumer` SET `First Name` = ? WHERE ID =?";
-        sqlArray[SqlQueryType.UPDATE_COSTUMER_LNAME.getCode()] = "UPDATE `Costumer` SET `Last Name` = ? WHERE ID =?";
-        sqlArray[SqlQueryType.UPDATE_COSTUMER_EMAIL.getCode()] = "UPDATE `Costumer` SET `Email Adress` = ? WHERE ID =?";
+        sqlArray[SqlQueryType.GET_ALL_COSTUMER_TABLE.getCode()] = "SELECT* FROM Costumer AS C, User AS U WHERE C.ID = U.userID";
+        sqlArray[SqlQueryType.UPDATE_COSTUMER_FNAME.getCode()] = "UPDATE `User` SET `userFirstName` = ? WHERE userID =?";
+        sqlArray[SqlQueryType.UPDATE_COSTUMER_LNAME.getCode()] = "UPDATE `User` SET `userLastName` = ? WHERE userID =?";
+        sqlArray[SqlQueryType.UPDATE_COSTUMER_EMAIL.getCode()] = "UPDATE `User` SET `userEmail` = ? WHERE userID =?";
         sqlArray[SqlQueryType.UPDATE_COSTUMER_SERVICE_PLAN.getCode()] = "UPDATE `Costumer` SET `Service Plan` = ? WHERE ID =?";
         sqlArray[SqlQueryType.UPDATE_COSTUMER_PURCHASE_PLAN.getCode()] = "UPDATE `Costumer` SET `Purchase Plan` = ? WHERE ID =?";
-        sqlArray[SqlQueryType.UPDATE_COSTUMER_TYPE.getCode()] = "UPDATE `Costumer` SET `Costumer Type` = ? WHERE ID =?";
+        sqlArray[SqlQueryType.UPDATE_COSTUMER_TYPE.getCode()] = "UPDATE `Costumer` SET `customerType` = ? WHERE ID =?";
         sqlArray[SqlQueryType.GET_ALL_COSTUMER_VEHICLES.getCode()] = "SELECT `Vehicle ID`, `Fuel Type`, `Owner ID` FROM `Vehicle` WHERE `Owner ID` = ?";
         sqlArray[SqlQueryType.REMOVE_VEHICLE.getCode()] = "DELETE FROM `Vehicle` WHERE `Vehicle ID` = ?";
-        sqlArray[SqlQueryType.REMOVE_COSTUMER.getCode()] = "DELETE FROM `Costumer` WHERE `ID` = ?";
+        sqlArray[SqlQueryType.REMOVE_COSTUMER.getCode()] =
+                "DELETE `Costumer`, `User` FROM `Costumer` INNER JOIN `User` ON Costumer.ID = User.userID WHERE `Costumer`.ID = ?";
         sqlArray[SqlQueryType.UPDATE_COSTUMER_CREDIT_CARD.getCode()] = "UPDATE `Costumer` SET `Credit Card Number` = ? ,`CreditCardExperationDate` = ? ,`CVV` = ?" +
                 "WHERE ID =?";
-
-
 
 
 
@@ -183,8 +178,9 @@ public class MysqlConnection {
          * ********** Costumer Registration Queries ****************
          * *****************************************/
         sqlArray[SqlQueryType.INSERT_NEW_COSTUMER.getCode()] =
-                "INSERT INTO `Costumer`(`ID`, `Password`, `Costumer Type`, `First Name`, `Last Name`, `Email Adress`, `Credit Card Number`," +
-                        " `CreditCardExperationDate`, `CVV`, `Purchase Plan`, `Service Plan`) VALUES (?,?,?,?,?,?,?,?,?,?,?);";
+                "INSERT INTO `Costumer`(`ID`, `Credit Card Number`, `CreditCardExperationDate`, `CVV`, `customerType`, `Purchase Plan`, `Service Plan`) VALUES (?,?,?,?,?,?,?)";
+        sqlArray[SqlQueryType.INSERT_NEW_COSTUMER_USER.getCode()] =
+                "INSERT INTO `User`(`userID`, `userType`, `userPassword`, `isLoginIndicator`, `userFirstName`, `userLastName`, `userEmail`, `FuelCompany1`) VALUES (?,'CUSTOMER',?,0,?,?,?,?)";
         sqlArray[SqlQueryType.INSERT_NEW_VEHICLE.getCode()] = "INSERT INTO `Vehicle`(`Vehicle ID`, `Fuel Type`, `Owner ID`) VALUES (?,?,?);";
 
 
@@ -193,10 +189,11 @@ public class MysqlConnection {
          * *****************************************/
         sqlArray[SqlQueryType.GET_ALL_ORDERS_FROM_SUPPLIER_TABLE.getCode()] = "SELECT * FROM `OrderForStock`";
         sqlArray[SqlQueryType.UPDATE_STATUS_TO_DONE.getCode()] = "UPDATE `OrderForStock` SET `OrderStatus`= \"Done\" WHERE `OrderNumber`= ?";
-        sqlArray[SqlQueryType.GET_FUEL_AMOUNT.getCode()]=
+        sqlArray[SqlQueryType.GET_GAS_STATION_TABLE.getCode()]= "SELECT `gasStationID`, `companyID`, `gasStationName`, `managerID`, `inventory_95`, `inventory_scooter`, `inventory_diesel` FROM `GasStation`";
 
         /* *****************************************
-         * ********** Templates+Campaigns Management Queries ****************
+         * ********** Templates+Campaigns Management Queries ***************
+         *
          * *****************************************/
         sqlArray[SqlQueryType.GET_ALL_TEMPLATES_TABLE.getCode()] = "SELECT * FROM `CampaignTemplates`";
         sqlArray[SqlQueryType.INSERT_NEW_TEMPLATE.getCode()] =
@@ -224,9 +221,18 @@ public class MysqlConnection {
         /* *****************************************
          * ********** Station Manager Reports Queries ****************
          * *****************************************/
-        sqlArray[SqlQueryType.GET_Quarterly_Revenue.getCode()] = "SELECT * FROM `Purchase` WHERE `purchaseDate` BETWEEN ? AND ?";
-        sqlArray[SqlQueryType.GET_Purchases_Report.getCode()] = "SELECT * FROM `Purchase` WHERE `Fuel type` LIKE ?";
-        sqlArray[SqlQueryType.GET_QuantityItemsStock_Report.getCode()] = "SELECT * FROM `FuelInventory` WHERE `Company Name` LIKE ?";
+        sqlArray[SqlQueryType.GET_Quarterly_Revenue.getCode()] = "select p.totalPrice from FastFuel as ff, Purchase as p " +
+                "WHERE ff.purchaseID LIKE p.purchaseID AND ff.StationNumber LIKE ? AND ff.companyName LIKE ? " +
+                "AND quarter(p.purchaseDate) LIKE quarter(curdate())";
+        sqlArray[SqlQueryType.GET_Purchases_Report.getCode()] = "select ff.FuelType, p.fuelAmount from FastFuel as ff, Purchase as p " +
+                "WHERE ff.purchaseID LIKE p.purchaseID " +
+                "AND ff.StationNumber LIKE ? " +
+                "AND ff.companyName LIKE ? " +
+                "AND ff.FuelType LIKE ?";
+        sqlArray[SqlQueryType.GET_QuantityItemsStock_Report.getCode()] = "SELECT gs.inventory_95, gs.inventory_diesel, gs.inventory_scooter from GasStation as gs " +
+                "WHERE gs.companyName LIKE ?" +
+                "AND gs.StationNumber LIKE ?";
+        sqlArray[SqlQueryType.GET_Manager_Data.getCode()] = "SELECT * FROM Employee WHERE Employee.employeeID LIKE ?";
     }
 
     public Connection getConnection() {

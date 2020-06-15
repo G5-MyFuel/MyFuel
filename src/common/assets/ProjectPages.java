@@ -12,7 +12,6 @@ public enum ProjectPages {
     CONFIRM_DISCOUNT_RATE_PAGE("/boundary/ConfirmDiscountRatesFXML.fxml"),
     COSTUMER_MANAGEMENT_TABLE_PAGE("/boundary/CostumerManagementTablePage.fxml"),
     COSTUMER_REGISTRATION_PAGE("/boundary/CustomerRegistrationFXML2.fxml"),
-    FAST_FUEL_PAGE("/boundary/CustomerRegistrationFXML2.fxml"),
     CREDIT_CARD_DIALOG_PAGE("/boundary/CreditCardDialogWindow.fxml"),
     GENERAL_DASH_BOARD("/boundary/generalDashBoard.fxml"),
 
@@ -28,6 +27,8 @@ public enum ProjectPages {
     GENERATING_REPORTS_MARKETING_MANAGER_PAGE("/boundary/GeneratingReportsMarketingManagerFXML.fxml"),
 
     //Daniel pages:
+    //PURCHASE_FUEL_FOR_HOME_HEATING,TRACKING_FUEL_FOR_HOME_HEATING,
+    FAST_FUEL_PAGE("/boundary/CustomerRegistrationFXML2.fxml"),
     PURCHASE_FUEL_FOR_HOME_HEATING("/boundary/NewPurchaseFuelForHomeHeatingFXML.fxml"),
     LOGIN_PAGE("/boundary/LoginToSystemFXML.fxml");
 
@@ -40,4 +41,5 @@ public enum ProjectPages {
     public String getPath() {
         return path;
     }
+
 }

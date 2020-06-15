@@ -1,34 +1,40 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Objects;
 
 public class User implements Serializable {
     private String userID;
-    private int userType;
+    private String userType;
     private String userPassword;
     private int isLoginIndicator;
     private String userFirstName;
     private String userLastName;
     private String userEmail;
+    private String[] fuelCompany;
 
-    public User(String userID, int userType, String userFirstName, String userLastName, String userEmail) {
+    public User(String userID, String userType, int isLoginIndicator, String userFirstName, String userLastName, String userEmail, String[] fuelCompany) {
         this.userID = userID;
         this.userType = userType;
+        this.isLoginIndicator = isLoginIndicator;
         this.userFirstName = userFirstName;
         this.userLastName = userLastName;
         this.userEmail = userEmail;
         this.userPassword = this.userID; //the default password is the userID
+        this.fuelCompany = fuelCompany;
         //
     }
 
-    public User(String userID, int userType, String userPassword, String userFirstName, String userLastName, String userEmail) {
+    public User(String userID, String userType, String userPassword, int isLoginIndicator, String userFirstName, String userLastName, String userEmail, String[] fuelCompany) {
         this.userID = userID;
         this.userType = userType;
         this.userPassword = userPassword;
+        this.isLoginIndicator = isLoginIndicator;
         this.userFirstName = userFirstName;
         this.userLastName = userLastName;
         this.userEmail = userEmail;
+        this.fuelCompany = fuelCompany;
     }
 
 
@@ -36,7 +42,7 @@ public class User implements Serializable {
         return userID;
     }
 
-    public int getUserType() {
+    public String getUserType() {
         return userType;
     }
 
@@ -64,7 +70,7 @@ public class User implements Serializable {
         this.userID = userID;
     }
 
-    public void setUserType(int userType) {
+    public void setUserType(String userType) {
         this.userType = userType;
     }
 
@@ -88,16 +94,25 @@ public class User implements Serializable {
         this.userEmail = userEmail;
     }
 
+    public String[] getFuelCompany() {
+        return fuelCompany;
+    }
+
+    public void setFuelCompany(String[] fuelCompany) {
+        this.fuelCompany = fuelCompany;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "userID='" + userID + '\'' +
-                ", userType=" + userType +
+                ", userType='" + userType + '\'' +
                 ", userPassword='" + userPassword + '\'' +
                 ", isLoginIndicator=" + isLoginIndicator +
                 ", userFirstName='" + userFirstName + '\'' +
                 ", userLastName='" + userLastName + '\'' +
                 ", userEmail='" + userEmail + '\'' +
+                ", fuelCompany=" + Arrays.toString(fuelCompany) +
                 '}';
     }
 

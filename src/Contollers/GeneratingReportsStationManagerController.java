@@ -26,13 +26,20 @@ public class GeneratingReportsStationManagerController extends BasicController {
         this.myBoundary = myBoundary;
     }
 
-    public void GetReportData(String ReportType, String startDate, String endDate) {
+    public void GetReportData(ArrayList<String> paramArray/*String ReportType, String startDate, String endDate*/) {
         ArrayList<Object> varArray = new ArrayList<>();
-        varArray.add(startDate);
-        switch (ReportType) {
+        varArray.addAll(paramArray);
+        varArray.remove(0);
+        System.out.println(paramArray);
+        System.out.println(varArray);
+        switch (paramArray.get(0)) {
+            case "Get Manager data":
+                SqlAction sqlAction = new SqlAction(SqlQueryType.GET_Manager_Data, varArray);
+                super.sendSqlActionToClient(sqlAction);
+                break;
             case "Quarterly revenue report":
-                varArray.add(endDate);
-                SqlAction sqlAction = new SqlAction(SqlQueryType.GET_Quarterly_Revenue, varArray);
+                //varArray.add(endDate);
+                sqlAction = new SqlAction(SqlQueryType.GET_Quarterly_Revenue, varArray);
                 super.sendSqlActionToClient(sqlAction);
                 break;
             case "Purchases report":
@@ -52,13 +59,15 @@ public class GeneratingReportsStationManagerController extends BasicController {
     public void getResultFromClient(SqlResult result) {
         Platform.runLater(() -> {
             switch (result.getActionType()) {
+                case GET_Manager_Data:
+                    myBoundary.setManagerData(this.changeResultToManagerData(result));
+                    break;
                 case GET_Quarterly_Revenue:
                     myBoundary.setQuarterlyData(this.changeResultToQuarterlyReport(result));
                     break;
                 case GET_Purchases_Report:
                     PurchasesReport resultList = changeResultToPurchasesReport(result);
                     myBoundary.setPurchasesData(resultList);
-
                     break;
                 case GET_QuantityItemsStock_Report:
                     myBoundary.setQuantityItemsStockData(changeResultToQuantityItemsStockReport(result));
@@ -80,23 +89,22 @@ public class GeneratingReportsStationManagerController extends BasicController {
 
         Float TotalPrice = new Float(0);
         for (ArrayList<Object> a : result.getResultData()) {
-            TotalPrice += Float.parseFloat((String) a.get(4));
+            TotalPrice += Float.parseFloat((String) a.get(0));
         }
         return TotalPrice.toString();
     }
 
     private PurchasesReport changeResultToPurchasesReport(SqlResult result) {
 
-        //PurchasesReport resultList = new PurchasesReport();
         Integer salesAmount = 0;
-        Float TotalPrice = new Float(0);
+        Float quantityPurchased = new Float(0);
         String FuelType = new String();
         for (ArrayList<Object> a : result.getResultData()) {
-            FuelType = (String) a.get(5);
-            TotalPrice += Float.parseFloat((String) a.get(3));
+            FuelType = (String) a.get(0);
+            quantityPurchased += Float.parseFloat((String) a.get(1));
             salesAmount++;
         }
-        PurchasesReport resultList = new PurchasesReport(FuelType, TotalPrice.toString() + " liters", salesAmount.toString() + " purchase");
+        PurchasesReport resultList = new PurchasesReport(FuelType, quantityPurchased.toString() + " liters", salesAmount.toString() + " purchase");
         return resultList;
     }
 
@@ -105,10 +113,21 @@ public class GeneratingReportsStationManagerController extends BasicController {
         ArrayList<QuantityItemsStockReport> resultList = new ArrayList<>();
 
         for (ArrayList<Object> a : result.getResultData()) {
-            QuantityItemsStockReport tempReport = new QuantityItemsStockReport((String) a.get(0), (String) a.get(1), (String) a.get(2));
-            resultList.add(tempReport);
+            resultList.add(new QuantityItemsStockReport((String )a.get(0)));
+            resultList.add(new QuantityItemsStockReport((String )a.get(1)));
+            resultList.add(new QuantityItemsStockReport((String )a.get(2)));
         }
         return resultList;
     }
 
+    private ArrayList<String> changeResultToManagerData(SqlResult result) {
+
+        ArrayList<String> resultList = new ArrayList<>();
+
+        for (ArrayList<Object> a : result.getResultData()) {
+            resultList.add((String) a.get(1));
+            resultList.add((String) a.get(2));
+        }
+        return resultList;
+    }
 }
