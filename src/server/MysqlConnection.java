@@ -271,6 +271,9 @@ public class MysqlConnection {
          * *****************************************/
         sqlArray[SqlQueryType.View_Quarterly_Revenue.getCode()] = "SELECT `TotalRevenue` FROM `ViewQuarterlyReportsForAdmin` " +
                 "WHERE `companyName` = ? AND `StationNumber` = ? AND `Quarterly` = quarter(?)";
+        sqlArray[SqlQueryType.View_Purchases_Revenue.getCode()] = "SELECT `FuelType`, `LitersPurchased`, `SalesAmount` FROM `ViewPurchasesReportsForAdmin` " +
+                "WHERE `companyName` = ? AND `StationNumber` = ? AND `Quarterly` = quarter(?) AND " +
+                "`FuelType` = \"Diesel\" OR `FuelType` = \"Gasoline 95\" OR `FuelType` = \"Scooter fuel\"";
     }
 
     public Connection getConnection() {

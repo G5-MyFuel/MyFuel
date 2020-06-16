@@ -235,6 +235,18 @@ public class VieReportsBoundary implements Initializable {
     @FXML
     void handleViewPurchasesReport(MouseEvent event) {
 
+        ChooseReportYearCombo.setVisible(false);
+        ChooseReportQuarterCombo.setVisible(false);
+        QuantityItemsStockTxt.setVisible(false);
+        ViewPurchasesReportTable.setVisible(true);
+        ViewQuantityReportTable.setVisible(false);
+        ViewTotalRevenueTXT.setVisible(false);
+
+        ArrayList<String> paramArray = new ArrayList<>();
+        paramArray.add("View Purchases report");
+        paramArray.add(managerCompany);
+        paramArray.add(managerStation);
+
     }
 
     @FXML
