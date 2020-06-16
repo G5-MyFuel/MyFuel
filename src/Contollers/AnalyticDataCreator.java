@@ -58,25 +58,28 @@ public class AnalyticDataCreator extends BasicController {
         for (int i=0; i < resultList.size(); i++ ){ //לשים לב לגודל של המערך אם אין לי נל פוינטר אקספשיין
             InputRating my = resultList.get(i);
             if(my.isFlag() == false) { //עוד לא טיפלנו ולכן נטפל עכשיו
-                customerTypeRating = my.getCustomerType().equals("private") ? 1 : 2;
+
+                customerTypeRating = my.getCustomerType().equals("private") ? 1 : 2; //דירוג שקשור לסוג לקוח
 
                 String hourString = new String();
                 HashMap<String, Integer> fuelTypeCounter = new HashMap<String, Integer>();
-                fuelTypeCounter.put("Gasoline 95",0);        fuelTypeCounter.put("Diesel",0);
-                fuelTypeCounter.put("Home Heating Fuel",0);  fuelTypeCounter.put("Scooter fuel",0);
+                fuelTypeCounter.put("Gasoline95",0);        fuelTypeCounter.put("Diesel",0);
+                fuelTypeCounter.put("HomeHeatingFuel",0);  fuelTypeCounter.put("ScooterFuel",0);
 
-                for (int j=i+1; j < resultList.size() ; j++ )
+                for (int j=i+1; j < resultList.size() ; j++ )//נעבור על כל שאר ההזמנות של הלקוחות
                 {
                     InputRating other = resultList.get(j);
 
-                    if (other.getCustomerID()==my.getCustomerID())
+                    if (other.getCustomerID()==my.getCustomerID()) //אם זה אותו לקוח - ניקח פרטים על הרכישות שלו
                     {
                         //נוסיף לקאונטר של אותו סוג דלק
-                        //fuelTypeCounter.put()
-                        fuelTypeCounter.get("x");
+                        fuelTypeCounter.put(other.getFuelType(),fuelTypeCounter.get((other.getFuelType()))+1);
                         //נכניס את כל השעות למערך ובסוף נמצא ממוצע
                         hourString += other.getPurchaseHour();
+                        //נסמן שטיפלנו בו
+                        other.setFlag(true);
                     }
+
 
                 }
 
