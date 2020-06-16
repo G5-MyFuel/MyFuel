@@ -29,9 +29,9 @@
                <tabs>
                   <Tab text="Update Personal Information">
                      <content>
-                        <AnchorPane prefWidth="1001.0">
+                        <AnchorPane>
                            <children>
-                              <Pane layoutY="25.0" style="-fx-background-color: white;">
+                              <Pane style="-fx-background-color: white;">
                                  <children>
                                     <Label layoutX="14.0" layoutY="29.0" style="-fx-background-color: #f2f2f2; -fx-opacity: 1; -fx-background-radius: 30;" text="Costumers Table">
                                        <font>
@@ -48,15 +48,15 @@
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
                                     </Button>
-                                    <TableView fx:id="CosManageTbale" layoutX="51.0" layoutY="214.0" prefHeight="261.0" prefWidth="854.0" style="-fx-background-color: #fcf8e8; -fx-border-width: 4; -fx-border-color: #2D4578;">
+                                    <TableView fx:id="CosManageTbale" layoutX="40.0" layoutY="207.0" prefHeight="254.0" prefWidth="958.0" style="-fx-background-color: #fcf8e8; -fx-border-width: 4; -fx-border-color: #2D4578;">
                                        <columns>
                                           <TableColumn fx:id="CostumerIDCol" maxWidth="90.0" prefWidth="90.0" text="Costumer ID" />
                                           <TableColumn fx:id="firstNameCol" prefWidth="81.0" text="First Name" />
                                           <TableColumn fx:id="LastNameCol" prefWidth="93.0" text="Last Name" />
-                                          <TableColumn fx:id="EmailAdressCol" prefWidth="183.0" text="Email Adress" />
-                                          <TableColumn fx:id="CostumerTypeCol" prefWidth="105.0" text="Costumer Type" />
-                                          <TableColumn fx:id="ServicePlanCol" minWidth="-1.0" prefWidth="151.0" text="Service Plan" />
-                                          <TableColumn fx:id="PurchasePlanCol" prefWidth="138.0" text="Purchase Plan" />
+                                          <TableColumn fx:id="EmailAdressCol" prefWidth="207.0" text="Email Adress" />
+                                          <TableColumn fx:id="CostumerTypeCol" prefWidth="98.0" text="Costumer Type" />
+                                          <TableColumn fx:id="pricingModelCol" minWidth="-1.0" prefWidth="240.0" text="Pricing Model" />
+                                          <TableColumn fx:id="PurchasePlanCol" prefWidth="170.0" text="Purchase Plan" />
                                        </columns>
                                        <contextMenu>
                                           <ContextMenu>

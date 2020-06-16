@@ -62,17 +62,16 @@ public class CustomerRegistrationController extends BasicController {
         }
         //
         //inserting costumer vehicles
-        if (costumer.getCostumerVehicle().size() > 1) {
-            ArrayList<Object> vehicleArray = new ArrayList<>();
-            for (Vehicle v : costumer.getCostumerVehicle()) {
-                vehicleArray.add(v.getVehicleID());
-                vehicleArray.add(v.getGasType());
-                vehicleArray.add(v.getOwnerID());
-                SqlAction sqlActionForVehicle = new SqlAction(SqlQueryType.INSERT_NEW_VEHICLE, vehicleArray);
-                super.sendSqlActionToClient(sqlActionForVehicle);
-                vehicleArray.clear();
-            }
+        ArrayList<Object> vehicleArray = new ArrayList<>();
+        for (Vehicle v : costumer.getCostumerVehicle()) {
+            vehicleArray.add(v.getVehicleID());
+            vehicleArray.add(v.getGasType());
+            vehicleArray.add(v.getOwnerID());
+            SqlAction sqlActionForVehicle = new SqlAction(SqlQueryType.INSERT_NEW_VEHICLE, vehicleArray);
+            super.sendSqlActionToClient(sqlActionForVehicle);
+            vehicleArray.clear();
         }
+
         //execute quarry
         SqlAction sqlAction = new SqlAction(SqlQueryType.INSERT_NEW_COSTUMER, CostumerTablevarArray);
         super.sendSqlActionToClient(sqlAction);
@@ -143,9 +142,9 @@ public class CustomerRegistrationController extends BasicController {
             Costumer cos = new Costumer((String) a.get(0), (String) a.get(9), (String) a.get(4),
                     (String) a.get(11), (String) a.get(12), (String) a.get(13), null, (String) a.get(6), null, (String) a.get(5));
             //add fuel companies.
-            temp.add((String)a.get(14));
-            temp.add((String)a.get(15));
-            temp.add((String)a.get(16));
+            temp.add((String) a.get(14));
+            temp.add((String) a.get(15));
+            temp.add((String) a.get(16));
             cos.setFuelCompany(temp);
             temp.clear();
             CreditCard card = new CreditCard(cos, (String) a.get(1), (String) a.get(2), (String) a.get(3));
@@ -157,7 +156,7 @@ public class CustomerRegistrationController extends BasicController {
 
     public boolean isCostumerExist(String cosID) {
         for (Costumer cos : allDBCostumerArray) {
-            if (cos.getUserID().toString().equals(cosID))
+            if (cos.getUserID().equals(cosID))
                 return true;
         }
         return false;
