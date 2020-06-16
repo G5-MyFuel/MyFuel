@@ -17,7 +17,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class SettingDiscountRatesBoundary implements Initializable {
+public class SettingDiscountRatesBoundary implements DataInitializable {
 
     /**
      * The supervisor boundary controller.
@@ -43,6 +43,11 @@ public class SettingDiscountRatesBoundary implements Initializable {
 
     private final ObservableList<String> SubscriptionType = FXCollections.observableArrayList("Regular monthly subscription - single vehicle",
             "Full monthly subscription (for single vehicle)", "Regular monthly subscription - number of vehicles");
+
+    @Override
+    public void initData(Object data) {
+
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

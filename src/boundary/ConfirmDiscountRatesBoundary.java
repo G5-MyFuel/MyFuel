@@ -12,7 +12,7 @@ import javafx.scene.control.Alert;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ConfirmDiscountRatesBoundary implements Initializable {
+public class ConfirmDiscountRatesBoundary implements DataInitializable {
 
     /**
      * The supervisor boundary controller.
@@ -29,6 +29,11 @@ public class ConfirmDiscountRatesBoundary implements Initializable {
 
     @FXML
     private Button btnRemoveNewRate;
+
+    @Override
+    public void initData(Object data) {
+
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
