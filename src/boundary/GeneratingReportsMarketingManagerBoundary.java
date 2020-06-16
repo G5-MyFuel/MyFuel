@@ -4,6 +4,7 @@ import Contollers.FormValidation;
 import Contollers.GeneratingReportsMarketingManagerController;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import common.assets.Toast;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -146,8 +147,10 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
     @FXML
     void handleStartDateBox(ActionEvent event) {
 
-        /*if(StartDateBox.getValue().isBefore(java.time.LocalDate.now()) == true)
-            ERRORalreadyPassedDate.setVisible(true);*/
+        if(StartDateBox.getValue().isBefore(java.time.LocalDate.now()) == true)
+            //ERRORalreadyPassedDate.setVisible(true);
+            //Toast.makeText(mainProjectFX.mainStage,"Wellcom to MyFuel ",1000,1500,1500);
+        Toast.makeText(mainProjectFX.mainStage,"MSG",1000,1500,1500,5,45);
     }
 
     @FXML
@@ -168,6 +171,8 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
 
     @FXML
     void handleGenerateReportBtn(ActionEvent event) {
+
+
 
     }
 

@@ -26,18 +26,18 @@ public class ConfirmDiscountRatesController extends BasicController {
 
     /*Logic Methods*/
 
-    public void GetDiscountRatesData(ArrayList<String> paramArray) {
+    public void GetDiscountRatesData(/*String query*/) {
         //ArrayList<Object> varArray = new ArrayList<>();
         //varArray.addAll(paramArray);
         //varArray.remove(0);
-        switch (paramArray.get(0)) {
-            case "Get Discount Rates data":
-                SqlAction sqlAction = new SqlAction(SqlQueryType.GET_Manager_Data/*, varArray*/);
-                super.sendSqlActionToClient(sqlAction);
-                break;
+        /*switch (query) {
+            case "Get Discount Rates data":*/
+        SqlAction sqlAction = new SqlAction(SqlQueryType.Get_DiscountRates_Table/*, varArray*/);
+        super.sendSqlActionToClient(sqlAction);
+                /*break;
             default:
                 break;
-        }
+        }*/
     }
 
 
@@ -46,7 +46,7 @@ public class ConfirmDiscountRatesController extends BasicController {
 
         Platform.runLater(() -> {
             switch (result.getActionType()) {
-                case GET_Manager_Data:
+                case Get_DiscountRates_Table:
                     myBoundary.setDiscountRatesData(this.changeResultToDiscountRatesData(result));
                     break;
                 default:
@@ -62,6 +62,7 @@ public class ConfirmDiscountRatesController extends BasicController {
      * @return String
      */
     private String changeResultToDiscountRatesData(SqlResult result) {
+
 
         /*Float TotalPrice = new Float(0);
         for (ArrayList<Object> a : result.getResultData()) {

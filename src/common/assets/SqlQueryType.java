@@ -42,6 +42,11 @@ public enum SqlQueryType {
     View_QuantityItemsStock_Report(SqlExecutionType.EXECUTE_QUERY),
 
     /* *****************************************
+     * ********** Admin Confirm Discount Rates Queries ****************
+     * *****************************************/
+    Get_DiscountRates_Table(SqlExecutionType.EXECUTE_QUERY),
+
+    /* *****************************************
      * ********** Costumer Management Queries ****************
      * *****************************************/
     UPDATE_COSTUMER_FNAME(SqlExecutionType.UPDATE_QUERY),
