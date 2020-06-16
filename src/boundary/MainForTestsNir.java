@@ -31,7 +31,7 @@ public class MainForTestsNir extends Application {
 
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource(ProjectPages.VIEW_REPORTS_PAGE.getPath()));
+            loader.setLocation(getClass().getResource(ProjectPages.SETTING_DISCOUNT_RATES_PAGE.getPath()));
             /*
             CONFIRM_DISCOUNT_RATES_PAGE
             SETTING_DISCOUNT_RATES_PAGE
