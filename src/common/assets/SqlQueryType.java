@@ -36,8 +36,9 @@ public enum SqlQueryType {
     /* *****************************************
      * ********** Admin View Reports Queries ****************
      * *****************************************/
-    View_Quarterly_Revenue(SqlExecutionType.EXECUTE_QUERY),
-    View_Purchases_Revenue(SqlExecutionType.EXECUTE_QUERY),
+    View_Quarterly_Report(SqlExecutionType.EXECUTE_QUERY),
+    View_Purchases_Report(SqlExecutionType.EXECUTE_QUERY),
+    View_QuantityItemsStock_Report(SqlExecutionType.EXECUTE_QUERY),
 
     /* *****************************************
      * ********** Costumer Management Queries ****************

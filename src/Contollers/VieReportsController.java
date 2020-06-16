@@ -4,11 +4,13 @@ import boundary.VieReportsBoundary;
 import common.assets.SqlAction;
 import common.assets.SqlQueryType;
 import common.assets.SqlResult;
+import entity.PurchasesReport;
+import entity.QuantityItemsStockReport;
 import javafx.application.Platform;
 
 import java.util.ArrayList;
 
-public class VieReportsController extends BasicController{
+public class VieReportsController extends BasicController {
 
     /**
      * The boundary controlled by this controller
@@ -33,7 +35,15 @@ public class VieReportsController extends BasicController{
         System.out.println(varArray);
         switch (paramArray.get(0)) {
             case "View Quarterly revenue report":
-                SqlAction sqlAction = new SqlAction(SqlQueryType.View_Quarterly_Revenue, varArray);
+                SqlAction sqlAction = new SqlAction(SqlQueryType.View_Quarterly_Report, varArray);
+                super.sendSqlActionToClient(sqlAction);
+                break;
+            case "View Purchases report":
+                sqlAction = new SqlAction(SqlQueryType.View_Purchases_Report, varArray);
+                super.sendSqlActionToClient(sqlAction);
+                break;
+            case "View Quantity of items in stock report":
+                sqlAction = new SqlAction(SqlQueryType.View_QuantityItemsStock_Report, varArray);
                 super.sendSqlActionToClient(sqlAction);
                 break;
             default:
@@ -47,19 +57,15 @@ public class VieReportsController extends BasicController{
 
         Platform.runLater(() -> {
             switch (result.getActionType()) {
-                case View_Quarterly_Revenue:
+                case View_Quarterly_Report:
                     myBoundary.setQuarterlyData(this.changeResultToQuarterlyReport(result));
                     break;
-                /*case GET_Quarterly_Revenue:
-                    myBoundary.setQuarterlyData(this.changeResultToQuarterlyReport(result));
+                case View_Purchases_Report:
+                    myBoundary.setPurchasesData(this.changeResultToPurchasesReport(result));
                     break;
-                case GET_Purchases_Report:
-                    //PurchasesReport resultList = changeResultToPurchasesReport(result);
-                    myBoundary.setPurchasesData(changeResultToPurchasesReport(result));
-                    break;
-                case GET_QuantityItemsStock_Report:
+                case View_QuantityItemsStock_Report:
                     myBoundary.setQuantityItemsStockData(changeResultToQuantityItemsStockReport(result));
-                    break;*/
+                    break;
                 default:
                     break;
             }
@@ -76,8 +82,65 @@ public class VieReportsController extends BasicController{
 
         String revenue = "There is no revenue for this quarter";
         for (ArrayList<Object> a : result.getResultData()) {
-            revenue = (String)a.get(0);
+            revenue = (String) a.get(0);
         }
         return revenue;
+    }
+
+    /**
+     * This method create String from the data base result.
+     *
+     * @param result the result
+     * @return String
+     */
+    private ArrayList<PurchasesReport> changeResultToPurchasesReport(SqlResult result) {
+
+        String[] fuelAmount = new String[]{"0.0 liters", "0.0 liters", "0.0 liters"};
+        String[] salesAmount = new String[]{"0 purchase", "0 purchase", "0 purchase"};
+        ArrayList<PurchasesReport> resultList = new ArrayList<>();
+        for (ArrayList<Object> a : result.getResultData()) {
+            System.out.println(a);
+            if (((String) a.get(0)).equals("Gasoline 95")) {
+                fuelAmount[0] = (String) a.get(1);
+                salesAmount[0] = (String) a.get(2);
+            }
+            if (((String) a.get(0)).equals("Diesel")) {
+                fuelAmount[1] = (String) a.get(1);
+                salesAmount[1] = (String) a.get(2);
+            }
+            if (((String) a.get(0)).equals("Scooter fuel")) {
+                fuelAmount[2] = (String) a.get(1);
+                salesAmount[2] = (String) a.get(2);
+            }
+        }
+        resultList.add(new PurchasesReport("Gasoline 95"));
+        resultList.add(new PurchasesReport("Diesel"));
+        resultList.add(new PurchasesReport("Scooter fuel"));
+        for (int i = 0; i < 3; i++) {
+            resultList.get(i).setQuantityPurchased(fuelAmount[i]);
+            resultList.get(i).setSalesAmount(salesAmount[i]);
+        }
+        return resultList;
+    }
+
+    private ArrayList<QuantityItemsStockReport> changeResultToQuantityItemsStockReport(SqlResult result) {
+
+        String[] fuelAvailableInventory = new String[]{"0.0 liters", "0.0 liters", "0.0 liters"};
+        ArrayList<QuantityItemsStockReport> resultList = new ArrayList<>();
+
+        for (ArrayList<Object> a : result.getResultData()) {
+            System.out.println(a);
+            if (((String) a.get(0)).equals("Gasoline 95"))
+                fuelAvailableInventory[0] = (String) a.get(1);
+            if (((String) a.get(0)).equals("Diesel"))
+                fuelAvailableInventory[1] = (String) a.get(1);
+            if (((String) a.get(0)).equals("Scooter fuel"))
+                fuelAvailableInventory[2] = (String) a.get(1);
+        }
+
+        for (int i = 0; i < 3; i++)
+            //resultList.get(i).setQuantityPurchased(fuelAmount[i]);
+            resultList.add(new QuantityItemsStockReport(fuelAvailableInventory[i]));
+        return resultList;
     }
 }

@@ -244,36 +244,31 @@ public class MysqlConnection {
         sqlArray[SqlQueryType.GET_Manager_Data.getCode()] = "SELECT * FROM Employee WHERE Employee.employeeID LIKE ?";
         sqlArray[SqlQueryType.INSERT_NEW_Quarterly_Report.getCode()] = "INSERT INTO `ViewQuarterlyReportsForAdmin`" +
                 "(`companyName`, `StationNumber`, `Date`, `Quarterly`, `TotalRevenue`) " +
-                "VALUES (?,?,CURRENT_TIME(),quarter(curdate()),?)";
-        /*CURRENT_TIME() = curdate()
-        לשנות גם בDATA BASE
-        * */
+                "VALUES (?,?,curdate(),quarter(curdate()),?)";
+
         sqlArray[SqlQueryType.INSERT_NEW_Purchases_Report.getCode()] = "INSERT INTO `ViewPurchasesReportsForAdmin`" +
                 "(`companyName`, `StationNumber`, `Date`, `Quarterly`, `FuelType`, `LitersPurchased`, `SalesAmount`) " +
                 "VALUES (?,?,CURRENT_TIME(),quarter(curdate()),?,?,?)," +
                 "(?,?,CURRENT_TIME(),quarter(curdate()),?,?,?)," +
-                "(?,?,CURRENT_TIME(),quarter(curdate()),?,?,?)";
-        /*CURRENT_TIME() = curdate()
-        לשנות גם בDATA BASE
-        * */
+                "(?,?,curdate(),quarter(curdate()),?,?,?)";
 
         sqlArray[SqlQueryType.INSERT_NEW_QuantityItemsStock_Report.getCode()] = "INSERT INTO `ViewQuantityItemsStockReportsForAdmin`" +
                 "(`companyName`, `StationNumber`, `Date`, `Quarterly`, `FuelType`, `AvailableInventory`) " +
                 "VALUES (?,?,CURRENT_TIME(),quarter(curdate()),?,?)," +
-                "(?,?,CURRENT_TIME(),quarter(curdate()),?,?)," +
-                "(?,?,CURRENT_TIME(),quarter(curdate()),?,?)";
-        /*CURRENT_TIME() = curdate()
-        לשנות גם בDATA BASE
-        * */
+                "(?,?,curdate(),quarter(curdate()),?,?)," +
+                "(?,?,curdate(),quarter(curdate()),?,?)";
 
         /* *****************************************
          * ********** Admin View Reports Queries ****************
          * *****************************************/
-        sqlArray[SqlQueryType.View_Quarterly_Revenue.getCode()] = "SELECT `TotalRevenue` FROM `ViewQuarterlyReportsForAdmin` " +
+        sqlArray[SqlQueryType.View_Quarterly_Report.getCode()] = "SELECT `TotalRevenue` FROM `ViewQuarterlyReportsForAdmin` " +
                 "WHERE `companyName` = ? AND `StationNumber` = ? AND `Quarterly` = quarter(?)";
-        sqlArray[SqlQueryType.View_Purchases_Revenue.getCode()] = "SELECT `FuelType`, `LitersPurchased`, `SalesAmount` FROM `ViewPurchasesReportsForAdmin` " +
+        sqlArray[SqlQueryType.View_Purchases_Report.getCode()] = "SELECT `FuelType`, `LitersPurchased`, `SalesAmount` FROM `ViewPurchasesReportsForAdmin` " +
                 "WHERE `companyName` = ? AND `StationNumber` = ? AND `Quarterly` = quarter(?) AND " +
-                "`FuelType` = \"Diesel\" OR `FuelType` = \"Gasoline 95\" OR `FuelType` = \"Scooter fuel\"";
+                "(`FuelType` = \"Diesel\" OR `FuelType` = \"Gasoline 95\" OR `FuelType` = \"Scooter fuel\")";
+        sqlArray[SqlQueryType.View_QuantityItemsStock_Report.getCode()] = "SELECT `FuelType`, `AvailableInventory` FROM `ViewQuantityItemsStockReportsForAdmin` " +
+                "WHERE `companyName` = ? AND `StationNumber` = ? AND `Quarterly` = quarter(?) " +
+                "AND (`FuelType` = \"Diesel\" OR `FuelType` = \"Gasoline 95\" OR `FuelType` = \"Scooter fuel\")";
     }
 
     public Connection getConnection() {
