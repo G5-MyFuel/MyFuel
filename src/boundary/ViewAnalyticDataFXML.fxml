@@ -72,7 +72,7 @@
                         <Insets bottom="5.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="selectedTimeRange" layoutX="170.0" layoutY="43.0" prefHeight="26.0" prefWidth="147.0" text="  " textFill="#1c0d5e">
+                  <Label fx:id="selectedTimeRangeTXT" layoutX="170.0" layoutY="43.0" prefHeight="26.0" prefWidth="147.0" text="  " textFill="#1c0d5e">
                      <padding>
                         <Insets bottom="5.0" />
                      </padding>
@@ -93,7 +93,7 @@
                         <Insets bottom="5.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="selectedCustomerType" layoutX="218.0" layoutY="43.0" prefHeight="26.0" prefWidth="129.0" text="  " textFill="#1c0d5e">
+                  <Label fx:id="selectedCustomerTypeTXT" layoutX="218.0" layoutY="43.0" prefHeight="26.0" prefWidth="129.0" text="  " textFill="#1c0d5e">
                      <padding>
                         <Insets bottom="5.0" />
                      </padding>
@@ -114,18 +114,13 @@
                         <Insets bottom="5.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="selectedFuelType" layoutX="174.0" layoutY="43.0" prefHeight="26.0" prefWidth="186.0" text="  " textFill="#1c0d5e">
+                  <Label layoutX="174.0" layoutY="43.0" prefHeight="26.0" prefWidth="186.0" text="  " textFill="#1c0d5e">
                      <padding>
                         <Insets bottom="5.0" />
                      </padding>
                   </Label>
                </children>
             </Pane>
-            <Label fx:id="lastCalcDateTXT" layoutX="433.0" layoutY="90.0" prefHeight="26.0" prefWidth="257.0" text="  " textFill="#1c0d5e">
-               <padding>
-                  <Insets bottom="5.0" />
-               </padding>
-            </Label>
          </children>
          <effect>
             <Blend />

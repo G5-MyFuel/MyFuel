@@ -17,7 +17,7 @@ public class ViewAnalyticDataController extends BasicController {
     private ViewAnalyticDataBoundary myBoundary; /**     * The boundary controlled by this controller     */
 
     /*Logic Variables*/
-    private static ViewAnalyticDataController Instance = null;
+    private static ViewAnalyticDataController Instance = null; //no need?
 
     public ViewAnalyticDataController(ViewAnalyticDataBoundary viewAnalyticDataBoundary) {
         this.myBoundary = myBoundary;
@@ -49,15 +49,11 @@ public class ViewAnalyticDataController extends BasicController {
     private ArrayList<Rating> changeResultToRating(SqlResult result){
         ArrayList<Rating> resultList = new ArrayList<>();
         for(ArrayList<Object> a: result.getResultData()) {
-            Rating cos = new Rating(Integer.parseInt((String) a.get(0)),Integer.parseInt((String)a.get(1)));
+            Rating cos = new Rating(Integer.parseInt((String) a.get(0)),Integer.parseInt((String)a.get(1)));//?????????
             resultList.add(cos);
         }
         return resultList;
     }
 
-    public void GetDateToCalcRating (){
-        SqlAction sqlAction = new SqlAction(SqlQueryType.GET_ALL_PURCHASE_TABLE);
-        super.sendSqlActionToClient(sqlAction);
 
-    }
 }
