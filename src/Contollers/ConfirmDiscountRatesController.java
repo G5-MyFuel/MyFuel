@@ -4,6 +4,7 @@ import boundary.ConfirmDiscountRatesBoundary;
 import common.assets.SqlAction;
 import common.assets.SqlQueryType;
 import common.assets.SqlResult;
+import entity.DiscountRate;
 import javafx.application.Platform;
 
 import java.util.ArrayList;
@@ -61,15 +62,17 @@ public class ConfirmDiscountRatesController extends BasicController {
      * @param result the result
      * @return String
      */
-    private String changeResultToDiscountRatesData(SqlResult result) {
+    private ArrayList<DiscountRate> changeResultToDiscountRatesData(SqlResult result) {
 
 
-        /*Float TotalPrice = new Float(0);
+        //Float TotalPrice = new Float(0);
+        ArrayList<DiscountRate> resultList = new ArrayList<>();
         for (ArrayList<Object> a : result.getResultData()) {
-            TotalPrice += Float.parseFloat((String) a.get(0));
+            resultList.add(new DiscountRate((String) a.get(0), (String) a.get(1),(String) a.get(3)));
+            //TotalPrice += Float.parseFloat((String) a.get(0));
         }
-        return TotalPrice.toString();*/
-        return "";
+        //return TotalPrice.toString();
+        return resultList;
     }
 
 }

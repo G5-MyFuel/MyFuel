@@ -3,12 +3,16 @@ package boundary;
 import Contollers.ConfirmDiscountRatesController;
 import Contollers.FormValidation;
 import entity.Costumer;
+import entity.DiscountRate;
 import entity.EditingCell;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 
 import java.net.URL;
@@ -25,19 +29,19 @@ public class ConfirmDiscountRatesBoundary implements DataInitializable {
     private final Alert ErrorAlert = new Alert(Alert.AlertType.ERROR);
 
     @FXML
-    private TableView<String> TableSubscriptionType;
+    private TableView<DiscountRate> TableSubscriptionType;
 
     @FXML
     private TableColumn CheckboxColumn;
 
     @FXML
-    private TableColumn<?, ?> SubscriptionTypeColumn;
+    private TableColumn<DiscountRate, String> SubscriptionTypeColumn;
 
     @FXML
-    private TableColumn<?, ?> CurrentPriceColumnColumn;
+    private TableColumn<DiscountRate, String> CurrentPriceColumnColumn;
 
     @FXML
-    private TableColumn<?, ?> NewPriceColumn;
+    private TableColumn<DiscountRate, String> NewPriceColumn;
 
     @FXML
     private Button btnApprovedRates;
@@ -82,7 +86,7 @@ public class ConfirmDiscountRatesBoundary implements DataInitializable {
      * this method will set the costumer table and the cell edit functions
      * when the page initialized.
      */
-    public void setSubscriptionTypeTable(ArrayList<Costumer> cosArray){
+    public void setSubscriptionTypeTable(ArrayList<Costumer> cosArray) {
 
 
     }
@@ -108,9 +112,14 @@ public class ConfirmDiscountRatesBoundary implements DataInitializable {
         });
     }*/
 
-    public void setDiscountRatesData(String revenue) {
+    public void setDiscountRatesData(ArrayList<DiscountRate> resultList) {
 
+        SubscriptionTypeColumn.setCellValueFactory(new PropertyValueFactory<>("newDiscountRate"));
+        CurrentPriceColumnColumn.setCellValueFactory(new PropertyValueFactory<>("currentDiscountRatecurrentDiscountRate"));
+        NewPriceColumn.setCellValueFactory(new PropertyValueFactory<>("newDiscountRate"));
 
+        ObservableList<DiscountRate> data = FXCollections.observableArrayList(resultList);
+        TableSubscriptionType.setItems(data);
     }
 
     @FXML
