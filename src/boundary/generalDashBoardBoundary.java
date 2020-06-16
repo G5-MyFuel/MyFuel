@@ -1,5 +1,6 @@
 package boundary;
 
+import Contollers.AnalyticDataCreator;
 import Contollers.GeneralDashBoardController;
 import common.assets.ProjectPages;
 import javafx.event.EventHandler;
@@ -24,6 +25,7 @@ import java.util.TimeZone;
 public class generalDashBoardBoundary implements DataInitializable {
 
     private GeneralDashBoardController myController = new GeneralDashBoardController(this);
+    private AnalyticDataCreator analyticDataCreator = new AnalyticDataCreator(this);
 
     //global variables:
     private String userID;
@@ -435,5 +437,7 @@ public class generalDashBoardBoundary implements DataInitializable {
 
 
     }
+
+
 
 }

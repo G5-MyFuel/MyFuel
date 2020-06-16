@@ -37,6 +37,7 @@ public class MainForTestsNir extends Application {
             SETTING_DISCOUNT_RATES_PAGE
             GENERATING_REPORTS_MARKETING_MANAGER_PAGE
             GENERATING_REPORTS_STATION_MANAGER_PAGE
+            VIEW_REPORTS_PAGE
              */
             root = loader.load();
             Scene s1 = new Scene(root);

@@ -13,6 +13,7 @@ public enum SqlQueryType {
     GET_ALL_VEHICLE_TABLE(SqlExecutionType.EXECUTE_QUERY),
     UPDATE_USER_LOGIN_STATUS(SqlExecutionType.UPDATE_QUERY),
     GET_EMPLOYEE_TABLE(SqlExecutionType.EXECUTE_QUERY),
+    GET_ALL_PURCHASE_FUEL_AMOUNT_OF_USER(SqlExecutionType.EXECUTE_QUERY),
 
     /* *****************************************
      * ********** Discount Rates Queries ****************
@@ -34,6 +35,13 @@ public enum SqlQueryType {
     INSERT_NEW_QuantityItemsStock_Report(SqlExecutionType.UPDATE_QUERY),
 
     /* *****************************************
+     * ********** Admin View Reports Queries ****************
+     * *****************************************/
+    View_Quarterly_Report(SqlExecutionType.EXECUTE_QUERY),
+    View_Purchases_Report(SqlExecutionType.EXECUTE_QUERY),
+    View_QuantityItemsStock_Report(SqlExecutionType.EXECUTE_QUERY),
+
+    /* *****************************************
      * ********** Costumer Management Queries ****************
      * *****************************************/
     UPDATE_COSTUMER_FNAME(SqlExecutionType.UPDATE_QUERY),
@@ -46,7 +54,6 @@ public enum SqlQueryType {
     REMOVE_VEHICLE(SqlExecutionType.UPDATE_QUERY),
     REMOVE_COSTUMER(SqlExecutionType.UPDATE_QUERY),
     UPDATE_COSTUMER_CREDIT_CARD(SqlExecutionType.UPDATE_QUERY),
-    UPDATE_USER_STATIONS(SqlExecutionType.UPDATE_QUERY),
 
     /* *****************************************
      * ********** Users Management Queries ****************
@@ -68,8 +75,7 @@ public enum SqlQueryType {
      * ********** Analitic Data Queries ****************
      * *****************************************/
     GET_ALL_RATING_TABLE(SqlExecutionType.EXECUTE_QUERY),
-    GET_CUSTOMER_AND_PURCHASE_TABLE(SqlExecutionType.EXECUTE_QUERY),
-    GET_ALL_PURCHASE_TABLE(SqlExecutionType.EXECUTE_QUERY),
+    GET_CUSTOMER_X_PURCHASE_TABLE(SqlExecutionType.EXECUTE_QUERY),
 
 
     /* *****************************************
@@ -80,9 +86,10 @@ public enum SqlQueryType {
     INSERT_NEW_COSTUMER_USER(SqlExecutionType.UPDATE_QUERY),
 
     /* *****************************************************
-     * *************** Station Manager Queries ****************
+     * *************** Station Manager Confirmation Queries ****************
      * *****************************************************/
     GET_ALL_ORDER_TO_SUPPLY_FOR_STATION_MANAGER(SqlExecutionType.EXECUTE_QUERY),
+    UPDATE_STATUS_TO_IN_TREATMENT(SqlExecutionType.UPDATE_QUERY),
 
     /* *****************************************
      * ********** Order From Supplier Queries ****************

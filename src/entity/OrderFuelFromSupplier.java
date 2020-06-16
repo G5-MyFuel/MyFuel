@@ -10,11 +10,11 @@ import java.util.Date;
  */
 
 public class OrderFuelFromSupplier {
-    private String OrderNum, FuelType, userFirstName,userLastName, OrderStatus,GasCompanyName;
+    private String OrderNum, FuelType, userFirstName,userLastName, OrderStatus,GasCompanyName,managerID;
     private int StationNumber, Quantity;
     private Date OrderDate;
 
-    public OrderFuelFromSupplier(String OrderNumber, String OrderStatus, String userFirstName, String userLastName, int StationNumber, Date OrderDate, String FuelType, int Quantity, String GasCompanyName) {
+    public OrderFuelFromSupplier(String OrderNumber, String OrderStatus, String userFirstName, String userLastName, int StationNumber, Date OrderDate, String FuelType, int Quantity, String GasCompanyName, String managerID) {
         this.OrderNum = OrderNumber;
         this.OrderStatus=OrderStatus;
         this.userFirstName=userFirstName;
@@ -24,11 +24,16 @@ public class OrderFuelFromSupplier {
         this.FuelType=FuelType;
         this.Quantity=Quantity;
         this.GasCompanyName=GasCompanyName;
+        this.managerID=managerID;
     }
 
     /**
      Getters
      */
+
+    public String getManagerID() {
+        return managerID;
+    }
 
     public String getOrderNum() {
         return OrderNum;
@@ -59,11 +64,11 @@ public class OrderFuelFromSupplier {
     }
 
 
-    public int getStationNumber() {
+    public Integer getStationNumber() {
         return StationNumber;
     }
 
-    public int getQuantity() {
+    public Integer getQuantity() {
         return Quantity;
     }
 
