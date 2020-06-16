@@ -4,16 +4,20 @@ import Contollers.FormValidation;
 import Contollers.GeneratingReportsMarketingManagerController;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
+import javafx.scene.control.*;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class GeneratingReportsMarketingManagerBoundary implements Initializable {
+public class GeneratingReportsMarketingManagerBoundary implements DataInitializable {
+
+    String managerID;
+    String managerCompany;
 
     /**
      * The supervisor boundary controller.
@@ -23,33 +27,81 @@ public class GeneratingReportsMarketingManagerBoundary implements Initializable 
     private final Alert ErrorAlert = new Alert(Alert.AlertType.ERROR);
 
     @FXML
-    private Button btnOverview;
-
-    @FXML
-    private Button btnCustomers;
-
-    @FXML
-    private Button btnPackages;
-
-    @FXML
-    private Button btnSignout;
-
-    @FXML
     private Button btnGenerateReport;
 
     @FXML
-    private JFXComboBox<?> ChooseReportToGenerateCombo;
+    private JFXComboBox<String> ChooseReportToGenerateCombo;
 
     @FXML
     private JFXTextField EnterOperationSaleTXT;
 
+    @FXML
+    private DatePicker EndDateBox;
+
+    @FXML
+    private DatePicker StartDateBox;
+
+    @FXML
+    private Label EndDateTxt;
+
+    @FXML
+    private Label StartDateTxt;
+
+    @FXML
+    private Label ShowReportMarketingCampaignTxt;
+
+    @FXML
+    private TableView<?> CommentsReportForMarketingCampaignTable;
+
+    @FXML
+    private TableColumn<?, ?> CommentsReport_CustomerIDColumn;
+
+    @FXML
+    private TableColumn<?, ?> TotalAmountSpentColumn;
+
+    @FXML
+    private TableView<?> CustomerPeriodicCharacterizationReportTable;
+
+    @FXML
+    private TableColumn<?, ?> CustomerPeriodicCharacterizationReport_CustomerIDCustomerPeriodicCharacterizationReportColumn;
+
+    @FXML
+    private TableColumn<?, ?> YellowColumn;
+
+    @FXML
+    private TableColumn<?, ?> SonolColumn;
+
+    @FXML
+    private TableColumn<?, ?> PazColumn;
+
+    @FXML
+    private TableColumn<?, ?> TotalColumn;
+
+    @Override
+    public void initData(Object data) {
+
+    }
+
+    private final ObservableList<String> ReportsType = FXCollections.observableArrayList("Comments Report for Marketing Campaign",
+            "Customer Periodic Characterization Report");
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         this.formValidation = FormValidation.getValidator();
 
-        //btnApprovedRates.setDisable(true);
-        /*ChooseSubscriptionTypeCombo.setItems(SubscriptionType);
-        ShowCurrentRateTXT.setVisible(false);
+        ChooseReportToGenerateCombo.setItems(ReportsType);
+
+        ChooseReportToGenerateCombo.setVisible(true);
+        StartDateTxt.setVisible(false);
+        StartDateBox.setVisible(false);
+        EndDateTxt.setVisible(false);
+        EndDateBox.setVisible(false);
+        EnterOperationSaleTXT.setVisible(false);
+        btnGenerateReport.setVisible(false);
+        ShowReportMarketingCampaignTxt.setVisible(false);
+        CommentsReportForMarketingCampaignTable.setVisible(false);
+        CustomerPeriodicCharacterizationReportTable.setVisible(false);
 
         /*  set all fields validators */
         formValidation();
@@ -71,21 +123,53 @@ public class GeneratingReportsMarketingManagerBoundary implements Initializable 
     @FXML
     void handleChooseReportToGenerate(ActionEvent event) {
 
+        ChooseReportToGenerateCombo.setPrefWidth(340);
+        StartDateBox.getEditor().clear();
+        EndDateBox.getEditor().clear();
+        StartDateTxt.setVisible(true);
+        StartDateBox.setVisible(true);
+        EndDateTxt.setVisible(true);
+        EndDateBox.setVisible(true);
+
+        if(ChooseReportToGenerateCombo.getValue().equals("Comments Report for Marketing Campaign"))
+            EnterOperationSaleTXT.setVisible(true);
+        else
+            EnterOperationSaleTXT.setVisible(false);
+
+        btnGenerateReport.setVisible(true);
+        ShowReportMarketingCampaignTxt.setVisible(false);
+        CommentsReportForMarketingCampaignTable.setVisible(false);
+        CustomerPeriodicCharacterizationReportTable.setVisible(false);
+
     }
 
     @FXML
-    void handleClicks(ActionEvent event) {
+    void handleStartDateBox(ActionEvent event) {
+
+        /*if(StartDateBox.getValue().isBefore(java.time.LocalDate.now()) == true)
+            ERRORalreadyPassedDate.setVisible(true);*/
+    }
+
+    @FXML
+    void handleEndDateBox(ActionEvent event) {
+
+        /*if(EndDateBox.getValue().isBefore(StartDateBox.getValue()) == true)
+            ERRORalreadyPassedDate.setVisible(true);*/
 
     }
 
     @FXML
     void handleEnterOperationSale(ActionEvent event) {
 
+        String str = EnterOperationSaleTXT.getText();
+        System.out.println(str);
+        //
     }
 
     @FXML
     void handleGenerateReportBtn(ActionEvent event) {
 
     }
+
 
 }

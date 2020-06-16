@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
  */
 public class FormValidation {
     private static FormValidation Validator = null;
-    private static boolean EmptyField;
+    private boolean EmptyField;
     private boolean NumberPositive;
     private boolean DoubleNumber;
     private boolean EmailAddress;
@@ -34,6 +34,9 @@ public class FormValidation {
     private boolean maxSizeIndicator;
     private boolean minSizeIndicator;
 
+    public FormValidation() {
+
+    }
 
     public static FormValidation getValidator() {
         if (Validator == null) {
@@ -48,13 +51,14 @@ public class FormValidation {
      * @param theField  - the field to validate
      * @param fieldName - the name of field
      */
-    public static void isEmptyFieldValidation(JFXTextField theField, String fieldName) {
+    public void isEmptyFieldValidation(JFXTextField theField, String fieldName) {
         RequiredFieldValidator reqInputValidator = new RequiredFieldValidator();
         reqInputValidator.setMessage(fieldName + " field is Required!");
         theField.getValidators().add(reqInputValidator);
         theField.focusedProperty().addListener((o, oldVal, newVal) -> {
+
             if (!newVal)
-                setEmptyField(theField.validate());
+               EmptyField = theField.validate();
         });
     }
 
@@ -779,7 +783,7 @@ public class FormValidation {
         return minSizeIndicator;
     }
 
-    public static void setEmptyField(boolean emptyField) {
+    public  void setEmptyField(boolean emptyField) {
         EmptyField = emptyField;
     }
 }

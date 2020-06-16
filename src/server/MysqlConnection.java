@@ -170,6 +170,7 @@ public class MysqlConnection {
                 "DELETE `Costumer`, `User` FROM `Costumer` INNER JOIN `User` ON Costumer.ID = User.userID WHERE `Costumer`.ID = ?";
         sqlArray[SqlQueryType.UPDATE_COSTUMER_CREDIT_CARD.getCode()] = "UPDATE `Costumer` SET `Credit Card Number` = ? ,`CreditCardExperationDate` = ? ,`CVV` = ?" +
                 "WHERE ID =?";
+        sqlArray[SqlQueryType.UPDATE_USER_STATIONS.getCode()] = "UPDATE `User` SET `FuelCompany1`= ? ,`FuelCompany2`= ?,`FuelCompany3`= ? WHERE userID = ?";
 
 
 
@@ -187,6 +188,7 @@ public class MysqlConnection {
          * *****************************************************/
         sqlArray[SqlQueryType.GET_ALL_ORDER_TO_SUPPLY_FOR_STATION_MANAGER.getCode()] = "SELECT OrderNumber,companyName,StationNum,FuelType,Quantity,OrderStatus FROM OrderForStock as ofs, GasStation as gs WHERE ofs.StationNum=gs.StationNumber and ofs.GasCompanyName=gs.companyName and ofs.OrderStatus like \"New\" and managerID= ?";
         sqlArray[SqlQueryType.UPDATE_STATUS_TO_IN_TREATMENT.getCode()]="UPDATE `OrderForStock` SET `OrderStatus` = \"In treatment\" WHERE `OrderNumber` = ?";
+
         /* *****************************************
          * ********** Orders From Supplier Queries ****************
          * *****************************************/

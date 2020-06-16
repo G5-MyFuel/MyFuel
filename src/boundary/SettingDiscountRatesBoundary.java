@@ -17,7 +17,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class SettingDiscountRatesBoundary implements Initializable {
+public class SettingDiscountRatesBoundary implements DataInitializable {
 
     /**
      * The supervisor boundary controller.
@@ -45,8 +45,13 @@ public class SettingDiscountRatesBoundary implements Initializable {
             "Full monthly subscription (for single vehicle)", "Regular monthly subscription - number of vehicles");
 
     @Override
+    public void initData(Object data) {
+
+    }
+
+    @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.formValidation = FormValidation.getValidator();
+        this.formValidation = new FormValidation();
         ChooseSubscriptionTypeCombo.setItems(SubscriptionType);
         ShowCurrentRateTXT.setVisible(false);
         ShowNewRateTXT.setVisible(false);
@@ -62,7 +67,7 @@ public class SettingDiscountRatesBoundary implements Initializable {
 
         //formValidation.isContainsOnlyNumbers(ShowNewRateTXT, "New price");
         //formValidation.numberPositiveValidation(ShowNewRateTXT, "New price");
-        FormValidation.isEmptyFieldValidation(ShowNewRateTXT, "New price");
+        formValidation.isEmptyFieldValidation(ShowNewRateTXT, "New price");
         //formValidation.maxLengthValidation(ShowNewRateTXT, "New price", 3);
         formValidation.maxFloatSizeValidation(ShowNewRateTXT, "New price", 100);
         formValidation.minFloatSizeValidation(ShowNewRateTXT, "New price", 0);

@@ -22,7 +22,6 @@ public class CustomerRegistrationController extends BasicController {
      * The boundary controlled by this controller
      */
     private CustomerRegistrationBoundary myBoundary;
-    private String companyName = "";
     private ArrayList<Costumer> allDBCostumerArray = new ArrayList<>();
     private ArrayList<Vehicle> allVehicleArray = new ArrayList<>();
     private Costumer tempCostumer;
@@ -49,7 +48,7 @@ public class CustomerRegistrationController extends BasicController {
         }
         CostumerTablevarArray.add(costumer.getCostumerType());
         CostumerTablevarArray.add(costumer.getPurchasePlan());
-        CostumerTablevarArray.add(costumer.getServicePlan());
+        CostumerTablevarArray.add(costumer.getPricingModel());
         //
         //building user.
         ArrayList<Object> UserTablevarArray = new ArrayList<>();
@@ -58,9 +57,9 @@ public class CustomerRegistrationController extends BasicController {
         UserTablevarArray.add(costumer.getUserFirstName());
         UserTablevarArray.add(costumer.getUserLastName());
         UserTablevarArray.add(costumer.getUserEmail());
-        UserTablevarArray.add(companyName);//fuelcompany1
-        UserTablevarArray.add(companyName);//fuelcompany2
-        UserTablevarArray.add(companyName);//fuelcompany3
+        for (int i = 0; i < 3; i++) {//add fuel companies
+            UserTablevarArray.add(costumer.getFuelCompany().get(i));
+        }
         //
         //inserting costumer vehicles
         if (costumer.getCostumerVehicle().size() > 1) {
@@ -139,9 +138,16 @@ public class CustomerRegistrationController extends BasicController {
      */
     private ArrayList<Costumer> changeResultToCostumer(SqlResult result) {
         ArrayList<Costumer> resultList = new ArrayList<>();
+        ArrayList<String> temp = new ArrayList<>();
         for (ArrayList<Object> a : result.getResultData()) {
             Costumer cos = new Costumer((String) a.get(0), (String) a.get(9), (String) a.get(4),
-                    (String) a.get(11), (String) a.get(12), (String) a.get(13), null, (String) a.get(5), null, (String) a.get(6));
+                    (String) a.get(11), (String) a.get(12), (String) a.get(13), null, (String) a.get(6), null, (String) a.get(5));
+            //add fuel companies.
+            temp.add((String)a.get(14));
+            temp.add((String)a.get(15));
+            temp.add((String)a.get(16));
+            cos.setFuelCompany(temp);
+            temp.clear();
             CreditCard card = new CreditCard(cos, (String) a.get(1), (String) a.get(2), (String) a.get(3));
             cos.setCostumerCreditCard(card);
             resultList.add(cos);
@@ -179,9 +185,5 @@ public class CustomerRegistrationController extends BasicController {
             resultList.add(vehicle);
         }
         return resultList;
-    }
-
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
     }
 }

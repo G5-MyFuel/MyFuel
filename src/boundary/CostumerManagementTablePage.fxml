@@ -4,6 +4,7 @@
 <?import com.jfoenix.controls.JFXTabPane?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import java.lang.String?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ContextMenu?>
@@ -17,6 +18,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <Pane prefHeight="796.0" prefWidth="1062.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundary.CostumerManagmentTablePageBoundary">
@@ -41,7 +43,7 @@
                                           <Font size="18.0" />
                                        </font>
                                     </JFXTextField>
-                                    <Button layoutX="323.0" layoutY="112.0" mnemonicParsing="false" onMouseClicked="#ClickSearchCostumer" prefHeight="33.0" prefWidth="91.0" style="-fx-background-color: #2D4578; -fx-background-radius: 50;" stylesheets="@style.css" text="Search" textFill="WHITE">
+                                    <Button layoutX="323.0" layoutY="112.0" mnemonicParsing="false" onMouseClicked="#ClickSearchCostumer" prefHeight="33.0" prefWidth="91.0" style="-fx-background-radius: 50;" stylesheets="@style.css" text="Search" textFill="WHITE">
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
@@ -70,12 +72,27 @@
                                        </contextMenu>
                                     </TableView>
                                     <Label layoutX="51.0" layoutY="173.0" text="*Double Click To Edit" />
-                                    <Button layoutX="51.0" layoutY="500.0" mnemonicParsing="false" onMouseClicked="#showCreditCard" prefHeight="33.0" prefWidth="293.0" style="-fx-background-color: #2D4578; -fx-background-radius: 50;" stylesheets="@style.css" text="Click To View Selected Costumer Credit Card Details" textFill="WHITE">
-                                       <cursor>
-                                          <Cursor fx:constant="HAND" />
-                                       </cursor>
-                                    </Button>
                                     <Label layoutX="51.0" layoutY="190.0" text="*Right Click to Delete / Refresh" />
+                                    <VBox layoutX="51.0" layoutY="473.0" prefHeight="108.0" prefWidth="293.0">
+                                       <children>
+                                          <Button mnemonicParsing="false" onMouseClicked="#showCreditCard" prefHeight="33.0" prefWidth="293.0" style="-fx-background-radius: 50;" stylesheets="@style.css" text="Click To View Selected Costumer Credit Card Details" textFill="WHITE">
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </Button>
+                                          <Button mnemonicParsing="false" onMouseClicked="#openStationPage" prefHeight="33.0" prefWidth="165.0" style="-fx-background-radius: 50;" stylesheets="@style.css" text="Chose Costumer Stations" textFill="WHITE">
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                             <VBox.margin>
+                                                <Insets top="20.0" />
+                                             </VBox.margin>
+                                          </Button>
+                                       </children>
+                                       <padding>
+                                          <Insets top="20.0" />
+                                       </padding>
+                                    </VBox>
                                  </children>
                               </Pane>
                            </children>
@@ -109,7 +126,7 @@
                                           </AnchorPane>
                                           <AnchorPane prefHeight="185.0" prefWidth="349.0" style="-fx-background-color: #fcf8e8;">
                                              <children>
-                                                <Button fx:id="saveVehicleButton" layoutX="153.0" layoutY="226.0" mnemonicParsing="false" onMouseClicked="#ClickSaveVehicleButton" text="Save" />
+                                                <Button fx:id="saveVehicleButton" layoutX="153.0" layoutY="226.0" mnemonicParsing="false" onMouseClicked="#ClickSaveVehicleButton" style="-fx-background-radius: 50;" stylesheets="@style.css" text="Save" />
                                                 <JFXTextField fx:id="VehicleIDtxt" focusColor="#00add8" labelFloat="true" layoutX="35.0" layoutY="73.0" prefHeight="25.0" prefWidth="281.0" promptText="Vehicle ID" unFocusColor="#868282" />
                                                 <JFXComboBox fx:id="GasTypeChoiseBox" layoutX="32.0" layoutY="118.0" prefHeight="40.0" prefWidth="284.0" promptText="Chose Gas Type:" />
                                                 <JFXTextField fx:id="OwnerIDtxt1" focusColor="#00add8" labelFloat="true" layoutX="33.0" layoutY="22.0" prefHeight="25.0" prefWidth="281.0" promptText="Owner ID" unFocusColor="#868282" />
@@ -119,7 +136,7 @@
                                     </SplitPane>
                                  </children>
                               </Pane>
-                              <Button fx:id="searchButton2" layoutX="248.0" layoutY="126.0" mnemonicParsing="false" onMouseClicked="#ClickSearchCostumerVehicles" prefHeight="33.0" prefWidth="91.0" style="-fx-background-color: #2D4578; -fx-background-radius: 50;" stylesheets="@style.css" text="Search" textFill="WHITE">
+                              <Button fx:id="searchButton2" layoutX="248.0" layoutY="126.0" mnemonicParsing="false" onMouseClicked="#ClickSearchCostumerVehicles" prefHeight="33.0" prefWidth="91.0" style="-fx-background-radius: 50;" stylesheets="@style.css" text="Search" textFill="WHITE">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
@@ -150,7 +167,7 @@
                                     <Font size="18.0" />
                                  </font>
                               </JFXTextField>
-                              <Button fx:id="SearchButton112" layoutX="37.0" layoutY="473.0" mnemonicParsing="false" onMouseClicked="#removeSelectedVehicle" prefHeight="37.0" prefWidth="235.0" style="-fx-background-color: #2D4578; -fx-background-radius: 50;" stylesheets="@style.css" text="Click To Remove Selected Vehicle" textAlignment="RIGHT" textFill="WHITE">
+                              <Button fx:id="SearchButton112" layoutX="37.0" layoutY="473.0" mnemonicParsing="false" onMouseClicked="#removeSelectedVehicle" prefHeight="37.0" prefWidth="235.0" style="-fx-background-radius: 50;" stylesheets="@style.css" text="Click To Remove Selected Vehicle" textAlignment="RIGHT" textFill="WHITE">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
@@ -165,7 +182,7 @@
                                     </ImageView>
                                  </graphic>
                               </Button>
-                              <Button fx:id="SearchButton1121" layoutX="630.0" layoutY="122.0" mnemonicParsing="false" onMouseClicked="#setVehicleInfoVisible" prefHeight="41.0" prefWidth="194.0" style="-fx-background-color: #2D4578; -fx-background-radius: 50;" stylesheets="@style.css" text="Click To Add New Vehicle" textAlignment="RIGHT" textFill="WHITE">
+                              <Button fx:id="SearchButton1121" layoutX="630.0" layoutY="122.0" mnemonicParsing="false" onMouseClicked="#setVehicleInfoVisible" prefHeight="41.0" prefWidth="194.0" style="-fx-background-radius: 50;" stylesheets="@style.css" text="Click To Add New Vehicle" textAlignment="RIGHT" textFill="WHITE">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>

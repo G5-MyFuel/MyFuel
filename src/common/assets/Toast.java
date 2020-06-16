@@ -18,7 +18,9 @@ import javafx.util.Duration;
  * */
 public final class Toast
 {
-    public static void makeText(Stage ownerStage, String toastMsg, int toastDelay, int fadeInDelay, int fadeOutDelay)
+
+
+    public static void makeText(Stage ownerStage, String toastMsg, int toastDelay, int fadeInDelay, int fadeOutDelay,int x,int y)
     {
         Stage toastStage=new Stage();
         toastStage.initOwner(ownerStage);
@@ -32,8 +34,8 @@ public final class Toast
         StackPane root = new StackPane(text);
         root.setStyle("-fx-background-radius: 20; -fx-background-color: rgba(0, 0, 150, 0.2); -fx-padding: 10px;");
         root.setOpacity(0);
-        root.setLayoutX(40);
-        root.setLayoutY(380);
+        root.setLayoutX(x);
+        root.setLayoutY(y);
 
         Scene scene = new Scene(root);
         scene.setFill(Color.TRANSPARENT);
@@ -64,4 +66,5 @@ public final class Toast
         });
         fadeInTimeline.play();
     }
+
 }

@@ -29,7 +29,7 @@ public class OrderExecutionBoundary implements DataInitializable {
 
     private OrderExecutionBoundary OrderExecutionController;
     private OrderFromSupplierController myController = new OrderFromSupplierController(this);
-    private String SupplierID="";
+    private String SupplierID = "";
     /*private ArrayList<OrderFuelFromSupplier> OFFS;*/
 
     @FXML
@@ -120,27 +120,24 @@ public class OrderExecutionBoundary implements DataInitializable {
 
     @FXML
     void ClickDoneBtn(MouseEvent event) {
-        for (int i = 0; i < myController.resultList.size(); i++) {
-            if (myController.resultList.get(i).getOrderNumber().equals(tableView.getSelectionModel().getSelectedItem().getOrderNumber())) {
-                myController.resultList.get(i).setOrderStatus("done");
-                myController.setNewStatus(myController.resultList.get(i).getOrderNumber());
-                tableData = FXCollections.observableArrayList(myController.resultList);
-                tableView.setItems(tableData);
+        tableView.getSelectionModel().getSelectedItem().setOrderStatus("done");
 
-                hboxOrderConfirmation.setVisible(false);
-                DoneMsgTxt.setVisible(true);
-                DoneBtn.setVisible(false);
-                tableView.refresh();
+        OrderFuelFromSupplier temp = tableView.getSelectionModel().getSelectedItem();
+        temp.setOrderStatus("done");
+        myController.setNewStatus(temp.getOrderNumber());
 
-                addToStock(myController.resultList.get(i).getQuantity(),myController.resultList.get(i).getFuelType()
-                            ,myController.resultList.get(i).getStationNumber(),myController.resultList.get(i).getManagerID());
-                break;
-            }
-        }
+        hboxOrderConfirmation.setVisible(false);
+        DoneMsgTxt.setVisible(true);
+        DoneBtn.setVisible(false);
+        tableView.refresh();
+
+        addToStock(temp.getQuantity(), temp.getFuelType(), temp.getStationNumber(), temp.getManagerID());
     }
+
+
     @Override
     public void initData(Object data) {
-        SupplierID = (String)data;
+        SupplierID = (String) data;
     }
 
     @Override
@@ -153,11 +150,11 @@ public class OrderExecutionBoundary implements DataInitializable {
         OrderViewAnchorPane.setVisible(false);
         myController.getOrdersFromDB();
         System.out.println("Order Execution Page Is Open");
-
     }
-     /**
-      This function set the details from DB to TableView
-      **/
+
+    /**
+     * This function set the details from DB to TableView
+     **/
     public void setOrderFuelFromSupplierTableView(ArrayList<OrderFuelFromSupplier> OrderArray) {
         orderCol.setCellValueFactory(new PropertyValueFactory<>("OrderNumber"));
         statusCol.setCellValueFactory(new PropertyValueFactory<>("OrderStatus"));
@@ -167,55 +164,51 @@ public class OrderExecutionBoundary implements DataInitializable {
     }
 
     /**
-     Get DB details for Order View after we choose an order from the table
+     * Get DB details for Order View after we choose an order from the table
      **/
     public void getOrderDetailsFromTableView() {
         tableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                OrderFuelFromSupplier temp = null;
-                for (int i = 0; i < myController.resultList.size(); i++) {
-                    if (myController.resultList.get(i).getOrderNumber().equals(tableView.getSelectionModel().getSelectedItem().getOrderNumber()))
-                        temp = myController.resultList.get(i);
-                    if (temp != null) {
-                        OrderViewAnchorPane.setVisible(true);
-                        arrowImage.setVisible(true);
-                        hboxOrderConfirmation.setVisible(true);
-                        hboxOrderConfirmation.setDisable(false);
-                        DoneBtn.setVisible(true);
-
-                        /************   Show details to the User  ***************/
-                        StationManagerField.setText(temp.getUserFirstName().toString()+" "+temp.getUserLastName());
-                        CompanyNameField.setText(temp.getGasCompanyName().toString());
-                        OrderDateField.setText(temp.getOrderDate().toString());
-                        FuelTypeField.setText(temp.getFuelType().toString());
-                        StationNumberField.setText(temp.getStationNumber().toString());
-                        QuantityField.setText(String.valueOf(temp.getQuantity().toString()));
-
-                        /******* 'Done' status or 'In treatment' status *********/
-                        if (temp.getOrderStatus().equals("Done") ) {
-                            DoneMsgTxt.setVisible(true);
-                            hboxOrderConfirmation.setDisable(true);
-                        }
-                        if (temp.getOrderStatus().equals("In treatment"))
-                            DoneMsgTxt.setVisible(false);
-                    }
+                OrderFuelFromSupplier temp = tableView.getSelectionModel().getSelectedItem();
+                if (temp.getOrderStatus().equals("done")) {
+                    DoneMsgTxt.setVisible(true);
+                    hboxOrderConfirmation.setVisible(false);
+                    DoneBtn.setVisible(false);
+                    tableView.refresh();
+                } else {
+                    confirmationCheckBox.setSelected(false);
+                    DoneMsgTxt.setVisible(false);
+                    OrderViewAnchorPane.setVisible(true);
+                    arrowImage.setVisible(true);
+                    hboxOrderConfirmation.setVisible(true);
+                    hboxOrderConfirmation.setDisable(false);
+                    DoneBtn.setVisible(true);
                 }
+                /************   Show details to the User  ***************/
+                StationManagerField.setText(temp.getUserFirstName() + " " + temp.getUserLastName());
+                CompanyNameField.setText(temp.getGasCompanyName());
+                OrderDateField.setText(temp.getOrderDate().toString());
+                FuelTypeField.setText(temp.getFuelType());
+                System.out.println(temp.getStationNumber());
+                StationNumberField.setText(temp.getStationNumber().toString());
+                QuantityField.setText(temp.getQuantity().toString());
             }
         });
     }
 
     /**
      * Update the inventory after the supplier confirm
+     *
      * @param quantity
      */
-    public void addToStock(int quantity,String fuelType,int stationNumber,String managerID) {
-        if(fuelType.equals("95"))
-            myController.setNewInventory95(quantity,managerID,stationNumber);
+    public void addToStock(int quantity, String fuelType, int stationNumber, String managerID) {
+        if (fuelType.equals("Gasoline95"))
+            myController.setNewInventory95(quantity, managerID, stationNumber);
         else if (fuelType.equals("diesel"))
-            myController.setNewInventoryDiesel(quantity,managerID,stationNumber);
-        else if (fuelType.equals("scooter"))
-            myController.setNewInventoryScooter(quantity,managerID,stationNumber);
+            myController.setNewInventoryDiesel(quantity, managerID, stationNumber);
+        else if (fuelType.equals("scooterFuel"))
+            myController.setNewInventoryScooter(quantity, managerID, stationNumber);
     }
 
 }

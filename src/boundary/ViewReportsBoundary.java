@@ -1,6 +1,6 @@
 package boundary;
 
-import Contollers.VieReportsController;
+import Contollers.ViewReportsController;
 import entity.PurchasesReport;
 import entity.QuantityItemsStockReport;
 import javafx.collections.FXCollections;
@@ -24,7 +24,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.image.ImageView;
 
-public class VieReportsBoundary implements Initializable {
+public class ViewReportsBoundary implements Initializable {
 
     String managerID;
     String managerCompany;
@@ -35,7 +35,7 @@ public class VieReportsBoundary implements Initializable {
      * The supervisor boundary controller.
      */
 
-    private final VieReportsController myController = new VieReportsController(this);
+    private final ViewReportsController myController = new ViewReportsController(this);
     //private FormValidation formValidation;
     //private final Alert ErrorAlert = new Alert(Alert.AlertType.ERROR);
     //ArrayList<PurchasesReport> PurchasesArray = new ArrayList<>();

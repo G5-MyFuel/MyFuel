@@ -1,6 +1,6 @@
 package Contollers;
 
-import boundary.VieReportsBoundary;
+import boundary.ViewReportsBoundary;
 import common.assets.SqlAction;
 import common.assets.SqlQueryType;
 import common.assets.SqlResult;
@@ -10,19 +10,19 @@ import javafx.application.Platform;
 
 import java.util.ArrayList;
 
-public class VieReportsController extends BasicController {
+public class ViewReportsController extends BasicController {
 
     /**
      * The boundary controlled by this controller
      */
-    private final VieReportsBoundary myBoundary;
+    private final ViewReportsBoundary myBoundary;
 
     /**
      * Instantiates a new Costumer Management controller.
      *
      * @param myBoundary the my boundary
      */
-    public VieReportsController(VieReportsBoundary myBoundary) {
+    public ViewReportsController(ViewReportsBoundary myBoundary) {
         this.myBoundary = myBoundary;
     }
 
