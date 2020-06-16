@@ -63,6 +63,7 @@ public class CreditCardWindowBoundary implements DataInitializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        CVVtxt.clear();
         formValidation = new FormValidation();
         //credit card number check
         formValidation.isOnlyNumbers(creditCardNumbertxt, "Card number");

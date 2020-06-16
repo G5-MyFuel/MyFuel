@@ -223,13 +223,12 @@ public class FormValidation {
             private void evalTextInputField() {
                 TextInputControl textField = (TextInputControl) this.srcControl.get();
                 boolean result = textField.getLength() > Length || textField.getLength() < Length ? false : true;
+                ExactlyInLength = result;
                 try {
                     if (result) {
                         this.hasErrors.set(false);
-                        ExactlyInLength = true;
                     } else {
                         this.hasErrors.set(true);
-                        ExactlyInLength = false;
                     }
                 } catch (Exception var3) {
                     this.hasErrors.set(true);

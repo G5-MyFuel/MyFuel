@@ -121,8 +121,6 @@ public class CustomerRegistrationBoundary implements DataInitializable {
 
     private ObservableList<String> GasType = FXCollections.observableArrayList("Gasoline-95", "Diesel", "Scooter Fuel");
 
-    private ObservableList<String> ModelTypes2 = FXCollections.observableArrayList("Casual fueling", "Regular monthly subscription");
-
     private ObservableList<String> SingelVehicle;
 
 
@@ -239,8 +237,10 @@ public class CustomerRegistrationBoundary implements DataInitializable {
     @FXML
     void ClickFinishButton(MouseEvent event) {
         Costumer tempCos = myController.getTempCostumer();
-
-
+        ArrayList<String> stations = new ArrayList<>();
+        stations.add("NULL");
+        stations.add("NULL");
+        stations.add("NULL");
         //set costumer final details.
         tempCos.setCostumerType(CostumertypeChoiceBox.getSelectionModel().getSelectedItem());
         tempCos.setPurchasePlan(PurchasePlanChoiseBox.getSelectionModel().getSelectedItem());
@@ -249,32 +249,20 @@ public class CustomerRegistrationBoundary implements DataInitializable {
         tempCos.setPricingModel(PricingModelChoiseBox1.getValue());
         if (tempCos.getPurchasePlan().equals("Exclusive")) {
             if (YELLOWbtn.isSelected())
-                tempCos.getFuelCompany().add("YELLOW");
-            else
-                tempCos.getFuelCompany().add("NULL");
+                stations.add(0,"YELLOW");
             if (PAZbtn.isSelected())
-                tempCos.getFuelCompany().add("PAZ");
-            else
-                tempCos.getFuelCompany().add("NULL");
+                stations.add(1,"PAZ");
             if (SONOLbtn.isSelected())
-                tempCos.getFuelCompany().add("SONOL");
-            else
-                tempCos.getFuelCompany().add("NULL");
+                stations.add(2,"SONOL");
         } else {
             if (yellowCheckBox.isSelected())
-                tempCos.getFuelCompany().add("YELLOW");
-            else
-                tempCos.getFuelCompany().add("NULL");
+                stations.add(0,"YELLOW");
             if (pazCheckBox.isSelected())
-                tempCos.getFuelCompany().add("PAZ");
-            else
-                tempCos.getFuelCompany().add("NULL");
+                stations.add(1,"PAZ");
             if (sonolCheckBox.isSelected())
-                tempCos.getFuelCompany().add("SONOL");
-            else
-                tempCos.getFuelCompany().add("NULL");
-
+                stations.add(2,"SONOL");
         }
+        tempCos.setFuelCompany(stations);
 
         myController.setCostumerInDB(tempCos);
         planInfoTAB.setDisable(true);

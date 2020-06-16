@@ -4,6 +4,7 @@ import boundary.ConfirmDiscountRatesBoundary;
 import common.assets.SqlAction;
 import common.assets.SqlQueryType;
 import common.assets.SqlResult;
+import entity.DiscountRate;
 import javafx.application.Platform;
 
 import java.util.ArrayList;
@@ -26,18 +27,18 @@ public class ConfirmDiscountRatesController extends BasicController {
 
     /*Logic Methods*/
 
-    public void GetDiscountRatesData(ArrayList<String> paramArray) {
+    public void GetDiscountRatesData(/*String query*/) {
         //ArrayList<Object> varArray = new ArrayList<>();
         //varArray.addAll(paramArray);
         //varArray.remove(0);
-        switch (paramArray.get(0)) {
-            case "Get Discount Rates data":
-                SqlAction sqlAction = new SqlAction(SqlQueryType.GET_Manager_Data/*, varArray*/);
-                super.sendSqlActionToClient(sqlAction);
-                break;
+        /*switch (query) {
+            case "Get Discount Rates data":*/
+        SqlAction sqlAction = new SqlAction(SqlQueryType.Get_DiscountRates_Table/*, varArray*/);
+        super.sendSqlActionToClient(sqlAction);
+                /*break;
             default:
                 break;
-        }
+        }*/
     }
 
 
@@ -46,7 +47,7 @@ public class ConfirmDiscountRatesController extends BasicController {
 
         Platform.runLater(() -> {
             switch (result.getActionType()) {
-                case GET_Manager_Data:
+                case Get_DiscountRates_Table:
                     myBoundary.setDiscountRatesData(this.changeResultToDiscountRatesData(result));
                     break;
                 default:
@@ -61,14 +62,18 @@ public class ConfirmDiscountRatesController extends BasicController {
      * @param result the result
      * @return String
      */
-    private String changeResultToDiscountRatesData(SqlResult result) {
+    private ArrayList<DiscountRate> changeResultToDiscountRatesData(SqlResult result) {
 
-        /*Float TotalPrice = new Float(0);
+
+        //Float TotalPrice = new Float(0);
+        ArrayList<DiscountRate> resultList = new ArrayList<>();
         for (ArrayList<Object> a : result.getResultData()) {
-            TotalPrice += Float.parseFloat((String) a.get(0));
+            resultList.add(new DiscountRate((String) a.get(0), (String) a.get(1),(String) a.get(3)));
+            //TotalPrice += Float.parseFloat((String) a.get(0));
         }
-        return TotalPrice.toString();*/
-        return "";
+        //return TotalPrice.toString();
+        System.out.println(resultList);
+        return resultList;
     }
 
 }
