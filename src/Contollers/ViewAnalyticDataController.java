@@ -1,16 +1,12 @@
 package Contollers;
 
-import boundary.MarketingCampaignTemplateBoundary;
 import boundary.ViewAnalyticDataBoundary;
 import common.assets.SqlAction;
 import common.assets.SqlQueryType;
 import common.assets.SqlResult;
-import entity.MarketingCampaignTemplate;
 import entity.Rating;
 import javafx.application.Platform;
-import server.MysqlConnection;
 
-import java.sql.Time;
 import java.util.ArrayList;
 
 public class ViewAnalyticDataController extends BasicController {
@@ -56,8 +52,8 @@ public class ViewAnalyticDataController extends BasicController {
     }
 
     public void GetDateToCalcRating (){
-        SqlAction sqlAction = new SqlAction(SqlQueryType.GET_ALL_PURCHASE_TABLE);
-        super.sendSqlActionToClient(sqlAction);
+       // SqlAction sqlAction = new SqlAction(SqlQueryType.GET_ALL_PURCHASE_TABLE);
+        //super.sendSqlActionToClient(sqlAction);
 
     }
 }

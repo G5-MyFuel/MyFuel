@@ -129,7 +129,11 @@ public class CostumerManagementController extends BasicController {
         ArrayList<Costumer> resultList = new ArrayList<>();
         for (ArrayList<Object> a : result.getResultData()) {
             Costumer cos = new Costumer((String) a.get(0), (String) a.get(9), (String) a.get(4),
-                    (String) a.get(11), (String) a.get(12), (String) a.get(13), null, (String) a.get(5), null, (String) a.get(6));
+                    (String) a.get(11), (String) a.get(12), (String) a.get(13), null, (String) a.get(6), null, (String) a.get(5));
+            //add fuel companies.
+            cos.getFuelCompany().add((String)a.get(14));
+            cos.getFuelCompany().add((String)a.get(15));
+            cos.getFuelCompany().add((String)a.get(16));
             CreditCard card = new CreditCard(cos, (String) a.get(1), (String) a.get(2), (String) a.get(3));
             cos.setCostumerCreditCard(card);
             resultList.add(cos);

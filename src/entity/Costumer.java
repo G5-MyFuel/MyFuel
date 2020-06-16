@@ -13,15 +13,15 @@ public class Costumer extends User {
     private CreditCard CostumerCreditCard;
     private ArrayList<Vehicle> CostumerVehicle = new ArrayList<Vehicle>();
     private String CostumerType;
-    private String servicePlan;
+    private String pricingModel;
     private String purchasePlan;
 
-    public Costumer(String ID, String CustomerPassword, String CostumerType, String Fname, String Lname, String emailAdress, CreditCard customerCreditCard, String purchasePlan, Vehicle CostumerVehicle,String servicePlan) {
+    public Costumer(String ID, String CustomerPassword, String CostumerType, String Fname, String Lname, String emailAdress, CreditCard customerCreditCard, String purchasePlan, Vehicle CostumerVehicle,String pricingModel) {
         super(ID,CostumerType,CustomerPassword,0,Fname,Lname,emailAdress,null);
         this.CostumerCreditCard = customerCreditCard;
         this.purchasePlan = purchasePlan;
         this.CostumerVehicle.add(CostumerVehicle);
-        this.servicePlan = servicePlan;
+        this.pricingModel = pricingModel;
         this.CostumerType = CostumerType;
         //
     }
@@ -42,12 +42,12 @@ public class Costumer extends User {
     }
 
 
-    public String getServicePlan() {
-        return servicePlan;
+    public String getPricingModel() {
+        return pricingModel;
     }
 
-    public void setServicePlan(String servicePlan) {
-        this.servicePlan = servicePlan;
+    public void setPricingModel(String pricingModel) {
+        this.pricingModel = pricingModel;
     }
 
     public ArrayList<Vehicle> getCostumerVehicle() {

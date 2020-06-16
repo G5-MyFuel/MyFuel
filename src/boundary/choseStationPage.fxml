@@ -71,7 +71,7 @@
                   <Insets left="10.0" />
                </VBox.margin>
             </JFXCheckBox>
-            <Button fx:id="confirmBtn" mnemonicParsing="false" onMouseClicked="#confirmFunction" text="Confirm" textAlignment="RIGHT">
+            <Button fx:id="confirmBtn" mnemonicParsing="false" onMouseClicked="#confirmFunction" stylesheets="@style.css" text="Confirm" textAlignment="RIGHT">
                <VBox.margin>
                   <Insets left="87.0" top="10.0" />
                </VBox.margin>

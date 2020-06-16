@@ -230,8 +230,8 @@ public class CostumerManagmentTablePageBoundary implements DataInitializable {
             @Override
             public void handle(TableColumn.CellEditEvent<Costumer, String> t) {
                 Costumer temp = ((Costumer) t.getTableView().getItems().get(t.getTablePosition().getRow()));
-                temp.setServicePlan(t.getNewValue());
-                myController.updateCostumerDetailsInDb(SqlQueryType.UPDATE_COSTUMER_SERVICE_PLAN, temp.getUserID(), temp.getServicePlan());
+                temp.setPricingModel(t.getNewValue());
+                myController.updateCostumerDetailsInDb(SqlQueryType.UPDATE_COSTUMER_SERVICE_PLAN, temp.getUserID(), temp.getPricingModel());
             }
         });
         //Modifying the purchasePlan property
@@ -273,7 +273,7 @@ public class CostumerManagmentTablePageBoundary implements DataInitializable {
                 Costumer treeItem = param.getValue();
                 Costumer costumer = treeItem;
 
-                String temp = costumer.getServicePlan();
+                String temp = costumer.getPricingModel();
                 return new SimpleObjectProperty<String>(temp);
             }
         });
@@ -471,7 +471,8 @@ public class CostumerManagmentTablePageBoundary implements DataInitializable {
     @FXML
     void openStationPage(){
         CosManageTbale.setDisable(true);
-
+        PagingController pc = new PagingController();
+        pc.loadAdditionalStage(ProjectPages.STATION_SELECTION_PAGE.getPath(),this);
     }
 
     public void changeSelectedCostumerStations(String station1,String station2,String station3){
