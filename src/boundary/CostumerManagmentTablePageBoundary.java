@@ -16,7 +16,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -32,7 +31,7 @@ import java.util.ResourceBundle;
 
 import static java.lang.Thread.sleep;
 
-public class CostumerManagmentTablePageBoundary implements Initializable {
+public class CostumerManagmentTablePageBoundary implements DataInitializable {
 
 
     private ArrayList<Vehicle> Vehicles = new ArrayList<>();
@@ -322,7 +321,7 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
 
     public void refreshTable() {
         myController.getCostumerTable();
-        ;
+
     }
 
     @FXML
@@ -366,7 +365,6 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
         }
 
     }
-
 
     @FXML
     void removeSelectedCostumer() {
@@ -470,6 +468,23 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
         }
     }
 
+    @FXML
+    void openStationPage(){
+        CosManageTbale.setDisable(true);
+
+    }
+
+    public void changeSelectedCostumerStations(String station1,String station2,String station3){
+        Costumer cos = CosManageTbale.getSelectionModel().getSelectedItem();
+        ArrayList<String> temp = new ArrayList<>();
+        temp.add(station1);
+        temp.add(station2);
+        temp.add(station3);
+        cos.setFuelCompany(temp);
+        myController.setCostumerStation(cos);
+        refreshTable();
+    }
+
     public Costumer getCos() {
         return cos;
     }
@@ -484,5 +499,15 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
                 return cos;
         }
         return null;
+    }
+
+
+    public TableView<Costumer> getCosManageTbale() {
+        return CosManageTbale;
+    }
+
+    @Override
+    public void initData(Object data) {
+
     }
 }

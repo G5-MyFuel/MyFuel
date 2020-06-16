@@ -59,10 +59,10 @@ public class LoginToSystemController extends BasicController {
     private ArrayList<User> changeResultToUsers(SqlResult result) {
         ArrayList<User> resultList = new ArrayList<>();
         for (ArrayList<Object> a : result.getResultData()) {
-            String[] fuelCompany = new String[3];
-            fuelCompany[0] = (String) a.get(7);
-            fuelCompany[1] = (String) a.get(8);
-            fuelCompany[2] = (String) a.get(9);
+            ArrayList<String> fuelCompany = new ArrayList<>();
+            fuelCompany.add((String) a.get(7));
+            fuelCompany.add((String) a.get(8));
+            fuelCompany.add((String) a.get(9));
             User user = new User((String) a.get(0), (String) a.get(1), (String) a.get(2), (int) a.get(3), (String) a.get(4), (String) a.get(5), (String) a.get(6), fuelCompany);
             resultList.add(user);
         }
@@ -105,7 +105,7 @@ public class LoginToSystemController extends BasicController {
     public String getFuelCompanyBuUserID(String userID){
         for (User u : myBoundary.getAllDBUsersArrayList()) {
             if (u.getUserID().equals(userID)) {
-                return u.getFuelCompany()[0];
+                return u.getFuelCompany().get(0);
             }
         }
         return "failed full user name";

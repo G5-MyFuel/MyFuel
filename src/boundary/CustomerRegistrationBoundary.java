@@ -117,7 +117,7 @@ public class CustomerRegistrationBoundary implements DataInitializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        formValidation = FormValidation.getValidator();
+        formValidation = new FormValidation();
         giValidation();
         //
         tempVehicleArray = new ArrayList<Vehicle>();
