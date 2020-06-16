@@ -6,7 +6,7 @@ public class Rating {
     private int customerID;
 
 
-    public Rating(int customerID, int rating) {
+    public Rating( int rating,int customerID) {
         this.customerID = customerID;
         this.rating = rating;
     }
