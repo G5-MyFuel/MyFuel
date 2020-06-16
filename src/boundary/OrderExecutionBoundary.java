@@ -131,7 +131,8 @@ public class OrderExecutionBoundary implements DataInitializable {
                 DoneMsgTxt.setVisible(true);
                 DoneBtn.setVisible(false);
                 tableView.refresh();
-                addToStock(myController.resultList.get(i).getQuantity(),myController.resultList.get(i).getFuelType());
+                addToStock(myController.resultList.get(i).getQuantity(),myController.resultList.get(i).getFuelType()
+                            ,myController.resultList.get(i).getStationNumber(),myController.resultList.get(i).getManagerID());
                 break;
             }
         }
@@ -184,18 +185,18 @@ public class OrderExecutionBoundary implements DataInitializable {
 
                         /************   Show details to the User  ***************/
                         StationManagerField.setText(temp.getUserFirstName().toString()+" "+temp.getUserLastName());
-                        StationNumberField.setText(String.valueOf(temp.getStationNumber()));
                         CompanyNameField.setText(temp.getGasCompanyName().toString());
                         OrderDateField.setText(temp.getOrderDate().toString());
                         FuelTypeField.setText(temp.getFuelType().toString());
-                        QuantityField.setText(String.valueOf(temp.getQuantity()));
+                        StationNumberField.setText(temp.getStationNumber().toString());
+                        QuantityField.setText(String.valueOf(temp.getQuantity().toString()));
 
                         /******* 'Done' status or 'In treatment' status *********/
                         if (temp.getOrderStatus().equals("Done") ) {
                             DoneMsgTxt.setVisible(true);
                             hboxOrderConfirmation.setDisable(true);
                         }
-                        if (temp.getOrderStatus().equals("In treatment")&& event.isSecondaryButtonDown())
+                        if (temp.getOrderStatus().equals("In treatment"))
                             DoneMsgTxt.setVisible(false);
                     }
                 }
@@ -207,13 +208,13 @@ public class OrderExecutionBoundary implements DataInitializable {
      * Update the inventory after the supplier confirm
      * @param quantity
      */
-    public void addToStock(int quantity,String fuelType) {
+    public void addToStock(int quantity,String fuelType,int stationNumber,String managerID) {
         if(fuelType.equals("95"))
-            myController.setNewInventory95(quantity);
+            myController.setNewInventory95(quantity,managerID,stationNumber);
         else if (fuelType.equals("diesel"))
-            myController.setNewInventoryDiesel(quantity);
+            myController.setNewInventoryDiesel(quantity,managerID,stationNumber);
         else if (fuelType.equals("scooter"))
-            myController.setNewInventoryScooter(quantity);
+            myController.setNewInventoryScooter(quantity,managerID,stationNumber);
     }
 
 }

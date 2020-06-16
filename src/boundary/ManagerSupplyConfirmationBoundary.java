@@ -32,6 +32,7 @@ public class ManagerSupplyConfirmationBoundary implements DataInitializable {
     private ManagerSupplyConfirmationController myController = new ManagerSupplyConfirmationController(this);
     private ObservableList<ManagerSupplyConfirmation> tableData;
     private String stationManagerID = "800300579";
+
     @FXML
     private Button btnOverview;
 
@@ -130,12 +131,12 @@ public class ManagerSupplyConfirmationBoundary implements DataInitializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        myController.getOrdersFromDB(stationManagerID);
         hboxOrderConfirmation.setVisible(false);
         tableView.setVisible(true);
         ApprovalTxt.setVisible(false);
         SendBtn.setVisible(false);
         SendBtn.setDisable(true);
+        myController.getOrdersFromDB(stationManagerID);
         System.out.println("Manager Supply Confirmation Page Is Open");
     }
 

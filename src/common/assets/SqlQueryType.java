@@ -85,9 +85,10 @@ public enum SqlQueryType {
     INSERT_NEW_COSTUMER_USER(SqlExecutionType.UPDATE_QUERY),
 
     /* *****************************************************
-     * *************** Station Manager Queries ****************
+     * *************** Station Manager Confirmation Queries ****************
      * *****************************************************/
     GET_ALL_ORDER_TO_SUPPLY_FOR_STATION_MANAGER(SqlExecutionType.EXECUTE_QUERY),
+    UPDATE_STATUS_TO_IN_TREATMENT(SqlExecutionType.UPDATE_QUERY),
 
     /* *****************************************
      * ********** Order From Supplier Queries ****************
