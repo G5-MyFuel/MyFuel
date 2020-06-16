@@ -29,7 +29,6 @@ public class VieReportsBoundary implements Initializable {
     String managerID;
     String managerCompany;
     String managerStation;
-    String ReportYear;
     String ReportYearAndQuarter;
 
     /**
