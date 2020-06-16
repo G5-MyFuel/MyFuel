@@ -163,6 +163,7 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
 
         String str = EnterOperationSaleTXT.getText();
         System.out.println(str);
+        //
     }
 
     @FXML
