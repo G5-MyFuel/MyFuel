@@ -137,10 +137,6 @@ public class MysqlConnection {
      */
     public static void initSqlArray() {
         sqlArray = new String[SqlQueryType.MAX_SQL_QUERY.getCode()];
-        /* *****************************************************
-         * *************** Station Manager Queries ****************
-         * *****************************************************/
-        sqlArray[SqlQueryType.GET_ALL_ORDER_TO_SUPPLY_FOR_STATION_MANAGER.getCode()] = "SELECT OrderNumber,companyName,StationNum,FuelType,Quantity FROM OrderForStock as ofs, GasStation as gs WHERE ofs.StationNum=gs.StationNumber and ofs.GasCompanyName=gs.companyName and ofs.OrderStatus like \"New\" and managerID= ?";
 
         /* *****************************************************
          * *************** Login Queries ****************
@@ -186,7 +182,11 @@ public class MysqlConnection {
                 "INSERT INTO `User`(`userID`, `userType`, `userPassword`, `isLoginIndicator`, `userFirstName`, `userLastName`, `userEmail`, `FuelCompany1`, `FuelCompany2`, `FuelCompany3`) VALUES (?,'CUSTOMER',?,0,?,?,?,?,?,?)";
         sqlArray[SqlQueryType.INSERT_NEW_VEHICLE.getCode()] = "INSERT INTO `Vehicle`(`Vehicle ID`, `Fuel Type`, `Owner ID`) VALUES (?,?,?);";
 
-
+        /* *****************************************************
+         * *************** Station Manager Queries ****************
+         * *****************************************************/
+        sqlArray[SqlQueryType.GET_ALL_ORDER_TO_SUPPLY_FOR_STATION_MANAGER.getCode()] = "SELECT OrderNumber,companyName,StationNum,FuelType,Quantity FROM OrderForStock as ofs, GasStation as gs WHERE ofs.StationNum=gs.StationNumber and ofs.GasCompanyName=gs.companyName and ofs.OrderStatus like \"New\" and managerID= ?";
+        sqlArray[SqlQueryType.UPDATE_STATUS_TO_IN_TREATMENT.getCode()]="UPDATE `OrderForStock` SET `OrderStatus` = \"In treatment\" WHERE `OrderNumber` = ?";
         /* *****************************************
          * ********** Orders From Supplier Queries ****************
          * *****************************************/
