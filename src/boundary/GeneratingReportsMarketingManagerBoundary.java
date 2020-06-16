@@ -7,13 +7,12 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
+import javafx.scene.control.*;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class GeneratingReportsMarketingManagerBoundary implements Initializable {
+public class GeneratingReportsMarketingManagerBoundary implements DataInitializable {
 
     /**
      * The supervisor boundary controller.
@@ -23,18 +22,6 @@ public class GeneratingReportsMarketingManagerBoundary implements Initializable 
     private final Alert ErrorAlert = new Alert(Alert.AlertType.ERROR);
 
     @FXML
-    private Button btnOverview;
-
-    @FXML
-    private Button btnCustomers;
-
-    @FXML
-    private Button btnPackages;
-
-    @FXML
-    private Button btnSignout;
-
-    @FXML
     private Button btnGenerateReport;
 
     @FXML
@@ -42,6 +29,53 @@ public class GeneratingReportsMarketingManagerBoundary implements Initializable 
 
     @FXML
     private JFXTextField EnterOperationSaleTXT;
+
+    @FXML
+    private DatePicker EndDateBox;
+
+    @FXML
+    private DatePicker StartDateBox;
+
+    @FXML
+    private Label EndDateTxt;
+
+    @FXML
+    private Label StartDateTxt;
+
+    @FXML
+    private Label ShowReportMarketingCampaignTxt;
+
+    @FXML
+    private TableView<?> CommentsReportForMarketingCampaignTable;
+
+    @FXML
+    private TableColumn<?, ?> CommentsReport_CustomerIDColumn;
+
+    @FXML
+    private TableColumn<?, ?> TotalAmountSpentColumn;
+
+    @FXML
+    private TableView<?> CustomerPeriodicCharacterizationReportTable;
+
+    @FXML
+    private TableColumn<?, ?> CustomerPeriodicCharacterizationReport_CustomerIDCustomerPeriodicCharacterizationReportColumn;
+
+    @FXML
+    private TableColumn<?, ?> YellowColumn;
+
+    @FXML
+    private TableColumn<?, ?> SonolColumn;
+
+    @FXML
+    private TableColumn<?, ?> PazColumn;
+
+    @FXML
+    private TableColumn<?, ?> TotalColumn;
+
+    @Override
+    public void initData(Object data) {
+
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -74,7 +108,7 @@ public class GeneratingReportsMarketingManagerBoundary implements Initializable 
     }
 
     @FXML
-    void handleClicks(ActionEvent event) {
+    void handleEndDateBox(ActionEvent event) {
 
     }
 
@@ -85,6 +119,11 @@ public class GeneratingReportsMarketingManagerBoundary implements Initializable 
 
     @FXML
     void handleGenerateReportBtn(ActionEvent event) {
+
+    }
+
+    @FXML
+    void handleStartDateBox(ActionEvent event) {
 
     }
 
