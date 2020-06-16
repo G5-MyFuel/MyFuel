@@ -68,6 +68,7 @@ public class AnalyticDataCreator extends BasicController {
                 fuelTypeCounter.put("Gasoline95",0);        fuelTypeCounter.put("Diesel",0);
                 fuelTypeCounter.put("HomeHeatingFuel",0);  fuelTypeCounter.put("ScooterFuel",0);
 
+
                 for (int j=i+1; j < resultList.size() ; j++ )//נעבור על כל שאר ההזמנות של הלקוחות ממנו והלאה
                 {
                     InputRating other = resultList.get(j);
