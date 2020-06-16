@@ -14,10 +14,11 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import java.net.URL;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.*;
 
 /**
@@ -186,16 +187,19 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
     }
 
     private void setDayAndDateComboBox() {
-        //String currentDayAndDate = LocalDate.now().getDayOfWeek().name() +" "+ new SimpleDateFormat("dd-mm-yyyy").format(new Date());
-        Date date = new Date();
-        DateTime currentDate = new DateTime(date);
-        DateTime tomorrowDate = currentDate.plusDays(1);
-        System.out.println("Today: " + currentDate + "\nTomorrow: " + tomorrowDate);
+        //get current day and date
+        DateTime dt = new DateTime();
+        DateTimeFormatter fmt = DateTimeFormat.forPattern("EEEE dd/MM/yyyy");
 
-
-        //TODO: להמשיך לממש ימים + שבועיים קדימה ולשלוח לקומבו בוקס
+        //build arraylist with the days and dates of the next two weeks
         ArrayList<String> twoWeeksDaysAndDates = new ArrayList<>();
+        twoWeeksDaysAndDates.add(fmt.withLocale(Locale.ENGLISH).print(dt));
+        for(int i=1;i<15;i++) {
+            twoWeeksDaysAndDates.add(fmt.withLocale(Locale.ENGLISH).print(dt.plusDays(i)));
+        }
 
+        //adds the arraylist values to the comboBox of optional dates
+        dayAndDateComboBox.getItems().addAll(twoWeeksDaysAndDates);
     }
 
     public void CheckOrderDetails() {
@@ -218,7 +222,7 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
     //todo: להמשיך להגדיר את התאריכים האופציונלים שיובאו מהדטהבייס מטבלת ShippingOptionalDates
     public void SetShippingTab() {
         shippingMethodComboBOX.getItems().addAll("Fast Shipping (40$)", "Standard Shipping (15$)");
-        whenPane.setVisible(false);
+        whenPane.setVisible(true);
         shippingOverviewPane.setVisible(false);
         optionalDatesForShippingGridPane.setVisible(false);
         //get available dates for shipping from DB
