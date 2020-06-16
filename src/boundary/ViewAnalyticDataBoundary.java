@@ -1,10 +1,12 @@
 package boundary;
 
+import Contollers.AnalyticDataCreator;
 import Contollers.FormValidation;
 import Contollers.MarketingCampaignTemplateController;
 import Contollers.ViewAnalyticDataController;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXTimePicker;
 import com.sun.deploy.panel.RuleSetViewerDialog;
 import entity.MarketingCampaignTemplate;
 import entity.Rating;
@@ -35,6 +37,8 @@ import java.util.ResourceBundle;
 public class ViewAnalyticDataBoundary implements Initializable {
     /** The supervisor boundary controller. */
     private ViewAnalyticDataController myController = new ViewAnalyticDataController(this);
+    private AnalyticDataCreator analyticDataCreator = new AnalyticDataCreator(this);
+
     private FormValidation formValidation;
 
     @FXML
@@ -69,9 +73,6 @@ public class ViewAnalyticDataBoundary implements Initializable {
 
     @FXML
     private TableColumn<Rating, Integer> ratingCulomn;
-
-    @FXML
-    private JFXComboBox<String> TimeRangeCombo;
 
     @FXML
     private Label selectedTimeRange;
@@ -115,14 +116,19 @@ public class ViewAnalyticDataBoundary implements Initializable {
     @FXML
     private Label lastCalcDateTXT;
 
+    @FXML
+    private JFXTimePicker TimeRangeStart;
+
+    @FXML
+    private JFXTimePicker TimeRangeEnd;
+
     private ObservableList<String> CustomerType = FXCollections.observableArrayList("PRIVATE" , "COMPANY");
-    private ObservableList<String> FuelType = FXCollections.observableArrayList("Gasoline", "Diesel", "ScooterFuel", "HomeHeatingFuel");
+    private ObservableList<String> FuelType = FXCollections.observableArrayList("Gasoline95", "Diesel", "ScooterFuel", "HomeHeatingFuel");
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //this.RatingTable.setVisible(false);
-
-      //  myController.getRatingTable();  //start the process that will ask server to execute quarry and get the table details
+        customerTypeCombo.setItems(CustomerType);
+        fuelTypeCombo1.setItems(FuelType);
 
     }
 
@@ -135,6 +141,11 @@ public class ViewAnalyticDataBoundary implements Initializable {
 
     }
 
+    @FXML
+    void handleGenerateData(ActionEvent event) {
+        analyticDataCreator.getCustomerXPurchaseTable();
+        myController.getRatingTable(); //start the process that will ask server to execute quarry and get the table details
+    }
 
     @FXML
     void handleBtnCustomerType(MouseEvent event) { // chack mouse event import
@@ -151,21 +162,18 @@ public class ViewAnalyticDataBoundary implements Initializable {
 
     }
 
-    @FXML
-    void handleGenerateData(ActionEvent event) {
 
-    }
+
     /**
      this method will set the templates table when we will initialize the page.
      */
     public void setRatingTable(ArrayList<Rating> cosArray){
-        //fix it
-       /* customerIdCulomn.setCellValueFactory(new PropertyValueFactory<>("customerID"));
         ratingCulomn.setCellValueFactory(new PropertyValueFactory<>("rating"));
+        customerIdCulomn.setCellValueFactory(new PropertyValueFactory<>("customerID"));
 
         ObservableList<Rating> data = FXCollections.observableArrayList(cosArray);
-        RatingTable.setItems(data);
-    */
+        RatingTableForCustomerType.setItems(data); //באופן זמני !!!!
+
     }
 
 

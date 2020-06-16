@@ -1,40 +1,67 @@
 package Contollers;
 
+import boundary.ViewAnalyticDataBoundary;
 import boundary.generalDashBoardBoundary;
 import common.assets.SqlAction;
 import common.assets.SqlQueryType;
 import common.assets.SqlResult;
 import entity.InputRating;
+import entity.MarketingCampaignTemplate;
 import entity.Rating;
 import javafx.application.Platform;
 
-import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 
 public class AnalyticDataCreator extends BasicController {
 
-    private generalDashBoardBoundary myBoundary; /**     * The boundary controlled by this controller     */
+   // private generalDashBoardBoundary myBoundary; /**     * The boundary controlled by this controller     */
+    private ViewAnalyticDataBoundary myBoundary;
 
-    public AnalyticDataCreator(generalDashBoardBoundary myBoundary) {
+    //private ViewAnalyticDataBoundary viewAnalyticDataBoundary;???????
+
+    /*public AnalyticDataCreator(generalDashBoardBoundary myBoundary) {
+        this.myBoundary = myBoundary;
+    }*/
+    public AnalyticDataCreator(ViewAnalyticDataBoundary myBoundary) {
         this.myBoundary = myBoundary;
     }
+
+
     @Override
     public void getResultFromClient(SqlResult result) {
         Platform.runLater(() -> {
             switch (result.getActionType()) {
                 case GET_CUSTOMER_X_PURCHASE_TABLE:
-                    ArrayList<InputRating> resultList = new ArrayList<>();
+                    ArrayList<Rating> resultList = new ArrayList<>();
                     resultList.addAll(this.changeResultToInputRating(result));
-                //    myBoundary.setRatingTable(resultList);
+                    for (int i=0; i<resultList.size();i++) {
+                        setRatingTableInDB(resultList,i);
+                    }
                     break;
-
+                case INSERT_RATING:
+                    break;
                 default:
                     break;
             }
         });
+    }
+
+  /*
+    public void getRatingTable() {
+        SqlAction sqlAction = new SqlAction(SqlQueryType.GET_ALL_RATING_TABLE);
+        super.sendSqlActionToClient(sqlAction);
+    }
+    */
+    private void setRatingTableInDB(ArrayList<Rating> resultList, int i) {
+        ArrayList<Object> varArray = new ArrayList<>();
+            varArray.add(resultList.get(i).getCustomerID());
+            varArray.add(resultList.get(i).getRating());
+            varArray.add(resultList.get(i).getRating());
+
+        SqlAction sqlAction = new SqlAction(SqlQueryType.INSERT_RATING, varArray);
+        super.sendSqlActionToClient(sqlAction);
     }
 
     public void getCustomerXPurchaseTable() {
@@ -43,7 +70,7 @@ public class AnalyticDataCreator extends BasicController {
 
     }
 
-    private ArrayList<InputRating> changeResultToInputRating(SqlResult result){
+    private ArrayList<Rating> changeResultToInputRating(SqlResult result){
         ArrayList<InputRating> resultList = new ArrayList<>();
         ArrayList<Rating> ratingList = new ArrayList<>();
         //bring all to array list from db
@@ -62,47 +89,46 @@ public class AnalyticDataCreator extends BasicController {
             if(my.isFlag() == false) { //עוד לא טיפלנו ולכן נטפל עכשיו
                 customerTypeRating = my.getCustomerType().equals("private") ? 1 : 2; //דירוג שקשור לסוג לקוח
 
-                String hourString = new String();
+                String hourString = new String("");
                 //קאונטר לסוגי הדלק לראות איזה יש בהזמנות של הלקוח
                 HashMap<String, Integer> fuelTypeCounter = new HashMap<String, Integer>();
                 fuelTypeCounter.put("Gasoline95",0);        fuelTypeCounter.put("Diesel",0);
                 fuelTypeCounter.put("HomeHeatingFuel",0);  fuelTypeCounter.put("ScooterFuel",0);
-
-
-                for (int j=i+1; j < resultList.size() ; j++ )//נעבור על כל שאר ההזמנות של הלקוחות ממנו והלאה
+                int j=i+1;
+                if ( j == resultList.size()) {
+                    fuelTypeCounter.put(my.getFuelType(), 1);
+                    hourString = my.getPurchaseHour();
+                }
+                for (; j < resultList.size() ; j++ )//נעבור על כל שאר ההזמנות של הלקוחות ממנו והלאה
                 {
+                    System.out.println("inside for");
                     InputRating other = resultList.get(j);
                     if (other.getCustomerID()==my.getCustomerID()) //אם זה אותו לקוח - ניקח פרטים על הרכישות שלו
                     {
                         //נוסיף לקאונטר של אותו סוג דלק
                         fuelTypeCounter.put(other.getFuelType(),fuelTypeCounter.get((other.getFuelType()))+1);
                         //נכניס את כל השעות לסטרינג ובסוף נמצא ממוצע
-                        hourString += other.getPurchaseHour();
+                        hourString = hourString + other.getPurchaseHour();
                         //נסמן שטיפלנו בו
                         other.setFlag(true);
                     }
                 }//סוף המעבר על כל הלקוחות והרכישות ממנו והלאה במערך
                 //ממוצע של התאריכים וחישוב דירוג עבור הממוצע הזה
+                System.out.println("after for");
                 purchaseHourRating =calculateTimeRating(calculateAverageOfTime(hourString));
 
                 //לבדוק לאיזה דלק יש הכי הרבה בקאונטר ולשמור דירוג לפי סוג הדלק
                 purchaseTypeRating =find_max(fuelTypeCounter);
-
-                ratingList.add(new Rating(customerTypeRating+purchaseHourRating+purchaseTypeRating,my.getCustomerID()));
+                //הכנסה לרשימה של דירוגים
+                ratingList.add(new Rating(customerTypeRating+purchaseHourRating+purchaseTypeRating ,  my.getCustomerID(), my.getCustomerType()));
             }
-
-
         }
-
-
-        return resultList;
+        return ratingList;
     }
 
 
 
-
-
-
+//מחשב ממוצע מתוך סטרינג עם רשימה של שעות
     private static String calculateAverageOfTime(String timeInHHmmss) {
         String[] split = timeInHHmmss.split(" ");
         long seconds = 0;
@@ -118,25 +144,25 @@ public class AnalyticDataCreator extends BasicController {
         long ss = seconds % 60;
         return String.format("%02d:%02d:%02d", hh,mm,ss);
     }
-
+//מחשב דירוג של זמנים לפי השעה הממוצעת
     private int calculateTimeRating(String avgHour){
         int purchaseHourRating;
         Time hour6 = java.sql.Time.valueOf("06:00:00");
         Time hour10 = java.sql.Time.valueOf("10:00:00");
-        Time hour15 = java.sql.Time.valueOf("15:00:00");
+        Time hour16 = java.sql.Time.valueOf("16:00:00");
         Time hour20 = java.sql.Time.valueOf("20:00:00");
         Time avg = java.sql.Time.valueOf(avgHour);
 
         if ((avg.after(hour6) && avg.before(hour10)) || avg.equals(hour6))   {//מ6 כולל עד 10 לא כולל
             purchaseHourRating=4;
-        }else if ((avg.after(hour10) && avg.before(hour15)) || avg.equals(hour10)) {//מ10 כולל עד 15 לא כולל
+        }else if ((avg.after(hour10) && avg.before(hour16)) || avg.equals(hour10)) {//מ10 כולל עד 15 לא כולל
                 purchaseHourRating=2;
-            }else if  ((avg.after(hour15) && avg.before(hour20)) || avg.equals(hour15)) {//מ15 כולל עד 20 לא כולל
+            }else if  ((avg.after(hour16) && avg.before(hour20)) || avg.equals(hour16)) {//מ15 כולל עד 20 לא כולל
             purchaseHourRating=3;
         }else purchaseHourRating=1;
         return purchaseHourRating;
     }
-
+//מוצא מקסימום מבין 4 ובהתאם מחזיר את הדירוגים המתאימים
     private  int find_max(HashMap<String, Integer> fuelTypeCounter){
         int a, b, c, d ;
         a= fuelTypeCounter.get("Gasoline95");
