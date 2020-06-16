@@ -6,6 +6,7 @@ import entity.OrderFuelFromSupplier;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -80,13 +81,23 @@ public class ManagerSupplyConfirmationBoundary implements DataInitializable {
 
     @FXML
     void OrderConfirmationCheck(MouseEvent event) {
-
+        /**  If there is a check sign   **/
+        if(confirmationCheckBox.isSelected())
+            SendBtn.setDisable(false);
+        else SendBtn.setDisable(true);
     }
 
     @FXML
     void SendConfirmationToSupplier(MouseEvent event) {
-        //TODO after we press on "Send" - update the "OrderForStock" table + Take it down from "Inventory" table
-
+        for (int i = 0; i < myController.resultList.size(); i++) {
+            if (myController.resultList.get(i).getOrderNumber().equals(tableView.getSelectionModel().getSelectedItem().getOrderNumber())) {
+                myController.setNewStatus(myController.resultList.get(i).getOrderNumber());
+                myController.resultList.get(i).setOrderStatus("In treatment");
+                tableData = FXCollections.observableArrayList(myController.resultList);
+                tableView.setItems(tableData);
+            }
+        }
+        //TODO : make sure we see the changes in the other table (supplier)
     }
 
     @FXML
@@ -114,20 +125,8 @@ public class ManagerSupplyConfirmationBoundary implements DataInitializable {
 
     }
 
-    @FXML
-    void returnToHomePage(MouseEvent event) {
-
-    }
-
-    @FXML
-    void signOut(MouseEvent event) {
-
-    }
-
     @Override
-    public void initData(Object data) {
-        stationManagerID = (String)data;
-    }
+    public void initData(Object data) { stationManagerID = (String)data; }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -150,6 +149,26 @@ public class ManagerSupplyConfirmationBoundary implements DataInitializable {
         tableView.setEditable(true);
         tableView.setItems(tableData);
     }
+
+    public void getDetailsFromTableView() {
+        tableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            ManagerSupplyConfirmation temp = null;
+            @Override
+            public void handle(MouseEvent event) {
+                for (int i = 0; i < myController.resultList.size(); i++) {
+                    if (myController.resultList.get(i).getOrderNumber().equals(tableView.getSelectionModel().getSelectedItem().getOrderNumber()))
+                        temp = myController.resultList.get(i);
+                    if (temp != null) {
+                        hboxOrderConfirmation.setVisible(true);
+                        SendBtn.setVisible(true);
+
+                    }
+
+                }
+            }
+        });
+    }
+
 
 
 

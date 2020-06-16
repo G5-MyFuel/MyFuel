@@ -30,8 +30,7 @@ public class OrderExecutionBoundary implements DataInitializable {
     private OrderExecutionBoundary OrderExecutionController;
     private OrderFromSupplierController myController = new OrderFromSupplierController(this);
     private String SupplierID="";
-
-    private ArrayList<OrderFuelFromSupplier> OFFS;
+    /*private ArrayList<OrderFuelFromSupplier> OFFS;*/
 
     @FXML
     private Button MenuHomePageBtn;
@@ -127,10 +126,12 @@ public class OrderExecutionBoundary implements DataInitializable {
                 myController.setNewStatus(myController.resultList.get(i).getOrderNumber());
                 tableData = FXCollections.observableArrayList(myController.resultList);
                 tableView.setItems(tableData);
+
                 hboxOrderConfirmation.setVisible(false);
                 DoneMsgTxt.setVisible(true);
                 DoneBtn.setVisible(false);
                 tableView.refresh();
+
                 addToStock(myController.resultList.get(i).getQuantity(),myController.resultList.get(i).getFuelType()
                             ,myController.resultList.get(i).getStationNumber(),myController.resultList.get(i).getManagerID());
                 break;
