@@ -29,6 +29,13 @@ public class ManagerSupplyConfirmationController extends BasicController {
         super.sendSqlActionToClient(sqlAction);
     }
 
+    public void setNewStatus(String OrderNumber){
+        ArrayList<Object> varArray=new ArrayList<>();
+        varArray.add(OrderNumber);
+        SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_STATUS_TO_IN_TREATMENT, varArray);
+        super.sendSqlActionToClient(sqlAction);
+    }
+
     public void getResultFromClient(SqlResult result) {
         Platform.runLater(() -> {
             switch (result.getActionType()) {
@@ -45,10 +52,10 @@ public class ManagerSupplyConfirmationController extends BasicController {
         });
     }
 
-    //OrderNumber,companyName,StationNum,FuelType,Quantity
     private ArrayList<ManagerSupplyConfirmation> changeResultToOrder(SqlResult result) {
         for (ArrayList<Object> a : result.getResultData()) {
-            ManagerSupplyConfirmation x = new ManagerSupplyConfirmation((String) a.get(0), (String) a.get(1), (int) a.get(2), (String) a.get(3), (int) a.get(4));
+            ManagerSupplyConfirmation x = new ManagerSupplyConfirmation((String) a.get(0), (String) a.get(1),
+                    (int) a.get(2), (String) a.get(3), (int) a.get(4),(String)a.get(5));
             resultList.add(x);
         }
         return resultList;

@@ -82,11 +82,11 @@ public class GeneratingReportsStationManagerBoundary implements DataInitializabl
     @FXML
     private Button btnSavePurchasesReport;
 
-    private final ObservableList<String> ReportsType = FXCollections.observableArrayList("Quarterly revenue report",
+    /*private final ObservableList<String> ReportsType = FXCollections.observableArrayList("Quarterly revenue report",
             "Purchases report", "Quantity of items in stock report");
     private final ObservableList<String> YearList = FXCollections.observableArrayList("2020", "2019", "2018", "2017", "2016", "2015",
             "2014", "2013", "2012", "2011", "2010");
-    private final ObservableList<String> quarterList = FXCollections.observableArrayList("First", "Second", "Third", "Fourth");
+    private final ObservableList<String> quarterList = FXCollections.observableArrayList("First", "Second", "Third", "Fourth");*/
 
     @Override
     public void initData(Object data) {

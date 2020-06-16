@@ -31,12 +31,13 @@ public class MainForTestsNir extends Application {
 
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource(ProjectPages.SETTING_DISCOUNT_RATES_PAGE.getPath()));
+            loader.setLocation(getClass().getResource(ProjectPages.VIEW_REPORTS_PAGE.getPath()));
             /*
             CONFIRM_DISCOUNT_RATES_PAGE
             SETTING_DISCOUNT_RATES_PAGE
             GENERATING_REPORTS_MARKETING_MANAGER_PAGE
             GENERATING_REPORTS_STATION_MANAGER_PAGE
+            VIEW_REPORTS_PAGE
              */
             root = loader.load();
             Scene s1 = new Scene(root);

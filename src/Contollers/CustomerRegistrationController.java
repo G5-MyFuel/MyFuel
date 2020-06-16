@@ -58,7 +58,9 @@ public class CustomerRegistrationController extends BasicController {
         UserTablevarArray.add(costumer.getUserFirstName());
         UserTablevarArray.add(costumer.getUserLastName());
         UserTablevarArray.add(costumer.getUserEmail());
-        UserTablevarArray.add(companyName);
+        UserTablevarArray.add(companyName);//fuelcompany1
+        UserTablevarArray.add(companyName);//fuelcompany2
+        UserTablevarArray.add(companyName);//fuelcompany3
         //
         //inserting costumer vehicles
         if (costumer.getCostumerVehicle().size() > 1) {
