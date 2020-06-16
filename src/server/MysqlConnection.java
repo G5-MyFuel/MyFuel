@@ -187,6 +187,7 @@ public class MysqlConnection {
          * *****************************************************/
         sqlArray[SqlQueryType.GET_ALL_ORDER_TO_SUPPLY_FOR_STATION_MANAGER.getCode()] = "SELECT OrderNumber,companyName,StationNum,FuelType,Quantity,OrderStatus FROM OrderForStock as ofs, GasStation as gs WHERE ofs.StationNum=gs.StationNumber and ofs.GasCompanyName=gs.companyName and ofs.OrderStatus like \"New\" and managerID= ?";
         sqlArray[SqlQueryType.UPDATE_STATUS_TO_IN_TREATMENT.getCode()]="UPDATE `OrderForStock` SET `OrderStatus` = \"In treatment\" WHERE `OrderNumber` = ?";
+
         /* *****************************************
          * ********** Orders From Supplier Queries ****************
          * *****************************************/
@@ -217,10 +218,12 @@ public class MysqlConnection {
          * ********** Analytic system Queries *********
          * *****************************************/
         sqlArray[SqlQueryType.GET_ALL_RATING_TABLE.getCode()] = "SELECT * FROM `Rating`";
-        sqlArray[SqlQueryType.GET_CUSTOMER_AND_PURCHASE_TABLE.getCode()] = "select * from Costumer as c, Purchase as p WHERE p.customerID LIKE c.ID ";
+        sqlArray[SqlQueryType.GET_CUSTOMER_X_PURCHASE_TABLE.getCode()] = "select p.customerID, c.customerType, p.purchaseID, ff.FuelType, p.purchaseHour " +
+                "from Costumer as c, Purchase as p, FastFuel as ff " +
+                "WHERE p.customerID LIKE c.ID AND p.purchaseID LIKE ff.purchaseID";
 
 
-        /* *****************************************
+    /* *****************************************
          * ********** Discount Rates Queries ****************
          * *****************************************/
         sqlArray[SqlQueryType.GET_RegularSubscriptionSingleVehicle_PRICE.getCode()] = "SELECT * FROM `DiscountRates` WHERE `Subscription type` LIKE \"Regular monthly subscription - single vehicle\"";

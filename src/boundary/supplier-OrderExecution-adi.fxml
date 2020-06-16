@@ -15,211 +15,104 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundary.OrderExecutionBoundary">
+<Pane prefHeight="768.0" prefWidth="1062.0" style="-fx-position-shape: center; -fx-border-color: transparent;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundary.OrderExecutionBoundary">
    <children>
-      <Pane prefHeight="804.0" prefWidth="1284.0" />
-      <HBox prefHeight="804.0" prefWidth="1284.0">
+      <ImageView fx:id="arrowImage" layoutX="468.0" layoutY="353.0">
+         <image>
+            <Image url="@../media/icons/arrow_100px.png" />
+         </image>
+      </ImageView>
+      <Text fx:id="OrderViewTitle" fill="#2d4578" layoutX="591.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Order View" wrappingWidth="244.6708984375">
+         <font>
+            <Font name="System Bold Italic" size="24.0" />
+         </font>
+      </Text>
+      <Text fill="#2d4578" layoutX="67.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Orders List" wrappingWidth="170.99999862909317">
+         <font>
+            <Font name="System Bold Italic" size="24.0" />
+         </font>
+      </Text>
+      <TableView fx:id="tableView" layoutX="60.0" layoutY="221.0" onContextMenuRequested="#getOrderDetailsFromTableView" onMouseClicked="#getOrderDetailsFromTableView" onMouseEntered="#getOrderDetailsFromTableView" onMousePressed="#getOrderDetailsFromTableView" prefHeight="391.0" prefWidth="361.0" style="-fx-background-color: #fcf8e8; -fx-border-style: solid;">
+         <columns>
+            <TableColumn fx:id="orderCol" prefWidth="242.0" text="Order" />
+            <TableColumn fx:id="statusCol" maxWidth="2500.0" prefWidth="115.0" text="Status" />
+         </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+         <contextMenu>
+            <ContextMenu>
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#handleRefresh" text="Refresh" />
+               </items>
+               <styleClass>
+                  <String fx:value="table-context" />
+                  <String fx:value="colored-context-menu" />
+               </styleClass>
+            </ContextMenu>
+         </contextMenu>
+      </TableView>
+      <Text layoutX="61.0" layoutY="634.0" strokeType="OUTSIDE" strokeWidth="0.0" text="* Status: In treatment / Done" wrappingWidth="317.6708984375" />
+      <Button fx:id="DoneBtn" layoutX="713.0" layoutY="693.0" mnemonicParsing="false" onMouseClicked="#ClickDoneBtn" prefHeight="40.0" prefWidth="89.0" style="-fx-background-color: #2D4578; -fx-background-radius: 50;" text="Done" textFill="WHITE" />
+      <HBox fx:id="hboxOrderConfirmation" alignment="CENTER_LEFT" layoutX="622.0" layoutY="616.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="53.0" prefWidth="285.0" style="-fx-background-color: #fcf8e8; -fx-border-color: #888888; -fx-background-radius: 5; -fx-background-insets: 0;">
          <children>
-            <AnchorPane prefHeight="749.0" prefWidth="235.0" style="-fx-background-color: #2D4578;">
-               <children>
-                  <VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="235.0" style="-fx-background-color: #2D4578;">
-                     <children>
-                        <Label style="-fx-font-size: 22;" text="Supplier" textAlignment="CENTER" textFill="#e5e5e5">
-                           <VBox.margin>
-                              <Insets top="10.0" />
-                           </VBox.margin>
-                        </Label>
-                        <ImageView fitHeight="162.0" fitWidth="171.0">
-                           <image>
-                              <Image url="@../media/avatars/customer_male_avatar.png" />
-                           </image>
-                        </ImageView>
-                        <Label style="-fx-font-size: 22;" text="Avi Levi" textAlignment="CENTER" textFill="#e5e5e5">
-                           <VBox.margin>
-                              <Insets bottom="20.0" />
-                           </VBox.margin>
-                        </Label>
-                        <Button fx:id="MenuHomePageBtn" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" style="-fx-font-family: 'Abel', sans-serif; -fx-font-size: 16; -fx-alignment: left;" stylesheets="@style.css" text="Home Page" textFill="#e7e5e5">
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                           <VBox.margin>
-                              <Insets />
-                           </VBox.margin>
-                           <padding>
-                              <Insets left="30.0" />
-                           </padding>
-                           <graphic>
-                              <ImageView fitHeight="23.0" fitWidth="27.0">
-                                 <image>
-                                    <Image url="@../media/icons/icons8_home_80px.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button fx:id="MenuOrderConfirmationBtn" graphicTextGap="22.0" mnemonicParsing="false" onContextMenuRequested="#OrderConfirmationCheck" onMouseClicked="#getOrderDetailsFromTableView" prefHeight="42.0" prefWidth="259.0" style="-fx-font-family: 'Abel', sans-serif; -fx-font-size: 16; -fx-alignment: left;" stylesheets="@style.css" text="Order Confirmation">
-                           <graphic>
-                              <ImageView fitHeight="23.0" fitWidth="27.0">
-                                 <image>
-                                    <Image url="@../media/icons/checked_checkbox_40px.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <padding>
-                              <Insets left="30.0" />
-                           </padding>
-                        </Button>
-                        <Button fx:id="btnSignout" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" style="-fx-font-family: 'Abel', sans-serif; -fx-font-size: 16; -fx-alignment: left;" stylesheets="@style.css" text="Sign Out">
-                           <padding>
-                              <Insets left="30.0" />
-                           </padding>
-                           <graphic>
-                              <ImageView fitHeight="23.0" fitWidth="27.0">
-                                 <image>
-                                    <Image url="@../media/icons/icons8_sign_out_80px.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                     </children>
-                  </VBox>
-                  <Pane layoutX="-3.0" layoutY="571.0" prefHeight="234.0" prefWidth="236.0">
-                     <children>
-                        <VBox layoutX="7.0" layoutY="147.0" prefHeight="67.0" prefWidth="238.0">
-                           <children>
-                              <VBox prefHeight="85.0" prefWidth="226.0" style="-fx-border-color: linear-gradient(to left, white, orange);">
-                                 <children>
-                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 35; -fx-font-family: 'Abel', sans-serif;;" text="13:00" textAlignment="CENTER" wrappingWidth="221.6215419769287" />
-                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 25; -fx-font-family: 'Abel', sans-serif;;" text="Friday 15/05/20" textAlignment="CENTER" wrappingWidth="223.39935874938965" />
-                                 </children>
-                              </VBox>
-                           </children>
-                        </VBox>
-                        <Pane layoutX="7.0" prefHeight="137.0" prefWidth="226.0" style="-fx-background-color: gray; -fx-border-color: linear-gradient(to left, white, orange);">
-                           <children>
-                              <Text fill="#ffdf21" layoutX="5.0" layoutY="59.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" text="You have new orders to approve !" textAlignment="CENTER" wrappingWidth="216.27685182262212">
-                                 <font>
-                                    <Font name="System Bold" size="20.0" />
-                                 </font>
-                              </Text>
-                              <ImageView fitHeight="64.0" fitWidth="70.0" layoutX="81.0" layoutY="-33.0">
-                                 <image>
-                                    <Image url="@../media/interface.png" />
-                                 </image>
-                              </ImageView>
-                           </children>
-                        </Pane>
-                     </children>
-                  </Pane>
-               </children>
-            </AnchorPane>
-            <AnchorPane prefHeight="817.0" prefWidth="1069.0">
-               <children>
-                  <Pane layoutY="14.0" prefHeight="805.0" prefWidth="1066.0" style="-fx-position-shape: center; -fx-border-color: transparent;" AnchorPane.bottomAnchor="-14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="14.0">
-                     <children>
-                        <ImageView fx:id="arrowImage" layoutX="468.0" layoutY="353.0">
-                           <image>
-                              <Image url="@../media/icons/arrow_100px.png" />
-                           </image>
-                        </ImageView>
-                        <Text fx:id="OrderViewTitle" fill="#2d4578" layoutX="591.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Order View" wrappingWidth="244.6708984375">
-                           <font>
-                              <Font name="System Bold Italic" size="24.0" />
-                           </font>
-                        </Text>
-                        <Text fill="#2d4578" layoutX="67.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Orders List" wrappingWidth="170.99999862909317">
-                           <font>
-                              <Font name="System Bold Italic" size="24.0" />
-                           </font>
-                        </Text>
-                        <TableView fx:id="tableView" layoutX="60.0" layoutY="221.0" onContextMenuRequested="#getOrderDetailsFromTableView" onMouseClicked="#getOrderDetailsFromTableView" onMouseEntered="#getOrderDetailsFromTableView" onMousePressed="#getOrderDetailsFromTableView" prefHeight="391.0" prefWidth="361.0" style="-fx-background-color: #fcf8e8; -fx-border-style: solid;">
-                           <columns>
-                              <TableColumn fx:id="orderCol" prefWidth="242.0" text="Order" />
-                              <TableColumn fx:id="statusCol" maxWidth="2500.0" prefWidth="115.0" text="Status" />
-                           </columns>
-                           <columnResizePolicy>
-                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                           </columnResizePolicy>
-                           <contextMenu>
-                              <ContextMenu>
-                                 <items>
-                                    <MenuItem mnemonicParsing="false" onAction="#handleRefresh" text="Refresh" />
-                                 </items>
-                                 <styleClass>
-                                    <String fx:value="table-context" />
-                                    <String fx:value="colored-context-menu" />
-                                 </styleClass>
-                              </ContextMenu>
-                           </contextMenu>
-                        </TableView>
-                        <Text layoutX="61.0" layoutY="634.0" strokeType="OUTSIDE" strokeWidth="0.0" text="* Status: In treatment / Done" wrappingWidth="317.6708984375" />
-                        <Button fx:id="DoneBtn" layoutX="713.0" layoutY="710.0" mnemonicParsing="false" onMouseClicked="#ClickDoneBtn" prefHeight="40.0" prefWidth="89.0" style="-fx-background-color: #2D4578; -fx-background-radius: 50;" text="Done" textFill="WHITE" />
-                        <HBox fx:id="hboxOrderConfirmation" alignment="CENTER_LEFT" layoutX="622.0" layoutY="616.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="53.0" prefWidth="285.0" style="-fx-background-color: #fcf8e8; -fx-border-color: #888888; -fx-background-radius: 5; -fx-background-insets: 0;">
-                           <children>
-                              <ImageView fx:id="checkBoxImage" fitHeight="35.0" fitWidth="35.0">
-                                 <HBox.margin>
-                                    <Insets left="20.0" right="30.0" />
-                                 </HBox.margin>
-                                 <image>
-                                    <Image url="@../media/icons/check_all_64px.png" />
-                                 </image>
-                              </ImageView>
-                              <Label prefHeight="21.0" prefWidth="136.0" text="Order completed">
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
-                              </Label>
-                              <CheckBox fx:id="confirmationCheckBox" mnemonicParsing="false" onMouseClicked="#OrderConfirmationCheck" prefHeight="21.0" prefWidth="12.0">
-                                 <HBox.margin>
-                                    <Insets left="10.0" right="20.0" />
-                                 </HBox.margin>
-                              </CheckBox>
-                           </children>
-                           <effect>
-                              <DropShadow blurType="GAUSSIAN" height="5.0" radius="2.0" width="5.0" />
-                           </effect>
-                        </HBox>
-                        <Text fill="#2d4578" layoutX="67.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Order Confirmation">
-                           <font>
-                              <Font name="System Bold Italic" size="40.0" />
-                           </font>
-                        </Text>
-                        <AnchorPane fx:id="OrderViewAnchorPane" layoutX="606.0" layoutY="216.0" prefHeight="375.0" prefWidth="393.0" style="-fx-background-color: #00ADD8;" styleClass="card-unpadded">
-                           <children>
-                              <Pane layoutX="-1.0" prefHeight="325.0" prefWidth="23.0" style="-fx-background-color: #007390;" />
-                              <Label layoutX="124.0" layoutY="57.0" prefHeight="35.0" prefWidth="126.0" style="-fx-font-weight: bold;" styleClass="custom-white-title-label" text="Station Manager: " textFill="WHITE" />
-                              <Label layoutX="122.0" layoutY="120.0" prefHeight="31.0" prefWidth="126.0" style="-fx-font-weight: bold;" styleClass="custom-white-label" text="Company:" textFill="WHITE" />
-                              <Label layoutX="124.0" layoutY="181.0" prefHeight="33.0" prefWidth="89.0" style="-fx-font-weight: bold;" styleClass="custom-white-label" text="Order Date:" textFill="WHITE" />
-                              <ImageView fitHeight="83.0" fitWidth="89.0" layoutX="30.0">
-                                 <image>
-                                    <Image url="@../media/icons/contact.png" />
-                                 </image>
-                              </ImageView>
-                              <Label layoutX="123.0" layoutY="241.0" prefHeight="33.0" prefWidth="80.0" style="-fx-font-weight: bold;" styleClass="custom-white-label" text="Fuel Type: " textFill="WHITE" />
-                              <Label layoutX="121.0" layoutY="299.0" prefHeight="33.0" prefWidth="74.0" style="-fx-font-weight: bold;" styleClass="custom-white-label" text="Quantity:" textFill="WHITE" />
-                              <Label fx:id="StationManagerField" layoutX="250.0" layoutY="64.0" prefHeight="21.0" prefWidth="126.0" text="Label" textFill="WHITE" />
-                              <Label fx:id="CompanyNameField" layoutX="199.0" layoutY="125.0" prefHeight="21.0" prefWidth="74.0" text="Label" textFill="WHITE" />
-                              <Label fx:id="OrderDateField" layoutX="250.0" layoutY="187.0" prefHeight="21.0" prefWidth="126.0" text="Label" textFill="WHITE" />
-                              <Label fx:id="FuelTypeField" layoutX="250.0" layoutY="247.0" prefHeight="21.0" prefWidth="126.0" text="Label" textFill="WHITE" />
-                              <Label fx:id="QuantityField" layoutX="250.0" layoutY="305.0" prefHeight="21.0" prefWidth="126.0" text="Label" textFill="WHITE" />
-                              <Label layoutX="276.0" layoutY="120.0" prefHeight="31.0" prefWidth="111.0" style="-fx-font-weight: bold;" styleClass="custom-white-label" text="Station: " textFill="WHITE" />
-                              <Label fx:id="StationNumberField1" layoutX="335.0" layoutY="125.0" prefHeight="21.0" prefWidth="50.0" text="Label" textFill="WHITE" />
-                              <Text fx:id="DoneMsgTxt" layoutX="48.0" layoutY="218.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-rotate: 320; -fx-opacity: 0.6;" text="Done" textAlignment="CENTER" wrappingWidth="292.40420269966125">
-                                 <font>
-                                    <Font name="System Bold Italic" size="96.0" />
-                                 </font>
-                              </Text>
-                           </children>
-                        </AnchorPane>
-                     </children>
-                  </Pane>
-               </children>
-            </AnchorPane>
+            <ImageView fx:id="checkBoxImage" fitHeight="35.0" fitWidth="35.0">
+               <HBox.margin>
+                  <Insets left="20.0" right="30.0" />
+               </HBox.margin>
+               <image>
+                  <Image url="@../media/icons/check_all_64px.png" />
+               </image>
+            </ImageView>
+            <Label prefHeight="21.0" prefWidth="136.0" text="Order completed">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </Label>
+            <CheckBox fx:id="confirmationCheckBox" mnemonicParsing="false" onMouseClicked="#OrderConfirmationCheck" prefHeight="21.0" prefWidth="12.0">
+               <HBox.margin>
+                  <Insets left="10.0" right="20.0" />
+               </HBox.margin>
+            </CheckBox>
          </children>
+         <effect>
+            <DropShadow blurType="GAUSSIAN" height="5.0" radius="2.0" width="5.0" />
+         </effect>
       </HBox>
+      <Text fill="#2d4578" layoutX="67.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Order Confirmation">
+         <font>
+            <Font name="System Bold Italic" size="40.0" />
+         </font>
+      </Text>
+      <AnchorPane fx:id="OrderViewAnchorPane" layoutX="606.0" layoutY="216.0" prefHeight="375.0" prefWidth="393.0" style="-fx-background-color: #00ADD8;" styleClass="card-unpadded">
+         <children>
+            <Pane layoutX="-1.0" prefHeight="325.0" prefWidth="23.0" style="-fx-background-color: #007390;" />
+            <Label layoutX="124.0" layoutY="57.0" prefHeight="35.0" prefWidth="126.0" style="-fx-font-weight: bold;" styleClass="custom-white-title-label" text="Station Manager: " textFill="WHITE" />
+            <Label layoutX="122.0" layoutY="120.0" prefHeight="31.0" prefWidth="126.0" style="-fx-font-weight: bold;" styleClass="custom-white-label" text="Company:" textFill="WHITE" />
+            <Label layoutX="124.0" layoutY="181.0" prefHeight="33.0" prefWidth="89.0" style="-fx-font-weight: bold;" styleClass="custom-white-label" text="Order Date:" textFill="WHITE" />
+            <ImageView fitHeight="83.0" fitWidth="89.0" layoutX="30.0">
+               <image>
+                  <Image url="@../media/icons/contact.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="123.0" layoutY="241.0" prefHeight="33.0" prefWidth="80.0" style="-fx-font-weight: bold;" styleClass="custom-white-label" text="Fuel Type: " textFill="WHITE" />
+            <Label layoutX="121.0" layoutY="299.0" prefHeight="33.0" prefWidth="74.0" style="-fx-font-weight: bold;" styleClass="custom-white-label" text="Quantity:" textFill="WHITE" />
+            <Label fx:id="StationManagerField" layoutX="250.0" layoutY="64.0" prefHeight="21.0" prefWidth="126.0" text="Label" textFill="WHITE" />
+            <Label fx:id="CompanyNameField" layoutX="199.0" layoutY="125.0" prefHeight="21.0" prefWidth="74.0" text="Label" textFill="WHITE" />
+            <Label fx:id="OrderDateField" layoutX="250.0" layoutY="187.0" prefHeight="21.0" prefWidth="126.0" text="Label" textFill="WHITE" />
+            <Label fx:id="FuelTypeField" layoutX="250.0" layoutY="247.0" prefHeight="21.0" prefWidth="126.0" text="Label" textFill="WHITE" />
+            <Label fx:id="QuantityField" layoutX="250.0" layoutY="305.0" prefHeight="21.0" prefWidth="126.0" text="Label" textFill="WHITE" />
+            <Label layoutX="276.0" layoutY="120.0" prefHeight="31.0" prefWidth="111.0" style="-fx-font-weight: bold;" styleClass="custom-white-label" text="Station: " textFill="WHITE" />
+            <Label fx:id="StationNumberField" layoutX="335.0" layoutY="125.0" prefHeight="21.0" prefWidth="50.0" text="Label" textFill="WHITE" />
+            <Text fx:id="DoneMsgTxt" layoutX="48.0" layoutY="218.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-rotate: 320; -fx-opacity: 0.6;" text="Done" textAlignment="CENTER" wrappingWidth="292.40420269966125">
+               <font>
+                  <Font name="System Bold Italic" size="96.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
    </children>
-</AnchorPane>
+</Pane>

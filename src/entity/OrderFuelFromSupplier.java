@@ -11,10 +11,10 @@ import java.util.Date;
 
 public class OrderFuelFromSupplier {
     private String OrderNum, FuelType, userFirstName,userLastName, OrderStatus,GasCompanyName,managerID;
-    private int StationNumber, Quantity;
+    private Integer StationNumber, Quantity;
     private Date OrderDate;
 
-    public OrderFuelFromSupplier(String OrderNumber, String OrderStatus, String userFirstName, String userLastName, int StationNumber, Date OrderDate, String FuelType, int Quantity, String GasCompanyName, String managerID) {
+    public OrderFuelFromSupplier(String OrderNumber, String OrderStatus, String userFirstName, String userLastName, Integer StationNumber, Date OrderDate, String FuelType, Integer Quantity, String GasCompanyName, String managerID) {
         this.OrderNum = OrderNumber;
         this.OrderStatus=OrderStatus;
         this.userFirstName=userFirstName;

@@ -2,9 +2,9 @@ package entity;
 
 public class Rating {
 
-
-    private int customerID;
     private int rating;
+    private int customerID;
+
 
     public Rating(int customerID, int rating) {
         this.customerID = customerID;

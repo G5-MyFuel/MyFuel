@@ -13,6 +13,7 @@ public enum SqlQueryType {
     GET_ALL_VEHICLE_TABLE(SqlExecutionType.EXECUTE_QUERY),
     UPDATE_USER_LOGIN_STATUS(SqlExecutionType.UPDATE_QUERY),
     GET_EMPLOYEE_TABLE(SqlExecutionType.EXECUTE_QUERY),
+    GET_ALL_PURCHASE_FUEL_AMOUNT_OF_USER(SqlExecutionType.EXECUTE_QUERY),
 
     /* *****************************************
      * ********** Discount Rates Queries ****************
@@ -74,7 +75,7 @@ public enum SqlQueryType {
      * ********** Analitic Data Queries ****************
      * *****************************************/
     GET_ALL_RATING_TABLE(SqlExecutionType.EXECUTE_QUERY),
-    GET_CUSTOMER_AND_PURCHASE_TABLE(SqlExecutionType.EXECUTE_QUERY),
+    GET_CUSTOMER_X_PURCHASE_TABLE(SqlExecutionType.EXECUTE_QUERY),
 
 
     /* *****************************************

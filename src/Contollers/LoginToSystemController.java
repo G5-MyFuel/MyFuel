@@ -153,7 +153,10 @@ public class LoginToSystemController extends BasicController {
                 buttonNameArrayList.add(temp);
                 buttonNameArrayList.add(getFullUserNameByUserId(temp));
                 buttonNameArrayList.add(getFuelCompanyBuUserID(temp));
+                //
                 buttonNameArrayList.add("GENERATING_REPORTS_STATION_MANAGER_PAGE");
+                buttonNameArrayList.add("PURCHASE_FUEL_FOR_HOME_HEATING");
+                //
                 Toast.makeText(mainProjectFX.mainStage,"Wellcom to MyFuel "+getFullUserNameByUserId(temp),1000,1500,1500);
                 break;
             case "MARKETING_MANAGER":
