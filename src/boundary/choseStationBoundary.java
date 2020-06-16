@@ -65,7 +65,7 @@ public class choseStationBoundary implements DataInitializable {
     @FXML
     public void confirmFunction(MouseEvent event) {
         Stage primStage = (Stage) confirmBtn.getScene().getWindow();
-        String station1 = null, station2 = null, station3 = null;
+        String station1 = "NULL", station2 = "NULL", station3 = "NULL";
         if (pazCheckBox.isSelected())
             station1 = "PAZ";
         if (yellowCheckBox.isSelected())

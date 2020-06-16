@@ -12,7 +12,7 @@ public class User implements Serializable {
     private String userFirstName;
     private String userLastName;
     private String userEmail;
-    private ArrayList<String> fuelCompany = new ArrayList<>();
+    private ArrayList<String> fuelCompany;
 
     public User(String userID, String userType, int isLoginIndicator, String userFirstName, String userLastName, String userEmail, ArrayList<String> fuelCompany) {
         this.userID = userID;

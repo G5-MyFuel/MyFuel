@@ -251,28 +251,28 @@ public class CustomerRegistrationBoundary implements DataInitializable {
             if (YELLOWbtn.isSelected())
                 tempCos.getFuelCompany().add("YELLOW");
             else
-                tempCos.getFuelCompany().add("null");
+                tempCos.getFuelCompany().add("NULL");
             if (PAZbtn.isSelected())
                 tempCos.getFuelCompany().add("PAZ");
             else
-                tempCos.getFuelCompany().add("null");
+                tempCos.getFuelCompany().add("NULL");
             if (SONOLbtn.isSelected())
                 tempCos.getFuelCompany().add("SONOL");
             else
-                tempCos.getFuelCompany().add("null");
+                tempCos.getFuelCompany().add("NULL");
         } else {
             if (yellowCheckBox.isSelected())
                 tempCos.getFuelCompany().add("YELLOW");
             else
-                tempCos.getFuelCompany().add("null");
+                tempCos.getFuelCompany().add("NULL");
             if (pazCheckBox.isSelected())
                 tempCos.getFuelCompany().add("PAZ");
             else
-                tempCos.getFuelCompany().add("null");
+                tempCos.getFuelCompany().add("NULL");
             if (sonolCheckBox.isSelected())
                 tempCos.getFuelCompany().add("SONOL");
             else
-                tempCos.getFuelCompany().add("null");
+                tempCos.getFuelCompany().add("NULL");
 
         }
 

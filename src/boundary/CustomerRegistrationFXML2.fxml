@@ -133,7 +133,6 @@
                               <Font name="System Bold Italic" size="40.0" />
                            </font>
                         </Label>
-                        <Label layoutX="30.0" layoutY="135.0" text="Fill in the required information" />
                         <ScrollPane layoutX="24.0" layoutY="215.0" prefHeight="251.0" prefWidth="236.0">
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="232.0" prefWidth="234.0">
@@ -392,7 +391,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Pane layoutX="513.0" layoutY="159.0">
+                        <Pane layoutX="496.0" layoutY="237.0">
                            <children>
                               <Label layoutX="22.0" layoutY="24.0" style="-fx-text-fill: #868282;" text="Pricing Model" />
                               <ImageView fx:id="ServicePlanInfo" fitHeight="16.0" fitWidth="23.0" layoutX="6.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
@@ -409,12 +408,12 @@
                               <Insets bottom="20.0" />
                            </padding>
                         </Pane>
-                        <ImageView fitHeight="36.0" fitWidth="54.0" layoutX="513.0" layoutY="339.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="36.0" fitWidth="54.0" layoutX="496.0" layoutY="181.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../media/CostumerRegisterationMedia/vehicleImg.png" />
                            </image>
                         </ImageView>
-                        <Label fx:id="NumberOfVehcles" layoutX="572.0" layoutY="349.0" stylesheets="@style.css" text="NumberOfVehcles">
+                        <Label fx:id="NumberOfVehcles" layoutX="553.0" layoutY="189.0" stylesheets="@style.css" text="NumberOfVehcles">
                            <textFill>
                               <LinearGradient endY="0.7095238095238096" startX="0.5523809523809524" startY="0.1380952380952381">
                                  <stops>

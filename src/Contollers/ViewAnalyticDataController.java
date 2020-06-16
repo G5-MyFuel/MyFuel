@@ -52,7 +52,7 @@ public class ViewAnalyticDataController extends BasicController {
     }
 
     public void GetDateToCalcRating (){
-       // SqlAction sqlAction = new SqlAction(SqlQueryType.GET_ALL_PURCHASE_TABLE);
+       //SqlAction sqlAction = new SqlAction(SqlQueryType.GET_ALL_PURCHASE_TABLE);
         //super.sendSqlActionToClient(sqlAction);
 
     }
