@@ -84,7 +84,7 @@ public enum SqlQueryType {
      * *****************************************/
     GET_ALL_RATING_TABLE(SqlExecutionType.EXECUTE_QUERY),
     GET_CUSTOMER_X_PURCHASE_TABLE(SqlExecutionType.EXECUTE_QUERY),
-
+    INSERT_RATING(SqlExecutionType.UPDATE_QUERY),
 
     /* *****************************************
      * ********** Costumer Registration Queries ****************

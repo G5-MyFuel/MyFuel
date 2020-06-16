@@ -221,7 +221,7 @@ public class MysqlConnection {
         sqlArray[SqlQueryType.GET_CUSTOMER_X_PURCHASE_TABLE.getCode()] = "select p.customerID, c.customerType, p.purchaseID, ff.FuelType, p.purchaseHour " +
                 "from Costumer as c, Purchase as p, FastFuel as ff " +
                 "WHERE p.customerID LIKE c.ID AND p.purchaseID LIKE ff.purchaseID";
-
+        sqlArray[SqlQueryType.INSERT_RATING.getCode()] ="INSERT INTO `Rating`(`CustomerID`, `Rating`, `CustomerType`) VALUES (?,?,?);";
 
     /* *****************************************
          * ********** Discount Rates Queries ****************

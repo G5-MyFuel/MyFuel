@@ -25,7 +25,7 @@ import java.util.TimeZone;
 public class generalDashBoardBoundary implements DataInitializable {
 
     private GeneralDashBoardController myController = new GeneralDashBoardController(this);
-    private AnalyticDataCreator analyticDataCreator = new AnalyticDataCreator(this);
+  //  private AnalyticDataCreator analyticDataCreator = new AnalyticDataCreator(this);
 
     //global variables:
     private String userID;
@@ -269,7 +269,7 @@ public class generalDashBoardBoundary implements DataInitializable {
     void RUN_SALE_OPERATION_PAGE() {
         currentPagePane.setVisible(true);
         currentPagePane.getChildren().clear();
-        currentPagePane.getChildren().setAll(mainProjectFX.pagingController.loadBoundaryInPane(ProjectPages.RUN_SALE_OPERATION_PAGE.getPath(), userID));
+        currentPagePane.getChildren().setAll(mainProjectFX.pagingController.loadBoundaryInPane(ProjectPages.RUN_MARKETING_CAMPAIGN_PAGE.getPath(), userID));
         myFuelLogo.setVisible(false);
     }
 
@@ -363,10 +363,12 @@ public class generalDashBoardBoundary implements DataInitializable {
                         time.setText(hour + ":" + "0" + (minute) + ":" + second);
                     else
                         time.setText(hour + ":" + (minute) + ":" + second);
+                    /*
                     //Calculate Analytical Data every sunday at 00:00:00:
-                    if (time.getText().equals("00:00:00") && (LocalDate.now().getDayOfWeek().equals("SUNDAY")))
+                    if (time.getText().equals("00:00:00") && (LocalDate.now().getDayOfWeek().equals("SUNDAY"))) {
                         CalculateAnalyticalData();
-
+                    }
+                    */
                     try {
                         sleep(1000);
                     } catch (InterruptedException ex) {
@@ -431,13 +433,11 @@ public class generalDashBoardBoundary implements DataInitializable {
         this.userID = userID;
     }
 
-
+/*
     //ANALITIC SYSTEM CALC :
     private void CalculateAnalyticalData() {
-
-
+        analyticDataCreator.getCustomerXPurchaseTable();
     }
-
-
+*/
 
 }

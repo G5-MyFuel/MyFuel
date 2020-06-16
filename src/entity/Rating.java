@@ -4,10 +4,21 @@ public class Rating {
 
     private int rating;
     private int customerID;
+    private String customerType;
 
 
-    public Rating( int rating,int customerID) {
+    public Rating(int rating, int customerID, String customerType){
+        this.rating = rating;
         this.customerID = customerID;
+        this.customerType = customerType;
+
+    }
+
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
         this.rating = rating;
     }
 
@@ -19,11 +30,11 @@ public class Rating {
         this.customerID = customerID;
     }
 
-    public int getRating() {
-        return rating;
+    public String getCustomerType() {
+        return customerType;
     }
 
-    public void setRating(int rating) {
-        this.rating = rating;
+    public void setCustomerType(String customerType) {
+        this.customerType = customerType;
     }
 }
