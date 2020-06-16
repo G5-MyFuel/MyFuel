@@ -1,6 +1,8 @@
 package boundary;
 
 import Contollers.VieReportsController;
+import entity.PurchasesReport;
+import entity.QuantityItemsStockReport;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,10 +17,11 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.control.TableView;
 import javafx.scene.image.ImageView;
 
 public class VieReportsBoundary implements Initializable {
@@ -26,6 +29,7 @@ public class VieReportsBoundary implements Initializable {
     String managerID;
     String managerCompany;
     String managerStation;
+    String ReportYearAndQuarter;
 
     /**
      * The supervisor boundary controller.
@@ -55,25 +59,25 @@ public class VieReportsBoundary implements Initializable {
     private Label QuantityItemsStockTxt;
 
     @FXML
-    private TableView<?> ViewPurchasesReportTable;
+    private TableView<PurchasesReport> ViewPurchasesReportTable;
 
     @FXML
-    private TableColumn<?, ?> FuelTypeColumn;
+    private TableColumn<PurchasesReport, String> FuelTypeColumn;
 
     @FXML
-    private TableColumn<?, ?> QuantityPurchasedColumn;
+    private TableColumn<PurchasesReport, String> QuantityPurchasedColumn;
 
     @FXML
-    private TableColumn<?, ?> SalesAmountColumn;
+    private TableColumn<PurchasesReport, String> SalesAmountColumn;
 
     @FXML
-    private TableView<?> ViewQuantityReportTable;
+    private TableView<QuantityItemsStockReport> ViewQuantityReportTable;
 
     @FXML
-    private TableColumn<?, ?> FuelTypeQuantityReportColumn;
+    private TableColumn<QuantityItemsStockReport, String> FuelTypeQuantityReportColumn;
 
     @FXML
-    private TableColumn<?, ?> AvailableInventoryColumn;
+    private TableColumn<QuantityItemsStockReport, String> AvailableInventoryColumn;
 
     @FXML
     private JFXTextField EnterStationNumberTXT;
@@ -102,9 +106,9 @@ public class VieReportsBoundary implements Initializable {
     @FXML
     private ImageView QuestionMark4;
 
+    @FXML
+    private Button btnOK;
 
-    private final ObservableList<String> ReportsType = FXCollections.observableArrayList("Quarterly revenue report",
-            "Purchases report", "Quantity of items in stock report");
     private final ObservableList<String> YearList = FXCollections.observableArrayList("2020", "2019", "2018", "2017", "2016", "2015",
             "2014", "2013", "2012", "2011", "2010");
     private final ObservableList<String> quarterList = FXCollections.observableArrayList("First", "Second", "Third", "Fourth");
@@ -114,19 +118,25 @@ public class VieReportsBoundary implements Initializable {
 
         managerCompany = "YELLOW";
         EnterStationNumberTXT.setVisible(true);
+        QuestionMark1.setVisible(true);
+
         btnViewQuarterlyRevenueReport.setVisible(false);
         btnViewPurchasesReport.setVisible(false);
         btnViewQuantityItemsInStockReport.setVisible(false);
-        ChooseReportYearCombo.setVisible(false);
-        ChooseReportQuarterCombo.setVisible(false);
-        QuantityItemsStockTxt.setVisible(false);
-        ViewPurchasesReportTable.setVisible(false);
-        ViewQuantityReportTable.setVisible(false);
-        ViewTotalRevenueTXT.setVisible(false);
         imgViewQuantityItemsInStockReport.setVisible(false);
         imgViewPurchasesReport.setVisible(false);
         imgViewQuarterlyRevenueReport.setVisible(false);
-        QuestionMark1.setVisible(false);
+
+        ChooseReportYearCombo.setVisible(false);
+        ChooseReportQuarterCombo.setVisible(false);
+
+        QuantityItemsStockTxt.setVisible(false);
+
+        ViewPurchasesReportTable.setVisible(false);
+
+        ViewQuantityReportTable.setVisible(false);
+        ViewTotalRevenueTXT.setVisible(false);
+
         QuestionMark2.setVisible(false);
         QuestionMark3.setVisible(false);
         QuestionMark4.setVisible(false);
@@ -135,56 +145,25 @@ public class VieReportsBoundary implements Initializable {
     @FXML
     void handleEnterStationNumber(ActionEvent event) {
 
+    }
+
+    @FXML
+    void handleOKbtn(ActionEvent event) {
+
         managerStation = EnterStationNumberTXT.getText();
-        btnViewQuarterlyRevenueReport.setVisible(true);
-        btnViewPurchasesReport.setVisible(true);
-        btnViewQuantityItemsInStockReport.setVisible(true);
-        imgViewQuantityItemsInStockReport.setVisible(true);
-        imgViewPurchasesReport.setVisible(true);
-        imgViewQuarterlyRevenueReport.setVisible(true);
-        QuestionMark1.setVisible(true);
-        QuestionMark2.setVisible(true);
-        QuestionMark3.setVisible(true);
-        QuestionMark4.setVisible(true);
-        ChooseReportYearCombo.setVisible(false);
-        ChooseReportQuarterCombo.setVisible(false);
+        ChooseReportYearCombo.setItems(YearList);
+        ChooseReportYearCombo.setVisible(true);
+        ChooseReportQuarterCombo.setItems(quarterList);
+        ChooseReportQuarterCombo.setVisible(true);
+
         QuantityItemsStockTxt.setVisible(false);
         ViewPurchasesReportTable.setVisible(false);
         ViewQuantityReportTable.setVisible(false);
         ViewTotalRevenueTXT.setVisible(false);
-
     }
 
     @FXML
     void handleViewQuarterlyRevenueReport(MouseEvent event) {
-
-        ChooseReportYearCombo.setItems(YearList);
-        ChooseReportYearCombo.setVisible(true);
-        ChooseReportQuarterCombo.setVisible(false);
-        QuantityItemsStockTxt.setVisible(false);
-        ViewPurchasesReportTable.setVisible(false);
-        ViewQuantityReportTable.setVisible(false);
-        ViewTotalRevenueTXT.setVisible(false);
-
-    }
-
-    @FXML
-    void handleChooseReportYear(ActionEvent event) {
-
-        ChooseReportQuarterCombo.setItems(quarterList);
-        ChooseReportQuarterCombo.setVisible(true);
-        QuantityItemsStockTxt.setVisible(false);
-        ViewPurchasesReportTable.setVisible(false);
-        ViewQuantityReportTable.setVisible(false);
-        ViewTotalRevenueTXT.setVisible(false);
-
-    }
-
-    @FXML
-    void handleChooseReportQuarter(ActionEvent event) {
-
-        /*String startDate = "";
-        String endDate = "";*/
 
         QuantityItemsStockTxt.setVisible(false);
         ViewPurchasesReportTable.setVisible(false);
@@ -195,32 +174,8 @@ public class VieReportsBoundary implements Initializable {
         paramArray.add("View Quarterly revenue report");
         paramArray.add(managerCompany);
         paramArray.add(managerStation);
-        /*paramArray.add(ChooseReportYearCombo.getValue());
-        paramArray.add(ChooseReportQuarterCombo.getValue());*/
-        switch (ChooseReportQuarterCombo.getValue()) {
-            case "First":
-                paramArray.add(ChooseReportYearCombo.getValue() + "-" + "01-01");
-                /*startDate = "01-01";
-                endDate = "03-31";*/
-                break;
-            case "Second":
-                paramArray.add(ChooseReportYearCombo.getValue() + "-" + "04-01");
-                /*startDate = "04-01";
-                endDate = "06-30";*/
-                break;
-            case "Third":
-                paramArray.add(ChooseReportYearCombo.getValue() + "-" + "07-01");
-               /*startDate = "07-01";
-                endDate = "09-30";*/
-                break;
-            case "Fourth":
-                paramArray.add(ChooseReportYearCombo.getValue() + "-" + "10-01");
-                /*startDate = "10-01";
-                endDate = "12-31";*/
-                break;
-            default:
-                break;
-        }
+        GetReportYearAndQuarter();
+        paramArray.add(ReportYearAndQuarter);
         myController.GetReportData(paramArray); //start the process that will ask server to execute quarry and get the table details
     }
 
@@ -231,19 +186,117 @@ public class VieReportsBoundary implements Initializable {
         ViewTotalRevenueTXT.setVisible(true);
     }
 
-
     @FXML
     void handleViewPurchasesReport(MouseEvent event) {
 
+        QuantityItemsStockTxt.setVisible(false);
+        ViewQuantityReportTable.setVisible(false);
+        ViewTotalRevenueTXT.setVisible(false);
+
+        ArrayList<String> paramArray = new ArrayList<>();
+        paramArray.add("View Purchases report");
+        paramArray.add(managerCompany);
+        paramArray.add(managerStation);
+        GetReportYearAndQuarter();
+        paramArray.add(ReportYearAndQuarter);
+        myController.GetReportData(paramArray); //start the process that will ask server to execute quarry and get the table details
+    }
+
+    public void setPurchasesData(ArrayList<PurchasesReport> resultList) {
+
+        System.out.println(resultList);
+        FuelTypeColumn.setCellValueFactory(new PropertyValueFactory<>("fuelType"));
+        QuantityPurchasedColumn.setCellValueFactory(new PropertyValueFactory<>("quantityPurchased"));
+        SalesAmountColumn.setCellValueFactory(new PropertyValueFactory<>("salesAmount"));
+
+        ObservableList<PurchasesReport> data = FXCollections.observableArrayList(resultList);
+        ViewPurchasesReportTable.setItems(data);
+        ViewPurchasesReportTable.setVisible(true);
     }
 
     @FXML
     void handleViewQuantityItemsInStockReport(MouseEvent event) {
 
+        ViewPurchasesReportTable.setVisible(false);
+        ViewQuantityReportTable.setVisible(false);
+        ViewTotalRevenueTXT.setVisible(false);
+        ArrayList<String> paramArray = new ArrayList<>();
+        paramArray.add("View Quantity of items in stock report");
+        paramArray.add(managerCompany);
+        paramArray.add(managerStation);
+        GetReportYearAndQuarter();
+        paramArray.add(ReportYearAndQuarter);
+        myController.GetReportData(paramArray); //start the process that will ask server to execute quarry and get the table details
+
+    }
+
+    public void setQuantityItemsStockData(ArrayList<QuantityItemsStockReport> resultList) {
+
+        resultList.get(0).setFuelType("Gasoline 95");
+        resultList.get(1).setFuelType("Diesel");
+        resultList.get(2).setFuelType("Scooter fuel");
+        FuelTypeQuantityReportColumn.setCellValueFactory(new PropertyValueFactory<>("fuelType"));
+        AvailableInventoryColumn.setCellValueFactory(new PropertyValueFactory<>("availableInventory"));
+
+        ObservableList<QuantityItemsStockReport> data = FXCollections.observableArrayList(resultList);
+        ViewQuantityReportTable.setItems(data);
+        ViewQuantityReportTable.setVisible(true);
+        QuantityItemsStockTxt.setVisible(true);
+    }
+
+    @FXML
+    void handleChooseReportYear(ActionEvent event) {
+
+        //ReportYear = ChooseReportYearCombo.getValue();
+
+        QuantityItemsStockTxt.setVisible(false);
+        ViewPurchasesReportTable.setVisible(false);
+        ViewQuantityReportTable.setVisible(false);
+        ViewTotalRevenueTXT.setVisible(false);
+    }
+
+    @FXML
+    void handleChooseReportQuarter(ActionEvent event) {
+
+        QuantityItemsStockTxt.setVisible(false);
+        ViewPurchasesReportTable.setVisible(false);
+        ViewQuantityReportTable.setVisible(false);
+        ViewTotalRevenueTXT.setVisible(false);
+
+        btnViewQuarterlyRevenueReport.setVisible(true);
+        btnViewPurchasesReport.setVisible(true);
+        btnViewQuantityItemsInStockReport.setVisible(true);
+        imgViewQuantityItemsInStockReport.setVisible(true);
+        imgViewPurchasesReport.setVisible(true);
+        imgViewQuarterlyRevenueReport.setVisible(true);
+        QuestionMark1.setVisible(true);
+        QuestionMark2.setVisible(true);
+        QuestionMark3.setVisible(true);
+        QuestionMark4.setVisible(true);
     }
 
     @FXML
     void handleViewTotalRevenue(ActionEvent event) {
 
+    }
+
+    public void GetReportYearAndQuarter() {
+
+        switch (ChooseReportQuarterCombo.getValue()) {
+            case "First":
+                ReportYearAndQuarter = ChooseReportYearCombo.getValue() + "-" + "01-01";
+                break;
+            case "Second":
+                ReportYearAndQuarter = ChooseReportYearCombo.getValue() + "-" + "04-01";
+                break;
+            case "Third":
+                ReportYearAndQuarter = ChooseReportYearCombo.getValue() + "-" + "07-01";
+                break;
+            case "Fourth":
+                ReportYearAndQuarter = ChooseReportYearCombo.getValue() + "-" + "10-01";
+                break;
+            default:
+                break;
+        }
     }
 }

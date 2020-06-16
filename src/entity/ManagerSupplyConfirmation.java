@@ -1,14 +1,16 @@
 package entity;
 
 public class ManagerSupplyConfirmation {
-    private String OrderNumber,companyName,FuelType;
-    int StationNum,Quantity;
-    public ManagerSupplyConfirmation(String orderNumber, String companyName, int stationNum, String fuelType, int quantity) {
-        OrderNumber = orderNumber;
+    private String OrderNumber, companyName, FuelType, orderStatus;
+    int StationNum, Quantity;
+
+    public ManagerSupplyConfirmation(String orderNumber, String companyName, int stationNum, String fuelType, int quantity, String orderStatus) {
+        this.OrderNumber = orderNumber;
         this.companyName = companyName;
-        StationNum = stationNum;
-        FuelType = fuelType;
-        Quantity = quantity;
+        this.StationNum = stationNum;
+        this.FuelType = fuelType;
+        this.Quantity = quantity;
+        this.orderStatus = orderStatus;
     }
 
     public String getOrderNumber() {
@@ -50,6 +52,10 @@ public class ManagerSupplyConfirmation {
     public void setQuantity(int quantity) {
         Quantity = quantity;
     }
+
+    public void setOrderStatus(String orderStatus) { this.orderStatus = orderStatus; }
+
+    public String getOrderStatus() {return orderStatus; }
 
     @Override
     public String toString() {
