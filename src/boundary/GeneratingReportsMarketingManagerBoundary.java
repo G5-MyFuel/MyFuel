@@ -4,6 +4,8 @@ import Contollers.FormValidation;
 import Contollers.GeneratingReportsMarketingManagerController;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -13,6 +15,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class GeneratingReportsMarketingManagerBoundary implements DataInitializable {
+
+    String managerID;
+    String managerCompany;
 
     /**
      * The supervisor boundary controller.
@@ -25,7 +30,7 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
     private Button btnGenerateReport;
 
     @FXML
-    private JFXComboBox<?> ChooseReportToGenerateCombo;
+    private JFXComboBox<String> ChooseReportToGenerateCombo;
 
     @FXML
     private JFXTextField EnterOperationSaleTXT;
@@ -77,13 +82,26 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
 
     }
 
+    private final ObservableList<String> ReportsType = FXCollections.observableArrayList("Comments Report for Marketing Campaign",
+            "Customer Periodic Characterization Report");
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         this.formValidation = FormValidation.getValidator();
 
-        //btnApprovedRates.setDisable(true);
-        /*ChooseSubscriptionTypeCombo.setItems(SubscriptionType);
-        ShowCurrentRateTXT.setVisible(false);
+        ChooseReportToGenerateCombo.setItems(ReportsType);
+
+        ChooseReportToGenerateCombo.setVisible(true);
+        StartDateTxt.setVisible(false);
+        StartDateBox.setVisible(false);
+        EndDateTxt.setVisible(false);
+        EndDateBox.setVisible(false);
+        EnterOperationSaleTXT.setVisible(false);
+        btnGenerateReport.setVisible(false);
+        ShowReportMarketingCampaignTxt.setVisible(false);
+        CommentsReportForMarketingCampaignTable.setVisible(false);
+        CustomerPeriodicCharacterizationReportTable.setVisible(false);
 
         /*  set all fields validators */
         formValidation();
@@ -105,16 +123,47 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
     @FXML
     void handleChooseReportToGenerate(ActionEvent event) {
 
+        ChooseReportToGenerateCombo.setPrefWidth(340);
+        StartDateBox.getEditor().clear();
+        EndDateBox.getEditor().clear();
+        StartDateTxt.setVisible(true);
+        StartDateBox.setVisible(true);
+        EndDateTxt.setVisible(true);
+        EndDateBox.setVisible(true);
+
+        if(ChooseReportToGenerateCombo.getValue().equals("Comments Report for Marketing Campaign"))
+            EnterOperationSaleTXT.setVisible(true);
+        else
+            EnterOperationSaleTXT.setVisible(false);
+
+        btnGenerateReport.setVisible(true);
+        ShowReportMarketingCampaignTxt.setVisible(false);
+        CommentsReportForMarketingCampaignTable.setVisible(false);
+        CustomerPeriodicCharacterizationReportTable.setVisible(false);
+
+    }
+
+    @FXML
+    void handleStartDateBox(ActionEvent event) {
+
+        /*if(StartDateBox.getValue().isBefore(java.time.LocalDate.now()) == true)
+            ERRORalreadyPassedDate.setVisible(true);*/
     }
 
     @FXML
     void handleEndDateBox(ActionEvent event) {
+
+        /*if(EndDateBox.getValue().isBefore(StartDateBox.getValue()) == true)
+            ERRORalreadyPassedDate.setVisible(true);*/
 
     }
 
     @FXML
     void handleEnterOperationSale(ActionEvent event) {
 
+        String str = EnterOperationSaleTXT.getText();
+        System.out.println(str);
+        //
     }
 
     @FXML
@@ -122,9 +171,5 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
 
     }
 
-    @FXML
-    void handleStartDateBox(ActionEvent event) {
-
-    }
 
 }
