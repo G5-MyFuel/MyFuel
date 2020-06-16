@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane prefHeight="796.0" prefWidth="1062.0" style="-fx-position-shape: center; -fx-border-color: transparent;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundary.VieReportsBoundary">
+<Pane prefHeight="796.0" prefWidth="1062.0" style="-fx-position-shape: center; -fx-border-color: transparent;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundary.ViewReportsBoundary">
    <children>
       <Label layoutX="39.0" layoutY="55.0" text="View Reports" textFill="#2d4578">
          <font>
