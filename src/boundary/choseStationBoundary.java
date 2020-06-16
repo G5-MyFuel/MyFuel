@@ -34,7 +34,7 @@ public class choseStationBoundary implements DataInitializable {
     @Override
     public void initData(Object data) {
         Stage primStage = (Stage) confirmBtn.getScene().getWindow();
-
+        primStage.setTitle("Chose your favourite stations");
         if (data instanceof CostumerManagmentTablePageBoundary)
             managmentBoundary = (CostumerManagmentTablePageBoundary) data;
 
