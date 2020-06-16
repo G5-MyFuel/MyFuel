@@ -114,8 +114,8 @@ public class ConfirmDiscountRatesBoundary implements DataInitializable {
 
     public void setDiscountRatesData(ArrayList<DiscountRate> resultList) {
 
-        SubscriptionTypeColumn.setCellValueFactory(new PropertyValueFactory<>("newDiscountRate"));
-        CurrentPriceColumnColumn.setCellValueFactory(new PropertyValueFactory<>("currentDiscountRatecurrentDiscountRate"));
+        SubscriptionTypeColumn.setCellValueFactory(new PropertyValueFactory<>("subscriptionType"));
+        CurrentPriceColumnColumn.setCellValueFactory(new PropertyValueFactory<>("currentDiscountRate"));
         NewPriceColumn.setCellValueFactory(new PropertyValueFactory<>("newDiscountRate"));
 
         ObservableList<DiscountRate> data = FXCollections.observableArrayList(resultList);

@@ -16,6 +16,15 @@ public class DiscountRate {
         this.newDiscountRate = newDiscountRate;
     }
 
+    @Override
+    public String toString() {
+        return "DiscountRate{" +
+                "subscriptionType='" + subscriptionType + '\'' +
+                ", currentDiscountRate='" + currentDiscountRate + '\'' +
+                ", newDiscountRate='" + newDiscountRate + '\'' +
+                '}';
+    }
+
     public String getSubscriptionType() {
         return subscriptionType;
     }

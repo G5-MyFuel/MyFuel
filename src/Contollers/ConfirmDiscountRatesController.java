@@ -72,6 +72,7 @@ public class ConfirmDiscountRatesController extends BasicController {
             //TotalPrice += Float.parseFloat((String) a.get(0));
         }
         //return TotalPrice.toString();
+        System.out.println(resultList);
         return resultList;
     }
 
