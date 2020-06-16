@@ -170,6 +170,7 @@ public class MysqlConnection {
                 "DELETE `Costumer`, `User` FROM `Costumer` INNER JOIN `User` ON Costumer.ID = User.userID WHERE `Costumer`.ID = ?";
         sqlArray[SqlQueryType.UPDATE_COSTUMER_CREDIT_CARD.getCode()] = "UPDATE `Costumer` SET `Credit Card Number` = ? ,`CreditCardExperationDate` = ? ,`CVV` = ?" +
                 "WHERE ID =?";
+        sqlArray[SqlQueryType.UPDATE_USER_STATIONS.getCode()] = "UPDATE `User` SET `FuelCompany1`= ? ,`FuelCompany2`= ?,`FuelCompany3`= ? WHERE userID = ?";
 
 
 

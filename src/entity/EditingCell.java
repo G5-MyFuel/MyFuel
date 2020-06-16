@@ -1,6 +1,4 @@
 package entity;
-import java.util.ArrayList;
-import java.util.List;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -11,9 +9,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+
+import java.util.ArrayList;
+import java.util.List;
 /**
  *
- * @author Graham Smith
+ * @author Itay Ziv
  */
 public class EditingCell extends TableCell<Costumer, String> {
     private TextField textField;

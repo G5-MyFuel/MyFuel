@@ -16,7 +16,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -32,7 +31,7 @@ import java.util.ResourceBundle;
 
 import static java.lang.Thread.sleep;
 
-public class CostumerManagmentTablePageBoundary implements Initializable {
+public class CostumerManagmentTablePageBoundary implements DataInitializable {
 
 
     private ArrayList<Vehicle> Vehicles = new ArrayList<>();
@@ -231,8 +230,8 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
             @Override
             public void handle(TableColumn.CellEditEvent<Costumer, String> t) {
                 Costumer temp = ((Costumer) t.getTableView().getItems().get(t.getTablePosition().getRow()));
-                temp.setServicePlan(t.getNewValue());
-                myController.updateCostumerDetailsInDb(SqlQueryType.UPDATE_COSTUMER_SERVICE_PLAN, temp.getUserID(), temp.getServicePlan());
+                temp.setPricingModel(t.getNewValue());
+                myController.updateCostumerDetailsInDb(SqlQueryType.UPDATE_COSTUMER_SERVICE_PLAN, temp.getUserID(), temp.getPricingModel());
             }
         });
         //Modifying the purchasePlan property
@@ -274,7 +273,7 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
                 Costumer treeItem = param.getValue();
                 Costumer costumer = treeItem;
 
-                String temp = costumer.getServicePlan();
+                String temp = costumer.getPricingModel();
                 return new SimpleObjectProperty<String>(temp);
             }
         });
@@ -322,7 +321,7 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
 
     public void refreshTable() {
         myController.getCostumerTable();
-        ;
+
     }
 
     @FXML
@@ -366,7 +365,6 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
         }
 
     }
-
 
     @FXML
     void removeSelectedCostumer() {
@@ -470,6 +468,24 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
         }
     }
 
+    @FXML
+    void openStationPage(){
+        CosManageTbale.setDisable(true);
+        PagingController pc = new PagingController();
+        pc.loadAdditionalStage(ProjectPages.STATION_SELECTION_PAGE.getPath(),this);
+    }
+
+    public void changeSelectedCostumerStations(String station1,String station2,String station3){
+        Costumer cos = CosManageTbale.getSelectionModel().getSelectedItem();
+        ArrayList<String> temp = new ArrayList<>();
+        temp.add(station1);
+        temp.add(station2);
+        temp.add(station3);
+        cos.setFuelCompany(temp);
+        myController.setCostumerStation(cos);
+        refreshTable();
+    }
+
     public Costumer getCos() {
         return cos;
     }
@@ -484,5 +500,15 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
                 return cos;
         }
         return null;
+    }
+
+
+    public TableView<Costumer> getCosManageTbale() {
+        return CosManageTbale;
+    }
+
+    @Override
+    public void initData(Object data) {
+
     }
 }

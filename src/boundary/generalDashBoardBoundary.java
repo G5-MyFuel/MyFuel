@@ -2,7 +2,6 @@ package boundary;
 
 import Contollers.AnalyticDataCreator;
 import Contollers.GeneralDashBoardController;
-import Contollers.MarketingCampaignTemplateController;
 import common.assets.ProjectPages;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -228,12 +227,10 @@ public class generalDashBoardBoundary implements DataInitializable {
             button1 = btnSignout;
             button2.setVisible(false);
             button3.setVisible(false);
-        }
-        else if (button2.getText().equals("b2")){
+        } else if (button2.getText().equals("b2")) {
             button2 = btnSignout;
             button3.setVisible(false);
-        }
-        else if (button3.getText().equals("b3")){
+        } else if (button3.getText().equals("b3")) {
             button3.setText(btnSignout.getText());
             button3.setOnMouseClicked(btnSignout.getOnMouseClicked());
             button3.setGraphic(btnSignout.getGraphic());
@@ -248,7 +245,7 @@ public class generalDashBoardBoundary implements DataInitializable {
         weekDay();
     }
 
-    void GENERATING_REPORTS_MARKETING_MANAGER_PAGE(){
+    void GENERATING_REPORTS_MARKETING_MANAGER_PAGE() {
         currentPagePane.setVisible(true);
         currentPagePane.getChildren().clear();
         currentPagePane.getChildren().setAll(mainProjectFX.pagingController.loadBoundaryInPane(ProjectPages.GENERATING_REPORTS_MARKETING_MANAGER_PAGE.getPath(), userID));
@@ -314,7 +311,7 @@ public class generalDashBoardBoundary implements DataInitializable {
     void newPurchaseFuelForHomeHeatingClick() {
         currentPagePane.setVisible(true);
         currentPagePane.getChildren().clear();
-        currentPagePane.getChildren().setAll(mainProjectFX.pagingController.loadBoundaryInPane(ProjectPages.PURCHASE_FUEL_FOR_HOME_HEATING.getPath(),userID));
+        currentPagePane.getChildren().setAll(mainProjectFX.pagingController.loadBoundaryInPane(ProjectPages.PURCHASE_FUEL_FOR_HOME_HEATING.getPath(), userID));
         myFuelLogo.setVisible(false);
     }
 
@@ -322,7 +319,7 @@ public class generalDashBoardBoundary implements DataInitializable {
         currentPagePane.setVisible(true);
         currentPagePane.getChildren().clear();
         String marketingRepCompanyName = null;
-        currentPagePane.getChildren().setAll(mainProjectFX.pagingController.loadBoundaryInPane(ProjectPages.COSTUMER_REGISTRATION_PAGE.getPath(),marketingRepCompanyName));
+        currentPagePane.getChildren().setAll(mainProjectFX.pagingController.loadBoundaryInPane(ProjectPages.COSTUMER_REGISTRATION_PAGE.getPath(), marketingRepCompanyName));
         myFuelLogo.setVisible(false);
     }
 
@@ -330,7 +327,7 @@ public class generalDashBoardBoundary implements DataInitializable {
     void costumerMenagmentClick() {
         currentPagePane.setVisible(true);
         currentPagePane.getChildren().clear();
-        currentPagePane.getChildren().setAll(mainProjectFX.pagingController.loadBoundaryInPane(ProjectPages.COSTUMER_MANAGEMENT_TABLE_PAGE.getPath(),userID));
+        currentPagePane.getChildren().setAll(mainProjectFX.pagingController.loadBoundaryInPane(ProjectPages.COSTUMER_MANAGEMENT_TABLE_PAGE.getPath(), userID));
         myFuelLogo.setVisible(false);
     }
 
@@ -364,7 +361,8 @@ public class generalDashBoardBoundary implements DataInitializable {
                     hour = cal.get(Calendar.HOUR_OF_DAY);
                     if (minute < 10)
                         time.setText(hour + ":" + "0" + (minute) + ":" + second);
-                    time.setText(hour + ":" + (minute) + ":" + second);
+                    else
+                        time.setText(hour + ":" + (minute) + ":" + second);
                     //Calculate Analytical Data every sunday at 00:00:00:
                     if (time.getText().equals("00:00:00") && (LocalDate.now().getDayOfWeek().equals("SUNDAY")))
                         CalculateAnalyticalData();
@@ -434,10 +432,8 @@ public class generalDashBoardBoundary implements DataInitializable {
     }
 
 
-
     //ANALITIC SYSTEM CALC :
-    private void CalculateAnalyticalData()
-    {
+    private void CalculateAnalyticalData() {
 
 
     }

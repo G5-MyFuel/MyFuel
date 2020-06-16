@@ -1,7 +1,7 @@
 package entity;
 
 import java.io.Serializable;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class User implements Serializable {
@@ -12,9 +12,9 @@ public class User implements Serializable {
     private String userFirstName;
     private String userLastName;
     private String userEmail;
-    private String[] fuelCompany;
+    private ArrayList<String> fuelCompany = new ArrayList<>();
 
-    public User(String userID, String userType, int isLoginIndicator, String userFirstName, String userLastName, String userEmail, String[] fuelCompany) {
+    public User(String userID, String userType, int isLoginIndicator, String userFirstName, String userLastName, String userEmail, ArrayList<String> fuelCompany) {
         this.userID = userID;
         this.userType = userType;
         this.isLoginIndicator = isLoginIndicator;
@@ -26,7 +26,7 @@ public class User implements Serializable {
         //
     }
 
-    public User(String userID, String userType, String userPassword, int isLoginIndicator, String userFirstName, String userLastName, String userEmail, String[] fuelCompany) {
+    public User(String userID, String userType, String userPassword, int isLoginIndicator, String userFirstName, String userLastName, String userEmail, ArrayList<String> fuelCompany) {
         this.userID = userID;
         this.userType = userType;
         this.userPassword = userPassword;
@@ -94,11 +94,11 @@ public class User implements Serializable {
         this.userEmail = userEmail;
     }
 
-    public String[] getFuelCompany() {
+    public ArrayList<String> getFuelCompany() {
         return fuelCompany;
     }
 
-    public void setFuelCompany(String[] fuelCompany) {
+    public void setFuelCompany(ArrayList<String> fuelCompany) {
         this.fuelCompany = fuelCompany;
     }
 
@@ -112,7 +112,7 @@ public class User implements Serializable {
                 ", userFirstName='" + userFirstName + '\'' +
                 ", userLastName='" + userLastName + '\'' +
                 ", userEmail='" + userEmail + '\'' +
-                ", fuelCompany=" + Arrays.toString(fuelCompany) +
+                ", fuelCompany=" + fuelCompany.toString() +
                 '}';
     }
 

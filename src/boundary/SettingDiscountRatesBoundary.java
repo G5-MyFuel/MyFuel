@@ -51,7 +51,7 @@ public class SettingDiscountRatesBoundary implements DataInitializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.formValidation = FormValidation.getValidator();
+        this.formValidation = new FormValidation();
         ChooseSubscriptionTypeCombo.setItems(SubscriptionType);
         ShowCurrentRateTXT.setVisible(false);
         ShowNewRateTXT.setVisible(false);
@@ -67,7 +67,7 @@ public class SettingDiscountRatesBoundary implements DataInitializable {
 
         //formValidation.isContainsOnlyNumbers(ShowNewRateTXT, "New price");
         //formValidation.numberPositiveValidation(ShowNewRateTXT, "New price");
-        FormValidation.isEmptyFieldValidation(ShowNewRateTXT, "New price");
+        formValidation.isEmptyFieldValidation(ShowNewRateTXT, "New price");
         //formValidation.maxLengthValidation(ShowNewRateTXT, "New price", 3);
         formValidation.maxFloatSizeValidation(ShowNewRateTXT, "New price", 100);
         formValidation.minFloatSizeValidation(ShowNewRateTXT, "New price", 0);
