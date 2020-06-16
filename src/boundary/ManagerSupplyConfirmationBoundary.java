@@ -32,7 +32,7 @@ public class ManagerSupplyConfirmationBoundary implements DataInitializable {
 
     private ManagerSupplyConfirmationController myController = new ManagerSupplyConfirmationController(this);
     private ObservableList<ManagerSupplyConfirmation> tableData;
-    private String stationManagerID = "762550139";
+    private String stationManagerID;
 
     @FXML
     private Button btnOverview;
