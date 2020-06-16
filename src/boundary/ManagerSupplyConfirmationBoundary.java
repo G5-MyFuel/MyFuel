@@ -32,7 +32,7 @@ public class ManagerSupplyConfirmationBoundary implements DataInitializable {
 
     private ManagerSupplyConfirmationController myController = new ManagerSupplyConfirmationController(this);
     private ObservableList<ManagerSupplyConfirmation> tableData;
-    private String stationManagerID = "800300579";
+    private String stationManagerID = "762550139";
 
     @FXML
     private Button btnOverview;
@@ -80,24 +80,27 @@ public class ManagerSupplyConfirmationBoundary implements DataInitializable {
     private Text ApprovalTxt;
 
     @FXML
+    private Text explanationTxt;
+
+    @FXML
     void OrderConfirmationCheck(MouseEvent event) {
         /**  If there is a check sign   **/
-        if(confirmationCheckBox.isSelected())
+        if (confirmationCheckBox.isSelected())
             SendBtn.setDisable(false);
         else SendBtn.setDisable(true);
     }
 
     @FXML
-    void SendConfirmationToSupplier(MouseEvent event) {
-        for (int i = 0; i < myController.resultList.size(); i++) {
-            if (myController.resultList.get(i).getOrderNumber().equals(tableView.getSelectionModel().getSelectedItem().getOrderNumber())) {
-                myController.setNewStatus(myController.resultList.get(i).getOrderNumber());
-                myController.resultList.get(i).setOrderStatus("In treatment");
-                tableData = FXCollections.observableArrayList(myController.resultList);
-                tableView.setItems(tableData);
-            }
-        }
-        //TODO : make sure we see the changes in the other table (supplier)
+    void clickSendBtn(MouseEvent event) {
+        ManagerSupplyConfirmation temp = tableView.getSelectionModel().getSelectedItem();
+        myController.setNewStatus(temp.getOrderNumber());
+        temp.setOrderStatus("In treatment");
+
+        hboxOrderConfirmation.setDisable(true);
+        SendBtn.setDisable(true);
+        ApprovalTxt.setVisible(true);
+        tableData = FXCollections.observableArrayList(myController.resultList);
+        tableView.setItems(tableData);
     }
 
     @FXML
@@ -126,7 +129,9 @@ public class ManagerSupplyConfirmationBoundary implements DataInitializable {
     }
 
     @Override
-    public void initData(Object data) { stationManagerID = (String)data; }
+    public void initData(Object data) {
+        stationManagerID = (String) data;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -135,6 +140,7 @@ public class ManagerSupplyConfirmationBoundary implements DataInitializable {
         ApprovalTxt.setVisible(false);
         SendBtn.setVisible(false);
         SendBtn.setDisable(true);
+        explanationTxt.setVisible(false);
         myController.getOrdersFromDB(stationManagerID);
         System.out.println("Manager Supply Confirmation Page Is Open");
     }
@@ -152,24 +158,24 @@ public class ManagerSupplyConfirmationBoundary implements DataInitializable {
 
     public void getDetailsFromTableView() {
         tableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            ManagerSupplyConfirmation temp = null;
             @Override
             public void handle(MouseEvent event) {
-                for (int i = 0; i < myController.resultList.size(); i++) {
-                    if (myController.resultList.get(i).getOrderNumber().equals(tableView.getSelectionModel().getSelectedItem().getOrderNumber()))
-                        temp = myController.resultList.get(i);
-                    if (temp != null) {
-                        hboxOrderConfirmation.setVisible(true);
-                        SendBtn.setVisible(true);
-
-                    }
-
+                ManagerSupplyConfirmation temp = tableView.getSelectionModel().getSelectedItem();
+                if (temp.getOrderStatus().equals("New")) {
+                    hboxOrderConfirmation.setVisible(true);
+                    hboxOrderConfirmation.setDisable(false);
+                    SendBtn.setVisible(true);
+                    SendBtn.setDisable(false);
+                    explanationTxt.setVisible(true);
+                    ApprovalTxt.setVisible(false);
+                    confirmationCheckBox.setSelected(false);
+                } else {
+                    hboxOrderConfirmation.setDisable(true);
+                    SendBtn.setDisable(true);
+                    ApprovalTxt.setVisible(true);
+                    confirmationCheckBox.setSelected(true);
                 }
             }
         });
     }
-
-
-
-
 }

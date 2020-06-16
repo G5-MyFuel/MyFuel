@@ -2,9 +2,9 @@ package entity;
 
 public class ManagerSupplyConfirmation {
     private String OrderNumber, companyName, FuelType, orderStatus;
-    int StationNum, Quantity;
+    Integer StationNum, Quantity;
 
-    public ManagerSupplyConfirmation(String orderNumber, String companyName, int stationNum, String fuelType, int quantity, String orderStatus) {
+    public ManagerSupplyConfirmation(String orderNumber, String companyName, Integer stationNum, String fuelType, Integer quantity, String orderStatus) {
         this.OrderNumber = orderNumber;
         this.companyName = companyName;
         this.StationNum = stationNum;
@@ -29,7 +29,7 @@ public class ManagerSupplyConfirmation {
         this.companyName = companyName;
     }
 
-    public int getStationNum() {
+    public Integer getStationNum() {
         return StationNum;
     }
 
@@ -45,7 +45,7 @@ public class ManagerSupplyConfirmation {
         FuelType = fuelType;
     }
 
-    public int getQuantity() {
+    public Integer getQuantity() {
         return Quantity;
     }
 
