@@ -4,16 +4,13 @@ import Contollers.ConfirmDiscountRatesController;
 import Contollers.FormValidation;
 import entity.Costumer;
 import entity.DiscountRate;
-import entity.EditingCell;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.util.Callback;
+import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -27,12 +24,10 @@ public class ConfirmDiscountRatesBoundary implements DataInitializable {
     private final ConfirmDiscountRatesController myController = new ConfirmDiscountRatesController(this);
     private FormValidation formValidation;
     private final Alert ErrorAlert = new Alert(Alert.AlertType.ERROR);
+    ArrayList<DiscountRate> sendDiscountRates = new ArrayList<>();
 
     @FXML
     private TableView<DiscountRate> TableSubscriptionType;
-
-    @FXML
-    private TableColumn CheckboxColumn;
 
     @FXML
     private TableColumn<DiscountRate, String> SubscriptionTypeColumn;
@@ -59,12 +54,15 @@ public class ConfirmDiscountRatesBoundary implements DataInitializable {
         this.formValidation = FormValidation.getValidator();
 
         btnApprovedRates.setDisable(true);
+        btnRemoveNewRate.setDisable(true);
         /*ChooseSubscriptionTypeCombo.setItems(SubscriptionType);
         ShowCurrentRateTXT.setVisible(false);
 
         /*  set all fields validators */
         formValidation();
-        myController.GetDiscountRatesData(/*"Get Discount Rates Data"*/);
+        ArrayList<String> paramArray = new ArrayList<>();
+        paramArray.add("Get Discount Rates Data");
+        myController.GetDiscountRatesData(paramArray);
 
     }
 
@@ -114,17 +112,50 @@ public class ConfirmDiscountRatesBoundary implements DataInitializable {
 
     public void setDiscountRatesData(ArrayList<DiscountRate> resultList) {
 
+        TableSubscriptionType.getSelectionModel().setSelectionMode(
+                SelectionMode.MULTIPLE
+        );
         SubscriptionTypeColumn.setCellValueFactory(new PropertyValueFactory<>("subscriptionType"));
         CurrentPriceColumnColumn.setCellValueFactory(new PropertyValueFactory<>("currentDiscountRate"));
         NewPriceColumn.setCellValueFactory(new PropertyValueFactory<>("newDiscountRate"));
 
         ObservableList<DiscountRate> data = FXCollections.observableArrayList(resultList);
         TableSubscriptionType.setItems(data);
+
+        //ArrayList<DiscountRate> discountArray = new ArrayList<DiscountRate>(TableSubscriptionType.getSelectionModel().getSelectedItems());
+
+    }
+
+    @FXML
+    void TableClicked(MouseEvent event) {
+
+        btnApprovedRates.setDisable(true);
+        btnRemoveNewRate.setDisable(true);
+        sendDiscountRates.clear();
+        ArrayList<DiscountRate> discountArray = new ArrayList<DiscountRate>(TableSubscriptionType.getSelectionModel().getSelectedItems());
+        System.out.println(discountArray);
+        System.out.println(TableSubscriptionType.getSelectionModel().getSelectedItems());
+        sendDiscountRates.addAll(discountArray);
+
+        System.out.println(discountArray.size());
+        if (discountArray.size() > 0) {
+            btnApprovedRates.setDisable(false);
+            btnRemoveNewRate.setDisable(false);
+        }
+
     }
 
     @FXML
     void handleApprovedRates(ActionEvent event) {
 
+        ArrayList<String> paramArray = new ArrayList<>();
+        paramArray.add("Update New Discount Rate");
+        for (DiscountRate a : sendDiscountRates)
+            paramArray.add(a.getSubscriptionType());
+        myController.GetDiscountRatesData(paramArray);
+        paramArray.clear();
+        paramArray.add("Get Discount Rates Data");
+        myController.GetDiscountRatesData(paramArray);
     }
 
     @FXML

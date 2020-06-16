@@ -6,7 +6,7 @@ public class DiscountRate {
     private String currentDiscountRate;
     private String newDiscountRate;
 
-    public DiscountRate(){
+    public DiscountRate() {
 
     }
 

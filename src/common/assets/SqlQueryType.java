@@ -45,6 +45,8 @@ public enum SqlQueryType {
      * ********** Admin Confirm Discount Rates Queries ****************
      * *****************************************/
     Get_DiscountRates_Table(SqlExecutionType.EXECUTE_QUERY),
+    UPDATE_NEW_DiscountRate(SqlExecutionType.UPDATE_QUERY),
+
 
     /* *****************************************
      * ********** Costumer Management Queries ****************
