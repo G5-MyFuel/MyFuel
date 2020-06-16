@@ -12,10 +12,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
 
 import java.net.URL;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 /**
@@ -184,8 +186,16 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
     }
 
     private void setDayAndDateComboBox() {
-        String currentDayAndDate = LocalDate.now().getDayOfWeek().name() +" "+ new SimpleDateFormat("dd-mm-yyyy").format(new Date());
+        //String currentDayAndDate = LocalDate.now().getDayOfWeek().name() +" "+ new SimpleDateFormat("dd-mm-yyyy").format(new Date());
+        Date date = new Date();
+        DateTime currentDate = new DateTime(date);
+        DateTime tomorrowDate = currentDate.plusDays(1);
+        System.out.println("Today: " + currentDate + "\nTomorrow: " + tomorrowDate);
+
+
         //TODO: להמשיך לממש ימים + שבועיים קדימה ולשלוח לקומבו בוקס
+        ArrayList<String> twoWeeksDaysAndDates = new ArrayList<>();
+
     }
 
     public void CheckOrderDetails() {
