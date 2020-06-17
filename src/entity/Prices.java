@@ -1,6 +1,8 @@
 package entity;
 
+import Contollers.GeneralDashBoardController;
 import common.assets.enums.FuelTypes;
+import common.assets.enums.PricingModelTypes;
 
 public class Prices {
     //Misrad Hatahbura prices
@@ -14,17 +16,17 @@ public class Prices {
     private final Double purchasePlanDiscount_multiple = 0.92;
 
     //Pricing model discount
-    private Double pricingModel_type1 = 1.0;
-    private Double pricingModel_type2 = 0.96;
-    private Double pricingModel_type3 = 0.9;
-    private Double pricingModel_type4 = 0.97;
+    private Double pricingModel_Casual_fueling = 1.0;
+    private Double pricingModel_Regular_monthly_subscription_single = 0.96;
+    private Double pricingModel_Regular_monthly_subscription_multiple = 0.9;
+    private Double pricingModel_Full_monthly_subscription = 0.97;
 
     //currentPrice details
     private Double fuelAmount;
     private Double fuelAmountOfPreviousMonth;
     private FuelTypes fuelType;
     private String purchasePlan;
-    private int pricingModelType = 0;
+    private PricingModelTypes pricingModelType;
     private Double totalPrice;
     private String userID;
 
@@ -32,10 +34,13 @@ public class Prices {
 
     }
 
-    public Prices(String userId, Double fuelAmount, FuelTypes fueltype, String purchasePlan, int pricingModelType) {
+    GeneralDashBoardController generalDashBoardController = new GeneralDashBoardController();
+
+    public Prices(String userId, Double fuelAmount, FuelTypes fueltype, String purchasePlan, PricingModelTypes pricingModelType) {
         //לקחת מהד"ב מחירים עדכניים - ממה שניר עשה - מודל תמחור
         //להריץ שאילתא שמקבלת את כמות הדלק של כל ההזמנות בטווח התאריכים של חודש קודם - עבור מנוי (4)
         this.userID = userId;
+        generalDashBoardController.getCustomerPurchaseAmountInLastMonthFromDB(userId);
         // this.fuelAmountOfPreviousMonth = getAllUserPurchaseAmountInLastMonth();
         this.fuelAmount = fuelAmount;
         this.fuelType = fueltype;
@@ -47,26 +52,26 @@ public class Prices {
 
 
     public Double calculateTotalPrice() {
-        if (userID.isEmpty() || fuelAmount == null || fuelType == null || purchasePlan == null || pricingModelType == 0 || totalPrice == null)
+        if (userID.isEmpty() || fuelAmount == null || fuelType == null || purchasePlan == null || pricingModelType.isEmpty() || totalPrice == null)
             return null;
         totalPrice = getFuelPriceByFuelType(fuelType) * fuelAmount;
         switch (pricingModelType) {
-            case 1:
-                totalPrice *= pricingModel_type1;
+            case Casual_fueling:
+                totalPrice *= pricingModel_Casual_fueling;
                 break;
 
-            case 2:
-                totalPrice *= pricingModel_type2;
+            case Regular_monthly_subscription_single:
+                totalPrice *= pricingModel_Regular_monthly_subscription_single;
                 break;
 
-            case 3:
-                totalPrice = (totalPrice *= pricingModel_type2) * pricingModel_type3;
+            case Regular_monthly_subscription_multiple:
+                totalPrice = (totalPrice *= pricingModel_Regular_monthly_subscription_single) * purchasePlanDiscount_multiple;
                 break;
 
-            case 4:
-
+            case Full_monthly_subscription:
                 //((((totalPrice*previousMonthFuelAmount)*0.96)*0.9))*0.97
                 //totalPrice = ;
+                totalPrice = (((totalPrice * generalDashBoardController.getFuelAmountOfPreMonthForCurrentUser()) * pricingModel_Regular_monthly_subscription_single)) * pricingModel_Full_monthly_subscription;
                 break;
             default:
                 System.err.println("error in pricingModelType - > number between 1-4");
@@ -103,13 +108,7 @@ public class Prices {
         return null;
     }
 
-    public Double getDiscountPricingModel_type1() {
-        return pricingModel_type1;
-    }
 
-    public Double getDiscountPricingModel_type2() {
-        return pricingModel_type1;
-    }
 
     public Double getBasePrice_95() {
         return basePrice_95;
@@ -135,33 +134,6 @@ public class Prices {
         return purchasePlanDiscount_multiple;
     }
 
-    public Double getPricingModel_type1() {
-        return pricingModel_type1;
-    }
-
-    public Double getPricingModel_type2() {
-        return pricingModel_type2;
-    }
-
-    public void setPricingModel_type2(Double pricingModel_type2) {
-        this.pricingModel_type2 = pricingModel_type2;
-    }
-
-    public Double getPricingModel_type3() {
-        return pricingModel_type3;
-    }
-
-    public void setPricingModel_type3(Double pricingModel_type3) {
-        this.pricingModel_type3 = pricingModel_type3;
-    }
-
-    public Double getPricingModel_type4() {
-        return pricingModel_type4;
-    }
-
-    public void setPricingModel_type4(Double pricingModel_type4) {
-        this.pricingModel_type4 = pricingModel_type4;
-    }
 
     public static void setBasePrice_95(Double basePrice_95) {
         Prices.basePrice_95 = basePrice_95;
@@ -177,6 +149,38 @@ public class Prices {
 
     public static void setBasePrice_homeHeating(Double basePrice_homeHeating) {
         Prices.basePrice_homeHeating = basePrice_homeHeating;
+    }
+
+    public Double getPricingModel_Casual_fueling() {
+        return pricingModel_Casual_fueling;
+    }
+
+    public void setPricingModel_Casual_fueling(Double pricingModel_Casual_fueling) {
+        this.pricingModel_Casual_fueling = pricingModel_Casual_fueling;
+    }
+
+    public Double getPricingModel_Regular_monthly_subscription_single() {
+        return pricingModel_Regular_monthly_subscription_single;
+    }
+
+    public void setPricingModel_Regular_monthly_subscription_single(Double pricingModel_Regular_monthly_subscription_single) {
+        this.pricingModel_Regular_monthly_subscription_single = pricingModel_Regular_monthly_subscription_single;
+    }
+
+    public Double getPricingModel_Regular_monthly_subscription_multiple() {
+        return pricingModel_Regular_monthly_subscription_multiple;
+    }
+
+    public void setPricingModel_Regular_monthly_subscription_multiple(Double pricingModel_Regular_monthly_subscription_multiple) {
+        this.pricingModel_Regular_monthly_subscription_multiple = pricingModel_Regular_monthly_subscription_multiple;
+    }
+
+    public Double getPricingModel_Full_monthly_subscription() {
+        return pricingModel_Full_monthly_subscription;
+    }
+
+    public void setPricingModel_Full_monthly_subscription(Double pricingModel_Full_monthly_subscription) {
+        this.pricingModel_Full_monthly_subscription = pricingModel_Full_monthly_subscription;
     }
 
     @Override

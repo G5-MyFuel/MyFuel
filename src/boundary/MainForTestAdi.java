@@ -33,7 +33,7 @@ public class MainForTestAdi extends Application {
         Pane root = null;
         try {
             FXMLLoader loader = new FXMLLoader();
-            /*loader.setLocation(getClass().getResource("/boundary/supplier-OrderExecution-adi.fxml"));*/
+            /*loader.setLocation(getClass().getResource("/boundary/supplierOrderExecution.fxml"));*/
             loader.setLocation(getClass().getResource("/boundary/Manager-Supply-Confirmation-adi.fxml"));
             root = loader.load();
             Scene s1 = new Scene(root);

@@ -94,7 +94,9 @@ public class generalDashBoardBoundary implements DataInitializable {
 
     @Override
     public void initData(Object data) {
-
+        myController.setCurrentUserID(userID);
+        //get all updated prices
+        myController.getAllUpdatedPricesFromDB();
         ArrayList<String> pageNameArrayList = (ArrayList<String>) data;
         String userPermission = pageNameArrayList.get(0);
         this.userID = pageNameArrayList.get(1);

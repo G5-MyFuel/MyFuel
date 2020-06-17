@@ -151,7 +151,8 @@ public class MysqlConnection {
          * *************** Common Queries ****************
          * *****************************************************/
         sqlArray[SqlQueryType.GET_ALL_VEHICLE_TABLE.getCode()] = "SELECT * FROM `Vehicle`";
-
+        sqlArray[SqlQueryType.GET_ALL_UPDATED_PRICES.getCode()] = "SELECT * FROM Prices;";
+        sqlArray[SqlQueryType.GET_ALL_PURCHASE_FUEL_AMOUNT_OF_USER.getCode()] = "call bpsdc8o22sikrlpvvxqm.calculateCustomersPreviousMonthFuelAmount(?);";
 
 
         /* *****************************************
