@@ -14,6 +14,7 @@ public enum SqlQueryType {
     UPDATE_USER_LOGIN_STATUS(SqlExecutionType.UPDATE_QUERY),
     GET_EMPLOYEE_TABLE(SqlExecutionType.EXECUTE_QUERY),
     //for Price class
+    GET_ALL_UPDATED_PRICES(SqlExecutionType.EXECUTE_QUERY),
     GET_ALL_PURCHASE_FUEL_AMOUNT_OF_USER(SqlExecutionType.EXECUTE_QUERY),
 
     /* *****************************************

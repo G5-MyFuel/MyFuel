@@ -5,10 +5,12 @@ import client.ChatClient;
 import client.ClientConsole;
 import common.assets.SqlAction;
 import common.assets.SqlResult;
+import entity.User;
 import javafx.scene.control.Button;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 /*
 import assets.SqlAction;
 import assets.SqlResult;

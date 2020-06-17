@@ -3,6 +3,9 @@ package boundary;
 import Contollers.AnalyticDataCreator;
 import Contollers.GeneralDashBoardController;
 import common.assets.ProjectPages;
+import entity.Costumer;
+import entity.Prices;
+import entity.User;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -26,6 +29,9 @@ public class generalDashBoardBoundary implements DataInitializable {
 
     private GeneralDashBoardController myController = new GeneralDashBoardController(this);
   //  private AnalyticDataCreator analyticDataCreator = new AnalyticDataCreator(this);
+    private ArrayList<Prices> resultListFuelPrices = new ArrayList<>();
+    private ArrayList<Costumer> resultListCustomers = new ArrayList<>();
+
 
     //global variables:
     private String userID;
@@ -440,4 +446,23 @@ public class generalDashBoardBoundary implements DataInitializable {
     }
 */
 
+    /*
+    Get all updated prices from DB
+     */
+
+    public ArrayList<Prices> getResultListFuelPrices() {
+        return resultListFuelPrices;
+    }
+
+    public void setResultListFuelPrices(ArrayList<Prices> resultListFuelPrices) {
+        this.resultListFuelPrices = resultListFuelPrices;
+    }
+
+    public ArrayList<Costumer> getResultListCustomers() {
+        return resultListCustomers;
+    }
+
+    public void setResultListCustomers(ArrayList<Costumer> resultListCustomers) {
+        this.resultListCustomers = resultListCustomers;
+    }
 }

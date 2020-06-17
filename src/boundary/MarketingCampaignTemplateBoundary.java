@@ -6,15 +6,14 @@ import Contollers.FormValidation;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTimePicker;
+import common.assets.enums.FuelTypes;
 import entity.Day;
-import entity.FuelTypes;
 import entity.MarketingCampaignTemplate;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.cell.PropertyValueFactory;
