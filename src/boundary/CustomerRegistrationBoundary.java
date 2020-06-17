@@ -223,9 +223,9 @@ public class CustomerRegistrationBoundary implements DataInitializable {
         vehicleMangTAB.getTabPane().getSelectionModel().selectNext();
         Integer numberOfCars = tempVehicleArray.size();
         if (numberOfCars > 1)
-            SingelVehicle = FXCollections.observableArrayList("Casual fueling", "Regular monthly subscription (" + numberOfCars.toString() + " Vehicles)", "Full monthly subscription");
+            SingelVehicle = FXCollections.observableArrayList("Casual fueling", "Regular monthly subscription (multiple)", "Full monthly subscription");
         else
-            SingelVehicle = FXCollections.observableArrayList("Casual fueling", "Regular monthly subscription", "Full monthly subscription");
+            SingelVehicle = FXCollections.observableArrayList("Casual fueling", "Regular monthly subscription (single)", "Full monthly subscription");
         PricingModelChoiseBox1.setItems(SingelVehicle);
         NumberOfVehcles.setText("The Total number of vehicles that " + FirstNametxt.getText() + " have is: " + numberOfCars.toString());
     }
