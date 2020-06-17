@@ -219,6 +219,16 @@ public class generalDashBoardBoundary implements DataInitializable {
                     });
                     break;
 
+                case "VIEW_ANALITIC_DATA":
+                    currentBtn.setText("View Analytic Data");
+                    currentBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent event) {
+                            VIEW_ANALITIC_DATA();
+                        }
+                    });
+                    break;
+
                 case "PURCHASE_FUEL_FOR_HOME_HEATING":
                     currentBtn.setText("New Order fuel\nfor home heating");
                     currentBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -334,6 +344,13 @@ public class generalDashBoardBoundary implements DataInitializable {
         currentPagePane.setVisible(true);
         currentPagePane.getChildren().clear();
         currentPagePane.getChildren().setAll(mainProjectFX.pagingController.loadBoundaryInPane(ProjectPages.GENERATING_REPORTS_STATION_MANAGER_PAGE.getPath(), userID));
+        myFuelLogo.setVisible(false);
+    }
+
+    void VIEW_ANALITIC_DATA() {
+        currentPagePane.setVisible(true);
+        currentPagePane.getChildren().clear();
+        currentPagePane.getChildren().setAll(mainProjectFX.pagingController.loadBoundaryInPane(ProjectPages.VIEW_ANALITIC_DATA.getPath(), userID));
         myFuelLogo.setVisible(false);
     }
 
@@ -462,12 +479,6 @@ public class generalDashBoardBoundary implements DataInitializable {
         this.userID = userID;
     }
 
-/*
-    //ANALITIC SYSTEM CALC :
-    private void CalculateAnalyticalData() {
-        analyticDataCreator.getCustomerXPurchaseTable();
-    }
-*/
 
     /*
     Get all updated prices from DB

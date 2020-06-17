@@ -167,6 +167,7 @@ public class LoginToSystemController extends BasicController {
                 buttonNameArrayList.add(getFullUserNameByUserId(temp));
                 buttonNameArrayList.add(getFuelCompanyBuUserID(temp));
                 buttonNameArrayList.add("RUN_MARKETING_CAMPAIGN_PAGE");
+                buttonNameArrayList.add("VIEW_ANALITIC_DATA");
                 Toast.makeText(mainProjectFX.mainStage,"Welcome to MyFuel "+getFullUserNameByUserId(temp),1000,1500,1500,40,380);
                 break;
             case "MARKETING_REPRESENTATIVE":
@@ -186,6 +187,7 @@ public class LoginToSystemController extends BasicController {
                 buttonNameArrayList.add(getFullUserNameByUserId(temp));
                 buttonNameArrayList.add(getFuelCompanyBuUserID(temp));
                 buttonNameArrayList.add("SALE_OPERATION_TEMPLATE_PAGE");
+                buttonNameArrayList.add("VIEW_ANALITIC_DATA");
 //                buttonNameArrayList.add("COSTUMER_MANAGEMENT_TABLE_PAGE");
 //                buttonNameArrayList.add("COSTUMER_REGISTRATION_PAGE");
                 Toast.makeText(mainProjectFX.mainStage,"Welcome to MyFuel "+getFullUserNameByUserId(temp),1000,1500,1500,40,380);
