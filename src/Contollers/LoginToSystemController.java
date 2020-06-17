@@ -156,11 +156,18 @@ public class LoginToSystemController extends BasicController {
                 //
                 buttonNameArrayList.add("GENERATING_REPORTS_STATION_MANAGER_PAGE");
                 buttonNameArrayList.add("PURCHASE_FUEL_FOR_HOME_HEATING");
+
                 //
                 Toast.makeText(mainProjectFX.mainStage,"Wellcom to MyFuel "+getFullUserNameByUserId(temp),1000,1500,1500,40,380);
                 break;
             case "MARKETING_MANAGER":
-
+                buttonNameArrayList.add("Marketing manager");
+                temp = myBoundary.getUserIDTextField().getText();
+                buttonNameArrayList.add(temp);
+                buttonNameArrayList.add(getFullUserNameByUserId(temp));
+                buttonNameArrayList.add(getFuelCompanyBuUserID(temp));
+                buttonNameArrayList.add("SALE_OPERATION_TEMPLATE_PAGE");
+                Toast.makeText(mainProjectFX.mainStage,"Wellcom to MyFuel "+getFullUserNameByUserId(temp),1000,1500,1500,40,380);
                 break;
             case "MARKETING_REPRESENTATIVE":
                 buttonNameArrayList.add("Marketing representative");
@@ -178,6 +185,7 @@ public class LoginToSystemController extends BasicController {
                 buttonNameArrayList.add(temp);
                 buttonNameArrayList.add(getFullUserNameByUserId(temp));
                 buttonNameArrayList.add(getFuelCompanyBuUserID(temp));
+                buttonNameArrayList.add("SALE_OPERATION_TEMPLATE_PAGE");
 //                buttonNameArrayList.add("COSTUMER_MANAGEMENT_TABLE_PAGE");
 //                buttonNameArrayList.add("COSTUMER_REGISTRATION_PAGE");
                 Toast.makeText(mainProjectFX.mainStage,"Wellcom to MyFuel "+getFullUserNameByUserId(temp),1000,1500,1500,40,380);
