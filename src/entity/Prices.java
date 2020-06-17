@@ -70,7 +70,6 @@ public class Prices {
 
             case Full_monthly_subscription:
                 //((((totalPrice*previousMonthFuelAmount)*0.96)*0.9))*0.97
-                //totalPrice = ;
                 totalPrice = (((totalPrice * generalDashBoardController.getFuelAmountOfPreMonthForCurrentUser()) * pricingModel_Regular_monthly_subscription_single)) * pricingModel_Full_monthly_subscription;
                 break;
             default:
@@ -81,17 +80,15 @@ public class Prices {
         //
         switch (purchasePlan) {
             case "Exclusive":
-
-                break;
+                return totalPrice = (totalPrice*purchasePlanDiscount_exclusive);
             case "Multiple Stations":
-
-                break;
-
+                return totalPrice = (totalPrice*purchasePlanDiscount_multiple);
             case "None":
-
-                break;
+                return totalPrice;
+            default:
+                System.err.println("error in purchasePlan type");
         }
-        return null;//??
+        return null;
     }
 
     public Double getFuelPriceByFuelType(FuelTypes ft) {

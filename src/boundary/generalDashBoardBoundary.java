@@ -3,6 +3,7 @@ package boundary;
 import Contollers.AnalyticDataCreator;
 import Contollers.GeneralDashBoardController;
 import common.assets.ProjectPages;
+import common.assets.enums.FuelTypes;
 import entity.Costumer;
 import entity.Prices;
 import entity.User;
@@ -95,6 +96,8 @@ public class generalDashBoardBoundary implements DataInitializable {
     @Override
     public void initData(Object data) {
         myController.setCurrentUserID(userID);
+        //
+       // Prices p = new Prices(userID,300.0, FuelTypes.HomeHeatingFuel,)
         //get all updated prices
         myController.getAllUpdatedPricesFromDB();
         ArrayList<String> pageNameArrayList = (ArrayList<String>) data;
@@ -236,6 +239,17 @@ public class generalDashBoardBoundary implements DataInitializable {
                     });
                     break;
 
+                case "SUPPLY_ORDER_EXECUTION":
+                    currentBtn.setText("Approve orders");
+                    currentBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent event) {
+                            SUPPLY_ORDER_EXECUTION();
+                        }
+                    });
+                    break;
+
+
                 default:
                     System.err.println("Page incorrect!");
                     break;
@@ -261,6 +275,13 @@ public class generalDashBoardBoundary implements DataInitializable {
     public void initialize(URL location, ResourceBundle resources) {
         clockFuntion();
         weekDay();
+    }
+
+    void SUPPLY_ORDER_EXECUTION(){
+        currentPagePane.setVisible(true);
+        currentPagePane.getChildren().clear();
+        currentPagePane.getChildren().setAll(mainProjectFX.pagingController.loadBoundaryInPane(ProjectPages.SUPPLY_ORDER_EXECUTION.getPath(), userID));
+        myFuelLogo.setVisible(false);
     }
 
     void GENERATING_REPORTS_MARKETING_MANAGER_PAGE() {
