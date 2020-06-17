@@ -16,7 +16,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -32,7 +31,7 @@ import java.util.ResourceBundle;
 
 import static java.lang.Thread.sleep;
 
-public class CostumerManagmentTablePageBoundary implements Initializable {
+public class CostumerManagmentTablePageBoundary implements DataInitializable {
 
 
     private ArrayList<Vehicle> Vehicles = new ArrayList<>();
@@ -99,7 +98,7 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
     private TableColumn CostumerTypeCol;
 
     @FXML
-    private TableColumn ServicePlanCol;
+    private TableColumn pricingModelCol;
 
     @FXML
     private TableColumn PurchasePlanCol;
@@ -119,14 +118,6 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
     @FXML
     private JFXTextField VehicleSearchCosIDtxt;
 
-    @FXML
-    private TreeTableColumn<?, ?> CostumerTypeTreeCol;
-
-    @FXML
-    private TreeTableColumn<?, ?> ServicePlanTreeCol;
-
-    @FXML
-    private TreeTableColumn<?, ?> PurchasePlanTreeCol;
 
     @FXML
     private ImageView loadingImg;
@@ -138,7 +129,6 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
     private JFXComboBox<String> ServicePlanChoiseBox;
 
     private ObservableList<String> CostumerType = FXCollections.observableArrayList("Private", "Company");
-    private ObservableList<String> ServicePlanType = FXCollections.observableArrayList("Exclusive", "Multiple Stations");
     private ObservableList<String> GasType = FXCollections.observableArrayList("Gasoline-95", "Diesel", "Scooter Fuel");
 
     @Override
@@ -148,7 +138,6 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
         myController.getCostumerTable(); //start the process that will ask server to execute quarry and get the table details
         myController.getVehicleTable();
         tableStyle();
-
     }
 
     private void tableStyle() {
@@ -161,8 +150,6 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
      * when the page initialized.
      */
     public void setCostumerTable(ArrayList<Costumer> cosArray) {
-
-
         costumers.addAll(cosArray);
         setColomsCells();
         ObservableList<Costumer> data = FXCollections.observableArrayList(cosArray);
@@ -173,7 +160,7 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
         firstNameCol.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Costumer, String>>() {
             @Override
             public void handle(TableColumn.CellEditEvent<Costumer, String> t) {
-                Costumer temp = ((Costumer) t.getTableView().getItems().get(t.getTablePosition().getRow()));
+                Costumer temp = t.getTableView().getItems().get(t.getTablePosition().getRow());
                 if (t.getNewValue().isEmpty() || t.getNewValue().matches(".*\\d.*")) {
                     ErrorAlert.setTitle("Fields Error");
                     ErrorAlert.setHeaderText("First Name field Error. Please try again.");
@@ -189,7 +176,7 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
         LastNameCol.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Costumer, String>>() {
             @Override
             public void handle(TableColumn.CellEditEvent<Costumer, String> t) {
-                Costumer temp = ((Costumer) t.getTableView().getItems().get(t.getTablePosition().getRow()));
+                Costumer temp = t.getTableView().getItems().get(t.getTablePosition().getRow());
                 if (t.getNewValue().isEmpty() || t.getNewValue().matches(".*\\d.*")) {
                     ErrorAlert.setTitle("Fields Error");
                     ErrorAlert.setHeaderText("Last Name field Error. Please try again.");
@@ -205,7 +192,7 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
         EmailAdressCol.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Costumer, String>>() {
             @Override
             public void handle(TableColumn.CellEditEvent<Costumer, String> t) {
-                Costumer temp = ((Costumer) t.getTableView().getItems().get(t.getTablePosition().getRow()));
+                Costumer temp = t.getTableView().getItems().get(t.getTablePosition().getRow());
                 if (t.getNewValue().isEmpty()) {
                     ErrorAlert.setTitle("Fields Error");
                     ErrorAlert.setHeaderText("Email field Error. Please try again.");
@@ -221,25 +208,25 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
         CostumerTypeCol.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Costumer, String>>() {
             @Override
             public void handle(TableColumn.CellEditEvent<Costumer, String> t) {
-                Costumer temp = ((Costumer) t.getTableView().getItems().get(t.getTablePosition().getRow()));
+                Costumer temp = t.getTableView().getItems().get(t.getTablePosition().getRow());
                 temp.setCostumerType(t.getNewValue());
                 myController.updateCostumerDetailsInDb(SqlQueryType.UPDATE_COSTUMER_TYPE, temp.getUserID(), temp.getCostumerType());
             }
         });
-        //Modifying the servicePlan property
-        ServicePlanCol.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Costumer, String>>() {
+        //Modifying the PricingModel property
+        pricingModelCol.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Costumer, String>>() {
             @Override
             public void handle(TableColumn.CellEditEvent<Costumer, String> t) {
                 Costumer temp = ((Costumer) t.getTableView().getItems().get(t.getTablePosition().getRow()));
-                temp.setServicePlan(t.getNewValue());
-                myController.updateCostumerDetailsInDb(SqlQueryType.UPDATE_COSTUMER_SERVICE_PLAN, temp.getUserID(), temp.getServicePlan());
+                temp.setPricingModel(t.getNewValue());
+                myController.updateCostumerDetailsInDb(SqlQueryType.UPDATE_COSTUMER_PRICING_MODEL, temp.getUserID(), temp.getPricingModel());
             }
         });
         //Modifying the purchasePlan property
         PurchasePlanCol.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Costumer, String>>() {
             @Override
             public void handle(TableColumn.CellEditEvent<Costumer, String> t) {
-                Costumer temp = ((Costumer) t.getTableView().getItems().get(t.getTablePosition().getRow()));
+                Costumer temp = t.getTableView().getItems().get(t.getTablePosition().getRow());
                 temp.setPurchasePlan(t.getNewValue());
                 myController.updateCostumerDetailsInDb(SqlQueryType.UPDATE_COSTUMER_PURCHASE_PLAN, temp.getUserID(), temp.getPurchasePlan());
             }
@@ -256,34 +243,27 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
             }
         };
 
-
         PurchasePlanCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Costumer, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<Costumer, String> param) {
-                Costumer treeItem = param.getValue();
-                Costumer costumer = treeItem;
-
+                Costumer costumer = param.getValue();
                 String temp = costumer.getPurchasePlan();
                 return new SimpleObjectProperty<String>(temp);
             }
         });
 
-        ServicePlanCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Costumer, String>, ObservableValue<String>>() {
+        pricingModelCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Costumer, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<Costumer, String> param) {
-                Costumer treeItem = param.getValue();
-                Costumer costumer = treeItem;
-
-                String temp = costumer.getServicePlan();
+                Costumer costumer = param.getValue();
+                String temp = costumer.getPricingModel();
                 return new SimpleObjectProperty<String>(temp);
             }
         });
         CostumerTypeCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Costumer, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<Costumer, String> param) {
-                Costumer treeItem = param.getValue();
-                Costumer costumer = treeItem;
-
+                Costumer costumer = param.getValue();
                 String temp = costumer.getCostumerType();
                 return new SimpleObjectProperty<String>(temp);
             }
@@ -302,11 +282,12 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
         CostumerTypeCol.setCellValueFactory(new PropertyValueFactory<Costumer, String>("CostumerType"));
         CostumerTypeCol.setCellFactory(ComboBoxTableCell.forTableColumn(CostumerType));
 
-        ServicePlanCol.setCellValueFactory(new PropertyValueFactory<Costumer, String>("servicePlan"));
-        ServicePlanCol.setCellFactory(ComboBoxTableCell.forTableColumn(ServicePlanType));
+        pricingModelCol.setCellValueFactory(new PropertyValueFactory<Costumer, String>("pricingModel"));
+        ObservableList<String> pricingModelType = FXCollections.observableArrayList("Casual fueling", "Regular monthly subscription", "Full monthly subscription");
+        pricingModelCol.setCellFactory(ComboBoxTableCell.forTableColumn(pricingModelType));
 
         PurchasePlanCol.setCellValueFactory(new PropertyValueFactory<Costumer, String>("purchasePlan"));
-        ObservableList<String> purchasePlan = FXCollections.observableArrayList("true", "false");
+        ObservableList<String> purchasePlan = FXCollections.observableArrayList("Exclusive", "Multiple Stations");
         PurchasePlanCol.setCellFactory(ComboBoxTableCell.forTableColumn(purchasePlan));
 
 
@@ -322,7 +303,6 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
 
     public void refreshTable() {
         myController.getCostumerTable();
-        ;
     }
 
     @FXML
@@ -366,7 +346,6 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
         }
 
     }
-
 
     @FXML
     void removeSelectedCostumer() {
@@ -470,6 +449,30 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
         }
     }
 
+    @FXML
+    void openStationPage() {
+        if (CosManageTbale.getSelectionModel().isEmpty()) {
+            ErrorAlert.setTitle("Internal Error");
+            ErrorAlert.setHeaderText("Please Select Costumer.");
+            ErrorAlert.showAndWait();
+        } else {
+            CosManageTbale.setDisable(true);
+            PagingController pc = new PagingController();
+            pc.loadAdditionalStage(ProjectPages.STATION_SELECTION_PAGE.getPath(), this);
+        }
+    }
+
+    public void changeSelectedCostumerStations(String station1, String station2, String station3) {
+        Costumer cos = CosManageTbale.getSelectionModel().getSelectedItem();
+        ArrayList<String> temp = new ArrayList<>();
+        temp.add(station1);
+        temp.add(station2);
+        temp.add(station3);
+        cos.setFuelCompany(temp);
+        myController.setCostumerStation(cos);
+        refreshTable();
+    }
+
     public Costumer getCos() {
         return cos;
     }
@@ -484,5 +487,15 @@ public class CostumerManagmentTablePageBoundary implements Initializable {
                 return cos;
         }
         return null;
+    }
+
+
+    public TableView<Costumer> getCosManageTbale() {
+        return CosManageTbale;
+    }
+
+    @Override
+    public void initData(Object data) {
+
     }
 }

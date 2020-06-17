@@ -122,6 +122,7 @@ public class MarketingCampaignTemplateBoundary implements Initializable {
         ChooseGasTypeComboSpecialization.setItems(FuelType);
         DayComboSpecialization1.setItems(DayType);
         this.detailsPane.setVisible(false);
+        MarketingAdForTemplate.setVisible(false);
 
         this.formValidation = FormValidation.getValidator();
         FormValidation();        //TODO: formValidation();   set all fields validators

@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTimePicker?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -66,17 +67,18 @@
                         <TableColumn fx:id="ratingCulomn" prefWidth="134.0" text="Rating" />
                      </columns>
                   </TableView>
-                  <JFXComboBox fx:id="TimeRangeCombo" layoutX="21.0" layoutY="1.0" onAction="#handleTimeRangeCombo" prefHeight="31.0" prefWidth="281.0" promptText="Select a time range:" />
                   <Label layoutX="21.0" layoutY="43.0" text="Selected Time Range:" textFill="#1c0d5e">
                      <padding>
                         <Insets bottom="5.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="selectedTimeRange" layoutX="170.0" layoutY="43.0" prefHeight="26.0" prefWidth="147.0" text="  " textFill="#1c0d5e">
+                  <Label fx:id="selectedTimeRangeTXT" layoutX="170.0" layoutY="43.0" prefHeight="26.0" prefWidth="147.0" text="  " textFill="#1c0d5e">
                      <padding>
                         <Insets bottom="5.0" />
                      </padding>
                   </Label>
+                  <JFXTimePicker fx:id="TimeRangeStart" defaultColor="#307fd3" layoutX="18.0" prefHeight="31.0" prefWidth="147.0" promptText="Select start hour" />
+                  <JFXTimePicker fx:id="TimeRangeEnd" defaultColor="#307fd3" layoutX="170.0" prefHeight="31.0" prefWidth="147.0" promptText="Select end hour" />
                </children>
             </Pane>
             <Pane fx:id="paneByCustomerType" layoutX="12.0" layoutY="232.0" prefHeight="515.0" prefWidth="343.0">
@@ -93,7 +95,7 @@
                         <Insets bottom="5.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="selectedCustomerType" layoutX="218.0" layoutY="43.0" prefHeight="26.0" prefWidth="129.0" text="  " textFill="#1c0d5e">
+                  <Label fx:id="selectedCustomerTypeTXT" layoutX="218.0" layoutY="43.0" prefHeight="26.0" prefWidth="129.0" text="  " textFill="#1c0d5e">
                      <padding>
                         <Insets bottom="5.0" />
                      </padding>
@@ -114,18 +116,13 @@
                         <Insets bottom="5.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="selectedFuelType" layoutX="174.0" layoutY="43.0" prefHeight="26.0" prefWidth="186.0" text="  " textFill="#1c0d5e">
+                  <Label layoutX="174.0" layoutY="43.0" prefHeight="26.0" prefWidth="186.0" text="  " textFill="#1c0d5e">
                      <padding>
                         <Insets bottom="5.0" />
                      </padding>
                   </Label>
                </children>
             </Pane>
-            <Label fx:id="lastCalcDateTXT" layoutX="433.0" layoutY="90.0" prefHeight="26.0" prefWidth="257.0" text="  " textFill="#1c0d5e">
-               <padding>
-                  <Insets bottom="5.0" />
-               </padding>
-            </Label>
          </children>
          <effect>
             <Blend />

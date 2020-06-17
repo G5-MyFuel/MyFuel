@@ -33,12 +33,13 @@ public class CostumerManagementController extends BasicController {
         SqlAction sqlAction = new SqlAction(SqlQueryType.GET_ALL_COSTUMER_TABLE);
         super.sendSqlActionToClient(sqlAction);
     }
+
     public void getVehicleTable() {
         SqlAction sqlAction = new SqlAction(SqlQueryType.GET_ALL_VEHICLE_TABLE);
         super.sendSqlActionToClient(sqlAction);
     }
 
-    public void updateCostumerDetailsInDb(SqlQueryType colm,String cosID,String val){
+    public void updateCostumerDetailsInDb(SqlQueryType colm, String cosID, String val) {
         //set Costumer data into varArray
         ArrayList<Object> varArray = new ArrayList<>();
         varArray.add(val);
@@ -47,28 +48,37 @@ public class CostumerManagementController extends BasicController {
         super.sendSqlActionToClient(sqlAction);
     }
 
-    public void getCostumerVehicles(String CostumerID){
+    public void setCostumerStation(Costumer cos) {
+        ArrayList<Object> varArray = new ArrayList<>();
+        for (int i = 0; i < 3; i++)
+            varArray.add(cos.getFuelCompany().get(i));
+        varArray.add(cos.getUserID());
+        SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_USER_STATIONS, varArray);
+        super.sendSqlActionToClient(sqlAction);
+    }
+
+    public void getCostumerVehicles(String CostumerID) {
         ArrayList<Object> varArray = new ArrayList<>();
         varArray.add(CostumerID);
         SqlAction sqlAction = new SqlAction(SqlQueryType.GET_ALL_COSTUMER_VEHICLES, varArray);
         super.sendSqlActionToClient(sqlAction);
     }
 
-    public void removeVehicle(String vehicleID){
+    public void removeVehicle(String vehicleID) {
         ArrayList<Object> varArray = new ArrayList<>();
         varArray.add(vehicleID);
         SqlAction sqlAction = new SqlAction(SqlQueryType.REMOVE_VEHICLE, varArray);
         super.sendSqlActionToClient(sqlAction);
     }
 
-    public void removeCostumer(String CostumerID){
+    public void removeCostumer(String CostumerID) {
         ArrayList<Object> varArray = new ArrayList<>();
         varArray.add(CostumerID);
         SqlAction sqlAction = new SqlAction(SqlQueryType.REMOVE_COSTUMER, varArray);
         super.sendSqlActionToClient(sqlAction);
     }
 
-    public void addVehicleToDB(String OwnerID,String VehicleID,String fuelType){
+    public void addVehicleToDB(String OwnerID, String VehicleID, String fuelType) {
         ArrayList<Object> varArray = new ArrayList<>();
         varArray.add(VehicleID);
         varArray.add(fuelType);
@@ -100,14 +110,13 @@ public class CostumerManagementController extends BasicController {
         });
     }
 
-    public boolean isVehicleExistInDb(String vehicleID){
+    public boolean isVehicleExistInDb(String vehicleID) {
         for (Vehicle v : dbVehicles) {
             if (v.getVehicleID().equals(vehicleID))
                 return true;
         }
         return false;
     }
-
 
 
     /**
@@ -118,29 +127,38 @@ public class CostumerManagementController extends BasicController {
      */
     private ArrayList<Costumer> changeResultToCostumer(SqlResult result) {
         ArrayList<Costumer> resultList = new ArrayList<>();
+        ArrayList<String> temp = new ArrayList<>();
         for (ArrayList<Object> a : result.getResultData()) {
             Costumer cos = new Costumer((String) a.get(0), (String) a.get(9), (String) a.get(4),
-                    (String) a.get(11), (String) a.get(12), (String) a.get(13), null, (String) a.get(5), null, (String) a.get(6));
+                    (String) a.get(11), (String) a.get(12), (String) a.get(13), null, (String) a.get(6), null, (String) a.get(5));
+            //add fuel companies.
+            temp.add((String)a.get(14));
+            temp.add((String)a.get(15));
+            temp.add((String)a.get(16));
+            cos.setFuelCompany(temp);
+            temp.clear();
             CreditCard card = new CreditCard(cos, (String) a.get(1), (String) a.get(2), (String) a.get(3));
             cos.setCostumerCreditCard(card);
             resultList.add(cos);
         }
         return resultList;
     }
+
     /**
      * This method create array list of Vehicles of specific costumer from the data base result.
      *
      * @param result the result
      * @return Array list of Vehicles
      */
-    private ArrayList<Vehicle> changeResultToVehicleArr(SqlResult result){
-        ArrayList<Vehicle> resultList=new ArrayList<>();
-        for(ArrayList<Object> a: result.getResultData()) {
-            Vehicle v = new Vehicle((String) a.get(2),(String)a.get(0),(String) a.get(1));
+    private ArrayList<Vehicle> changeResultToVehicleArr(SqlResult result) {
+        ArrayList<Vehicle> resultList = new ArrayList<>();
+        for (ArrayList<Object> a : result.getResultData()) {
+            Vehicle v = new Vehicle((String) a.get(2), (String) a.get(0), (String) a.get(1));
             resultList.add(v);
         }
         return resultList;
     }
+
     /**
      * This method create array list of Vehicles from the data base result.
      *

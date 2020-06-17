@@ -14,11 +14,12 @@ public enum ProjectPages {
     COSTUMER_REGISTRATION_PAGE("/boundary/CustomerRegistrationFXML2.fxml"),
     CREDIT_CARD_DIALOG_PAGE("/boundary/CreditCardDialogWindow.fxml"),
     GENERAL_DASH_BOARD("/boundary/generalDashBoard.fxml"),
+    STATION_SELECTION_PAGE("/boundary/choseStationPage.fxml"),
 
 
     //hani pages:
     SALE_OPERATION_TEMPLATE_PAGE("/boundary/MarketingCampaignTemplate.fxml"),
-    RUN_SALE_OPERATION_PAGE("/boundary/MarketingCampaignFXML.fxml"),
+    RUN_MARKETING_CAMPAIGN_PAGE("/boundary/MarketingCampaignFXML.fxml"),
     VIEW_ANALITIC_DATA("/boundary/ViewAnalyticDataFXML.fxml"),
     //Nir pages:
     SETTING_DISCOUNT_RATES_PAGE("/boundary/SettingDiscountRatesFXML.fxml"),

@@ -47,18 +47,26 @@ public enum SqlQueryType {
     View_QuantityItemsStock_Report(SqlExecutionType.EXECUTE_QUERY),
 
     /* *****************************************
+     * ********** Admin Confirm Discount Rates Queries ****************
+     * *****************************************/
+    Get_DiscountRates_Table(SqlExecutionType.EXECUTE_QUERY),
+    UPDATE_NEW_DiscountRate(SqlExecutionType.UPDATE_QUERY),
+
+
+    /* *****************************************
      * ********** Costumer Management Queries ****************
      * *****************************************/
     UPDATE_COSTUMER_FNAME(SqlExecutionType.UPDATE_QUERY),
     UPDATE_COSTUMER_LNAME(SqlExecutionType.UPDATE_QUERY),
     UPDATE_COSTUMER_EMAIL(SqlExecutionType.UPDATE_QUERY),
     UPDATE_COSTUMER_TYPE(SqlExecutionType.UPDATE_QUERY),
-    UPDATE_COSTUMER_SERVICE_PLAN(SqlExecutionType.UPDATE_QUERY),
+    UPDATE_COSTUMER_PRICING_MODEL(SqlExecutionType.UPDATE_QUERY),
     UPDATE_COSTUMER_PURCHASE_PLAN(SqlExecutionType.UPDATE_QUERY),
     GET_ALL_COSTUMER_VEHICLES(SqlExecutionType.EXECUTE_QUERY),
     REMOVE_VEHICLE(SqlExecutionType.UPDATE_QUERY),
     REMOVE_COSTUMER(SqlExecutionType.UPDATE_QUERY),
     UPDATE_COSTUMER_CREDIT_CARD(SqlExecutionType.UPDATE_QUERY),
+    UPDATE_USER_STATIONS(SqlExecutionType.UPDATE_QUERY),
 
     /* *****************************************
      * ********** Users Management Queries ****************
@@ -80,8 +88,8 @@ public enum SqlQueryType {
      * ********** Analitic Data Queries ****************
      * *****************************************/
     GET_ALL_RATING_TABLE(SqlExecutionType.EXECUTE_QUERY),
-    GET_CUSTOMER_AND_PURCHASE_TABLE(SqlExecutionType.EXECUTE_QUERY),
-
+    GET_CUSTOMER_X_PURCHASE_TABLE(SqlExecutionType.EXECUTE_QUERY),
+    INSERT_RATING(SqlExecutionType.UPDATE_QUERY),
 
     /* *****************************************
      * ********** Costumer Registration Queries ****************

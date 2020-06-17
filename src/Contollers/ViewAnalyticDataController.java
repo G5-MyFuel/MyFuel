@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 public class ViewAnalyticDataController extends BasicController {
     private ViewAnalyticDataBoundary myBoundary; /**     * The boundary controlled by this controller     */
+    private AnalyticDataCreator analyticDataCreator = new AnalyticDataCreator(myBoundary);
 
     /*Logic Variables*/
     private static ViewAnalyticDataController Instance = null;
@@ -32,6 +33,7 @@ public class ViewAnalyticDataController extends BasicController {
                     ArrayList<Rating> resultList = new ArrayList<>();
                     resultList.addAll(this.changeResultToRating(result));
                     myBoundary.setRatingTable(resultList);
+
                     break;
 
                 default:
@@ -49,15 +51,17 @@ public class ViewAnalyticDataController extends BasicController {
     private ArrayList<Rating> changeResultToRating(SqlResult result){
         ArrayList<Rating> resultList = new ArrayList<>();
         for(ArrayList<Object> a: result.getResultData()) {
-            Rating cos = new Rating(Integer.parseInt((String) a.get(0)),Integer.parseInt((String)a.get(1)));
+            Rating cos = new Rating(Integer.parseInt((String) a.get(0)),
+                    (Integer)a.get(1),
+                    (String)a.get(2));
             resultList.add(cos);
-        }
+             }
         return resultList;
     }
 
-    /*public void GetDateToCalcRating (){
-        SqlAction sqlAction = new SqlAction(SqlQueryType.GET_ALL_PURCHASE_TABLE);
-        super.sendSqlActionToClient(sqlAction);
+    public void GetDateToCalcRating (){
+       // SqlAction sqlAction = new SqlAction(SqlQueryType.GET_ALL_PURCHASE_TABLE);
+        //super.sendSqlActionToClient(sqlAction);
 
-    }*/
+    }
 }

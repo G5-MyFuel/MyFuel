@@ -3,6 +3,7 @@ package boundary;
 import Contollers.CustomerRegistrationController;
 import Contollers.FormValidation;
 import Contollers.PagingController;
+import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
@@ -18,6 +19,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 
@@ -70,8 +72,6 @@ public class CustomerRegistrationBoundary implements DataInitializable {
     @FXML
     private JFXComboBox<String> PurchasePlanChoiseBox;
     @FXML
-    private Pane mainPane;
-    @FXML
     private TableColumn<Vehicle, String> VehicleIdColom;
     @FXML
     private TableColumn<Vehicle, String> GasTypeColom;
@@ -98,7 +98,17 @@ public class CustomerRegistrationBoundary implements DataInitializable {
     @FXML
     private JFXComboBox<String> PricingModelChoiseBox1;
     @FXML
-    private Button clearSelectionbtn;
+    private VBox exclusiveVbox;
+    @FXML
+    private VBox MultipleVbox;
+    @FXML
+    private Label NumberOfVehcles;
+    @FXML
+    private JFXCheckBox pazCheckBox;
+    @FXML
+    private JFXCheckBox yellowCheckBox;
+    @FXML
+    private JFXCheckBox sonolCheckBox;
 
 
     /*
@@ -111,23 +121,15 @@ public class CustomerRegistrationBoundary implements DataInitializable {
 
     private ObservableList<String> GasType = FXCollections.observableArrayList("Gasoline-95", "Diesel", "Scooter Fuel");
 
-    private ObservableList<String> SingelVehicle = FXCollections.observableArrayList("Casual fueling", "Regular monthly subscription", "Full monthly subscription");
-    private ObservableList<String> ModelTypes2 = FXCollections.observableArrayList("Casual fueling", "Regular monthly subscription");
+    private ObservableList<String> SingelVehicle;
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        formValidation = FormValidation.getValidator();
+        formValidation = new FormValidation();
         giValidation();
         //
         tempVehicleArray = new ArrayList<Vehicle>();
-        //clear all fields section:
-        CostumerIDtxt.clear();
-        FirstNametxt.clear();
-        LastNametxt.clear();
-        EmailAdresstxt.clear();
-        VehicleIDtxt.clear();
-        VehicleTable.getItems().clear();
         //
         //Tooltip initialize Section:
         Tooltip.install(StationsInfo, createToolTip("Please Chose Station according to your plan."));
@@ -136,8 +138,6 @@ public class CustomerRegistrationBoundary implements DataInitializable {
         Tooltip.install(ServicePlanInfo, createToolTip("Chose your service plan type"));
         Tooltip.install(CreditCardLinkTT, createToolTip("You can add your credit card info by clicking this link. "));
         //
-        mainPane.setVisible(false);
-        mainPane.setDisable(true);
         VehicleInformationPane.setVisible(false);
         vehicleMangTAB.setDisable(true);
         planInfoTAB.setDisable(true);
@@ -155,21 +155,10 @@ public class CustomerRegistrationBoundary implements DataInitializable {
         //get all costumer from DB for validations:
         myController.getCostumerTable();
         //
-        mainPane.setVisible(true);
-        mainPane.setDisable(false);
-        tempVehicleArray.clear();
         //clear all fields section:
-        CostumerIDtxt.clear();
-        FirstNametxt.clear();
-        LastNametxt.clear();
-        EmailAdresstxt.clear();
-        VehicleIDtxt.clear();
         VehicleInformationPane.setVisible(false);
-        VehicleTable.getItems().clear();
-        CardClickFlag = false;
         tempCreditCard = null;
         stationPane.setVisible(false);
-        PricingModelChoiseBox1.setItems(SingelVehicle);
 
 
         PurchasePlanChoiseBox.valueProperty().addListener((composant, oldValue, newValue) -> {
@@ -178,17 +167,13 @@ public class CustomerRegistrationBoundary implements DataInitializable {
             SONOLbtn.setSelected(false);
             stationPane.setVisible(true);
             if (PurchasePlanChoiseBox.getValue().equals("Multiple Stations")) {
-                ToggleGroup q1 = new ToggleGroup();
-                ToggleGroup q2 = new ToggleGroup();
-                ToggleGroup q3 = new ToggleGroup();
-                clearSelectionbtn.setVisible(true);
-                PAZbtn.setToggleGroup(q1);
-                YELLOWbtn.setToggleGroup(q2);
-                SONOLbtn.setToggleGroup(q3);
+                exclusiveVbox.setVisible(false);
+                MultipleVbox.setVisible(true);
                 choseStationLable.setText("You may chose 2 or 3 stations.");
             } else if (PurchasePlanChoiseBox.getValue().equals("Exclusive")) {
+                exclusiveVbox.setVisible(true);
+                MultipleVbox.setVisible(false);
                 ToggleGroup q1 = new ToggleGroup();
-                clearSelectionbtn.setVisible(false);
                 PAZbtn.setToggleGroup(q1);
                 YELLOWbtn.setToggleGroup(q1);
                 SONOLbtn.setToggleGroup(q1);
@@ -201,8 +186,6 @@ public class CustomerRegistrationBoundary implements DataInitializable {
 
     @Override
     public void initData(Object data) {
-        if (data instanceof String)
-            myController.setCompanyName((String) data);
     }
 
     @FXML
@@ -238,6 +221,13 @@ public class CustomerRegistrationBoundary implements DataInitializable {
         planInfoTAB.setDisable(false);
         vehicleMangTAB.setDisable(true);
         vehicleMangTAB.getTabPane().getSelectionModel().selectNext();
+        Integer numberOfCars = tempVehicleArray.size();
+        if (numberOfCars > 1)
+            SingelVehicle = FXCollections.observableArrayList("Casual fueling", "Regular monthly subscription (" + numberOfCars.toString() + " Vehicles)", "Full monthly subscription");
+        else
+            SingelVehicle = FXCollections.observableArrayList("Casual fueling", "Regular monthly subscription", "Full monthly subscription");
+        PricingModelChoiseBox1.setItems(SingelVehicle);
+        NumberOfVehcles.setText("The Total number of vehicles that " + FirstNametxt.getText() + " have is: " + numberOfCars.toString());
     }
 
     /**
@@ -247,20 +237,48 @@ public class CustomerRegistrationBoundary implements DataInitializable {
     @FXML
     void ClickFinishButton(MouseEvent event) {
         Costumer tempCos = myController.getTempCostumer();
-
-
+        ArrayList<String> stations = new ArrayList<>();
+        stations.add("NULL");
+        stations.add("NULL");
+        stations.add("NULL");
         //set costumer final details.
         tempCos.setCostumerType(CostumertypeChoiceBox.getSelectionModel().getSelectedItem());
-        tempCos.setServicePlan(PurchasePlanChoiseBox.getSelectionModel().getSelectedItem());
+        tempCos.setPurchasePlan(PurchasePlanChoiseBox.getSelectionModel().getSelectedItem());
         tempCos.setCostumerVehicle(tempVehicleArray);
         tempCos.setCostumerCreditCard(tempCreditCard);
+        tempCos.setPricingModel(PricingModelChoiseBox1.getValue());
+        if (tempCos.getPurchasePlan().equals("Exclusive")) {
+            if (YELLOWbtn.isSelected())
+                stations.add(0,"YELLOW");
+            if (PAZbtn.isSelected())
+                stations.add(1,"PAZ");
+            if (SONOLbtn.isSelected())
+                stations.add(2,"SONOL");
+        } else {
+            if (yellowCheckBox.isSelected())
+                stations.add(0,"YELLOW");
+            if (pazCheckBox.isSelected())
+                stations.add(1,"PAZ");
+            if (sonolCheckBox.isSelected())
+                stations.add(2,"SONOL");
+        }
+        tempCos.setFuelCompany(stations);
+
         myController.setCostumerInDB(tempCos);
-        mainPane.setVisible(false);
-        mainPane.setDisable(true);
         planInfoTAB.setDisable(true);
         personalInfoTAB.setDisable(false);
         vehicleMangTAB.getTabPane().getSelectionModel().selectPrevious();
         vehicleMangTAB.getTabPane().getSelectionModel().selectPrevious();
+        //clear all fields section:
+        CostumerIDtxt.clear();
+        FirstNametxt.clear();
+        LastNametxt.clear();
+        EmailAdresstxt.clear();
+        VehicleIDtxt.clear();
+        VehicleTable.getItems().clear();
+        CardClickFlag = false;
+        tempVehicleArray.clear();
+
     }
 
     /**
@@ -316,14 +334,6 @@ public class CustomerRegistrationBoundary implements DataInitializable {
         tempVehicleArray.remove(VehicleTable.getSelectionModel().getSelectedItem());
         ObservableList<Vehicle> data = FXCollections.observableArrayList(tempVehicleArray);
         VehicleTable.setItems(data);
-    }
-
-    @FXML
-    void clearSelection(MouseEvent event) {
-        PAZbtn.setSelected(false);
-        SONOLbtn.setSelected(false);
-        YELLOWbtn.setSelected(false);
-
     }
 
 

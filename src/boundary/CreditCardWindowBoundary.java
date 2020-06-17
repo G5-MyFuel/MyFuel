@@ -13,7 +13,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -44,9 +43,6 @@ public class CreditCardWindowBoundary implements DataInitializable {
     private String experationDate;
 
     @FXML
-    private Pane CreditCardWindow;
-
-    @FXML
     private JFXTextField creditCardNumbertxt;
 
     @FXML
@@ -67,13 +63,15 @@ public class CreditCardWindowBoundary implements DataInitializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        formValidation = FormValidation.getValidator();
+        CVVtxt.clear();
+        formValidation = new FormValidation();
         //credit card number check
         formValidation.isOnlyNumbers(creditCardNumbertxt, "Card number");
         formValidation.ExactlyInLengthValidation(creditCardNumbertxt, "Card number", 16);
         //cvv
-        formValidation.isOnlyNumbers(CVVtxt, "CVV");
         formValidation.ExactlyInLengthValidation(CVVtxt, "CVV", 3);
+        formValidation.isOnlyNumbers(CVVtxt, "CVV");
+
 
     }
 
@@ -90,11 +88,11 @@ public class CreditCardWindowBoundary implements DataInitializable {
         /*validate card and insert it to db
          * */
         //Update process
-        if (creditCardNumbertxt.getText().isEmpty() || CVVtxt.getText().isEmpty() || YearCombo.getValue().isEmpty() || MonthCombo.getValue().isEmpty()) { //here have to add more validations to card
+        if (formValidation.isEmptyField()) { //validate empty fields
             ErrorAlert.setTitle("Credit Card Fields Error");
             ErrorAlert.setHeaderText("Please insert all Credit Card Information.");
             ErrorAlert.showAndWait();
-        } else if (!validateCardFields()) {
+        } else if (!validateCardFields()) { //validate if fields are correct
             ErrorAlert.setTitle("Fields Error");
             ErrorAlert.setHeaderText("Please make sure all fields are correct.");
             ErrorAlert.showAndWait();
@@ -106,13 +104,15 @@ public class CreditCardWindowBoundary implements DataInitializable {
             if (registrationBoundary != null) {
                 registrationBoundary.setTempCreditCard(tempCreditCard);
                 registrationBoundary.setCardClickFlag(true);
+                primStage.close();
             } else {
                 tempCreditCard.setCardOwner(managmentBoundary.getCos());
                 myController.updateCostumerCreditCardInDb(tempCreditCard);
                 managmentBoundary.refreshTable();
+                primStage.close();
             }
         }
-        primStage.close();
+
     }
 
 

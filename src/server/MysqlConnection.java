@@ -161,7 +161,7 @@ public class MysqlConnection {
         sqlArray[SqlQueryType.UPDATE_COSTUMER_FNAME.getCode()] = "UPDATE `User` SET `userFirstName` = ? WHERE userID =?";
         sqlArray[SqlQueryType.UPDATE_COSTUMER_LNAME.getCode()] = "UPDATE `User` SET `userLastName` = ? WHERE userID =?";
         sqlArray[SqlQueryType.UPDATE_COSTUMER_EMAIL.getCode()] = "UPDATE `User` SET `userEmail` = ? WHERE userID =?";
-        sqlArray[SqlQueryType.UPDATE_COSTUMER_SERVICE_PLAN.getCode()] = "UPDATE `Costumer` SET `Service Plan` = ? WHERE ID =?";
+        sqlArray[SqlQueryType.UPDATE_COSTUMER_PRICING_MODEL.getCode()] = "UPDATE `Costumer` SET `Pricing Model` = ? WHERE ID =?";
         sqlArray[SqlQueryType.UPDATE_COSTUMER_PURCHASE_PLAN.getCode()] = "UPDATE `Costumer` SET `Purchase Plan` = ? WHERE ID =?";
         sqlArray[SqlQueryType.UPDATE_COSTUMER_TYPE.getCode()] = "UPDATE `Costumer` SET `customerType` = ? WHERE ID =?";
         sqlArray[SqlQueryType.GET_ALL_COSTUMER_VEHICLES.getCode()] = "SELECT `Vehicle ID`, `Fuel Type`, `Owner ID` FROM `Vehicle` WHERE `Owner ID` = ?";
@@ -170,6 +170,7 @@ public class MysqlConnection {
                 "DELETE `Costumer`, `User` FROM `Costumer` INNER JOIN `User` ON Costumer.ID = User.userID WHERE `Costumer`.ID = ?";
         sqlArray[SqlQueryType.UPDATE_COSTUMER_CREDIT_CARD.getCode()] = "UPDATE `Costumer` SET `Credit Card Number` = ? ,`CreditCardExperationDate` = ? ,`CVV` = ?" +
                 "WHERE ID =?";
+        sqlArray[SqlQueryType.UPDATE_USER_STATIONS.getCode()] = "UPDATE `User` SET `FuelCompany1`= ? ,`FuelCompany2`= ?,`FuelCompany3`= ? WHERE userID = ?";
 
 
 
@@ -177,7 +178,7 @@ public class MysqlConnection {
          * ********** Costumer Registration Queries ****************
          * *****************************************/
         sqlArray[SqlQueryType.INSERT_NEW_COSTUMER.getCode()] =
-                "INSERT INTO `Costumer`(`ID`, `Credit Card Number`, `CreditCardExperationDate`, `CVV`, `customerType`, `Purchase Plan`, `Service Plan`) VALUES (?,?,?,?,?,?,?)";
+                "INSERT INTO `Costumer`(`ID`, `Credit Card Number`, `CreditCardExperationDate`, `CVV`, `customerType`, `Purchase Plan`, `Pricing Model`) VALUES (?,?,?,?,?,?,?)";
         sqlArray[SqlQueryType.INSERT_NEW_COSTUMER_USER.getCode()] =
                 "INSERT INTO `User`(`userID`, `userType`, `userPassword`, `isLoginIndicator`, `userFirstName`, `userLastName`, `userEmail`, `FuelCompany1`, `FuelCompany2`, `FuelCompany3`) VALUES (?,'CUSTOMER',?,0,?,?,?,?,?,?)";
         sqlArray[SqlQueryType.INSERT_NEW_VEHICLE.getCode()] = "INSERT INTO `Vehicle`(`Vehicle ID`, `Fuel Type`, `Owner ID`) VALUES (?,?,?);";
@@ -217,10 +218,12 @@ public class MysqlConnection {
          * ********** Analytic system Queries *********
          * *****************************************/
         sqlArray[SqlQueryType.GET_ALL_RATING_TABLE.getCode()] = "SELECT * FROM `Rating`";
-        sqlArray[SqlQueryType.GET_CUSTOMER_AND_PURCHASE_TABLE.getCode()] = "select * from Costumer as c, Purchase as p WHERE p.customerID LIKE c.ID ";
+        sqlArray[SqlQueryType.GET_CUSTOMER_X_PURCHASE_TABLE.getCode()] = "select p.customerID, c.customerType, p.purchaseID, ff.FuelType, p.purchaseHour " +
+                "from Costumer as c, Purchase as p, FastFuel as ff " +
+                "WHERE p.customerID LIKE c.ID AND p.purchaseID LIKE ff.purchaseID";
+        sqlArray[SqlQueryType.INSERT_RATING.getCode()] ="INSERT INTO `Rating`(`CustomerID`, `Rating`, `CustomerType`) VALUES (?,?,?);";
 
-
-        /* *****************************************
+    /* *****************************************
          * ********** Discount Rates Queries ****************
          * *****************************************/
         sqlArray[SqlQueryType.GET_RegularSubscriptionSingleVehicle_PRICE.getCode()] = "SELECT * FROM `DiscountRates` WHERE `Subscription type` LIKE \"Regular monthly subscription - single vehicle\"";
@@ -269,6 +272,13 @@ public class MysqlConnection {
         sqlArray[SqlQueryType.View_QuantityItemsStock_Report.getCode()] = "SELECT `FuelType`, `AvailableInventory` FROM `ViewQuantityItemsStockReportsForAdmin` " +
                 "WHERE `companyName` = ? AND `StationNumber` = ? AND `Quarterly` = quarter(?) " +
                 "AND (`FuelType` = \"Diesel\" OR `FuelType` = \"Gasoline 95\" OR `FuelType` = \"Scooter fuel\")";
+
+        /* *****************************************
+         * ********** Admin Confirm Discount Rates Queries ****************
+         * *****************************************/
+        sqlArray[SqlQueryType.Get_DiscountRates_Table.getCode()] = "SELECT * FROM `DiscountRates`";
+        sqlArray[SqlQueryType.UPDATE_NEW_DiscountRate.getCode()] = "UPDATE `DiscountRates` " +
+                "SET `CurrentDiscountRate`= `NewDiscountRate`, `Status`= \"Approved\",`NewDiscountRate`= \"-\" WHERE `Subscription type` = ?";
     }
 
     public Connection getConnection() {

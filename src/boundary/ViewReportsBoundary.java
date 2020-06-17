@@ -1,6 +1,6 @@
 package boundary;
 
-import Contollers.VieReportsController;
+import Contollers.ViewReportsController;
 import entity.PurchasesReport;
 import entity.QuantityItemsStockReport;
 import javafx.collections.FXCollections;
@@ -24,7 +24,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.image.ImageView;
 
-public class VieReportsBoundary implements Initializable {
+public class ViewReportsBoundary implements DataInitializable {
 
     String managerID;
     String managerCompany;
@@ -35,7 +35,7 @@ public class VieReportsBoundary implements Initializable {
      * The supervisor boundary controller.
      */
 
-    private final VieReportsController myController = new VieReportsController(this);
+    private final ViewReportsController myController = new ViewReportsController(this);
     //private FormValidation formValidation;
     //private final Alert ErrorAlert = new Alert(Alert.AlertType.ERROR);
     //ArrayList<PurchasesReport> PurchasesArray = new ArrayList<>();
@@ -112,6 +112,11 @@ public class VieReportsBoundary implements Initializable {
     private final ObservableList<String> YearList = FXCollections.observableArrayList("2020", "2019", "2018", "2017", "2016", "2015",
             "2014", "2013", "2012", "2011", "2010");
     private final ObservableList<String> quarterList = FXCollections.observableArrayList("First", "Second", "Third", "Fourth");
+
+    @Override
+    public void initData(Object data) {
+
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

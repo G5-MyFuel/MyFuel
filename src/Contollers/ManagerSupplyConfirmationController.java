@@ -26,6 +26,7 @@ public class ManagerSupplyConfirmationController extends BasicController {
         ArrayList<Object> al = new ArrayList<>();
         al.add(stationManagerID);
         SqlAction sqlAction = new SqlAction(SqlQueryType.GET_ALL_ORDER_TO_SUPPLY_FOR_STATION_MANAGER,al);
+        System.out.println(al);
         super.sendSqlActionToClient(sqlAction);
     }
 
@@ -55,7 +56,7 @@ public class ManagerSupplyConfirmationController extends BasicController {
     private ArrayList<ManagerSupplyConfirmation> changeResultToOrder(SqlResult result) {
         for (ArrayList<Object> a : result.getResultData()) {
             ManagerSupplyConfirmation x = new ManagerSupplyConfirmation((String) a.get(0), (String) a.get(1),
-                    (int) a.get(2), (String) a.get(3), (int) a.get(4),(String)a.get(5));
+                    (Integer) a.get(2), (String) a.get(3), (Integer) a.get(4),(String)a.get(5));
             resultList.add(x);
         }
         return resultList;

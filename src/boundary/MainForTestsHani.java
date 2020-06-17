@@ -1,6 +1,4 @@
 package boundary;
-import client.ChatClient;
-import client.ClientApp;
 import client.ClientConsole;
 import common.assets.ProjectPages;
 import javafx.application.Application;
@@ -9,8 +7,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-
-import java.io.IOException;
 //קובץ בדיקות עבור SaleOperationTemplateController
 
 public class MainForTestsHani extends Application {
