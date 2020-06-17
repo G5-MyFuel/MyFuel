@@ -223,7 +223,7 @@ public class CustomerRegistrationBoundary implements DataInitializable {
         vehicleMangTAB.getTabPane().getSelectionModel().selectNext();
         Integer numberOfCars = tempVehicleArray.size();
         if (numberOfCars > 1)
-            SingelVehicle = FXCollections.observableArrayList("Casual fueling", "Regular monthly subscription (multiple)", "Full monthly subscription");
+            SingelVehicle = FXCollections.observableArrayList("Casual fueling", "Regular monthly subscription (multiple)");
         else
             SingelVehicle = FXCollections.observableArrayList("Casual fueling", "Regular monthly subscription (single)", "Full monthly subscription");
         PricingModelChoiseBox1.setItems(SingelVehicle);
@@ -237,47 +237,67 @@ public class CustomerRegistrationBoundary implements DataInitializable {
     @FXML
     void ClickFinishButton(MouseEvent event) {
         Costumer tempCos = myController.getTempCostumer();
+        boolean flag = false;
         ArrayList<String> stations = new ArrayList<>();
         stations.add("NULL");
         stations.add("NULL");
         stations.add("NULL");
-        //set costumer final details.
-        tempCos.setCostumerType(CostumertypeChoiceBox.getSelectionModel().getSelectedItem());
-        tempCos.setPurchasePlan(PurchasePlanChoiseBox.getSelectionModel().getSelectedItem());
+
         tempCos.setCostumerVehicle(tempVehicleArray);
         tempCos.setCostumerCreditCard(tempCreditCard);
-        tempCos.setPricingModel(PricingModelChoiseBox1.getValue());
         if (tempCos.getPurchasePlan().equals("Exclusive")) {
             if (YELLOWbtn.isSelected())
-                stations.add(0,"YELLOW");
+                stations.add(0, "YELLOW");
             if (PAZbtn.isSelected())
-                stations.add(1,"PAZ");
+                stations.add(1, "PAZ");
             if (SONOLbtn.isSelected())
-                stations.add(2,"SONOL");
+                stations.add(2, "SONOL");
         } else {
-            if (yellowCheckBox.isSelected())
-                stations.add(0,"YELLOW");
-            if (pazCheckBox.isSelected())
-                stations.add(1,"PAZ");
-            if (sonolCheckBox.isSelected())
-                stations.add(2,"SONOL");
+            int counter = 0;
+            if (yellowCheckBox.isSelected()) {
+                stations.add(0, "YELLOW");
+                counter++;
+            }
+            if (pazCheckBox.isSelected()) {
+                stations.add(1, "PAZ");
+                counter++;
+            }
+            if (sonolCheckBox.isSelected()) {
+                stations.add(2, "SONOL");
+                counter++;
+            }
+            if (counter < 2) {
+                ErrorAlert.setTitle("Internal Error");
+                ErrorAlert.setHeaderText("Your plan is Multiple Stations.\nplease select 2 or 3 stations.");
+                ErrorAlert.showAndWait();
+                flag = true;
+            }
         }
-        tempCos.setFuelCompany(stations);
-
-        myController.setCostumerInDB(tempCos);
-        planInfoTAB.setDisable(true);
-        personalInfoTAB.setDisable(false);
-        vehicleMangTAB.getTabPane().getSelectionModel().selectPrevious();
-        vehicleMangTAB.getTabPane().getSelectionModel().selectPrevious();
-        //clear all fields section:
-        CostumerIDtxt.clear();
-        FirstNametxt.clear();
-        LastNametxt.clear();
-        EmailAdresstxt.clear();
-        VehicleIDtxt.clear();
-        VehicleTable.getItems().clear();
-        CardClickFlag = false;
-        tempVehicleArray.clear();
+        if (flag || CostumertypeChoiceBox.getSelectionModel().isEmpty() || PurchasePlanChoiseBox.getSelectionModel().isEmpty() || PricingModelChoiseBox1.getSelectionModel().isEmpty()) {
+            ErrorAlert.setTitle("Internal Error");
+            ErrorAlert.setHeaderText("One or more of the fields is empty.");
+            ErrorAlert.showAndWait();
+        } else {
+            //set costumer final details.
+            tempCos.setCostumerType(CostumertypeChoiceBox.getSelectionModel().getSelectedItem());
+            tempCos.setPurchasePlan(PurchasePlanChoiseBox.getSelectionModel().getSelectedItem());
+            tempCos.setPricingModel(PricingModelChoiseBox1.getValue());
+            tempCos.setFuelCompany(stations);
+            myController.setCostumerInDB(tempCos);
+            planInfoTAB.setDisable(true);
+            personalInfoTAB.setDisable(false);
+            vehicleMangTAB.getTabPane().getSelectionModel().selectPrevious();
+            vehicleMangTAB.getTabPane().getSelectionModel().selectPrevious();
+            //clear all fields section:
+            CostumerIDtxt.clear();
+            FirstNametxt.clear();
+            LastNametxt.clear();
+            EmailAdresstxt.clear();
+            VehicleIDtxt.clear();
+            VehicleTable.getItems().clear();
+            CardClickFlag = false;
+            tempVehicleArray.clear();
+        }
 
     }
 

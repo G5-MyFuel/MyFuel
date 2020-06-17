@@ -325,6 +325,7 @@ public class CostumerManagmentTablePageBoundary implements DataInitializable {
 
     @FXML
     void ClickSaveVehicleButton(MouseEvent event) {
+        boolean flag = false;
         if (OwnerIDtxt1.getText().isEmpty() || VehicleIDtxt.getText().isEmpty() || GasTypeChoiseBox.getSelectionModel().isEmpty()) {
             ErrorAlert.setTitle("Internal Error");
             ErrorAlert.setHeaderText("One of the required fields is empty.\nPlease insert required information to proceed.");
@@ -334,6 +335,8 @@ public class CostumerManagmentTablePageBoundary implements DataInitializable {
             ErrorAlert.setHeaderText("Vehicle ID already exists.\nPlease chose different ID.");
             ErrorAlert.showAndWait();
         } else {
+            if (VehicleTable.getItems().size() == 1)
+                flag = true;
             myController.addVehicleToDB(OwnerIDtxt1.getText(), VehicleIDtxt.getText(), GasTypeChoiseBox.getValue());
             Vehicle insertItem = new Vehicle(OwnerIDtxt1.getText(), VehicleIDtxt.getText(), GasTypeChoiseBox.getValue());
             Costumer cos = searchCostumerWithID(OwnerIDtxt1.getText());
@@ -343,6 +346,13 @@ public class CostumerManagmentTablePageBoundary implements DataInitializable {
             OwnerIDtxt1.clear();
             VehicleIDtxt.clear();
             VehicleInformationPane.setVisible(false);
+            if (VehicleTable.getItems().size() > 1 && flag) {
+                ArrayList<Object> obj = new ArrayList<>();
+                obj.add("multiple");
+                obj.add(this);
+                PagingController pc = new PagingController();
+                pc.loadAdditionalStage(ProjectPages.CHOOSE_SUBSCRIPTION_TYPE.getPath(), obj);
+            }
         }
 
     }
@@ -421,6 +431,14 @@ public class CostumerManagmentTablePageBoundary implements DataInitializable {
                 myController.removeVehicle(VehicleTable.getSelectionModel().getSelectedItem().getVehicleID());
                 Vehicle selectedItem = VehicleTable.getSelectionModel().getSelectedItem();
                 VehicleTable.getItems().remove(selectedItem);
+                if (VehicleTable.getItems().size() <= 1) {
+                    ArrayList<Object> obj = new ArrayList<>();
+                    obj.add("single");
+                    obj.add(this);
+                    PagingController pc = new PagingController();
+                    pc.loadAdditionalStage(ProjectPages.CHOOSE_SUBSCRIPTION_TYPE.getPath(), obj);
+                }
+
             }
         }
     }
@@ -492,6 +510,14 @@ public class CostumerManagmentTablePageBoundary implements DataInitializable {
 
     public TableView<Costumer> getCosManageTbale() {
         return CosManageTbale;
+    }
+
+    public CostumerManagementController getMyController() {
+        return myController;
+    }
+
+    public JFXTextField getVehicleSearchCosIDtxt() {
+        return VehicleSearchCosIDtxt;
     }
 
     @Override

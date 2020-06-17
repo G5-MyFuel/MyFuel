@@ -15,6 +15,7 @@ public enum ProjectPages {
     CREDIT_CARD_DIALOG_PAGE("/boundary/CreditCardDialogWindow.fxml"),
     GENERAL_DASH_BOARD("/boundary/generalDashBoard.fxml"),
     STATION_SELECTION_PAGE("/boundary/choseStationPage.fxml"),
+    CHOOSE_SUBSCRIPTION_TYPE("/boundary/choseSubscriptionPlan.fxml"),
 
     SALE_OPERATION_TEMPLATE_PAGE("/boundary/MarketingCampaignTemplate.fxml"),
     RUN_MARKETING_CAMPAIGN_PAGE("/boundary/MarketingCampaignFXML.fxml"),
