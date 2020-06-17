@@ -1,28 +1,28 @@
 package common.assets.enums;
 
 public enum FuelTypes {
-    Gasoline95{
+    Gasoline95 {
         @Override
         public String toString() {
-            return super.toString();
+            return "Gasoline95";
         }
     },
-    Diesel{
+    Diesel {
         @Override
         public String toString() {
-            return super.toString();
+            return "Diesel";
         }
     },
-    ScooterFuel{
+    ScooterFuel {
         @Override
         public String toString() {
-            return super.toString();
+            return "ScooterFuel";
         }
     },
-    HomeHeatingFuel{
+    HomeHeatingFuel {
         @Override
         public String toString() {
-            return super.toString();
+            return "HomeHeatingFuel";
         }
     };
 }

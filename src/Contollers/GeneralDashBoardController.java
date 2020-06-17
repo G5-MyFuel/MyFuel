@@ -6,18 +6,23 @@ import common.assets.SqlQueryType;
 import common.assets.SqlResult;
 import common.assets.enums.FuelTypes;
 import entity.Prices;
-import entity.User;
 import javafx.application.Platform;
 
 import java.util.ArrayList;
 
 public class GeneralDashBoardController extends BasicController {
     private generalDashBoardBoundary myBoundary;
+    private Double fuelAmountOfPreMonthForCurrentUser = 0.0;
+    private String currentUserID = null;
+
 
     /**
      * The boundary controlled by this controller
      */
 
+    public GeneralDashBoardController() {
+
+    }
 
     public GeneralDashBoardController(generalDashBoardBoundary myBoundary) {
         this.myBoundary = myBoundary;
@@ -26,13 +31,13 @@ public class GeneralDashBoardController extends BasicController {
     @Override
     public void getResultFromClient(SqlResult result) {
         Platform.runLater(() -> {
+            //        sqlArray[SqlQueryType.GET_ALL_UPDATED_PRICES.getCode()] = "SELECT * FROM Prices;";
             switch (result.getActionType()) {
-                case GET_ALL_PURCHASE_FUEL_AMOUNT_OF_USER:
-                    ArrayList<User> resultListFuelPrices = new ArrayList<>();
+                case GET_ALL_UPDATED_PRICES:
                     this.changeResultToFuelPrices(result);
-                    Prices p = new Prices();
-                    System.out.println(p.toString());
-                    //System.out.println(myBoundary.getAllDBUsersArrayList()); //test
+                    break;
+                case GET_ALL_PURCHASE_FUEL_AMOUNT_OF_USER:
+                    this.changeResultToFueAmountOfPreMonthOfCurUser(result, "");
                     break;
                 //
                 default:
@@ -43,38 +48,65 @@ public class GeneralDashBoardController extends BasicController {
     }
 
     //קבלת כל הלקוחות
-    private void getAllCustomersPurchaseAmountInLastMonthFromDB() {
-        SqlAction sqlAction = new SqlAction(SqlQueryType.GET_ALL_PURCHASE_FUEL_AMOUNT_OF_USER);
+    public void getCustomerPurchaseAmountInLastMonthFromDB(String customerId) {
+        ArrayList<Object> vars = new ArrayList<>();
+        if (currentUserID != null) vars.add(currentUserID);
+        if (customerId != null) vars.add(customerId);
+        SqlAction sqlAction = new SqlAction(SqlQueryType.GET_ALL_PURCHASE_FUEL_AMOUNT_OF_USER, vars);
         super.sendSqlActionToClient(sqlAction);
+    }
+
+    private void changeResultToFueAmountOfPreMonthOfCurUser(SqlResult result, String userID) {
+        for (ArrayList<Object> a : result.getResultData()) {
+            this.fuelAmountOfPreMonthForCurrentUser = (Double) a.get(1);
+            System.out.println(fuelAmountOfPreMonthForCurrentUser.getClass().getName() + "-->" + fuelAmountOfPreMonthForCurrentUser.toString());
+        }
     }
 
 
     //קבלת מחירים עדכניים
-    private void getAllUpdatedPricesFromDB() {
+    public void getAllUpdatedPricesFromDB() {
         SqlAction sqlAction = new SqlAction(SqlQueryType.GET_ALL_UPDATED_PRICES);
         super.sendSqlActionToClient(sqlAction);
     }
 
     private void changeResultToFuelPrices(SqlResult result) {
         FuelTypes ft;
-
+        String s;
         for (ArrayList<Object> a : result.getResultData()) {
-            String s = (String) a.get(1);
-            switch (s) {
-                case "Diesel":
-                    Prices.setBasePrice_diesel((Double) a.get(2));
+            s = (String) a.get(0);
+            ft = FuelTypes.valueOf(s);
+            switch (ft) {
+                case Diesel:
+                    Prices.setBasePrice_diesel((Double) a.get(1));
                     break;
-                case "Gasoline95":
-                    Prices.setBasePrice_95((Double) a.get(2));
+                case Gasoline95:
+                    Prices.setBasePrice_95((Double) a.get(1));
                     break;
-                case "HomeHeatingFuel":
-                    Prices.setBasePrice_homeHeating((Double) a.get(2));
+                case HomeHeatingFuel:
+                    Prices.setBasePrice_homeHeating((Double) a.get(1));
                     break;
-                case "ScooterFuel":
-                    Prices.setBasePrice_scooter((Double) a.get(2));
+                case ScooterFuel:
+                    Prices.setBasePrice_scooter((Double) a.get(1));
                     break;
             }
+            System.out.println(ft.toString() + "'s Price refreshed to: " + a.get(1));
         }
     }
 
+    public Double getFuelAmountOfPreMonthForCurrentUser() {
+        return fuelAmountOfPreMonthForCurrentUser;
+    }
+
+    public void setFuelAmountOfPreMonthForCurrentUser(Double fuelAmountOfPreMonthForCurrentUser) {
+        this.fuelAmountOfPreMonthForCurrentUser = fuelAmountOfPreMonthForCurrentUser;
+    }
+
+    public String getCurrentUserID() {
+        return currentUserID;
+    }
+
+    public void setCurrentUserID(String currentUserID) {
+        this.currentUserID = currentUserID;
+    }
 }

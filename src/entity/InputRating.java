@@ -18,6 +18,7 @@ public class InputRating {
         this.purchaseID = purchaseID;
         this.fuelType = fuelType;
         this.purchaseHour = purchaseHour;
+        flag = false;
     }
 
     public int getCustomerID() {
