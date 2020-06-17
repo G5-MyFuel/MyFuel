@@ -76,7 +76,7 @@ public class AnalyticDataCreator extends BasicController {
         //bring all to array list from db
         //  customerID   |   customerType   |   purchaseID   |   FuelType   |   purchaseHour
         for(ArrayList<Object> a: result.getResultData()) {
-            InputRating cos = new InputRating(Integer.parseInt((String) a.get(0)),(String)a.get(1), (String)a.get(2),(String)a.get(3), (String) a.get(4));
+            InputRating cos = new InputRating((String) a.get(0),(String)a.get(1), (String)a.get(2),(String)a.get(3), (String) a.get(4));
             resultList.add(cos);
         }
         int customerTypeRating; //0.2

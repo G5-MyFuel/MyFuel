@@ -5,14 +5,14 @@ import java.sql.Time;
 public class InputRating {
 
     //private int rating;
-    private int customerID;
+    private String customerID;
     private String customerType;
     private String purchaseID;
     private String fuelType;
     private String purchaseHour;
     private boolean flag;
 
-    public InputRating(int customerID, String customerType, String purchaseID, String fuelType, String purchaseHour) {
+    public InputRating(String customerID, String customerType, String purchaseID, String fuelType, String purchaseHour) {
         this.customerID = customerID;
         this.customerType = customerType;
         this.purchaseID = purchaseID;
@@ -21,11 +21,11 @@ public class InputRating {
         flag = false;
     }
 
-    public int getCustomerID() {
+    public String getCustomerID() {
         return customerID;
     }
 
-    public void setCustomerID(int customerID) {
+    public void setCustomerID(String customerID) {
         this.customerID = customerID;
     }
 

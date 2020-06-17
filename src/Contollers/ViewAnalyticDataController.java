@@ -20,12 +20,10 @@ import java.util.HashMap;
 import java.util.List;
 
 public class ViewAnalyticDataController extends BasicController {
-
+    private Time start;
+    private Time end;
     private ViewAnalyticDataBoundary myBoundary; /**     * The boundary controlled by this controller     */
-    /*Logic Variables*/
-    //private static ViewAnalyticDataController Instance = null;
-
-    public ViewAnalyticDataController(ViewAnalyticDataBoundary viewAnalyticDataBoundary) {
+    public ViewAnalyticDataController(ViewAnalyticDataBoundary myBoundary) {
         this.myBoundary = myBoundary;
     }
 
@@ -43,11 +41,11 @@ public class ViewAnalyticDataController extends BasicController {
             switch (result.getActionType()) {
                 case DELETE_ALL_RATINGS_ROWS:
                     break;
-                case GET_ALL_RATING_TABLE:
+                /*case GET_ALL_RATING_TABLE:
                     ArrayList<Rating> resultList = new ArrayList<>();
                     resultList.addAll(this.changeResultToRating(result));
                     myBoundary.setRatingTable(resultList);
-                    break;
+                    break;*/
                 case GET_CUSTOMER_X_PURCHASE_TABLE:
                     ArrayList<Rating> resultList1 = new ArrayList<>();
                     resultList1.addAll(this.changeResultToInputRating(result));
@@ -58,7 +56,14 @@ public class ViewAnalyticDataController extends BasicController {
                 case INSERT_RATING:
                     break;
                 case GET_RATING_FOR_CUSTUMER_TYPE:
-
+                    ArrayList<Rating> resultList2 = new ArrayList<>();
+                    resultList2.addAll(this.changeResultToRating(result));
+                    myBoundary.setRatingForCustomerTypeTable(resultList2);
+                    break;
+                case GET_RATING_FOR_TIME_RANGE:
+                    ArrayList<Rating> resultList3 = new ArrayList<>();
+                    resultList3.addAll(this.changeResultToRatingForTimeRange(result));
+                    myBoundary.setRatingForTimeRangeTable(resultList3);
                     break;
                 default:
                     break;
@@ -79,13 +84,33 @@ public class ViewAnalyticDataController extends BasicController {
     private ArrayList<Rating> changeResultToRating(SqlResult result){
         ArrayList<Rating> resultList = new ArrayList<>();
         for(ArrayList<Object> a: result.getResultData()) {
-            Rating cos = new Rating(Integer.parseInt((String) a.get(0)),(Integer)a.get(1),(String)a.get(2));
+            Rating cos = new Rating((Integer) a.get(1),(String) a.get(0),(String)a.get(2));
             resultList.add(cos);
-             }
+        }
         return resultList;
     }
 
-    private void setRatingTableInDB(ArrayList<Rating> resultList, int i) {
+    private ArrayList<Rating> changeResultToRatingForTimeRange(SqlResult result) {
+        ArrayList<Rating> resultList = new ArrayList<>();
+        for (ArrayList<Object> a : result.getResultData()) {
+            if ((Time.valueOf((String) a.get(2)).after(start) && Time.valueOf((String) a.get(2)).before(end)) ||
+                    Time.valueOf((String) a.get(2)).equals(start) && Time.valueOf((String) a.get(2)).equals(end)) {
+                Rating cos = new Rating((Integer) a.get(0), (String) a.get(1), (String) a.get(2));
+                if (resultList.isEmpty()) resultList.add(cos);
+
+                int counter=0;
+                for(int i = 0; i<resultList.size(); i++){
+                     if (resultList.get(i).getCustomerID().equals(cos.getCustomerID())) {
+                         counter++;
+                     }
+                }
+                if (counter ==0) resultList.add(cos);
+            }
+        }
+         return resultList;
+    }
+
+        private void setRatingTableInDB(ArrayList<Rating> resultList, int i) {
         ArrayList<Object> varArray = new ArrayList<>();
         varArray.add(resultList.get(i).getCustomerID());
         varArray.add(resultList.get(i).getRating());
@@ -107,7 +132,7 @@ public class ViewAnalyticDataController extends BasicController {
         //bring all to array list from db
         //  customerID   |   customerType   |   purchaseID   |   FuelType   |   purchaseHour
         for(ArrayList<Object> a: result.getResultData()) {
-            InputRating cos = new InputRating(Integer.parseInt((String) a.get(0)),(String)a.get(1), (String)a.get(2),(String)a.get(3), (String) a.get(4));
+            InputRating cos = new InputRating((String) a.get(0),(String)a.get(1), (String)a.get(2),(String)a.get(3), (String) a.get(4));
             resultList.add(cos);
         }
         int customerTypeRating; //0.2
@@ -157,7 +182,7 @@ public class ViewAnalyticDataController extends BasicController {
 
 
 
-    //מחשב דירוג של זמנים לפי השעה הממוצעת
+    //מחשב דירוג של זמנים
     private int calculateTimeRating(String avgHour){
         int purchaseHourRating;
         Time hour6 = java.sql.Time.valueOf("06:00:00");
@@ -200,4 +225,19 @@ private int calculateAverage(List<Integer> marks) {
     }
 
     return sum / marks.size();
-}}
+}
+
+    public void getRatingForCustomerTypeTable(String paramArray) {
+        ArrayList<Object> varArray = new ArrayList<>();
+        varArray.add(paramArray);
+        SqlAction sqlAction = new SqlAction(SqlQueryType.GET_RATING_FOR_CUSTUMER_TYPE, varArray);
+        super.sendSqlActionToClient(sqlAction);
+    }
+
+    public void getRatingForTimeRangeTable(Time start, Time end) {
+        this.start = start;
+        this.end= end;
+        SqlAction sqlAction = new SqlAction(SqlQueryType.GET_RATING_FOR_TIME_RANGE);
+        super.sendSqlActionToClient(sqlAction);
+    }
+}

@@ -2,19 +2,19 @@ package entity;
 
 public class Rating {
 
-    private int rating;
-    private int customerID;
+    private Integer rating;
+    private String customerID;
     private String customerType;
 
 
-    public Rating(int rating, int customerID, String customerType){
+    public Rating(Integer rating, String customerID, String customerType){
         this.rating = rating;
         this.customerID = customerID;
         this.customerType = customerType;
 
     }
 
-    public int getRating() {
+    public Integer getRating() {
         return rating;
     }
 
@@ -22,11 +22,11 @@ public class Rating {
         this.rating = rating;
     }
 
-    public int getCustomerID() {
+    public String getCustomerID() {
         return customerID;
     }
 
-    public void setCustomerID(int customerID) {
+    public void setCustomerID(String customerID) {
         this.customerID = customerID;
     }
 

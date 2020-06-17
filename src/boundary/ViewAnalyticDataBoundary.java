@@ -25,6 +25,7 @@ import javafx.scene.layout.Pane;
 
 import java.awt.*;
 import java.net.URL;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -94,10 +95,13 @@ public class ViewAnalyticDataBoundary implements DataInitializable {
     private JFXComboBox<String> customerTypeCombo;
 
     @FXML
+    private JFXButton btnCustomerTypeShow;
+
+    @FXML
     private Label selectedCustomerType;
 
     @FXML
-    private Pane paneByCustomerType1;
+    private Pane paneByFuelType;
 
     @FXML
     private TableView<Rating> RatingTableForFuelType;
@@ -123,7 +127,14 @@ public class ViewAnalyticDataBoundary implements DataInitializable {
     @FXML
     private JFXTimePicker TimeRangeEnd;
 
-    private ObservableList<String> CustomerType = FXCollections.observableArrayList("PRIVATE" , "COMPANY");
+    @FXML
+    private JFXButton btnTimePickerShow;
+
+    @FXML
+    private JFXButton btnFuelTypeShow;
+
+
+    private ObservableList<String> CustomerType = FXCollections.observableArrayList("private" , "Company");
     private ObservableList<String> FuelType = FXCollections.observableArrayList("Gasoline95", "Diesel", "ScooterFuel", "HomeHeatingFuel");
 
     @Override
@@ -134,72 +145,98 @@ public class ViewAnalyticDataBoundary implements DataInitializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        paneByCustomerType.setVisible(false);
+        paneByFuelType.setVisible(false);
+        paneByTime.setVisible(false);
         customerTypeCombo.setItems(CustomerType);
         fuelTypeCombo1.setItems(FuelType);
+        btnCustomerTypeShow.setDisable(true);
+
     }
 
     private void formValidation() {
-        /**
-         *
-         *
-         */
-
     }
 
     @FXML
     void handleGenerateData(ActionEvent event) {
         myController.deletePreviosData();
         myController.getCustomerXPurchaseTable();
-      ///  myController.getRatingTable(); //start the process that will ask server to execute quarry and get the table details
     }
 
     @FXML
-    void handleBtnCustomerType(MouseEvent event) { // chack mouse event import
-
+    void handleBtnCustomerType(MouseEvent event) {
+        paneByCustomerType.setVisible(true);
     }
 
     @FXML
     void handleBtnFuleType(ActionEvent event) {
-
+        paneByFuelType.setVisible(true);
     }
 
     @FXML
     void handleBtnRefuelHour(ActionEvent event) {
-
+        paneByTime.setVisible(true);
     }
-
-
-
-    /**
-     this method will set the templates table when we will initialize the page.
-     */
-    public void setRatingTable(ArrayList<Rating> cosArray){
-        ratingCulomn.setCellValueFactory(new PropertyValueFactory<>("rating"));
-        customerIdCulomn.setCellValueFactory(new PropertyValueFactory<>("customerID"));
-
-        ObservableList<Rating> data = FXCollections.observableArrayList(cosArray);
-        RatingTableForTimeRange.setItems(data); //באופן זמני !!!!
-
-    }
-
 
     @FXML
     void handleFuelTypeCombo(ActionEvent event) {
-
     }
-
 
     @FXML
     void handleTimeRangeCombo(ActionEvent event) {
+    }
+
+    @FXML
+    void handleCustomerTypeComboClick(ActionEvent event) {
+        btnCustomerTypeShow.setDisable(false);
+        paneByCustomerType.setVisible(true);
 
     }
 
     @FXML
     void handlecustomerTypeCombo(ActionEvent event) {
-        customerTypeCombo.getValue();
+        String str = customerTypeCombo.getValue();
+        myController.getRatingForCustomerTypeTable(str);
         customerTypeCombo.setVisible(true);
 
 
     }
+    public void setRatingForCustomerTypeTable(ArrayList<Rating> cosArray){
+        ratingCulomn1.setCellValueFactory(new PropertyValueFactory<>("rating"));
+        customerIdCulomn1.setCellValueFactory(new PropertyValueFactory<>("customerID"));
+
+        ObservableList<Rating> data = FXCollections.observableArrayList(cosArray);
+        RatingTableForCustomerType.setItems(data);
+    }
+
+    public void setRatingForTimeRangeTable(ArrayList<Rating> cosArray){
+        ratingCulomn.setCellValueFactory(new PropertyValueFactory<>("rating"));
+        customerIdCulomn.setCellValueFactory(new PropertyValueFactory<>("customerID"));
+
+        ObservableList<Rating> data = FXCollections.observableArrayList(cosArray);
+        RatingTableForTimeRange.setItems(data);
+    }
+
+    public void handleTimePickerShow(ActionEvent actionEvent) {
+         myController.getRatingForTimeRangeTable(Time.valueOf(TimeRangeStart.getValue()),Time.valueOf(TimeRangeEnd.getValue()));
+
+    }
+
+    public void handleFuelTypeComboShow(ActionEvent actionEvent) {
+
+    }
+
+
+    @FXML
+    void handleBtnCustomerType(ActionEvent event) {
+
+    }
+
+    @FXML
+    void handleBtnCustomerTypeImage(MouseEvent event) {
+
+    }
+
+
 
 }

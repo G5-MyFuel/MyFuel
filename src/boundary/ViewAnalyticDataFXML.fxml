@@ -3,7 +3,6 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTimePicker?>
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -36,11 +35,6 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <Label layoutX="66.0" layoutY="91.0" text="Last time the ratings were calculated by the system :">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
             <ImageView fx:id="imageRefuelHour" fitHeight="50.0" fitWidth="53.0" layoutX="386.0" layoutY="132.0" onMouseClicked="#handleBtnRefuelHour">
                <image>
                   <Image url="@../media/analiticData/icons8_clock_40px.png" />
@@ -73,7 +67,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <ImageView fx:id="imageCustomerType" fitHeight="50.0" fitWidth="53.0" layoutX="43.0" layoutY="132.0" onMouseClicked="#handleBtnCustomerType">
+            <ImageView fx:id="imageCustomerType" fitHeight="50.0" fitWidth="53.0" layoutX="43.0" layoutY="132.0" onMouseClicked="#handleBtnCustomerTypeImage">
                <image>
                   <Image url="@../media/analiticData/icons8_user_account_40px_1.png" />
                </image>
@@ -85,72 +79,74 @@
                <children>
                   <TableView fx:id="RatingTableForTimeRange" layoutX="21.0" layoutY="81.0" prefHeight="433.0" prefWidth="296.0">
                      <columns>
-                        <TableColumn fx:id="customerIdCulomn" prefWidth="161.0" text="Customer id" />
                         <TableColumn fx:id="ratingCulomn" prefWidth="134.0" text="Rating" />
+                        <TableColumn fx:id="customerIdCulomn" prefWidth="161.0" text="Customer id" />
                      </columns>
                   </TableView>
-                  <Label layoutX="21.0" layoutY="56.0" prefHeight="26.0" prefWidth="227.0" text="Rating for Selected Time Range:" textFill="#1c0d5e">
-                     <padding>
-                        <Insets bottom="5.0" />
-                     </padding>
-                  </Label>
-                  <Label fx:id="selectedTimeRangeTXT" layoutX="238.0" layoutY="56.0" prefHeight="26.0" prefWidth="79.0" text="  " textFill="#1c0d5e">
-                     <padding>
-                        <Insets bottom="5.0" />
-                     </padding>
-                  </Label>
-                  <JFXTimePicker fx:id="TimeRangeStart" defaultColor="#307fd3" layoutX="2.0" prefHeight="31.0" prefWidth="163.0" promptText="Select start hour">
+                  <JFXTimePicker fx:id="TimeRangeStart" defaultColor="#307fd3" layoutX="21.0" layoutY="-1.0" prefHeight="31.0" prefWidth="149.0" promptText="Select start hour">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </JFXTimePicker>
-                  <JFXTimePicker fx:id="TimeRangeEnd" defaultColor="#307fd3" layoutX="174.0" layoutY="-1.0" prefHeight="31.0" prefWidth="163.0" promptText="Select end hour">
+                  <JFXTimePicker fx:id="TimeRangeEnd" defaultColor="#307fd3" layoutX="181.0" layoutY="-1.0" prefHeight="31.0" prefWidth="142.0" promptText="Select end hour">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </JFXTimePicker>
+                  <JFXButton fx:id="btnTimePickerShow" buttonType="RAISED" layoutX="21.0" layoutY="44.0" onAction="#handleTimePickerShow" prefHeight="27.0" prefWidth="296.0" ripplerFill="#c6e1e7" styleClass="jfx-button" stylesheets="@GeneratingReportsStationManagerCSS.css" text="Show Segmentation by customer type" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </JFXButton>
                </children>
             </Pane>
             <Pane fx:id="paneByCustomerType" layoutX="12.0" layoutY="232.0" prefHeight="515.0" prefWidth="343.0">
                <children>
                   <TableView fx:id="RatingTableForCustomerType" layoutX="42.0" layoutY="81.0" prefHeight="433.0" prefWidth="296.0">
                      <columns>
-                        <TableColumn fx:id="customerIdCulomn1" prefWidth="161.0" text="Customer id" />
                         <TableColumn fx:id="ratingCulomn1" prefWidth="134.0" text="Rating" />
+                        <TableColumn fx:id="customerIdCulomn1" prefWidth="161.0" text="Customer id" />
                      </columns>
                   </TableView>
-                  <JFXComboBox fx:id="customerTypeCombo" layoutX="42.0" layoutY="1.0" onAction="#handlecustomerTypeCombo" prefHeight="31.0" prefWidth="281.0" promptText="Select Customer Type:" />
-                  <Label layoutX="42.0" layoutY="43.0" text="Selected Customer Type:" textFill="#1c0d5e">
-                     <padding>
-                        <Insets bottom="5.0" />
-                     </padding>
-                  </Label>
-                  <Label fx:id="selectedCustomerTypeTXT" layoutX="218.0" layoutY="43.0" prefHeight="26.0" prefWidth="129.0" text="  " textFill="#1c0d5e">
-                     <padding>
-                        <Insets bottom="5.0" />
-                     </padding>
-                  </Label>
+                  <JFXComboBox fx:id="customerTypeCombo" layoutX="42.0" layoutY="1.0" onAction="#handleCustomerTypeComboClick" prefHeight="31.0" prefWidth="296.0" promptText="Select Customer Type:">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </JFXComboBox>
+                  <JFXButton fx:id="btnCustomerTypeShow" buttonType="RAISED" layoutX="39.0" layoutY="42.0" onAction="#handlecustomerTypeCombo" prefHeight="27.0" prefWidth="296.0" ripplerFill="#c6e1e7" styleClass="jfx-button" stylesheets="@GeneratingReportsStationManagerCSS.css" text="Show Segmentation by customer type" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </JFXButton>
                </children>
             </Pane>
-            <Pane fx:id="paneByCustomerType1" layoutX="692.0" layoutY="232.0" prefHeight="515.0" prefWidth="367.0">
+            <Pane fx:id="paneByFuelType" layoutX="692.0" layoutY="232.0" prefHeight="515.0" prefWidth="367.0">
                <children>
                   <TableView fx:id="RatingTableForFuelType" layoutX="42.0" layoutY="81.0" prefHeight="433.0" prefWidth="296.0">
                      <columns>
-                        <TableColumn fx:id="customerIdCulomn11" prefWidth="161.0" text="Customer id" />
                         <TableColumn fx:id="ratingCulomn11" prefWidth="134.0" text="Rating" />
+                        <TableColumn fx:id="customerIdCulomn11" prefWidth="161.0" text="Customer id" />
                      </columns>
                   </TableView>
-                  <JFXComboBox fx:id="fuelTypeCombo1" layoutX="42.0" layoutY="1.0" onAction="#handleFuelTypeCombo" prefHeight="31.0" prefWidth="281.0" promptText="Select Fuel Type:" />
-                  <Label layoutX="42.0" layoutY="43.0" text="Selected Fuel Type:" textFill="#1c0d5e">
-                     <padding>
-                        <Insets bottom="5.0" />
-                     </padding>
-                  </Label>
-                  <Label layoutX="174.0" layoutY="43.0" prefHeight="26.0" prefWidth="186.0" text="  " textFill="#1c0d5e">
-                     <padding>
-                        <Insets bottom="5.0" />
-                     </padding>
-                  </Label>
+                  <JFXComboBox fx:id="fuelTypeCombo1" layoutX="42.0" layoutY="1.0" onAction="#handleFuelTypeCombo" prefHeight="31.0" prefWidth="296.0" promptText="Select Fuel Type:">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </JFXComboBox>
+                  <JFXButton fx:id="btnFuelTypeShow" buttonType="RAISED" layoutX="42.0" layoutY="42.0" onAction="#handleFuelTypeComboShow" prefHeight="27.0" prefWidth="296.0" ripplerFill="#c6e1e7" styleClass="jfx-button" stylesheets="@GeneratingReportsStationManagerCSS.css" text="Show Segmentation by customer type" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </JFXButton>
                </children>
             </Pane>
          </children>
