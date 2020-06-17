@@ -1,4 +1,4 @@
-package common.assets;
+package common.assets.enums;
 
 public enum UserType {
     CUSTOMER,

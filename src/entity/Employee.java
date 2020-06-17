@@ -1,8 +1,6 @@
 package entity;
 
 
-import common.assets.UserType;
-
 public class Employee extends User {
     String fuelCompanyName;
     String gasStatinID;
