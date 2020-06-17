@@ -132,7 +132,7 @@ public class LoginToSystemController extends BasicController {
                 buttonNameArrayList.add(temp);
                 buttonNameArrayList.add(getFullUserNameByUserId(temp));
                 buttonNameArrayList.add(getFuelCompanyBuUserID(temp));
-                //buttonNameArrayList.add("");
+                buttonNameArrayList.add("SUPPLY_ORDER_EXECUTION");
                 Toast.makeText(mainProjectFX.mainStage,"Welcome to MyFuel "+getFullUserNameByUserId(temp),1000,1500,1500,40,380);
                 break;
             case "DALKAN":
