@@ -88,7 +88,7 @@
             <DropShadow blurType="GAUSSIAN" height="5.0" radius="2.0" width="5.0" />
          </effect>
       </HBox>
-      <Button fx:id="SendBtn" layoutX="729.0" layoutY="467.0" mnemonicParsing="false" onMouseClicked="#clickSendBtn" prefHeight="42.0" prefWidth="89.0" style="-fx-background-radius: 50;" styleClass="style.css" text="Send" textFill="WHITE">
+      <Button fx:id="SendBtn" layoutX="729.0" layoutY="467.0" mnemonicParsing="false" onMouseClicked="#clickSendBtn" prefHeight="42.0" prefWidth="89.0" style="-fx-background-radius: 50;" stylesheets="@style.css" text="Send" textFill="WHITE">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>

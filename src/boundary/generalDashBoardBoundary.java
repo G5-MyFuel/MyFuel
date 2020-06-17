@@ -241,6 +241,7 @@ public class generalDashBoardBoundary implements DataInitializable {
 
                 case "SUPPLY_ORDER_EXECUTION":
                     currentBtn.setText("Approve orders");
+                    button2.setVisible(false);
                     currentBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
                         @Override
                         public void handle(MouseEvent event) {
