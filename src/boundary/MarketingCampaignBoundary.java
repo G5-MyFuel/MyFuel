@@ -1,7 +1,7 @@
 package boundary;
 
 import Contollers.FormValidation;
-import Contollers.RunMarketingCampaignController;
+import Contollers.MarketingCampaignController;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import entity.MarketingCampaign;
@@ -24,15 +24,15 @@ import java.util.ResourceBundle;
 
 /**
  * @author Hana Wiener
- * @see RunMarketingCampaignController - the form's logic class
+ * @see MarketingCampaignController - the form's logic class
  */
 
-public class RunMarketingCampaignBoundary implements Initializable {
+public class MarketingCampaignBoundary implements DataInitializable {
     /**
      * The supervisor boundary controller.
      */
-    private RunMarketingCampaignController myController = new RunMarketingCampaignController(this);
-
+    private MarketingCampaignController myController = new MarketingCampaignController(this);
+    private String marketingManager;
     private FormValidation formValidation;
 
     /*
@@ -126,11 +126,16 @@ public class RunMarketingCampaignBoundary implements Initializable {
     @FXML
     private Label ERRORnoTemplate;
 
-
-
     String choosenTemplate = new String();
     boolean flagSale = true;
     MarketingCampaign newSale = new MarketingCampaign();
+
+
+    @Override
+    public void initData(Object data) {
+        this.marketingManager = (String) data;
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.detailsPane.setVisible(false);
@@ -300,7 +305,6 @@ public class RunMarketingCampaignBoundary implements Initializable {
     void handleClicks(ActionEvent event) {
 
     }
-
 
 
 }
