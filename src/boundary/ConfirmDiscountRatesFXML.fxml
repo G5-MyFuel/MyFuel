@@ -28,5 +28,10 @@
             <Font name="System Bold Italic" size="18.0" />
          </font>
       </Label>
+      <Label fx:id="InstructionsLabel" layoutX="39.0" layoutY="137.0" text="*Hold down control button for multiple-choice">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
    </children>
 </Pane>
