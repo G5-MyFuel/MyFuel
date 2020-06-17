@@ -157,7 +157,7 @@ public class generalDashBoardBoundary implements DataInitializable {
                     });
                     break;
 
-                case "RUN_SALE_OPERATION_PAGE":
+                case "RUN_MARKETING_CAMPAIGN_PAGE":
                     currentBtn.setText("Run sale operation page");
                     currentBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
                         @Override
