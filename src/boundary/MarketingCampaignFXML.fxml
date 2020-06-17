@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="796.0" prefWidth="1062.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundary.RunMarketingCampaignBoundary">
+   <children>
+      <Pane prefHeight="796.0" prefWidth="1062.0" style="-fx-position-shape: center; -fx-border-color: transparent;">
+         <children>
+            <Label layoutX="48.0" layoutY="70.0" text="Run Marketing Campaign" textFill="#2d4578">
+               <font>
+                  <Font name="System Bold Italic" size="40.0" />
+               </font>
+            </Label>
+            <Label layoutX="126.0" layoutY="128.0" text="Currently running sale operations:">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TableView fx:id="saleOperationTableView" layoutX="59.0" layoutY="169.0" prefHeight="494.0" prefWidth="459.0">
+               <columns>
+                  <TableColumn fx:id="saleIDColumn" prefWidth="99.0" text="Campaign ID" />
+                  <TableColumn fx:id="TemplateNameColumn" prefWidth="164.0" text="Template Name" />
+                  <TableColumn fx:id="StartDateColumn" prefWidth="96.0" text="Start Date" />
+                  <TableColumn fx:id="EndDateColumn" prefWidth="106.0" text="End Date" />
+               </columns>
+            </TableView>
+            <Button fx:id="btnADDnewSaleOperation1" layoutX="159.0" layoutY="676.0" mnemonicParsing="false" onAction="#handleBtnAddSale" prefHeight="42.0" prefWidth="260.0" style="-fx-background-color: #2D4578; -fx-background-radius: 50;" stylesheets="@style.css" text="Add New Marketing Campaign" textFill="WHITE" />
+            <Pane fx:id="detailsPane" layoutX="617.0" layoutY="169.0" prefHeight="495.0" prefWidth="392.0">
+               <children>
+                  <SplitPane fx:id="newTemplateDetails" dividerPositions="0.08333333333333333" orientation="VERTICAL" prefHeight="494.0" prefWidth="390.0">
+                     <items>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="35.0" prefWidth="335.0" style="-fx-background-color: #fcf8e8;">
+                           <children>
+                              <Label alignment="CENTER" layoutX="-1.0" prefHeight="42.0" prefWidth="373.0" style="-fx-font-weight: Bold;" text="Fill in New Marketing Campaign Details  " />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="272.0" prefWidth="870.0" style="-fx-background-color: #fcf8e8;">
+                           <children>
+                              <JFXDatePicker fx:id="startDatePicker" defaultColor="#222275" layoutX="53.0" layoutY="222.0" onAction="#handleStartDate" onMouseClicked="#handleStartDateNew" onMousePressed="#handleStartDateNew" onMouseReleased="#handleStartDateNew" prefHeight="31.0" prefWidth="277.0" promptText="Start Sale Date" />
+                              <JFXDatePicker fx:id="endDatePicker" defaultColor="#222275" layoutX="53.0" layoutY="279.0" onAction="#handleEndDate" onMouseClicked="#handleEndDateNew" prefHeight="31.0" prefWidth="278.0" promptText="End Sale Date" />
+                              <JFXComboBox fx:id="ChooseTemplateCombo" layoutX="56.0" layoutY="19.0" onAction="#handleChooseTemplate" prefHeight="31.0" prefWidth="281.0" promptText="Choose Template" />
+                              <HBox fx:id="templateDetaildVBOX" layoutX="74.0" layoutY="59.0" prefHeight="156.0" prefWidth="238.0">
+                                 <children>
+                                    <VBox alignment="BOTTOM_RIGHT" prefHeight="156.0" prefWidth="107.0">
+                                       <children>
+                                          <Label text="Template ID:  " textFill="#1c0d5e">
+                                             <padding>
+                                                <Insets bottom="5.0" />
+                                             </padding>
+                                          </Label>
+                                          <Label text="Fuel Type:  " textFill="#1c0d5e">
+                                             <padding>
+                                                <Insets bottom="5.0" />
+                                             </padding>
+                                          </Label>
+                                          <Label text="Discount:  " textFill="#1c0d5e">
+                                             <padding>
+                                                <Insets bottom="5.0" />
+                                             </padding>
+                                          </Label>
+                                          <Label text="Day:  " textFill="#1c0d5e">
+                                             <padding>
+                                                <Insets bottom="5.0" />
+                                             </padding>
+                                          </Label>
+                                          <Label text="Begin Hour:  " textFill="#1c0d5e">
+                                             <padding>
+                                                <Insets bottom="5.0" />
+                                             </padding>
+                                          </Label>
+                                          <Label text="End Hour:  " textFill="#1c0d5e">
+                                             <padding>
+                                                <Insets bottom="5.0" />
+                                             </padding>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                    <VBox prefHeight="156.0" prefWidth="145.0">
+                                       <children>
+                                          <Label fx:id="idFromDB" text="  " textFill="#1c0d5e">
+                                             <padding>
+                                                <Insets bottom="5.0" />
+                                             </padding>
+                                          </Label>
+                                          <Label fx:id="typeFromDB" text="  " textFill="#1c0d5e">
+                                             <padding>
+                                                <Insets bottom="5.0" />
+                                             </padding>
+                                          </Label>
+                                          <Label fx:id="discountFromDB" text="  " textFill="#1c0d5e">
+                                             <padding>
+                                                <Insets bottom="5.0" />
+                                             </padding>
+                                          </Label>
+                                          <Label fx:id="dayFromDB" text="  " textFill="#1c0d5e">
+                                             <padding>
+                                                <Insets bottom="5.0" />
+                                             </padding>
+                                          </Label>
+                                          <Label fx:id="beginHourFromDB" text="  " textFill="#1c0d5e">
+                                             <padding>
+                                                <Insets bottom="5.0" />
+                                             </padding>
+                                          </Label>
+                                          <Label fx:id="endHourFromDB" text="  " textFill="#1c0d5e">
+                                             <padding>
+                                                <Insets bottom="5.0" />
+                                             </padding>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <Button fx:id="btnRunSaleOperation" layoutX="68.0" layoutY="339.0" mnemonicParsing="false" onAction="#handleBtnRunSale" prefHeight="42.0" prefWidth="238.0" style="-fx-background-color: #2D4578; -fx-background-radius: 50;" stylesheets="@style.css" text="Run Marketing Campaign" textFill="WHITE" />
+                              <Label fx:id="ERRORalreadyPassedDate" layoutX="45.0" layoutY="253.0" text="Can not select a date that has already passed!" textFill="RED">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="ERRORendBeforStart" layoutX="48.0" layoutY="309.0" prefHeight="16.0" prefWidth="237.0" text="End date must be later than start date." textFill="RED">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="ERRORoverlap" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="6.0" layoutX="2.0" layoutY="388.0" prefHeight="30.0" prefWidth="381.0" text="Error !  Only one operation can run each day." textAlignment="CENTER" textFill="RED" visible="false">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="ERRORoverlap1" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="6.0" layoutX="6.0" layoutY="410.0" prefHeight="30.0" prefWidth="381.0" text="Choose dates that won't overlap with existing sale-operation." textAlignment="CENTER" textFill="RED" visible="false">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="ERRORnoTemplate" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="6.0" layoutX="6.0" layoutY="388.0" prefHeight="30.0" prefWidth="381.0" text="Error - Template selection is required!" textAlignment="CENTER" textFill="RED">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                     </items>
+                  </SplitPane>
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+   </children>
+</Pane>

@@ -30,13 +30,15 @@ import java.util.ResourceBundle;
  * @see MarketingCampaignTemplateController - the form's logic class
  */
 
-public class MarketingCampaignTemplateBoundary implements Initializable {
+public class MarketingCampaignTemplateBoundary implements DataInitializable {
 
     /** The supervisor boundary controller. */
     private MarketingCampaignTemplateController myController = new MarketingCampaignTemplateController(this);
+    private String marketingDepartmentWorker;
 
     private FormValidation formValidation;
     private boolean flagValidation=true;
+    private String dateAndDayPattern = "";
 
     //gui variables:
     @FXML
@@ -115,7 +117,12 @@ public class MarketingCampaignTemplateBoundary implements Initializable {
     private JFXComboBox<String> DayComboSpecialization1;
 
     private ObservableList<String> DayType = FXCollections.observableArrayList("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "All");
-    private ObservableList<String> FuelType = FXCollections.observableArrayList("Gasoline", "Diesel", "ScooterFuel", "HomeHeatingFuel");
+    private ObservableList<String> FuelType = FXCollections.observableArrayList("Gasoline", "Diesel", "ScooterFuel");
+
+    @Override
+    public void initData(Object data) {
+        this.marketingDepartmentWorker = (String) data;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
