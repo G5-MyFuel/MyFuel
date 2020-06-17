@@ -137,6 +137,9 @@ public class ConfirmDiscountRatesBoundary implements DataInitializable {
         System.out.println(TableSubscriptionType.getSelectionModel().getSelectedItems());
         sendDiscountRates.addAll(discountArray);
 
+        /*for (DiscountRate temp : sendDiscountRates)
+            if(temp.get)    סטטוס*/
+
         System.out.println(discountArray.size());
         if (discountArray.size() > 0) {
             btnApprovedRates.setDisable(false);
@@ -150,8 +153,8 @@ public class ConfirmDiscountRatesBoundary implements DataInitializable {
 
         ArrayList<String> paramArray = new ArrayList<>();
         paramArray.add("Update New Discount Rate");
-        for (DiscountRate a : sendDiscountRates)
-            paramArray.add(a.getSubscriptionType());
+        for (DiscountRate temp : sendDiscountRates)
+            paramArray.add(temp.getSubscriptionType());
         myController.GetDiscountRatesData(paramArray);
         paramArray.clear();
         paramArray.add("Get Discount Rates Data");
