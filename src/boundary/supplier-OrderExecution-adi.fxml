@@ -2,11 +2,11 @@
 
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.effect.DropShadow?>
@@ -45,9 +45,6 @@
          </columnResizePolicy>
          <contextMenu>
             <ContextMenu>
-               <items>
-                  <MenuItem mnemonicParsing="false" onAction="#handleRefresh" text="Refresh" />
-               </items>
                <styleClass>
                   <String fx:value="table-context" />
                   <String fx:value="colored-context-menu" />
@@ -56,7 +53,10 @@
          </contextMenu>
       </TableView>
       <Text layoutX="61.0" layoutY="634.0" strokeType="OUTSIDE" strokeWidth="0.0" text="* Status: In treatment / Done" wrappingWidth="317.6708984375" />
-      <Button fx:id="DoneBtn" layoutX="713.0" layoutY="693.0" mnemonicParsing="false" onMouseClicked="#ClickDoneBtn" prefHeight="40.0" prefWidth="89.0" style="-fx-background-color: #2D4578; -fx-background-radius: 50;" text="Done" textFill="WHITE" />
+      <Button fx:id="DoneBtn" layoutX="713.0" layoutY="693.0" mnemonicParsing="false" onMouseClicked="#ClickDoneBtn" prefHeight="40.0" prefWidth="89.0" style="-fx-background-radius: 50;" styleClass="style.css" text="Done" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
       <HBox fx:id="hboxOrderConfirmation" alignment="CENTER_LEFT" layoutX="622.0" layoutY="616.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="53.0" prefWidth="285.0" style="-fx-background-color: #fcf8e8; -fx-border-color: #888888; -fx-background-radius: 5; -fx-background-insets: 0;">
          <children>
             <ImageView fx:id="checkBoxImage" fitHeight="35.0" fitWidth="35.0">

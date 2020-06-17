@@ -9,10 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -32,7 +29,9 @@ public class ManagerSupplyConfirmationBoundary implements DataInitializable {
 
     private ManagerSupplyConfirmationController myController = new ManagerSupplyConfirmationController(this);
     private ObservableList<ManagerSupplyConfirmation> tableData;
-    private String stationManagerID;
+    private String stationManagerID="762550139";
+
+    //TODO: general station manager id
 
     @FXML
     private Button btnOverview;
@@ -83,6 +82,13 @@ public class ManagerSupplyConfirmationBoundary implements DataInitializable {
     private Text explanationTxt;
 
     @FXML
+    private Text OrderNumberTxt;
+
+    @FXML
+    private Label orderNumberField;
+
+
+    @FXML
     void OrderConfirmationCheck(MouseEvent event) {
         /**  If there is a check sign   **/
         if (confirmationCheckBox.isSelected())
@@ -96,6 +102,9 @@ public class ManagerSupplyConfirmationBoundary implements DataInitializable {
         myController.setNewStatus(temp.getOrderNumber());
         temp.setOrderStatus("In treatment");
 
+        orderNumberField.setText(temp.getOrderNumber());
+        OrderNumberTxt.setVisible(true);
+        orderNumberField.setVisible(true);
         hboxOrderConfirmation.setDisable(true);
         SendBtn.setDisable(true);
         ApprovalTxt.setVisible(true);
@@ -141,13 +150,15 @@ public class ManagerSupplyConfirmationBoundary implements DataInitializable {
         SendBtn.setVisible(false);
         SendBtn.setDisable(true);
         explanationTxt.setVisible(false);
+        orderNumberField.setVisible(false);
+        OrderNumberTxt.setVisible(false);
         myController.getOrdersFromDB(stationManagerID);
         System.out.println("Manager Supply Confirmation Page Is Open");
     }
 
     public void setOrderForManagerTableView(ArrayList<ManagerSupplyConfirmation> OrderArray) {
         OrderCol.setCellValueFactory(new PropertyValueFactory<>("OrderNumber"));
-        CompanyCol.setCellValueFactory(new PropertyValueFactory<>("GasCompanyName"));
+        CompanyCol.setCellValueFactory(new PropertyValueFactory<>("companyName"));
         StationCol.setCellValueFactory(new PropertyValueFactory<>("StationNum"));
         FuelTypeCol.setCellValueFactory(new PropertyValueFactory<>("FuelType"));
         AmountCol.setCellValueFactory(new PropertyValueFactory<>("Quantity"));
@@ -162,6 +173,9 @@ public class ManagerSupplyConfirmationBoundary implements DataInitializable {
             public void handle(MouseEvent event) {
                 ManagerSupplyConfirmation temp = tableView.getSelectionModel().getSelectedItem();
                 if (temp.getOrderStatus().equals("New")) {
+                    orderNumberField.setText(temp.getOrderNumber());
+                    OrderNumberTxt.setVisible(true);
+                    orderNumberField.setVisible(true);
                     hboxOrderConfirmation.setVisible(true);
                     hboxOrderConfirmation.setDisable(false);
                     SendBtn.setVisible(true);
@@ -170,6 +184,9 @@ public class ManagerSupplyConfirmationBoundary implements DataInitializable {
                     ApprovalTxt.setVisible(false);
                     confirmationCheckBox.setSelected(false);
                 } else {
+                    orderNumberField.setText(temp.getOrderNumber());
+                    OrderNumberTxt.setVisible(true);
+                    orderNumberField.setVisible(true);
                     hboxOrderConfirmation.setDisable(true);
                     SendBtn.setDisable(true);
                     ApprovalTxt.setVisible(true);
