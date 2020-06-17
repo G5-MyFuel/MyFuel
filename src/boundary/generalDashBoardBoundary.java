@@ -2,6 +2,7 @@ package boundary;
 
 import Contollers.AnalyticDataCreator;
 import Contollers.GeneralDashBoardController;
+import Contollers.ViewAnalyticDataController;
 import common.assets.ProjectPages;
 import entity.Costumer;
 import entity.Prices;
@@ -28,7 +29,7 @@ import java.util.TimeZone;
 public class generalDashBoardBoundary implements DataInitializable {
 
     private GeneralDashBoardController myController = new GeneralDashBoardController(this);
-  //  private AnalyticDataCreator analyticDataCreator = new AnalyticDataCreator(this);
+    private ViewAnalyticDataController analiticData = new ViewAnalyticDataController();
     private ArrayList<Prices> resultListFuelPrices = new ArrayList<>();
     private ArrayList<Costumer> resultListCustomers = new ArrayList<>();
 
@@ -329,7 +330,8 @@ public class generalDashBoardBoundary implements DataInitializable {
     void VIEW_ANALITIC_DATA() {
         currentPagePane.setVisible(true);
         currentPagePane.getChildren().clear();
-        currentPagePane.getChildren().setAll(mainProjectFX.pagingController.loadBoundaryInPane(ProjectPages.VIEW_ANALITIC_DATA.getPath(), userID));
+
+        currentPagePane.getChildren().setAll(mainProjectFX.pagingController.loadBoundaryInPane(ProjectPages.VIEW_ANALITIC_DATA.getPath(),this));
         myFuelLogo.setVisible(false);
     }
 
@@ -388,12 +390,12 @@ public class generalDashBoardBoundary implements DataInitializable {
                         time.setText(hour + ":" + "0" + (minute) + ":" + second);
                     else
                         time.setText(hour + ":" + (minute) + ":" + second);
-                    /*
+
                     //Calculate Analytical Data every sunday at 00:00:00:
                     if (time.getText().equals("00:00:00") && (LocalDate.now().getDayOfWeek().equals("SUNDAY"))) {
-                        CalculateAnalyticalData();
+                        analiticData.startCalculate();
                     }
-                    */
+
                     try {
                         sleep(1000);
                     } catch (InterruptedException ex) {

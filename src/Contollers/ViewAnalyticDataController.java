@@ -12,6 +12,7 @@ import entity.Rating;
 import javafx.application.Platform;
 import server.MysqlConnection;
 
+import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,10 +29,20 @@ public class ViewAnalyticDataController extends BasicController {
         this.myBoundary = myBoundary;
     }
 
+    public ViewAnalyticDataController() {
+    }
+
+    public void startCalculate(){
+        this.deletePreviosData();
+        this.getCustomerXPurchaseTable();
+    }
+
     @Override
     public void getResultFromClient(SqlResult result) {
         Platform.runLater(() -> {
             switch (result.getActionType()) {
+                case DELETE_ALL_RATINGS_ROWS:
+                    break;
                 case GET_ALL_RATING_TABLE:
                     ArrayList<Rating> resultList = new ArrayList<>();
                     resultList.addAll(this.changeResultToRating(result));
@@ -43,15 +54,20 @@ public class ViewAnalyticDataController extends BasicController {
                     for (int i=0; i<resultList1.size();i++) {
                         setRatingTableInDB(resultList1,i);
                     }
-                    System.out.println("rating done");
-                    System.out.println("///////////");
                     break;
                 case INSERT_RATING:
+                    break;
+                case GET_RATING_FOR_CUSTUMER_TYPE:
+
                     break;
                 default:
                     break;
             }
         });
+    }
+    public void deletePreviosData() {
+        SqlAction sqlAction = new SqlAction(SqlQueryType.DELETE_ALL_RATINGS_ROWS);
+        super.sendSqlActionToClient(sqlAction);
     }
 
     public void getRatingTable() {
@@ -63,26 +79,17 @@ public class ViewAnalyticDataController extends BasicController {
     private ArrayList<Rating> changeResultToRating(SqlResult result){
         ArrayList<Rating> resultList = new ArrayList<>();
         for(ArrayList<Object> a: result.getResultData()) {
-            Rating cos = new Rating(Integer.parseInt((String) a.get(0)),
-                    (Integer)a.get(1),
-                    (String)a.get(2));
+            Rating cos = new Rating(Integer.parseInt((String) a.get(0)),(Integer)a.get(1),(String)a.get(2));
             resultList.add(cos);
              }
         return resultList;
     }
 
-    public void GetDateToCalcRating (){
-       // SqlAction sqlAction = new SqlAction(SqlQueryType.GET_ALL_PURCHASE_TABLE);
-        //super.sendSqlActionToClient(sqlAction);
-
-    }
-
-
     private void setRatingTableInDB(ArrayList<Rating> resultList, int i) {
         ArrayList<Object> varArray = new ArrayList<>();
         varArray.add(resultList.get(i).getCustomerID());
         varArray.add(resultList.get(i).getRating());
-        varArray.add(resultList.get(i).getRating());
+        varArray.add(resultList.get(i).getCustomerType());
 
         SqlAction sqlAction = new SqlAction(SqlQueryType.INSERT_RATING, varArray);
         super.sendSqlActionToClient(sqlAction);

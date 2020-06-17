@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXTimePicker?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
@@ -11,7 +12,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
-
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="796.0" prefWidth="1062.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundary.MarketingCampaignTemplateBoundary">
    <children>
@@ -33,7 +33,10 @@
                   <TableColumn fx:id="EndHourColumn" prefWidth="102.0" text="End Hour" />
                </columns>
             </TableView>
-            <Button fx:id="btnAddNewTemplate" layoutX="425.0" layoutY="375.0" mnemonicParsing="false" onAction="#handleBtnAddTemplate" prefHeight="42.0" prefWidth="207.0" style="-fx-background-color: #2d4578; -fx-background-radius: 50;" stylesheets="@style.css" text="Add New Template" textFill="WHITE" />
+            <Button fx:id="btnAddNewTemplate" layoutX="425.0" layoutY="375.0" mnemonicParsing="false" onAction="#handleBtnAddTemplate" prefHeight="42.0" prefWidth="207.0" style="-fx-background-radius: 50;" stylesheets="@style.css" text="Add New Template" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
             <Pane fx:id="detailsPane" layoutX="85.0" layoutY="364.0" prefHeight="389.0" prefWidth="873.0">
                <children>
                   <SplitPane fx:id="newTemplateDetails" dividerPositions="0.1440329218106996" orientation="VERTICAL" prefHeight="392.0" prefWidth="872.0">
@@ -52,7 +55,10 @@
                               <JFXTimePicker fx:id="StartHour" defaultColor="#32236f" layoutX="451.0" layoutY="135.0" prefHeight="31.0" prefWidth="168.0" promptText="Start Hour" />
                               <JFXTimePicker fx:id="EndHour" defaultColor="#32236f" layoutX="639.0" layoutY="139.0" prefHeight="31.0" prefWidth="168.0" promptText="End Hour" />
                               <JFXTextField fx:id="MarketingAdForTemplate" focusColor="#00add8" labelFloat="true" layoutX="451.0" layoutY="211.0" prefHeight="33.0" prefWidth="355.0" promptText="Marketing Ad For Template" unFocusColor="#868282" />
-                              <Button fx:id="btnNewTemplate" layoutX="332.0" layoutY="261.0" mnemonicParsing="false" onAction="#handleSaveTemplate" prefHeight="42.0" prefWidth="207.0" style="-fx-background-color: #2d4578; -fx-background-radius: 50;" stylesheets="@style.css" text="Save New Template" textFill="WHITE" />
+                              <Button fx:id="btnNewTemplate" layoutX="332.0" layoutY="261.0" mnemonicParsing="false" onAction="#handleSaveTemplate" prefHeight="42.0" prefWidth="207.0" style="-fx-background-radius: 50;" stylesheets="@style.css" text="Save New Template" textFill="WHITE">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor></Button>
                            </children>
                         </AnchorPane>
                      </items>

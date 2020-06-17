@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXDatePicker?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
@@ -36,7 +37,10 @@
                   <TableColumn fx:id="EndDateColumn" prefWidth="106.0" text="End Date" />
                </columns>
             </TableView>
-            <Button fx:id="btnADDnewSaleOperation1" layoutX="159.0" layoutY="676.0" mnemonicParsing="false" onAction="#handleBtnAddSale" prefHeight="42.0" prefWidth="260.0" style="-fx-background-color: #2D4578; -fx-background-radius: 50;" stylesheets="@style.css" text="Add New Marketing Campaign" textFill="WHITE" />
+            <Button fx:id="btnADDnewSaleOperation1" layoutX="159.0" layoutY="676.0" mnemonicParsing="false" onAction="#handleBtnAddSale" prefHeight="42.0" prefWidth="260.0" style="-fx-background-radius: 50;" stylesheets="@style.css" text="Add New Marketing Campaign" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
             <Pane fx:id="detailsPane" layoutX="617.0" layoutY="169.0" prefHeight="495.0" prefWidth="392.0">
                <children>
                   <SplitPane fx:id="newTemplateDetails" dividerPositions="0.08333333333333333" orientation="VERTICAL" prefHeight="494.0" prefWidth="390.0">
@@ -48,8 +52,14 @@
                         </AnchorPane>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="272.0" prefWidth="870.0" style="-fx-background-color: #fcf8e8;">
                            <children>
-                              <JFXDatePicker fx:id="startDatePicker" defaultColor="#222275" layoutX="53.0" layoutY="222.0" onAction="#handleStartDate" onMouseClicked="#handleStartDateNew" onMousePressed="#handleStartDateNew" onMouseReleased="#handleStartDateNew" prefHeight="31.0" prefWidth="277.0" promptText="Start Sale Date" />
-                              <JFXDatePicker fx:id="endDatePicker" defaultColor="#222275" layoutX="53.0" layoutY="279.0" onAction="#handleEndDate" onMouseClicked="#handleEndDateNew" prefHeight="31.0" prefWidth="278.0" promptText="End Sale Date" />
+                              <JFXDatePicker fx:id="startDatePicker" defaultColor="#222275" layoutX="53.0" layoutY="222.0" onAction="#handleStartDate" onMouseClicked="#handleStartDateNew" onMousePressed="#handleStartDateNew" onMouseReleased="#handleStartDateNew" prefHeight="31.0" prefWidth="277.0" promptText="Start Sale Date">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor></JFXDatePicker>
+                              <JFXDatePicker fx:id="endDatePicker" defaultColor="#222275" layoutX="53.0" layoutY="279.0" onAction="#handleEndDate" onMouseClicked="#handleEndDateNew" prefHeight="31.0" prefWidth="278.0" promptText="End Sale Date">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor></JFXDatePicker>
                               <JFXComboBox fx:id="ChooseTemplateCombo" layoutX="56.0" layoutY="19.0" onAction="#handleChooseTemplate" prefHeight="31.0" prefWidth="281.0" promptText="Choose Template" />
                               <HBox fx:id="templateDetaildVBOX" layoutX="74.0" layoutY="59.0" prefHeight="156.0" prefWidth="238.0">
                                  <children>
@@ -123,7 +133,10 @@
                                     </VBox>
                                  </children>
                               </HBox>
-                              <Button fx:id="btnRunSaleOperation" layoutX="68.0" layoutY="339.0" mnemonicParsing="false" onAction="#handleBtnRunSale" prefHeight="42.0" prefWidth="238.0" style="-fx-background-color: #2D4578; -fx-background-radius: 50;" stylesheets="@style.css" text="Run Marketing Campaign" textFill="WHITE" />
+                              <Button fx:id="btnRunSaleOperation" layoutX="68.0" layoutY="339.0" mnemonicParsing="false" onAction="#handleBtnRunSale" prefHeight="42.0" prefWidth="238.0" style="-fx-background-radius: 50;" stylesheets="@style.css" text="Run Marketing Campaign" textFill="WHITE">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor></Button>
                               <Label fx:id="ERRORalreadyPassedDate" layoutX="45.0" layoutY="253.0" text="Can not select a date that has already passed!" textFill="RED">
                                  <font>
                                     <Font size="14.0" />

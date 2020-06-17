@@ -223,8 +223,11 @@ public class MysqlConnection {
                 "from Costumer as c, Purchase as p, FastFuel as ff " +
                 "WHERE p.customerID LIKE c.ID AND p.purchaseID LIKE ff.purchaseID";
         sqlArray[SqlQueryType.INSERT_RATING.getCode()] ="INSERT INTO `Rating`(`CustomerID`, `Rating`, `CustomerType`) VALUES (?,?,?);";
+        sqlArray[SqlQueryType.DELETE_ALL_RATINGS_ROWS.getCode()] = "DELETE FROM `Rating` WHERE 1";
+        sqlArray[SqlQueryType.GET_RATING_FOR_CUSTUMER_TYPE.getCode()] = "SELECT * FROM `Rating` WHERE `CustomerType`='?'";
 
-    /* *****************************************
+
+        /* *****************************************
          * ********** Discount Rates Queries ****************
          * *****************************************/
         sqlArray[SqlQueryType.GET_RegularSubscriptionSingleVehicle_PRICE.getCode()] = "SELECT * FROM `DiscountRates` WHERE `Subscription type` LIKE \"Regular monthly subscription - single vehicle\"";

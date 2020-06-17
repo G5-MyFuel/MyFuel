@@ -38,7 +38,7 @@ public class ViewAnalyticDataBoundary implements DataInitializable {
     /** The supervisor boundary controller. */
     private ViewAnalyticDataController myController = new ViewAnalyticDataController(this);
     //private AnalyticDataCreator analyticDataCreator = new AnalyticDataCreator(this);
-
+    private generalDashBoardBoundary myDashBoard;
     private String marketingManager;
     private FormValidation formValidation;
 
@@ -128,7 +128,8 @@ public class ViewAnalyticDataBoundary implements DataInitializable {
 
     @Override
     public void initData(Object data) {
-        this.marketingManager = (String) data;
+         myDashBoard = (generalDashBoardBoundary) data;
+
     }
 
     @Override
@@ -147,8 +148,9 @@ public class ViewAnalyticDataBoundary implements DataInitializable {
 
     @FXML
     void handleGenerateData(ActionEvent event) {
+        myController.deletePreviosData();
         myController.getCustomerXPurchaseTable();
-        myController.getRatingTable(); //start the process that will ask server to execute quarry and get the table details
+      ///  myController.getRatingTable(); //start the process that will ask server to execute quarry and get the table details
     }
 
     @FXML
@@ -176,7 +178,7 @@ public class ViewAnalyticDataBoundary implements DataInitializable {
         customerIdCulomn.setCellValueFactory(new PropertyValueFactory<>("customerID"));
 
         ObservableList<Rating> data = FXCollections.observableArrayList(cosArray);
-        RatingTableForCustomerType.setItems(data); //באופן זמני !!!!
+        RatingTableForTimeRange.setItems(data); //באופן זמני !!!!
 
     }
 
@@ -194,6 +196,9 @@ public class ViewAnalyticDataBoundary implements DataInitializable {
 
     @FXML
     void handlecustomerTypeCombo(ActionEvent event) {
+        customerTypeCombo.getValue();
+        customerTypeCombo.setVisible(true);
+
 
     }
 

@@ -88,11 +88,7 @@ public class MarketingCampaignController extends BasicController {
             cos.setBeginDate(Date.valueOf((String) a.get(2)));
             cos.setEndDate(Date.valueOf((String) a.get(3)));
 
-            //if (((String) a.get(0)).equals("") == false) {
             SaleCounter = Integer.parseInt((String) a.get(0));
-            /*}
-            else { SaleCounter=1; }*/
-
             resultList.add(cos);
         }
         return resultList;
