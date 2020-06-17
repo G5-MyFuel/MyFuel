@@ -34,11 +34,12 @@ import java.util.ResourceBundle;
  * @see ViewAnalyticDataController - the form's logic class
  */
 
-public class ViewAnalyticDataBoundary implements Initializable {
+public class ViewAnalyticDataBoundary implements DataInitializable {
     /** The supervisor boundary controller. */
     private ViewAnalyticDataController myController = new ViewAnalyticDataController(this);
-    private AnalyticDataCreator analyticDataCreator = new AnalyticDataCreator(this);
+    //private AnalyticDataCreator analyticDataCreator = new AnalyticDataCreator(this);
 
+    private String marketingManager;
     private FormValidation formValidation;
 
     @FXML
@@ -126,12 +127,15 @@ public class ViewAnalyticDataBoundary implements Initializable {
     private ObservableList<String> FuelType = FXCollections.observableArrayList("Gasoline95", "Diesel", "ScooterFuel", "HomeHeatingFuel");
 
     @Override
+    public void initData(Object data) {
+        this.marketingManager = (String) data;
+    }
+
+    @Override
     public void initialize(URL location, ResourceBundle resources) {
         customerTypeCombo.setItems(CustomerType);
         fuelTypeCombo1.setItems(FuelType);
-
     }
-
 
     private void formValidation() {
         /**
@@ -143,7 +147,7 @@ public class ViewAnalyticDataBoundary implements Initializable {
 
     @FXML
     void handleGenerateData(ActionEvent event) {
-        analyticDataCreator.getCustomerXPurchaseTable();
+        myController.getCustomerXPurchaseTable();
         myController.getRatingTable(); //start the process that will ask server to execute quarry and get the table details
     }
 
