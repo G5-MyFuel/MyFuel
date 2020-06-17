@@ -44,6 +44,9 @@ public class ConfirmDiscountRatesBoundary implements DataInitializable {
     @FXML
     private Button btnRemoveNewRate;
 
+    @FXML
+    private Label NoNewRatePendingLabel;
+
     @Override
     public void initData(Object data) {
 
@@ -55,6 +58,10 @@ public class ConfirmDiscountRatesBoundary implements DataInitializable {
 
         btnApprovedRates.setDisable(true);
         btnRemoveNewRate.setDisable(true);
+        NoNewRatePendingLabel.setVisible(false);
+        TableSubscriptionType.setVisible(false);
+        btnApprovedRates.setVisible(false);
+        btnRemoveNewRate.setVisible(false);
         /*ChooseSubscriptionTypeCombo.setItems(SubscriptionType);
         ShowCurrentRateTXT.setVisible(false);
 
@@ -120,7 +127,19 @@ public class ConfirmDiscountRatesBoundary implements DataInitializable {
         NewPriceColumn.setCellValueFactory(new PropertyValueFactory<>("newDiscountRate"));
 
         ObservableList<DiscountRate> data = FXCollections.observableArrayList(resultList);
-        TableSubscriptionType.setItems(data);
+        if (resultList.size() == 0) {
+            NoNewRatePendingLabel.setVisible(true);
+            TableSubscriptionType.setVisible(false);
+            btnApprovedRates.setVisible(false);
+            btnRemoveNewRate.setVisible(false);
+        } else {
+            NoNewRatePendingLabel.setVisible(false);
+            TableSubscriptionType.setVisible(true);
+            btnApprovedRates.setVisible(true);
+            btnRemoveNewRate.setVisible(true);
+            TableSubscriptionType.setItems(data);
+        }
+
 
         //ArrayList<DiscountRate> discountArray = new ArrayList<DiscountRate>(TableSubscriptionType.getSelectionModel().getSelectedItems());
 
@@ -145,7 +164,6 @@ public class ConfirmDiscountRatesBoundary implements DataInitializable {
             btnApprovedRates.setDisable(false);
             btnRemoveNewRate.setDisable(false);
         }
-
     }
 
     @FXML
@@ -163,6 +181,9 @@ public class ConfirmDiscountRatesBoundary implements DataInitializable {
 
     @FXML
     void handleRemoveNewRate(ActionEvent event) {
+
+
+
 
     }
 
