@@ -2,6 +2,7 @@
 
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ContextMenu?>
@@ -59,7 +60,7 @@
             </ContextMenu>
          </contextMenu>
       </TableView>
-      <HBox fx:id="hboxOrderConfirmation" alignment="CENTER_LEFT" layoutX="631.0" layoutY="290.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="63.0" prefWidth="285.0" style="-fx-background-color: #fcf8e8; -fx-border-color: #888888; -fx-background-radius: 5; -fx-background-insets: 0;">
+      <HBox fx:id="hboxOrderConfirmation" alignment="CENTER_LEFT" layoutX="631.0" layoutY="322.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="63.0" prefWidth="285.0" style="-fx-background-color: #fcf8e8; -fx-border-color: #888888; -fx-background-radius: 5; -fx-background-insets: 0;">
          <children>
             <ImageView fx:id="checkBoxImage" fitHeight="35.0" fitWidth="35.0">
                <HBox.margin>
@@ -87,7 +88,10 @@
             <DropShadow blurType="GAUSSIAN" height="5.0" radius="2.0" width="5.0" />
          </effect>
       </HBox>
-      <Button fx:id="SendBtn" layoutX="729.0" layoutY="443.0" mnemonicParsing="false" onMouseClicked="#clickSendBtn" prefHeight="42.0" prefWidth="89.0" style="-fx-background-color: #2D4578; -fx-background-radius: 50;" text="Send" textFill="WHITE" />
+      <Button fx:id="SendBtn" layoutX="729.0" layoutY="467.0" mnemonicParsing="false" onMouseClicked="#clickSendBtn" prefHeight="42.0" prefWidth="89.0" style="-fx-background-radius: 50;" stylesheets="@style.css" text="Send" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
       <Text fx:id="ApprovalTxt" fill="RED" layoutX="631.0" layoutY="581.0" strokeType="OUTSIDE" strokeWidth="0.0" text="* Order was sent to the supplier" wrappingWidth="284.999979197979">
          <font>
             <Font name="System Bold" size="19.0" />
@@ -99,5 +103,16 @@
             <Font size="17.0" />
          </font>
       </Text>
+      <Text layoutX="656.0" layoutY="208.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <Text fx:id="OrderNumberTxt" layoutX="572.0" layoutY="198.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Order Number:" wrappingWidth="118.04345703125">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Text>
+      <Label fx:id="orderNumberField" layoutX="729.0" layoutY="177.0" prefHeight="31.0" prefWidth="89.0" text="Label" textFill="#2d4578">
+         <font>
+            <Font name="System Bold" size="21.0" />
+         </font>
+      </Label>
    </children>
 </Pane>

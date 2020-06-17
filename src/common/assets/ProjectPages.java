@@ -16,27 +16,24 @@ public enum ProjectPages {
     GENERAL_DASH_BOARD("/boundary/generalDashBoard.fxml"),
     STATION_SELECTION_PAGE("/boundary/choseStationPage.fxml"),
 
-
-    //hani pages:
     SALE_OPERATION_TEMPLATE_PAGE("/boundary/MarketingCampaignTemplate.fxml"),
     RUN_MARKETING_CAMPAIGN_PAGE("/boundary/MarketingCampaignFXML.fxml"),
     VIEW_ANALITIC_DATA("/boundary/ViewAnalyticDataFXML.fxml"),
-    //Nir pages:
+
     SETTING_DISCOUNT_RATES_PAGE("/boundary/SettingDiscountRatesFXML.fxml"),
     CONFIRM_DISCOUNT_RATES_PAGE("/boundary/ConfirmDiscountRatesFXML.fxml"),
     GENERATING_REPORTS_STATION_MANAGER_PAGE("/boundary/GeneratingReportsStationManagerFXML.fxml"),
     GENERATING_REPORTS_MARKETING_MANAGER_PAGE("/boundary/GeneratingReportsMarketingManagerFXML.fxml"),
     VIEW_REPORTS_PAGE("/boundary/ViewReportsFXML.fxml"),
 
-    //Daniel pages:
-    //PURCHASE_FUEL_FOR_HOME_HEATING,TRACKING_FUEL_FOR_HOME_HEATING,
+
     FAST_FUEL_PAGE("/boundary/CustomerRegistrationFXML2.fxml"),
     PURCHASE_FUEL_FOR_HOME_HEATING("/boundary/NewPurchaseFuelForHomeHeatingFXML.fxml"),
     LOGIN_PAGE("/boundary/LoginToSystemFXML.fxml"),
 
     //Adi pages:
-    MANAGER_SUPPLY_CONFIRMATION_PAGE("/boundary/Manager-Supply-confirmation-adi.fxml");
-
+    MANAGER_SUPPLY_CONFIRMATION_PAGE("/boundary/Manager-Supply-confirmation-adi.fxml"),
+    SUPPLY_ORDER_EXECUTION("/boundary/supplierOrderExecution.fxml");
 
     private String path;
 

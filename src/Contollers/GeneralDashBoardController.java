@@ -37,7 +37,7 @@ public class GeneralDashBoardController extends BasicController {
                     this.changeResultToFuelPrices(result);
                     break;
                 case GET_ALL_PURCHASE_FUEL_AMOUNT_OF_USER:
-                    this.changeResultToFueAmountOfPreMonthOfCurUser(result, "");
+                    this.changeResultToFueAmountOfPreMonthOfCurUser(result, currentUserID);
                     break;
                 //
                 default:

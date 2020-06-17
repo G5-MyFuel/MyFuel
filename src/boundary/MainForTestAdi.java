@@ -3,6 +3,7 @@ package boundary;
 import client.ChatClient;
 import client.ClientApp;
 import client.ClientConsole;
+import common.assets.ProjectPages;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -34,7 +35,7 @@ public class MainForTestAdi extends Application {
         try {
             FXMLLoader loader = new FXMLLoader();
             /*loader.setLocation(getClass().getResource("/boundary/supplierOrderExecution.fxml"));*/
-            loader.setLocation(getClass().getResource("/boundary/Manager-Supply-Confirmation-adi.fxml"));
+            loader.setLocation(getClass().getResource(ProjectPages.MANAGER_SUPPLY_CONFIRMATION_PAGE.getPath()));
             root = loader.load();
             Scene s1 = new Scene(root);
             primaryStage.setScene(s1);

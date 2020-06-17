@@ -1,6 +1,7 @@
 package boundary;
 
 import Contollers.OrderFromSupplierController;
+import common.assets.EmailHandler;
 import entity.OrderFuelFromSupplier;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,6 +20,7 @@ import javafx.scene.text.Text;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.ResourceBundle;
 
 /**
@@ -30,6 +32,7 @@ public class OrderExecutionBoundary implements DataInitializable {
     private OrderExecutionBoundary OrderExecutionController;
     private OrderFromSupplierController myController = new OrderFromSupplierController(this);
     private String SupplierID = "";
+    /*private  generalDashBoardBoundary dashBoard;
     /*private ArrayList<OrderFuelFromSupplier> OFFS;*/
 
     @FXML
@@ -120,24 +123,29 @@ public class OrderExecutionBoundary implements DataInitializable {
 
     @FXML
     void ClickDoneBtn(MouseEvent event) {
+        EmailHandler sender = new EmailHandler();
         tableView.getSelectionModel().getSelectedItem().setOrderStatus("done");
 
         OrderFuelFromSupplier temp = tableView.getSelectionModel().getSelectedItem();
         temp.setOrderStatus("done");
         myController.setNewStatus(temp.getOrderNumber());
-
         hboxOrderConfirmation.setVisible(false);
         DoneMsgTxt.setVisible(true);
         DoneBtn.setVisible(false);
         tableView.refresh();
 
         addToStock(temp.getQuantity(), temp.getFuelType(), temp.getStationNumber(), temp.getManagerID());
+        /** Send an email to the station manager that the order arrived **/
+        sender.sendMessage(temp.getUserEmail(),"Order update","Dear "+temp.getUserFirstName()+" "+temp.getUserLastName()+
+                ", Order number "+temp.getOrderNumber()+" has arrived to your station.\n Have a nice day.\n\n *message from MyFuel");
     }
 
 
     @Override
     public void initData(Object data) {
-        SupplierID = (String) data;
+        this.SupplierID = (String) data;
+        /*SupplierID = (String)((ArrayList<?>) data).get(1);
+        dashBoard = (generalDashBoardBoundary)((ArrayList<?>) data).get(0);*/
     }
 
     @Override
