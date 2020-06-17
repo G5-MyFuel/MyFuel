@@ -4,13 +4,11 @@ import boundary.GeneratingReportsStationManagerBoundary;
 import common.assets.SqlAction;
 import common.assets.SqlQueryType;
 import common.assets.SqlResult;
-import entity.FuelTypes;
 import entity.PurchasesReport;
 import entity.QuantityItemsStockReport;
 import javafx.application.Platform;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class GeneratingReportsStationManagerController extends BasicController {
 

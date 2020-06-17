@@ -47,6 +47,9 @@ public class ConfirmDiscountRatesBoundary implements DataInitializable {
     @FXML
     private Label NoNewRatePendingLabel;
 
+    @FXML
+    private Label InstructionsLabel;
+
     @Override
     public void initData(Object data) {
 
@@ -56,12 +59,13 @@ public class ConfirmDiscountRatesBoundary implements DataInitializable {
     public void initialize(URL location, ResourceBundle resources) {
         this.formValidation = FormValidation.getValidator();
 
-        btnApprovedRates.setDisable(true);
-        btnRemoveNewRate.setDisable(true);
+        /*btnApprovedRates.setDisable(true);
+        btnRemoveNewRate.setDisable(true);*/
         NoNewRatePendingLabel.setVisible(false);
         TableSubscriptionType.setVisible(false);
         btnApprovedRates.setVisible(false);
         btnRemoveNewRate.setVisible(false);
+        InstructionsLabel.setVisible(false);
 
         /*  set all fields validators */
         formValidation();
@@ -100,11 +104,13 @@ public class ConfirmDiscountRatesBoundary implements DataInitializable {
             TableSubscriptionType.setVisible(false);
             btnApprovedRates.setVisible(false);
             btnRemoveNewRate.setVisible(false);
+            InstructionsLabel.setVisible(false);
         } else {
             NoNewRatePendingLabel.setVisible(false);
             TableSubscriptionType.setVisible(true);
             btnApprovedRates.setVisible(true);
             btnRemoveNewRate.setVisible(true);
+            InstructionsLabel.setVisible(true);
             TableSubscriptionType.setItems(data);
         }
     }
