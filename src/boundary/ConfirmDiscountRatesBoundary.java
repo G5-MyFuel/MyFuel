@@ -44,6 +44,9 @@ public class ConfirmDiscountRatesBoundary implements DataInitializable {
     @FXML
     private Button btnRemoveNewRate;
 
+    @FXML
+    private Label NoNewRatePendingLabel;
+
     @Override
     public void initData(Object data) {
 
@@ -55,8 +58,10 @@ public class ConfirmDiscountRatesBoundary implements DataInitializable {
 
         btnApprovedRates.setDisable(true);
         btnRemoveNewRate.setDisable(true);
-        /*ChooseSubscriptionTypeCombo.setItems(SubscriptionType);
-        ShowCurrentRateTXT.setVisible(false);
+        NoNewRatePendingLabel.setVisible(false);
+        TableSubscriptionType.setVisible(false);
+        btnApprovedRates.setVisible(false);
+        btnRemoveNewRate.setVisible(false);
 
         /*  set all fields validators */
         formValidation();
@@ -80,36 +85,6 @@ public class ConfirmDiscountRatesBoundary implements DataInitializable {
 
     }
 
-    /**
-     * this method will set the costumer table and the cell edit functions
-     * when the page initialized.
-     */
-    public void setSubscriptionTypeTable(ArrayList<Costumer> cosArray) {
-
-
-    }
-
-    /*private void setColomsCells() {
-
-        //Create a customer cell factory so that cells can support editing.
-        Callback<TableColumn, TableCell> cellFactory = new Callback<TableColumn, TableCell>() {
-            @Override
-            public TableCell call(TableColumn p) {
-                return new EditingCell();
-            }
-        };
-        CheckboxColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<String, String>, ObservableValue<String>>() {
-            @Override
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<Costumer, String> param) {
-                Costumer treeItem = param.getValue();
-                Costumer costumer = treeItem;
-
-                String temp = costumer.getPurchasePlan();
-                return new SimpleObjectProperty<String>(temp);
-            }
-        });
-    }*/
-
     public void setDiscountRatesData(ArrayList<DiscountRate> resultList) {
 
         TableSubscriptionType.getSelectionModel().setSelectionMode(
@@ -120,10 +95,18 @@ public class ConfirmDiscountRatesBoundary implements DataInitializable {
         NewPriceColumn.setCellValueFactory(new PropertyValueFactory<>("newDiscountRate"));
 
         ObservableList<DiscountRate> data = FXCollections.observableArrayList(resultList);
-        TableSubscriptionType.setItems(data);
-
-        //ArrayList<DiscountRate> discountArray = new ArrayList<DiscountRate>(TableSubscriptionType.getSelectionModel().getSelectedItems());
-
+        if (resultList.size() == 0) {
+            NoNewRatePendingLabel.setVisible(true);
+            TableSubscriptionType.setVisible(false);
+            btnApprovedRates.setVisible(false);
+            btnRemoveNewRate.setVisible(false);
+        } else {
+            NoNewRatePendingLabel.setVisible(false);
+            TableSubscriptionType.setVisible(true);
+            btnApprovedRates.setVisible(true);
+            btnRemoveNewRate.setVisible(true);
+            TableSubscriptionType.setItems(data);
+        }
     }
 
     @FXML
@@ -137,33 +120,37 @@ public class ConfirmDiscountRatesBoundary implements DataInitializable {
         System.out.println(TableSubscriptionType.getSelectionModel().getSelectedItems());
         sendDiscountRates.addAll(discountArray);
 
-        /*for (DiscountRate temp : sendDiscountRates)
-            if(temp.get)    סטטוס*/
-
         System.out.println(discountArray.size());
         if (discountArray.size() > 0) {
             btnApprovedRates.setDisable(false);
             btnRemoveNewRate.setDisable(false);
         }
-
     }
 
     @FXML
     void handleApprovedRates(ActionEvent event) {
 
-        ArrayList<String> paramArray = new ArrayList<>();
-        paramArray.add("Update New Discount Rate");
-        for (DiscountRate temp : sendDiscountRates)
-            paramArray.add(temp.getSubscriptionType());
-        myController.GetDiscountRatesData(paramArray);
-        paramArray.clear();
-        paramArray.add("Get Discount Rates Data");
-        myController.GetDiscountRatesData(paramArray);
+        updateDiscountRate("Update New Discount Rate");
     }
 
     @FXML
     void handleRemoveNewRate(ActionEvent event) {
 
+        updateDiscountRate("Remove New Discount Rate");
+    }
+
+    void updateDiscountRate(String queryName) {
+
+        ArrayList<String> paramArray = new ArrayList<>();
+        for (DiscountRate temp : sendDiscountRates) {
+            paramArray.clear();
+            paramArray.add(queryName);
+            paramArray.add(temp.getSubscriptionType());
+            myController.GetDiscountRatesData(paramArray);
+        }
+        paramArray.clear();
+        paramArray.add("Get Discount Rates Data");
+        myController.GetDiscountRatesData(paramArray);
     }
 
 }

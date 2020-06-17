@@ -42,6 +42,10 @@ public class ConfirmDiscountRatesController extends BasicController {
                 sqlAction = new SqlAction(SqlQueryType.UPDATE_NEW_DiscountRate, varArray);
                 super.sendSqlActionToClient(sqlAction);
                 break;
+            case "Remove New Discount Rate":
+                sqlAction = new SqlAction(SqlQueryType.Remove_NEW_DiscountRate, varArray);
+                super.sendSqlActionToClient(sqlAction);
+                break;
             default:
                 break;
         }
@@ -55,6 +59,8 @@ public class ConfirmDiscountRatesController extends BasicController {
             switch (result.getActionType()) {
                 case Get_DiscountRates_Table:
                     myBoundary.setDiscountRatesData(this.changeResultToDiscountRatesData(result));
+                    break;
+                case Remove_NEW_DiscountRate:
                     break;
                 default:
                     break;

@@ -276,9 +276,11 @@ public class MysqlConnection {
         /* *****************************************
          * ********** Admin Confirm Discount Rates Queries ****************
          * *****************************************/
-        sqlArray[SqlQueryType.Get_DiscountRates_Table.getCode()] = "SELECT * FROM `DiscountRates`";
+        sqlArray[SqlQueryType.Get_DiscountRates_Table.getCode()] = "SELECT * FROM `DiscountRates` WHERE `NewDiscountRate` != \"-\"";
         sqlArray[SqlQueryType.UPDATE_NEW_DiscountRate.getCode()] = "UPDATE `DiscountRates` " +
                 "SET `CurrentDiscountRate`= `NewDiscountRate`, `Status`= \"Approved\",`NewDiscountRate`= \"-\" WHERE `Subscription type` = ?";
+        sqlArray[SqlQueryType.Remove_NEW_DiscountRate.getCode()] = "UPDATE `DiscountRates` " +
+                "SET `Status`= \"Approved\",`NewDiscountRate`= \"-\" WHERE `Subscription type` = ?";
     }
 
     public Connection getConnection() {
