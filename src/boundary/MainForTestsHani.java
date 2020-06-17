@@ -28,7 +28,7 @@ public class MainForTestsHani extends Application {
         Pane root = null;
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource(ProjectPages.VIEW_ANALITIC_DATA.getPath()));
+            loader.setLocation(getClass().getResource(ProjectPages.RUN_MARKETING_CAMPAIGN_PAGE.getPath()));
             root = loader.load();
             Scene s1 = new Scene(root);
             primaryStage.setScene(s1);

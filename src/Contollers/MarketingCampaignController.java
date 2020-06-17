@@ -1,6 +1,6 @@
 package Contollers;
 
-import boundary.RunMarketingCampaignBoundary;
+import boundary.MarketingCampaignBoundary;
 import common.assets.SqlAction;
 import common.assets.SqlQueryType;
 import common.assets.SqlResult;
@@ -14,14 +14,14 @@ import java.util.ArrayList;
 
 /**
  * @author hani
- * @see RunMarketingCampaignController - the form's logic class
+ * @see MarketingCampaignController - the form's logic class
  */
 
-public class RunMarketingCampaignController extends BasicController {
+public class MarketingCampaignController extends BasicController {
     /**
      * The boundary controlled by this controller
      */
-    private RunMarketingCampaignBoundary myBoundary;
+    private MarketingCampaignBoundary myBoundary;
     private MarketingCampaign tempSaleOperation;
     private boolean flagSale = true;
     private int SaleCounter;
@@ -31,7 +31,7 @@ public class RunMarketingCampaignController extends BasicController {
      *
      * @param myBoundary the my boundary
      */
-    public RunMarketingCampaignController(RunMarketingCampaignBoundary myBoundary) {
+    public MarketingCampaignController(MarketingCampaignBoundary myBoundary) {
         this.myBoundary = myBoundary;
     }
 
