@@ -24,7 +24,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.image.ImageView;
 
-public class ViewReportsBoundary implements Initializable {
+public class ViewReportsBoundary implements DataInitializable {
 
     String managerID;
     String managerCompany;
@@ -112,6 +112,11 @@ public class ViewReportsBoundary implements Initializable {
     private final ObservableList<String> YearList = FXCollections.observableArrayList("2020", "2019", "2018", "2017", "2016", "2015",
             "2014", "2013", "2012", "2011", "2010");
     private final ObservableList<String> quarterList = FXCollections.observableArrayList("First", "Second", "Third", "Fourth");
+
+    @Override
+    public void initData(Object data) {
+
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

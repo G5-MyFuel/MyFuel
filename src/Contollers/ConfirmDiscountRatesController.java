@@ -27,18 +27,24 @@ public class ConfirmDiscountRatesController extends BasicController {
 
     /*Logic Methods*/
 
-    public void GetDiscountRatesData(/*String query*/) {
-        //ArrayList<Object> varArray = new ArrayList<>();
-        //varArray.addAll(paramArray);
-        //varArray.remove(0);
-        /*switch (query) {
-            case "Get Discount Rates data":*/
-        SqlAction sqlAction = new SqlAction(SqlQueryType.Get_DiscountRates_Table/*, varArray*/);
-        super.sendSqlActionToClient(sqlAction);
-                /*break;
+    public void GetDiscountRatesData(ArrayList<String> paramArray) {
+        ArrayList<Object> varArray = new ArrayList<>();
+        varArray.addAll(paramArray);
+        varArray.remove(0);
+        System.out.println(paramArray);
+        System.out.println(varArray);
+        switch (paramArray.get(0)) {
+            case "Get Discount Rates Data":
+                SqlAction sqlAction = new SqlAction(SqlQueryType.Get_DiscountRates_Table);
+                super.sendSqlActionToClient(sqlAction);
+                break;
+            case "Update New Discount Rate":
+                sqlAction = new SqlAction(SqlQueryType.UPDATE_NEW_DiscountRate, varArray);
+                super.sendSqlActionToClient(sqlAction);
+                break;
             default:
                 break;
-        }*/
+        }
     }
 
 
@@ -68,7 +74,7 @@ public class ConfirmDiscountRatesController extends BasicController {
         //Float TotalPrice = new Float(0);
         ArrayList<DiscountRate> resultList = new ArrayList<>();
         for (ArrayList<Object> a : result.getResultData()) {
-            resultList.add(new DiscountRate((String) a.get(0), (String) a.get(1),(String) a.get(3)));
+            resultList.add(new DiscountRate((String) a.get(0), (String) a.get(1), (String) a.get(3)));
             //TotalPrice += Float.parseFloat((String) a.get(0));
         }
         //return TotalPrice.toString();

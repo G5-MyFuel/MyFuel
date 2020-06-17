@@ -13,7 +13,12 @@ public enum SqlQueryType {
     GET_ALL_VEHICLE_TABLE(SqlExecutionType.EXECUTE_QUERY),
     UPDATE_USER_LOGIN_STATUS(SqlExecutionType.UPDATE_QUERY),
     GET_EMPLOYEE_TABLE(SqlExecutionType.EXECUTE_QUERY),
+    //for Price class
     GET_ALL_PURCHASE_FUEL_AMOUNT_OF_USER(SqlExecutionType.EXECUTE_QUERY),
+
+    /* *****************************************
+     * ********** PurchaseFuelForHomeHeating ****************
+     * *****************************************/
 
     /* *****************************************
      * ********** Discount Rates Queries ****************
@@ -45,6 +50,8 @@ public enum SqlQueryType {
      * ********** Admin Confirm Discount Rates Queries ****************
      * *****************************************/
     Get_DiscountRates_Table(SqlExecutionType.EXECUTE_QUERY),
+    UPDATE_NEW_DiscountRate(SqlExecutionType.UPDATE_QUERY),
+
 
     /* *****************************************
      * ********** Costumer Management Queries ****************
