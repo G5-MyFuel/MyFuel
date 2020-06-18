@@ -154,6 +154,12 @@ public class MysqlConnection {
         sqlArray[SqlQueryType.GET_ALL_UPDATED_PRICES.getCode()] = "SELECT * FROM Prices;";
         sqlArray[SqlQueryType.GET_ALL_PURCHASE_FUEL_AMOUNT_OF_USER.getCode()] = "call bpsdc8o22sikrlpvvxqm.calculateCustomersPreviousMonthFuelAmount(?);";
 
+        /* *****************************************************
+         * *************** Fuel Management Queries ****************
+         * *****************************************************/
+        sqlArray[SqlQueryType.GET_ALL_MANAGER_STATIONS.getCode()] = "SELECT * FROM `GasStation` WHERE managerID = ?";
+        sqlArray[SqlQueryType.UPDATE_FUEL_LIMIT_STOCK.getCode()] = "UPDATE `GasStation` SET `FUEL_LIMIT`= ? WHERE StationNumber = ?";
+
 
         /* *****************************************
          * ********** Costumer Management Queries ****************

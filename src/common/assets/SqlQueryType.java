@@ -18,6 +18,13 @@ public enum SqlQueryType {
     GET_ALL_PURCHASE_FUEL_AMOUNT_OF_USER(SqlExecutionType.EXECUTE_QUERY),
 
     /* *****************************************
+     * ********** Fuel Management Queries ****************
+     * *****************************************/
+    GET_ALL_MANAGER_STATIONS(SqlExecutionType.EXECUTE_QUERY),
+    UPDATE_FUEL_LIMIT_STOCK(SqlExecutionType.UPDATE_QUERY),
+
+
+    /* *****************************************
      * ********** PurchaseFuelForHomeHeating ****************
      * *****************************************/
 

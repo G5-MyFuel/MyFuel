@@ -286,6 +286,15 @@ public class generalDashBoardBoundary implements DataInitializable {
                         }
                     });
                     break;
+                case "FUEL_MANAGMENT_PAGE":
+                    currentBtn.setText("Fuel Management");
+                    currentBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent event) {
+                            FUEL_MANAGMENT_PAGE();
+                        }
+                    });
+                    break;
 
 
                 default:
@@ -416,6 +425,12 @@ public class generalDashBoardBoundary implements DataInitializable {
         currentPagePane.getChildren().clear();
         currentPagePane.getStylesheets().add("../boudary/BGcss.css");
         currentPagePane.getChildren().setAll(mainProjectFX.pagingController.loadBoundaryInPane(ProjectPages.COSTUMER_MANAGEMENT_TABLE_PAGE.getPath(), userID));
+        myFuelLogo.setVisible(false);
+    }
+
+    void FUEL_MANAGMENT_PAGE(){
+        currentPagePane.setVisible(true);
+        mainProjectFX.pagingController.loadAdditionalStage(ProjectPages.FUEL_MANAGMENT_PAGE.getPath(), userID);
         myFuelLogo.setVisible(false);
     }
 

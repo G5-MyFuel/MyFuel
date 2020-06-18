@@ -11,6 +11,7 @@ public class EchoServer extends AbstractServer {
      * The default port to listen on.
      */
     final public static int DEFAULT_PORT = 5555;
+    final public static String FILLE_DIRECTORY = "C:\\the place we store the fiels.\\";
     public static int portNumber = 0;
     MysqlConnection mysql = MysqlConnection.Instance;
 
@@ -42,12 +43,41 @@ public class EchoServer extends AbstractServer {
 
         System.out.println("Message received: " + sqlAction.getActionType() + " from " + client);
 
-        /* If it is a file request also upload it to the server */
-//        if(msg instanceof "SqlFileAction"){
-//            //we will have to implement it later.
+//        /* If it is a file request also upload it to the server */
+//        if (msg instanceof SqlFileAction) {
+//            SqlFileAction sqlFileAction = (SqlFileAction) msg;
+//            if (sqlFileAction.getUpload() == true) {
+//                MyFile uploadedFile = sqlFileAction.getMyFile();
+//                int fileIndex = ((BigInteger) (sqlResult.getResultData().get(0).get(0))).intValue();
+//                String fileExtension = (String) sqlFileAction.getActionVars().get(1);
+//                String filePath = FILLE_DIRECTORY + fileIndex + "." + fileExtension;
+//
+//                System.out.println("File path is: " + filePath);
+//                try (FileOutputStream fileOuputStream = new FileOutputStream(filePath)) {
+//                    fileOuputStream.write(uploadedFile.getMybytearray());
+//                } catch (FileNotFoundException e) {
+//                    e.printStackTrace();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        } else {
+//            ArrayList<Object> newResultData = new ArrayList<Object>();
+//            /* Create my file from path */
+//            if (!sqlResult.getResultData().isEmpty()) {
+//                for (ArrayList<Object> resultRow : sqlResult.getResultData()) {
+//                    String fileName = ((Integer) resultRow.get(0)).toString();
+//                    String fileExtension = (String) resultRow.get(1);
+//                    String path = FILLE_DIRECTORY + fileName + "." + fileExtension;
+//                    MyFile myFile = MyFile.parseToMyFile(path);
+//                    newResultData.add(myFile);
+//                }
+//            }
+//            sqlResult.setResultData(newResultData);
 //        }
 
         this.sendToClient(sqlResult, client);
+
     }
 
     /**
@@ -67,36 +97,30 @@ public class EchoServer extends AbstractServer {
     }
 
     // Class methods ***************************************************
+
     /**
      * This method is responsible for the creation of
      * the server instance (there is no UI in this phase).
      *
      * @param args The port number to listen on.  Defaults to 5555
-     *          if no argument is entered.
+     *             if no argument is entered.
      */
-    public static void startServer(String[] args)
-    {
+    public static void startServer(String[] args) {
         MysqlConnection.initSqlArray();
         int port = 0; //Port to listen on
 
-        try
-        {
+        try {
             port = Integer.parseInt(args[0]); //Get port from command line
-        }
-        catch(Throwable t)
-        {
+        } catch (Throwable t) {
             port = DEFAULT_PORT; //Set port to 5555
         }
 
         EchoServer sv = new EchoServer(port);
         setSv(sv);
 
-        try
-        {
+        try {
             sv.listen(); //Start listening for connections
-        }
-        catch (Exception ex)
-        {
+        } catch (Exception ex) {
             System.out.println("ERROR - Could not listen for clients!");
         }
     }
