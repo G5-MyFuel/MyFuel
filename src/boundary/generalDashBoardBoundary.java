@@ -3,9 +3,6 @@ package boundary;
 import Contollers.GeneralDashBoardController;
 import Contollers.ViewAnalyticDataController;
 import common.assets.ProjectPages;
-import common.assets.enums.FuelTypes;
-import common.assets.enums.PricingModelTypes;
-import common.assets.enums.PurchasePlanTypes;
 import entity.Costumer;
 import entity.Prices;
 import javafx.event.EventHandler;
@@ -80,7 +77,8 @@ public class generalDashBoardBoundary implements DataInitializable {
 
     @FXML
     private Text currectDate;
-
+    @FXML
+    private Text notificationCounter;
     @FXML
     private Text currectDay;
 
@@ -278,7 +276,7 @@ public class generalDashBoardBoundary implements DataInitializable {
         weekDay();
     }
 
-    void SUPPLY_ORDER_EXECUTION(){
+    void SUPPLY_ORDER_EXECUTION() {
         currentPagePane.setVisible(true);
         currentPagePane.getChildren().clear();
         currentPagePane.getChildren().setAll(mainProjectFX.pagingController.loadBoundaryInPane(ProjectPages.SUPPLY_ORDER_EXECUTION.getPath(), userID));
@@ -352,7 +350,7 @@ public class generalDashBoardBoundary implements DataInitializable {
         currentPagePane.setVisible(true);
         currentPagePane.getChildren().clear();
 
-        currentPagePane.getChildren().setAll(mainProjectFX.pagingController.loadBoundaryInPane(ProjectPages.VIEW_ANALITIC_DATA.getPath(),this));
+        currentPagePane.getChildren().setAll(mainProjectFX.pagingController.loadBoundaryInPane(ProjectPages.VIEW_ANALITIC_DATA.getPath(), this));
         myFuelLogo.setVisible(false);
     }
 
