@@ -142,7 +142,7 @@
                                                       <Image url="@../media/interface.png" />
                                                   </image>
                                               </ImageView>
-                                    <Text fx:id="notificationCounter" layoutX="46.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3">
+                                    <Text fx:id="notificationCounter" layoutX="45.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3">
                                        <font>
                                           <Font name="System Bold" size="18.0" />
                                        </font>

@@ -77,8 +77,10 @@ public class generalDashBoardBoundary implements DataInitializable {
 
     @FXML
     private Text currectDate;
+
     @FXML
     private Text notificationCounter;
+
     @FXML
     private Text currectDay;
 
@@ -248,6 +250,13 @@ public class generalDashBoardBoundary implements DataInitializable {
                     });
                     break;
 
+                case "MANAGER_SUPPLY_CONFIRMATION_PAGE":
+                    currentBtn.setText("Approve Stock Order");
+                    currentBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent event) { MANAGER_SUPPLY_CONFIRMATION_PAGE(); }
+                    });
+                    break;
 
                 default:
                     System.err.println("Page incorrect!");
@@ -351,6 +360,13 @@ public class generalDashBoardBoundary implements DataInitializable {
         currentPagePane.getChildren().clear();
 
         currentPagePane.getChildren().setAll(mainProjectFX.pagingController.loadBoundaryInPane(ProjectPages.VIEW_ANALITIC_DATA.getPath(), this));
+        myFuelLogo.setVisible(false);
+    }
+
+    void MANAGER_SUPPLY_CONFIRMATION_PAGE() {
+        currentPagePane.setVisible(true);
+        currentPagePane.getChildren().clear();
+        currentPagePane.getChildren().setAll(mainProjectFX.pagingController.loadBoundaryInPane(ProjectPages.MANAGER_SUPPLY_CONFIRMATION_PAGE.getPath(), this));
         myFuelLogo.setVisible(false);
     }
 
@@ -470,6 +486,7 @@ public class generalDashBoardBoundary implements DataInitializable {
         else
             currectDate.setText(String.valueOf(dayOfMonth) + "/" + String.valueOf(month) + "/" + String.valueOf(year));
     }
+
 
     public String getUserID() {
         return userID;
