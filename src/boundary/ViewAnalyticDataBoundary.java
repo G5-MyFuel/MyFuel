@@ -163,13 +163,6 @@ public class ViewAnalyticDataBoundary implements DataInitializable {
         fuelTypeCombo1.setItems(FuelType);
         btnCustomerTypeShow.setDisable(true);
 
-        /*ratingCulomn.setStyle( "-fx-alignment: CENTER;");
-        ratingCulomn1.setStyle( "-fx-alignment: CENTER-RIGHT;");
-        ratingCulomn11.setStyle( "-fx-alignment: CENTER-RIGHT;");
-        customerIdCulomn.setStyle( "-fx-alignment: CENTER-RIGHT;");
-        customerIdCulomn1.setStyle( "-fx-alignment: CENTER-RIGHT;");
-        customerIdCulomn11.setStyle( "-fx-alignment: CENTER-RIGHT;");
-*/
     }
 
     private void formValidation() {

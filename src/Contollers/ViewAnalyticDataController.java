@@ -99,6 +99,7 @@ public class ViewAnalyticDataController extends BasicController {
 
     private ArrayList<Rating> changeResultToRatingForTimeRange(SqlResult result) {
         ArrayList<Rating> resultList = new ArrayList<>();
+        for(int t=0;t<11;t++)   monim[t]=0;
         for (ArrayList<Object> a : result.getResultData()) {
             if ((Time.valueOf((String) a.get(2)).after(start) && Time.valueOf((String) a.get(2)).before(end)) ||
                     Time.valueOf((String) a.get(2)).equals(start) && Time.valueOf((String) a.get(2)).equals(end)) {
@@ -111,7 +112,6 @@ public class ViewAnalyticDataController extends BasicController {
                          counter++;
                      }
                 }
-                for(int t=0;t<4;t++)   monim[t]=0;
                 if (counter ==0 ) {//הכנסה לרשימה שתוצג בסוף
                     resultList.add(cos);
                     for(int k=1; k<11; k++)
@@ -125,6 +125,7 @@ public class ViewAnalyticDataController extends BasicController {
 
     private ArrayList<Rating> changeResultToRatingForFuelType(SqlResult result) {
         ArrayList<Rating> resultList = new ArrayList<>();
+        for(int t=0;t<11;t++)   monim[t]=0;
         for (int i=0;i < result.getResultData().size(); i++ ) {
             ArrayList<Object> a = result.getResultData().get(i);
             Rating cos = new Rating((Integer) a.get(0), (String) a.get(1), (String) a.get(2));
@@ -134,7 +135,6 @@ public class ViewAnalyticDataController extends BasicController {
                         counter++;
                     }
                 }
-                for(int t=0;t<4;t++)   monim[t]=0;
                 if (counter ==0 ) {//הכנסה לרשימה שתוצג בסוף
                     resultList.add(cos);
                     for(int k=1; k<11; k++)

@@ -116,7 +116,7 @@ public class MarketingCampaignTemplateBoundary implements DataInitializable {
     private JFXComboBox<String> DayComboSpecialization1;
 
     private ObservableList<String> DayType = FXCollections.observableArrayList("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "All");
-    private ObservableList<String> FuelType = FXCollections.observableArrayList("Gasoline", "Diesel", "ScooterFuel");
+    private ObservableList<String> FuelType = FXCollections.observableArrayList("Gasoline95", "Diesel", "ScooterFuel");
 
     @Override
     public void initData(Object data) {
