@@ -4,26 +4,25 @@ import common.assets.EmailHandler;
 
 public class GasStation {
 
-    private Integer gasStationID;
-    private Integer companyID;
+    private Integer stationNumber;
+    private String companyName;
     private String gasStationName;
     private String managerID;
     private String inventory_95, inventoryScooter, inventoryDiesel;
     private Thread fuelAmountLimitCheck;
-    private Integer limit;
+    private Double fuelLimit;
     private EmailHandler emailSender;
 
 
-    public GasStation(Integer gasStationID, Integer companyID, String gasStationName, String managerID, String inventory_95, String inventoryScooter, String inventoryDiesel) {
-        this.gasStationID = gasStationID;
-        this.companyID = companyID;
+    public GasStation(Integer stationNumber, String companyName, String gasStationName, String managerID, String inventory_95, String inventoryScooter, String inventoryDiesel,Double fuelLimit) {
+        this.stationNumber = stationNumber;
+        this.companyName = companyName;
         this.gasStationName = gasStationName;
         this.managerID = managerID;
         this.inventory_95 = inventory_95;
         this.inventoryScooter = inventoryScooter;
         this.inventoryDiesel = inventoryDiesel;
-        emailSender = new EmailHandler();
-        fuelAmountLimitCheck.start();
+        this.fuelLimit = fuelLimit;
     }
 
 
@@ -39,14 +38,14 @@ public class GasStation {
             public void run() {
                 for (; ; ) {
 
-                    if (Integer.parseInt(inventory_95) < limit) {
+                    if (Integer.parseInt(inventory_95) < fuelLimit) {
                         emailSender.sendMessage("stationManagerEmailAdress@gmail.com", "Fuel Amount - Gasoline_95", "Fuel amount has been decrees below the define limit.");
                     }
-                    if (Integer.parseInt(inventoryScooter) < limit) {
+                    if (Integer.parseInt(inventoryScooter) < fuelLimit) {
                         emailSender.sendMessage("stationManagerEmailAdress@gmail.com", "Fuel Amount - Scooter", "Fuel amount has been decrees below the define limit.");
 
                     }
-                    if (Integer.parseInt(inventoryDiesel) < limit) {
+                    if (Integer.parseInt(inventoryDiesel) < fuelLimit) {
                         emailSender.sendMessage("stationManagerEmailAdress@gmail.com", "Fuel Amount - Diesel", "Fuel amount has been decrees below the define limit.");
 
                     }
@@ -66,20 +65,20 @@ public class GasStation {
 
     //Getters and Setters
     //
-    public Integer getGasStationID() {
-        return gasStationID;
+    public Integer getStationNumber() {
+        return stationNumber;
     }
 
-    public void setGasStationID(Integer gasStationID) {
-        this.gasStationID = gasStationID;
+    public void setStationNumber(Integer stationNumber) {
+        this.stationNumber = stationNumber;
     }
 
-    public Integer getCompanyID() {
-        return companyID;
+    public String getCompanyName() {
+        return companyName;
     }
 
-    public void setCompanyID(Integer companyID) {
-        this.companyID = companyID;
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
     }
 
     public String getGasStationName() {
@@ -121,6 +120,15 @@ public class GasStation {
     public void setInventoryDiesel(String inventoryDiesel) {
         this.inventoryDiesel = inventoryDiesel;
     }
+
+    public Double getFuelLimit() {
+        return fuelLimit;
+    }
+
+    public void setFuelLimit(Double fuelLimit) {
+        this.fuelLimit = fuelLimit;
+    }
+
     //
 
 
