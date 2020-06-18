@@ -16,7 +16,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundary.generalDashBoardBoundary">
+<Pane stylesheets="@BGcss.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundary.generalDashBoardBoundary">
     <children>
         <HBox>
             <children>
@@ -60,16 +60,16 @@
                                                     <children>
                                                         <Button fx:id="btnSignout" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onMouseClicked="#signOutClick" prefHeight="42.0" prefWidth="259.0" style="-fx-font-family: 'Abel', sans-serif; -fx-font-size: 16;" stylesheets="@style.css" text="Sign Out" GridPane.rowIndex="4">
                                                             <graphic>
-                                                                <ImageView fitHeight="22.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
+                                                                <ImageView fitHeight="31.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                                                     <image>
-                                                                        <Image url="@../media/ButtonsDashBoardMedia/icons8_return_purchase_40px.png" />
+                                                                        <Image url="@../media/ButtonsDashBoardMedia/signOut.png" />
                                                                     </image>
                                                                 </ImageView>
                                                             </graphic>
                                                         </Button>
                                                         <Button fx:id="btnHomePage" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onMouseClicked="#homePageClick" prefHeight="42.0" prefWidth="259.0" style="-fx-font-family: 'Abel', sans-serif; -fx-font-size: 16;" stylesheets="@style.css" text="Home Page" textFill="#e7e5e5">
                                                             <graphic>
-                                                                <ImageView fx:id="homePageIconImage" fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                                                                <ImageView fx:id="homePageIconImage" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                                                     <image>
                                                                         <Image url="@../media/CostumerRegisterationMedia/icons8_home_80px.png" />
                                                                     </image>
@@ -155,14 +155,14 @@
                         </AnchorPane>
                     </children>
                 </AnchorPane>
-                <Pane fx:id="HomePagePane" prefHeight="796.0" prefWidth="1062.0" style="-fx-position-shape: center; -fx-border-color: transparent;">
+                <Pane fx:id="HomePagePane" prefHeight="796.0" prefWidth="1062.0" style="-fx-position-shape: center; -fx-border-color: transparent;" stylesheets="@BGcss.css">
                     <children>
                         <ImageView fx:id="myFuelLogo" fitHeight="166.0" fitWidth="429.0" layoutX="300.0" layoutY="301.0" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@../media/2065573.png" />
                             </image>
                         </ImageView>
-                        <Pane fx:id="currentPagePane" />
+                        <Pane fx:id="currentPagePane" stylesheets="@BGcss.css" />
                     </children>
                 </Pane>
             </children>
