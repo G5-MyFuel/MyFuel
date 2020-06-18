@@ -61,7 +61,7 @@
                                        <contextMenu>
                                           <ContextMenu>
                                              <items>
-                                                <MenuItem mnemonicParsing="false" text="Refresh" />
+                                                <MenuItem mnemonicParsing="false" onAction="#refreshTable" text="Refresh" />
                                                 <MenuItem fx:id="DeleteBtn" mnemonicParsing="false" onAction="#removeSelectedCostumer" text="Delete" />
                                              </items>
                                              <styleClass>
@@ -117,16 +117,16 @@
                               </Label>
                               <Pane fx:id="VehicleInformationPane" layoutX="545.0" layoutY="190.0" prefHeight="367.0" prefWidth="364.0">
                                  <children>
-                                    <SplitPane dividerPositions="0.16161616161616163" layoutX="3.0" layoutY="4.0" orientation="VERTICAL" prefHeight="360.0" prefWidth="359.0" style="-fx-border-color: #2D4578; -fx-border-width: 4;">
+                                    <SplitPane dividerPositions="0.16161616161616163" layoutX="3.0" layoutY="4.0" orientation="VERTICAL" prefHeight="285.0" prefWidth="359.0" style="-fx-border-color: #2D4578; -fx-border-width: 4;">
                                        <items>
                                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="35.0" prefWidth="335.0" style="-fx-background-color: #fcf8e8;">
                                              <children>
                                                 <Label alignment="CENTER" layoutX="96.0" layoutY="7.0" style="-fx-font-weight: Bold;" text="Fill in Vehicle Information" />
                                              </children>
                                           </AnchorPane>
-                                          <AnchorPane prefHeight="185.0" prefWidth="349.0" style="-fx-background-color: #fcf8e8;">
+                                          <AnchorPane prefHeight="218.0" prefWidth="349.0" style="-fx-background-color: #fcf8e8;">
                                              <children>
-                                                <Button fx:id="saveVehicleButton" layoutX="153.0" layoutY="226.0" mnemonicParsing="false" onMouseClicked="#ClickSaveVehicleButton" style="-fx-background-radius: 50;" stylesheets="@style.css" text="Save">
+                                                <Button fx:id="saveVehicleButton" layoutX="153.0" layoutY="186.0" mnemonicParsing="false" onMouseClicked="#ClickSaveVehicleButton" style="-fx-background-radius: 50;" stylesheets="@style.css" text="Save">
                                                    <cursor>
                                                       <Cursor fx:constant="HAND" />
                                                    </cursor></Button>
@@ -146,7 +146,7 @@
                               </Button>
                               <Pane layoutX="11.0" layoutY="190.0" prefHeight="264.0" prefWidth="287.0">
                                  <children>
-                                    <TableView fx:id="VehicleTable" layoutY="2.0" prefHeight="261.0" prefWidth="287.0" style="-fx-background-color: #fcf8e8; -fx-border-color: #2D4578; -fx-border-width: 4;">
+                                    <TableView fx:id="VehicleTable" layoutY="2.0" prefHeight="293.0" prefWidth="287.0" style="-fx-background-color: #fcf8e8; -fx-border-color: #2D4578; -fx-border-width: 4;">
                                        <columns>
                                           <TableColumn fx:id="VehicleIDCol" prefWidth="140.0" text="VehicleI ID" />
                                           <TableColumn fx:id="GasTypeCol" prefWidth="146.0" text="Gas Type" />
@@ -170,7 +170,7 @@
                                     <Font size="18.0" />
                                  </font>
                               </JFXTextField>
-                              <Button fx:id="SearchButton112" layoutX="37.0" layoutY="473.0" mnemonicParsing="false" onMouseClicked="#removeSelectedVehicle" prefHeight="37.0" prefWidth="235.0" style="-fx-background-radius: 50;" stylesheets="@style.css" text="Click To Remove Selected Vehicle" textAlignment="RIGHT" textFill="WHITE">
+                              <Button fx:id="SearchButton112" layoutX="37.0" layoutY="493.0" mnemonicParsing="false" onMouseClicked="#removeSelectedVehicle" prefHeight="37.0" prefWidth="235.0" style="-fx-background-radius: 50;" stylesheets="@style.css" text="Click To Remove Selected Vehicle" textAlignment="RIGHT" textFill="WHITE">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
@@ -185,7 +185,7 @@
                                     </ImageView>
                                  </graphic>
                               </Button>
-                              <Button fx:id="SearchButton1121" layoutX="630.0" layoutY="122.0" mnemonicParsing="false" onMouseClicked="#setVehicleInfoVisible" prefHeight="41.0" prefWidth="194.0" style="-fx-background-radius: 50;" stylesheets="@style.css" text="Click To Add New Vehicle" textAlignment="RIGHT" textFill="WHITE">
+                              <Button fx:id="SearchButton1121" layoutX="623.0" layoutY="122.0" mnemonicParsing="false" onMouseClicked="#setVehicleInfoVisible" prefHeight="41.0" prefWidth="194.0" style="-fx-background-radius: 50;" stylesheets="@style.css" text="Click To Add New Vehicle" textAlignment="RIGHT" textFill="WHITE">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
@@ -221,4 +221,7 @@
          </children>
       </Pane>
    </children>
+   <padding>
+      <Insets left="10.0" />
+   </padding>
 </Pane>

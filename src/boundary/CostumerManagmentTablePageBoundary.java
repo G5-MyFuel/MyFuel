@@ -19,7 +19,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.util.Callback;
@@ -46,29 +45,13 @@ public class CostumerManagmentTablePageBoundary implements DataInitializable {
     private CostumerManagementController myController = new CostumerManagementController(this);
 
 
-    @FXML
-    private Button btnOverview;
-
-    @FXML
-    private Button btnCustomers1;
-
-    @FXML
-    private Button btnCustomers;
-
-    @FXML
-    private Button btnSignout;
 
     @FXML
     private JFXTextField CostumerIDtxt;
 
-    @FXML
-    private Button FinishButton;
 
     @FXML
     private Pane VehicleInformationPane;
-
-    @FXML
-    private Button saveVehicleButton;
 
     @FXML
     private JFXTextField VehicleIDtxt;
@@ -79,8 +62,6 @@ public class CostumerManagmentTablePageBoundary implements DataInitializable {
     @FXML
     private JFXComboBox<String> GasTypeChoiseBox;
 
-    @FXML
-    private Button FinishButton1;
 
     @FXML
     private TableColumn CostumerIDCol;
@@ -119,14 +100,9 @@ public class CostumerManagmentTablePageBoundary implements DataInitializable {
     private JFXTextField VehicleSearchCosIDtxt;
 
 
-    @FXML
-    private ImageView loadingImg;
-
 
     private JFXComboBox<String> CostumertypeChoiceBox = new JFXComboBox<>();
 
-
-    private JFXComboBox<String> ServicePlanChoiseBox;
 
     private ObservableList<String> CostumerType = FXCollections.observableArrayList("Private", "Company");
     private ObservableList<String> GasType = FXCollections.observableArrayList("Gasoline-95", "Diesel", "Scooter Fuel");
@@ -301,6 +277,7 @@ public class CostumerManagmentTablePageBoundary implements DataInitializable {
         VehicleTable.setItems(data);
     }
 
+    @FXML
     public void refreshTable() {
         myController.getCostumerTable();
     }
