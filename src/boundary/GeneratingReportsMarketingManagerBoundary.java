@@ -5,12 +5,17 @@ import Contollers.GeneratingReportsMarketingManagerController;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import common.assets.Toast;
+import entity.CommentsReport;
+import entity.PurchasesReport;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.paint.Paint;
+import javafx.scene.text.Font;
 import javafx.util.Callback;
 import org.apache.commons.lang3.StringUtils;
 
@@ -31,6 +36,8 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
     private final GeneratingReportsMarketingManagerController myController = new GeneratingReportsMarketingManagerController(this);
     private FormValidation formValidation;
     private final Alert ErrorAlert = new Alert(Alert.AlertType.ERROR);
+    Font font;
+    Paint paint;
 
     @FXML
     private Button btnGenerateReport;
@@ -57,13 +64,13 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
     private Label ShowReportMarketingCampaignTxt;
 
     @FXML
-    private TableView<?> CommentsReportForMarketingCampaignTable;
+    private TableView<CommentsReport> CommentsReportForMarketingCampaignTable;
 
     @FXML
-    private TableColumn<?, ?> CommentsReport_CustomerIDColumn;
+    private TableColumn<CommentsReport, String> CommentsReport_CustomerIDColumn;
 
     @FXML
-    private TableColumn<?, ?> TotalAmountSpentColumn;
+    private TableColumn<CommentsReport, String> TotalAmountSpentColumn;
 
     @FXML
     private TableView<?> CustomerPeriodicCharacterizationReportTable;
@@ -82,12 +89,6 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
 
     @FXML
     private TableColumn<?, ?> TotalColumn;
-
-    @FXML
-    private Label ERRORStartAlreadyPassedDate;
-
-    @FXML
-    private Label ERROREndAlreadyPassedDate;
 
     @FXML
     private Label ERRORendBeforStart;
@@ -120,8 +121,6 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
         ShowReportMarketingCampaignTxt.setVisible(false);
         CommentsReportForMarketingCampaignTable.setVisible(false);
         CustomerPeriodicCharacterizationReportTable.setVisible(false);
-        ERRORStartAlreadyPassedDate.setVisible(false);
-        ERROREndAlreadyPassedDate.setVisible(false);
 
         ERRORendBeforStart.setVisible(false);
         ERRORnoOperation.setVisible(false);
@@ -129,6 +128,9 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
         disablePastDates();
         EndDateBox.setValue(LocalDate.now());
         StartDateBox.setValue(LocalDate.now());
+
+        font = ShowReportMarketingCampaignTxt.getFont();
+        paint = ShowReportMarketingCampaignTxt.getTextFill();
 
         /*  set all fields validators */
         formValidation();
@@ -195,11 +197,32 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
         paramArray.add(ChooseReportToGenerateCombo.getValue());
         if (ChooseReportToGenerateCombo.getValue().equals("Comments Report for Marketing Campaign")) {
             //ShowReportMarketingCampaignTxt.setText("Comments Report for Marketing Campaign #" + ChooseReportToGenerateCombo.getValue());
-            ShowReportMarketingCampaignTxt.setVisible(true);
+            //ShowReportMarketingCampaignTxt.setVisible(true);
             paramArray.add(EnterOperationSaleTXT.getText());
         }
 
         myController.GetReportData(paramArray);
+    }
+
+    public void setCommentsReportData(ArrayList<CommentsReport> resultList) {
+
+        Float totalSum = new Float(0);
+        Integer totalCustomer = new Integer(0);
+        for (CommentsReport temp : resultList) {
+            totalSum+= Float.parseFloat(temp.getCustomerTotalSum());
+        }
+        CommentsReport_CustomerIDColumn.setCellValueFactory(new PropertyValueFactory<>("customerID"));
+        TotalAmountSpentColumn.setCellValueFactory(new PropertyValueFactory<>("customerTotalSum"));
+        ObservableList<CommentsReport> data = FXCollections.observableArrayList(resultList);
+        CommentsReportForMarketingCampaignTable.setItems(data);
+
+        ShowReportMarketingCampaignTxt.setText("In marketing campaign #" + EnterOperationSaleTXT.getText() + ", " + resultList.size() + " customers were acquired,\n" +
+                "their total purchases being " + totalSum.toString() + "₪:");
+        //₪
+        ShowReportMarketingCampaignTxt.setFont(font);
+        ShowReportMarketingCampaignTxt.setTextFill(paint);
+        ShowReportMarketingCampaignTxt.setVisible(true);
+        CommentsReportForMarketingCampaignTable.setVisible(true);
     }
 
     /*boolean isStartDateBoxBeforeLocalDate() {
@@ -233,9 +256,9 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
     void checkValidDateForEndDate() {
 
         if (isEndDateBoxBeforeStartDateBox())
-            ERROREndAlreadyPassedDate.setVisible(true);
+            ERRORendBeforStart.setVisible(true);
         else
-            ERROREndAlreadyPassedDate.setVisible(false);
+            ERRORendBeforStart.setVisible(false);
 
         if (!(isEndDateBoxBeforeStartDateBox()) /*&& !(isStartDateBoxBeforeLocalDate())*/) {
             btnGenerateReport.setVisible(true);

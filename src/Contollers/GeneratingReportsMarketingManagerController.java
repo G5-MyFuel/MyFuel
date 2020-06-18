@@ -4,9 +4,12 @@ import boundary.GeneratingReportsMarketingManagerBoundary;
 import common.assets.SqlAction;
 import common.assets.SqlQueryType;
 import common.assets.SqlResult;
+import entity.CommentsReport;
 import javafx.application.Platform;
 
 import java.util.ArrayList;
+
+import static java.sql.Types.DOUBLE;
 
 public class GeneratingReportsMarketingManagerController extends BasicController {
 
@@ -42,18 +45,18 @@ public class GeneratingReportsMarketingManagerController extends BasicController
 
     /*Logic Methods*/
 
-        @Override
-        public void getResultFromClient(SqlResult result){
-            Platform.runLater(() -> {
-                switch (result.getActionType()) {
-                    case GET_Manager_Data:
-                        //myBoundary.setCommentsReportData(this.changeResultToCommentsReport(result));
-                        break;
-                    default:
-                        break;
-                }
-            });
-        }
+    @Override
+    public void getResultFromClient(SqlResult result) {
+        Platform.runLater(() -> {
+            switch (result.getActionType()) {
+                case GET_Comments_Report:
+                    myBoundary.setCommentsReportData(this.changeResultToCommentsReport(result));
+                    break;
+                default:
+                    break;
+            }
+        });
+    }
 
     /**
      * This method create String from the data base result.
@@ -61,13 +64,48 @@ public class GeneratingReportsMarketingManagerController extends BasicController
      * @param result the result
      * @return String
      */
-    private String changeResultToCommentsReport(SqlResult result) {
+    private ArrayList<CommentsReport> changeResultToCommentsReport(SqlResult result) {
 
-        Float TotalPrice = new Float(0);
+        ArrayList<CommentsReport> resultList = new ArrayList<>();
         for (ArrayList<Object> a : result.getResultData()) {
-            TotalPrice += Float.parseFloat((String) a.get(0));
+
+            String customerID = (String) a.get(0);
+            Double b = new Double(0);
+            b = (Double) a.get(1);
+            String customerTotalSum = b.toString();
+            //System.out.println(customerID + ":  "+customerTotalSum);
+            resultList.add(new CommentsReport(customerID, customerTotalSum));
+            //resultList.add(new CommentsReport((String) a.get(0), (String) a.get(1)));
         }
-        return TotalPrice.toString();
+        System.out.println(resultList);
+        return resultList;
+        /*
+        Float[] fuelAmount = new Float[]{Float.valueOf(0),Float.valueOf(0),Float.valueOf(0)};
+        Integer[] salesAmount = new Integer[]{0,0,0};
+        ArrayList<PurchasesReport> resultList = new ArrayList<>();
+        for (ArrayList<Object> a : result.getResultData()) {
+            if (((String) a.get(0)).equals("Gasoline 95")) {
+                fuelAmount[0] += Float.parseFloat((String) a.get(1));
+                salesAmount[0]++;
+            }
+            if (((String) a.get(0)).equals("Diesel")) {
+                fuelAmount[1] += Float.parseFloat((String) a.get(1));
+                salesAmount[1]++;
+            }
+            if (((String) a.get(0)).equals("Scooter fuel")) {
+                fuelAmount[2] += Float.parseFloat((String) a.get(1));
+                salesAmount[2]++;
+            }
+        }
+        resultList.add(new PurchasesReport("Gasoline 95"));
+        resultList.add(new PurchasesReport("Diesel"));
+        resultList.add(new PurchasesReport("Scooter fuel"));
+        for (int i = 0; i < 3; i++) {
+            resultList.get(i).setQuantityPurchased(fuelAmount[i].toString() + " liters");
+            resultList.get(i).setSalesAmount(salesAmount[i].toString() + " purchase");
+        }
+        return resultList;
+         */
     }
 
 }

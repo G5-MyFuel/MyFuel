@@ -4,15 +4,13 @@ public class CommentsReport {
 
     private String customerID;
     private String customerTotalSum;
-    private String TotalSum;
 
     public CommentsReport() {
     }
 
-    public CommentsReport(String customerID, String customerTotalSum, String totalSum) {
+    public CommentsReport(String customerID, String customerTotalSum) {
         this.customerID = customerID;
         this.customerTotalSum = customerTotalSum;
-        TotalSum = totalSum;
     }
 
     public String getCustomerID() {
@@ -31,11 +29,11 @@ public class CommentsReport {
         this.customerTotalSum = customerTotalSum;
     }
 
-    public String getTotalSum() {
-        return TotalSum;
-    }
-
-    public void setTotalSum(String totalSum) {
-        TotalSum = totalSum;
+    @Override
+    public String toString() {
+        return "\nCommentsReport{" +
+                "customerID='" + customerID + '\'' +
+                ", customerTotalSum='" + customerTotalSum + '\'' +
+                '}';
     }
 }
