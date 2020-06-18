@@ -39,7 +39,6 @@ public class GeneralDashBoardController extends BasicController {
                     this.changeResultToFueAmountOfPreMonthOfCurUser(result, currentUserID);
                     break;
                 default:
-                    System.err.println(this.getClass().getName().toString() + ": result error from db");
                     break;
             }
         });
