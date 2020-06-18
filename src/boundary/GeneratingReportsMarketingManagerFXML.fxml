@@ -58,5 +58,25 @@
             <TableColumn fx:id="TotalColumn" prefWidth="110.0" text="Total" />
         </columns>
       </TableView>
+      <Label fx:id="ERRORStartAlreadyPassedDate" layoutX="36.0" layoutY="263.0" text="Can not select a start date that has already passed!" textFill="RED">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="ERRORendBeforStart" layoutX="387.0" layoutY="263.0" prefHeight="16.0" prefWidth="237.0" text="End date must be later than start date." textFill="RED">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="ERRORnoOperation" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="6.0" layoutX="36.0" layoutY="304.0" prefHeight="30.0" prefWidth="357.0" text="Error - Operation sale selection is required!" textAlignment="CENTER" textFill="RED">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="ERROREndAlreadyPassedDate" layoutX="387.0" layoutY="286.0" text="Can not select a end date that has already passed!" textFill="RED">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
    </children>
 </Pane>
