@@ -20,9 +20,9 @@
             <Font name="System Bold" size="40.0" />
          </font>
       </Label>
-      <Button fx:id="btnGenerateReport" layoutX="39.0" layoutY="327.0" mnemonicParsing="false" onAction="#handleGenerateReportBtn" prefHeight="42.0" prefWidth="89.0" style="-fx-background-color: #2D4578; -fx-background-radius: 50;" stylesheets="@style.css" text="Generate" />
+      <Button fx:id="btnGenerateReport" layoutX="38.0" layoutY="373.0" mnemonicParsing="false" onAction="#handleGenerateReportBtn" prefHeight="42.0" prefWidth="89.0" style="-fx-background-color: #2D4578; -fx-background-radius: 50;" stylesheets="@style.css" text="Generate" />
       <JFXComboBox fx:id="ChooseReportToGenerateCombo" layoutX="295.0" layoutY="157.0" onAction="#handleChooseReportToGenerate" prefHeight="31.0" prefWidth="184.0" promptText="Report type:" />
-      <JFXTextField fx:id="EnterOperationSaleTXT" focusColor="#00add8" labelFloat="true" layoutX="36.0" layoutY="249.0" onAction="#handleEnterOperationSale" prefHeight="47.0" prefWidth="252.0" promptText="Please enter a operation sale" unFocusColor="#868282">
+      <JFXTextField fx:id="EnterOperationSaleTXT" focusColor="#00add8" labelFloat="true" layoutX="35.0" layoutY="283.0" onAction="#handleEnterOperationSale" prefHeight="47.0" prefWidth="252.0" promptText="Please enter a operation sale" unFocusColor="#868282">
          <padding>
             <Insets top="20.0" />
          </padding>
@@ -42,14 +42,14 @@
             <Font name="System Bold Italic" size="18.0" />
          </font>
       </Label>
-      <Label fx:id="ShowReportMarketingCampaignTxt" layoutX="49.0" layoutY="388.0" text="Comments Report for Marketing Campaign #" />
-      <TableView fx:id="CommentsReportForMarketingCampaignTable" layoutX="52.0" layoutY="430.0" prefHeight="245.0" prefWidth="420.0">
+      <Label fx:id="ShowReportMarketingCampaignTxt" layoutX="48.0" layoutY="422.0" text="Comments Report for Marketing Campaign #" />
+      <TableView fx:id="CommentsReportForMarketingCampaignTable" layoutX="51.0" layoutY="464.0" prefHeight="245.0" prefWidth="420.0">
         <columns>
           <TableColumn fx:id="CommentsReport_CustomerIDColumn" prefWidth="210.0" text="Customer ID" />
           <TableColumn fx:id="TotalAmountSpentColumn" minWidth="0.0" prefWidth="210.0" text="Total amount spent" />
         </columns>
       </TableView>
-      <TableView fx:id="CustomerPeriodicCharacterizationReportTable" layoutX="479.0" layoutY="430.0" prefHeight="245.0" prefWidth="550.0">
+      <TableView fx:id="CustomerPeriodicCharacterizationReportTable" layoutX="478.0" layoutY="464.0" prefHeight="245.0" prefWidth="550.0">
         <columns>
           <TableColumn fx:id="CustomerPeriodicCharacterizationReport_CustomerIDCustomerPeriodicCharacterizationReportColumn" prefWidth="110.0" text="Customer ID" />
           <TableColumn fx:id="YellowColumn" prefWidth="110.0" text="Yellow" />
@@ -68,7 +68,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Label fx:id="ERRORnoOperation" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="6.0" layoutX="36.0" layoutY="304.0" prefHeight="30.0" prefWidth="357.0" text="Error - Operation sale selection is required!" textAlignment="CENTER" textFill="RED">
+      <Label fx:id="ERRORnoOperation" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="6.0" layoutX="35.0" layoutY="338.0" prefHeight="30.0" prefWidth="357.0" text="Error - Operation sale selection is required!" textAlignment="CENTER" textFill="RED">
          <font>
             <Font size="18.0" />
          </font>

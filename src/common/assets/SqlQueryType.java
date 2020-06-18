@@ -54,6 +54,10 @@ public enum SqlQueryType {
     UPDATE_NEW_DiscountRate(SqlExecutionType.UPDATE_QUERY),
     Remove_NEW_DiscountRate(SqlExecutionType.UPDATE_QUERY),
 
+    /* *****************************************
+     * ********** Marketing Manager Reports Queries ****************
+     * *****************************************/
+    GET_Comments_Report(SqlExecutionType.EXECUTE_QUERY),
 
     /* *****************************************
      * ********** Costumer Management Queries ****************

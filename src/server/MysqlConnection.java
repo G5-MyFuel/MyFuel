@@ -290,6 +290,13 @@ public class MysqlConnection {
                 "SET `CurrentDiscountRate`= `NewDiscountRate`, `Status`= \"Approved\",`NewDiscountRate`= \"-\" WHERE `Subscription type` = ?";
         sqlArray[SqlQueryType.Remove_NEW_DiscountRate.getCode()] = "UPDATE `DiscountRates` " +
                 "SET `Status`= \"Approved\",`NewDiscountRate`= \"-\" WHERE `Subscription type` = ?";
+
+        /* *****************************************
+         * ********** Marketing Manager Reports Queries ****************
+         * *****************************************/
+        sqlArray[SqlQueryType.GET_Comments_Report.getCode()] = "select customerID,SUM(totalPrice) as TotalSum " +
+                "from(SELECT totalPrice,customerID from Purchase where CampaignID = ?) as t group by customerID";
+
     }
 
     public Connection getConnection() {

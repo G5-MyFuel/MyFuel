@@ -11,10 +11,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.util.Callback;
 import org.apache.commons.lang3.StringUtils;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
 
@@ -120,8 +122,13 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
         CustomerPeriodicCharacterizationReportTable.setVisible(false);
         ERRORStartAlreadyPassedDate.setVisible(false);
         ERROREndAlreadyPassedDate.setVisible(false);
+
         ERRORendBeforStart.setVisible(false);
         ERRORnoOperation.setVisible(false);
+
+        disablePastDates();
+        EndDateBox.setValue(LocalDate.now());
+        StartDateBox.setValue(LocalDate.now());
 
         /*  set all fields validators */
         formValidation();
@@ -129,6 +136,7 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
 
     private void formValidation() {
 
+        formValidation.isEmptyFieldValidation(EnterOperationSaleTXT, "Operation Sale");
         /*  EnterOperationSaleTXT validation */
 /*
         //formValidation.isContainsOnlyNumbers(ShowNewRateTXT, "New price");
@@ -144,12 +152,6 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
     void handleChooseReportToGenerate(ActionEvent event) {
 
         ChooseReportToGenerateCombo.setPrefWidth(340);
-        //System.out.println(StartDateBox.getEditor());
-        StartDateBox.getEditor().clear();
-        //StartDateBox.setValue(LocalDate.parse("null"));
-        EndDateBox.getEditor().clear();
-        //EndDateBox.setValue(null);
-        System.out.println(EndDateBox.getValue());
         StartDateTxt.setVisible(true);
         StartDateBox.setVisible(true);
         EndDateTxt.setVisible(true);
@@ -158,28 +160,20 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
         if (ChooseReportToGenerateCombo.getValue().equals("Customer Periodic Characterization Report"))
             EnterOperationSaleTXT.setVisible(false);
 
-        btnGenerateReport.setVisible(false);
+        //btnGenerateReport.setVisible(false);
+        checkValidDateForEndDate();
         ShowReportMarketingCampaignTxt.setVisible(false);
         CommentsReportForMarketingCampaignTable.setVisible(false);
         CustomerPeriodicCharacterizationReportTable.setVisible(false);
 
     }
 
-    /*LocalDate parsedDate = parseDate("2016-08-16"); // you can also enter an empty string
-
-
-    private LocalDate parseDate(final String dateAsString) {
-        if (StringUtils.isEmpty(dateAsString)) { //isEmpty() will check if the string is empty or null
-            return null; // here you can return the current date as well with LocalDate.now();
-        }
-        //default, ISO_LOCAL_DATE
-        return LocalDate.parse(dateAsString);
-    }*/
-
     @FXML
     void handleStartDateBox(ActionEvent event) {
 
-        checkValidDateForStartDate();
+        disableBeforeStartDate();
+        //checkValidDateForStartDate();
+        checkValidDateForEndDate();
     }
 
 
@@ -192,37 +186,25 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
     @FXML
     void handleEnterOperationSale(ActionEvent event) {
 
-        String str = EnterOperationSaleTXT.getText();
-        System.out.println(str);
-        //
     }
 
     @FXML
     void handleGenerateReportBtn(ActionEvent event) {
 
+        ArrayList<String> paramArray = new ArrayList<>();
+        paramArray.add(ChooseReportToGenerateCombo.getValue());
+        if (ChooseReportToGenerateCombo.getValue().equals("Comments Report for Marketing Campaign")) {
+            //ShowReportMarketingCampaignTxt.setText("Comments Report for Marketing Campaign #" + ChooseReportToGenerateCombo.getValue());
+            ShowReportMarketingCampaignTxt.setVisible(true);
+            paramArray.add(EnterOperationSaleTXT.getText());
+        }
 
+        myController.GetReportData(paramArray);
     }
 
-    boolean isEndDateBoxNull() {
-        System.out.println("isEndDateBoxNull:");
-        System.out.println("EndDateBox:" + EndDateBox);
-        System.out.println("EndDateBox.getValue:" + EndDateBox.getValue());
-        System.out.println();
-        //return (EndDateBox.getValue() == null);
-        return (EndDateBox.getEditor().equals(null));
-    }
-
-    boolean isStartDateBoxNull() {
-        return (StartDateBox.getValue() == null);
-    }
-
-    boolean isStartDateBoxBeforeLocalDate() {
+    /*boolean isStartDateBoxBeforeLocalDate() {
         return StartDateBox.getValue().isBefore(java.time.LocalDate.now());
-    }
-
-    boolean isEndDateBoxBeforeLocalDate() {
-        return EndDateBox.getValue().isBefore(java.time.LocalDate.now());
-    }
+    }*/
 
     boolean isEndDateBoxBeforeStartDateBox() {
         return EndDateBox.getValue().isBefore(StartDateBox.getValue());
@@ -230,25 +212,32 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
 
     void checkValidDateForStartDate() {
 
-
-        if (isStartDateBoxBeforeLocalDate())
-            ERRORStartAlreadyPassedDate.setVisible(true);
+        disableBeforeStartDate();
+        /*if(isEndDateBoxBeforeStartDateBox())
+            ERROREndAlreadyPassedDate.setVisible(true);
         else
-            ERRORStartAlreadyPassedDate.setVisible(false);
+            ERROREndAlreadyPassedDate.setVisible(false);
 
-        if (!(isEndDateBoxNull())) {
-            if (isEndDateBoxBeforeStartDateBox())
-                ERRORendBeforStart.setVisible(true);
+        if (!(isStartDateBoxBeforeLocalDate()) && !(isEndDateBoxBeforeStartDateBox())) {
+            btnGenerateReport.setVisible(true);
+            if (ChooseReportToGenerateCombo.getValue().equals("Comments Report for Marketing Campaign"))
+                EnterOperationSaleTXT.setVisible(true);
             else
-                ERRORendBeforStart.setVisible(false);
-            if (isEndDateBoxBeforeLocalDate())
-                ERROREndAlreadyPassedDate.setVisible(true);
-            else
-                ERROREndAlreadyPassedDate.setVisible(false);
-        }
+                EnterOperationSaleTXT.setVisible(false);
+        } else {
+            btnGenerateReport.setVisible(false);
+            EnterOperationSaleTXT.setVisible(false);
+        }*/
+    }
 
+    void checkValidDateForEndDate() {
 
-        if (/*isStartDateBoxNull() && */!(isStartDateBoxBeforeLocalDate()) && !(isEndDateBoxNull()) && !(isEndDateBoxBeforeStartDateBox())) {
+        if (isEndDateBoxBeforeStartDateBox())
+            ERROREndAlreadyPassedDate.setVisible(true);
+        else
+            ERROREndAlreadyPassedDate.setVisible(false);
+
+        if (!(isEndDateBoxBeforeStartDateBox()) /*&& !(isStartDateBoxBeforeLocalDate())*/) {
             btnGenerateReport.setVisible(true);
             if (ChooseReportToGenerateCombo.getValue().equals("Comments Report for Marketing Campaign"))
                 EnterOperationSaleTXT.setVisible(true);
@@ -258,41 +247,49 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
             btnGenerateReport.setVisible(false);
             EnterOperationSaleTXT.setVisible(false);
         }
+
     }
 
-    void checkValidDateForEndDate() {
+    void disablePastDates() {
 
-        if (!(isStartDateBoxNull()))
-            if (isStartDateBoxBeforeLocalDate())
-                ERRORStartAlreadyPassedDate.setVisible(true);
-            else
-                ERRORStartAlreadyPassedDate.setVisible(false);
-
-        if (!(isStartDateBoxNull())) {
-            if (isEndDateBoxBeforeStartDateBox())
-                ERRORendBeforStart.setVisible(true);
-            else
-                ERRORendBeforStart.setVisible(false);
-        }
-        if (isEndDateBoxBeforeLocalDate())
-            ERROREndAlreadyPassedDate.setVisible(true);
-        else
-            ERROREndAlreadyPassedDate.setVisible(false);
-
-
-        if (!(isStartDateBoxNull())) {
-            if (!(isEndDateBoxBeforeStartDateBox()) && !(isStartDateBoxBeforeLocalDate())) {
-                btnGenerateReport.setVisible(true);
-                if (ChooseReportToGenerateCombo.getValue().equals("Comments Report for Marketing Campaign"))
-                    EnterOperationSaleTXT.setVisible(true);
-                else
-                    EnterOperationSaleTXT.setVisible(false);
-            } else {
-                btnGenerateReport.setVisible(false);
-                EnterOperationSaleTXT.setVisible(false);
+        // disable past dates of DatePicker gui obj
+        Callback<DatePicker, DateCell> callB = new Callback<DatePicker, DateCell>() {
+            @Override
+            public DateCell call(final DatePicker param) {
+                return new DateCell() {
+                    @Override
+                    public void updateItem(LocalDate item, boolean empty) {
+                        super.updateItem(item, empty); //To change body of generated methods, choose Tools | Templates.
+                        LocalDate today = LocalDate.now();
+                        setDisable(empty || item.compareTo(today) < 0);
+                    }
+                };
             }
-        }
 
+        };
+        StartDateBox.setDayCellFactory(callB);
+        EndDateBox.setDayCellFactory(callB);
+
+    }
+
+    void disableBeforeStartDate() {
+
+        // disable past dates of DatePicker gui obj
+        Callback<DatePicker, DateCell> callB = new Callback<DatePicker, DateCell>() {
+            @Override
+            public DateCell call(final DatePicker param) {
+                return new DateCell() {
+                    @Override
+                    public void updateItem(LocalDate item, boolean empty) {
+                        super.updateItem(item, empty); //To change body of generated methods, choose Tools | Templates.
+                        LocalDate startDate = StartDateBox.getValue();
+                        setDisable(empty || item.compareTo(startDate) < 0);
+                    }
+                };
+            }
+
+        };
+        EndDateBox.setDayCellFactory(callB);
     }
 
 }
