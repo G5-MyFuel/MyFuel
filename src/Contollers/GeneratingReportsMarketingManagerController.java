@@ -59,53 +59,17 @@ public class GeneratingReportsMarketingManagerController extends BasicController
     }
 
     /**
-     * This method create String from the data base result.
+     * This method create Comments Report from the data base result.
      *
      * @param result the result
-     * @return String
+     * @return ArrayList<CommentsReport>
      */
     private ArrayList<CommentsReport> changeResultToCommentsReport(SqlResult result) {
 
         ArrayList<CommentsReport> resultList = new ArrayList<>();
-        for (ArrayList<Object> a : result.getResultData()) {
-
-            String customerID = (String) a.get(0);
-            Double b = new Double(0);
-            b = (Double) a.get(1);
-            String customerTotalSum = b.toString();
-            //System.out.println(customerID + ":  "+customerTotalSum);
-            resultList.add(new CommentsReport(customerID, customerTotalSum));
-            //resultList.add(new CommentsReport((String) a.get(0), (String) a.get(1)));
-        }
-        System.out.println(resultList);
+        for (ArrayList<Object> a : result.getResultData())
+            resultList.add(new CommentsReport((String) a.get(0), a.get(1).toString()));
         return resultList;
-        /*
-        Float[] fuelAmount = new Float[]{Float.valueOf(0),Float.valueOf(0),Float.valueOf(0)};
-        Integer[] salesAmount = new Integer[]{0,0,0};
-        ArrayList<PurchasesReport> resultList = new ArrayList<>();
-        for (ArrayList<Object> a : result.getResultData()) {
-            if (((String) a.get(0)).equals("Gasoline 95")) {
-                fuelAmount[0] += Float.parseFloat((String) a.get(1));
-                salesAmount[0]++;
-            }
-            if (((String) a.get(0)).equals("Diesel")) {
-                fuelAmount[1] += Float.parseFloat((String) a.get(1));
-                salesAmount[1]++;
-            }
-            if (((String) a.get(0)).equals("Scooter fuel")) {
-                fuelAmount[2] += Float.parseFloat((String) a.get(1));
-                salesAmount[2]++;
-            }
-        }
-        resultList.add(new PurchasesReport("Gasoline 95"));
-        resultList.add(new PurchasesReport("Diesel"));
-        resultList.add(new PurchasesReport("Scooter fuel"));
-        for (int i = 0; i < 3; i++) {
-            resultList.get(i).setQuantityPurchased(fuelAmount[i].toString() + " liters");
-            resultList.get(i).setSalesAmount(salesAmount[i].toString() + " purchase");
-        }
-        return resultList;
-         */
     }
 
 }

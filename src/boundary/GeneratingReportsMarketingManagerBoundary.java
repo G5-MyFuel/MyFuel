@@ -138,7 +138,7 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
 
     private void formValidation() {
 
-        formValidation.isEmptyFieldValidation(EnterOperationSaleTXT, "Operation Sale");
+        //formValidation.isEmptyFieldValidation(EnterOperationSaleTXT, "Operation Sale");
         /*  EnterOperationSaleTXT validation */
 /*
         //formValidation.isContainsOnlyNumbers(ShowNewRateTXT, "New price");
@@ -154,15 +154,22 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
     void handleChooseReportToGenerate(ActionEvent event) {
 
         ChooseReportToGenerateCombo.setPrefWidth(340);
-        StartDateTxt.setVisible(true);
-        StartDateBox.setVisible(true);
-        EndDateTxt.setVisible(true);
-        EndDateBox.setVisible(true);
 
-        if (ChooseReportToGenerateCombo.getValue().equals("Customer Periodic Characterization Report"))
+
+        if (ChooseReportToGenerateCombo.getValue().equals("Customer Periodic Characterization Report")) {
+            StartDateTxt.setVisible(true);
+            StartDateBox.setVisible(true);
+            EndDateTxt.setVisible(true);
+            EndDateBox.setVisible(true);
             EnterOperationSaleTXT.setVisible(false);
+        } else {
+            StartDateTxt.setVisible(false);
+            StartDateBox.setVisible(false);
+            EndDateTxt.setVisible(false);
+            EndDateBox.setVisible(false);
+            EnterOperationSaleTXT.setVisible(true);
+        }
 
-        //btnGenerateReport.setVisible(false);
         checkValidDateForEndDate();
         ShowReportMarketingCampaignTxt.setVisible(false);
         CommentsReportForMarketingCampaignTable.setVisible(false);
@@ -196,33 +203,46 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
         ArrayList<String> paramArray = new ArrayList<>();
         paramArray.add(ChooseReportToGenerateCombo.getValue());
         if (ChooseReportToGenerateCombo.getValue().equals("Comments Report for Marketing Campaign")) {
-            //ShowReportMarketingCampaignTxt.setText("Comments Report for Marketing Campaign #" + ChooseReportToGenerateCombo.getValue());
-            //ShowReportMarketingCampaignTxt.setVisible(true);
-            paramArray.add(EnterOperationSaleTXT.getText());
-        }
+            if (EnterOperationSaleTXT.getText().equals("")){
+                ERRORnoOperation.setVisible(true);
+                ShowReportMarketingCampaignTxt.setVisible(false);
+            }
 
-        myController.GetReportData(paramArray);
+            else {
+                ERRORnoOperation.setVisible(false);
+                paramArray.add(EnterOperationSaleTXT.getText());
+                CommentsReportForMarketingCampaignTable.setVisible(false);
+                CustomerPeriodicCharacterizationReportTable.setVisible(false);
+                ShowReportMarketingCampaignTxt.setVisible(false);
+                myController.GetReportData(paramArray);
+            }
+        }
     }
 
     public void setCommentsReportData(ArrayList<CommentsReport> resultList) {
 
-        Float totalSum = new Float(0);
-        Integer totalCustomer = new Integer(0);
-        for (CommentsReport temp : resultList) {
-            totalSum+= Float.parseFloat(temp.getCustomerTotalSum());
-        }
-        CommentsReport_CustomerIDColumn.setCellValueFactory(new PropertyValueFactory<>("customerID"));
-        TotalAmountSpentColumn.setCellValueFactory(new PropertyValueFactory<>("customerTotalSum"));
-        ObservableList<CommentsReport> data = FXCollections.observableArrayList(resultList);
-        CommentsReportForMarketingCampaignTable.setItems(data);
+        if (resultList.size() > 0) {
+            Float totalSum = new Float(0);
+            for (CommentsReport temp : resultList) {
+                totalSum += Float.parseFloat(temp.getCustomerTotalSum());
+            }
+            CommentsReport_CustomerIDColumn.setCellValueFactory(new PropertyValueFactory<>("customerID"));
+            TotalAmountSpentColumn.setCellValueFactory(new PropertyValueFactory<>("customerTotalSum"));
+            ObservableList<CommentsReport> data = FXCollections.observableArrayList(resultList);
+            CommentsReportForMarketingCampaignTable.setItems(data);
 
-        ShowReportMarketingCampaignTxt.setText("In marketing campaign #" + EnterOperationSaleTXT.getText() + ", " + resultList.size() + " customers were acquired,\n" +
-                "their total purchases being " + totalSum.toString() + "₪:");
-        //₪
-        ShowReportMarketingCampaignTxt.setFont(font);
-        ShowReportMarketingCampaignTxt.setTextFill(paint);
-        ShowReportMarketingCampaignTxt.setVisible(true);
-        CommentsReportForMarketingCampaignTable.setVisible(true);
+            ShowReportMarketingCampaignTxt.setText("In marketing campaign #" + EnterOperationSaleTXT.getText() + ", " + resultList.size() + " customers were acquired,\n" +
+                    "their total purchases being " + totalSum.toString() + "₪:");
+            //₪
+            ShowReportMarketingCampaignTxt.setFont(font);
+            ShowReportMarketingCampaignTxt.setTextFill(paint);
+            ShowReportMarketingCampaignTxt.setVisible(true);
+            CommentsReportForMarketingCampaignTable.setVisible(true);
+        } else {
+            ShowReportMarketingCampaignTxt.setVisible(true);
+            ShowReportMarketingCampaignTxt.setText("No information found for Marketing campaign #" + EnterOperationSaleTXT.getText() + " !");
+        }
+
     }
 
     /*boolean isStartDateBoxBeforeLocalDate() {
@@ -262,13 +282,13 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
 
         if (!(isEndDateBoxBeforeStartDateBox()) /*&& !(isStartDateBoxBeforeLocalDate())*/) {
             btnGenerateReport.setVisible(true);
-            if (ChooseReportToGenerateCombo.getValue().equals("Comments Report for Marketing Campaign"))
+            /*if (ChooseReportToGenerateCombo.getValue().equals("Comments Report for Marketing Campaign"))
                 EnterOperationSaleTXT.setVisible(true);
             else
-                EnterOperationSaleTXT.setVisible(false);
+                EnterOperationSaleTXT.setVisible(false);*/
         } else {
             btnGenerateReport.setVisible(false);
-            EnterOperationSaleTXT.setVisible(false);
+            //.setVisible(false);
         }
 
     }
