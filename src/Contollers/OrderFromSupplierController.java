@@ -73,7 +73,6 @@ public class OrderFromSupplierController extends BasicController {
                     resultList.addAll(this.changeResultToOrder(result));
                     myBoundary.setOrderFuelFromSupplierTableView(resultList);
                     break;
-                case UPDATE_STATUS_TO_DONE:
 
 
                 default:

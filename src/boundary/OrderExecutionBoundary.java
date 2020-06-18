@@ -32,8 +32,7 @@ public class OrderExecutionBoundary implements DataInitializable {
     private OrderExecutionBoundary OrderExecutionController;
     private OrderFromSupplierController myController = new OrderFromSupplierController(this);
     private String SupplierID = "";
-    /*private  generalDashBoardBoundary dashBoard;
-    /*private ArrayList<OrderFuelFromSupplier> OFFS;*/
+
 
     @FXML
     private Button MenuHomePageBtn;
@@ -144,8 +143,6 @@ public class OrderExecutionBoundary implements DataInitializable {
     @Override
     public void initData(Object data) {
         this.SupplierID = (String) data;
-        /*SupplierID = (String)((ArrayList<?>) data).get(1);
-        dashBoard = (generalDashBoardBoundary)((ArrayList<?>) data).get(0);*/
     }
 
     @Override
@@ -208,7 +205,6 @@ public class OrderExecutionBoundary implements DataInitializable {
     /**
      * Update the inventory after the supplier confirm
      *
-     * @param quantity
      */
     public void addToStock(int quantity, String fuelType, int stationNumber, String managerID) {
         if (fuelType.equals("Gasoline95"))

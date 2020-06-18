@@ -113,6 +113,8 @@ public enum SqlQueryType {
      * *****************************************************/
     GET_ALL_ORDER_TO_SUPPLY_FOR_STATION_MANAGER(SqlExecutionType.EXECUTE_QUERY),
     UPDATE_STATUS_TO_IN_TREATMENT(SqlExecutionType.UPDATE_QUERY),
+    GET_ALL_ORDER_WITH_STATUS_DONE(SqlExecutionType.EXECUTE_QUERY),
+    UPDATE_STATUS_TO_VIEWED(SqlExecutionType.UPDATE_QUERY),
 
     /* *****************************************
      * ********** Order From Supplier Queries ****************

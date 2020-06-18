@@ -35,7 +35,8 @@ public class MainForTestAdi extends Application {
         try {
             FXMLLoader loader = new FXMLLoader();
             /*loader.setLocation(getClass().getResource("/boundary/supplierOrderExecution.fxml"));*/
-            loader.setLocation(getClass().getResource(ProjectPages.MANAGER_SUPPLY_CONFIRMATION_PAGE.getPath()));
+            /*loader.setLocation(getClass().getResource(ProjectPages.MANAGER_SUPPLY_CONFIRMATION_PAGE.getPath()));*/
+            loader.setLocation(getClass().getResource("/boundary/ManagerNotificationsPage.fxml"));
             root = loader.load();
             Scene s1 = new Scene(root);
             primaryStage.setScene(s1);
