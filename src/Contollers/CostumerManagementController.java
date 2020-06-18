@@ -87,6 +87,10 @@ public class CostumerManagementController extends BasicController {
         super.sendSqlActionToClient(sqlAction);
     }
 
+    /**
+     *
+     * @param result - The result recieved from the DB
+     */
     @Override
     public void getResultFromClient(SqlResult result) {
         Platform.runLater(() -> {
@@ -110,6 +114,11 @@ public class CostumerManagementController extends BasicController {
         });
     }
 
+    /**
+     *
+     * @param vehicleID
+     * @return true or false
+     */
     public boolean isVehicleExistInDb(String vehicleID) {
         for (Vehicle v : dbVehicles) {
             if (v.getVehicleID().equals(vehicleID))
