@@ -4,6 +4,7 @@
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTimePicker?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -13,6 +14,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="796.0" prefWidth="1062.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundary.ViewAnalyticDataBoundary">
    <children>
@@ -35,7 +37,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <ImageView fx:id="imageRefuelHour" fitHeight="50.0" fitWidth="53.0" layoutX="386.0" layoutY="132.0" onMouseClicked="#handleBtnRefuelHour">
+            <ImageView fx:id="imageRefuelHour" fitHeight="50.0" fitWidth="53.0" layoutX="386.0" layoutY="132.0" onMouseClicked="#handleBtnRefuelHourImage">
                <image>
                   <Image url="@../media/analiticData/icons8_clock_40px.png" />
                </image>
@@ -43,7 +45,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fx:id="imageFuelType" fitHeight="50.0" fitWidth="53.0" layoutX="728.0" layoutY="132.0" onMouseClicked="#handleBtnFuleType">
+            <ImageView fx:id="imageFuelType" fitHeight="50.0" fitWidth="53.0" layoutX="728.0" layoutY="132.0" onMouseClicked="#handleBtnFuleTypeImage">
                <image>
                   <Image url="@../media/analiticData/icons8_gas_station_40px.png" />
                </image>
@@ -75,7 +77,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <Pane fx:id="paneByTime" layoutX="368.0" layoutY="232.0" prefHeight="515.0" prefWidth="337.0">
+            <Pane fx:id="paneByTime" layoutX="45.0" layoutY="232.0" prefHeight="515.0" prefWidth="979.0">
                <children>
                   <TableView fx:id="RatingTableForTimeRange" layoutX="21.0" layoutY="81.0" prefHeight="433.0" prefWidth="296.0">
                      <columns>
@@ -101,9 +103,20 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </JFXButton>
+                  <PieChart fx:id="pieChartHouers" layoutX="413.0" layoutY="92.0" />
+                  <Text layoutX="389.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Segmentation of ratings by Refueling hour:" wrappingWidth="378.16650390625">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="selectedhouresTXT" layoutX="757.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" " wrappingWidth="195.16649955511093">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Text>
                </children>
             </Pane>
-            <Pane fx:id="paneByCustomerType" layoutX="12.0" layoutY="232.0" prefHeight="515.0" prefWidth="343.0">
+            <Pane fx:id="paneByCustomerType" layoutX="18.0" layoutY="232.0" prefHeight="515.0" prefWidth="1014.0" visible="false">
                <children>
                   <TableView fx:id="RatingTableForCustomerType" layoutX="42.0" layoutY="81.0" prefHeight="433.0" prefWidth="296.0">
                      <columns>
@@ -124,9 +137,20 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </JFXButton>
+                  <PieChart fx:id="pieChartCustomerType" layoutX="438.0" layoutY="69.0" />
+                  <Text layoutX="452.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Segmentation of ratings by Customers type:" wrappingWidth="378.16650390625">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="selectedCustomerTypeTXT" layoutX="830.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" " wrappingWidth="102.16650390625">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Text>
                </children>
             </Pane>
-            <Pane fx:id="paneByFuelType" layoutX="692.0" layoutY="232.0" prefHeight="515.0" prefWidth="367.0">
+            <Pane fx:id="paneByFuelType" layoutX="21.0" layoutY="232.0" prefHeight="515.0" prefWidth="1014.0" visible="false">
                <children>
                   <TableView fx:id="RatingTableForFuelType" layoutX="42.0" layoutY="81.0" prefHeight="433.0" prefWidth="296.0">
                      <columns>
@@ -147,6 +171,17 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </JFXButton>
+                  <PieChart fx:id="pieChartFuelType" layoutX="444.0" layoutY="81.0" />
+                  <Text layoutX="465.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Segmentation of ratings by Fuel type:" wrappingWidth="378.16650390625">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="selectedFuelTypeTXT" layoutX="794.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" " wrappingWidth="184.16650390625">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Text>
                </children>
             </Pane>
          </children>

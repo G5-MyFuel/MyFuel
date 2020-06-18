@@ -1,20 +1,16 @@
 package boundary;
 
-import Contollers.AnalyticDataCreator;
 import Contollers.FormValidation;
-import Contollers.MarketingCampaignTemplateController;
 import Contollers.ViewAnalyticDataController;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTimePicker;
-import com.sun.deploy.panel.RuleSetViewerDialog;
-import entity.MarketingCampaignTemplate;
 import entity.Rating;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -22,6 +18,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 
 import java.awt.*;
 import java.net.URL;
@@ -116,9 +113,6 @@ public class ViewAnalyticDataBoundary implements DataInitializable {
     private JFXComboBox<String> fuelTypeCombo1;
 
     @FXML
-    private Label selectedFuelTypeTXT;
-
-    @FXML
     private Label lastCalcDateTXT;
 
     @FXML
@@ -132,6 +126,23 @@ public class ViewAnalyticDataBoundary implements DataInitializable {
 
     @FXML
     private JFXButton btnFuelTypeShow;
+
+    @FXML
+    private PieChart pieChartCustomerType;
+
+    @FXML
+    private Text selectedCustomerTypeTXT;
+
+    @FXML
+    private PieChart pieChartHouers;
+
+    @FXML
+    private Text selectedhouresTXT;
+
+    @FXML
+    private PieChart pieChartFuelType;
+    @FXML
+    private Text selectedFuelTypeTXT;
 
 
     private ObservableList<String> CustomerType = FXCollections.observableArrayList("private" , "Company");
@@ -152,6 +163,13 @@ public class ViewAnalyticDataBoundary implements DataInitializable {
         fuelTypeCombo1.setItems(FuelType);
         btnCustomerTypeShow.setDisable(true);
 
+        /*ratingCulomn.setStyle( "-fx-alignment: CENTER;");
+        ratingCulomn1.setStyle( "-fx-alignment: CENTER-RIGHT;");
+        ratingCulomn11.setStyle( "-fx-alignment: CENTER-RIGHT;");
+        customerIdCulomn.setStyle( "-fx-alignment: CENTER-RIGHT;");
+        customerIdCulomn1.setStyle( "-fx-alignment: CENTER-RIGHT;");
+        customerIdCulomn11.setStyle( "-fx-alignment: CENTER-RIGHT;");
+*/
     }
 
     private void formValidation() {
@@ -164,22 +182,44 @@ public class ViewAnalyticDataBoundary implements DataInitializable {
     }
 
     @FXML
-    void handleBtnCustomerType(MouseEvent event) {
-        paneByCustomerType.setVisible(true);
+    void handleBtnFuleType(ActionEvent event) {
+        paneByCustomerType.setVisible(false);
+        paneByTime.setVisible(false);
+        paneByFuelType.setVisible(true);
     }
 
     @FXML
-    void handleBtnFuleType(ActionEvent event) {
+    void handleBtnFuleTypeImage(MouseEvent event) {
+        paneByCustomerType.setVisible(false);
+        paneByTime.setVisible(false);
         paneByFuelType.setVisible(true);
     }
 
     @FXML
     void handleBtnRefuelHour(ActionEvent event) {
+        paneByFuelType.setVisible(false);
+        paneByCustomerType.setVisible(false);
+        paneByTime.setVisible(true);
+    }
+
+    @FXML
+    void handleBtnRefuelHourImage(MouseEvent event) {
+        paneByFuelType.setVisible(false);
+        paneByCustomerType.setVisible(false);
         paneByTime.setVisible(true);
     }
 
     @FXML
     void handleFuelTypeCombo(ActionEvent event) {
+        btnFuelTypeShow.setDisable(false);
+        paneByFuelType.setVisible(true);
+
+    }
+
+    public void handleFuelTypeComboShow(ActionEvent actionEvent) {
+        String str = fuelTypeCombo1.getValue();
+        myController.getRatingForFuelTypeTable(str);
+        RatingTableForFuelType.setVisible(true);
     }
 
     @FXML
@@ -199,21 +239,39 @@ public class ViewAnalyticDataBoundary implements DataInitializable {
         myController.getRatingForCustomerTypeTable(str);
         customerTypeCombo.setVisible(true);
 
-
     }
+
+
     public void setRatingForCustomerTypeTable(ArrayList<Rating> cosArray){
         ratingCulomn1.setCellValueFactory(new PropertyValueFactory<>("rating"));
         customerIdCulomn1.setCellValueFactory(new PropertyValueFactory<>("customerID"));
 
         ObservableList<Rating> data = FXCollections.observableArrayList(cosArray);
+        selectedCustomerTypeTXT.setText(customerTypeCombo.getValue());
+        showPieChartCustomerType (data);
         RatingTableForCustomerType.setItems(data);
     }
+
+
+
+    public void setRatingForFuelTypeTable(ArrayList<Rating> cosArray){
+        ratingCulomn11.setCellValueFactory(new PropertyValueFactory<>("rating"));
+        customerIdCulomn11.setCellValueFactory(new PropertyValueFactory<>("customerID"));
+
+        ObservableList<Rating> data = FXCollections.observableArrayList(cosArray);
+        selectedFuelTypeTXT.setText(fuelTypeCombo1.getValue());
+        showPieChartFuelType (data);
+        RatingTableForFuelType.setItems(data);
+    }
+
 
     public void setRatingForTimeRangeTable(ArrayList<Rating> cosArray){
         ratingCulomn.setCellValueFactory(new PropertyValueFactory<>("rating"));
         customerIdCulomn.setCellValueFactory(new PropertyValueFactory<>("customerID"));
 
         ObservableList<Rating> data = FXCollections.observableArrayList(cosArray);
+        selectedhouresTXT.setText(TimeRangeStart.getValue() + " to " + TimeRangeEnd.getValue());
+        showPieChartHouers (data);
         RatingTableForTimeRange.setItems(data);
     }
 
@@ -222,21 +280,62 @@ public class ViewAnalyticDataBoundary implements DataInitializable {
 
     }
 
-    public void handleFuelTypeComboShow(ActionEvent actionEvent) {
-
-    }
 
 
     @FXML
     void handleBtnCustomerType(ActionEvent event) {
+        paneByFuelType.setVisible(false);
+        paneByTime.setVisible(false);
+        paneByCustomerType.setVisible(true);
 
     }
 
     @FXML
     void handleBtnCustomerTypeImage(MouseEvent event) {
+        paneByFuelType.setVisible(false);
+        paneByTime.setVisible(false);
+        paneByCustomerType.setVisible(true);
+
+    }
+//pai chart methodes :
+    private void showPieChartCustomerType(ObservableList<Rating> data) {
+        int[] monim = new int[11];
+        for(int i=0;i<10;i++)
+            monim[i] = 0;
+        for (int i=0;i<data.size();i++) {
+            monim[data.get(i).getRating()] ++;
+        }
+        ObservableList<PieChart.Data> piedata = FXCollections.observableArrayList(
+                new PieChart.Data("Rating 1", monim[1]), new PieChart.Data("Rating 2", monim[2]),
+                new PieChart.Data("Rating 3", monim[3]),new PieChart.Data("Rating 4", monim[4]),
+                new PieChart.Data("Rating 5", monim[5]),new PieChart.Data("Rating 6", monim[6]),
+                new PieChart.Data("Rating 7", monim[7]),new PieChart.Data("Rating 8", monim[8]),
+                new PieChart.Data("Rating 9", monim[9]),new PieChart.Data("Rating 10", monim[10]));
+        pieChartCustomerType.setData(piedata);
+    }
+
+    private void showPieChartFuelType(ObservableList<Rating> data) {
+        int[] monim = myController.monim;
+        ObservableList<PieChart.Data> piedata1 = FXCollections.observableArrayList(
+                new PieChart.Data("Rating 1", monim[1]), new PieChart.Data("Rating 2", monim[2]),
+                new PieChart.Data("Rating 3", monim[3]),new PieChart.Data("Rating 4", monim[4]),
+                new PieChart.Data("Rating 5", monim[5]),new PieChart.Data("Rating 6", monim[6]),
+                new PieChart.Data("Rating 7", monim[7]),new PieChart.Data("Rating 8", monim[8]),
+                new PieChart.Data("Rating 9", monim[9]),new PieChart.Data("Rating 10", monim[10]));
+        pieChartFuelType.setData(piedata1);
 
     }
 
+    private void showPieChartHouers(ObservableList<Rating> data) {
+        int[] monim = myController.monim;
+        ObservableList<PieChart.Data> piedata2 = FXCollections.observableArrayList(
+                new PieChart.Data("Rating 1", monim[1]), new PieChart.Data("Rating 2", monim[2]),
+                new PieChart.Data("Rating 3", monim[3]),new PieChart.Data("Rating 4", monim[4]),
+                new PieChart.Data("Rating 5", monim[5]),new PieChart.Data("Rating 6", monim[6]),
+                new PieChart.Data("Rating 7", monim[7]),new PieChart.Data("Rating 8", monim[8]),
+                new PieChart.Data("Rating 9", monim[9]),new PieChart.Data("Rating 10", monim[10]));
+        pieChartHouers.setData(piedata2);
 
+    }
 
 }

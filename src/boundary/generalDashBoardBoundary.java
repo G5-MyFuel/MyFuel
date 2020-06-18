@@ -1,6 +1,5 @@
 package boundary;
 
-import Contollers.AnalyticDataCreator;
 import Contollers.GeneralDashBoardController;
 import Contollers.ViewAnalyticDataController;
 import common.assets.ProjectPages;
@@ -9,8 +8,6 @@ import common.assets.enums.PricingModelTypes;
 import common.assets.enums.PurchasePlanTypes;
 import entity.Costumer;
 import entity.Prices;
-import entity.PurchasePlan;
-import entity.User;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

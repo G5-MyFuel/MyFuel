@@ -26,6 +26,7 @@ public class ViewAnalyticDataController extends BasicController {
     public ViewAnalyticDataController(ViewAnalyticDataBoundary myBoundary) {
         this.myBoundary = myBoundary;
     }
+    public int[] monim = new int[11];
 
     public ViewAnalyticDataController() {
     }
@@ -41,11 +42,6 @@ public class ViewAnalyticDataController extends BasicController {
             switch (result.getActionType()) {
                 case DELETE_ALL_RATINGS_ROWS:
                     break;
-                /*case GET_ALL_RATING_TABLE:
-                    ArrayList<Rating> resultList = new ArrayList<>();
-                    resultList.addAll(this.changeResultToRating(result));
-                    myBoundary.setRatingTable(resultList);
-                    break;*/
                 case GET_CUSTOMER_X_PURCHASE_TABLE:
                     ArrayList<Rating> resultList1 = new ArrayList<>();
                     resultList1.addAll(this.changeResultToInputRating(result));
@@ -65,6 +61,11 @@ public class ViewAnalyticDataController extends BasicController {
                     resultList3.addAll(this.changeResultToRatingForTimeRange(result));
                     myBoundary.setRatingForTimeRangeTable(resultList3);
                     break;
+                case GET_RATING_FOR_FUEL_TYPE:
+                    ArrayList<Rating> resultList4 = new ArrayList<>();
+                    resultList4.addAll(this.changeResultToRatingForFuelType(result));
+                    myBoundary.setRatingForFuelTypeTable(resultList4);
+                    break;
                 default:
                     break;
             }
@@ -77,6 +78,12 @@ public class ViewAnalyticDataController extends BasicController {
 
     public void getRatingTable() {
         SqlAction sqlAction = new SqlAction(SqlQueryType.GET_ALL_RATING_TABLE);
+        super.sendSqlActionToClient(sqlAction);
+
+    }
+
+    public void getCustomerXPurchaseTable() {
+        SqlAction sqlAction = new SqlAction(SqlQueryType.GET_CUSTOMER_X_PURCHASE_TABLE);
         super.sendSqlActionToClient(sqlAction);
 
     }
@@ -104,12 +111,39 @@ public class ViewAnalyticDataController extends BasicController {
                          counter++;
                      }
                 }
-                if (counter ==0) resultList.add(cos);
+                for(int t=0;t<4;t++)   monim[t]=0;
+                if (counter ==0 ) {//הכנסה לרשימה שתוצג בסוף
+                    resultList.add(cos);
+                    for(int k=1; k<11; k++)
+                        if (cos.getRating()==k)
+                            monim[k]++;
+                }
             }
         }
          return resultList;
     }
 
+    private ArrayList<Rating> changeResultToRatingForFuelType(SqlResult result) {
+        ArrayList<Rating> resultList = new ArrayList<>();
+        for (int i=0;i < result.getResultData().size(); i++ ) {
+            ArrayList<Object> a = result.getResultData().get(i);
+            Rating cos = new Rating((Integer) a.get(0), (String) a.get(1), (String) a.get(2));
+                int counter=0;
+                for(int j = 0; j<resultList.size(); j++){
+                    if (resultList.get(j).getCustomerID().equals(cos.getCustomerID())) {
+                        counter++;
+                    }
+                }
+                for(int t=0;t<4;t++)   monim[t]=0;
+                if (counter ==0 ) {//הכנסה לרשימה שתוצג בסוף
+                    resultList.add(cos);
+                    for(int k=1; k<11; k++)
+                        if (cos.getRating()==k)
+                            monim[k]++;
+                    }
+                }
+        return resultList;
+    }
         private void setRatingTableInDB(ArrayList<Rating> resultList, int i) {
         ArrayList<Object> varArray = new ArrayList<>();
         varArray.add(resultList.get(i).getCustomerID());
@@ -120,11 +154,6 @@ public class ViewAnalyticDataController extends BasicController {
         super.sendSqlActionToClient(sqlAction);
     }
 
-    public void getCustomerXPurchaseTable() {
-        SqlAction sqlAction = new SqlAction(SqlQueryType.GET_CUSTOMER_X_PURCHASE_TABLE);
-        super.sendSqlActionToClient(sqlAction);
-
-    }
 
     private ArrayList<Rating> changeResultToInputRating(SqlResult result){
         ArrayList<InputRating> resultList = new ArrayList<>();
@@ -214,18 +243,18 @@ public class ViewAnalyticDataController extends BasicController {
         else return 1;
     }
 
-//חישוב ממוצע של מערך:
-private int calculateAverage(List<Integer> marks) {
-    if (marks == null || marks.isEmpty()) {
-        return 0;
-    }
-    int sum = 0;
-    for (Integer mark : marks) {
-        sum += mark;
-    }
+    //חישוב ממוצע של מערך:
+    private int calculateAverage(List<Integer> marks) {
+        if (marks == null || marks.isEmpty()) {
+            return 0;
+        }
+        int sum = 0;
+        for (Integer mark : marks) {
+            sum += mark;
+        }
 
-    return sum / marks.size();
-}
+        return sum / marks.size();
+    }
 
     public void getRatingForCustomerTypeTable(String paramArray) {
         ArrayList<Object> varArray = new ArrayList<>();
@@ -240,4 +269,13 @@ private int calculateAverage(List<Integer> marks) {
         SqlAction sqlAction = new SqlAction(SqlQueryType.GET_RATING_FOR_TIME_RANGE);
         super.sendSqlActionToClient(sqlAction);
     }
+
+    public void getRatingForFuelTypeTable(String paramArray) {
+        ArrayList<Object> varArray = new ArrayList<>();
+        varArray.add(paramArray);
+        System.out.println(varArray.toString());//todo: להוריד את זה
+        SqlAction sqlAction = new SqlAction(SqlQueryType.GET_RATING_FOR_FUEL_TYPE, varArray);
+        super.sendSqlActionToClient(sqlAction);
+    }
+
 }

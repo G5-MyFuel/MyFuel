@@ -95,6 +95,7 @@ public enum SqlQueryType {
     DELETE_ALL_RATINGS_ROWS(SqlExecutionType.UPDATE_QUERY),
     GET_RATING_FOR_CUSTUMER_TYPE(SqlExecutionType.EXECUTE_QUERY),
     GET_RATING_FOR_TIME_RANGE(SqlExecutionType.EXECUTE_QUERY),
+    GET_RATING_FOR_FUEL_TYPE(SqlExecutionType.EXECUTE_QUERY),
 
     /* *****************************************
      * ********** Costumer Registration Queries ****************

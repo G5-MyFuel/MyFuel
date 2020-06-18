@@ -224,9 +224,13 @@ public class MysqlConnection {
                 "WHERE p.customerID LIKE c.ID AND p.purchaseID LIKE ff.purchaseID";
         sqlArray[SqlQueryType.INSERT_RATING.getCode()] ="INSERT INTO `Rating`(`CustomerID`, `Rating`, `CustomerType`) VALUES (?,?,?);";
         sqlArray[SqlQueryType.DELETE_ALL_RATINGS_ROWS.getCode()] = "DELETE FROM `Rating` WHERE 1";
-        sqlArray[SqlQueryType.GET_RATING_FOR_CUSTUMER_TYPE.getCode()] = "SELECT * FROM `Rating` WHERE `CustomerType`='?'";
+        sqlArray[SqlQueryType.GET_RATING_FOR_CUSTUMER_TYPE.getCode()] = "SELECT * FROM `Rating` WHERE `CustomerType`= ? ";
         sqlArray[SqlQueryType.GET_RATING_FOR_TIME_RANGE.getCode()] = "SELECT r.Rating, p.customerID, p.purchaseHour from " +
                 "Rating as r, Purchase as p WHERE p.customerID LIKE r.CustomerID";
+        sqlArray[SqlQueryType.GET_RATING_FOR_FUEL_TYPE.getCode()] = "SELECT r.Rating, p.customerID, ff.FuelType from " +
+                "Rating as r, Purchase as p, FastFuel as ff WHERE p.customerID LIKE r.CustomerID AND ff.purchaseID LIKE p.purchaseID AND FuelType= ? ";
+
+
 
         /* *****************************************
          * ********** Discount Rates Queries ****************
