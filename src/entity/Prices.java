@@ -3,6 +3,7 @@ package entity;
 import Contollers.GeneralDashBoardController;
 import common.assets.enums.FuelTypes;
 import common.assets.enums.PricingModelTypes;
+import common.assets.enums.PurchasePlanTypes;
 
 public class Prices {
     //Misrad Hatahbura prices
@@ -25,7 +26,7 @@ public class Prices {
     private Double fuelAmount;
     private Double fuelAmountOfPreviousMonth;
     private FuelTypes fuelType;
-    private String purchasePlan;
+    private PurchasePlanTypes purchasePlan;
     private PricingModelTypes pricingModelType;
     private Double totalPrice;
     private String userID;
@@ -36,7 +37,7 @@ public class Prices {
 
     GeneralDashBoardController generalDashBoardController = new GeneralDashBoardController();
 
-    public Prices(String userId, Double fuelAmount, FuelTypes fueltype, String purchasePlan, PricingModelTypes pricingModelType) {
+    public Prices(String userId, Double fuelAmount, FuelTypes fueltype, PurchasePlanTypes purchasePlan, PricingModelTypes pricingModelType) {
         //לקחת מהד"ב מחירים עדכניים - ממה שניר עשה - מודל תמחור
         //להריץ שאילתא שמקבלת את כמות הדלק של כל ההזמנות בטווח התאריכים של חודש קודם - עבור מנוי (4)
         this.userID = userId;
@@ -79,11 +80,11 @@ public class Prices {
         //
         //
         switch (purchasePlan) {
-            case "Exclusive":
+            case EXCLUSIVE:
                 return totalPrice = (totalPrice*purchasePlanDiscount_exclusive);
-            case "Multiple Stations":
+            case MULTIPLE_STATIONS:
                 return totalPrice = (totalPrice*purchasePlanDiscount_multiple);
-            case "None":
+            case NONE:
                 return totalPrice;
             default:
                 System.err.println("error in purchasePlan type");

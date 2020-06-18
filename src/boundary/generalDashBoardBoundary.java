@@ -5,8 +5,11 @@ import Contollers.GeneralDashBoardController;
 import Contollers.ViewAnalyticDataController;
 import common.assets.ProjectPages;
 import common.assets.enums.FuelTypes;
+import common.assets.enums.PricingModelTypes;
+import common.assets.enums.PurchasePlanTypes;
 import entity.Costumer;
 import entity.Prices;
+import entity.PurchasePlan;
 import entity.User;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -96,12 +99,13 @@ public class generalDashBoardBoundary implements DataInitializable {
 
     @Override
     public void initData(Object data) {
+        ArrayList<String> pageNameArrayList = (ArrayList<String>) data;
+
         myController.setCurrentUserID(userID);
         //
-       // Prices p = new Prices(userID,300.0, FuelTypes.HomeHeatingFuel,)
+        Prices p = new Prices(pageNameArrayList.get(1),300.0, FuelTypes.HomeHeatingFuel, PurchasePlanTypes.MULTIPLE_STATIONS, PricingModelTypes.Regular_monthly_subscription_multiple);
         //get all updated prices
         myController.getAllUpdatedPricesFromDB();
-        ArrayList<String> pageNameArrayList = (ArrayList<String>) data;
         String userPermission = pageNameArrayList.get(0);
         this.userID = pageNameArrayList.get(1);
         String userFullName = pageNameArrayList.get(2);

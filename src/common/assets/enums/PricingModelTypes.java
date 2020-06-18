@@ -11,6 +11,7 @@ public enum PricingModelTypes {
     PricingModelTypes(String pmt){
         this.pricingModelString = pmt;
     }
+
     public String getPricingModelString(){
         return pricingModelString;
     }
