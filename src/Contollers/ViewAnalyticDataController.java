@@ -22,15 +22,24 @@ import java.util.List;
 public class ViewAnalyticDataController extends BasicController {
     private Time start;
     private Time end;
+    public int[] monim = new int[11];
+
     private ViewAnalyticDataBoundary myBoundary; /**     * The boundary controlled by this controller     */
     public ViewAnalyticDataController(ViewAnalyticDataBoundary myBoundary) {
         this.myBoundary = myBoundary;
     }
-    public int[] monim = new int[11];
 
+    /**
+     *
+     */
     public ViewAnalyticDataController() {
     }
 
+    /**
+     *    * This method will only be activated if the "Generate Analitic Data" button is pressed
+     *      * The method calls for a query that will get customer and purchases data ,
+     *      *  calculate their ratings, and save to DB
+     */
     public void startCalculate(){
         this.deletePreviosData();
         this.getCustomerXPurchaseTable();
