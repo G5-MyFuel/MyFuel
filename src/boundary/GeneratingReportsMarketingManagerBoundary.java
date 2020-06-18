@@ -202,20 +202,25 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
 
         ArrayList<String> paramArray = new ArrayList<>();
         paramArray.add(ChooseReportToGenerateCombo.getValue());
-        if (ChooseReportToGenerateCombo.getValue().equals("Comments Report for Marketing Campaign")) {
-            if (EnterOperationSaleTXT.getText().equals("")){
-                ERRORnoOperation.setVisible(true);
-                ShowReportMarketingCampaignTxt.setVisible(false);
-            }
+        CommentsReportForMarketingCampaignTable.setVisible(false);
+        CustomerPeriodicCharacterizationReportTable.setVisible(false);
+        switch (ChooseReportToGenerateCombo.getValue()) {
+            case "Comments Report for Marketing Campaign":
+                if (EnterOperationSaleTXT.getText().equals("")) {
+                    ERRORnoOperation.setVisible(true);
+                    ShowReportMarketingCampaignTxt.setVisible(false);
+                } else {
+                    ERRORnoOperation.setVisible(false);
+                    paramArray.add(EnterOperationSaleTXT.getText());
+                    ShowReportMarketingCampaignTxt.setVisible(false);
+                    myController.GetReportData(paramArray);
+                }
+                break;
+            case "Customer Periodic Characterization Report":
 
-            else {
-                ERRORnoOperation.setVisible(false);
-                paramArray.add(EnterOperationSaleTXT.getText());
-                CommentsReportForMarketingCampaignTable.setVisible(false);
-                CustomerPeriodicCharacterizationReportTable.setVisible(false);
-                ShowReportMarketingCampaignTxt.setVisible(false);
-                myController.GetReportData(paramArray);
-            }
+                break;
+            default:
+                break;
         }
     }
 
