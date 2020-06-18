@@ -287,6 +287,11 @@ public class generalDashBoardBoundary implements DataInitializable {
                     });
                     break;
                 case "FUEL_MANAGMENT_PAGE":
+                    image = new Image(getClass().getResourceAsStream("../media/ButtonsDashBoardMedia/fuelManagement.png"));
+                    imageView = new ImageView(image);
+                    imageView.setFitHeight(30);
+                    imageView.setFitWidth(30);
+                    currentBtn.setGraphic(imageView);
                     currentBtn.setText("Fuel Management");
                     currentBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
                         @Override

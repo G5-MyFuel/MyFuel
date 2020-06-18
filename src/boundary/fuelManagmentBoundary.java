@@ -15,6 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ public class fuelManagmentBoundary implements DataInitializable {
     private Integer currectStationNumber;
     private Alert ErrorAlert = new Alert(Alert.AlertType.ERROR);
     private FormValidation myValidator = new FormValidation();
+    private Stage primStage;
 
 
     @FXML
@@ -61,23 +63,26 @@ public class fuelManagmentBoundary implements DataInitializable {
 
     @Override
     public void initData(Object data) {
-        managerID = (String)data;
+        primStage = (Stage) confirmBtn.getScene().getWindow();
+        primStage.setAlwaysOnTop(true);
+        primStage.setTitle("Fuel management window");
+        managerID = (String) data;
+        myController.getAllManagerStations(managerID);
         dataPane.setVisible(false);
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         handleComboBox();
-        myController.getAllManagerStations(managerID);
         myValidator.isOnlyNumbers(newStockLimitArea, "Stock Limit");
         myValidator.isEmptyFieldValidation(newStockLimitArea, "Stock Limit");
     }
 
     @FXML
     void confirmFunction(MouseEvent event) {
-        if ( myValidator.isEmptyField() && myValidator.isOnlyNumbers() ) {
+        if (myValidator.isEmptyField() && myValidator.isOnlyNumbers()) {
             myController.updateFuelLimit(Double.parseDouble(newStockLimitArea.getText()), currectStationNumber);
-        } else{
+        } else {
             ErrorAlert.setTitle("Field Error");
             ErrorAlert.setHeaderText("Stock limit field error.");
             ErrorAlert.showAndWait();
@@ -113,7 +118,7 @@ public class fuelManagmentBoundary implements DataInitializable {
 
     public void stockLimitHasBeenUpdate() {
         stockLimitNumber.setText(newStockLimitArea.getText());
-        Toast.makeText(mainProjectFX.mainStage, "Fuel stock limit has been successfully updated.", 1000, 800, 1500, 10, 150);
+        Toast.makeText(primStage, "Fuel stock limit has been successfully updated.", 1000, 800, 1500, 10, 150);
     }
 
     private GasStation searchStation(String stationName) {
