@@ -20,7 +20,7 @@
             <Font name="System Bold Italic" size="24.0" />
          </font>
          <textFill>
-            <LinearGradient endX="1.0" endY="1.0" startY="1.0">
+            <LinearGradient endX="0.519047619047619" endY="1.0" startX="1.0">
                <stops>
                   <Stop color="#374ee8" />
                   <Stop color="#20d3eb" offset="1.0" />

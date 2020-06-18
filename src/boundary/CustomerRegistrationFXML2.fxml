@@ -27,7 +27,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="mainPane" prefHeight="796.0" prefWidth="1062.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundary.CustomerRegistrationBoundary">
+<Pane fx:id="mainPane" prefHeight="796.0" prefWidth="1062.0" stylesheets="@BGcss.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundary.CustomerRegistrationBoundary">
    <children>
       <JFXTabPane layoutY="60.0" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="50.0">
          <tabs>
@@ -58,7 +58,7 @@
                                  <children>
                                     <JFXTextField fx:id="CostumerIDtxt" focusColor="#00add8" labelFloat="true" promptText="Costumer ID" unFocusColor="#868282">
                                        <font>
-                                          <Font size="18.0" />
+                                          <Font name="System Bold" size="18.0" />
                                        </font>
                                     </JFXTextField>
                                     <JFXTextField fx:id="FirstNametxt" focusColor="#00add8" labelFloat="true" layoutX="10.0" layoutY="10.0" promptText="First Name" unFocusColor="#868282">
@@ -66,7 +66,7 @@
                                           <Insets bottom="5.0" top="50.0" />
                                        </padding>
                                        <font>
-                                          <Font size="18.0" />
+                                          <Font name="System Bold" size="18.0" />
                                        </font>
                                     </JFXTextField>
                                     <JFXTextField fx:id="LastNametxt" focusColor="#00add8" labelFloat="true" layoutX="10.0" layoutY="46.0" promptText="Last Name" unFocusColor="#868282">
@@ -74,7 +74,7 @@
                                           <Insets top="50.0" />
                                        </padding>
                                        <font>
-                                          <Font size="18.0" />
+                                          <Font name="System Bold" size="18.0" />
                                        </font>
                                     </JFXTextField>
                                     <JFXTextField fx:id="EmailAdresstxt" focusColor="#00add8" focusTraversable="false" labelFloat="true" layoutX="10.0" layoutY="82.0" promptText="Email Adress" unFocusColor="#868282">
@@ -82,24 +82,19 @@
                                           <Insets top="50.0" />
                                        </padding>
                                        <font>
-                                          <Font size="18.0" />
+                                          <Font name="System Bold" size="18.0" />
                                        </font>
                                     </JFXTextField>
                                     <Pane nodeOrientation="LEFT_TO_RIGHT" prefHeight="11.0" prefWidth="385.0">
                                        <children>
-                                          <Hyperlink fx:id="CreditCardLink" layoutX="86.0" layoutY="37.0" onMouseClicked="#creditCardLinkOnClick" text="Credit Card Details (Optional)" />
+                                          <Hyperlink fx:id="CreditCardLink" layoutX="86.0" layoutY="37.0" onMouseClicked="#creditCardLinkOnClick" text="Credit Card Details (Optional)">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font></Hyperlink>
                                           <ImageView fitHeight="47.0" fitWidth="58.0" layoutX="29.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
                                                 <Image url="@../media/CostumerRegisterationMedia/card_security_40px.png" />
                                              </image>
-                                          </ImageView>
-                                          <ImageView fx:id="CreditCardLinkTT" fitHeight="64.0" fitWidth="16.0" layoutX="249.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../media/CostumerRegisterationMedia/help_16px.png" />
-                                             </image>
-                                             <cursor>
-                                                <Cursor fx:constant="HAND" />
-                                             </cursor>
                                           </ImageView>
                                        </children>
                                        <padding>
@@ -111,6 +106,14 @@
                                     <Insets left="20.0" top="10.0" />
                                  </padding>
                               </VBox>
+                              <ImageView fx:id="CreditCardLinkTT" fitHeight="64.0" fitWidth="16.0" layoutX="298.0" layoutY="529.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../media/CostumerRegisterationMedia/help_16px.png" />
+                                 </image>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </ImageView>
                            </children>
                         </Pane>
                      </children>
