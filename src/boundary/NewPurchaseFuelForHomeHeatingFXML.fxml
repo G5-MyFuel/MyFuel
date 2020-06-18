@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXTabPane?>
 <?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
@@ -81,7 +82,7 @@
                                                       </JFXTextArea>
                                                       <Pane prefHeight="278.0" prefWidth="460.0">
                                                          <children>
-                                                            <ImageView fx:id="nextOrderDetailsBtn" accessibleRole="BUTTON" fitHeight="70.0" fitWidth="87.0" layoutX="390.0" layoutY="192.0" pickOnBounds="true" preserveRatio="true">
+                                                            <ImageView fx:id="orderDetailsToShipping" accessibleRole="BUTTON" fitHeight="70.0" fitWidth="87.0" layoutX="390.0" layoutY="192.0" onMouseClicked="#GoToShippingPage" pickOnBounds="true" preserveRatio="true">
                                                                <image>
                                                                   <Image url="@../media/CostumerRegisterationMedia/forward_button_40px.png" />
                                                                </image>
@@ -139,20 +140,7 @@
                                                                   <Insets top="-10.0" />
                                                                </GridPane.margin>
                                                             </JFXTextField>
-                                                            <Pane prefHeight="200.0" prefWidth="200.0">
-                                                               <children>
-                                                                  <Text layoutX="252.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="limit for this order: ">
-                                                                     <font>
-                                                                        <Font size="16.0" />
-                                                                     </font>
-                                                                  </Text>
-                                                                  <Text fx:id="fuelLimitForOrder" fill="#380cfe" layoutX="387.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="theLim">
-                                                                     <font>
-                                                                        <Font name="System Bold" size="18.0" />
-                                                                     </font>
-                                                                  </Text>
-                                                               </children>
-                                                            </Pane>
+                                                            <Pane prefHeight="200.0" prefWidth="200.0" />
                                                          </children>
                                                       </GridPane>
                                                       <Label alignment="CENTER" prefHeight="30.0" prefWidth="446.0" style="-fx-background-color: #DCDCDC; -fx-opacity: 1; -fx-background-radius: 30;" text="Delivery Address Details">
@@ -264,7 +252,12 @@
                                                                   <Insets />
                                                                </VBox.margin>
                                                             </Label>
-                                                            <JFXComboBox fx:id="dayAndDateComboBox" prefHeight="37.0" prefWidth="203.0" style="-fx-font-size: 12pt;" />
+                                                            <HBox alignment="CENTER">
+                                                               <children>
+                                                                  <JFXDatePicker fx:id="shippingDatePicker" />
+                                                                  <JFXComboBox fx:id="dayAndDateComboBox" prefHeight="37.0" prefWidth="203.0" style="-fx-font-size: 12pt;" />
+                                                               </children>
+                                                            </HBox>
                                                             <Label text="Shipping hours available on this day:">
                                                                <VBox.margin>
                                                                   <Insets top="10.0" />
@@ -304,7 +297,7 @@
                                                                <children>
                                                                   <ImageView fitHeight="33.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                                                                      <image>
-                                                                        <Image url="@../media/fuel%20for%20home%20heating/icons8_fuel_tank_30px.png" />
+                                                                        <Image url="@../media/FuelForHomeHeating/icons8_fuel_tank_30px.png" />
                                                                      </image>
                                                                   </ImageView>
                                                                   <Text fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold; -fx-font-size: 22;" text="Your fuel order will be delivered on" textAlignment="CENTER" wrappingWidth="460.00567626953125" />
@@ -315,7 +308,7 @@
                                                       </VBox>
                                                       <Pane prefHeight="87.0" prefWidth="983.0">
                                                          <children>
-                                                            <ImageView accessibleRole="BUTTON" fitHeight="70.0" fitWidth="87.0" layoutX="924.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+                                                            <ImageView accessibleRole="BUTTON" fitHeight="70.0" fitWidth="87.0" layoutX="924.0" layoutY="4.0" onMouseClicked="#GoToReviewPage" pickOnBounds="true" preserveRatio="true">
                                                                <image>
                                                                   <Image url="@../media/CostumerRegisterationMedia/forward_button_40px.png" />
                                                                </image>
@@ -327,7 +320,7 @@
                                                                </cursor>
                                                             </ImageView>
                                                             <JFXButton text=" " />
-                                                            <ImageView accessibleRole="BUTTON" fitHeight="70.0" fitWidth="94.0" layoutX="-1.0" layoutY="-2.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+                                                            <ImageView accessibleRole="BUTTON" fitHeight="70.0" fitWidth="94.0" layoutX="-1.0" layoutY="-2.0" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#GoToOrderDetailsPage" pickOnBounds="true" preserveRatio="true">
                                                                <image>
                                                                   <Image url="@../media/CostumerRegisterationMedia/forward_button_40px.png" />
                                                                </image>
@@ -482,7 +475,7 @@
                                           </Label>
                                           <JFXButton layoutY="570.0" text=" ">
                                              <graphic>
-                                                <ImageView accessibleRole="BUTTON" fitHeight="70.0" fitWidth="94.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+                                                <ImageView accessibleRole="BUTTON" fitHeight="70.0" fitWidth="94.0" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#GoToOrderDetailsPage" pickOnBounds="true" preserveRatio="true">
                                                    <image>
                                                       <Image url="@../media/CostumerRegisterationMedia/forward_button_40px.png" />
                                                    </image>
@@ -497,11 +490,6 @@
                                                 <Font name="System Bold" size="23.0" />
                                              </font>
                                           </JFXButton>
-                                          <ImageView layoutX="267.0" layoutY="570.0">
-                                             <image>
-                                                <Image url="@../../../../../../../AppData/Local/Temp/icons8_pay_64px.png" />
-                                             </image>
-                                          </ImageView>
                                        </children></AnchorPane>
                                  </content>
                                  <graphic>

@@ -2,24 +2,30 @@ package boundary;
 
 import Contollers.FormValidation;
 import Contollers.NewPurchaseFuelForHomeHeatingController;
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXTextArea;
-import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.*;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+import javafx.scene.control.DateCell;
+import javafx.scene.control.DatePicker;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.util.Callback;
 import org.joda.time.DateTime;
-import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
+import sun.plugin2.jvm.RemoteJVMLauncher;
 
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * @author daniel
@@ -41,16 +47,13 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
     private JFXTextArea noteTXT;
 
     @FXML
-    private ImageView nextOrderDetailsBtn;
+    private ImageView orderDetailsToShipping;
 
     @FXML
     private JFXTextField emailAddressTXT;
 
     @FXML
     private JFXTextField fuelQuantityTXT;
-
-    @FXML
-    private Text fuelLimitForOrder;
 
     @FXML
     private JFXTextField streetNameTXT;
@@ -133,6 +136,8 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
     @FXML
     private Text deliveryAddressTXT;
 
+    @FXML
+    private JFXDatePicker shippingDatePicker;
 
     @Override
     public void initData(Object data) {
@@ -194,7 +199,7 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
         //build arraylist with the days and dates of the next two weeks
         ArrayList<String> twoWeeksDaysAndDates = new ArrayList<>();
         twoWeeksDaysAndDates.add(fmt.withLocale(Locale.ENGLISH).print(dt));
-        for(int i=1;i<15;i++) {
+        for (int i = 1; i < 15; i++) {
             twoWeeksDaysAndDates.add(fmt.withLocale(Locale.ENGLISH).print(dt.plusDays(i)));
         }
 
@@ -202,6 +207,7 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
         dayAndDateComboBox.getItems().addAll(twoWeeksDaysAndDates);
     }
 
+    @FXML
     public void CheckOrderDetails() {
         ArrayList<Object> guiObjects = new ArrayList<Object>();
         guiObjects.add(fuelQuantityTXT);
@@ -221,19 +227,80 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
 
     //todo: להמשיך להגדיר את התאריכים האופציונלים שיובאו מהדטהבייס מטבלת ShippingOptionalDates
     public void SetShippingTab() {
-        shippingMethodComboBOX.getItems().addAll("Fast Shipping (40$)", "Standard Shipping (15$)");
-        whenPane.setVisible(true);
         shippingOverviewPane.setVisible(false);
-        optionalDatesForShippingGridPane.setVisible(false);
+        whenPane.setVisible(false);
+        shippingMethodComboBOX.getItems().addAll("Fast Shipping (40$)", "Standard Shipping (15$)");
+        shippingMethodComboBOX.valueProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                switch (shippingMethodComboBOX.getValue()) {
+                    case "Fast Shipping (40$)":
+                        System.out.println("Fast Shipping selected");
+                        FastShippingSelected();
+
+                        break;
+                    case "Standard Shipping (15$)":
+                        System.out.println("Standard Shipping selected");
+                        StandardShippingSelected();
+                        break;
+                }
+            }
+        });
         //get available dates for shipping from DB
         String getAllAvailableDatesFromDbQUERY = "";    //todo:  query
 //        ClientApp.client.handleMessageFromClientUI(new Message(OperationType.getRequirementData,""));
     }
+
+    private void FastShippingSelected() {
+        whenPane.setVisible(false);
+        optionalDatesForShippingGridPane.setVisible(false);
+    }
+
+    private void StandardShippingSelected() {
+        whenPane.setVisible(true);
+        optionalDatesForShippingGridPane.setVisible(false);
+
+        // disable past dates of DatePicker gui obj
+        Callback<DatePicker, DateCell> callB = new Callback<DatePicker, DateCell>() {
+            @Override
+            public DateCell call(final DatePicker param) {
+                return new DateCell() {
+                    @Override
+                    public void updateItem(LocalDate item, boolean empty) {
+                        super.updateItem(item, empty); //To change body of generated methods, choose Tools | Templates.
+                        LocalDate today = LocalDate.now();
+                        setDisable(empty || item.compareTo(today) < 0);
+                    }
+                };
+            }
+
+        };
+        shippingDatePicker.setDayCellFactory(callB);
+
+        //check if the date selected available in DB (running on Thread)
+
+    }
+
 
     public void InitialAndResetAllShippingDates() {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date date = new Date(Calendar.getInstance().getTime().getTime());
         String initialShippingDatesQUERY = "INSERT INTO `bpsdc8o22sikrlpvvxqm`.`ShippingOptionalDates` (`DayAndDate`, `T1`, `T2`, `T3`, `T4`, `T5`, `T6`) VALUES ('2020-05-31', '1', '1', '1', '1', '1', '1');";
         // ClientApp.chatClient.handleMessageFromClientUI(new Message(OperationType.updateRequirement,initialShippingDatesQUERY));
+    }
+
+    @FXML
+    void GoToOrderDetailsPage(MouseEvent event) {
+
+    }
+
+    @FXML
+    void GoToReviewPage(MouseEvent event) {
+
+    }
+
+    @FXML
+    void GoToShippingPage(MouseEvent event) {
+
     }
 }
