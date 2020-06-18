@@ -1,7 +1,13 @@
 package entity;
 
 import common.assets.EmailHandler;
-
+/**
+ * the class Gas Station
+ *
+ * @author Itay Ziv
+ * @see GasStation - the form's entity class
+ *
+ */
 public class GasStation {
 
     private Integer stationNumber;

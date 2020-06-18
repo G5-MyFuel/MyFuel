@@ -9,6 +9,14 @@ import javafx.application.Platform;
 
 import java.util.ArrayList;
 
+
+/**
+ * the class fuel Management Controller
+ *
+ * @author Itay Ziv
+ * @see fuelManagmentController - the form's Controller class
+ *
+ */
 public class fuelManagmentController extends BasicController {
 
 

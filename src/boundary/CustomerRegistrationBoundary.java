@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
+ * the class costumer registration boundary
  * @author itay
  * @see CustomerRegistrationBoundary - the form's Boundary class
  */

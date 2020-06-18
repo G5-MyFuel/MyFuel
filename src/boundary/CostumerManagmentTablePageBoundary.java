@@ -29,6 +29,12 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import static java.lang.Thread.sleep;
+/**
+ * the class Costumer Management Table Page Boundary
+ *
+ * @author Itay Ziv
+ * @see CostumerManagmentTablePageBoundary - the form's Boundary class
+ */
 
 public class CostumerManagmentTablePageBoundary implements DataInitializable {
 

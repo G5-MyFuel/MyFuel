@@ -11,7 +11,8 @@ import javafx.application.Platform;
 
 import java.util.ArrayList;
 
-/**
+
+/** the class Customer Registration Controller
  * @author itay
  * @see CustomerRegistrationController - the form's logic class
  */

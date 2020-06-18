@@ -20,6 +20,13 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+/**
+ * the class fuel Management Boundary
+ *
+ * @author Itay Ziv
+ * @see fuelManagmentBoundary - the form's Boundary class
+ *
+ */
 
 public class fuelManagmentBoundary implements DataInitializable {
 
