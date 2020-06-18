@@ -254,7 +254,7 @@
                                                             </Label>
                                                             <HBox alignment="CENTER">
                                                                <children>
-                                                                  <JFXDatePicker fx:id="shippingDatePicker" />
+                                                                  <JFXDatePicker fx:id="shippingDatePicker" onAction="#handleJFXDatePicker" />
                                                                   <JFXComboBox fx:id="dayAndDateComboBox" prefHeight="37.0" prefWidth="203.0" style="-fx-font-size: 12pt;" />
                                                                </children>
                                                             </HBox>

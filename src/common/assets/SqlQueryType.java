@@ -20,6 +20,7 @@ public enum SqlQueryType {
     /* *****************************************
      * ********** PurchaseFuelForHomeHeating ****************
      * *****************************************/
+    GET_ALL_SHIPPING_DATES_AVAILABLE(SqlExecutionType.EXECUTE_QUERY),
 
     /* *****************************************
      * ********** Discount Rates Queries ****************
