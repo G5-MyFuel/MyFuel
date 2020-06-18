@@ -31,7 +31,6 @@ public class GeneralDashBoardController extends BasicController {
     @Override
     public void getResultFromClient(SqlResult result) {
         Platform.runLater(() -> {
-            //        sqlArray[SqlQueryType.GET_ALL_UPDATED_PRICES.getCode()] = "SELECT * FROM Prices;";
             switch (result.getActionType()) {
                 case GET_ALL_UPDATED_PRICES:
                     this.changeResultToFuelPrices(result);
@@ -39,9 +38,7 @@ public class GeneralDashBoardController extends BasicController {
                 case GET_ALL_PURCHASE_FUEL_AMOUNT_OF_USER:
                     this.changeResultToFueAmountOfPreMonthOfCurUser(result, currentUserID);
                     break;
-                //
                 default:
-                    System.err.println(this.getClass().getName().toString() + ": result error from db");
                     break;
             }
         });

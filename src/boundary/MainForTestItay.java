@@ -38,7 +38,7 @@ public class MainForTestItay extends Application {
         Pane root = null;
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource(ProjectPages.GENERAL_DASH_BOARD.getPath()));
+            loader.setLocation(getClass().getResource(ProjectPages.CHOOSE_SUBSCRIPTION_TYPE.getPath()));
             root = loader.load();
             Scene s1 = new Scene(root);
             primaryStage.setScene(s1);
