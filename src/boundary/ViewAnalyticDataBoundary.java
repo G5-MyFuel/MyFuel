@@ -1,6 +1,5 @@
 package boundary;
 
-import Contollers.FormValidation;
 import Contollers.ViewAnalyticDataController;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -36,9 +35,17 @@ import java.util.ResourceBundle;
  * @see ViewAnalyticDataController - the form's logic class
  */
 public class ViewAnalyticDataBoundary implements DataInitializable {
-    /** The supervisor boundary controller. */
+    /**
+     *  The supervisor boundary controller.
+     *  */
     private ViewAnalyticDataController myController = new ViewAnalyticDataController(this);
+    /**
+     *  The boundary of the side menu
+     */
     private generalDashBoardBoundary myDashBoard;
+    /**
+     * A parameter that represents who enters the page
+     */
     private String marketingManager;
     /**
      * gui variables
@@ -155,7 +162,7 @@ public class ViewAnalyticDataBoundary implements DataInitializable {
     private ObservableList<String> FuelType = FXCollections.observableArrayList("Gasoline95", "Diesel", "ScooterFuel", "HomeHeatingFuel");
 
     /**
-     *  This method allows to save information sent when uploading the page
+     *  This method allows to save information sent when uploading the page (user id)
      *
      * @param data - The data sent to the boundary
      */
@@ -191,6 +198,9 @@ public class ViewAnalyticDataBoundary implements DataInitializable {
      */
     @FXML
     void handleGenerateData(ActionEvent event) {
+        paneByFuelType.setVisible(false);
+        paneByCustomerType.setVisible(false);
+        paneByTime.setVisible(false);
         myController.deletePreviosData();
         myController.getCustomerXPurchaseTable();
     }
@@ -326,6 +336,8 @@ public class ViewAnalyticDataBoundary implements DataInitializable {
 
     //TODO: continue java doc
     /**
+     *This method will only be activated if the "customer type" image is pressed
+     * The method will display the window that show ranking by customer type parameter
      *
      * @param event
      */
@@ -338,8 +350,11 @@ public class ViewAnalyticDataBoundary implements DataInitializable {
     }
 
     /**
+     *This method receives from the controller an array with the values obtained from the DB
+     * And places them in the appropriate table of ratings- CustomerTypeTable
+     * And send to another function to place them in a pie chart
      *
-     * @param cosArray
+     * @param cosArray  An array of ratings and customer IDs received from DB
      */
     public void setRatingForCustomerTypeTable(ArrayList<Rating> cosArray){
         ratingCulomn1.setCellValueFactory(new PropertyValueFactory<>("rating"));
@@ -352,6 +367,9 @@ public class ViewAnalyticDataBoundary implements DataInitializable {
     }
 
     /**
+     *This method receives from the controller an array with the values obtained from the DB
+     * And places them in the appropriate table of ratings - FuelTypeTable
+     * And send to another function to place them in a pie chart
      *
      * @param cosArray
      */
@@ -361,11 +379,14 @@ public class ViewAnalyticDataBoundary implements DataInitializable {
 
         ObservableList<Rating> data = FXCollections.observableArrayList(cosArray);
         selectedFuelTypeTXT.setText(fuelTypeCombo1.getValue());
-        showPieChartFuelType (data);
+        showPieChartFuelType ();
         RatingTableForFuelType.setItems(data);
     }
 
     /**
+     *This method receives from the controller an array with the values obtained from the DB
+     * And places them in the appropriate table of ratings - TimeRangeTable
+     * And send to another function to place them in a pie chart
      *
      * @param cosArray
      */
@@ -375,16 +396,15 @@ public class ViewAnalyticDataBoundary implements DataInitializable {
 
         ObservableList<Rating> data = FXCollections.observableArrayList(cosArray);
         selectedhouresTXT.setText(TimeRangeStart.getValue() + " to " + TimeRangeEnd.getValue());
-        showPieChartHouers (data);
+        showPieChartHours();
         RatingTableForTimeRange.setItems(data);
     }
 
-
-//pai chart methodes :
-
     /**
+     *This function receives an array of data and displays it in a rating pie chart
+     *Segmented by customer type
      *
-     * @param data
+     * @param data   An array with ratings
      */
     private void showPieChartCustomerType(ObservableList<Rating> data) {
         int[] monim = new int[11];
@@ -403,11 +423,12 @@ public class ViewAnalyticDataBoundary implements DataInitializable {
     }
 
     /**
+     *This function receives an array of data and displays it in a rating pie chart
+     * Segmented by fuel type
      *
-     * @param data
      */
-    private void showPieChartFuelType(ObservableList<Rating> data) {
-        int[] monim = myController.monim;
+    private void showPieChartFuelType() {
+        int[] monim = myController.counters;
         ObservableList<PieChart.Data> piedata1 = FXCollections.observableArrayList(
                 new PieChart.Data("Rating 1", monim[1]), new PieChart.Data("Rating 2", monim[2]),
                 new PieChart.Data("Rating 3", monim[3]),new PieChart.Data("Rating 4", monim[4]),
@@ -419,11 +440,12 @@ public class ViewAnalyticDataBoundary implements DataInitializable {
     }
 
     /**
+     * This function receives an array of data and displays it in a rating pie chart
+     *Segmented by refueling hours
      *
-     * @param data
      */
-    private void showPieChartHouers(ObservableList<Rating> data) {
-        int[] monim = myController.monim;
+    private void showPieChartHours() {
+        int[] monim = myController.counters;
         ObservableList<PieChart.Data> piedata2 = FXCollections.observableArrayList(
                 new PieChart.Data("Rating 1", monim[1]), new PieChart.Data("Rating 2", monim[2]),
                 new PieChart.Data("Rating 3", monim[3]),new PieChart.Data("Rating 4", monim[4]),
@@ -434,7 +456,5 @@ public class ViewAnalyticDataBoundary implements DataInitializable {
 
     }
 
-    @FXML
-    void handleTimeRangeCombo(ActionEvent event) {
-    }
+
 }
