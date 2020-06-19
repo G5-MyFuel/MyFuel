@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -19,20 +20,29 @@
             <Font name="System Bold" size="40.0" />
          </font>
       </Label>
-      <JFXButton fx:id="btnQuarterlyRevenueReport" buttonType="RAISED" layoutX="39.0" layoutY="313.0" onMouseClicked="#handleQuarterlyRevenueReport" prefHeight="38.0" prefWidth="280.0" styleClass="jfx-button" stylesheets="@GeneratingReportsStationManagerCSS.css" text="Generate Quarterly revenue report" textFill="WHITE">
+      <JFXButton fx:id="btnQuarterlyRevenueReport" buttonType="RAISED" layoutX="39.0" layoutY="313.0" onMouseClicked="#handleQuarterlyRevenueReport" prefHeight="38.0" prefWidth="280.0" style="-fx-background-radius: 50;" stylesheets="@style.css" text="Generate Quarterly revenue report" textFill="WHITE">
          <font>
             <Font name="Calibri Bold" size="14.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </JFXButton>
-      <JFXButton fx:id="btnPurchasesReport" buttonType="RAISED" layoutX="387.0" layoutY="313.0" onMouseClicked="#handlePurchasesReport" prefHeight="38.0" prefWidth="280.0" styleClass="jfx-button" stylesheets="@GeneratingReportsStationManagerCSS.css" text="Generate Purchases report" textFill="WHITE">
+      <JFXButton fx:id="btnPurchasesReport" buttonType="RAISED" layoutX="387.0" layoutY="313.0" onMouseClicked="#handlePurchasesReport" prefHeight="38.0" prefWidth="280.0" style="-fx-background-radius: 50;" stylesheets="@style.css" text="Generate Purchases report" textFill="WHITE">
          <font>
             <Font name="Calibri Bold" size="14.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </JFXButton>
-      <JFXButton fx:id="btnQuantityItemsInStockReport" buttonType="RAISED" layoutX="727.0" layoutY="313.0" onMouseClicked="#handleQuantityItemsInStockReport" prefHeight="38.0" prefWidth="280.0" styleClass="jfx-button" stylesheets="@GeneratingReportsStationManagerCSS.css" text="Generate Quantity of items in stock report" textFill="WHITE">
+      <JFXButton fx:id="btnQuantityItemsInStockReport" buttonType="RAISED" layoutX="727.0" layoutY="313.0" onMouseClicked="#handleQuantityItemsInStockReport" prefHeight="38.0" prefWidth="280.0" style="-fx-background-radius: 50;" stylesheets="@style.css" text="Generate Quantity of items in stock report" textFill="WHITE">
          <font>
             <Font name="Calibri Bold" size="14.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </JFXButton>
       <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="770.0" layoutY="140.0" onMouseClicked="#handleQuantityItemsInStockReport">
          <image>
@@ -91,8 +101,17 @@
             <TableColumn fx:id="AvailableInventoryColumn" prefWidth="157.0" text="Available inventory" />
          </columns>
       </TableView>
-      <Button fx:id="btnSaveQuarterlyReport" layoutX="105.0" layoutY="549.0" mnemonicParsing="false" onAction="#handleSaveQuarterlyReportBtn" prefHeight="42.0" prefWidth="132.0" style="-fx-background-color: #2D4578; -fx-background-radius: 50;" stylesheets="@style.css" text="Save to Admin" />
-      <Button fx:id="btnSaveQuantityReport" layoutX="788.0" layoutY="604.0" mnemonicParsing="false" onAction="#handleSaveQuantityReportBtn" prefHeight="42.0" prefWidth="132.0" style="-fx-background-color: #2D4578; -fx-background-radius: 50;" stylesheets="@style.css" text="Save to Admin" />
-      <Button fx:id="btnSavePurchasesReport" layoutX="465.0" layoutY="604.0" mnemonicParsing="false" onAction="#handleSavePurchasesReportBtn" prefHeight="42.0" prefWidth="132.0" style="-fx-background-color: #2D4578; -fx-background-radius: 50;" stylesheets="@style.css" text="Save to Admin" />
+      <Button fx:id="btnSaveQuarterlyReport" layoutX="105.0" layoutY="549.0" mnemonicParsing="false" onAction="#handleSaveQuarterlyReportBtn" prefHeight="42.0" prefWidth="132.0" style="-fx-background-radius: 50;" stylesheets="@style.css" text="Save to Admin">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <Button fx:id="btnSaveQuantityReport" layoutX="788.0" layoutY="604.0" mnemonicParsing="false" onAction="#handleSaveQuantityReportBtn" prefHeight="42.0" prefWidth="132.0" style="-fx-background-radius: 50;" stylesheets="@style.css" text="Save to Admin">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <Button fx:id="btnSavePurchasesReport" layoutX="465.0" layoutY="604.0" mnemonicParsing="false" onAction="#handleSavePurchasesReportBtn" prefHeight="42.0" prefWidth="132.0" style="-fx-background-radius: 50;" stylesheets="@style.css" text="Save to Admin">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
    </children>
 </Pane>
