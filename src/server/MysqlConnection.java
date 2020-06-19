@@ -310,7 +310,7 @@ public class MysqlConnection {
         sqlArray[SqlQueryType.GET_Comments_Report.getCode()] = "select customerID,SUM(totalPrice) as TotalSum " +
                 "from(SELECT totalPrice,customerID from Purchase where CampaignID = ?) as t group by customerID";
         sqlArray[SqlQueryType.GET_Customers_List.getCode()] = "SELECT customerID, sum(totalPrice) from Purchase AS p, FastFuel AS f " +
-                "where p.purchaseID = f.purchaseID AND p.purchaseDate BETWEEN ? AND ? GROUP by customerID";
+                "where p.purchaseID = f.purchaseID AND p.purchaseDate BETWEEN ? AND ? GROUP by customerID ORDER BY sum(totalPrice) DESC";
         sqlArray[SqlQueryType.GET_CustomerPeriodicCharacterization_Report.getCode()] = "SELECT p.customerID, SUM(p.totalPrice) AS TotalSum, f.companyName from Purchase AS p, FastFuel AS f " +
                 "where p.purchaseID = f.purchaseID AND p.purchaseDate BETWEEN ? AND ? group by customerID, companyName";
 

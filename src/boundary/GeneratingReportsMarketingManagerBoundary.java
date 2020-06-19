@@ -230,6 +230,10 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
         }
     }
 
+    /**
+     *
+     * @param resultList
+     */
     public void setCommentsReportData(ArrayList<CommentsReport> resultList) {
 
         if (resultList.size() > 0) {
@@ -298,6 +302,10 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
         return StartDateBox.getValue().isBefore(java.time.LocalDate.now());
     }*/
 
+    /**
+     *
+     * @return
+     */
     boolean isEndDateBoxBeforeStartDateBox() {
         return EndDateBox.getValue().isBefore(StartDateBox.getValue());
     }
