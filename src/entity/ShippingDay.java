@@ -43,4 +43,53 @@ public class ShippingDay {
 //    public void fromStringToDate(String strDate) throws ParseException {
 //        this.date = new SimpleDateFormat("yyyy-MM-dd").parse(strDate);
 //    }
+
+
+    public Integer getT1() {
+        return t1;
+    }
+
+    public void setT1(Integer t1) {
+        this.t1 = t1;
+    }
+
+    public Integer getT2() {
+        return t2;
+    }
+
+    public void setT2(Integer t2) {
+        this.t2 = t2;
+    }
+
+    public Integer getT3() {
+        return t3;
+    }
+
+    public void setT3(Integer t3) {
+        this.t3 = t3;
+    }
+
+    public Integer getT4() {
+        return t4;
+    }
+
+    public void setT4(Integer t4) {
+        this.t4 = t4;
+    }
+
+    public Integer getT5() {
+        return t5;
+    }
+
+    public void setT5(Integer t5) {
+        this.t5 = t5;
+    }
+
+    public Integer getT6() {
+        return t6;
+    }
+
+    public void setT6(Integer t6) {
+        this.t6 = t6;
+    }
 }

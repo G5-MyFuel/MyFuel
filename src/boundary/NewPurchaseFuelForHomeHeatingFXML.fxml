@@ -254,11 +254,10 @@
                                                             </Label>
                                                             <HBox alignment="CENTER">
                                                                <children>
-                                                                  <JFXDatePicker fx:id="shippingDatePicker" onAction="#handleJFXDatePicker" />
-                                                                  <JFXComboBox fx:id="dayAndDateComboBox" prefHeight="37.0" prefWidth="203.0" style="-fx-font-size: 12pt;" />
+                                                                  <JFXDatePicker fx:id="shippingDatePicker" onAction="#handleJFXDatePicker" prefHeight="25.0" prefWidth="214.0" />
                                                                </children>
                                                             </HBox>
-                                                            <Label text="Shipping hours available on this day:">
+                                                            <Label fx:id="ShippingHouresAvailableOnThisDateLABLE" text="Shipping hours available on this day:" visible="false">
                                                                <VBox.margin>
                                                                   <Insets top="10.0" />
                                                                </VBox.margin>
@@ -286,7 +285,7 @@
                                                                      </effect>
                                                                   </JFXButton>
                                                                   <JFXButton fx:id="t15to17BTN" alignment="CENTER" prefHeight="73.0" prefWidth="141.0" style="-fx-font-size: 12pt;" styleClass="dalivery-time" text="15:00 - 17:00" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                                                  <JFXButton fx:id="t7to9BTN" alignment="CENTER" prefHeight="73.0" prefWidth="141.0" style="-fx-font-size: 12pt;" styleClass="dalivery-time" text="07:00 - 09:00" />
+                                                                  <JFXButton fx:id="t7to9BTN" alignment="CENTER" disable="true" prefHeight="73.0" prefWidth="141.0" style="-fx-font-size: 12pt;" styleClass="dalivery-time" text="07:00 - 09:00" />
                                                                </children>
                                                             </GridPane>
                                                          </children>
