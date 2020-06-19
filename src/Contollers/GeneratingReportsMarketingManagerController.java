@@ -5,6 +5,7 @@ import common.assets.SqlAction;
 import common.assets.SqlQueryType;
 import common.assets.SqlResult;
 import entity.CommentsReport;
+import entity.CustomerPeriodicCharacterizationReport;
 import javafx.application.Platform;
 
 import java.util.ArrayList;
@@ -60,13 +61,13 @@ public class GeneratingReportsMarketingManagerController extends BasicController
         Platform.runLater(() -> {
             switch (result.getActionType()) {
                 case GET_Comments_Report:
-                    myBoundary.setCustomersListData(this.changeResultToCustomersList(result));
-                    break;
-                case GET_Customers_List:
                     myBoundary.setCommentsReportData(this.changeResultToCommentsReport(result));
                     break;
+                case GET_Customers_List:
+                    myBoundary.setCustomersListData(this.changeResultToCustomersList(result));
+                    break;
                 case GET_CustomerPeriodicCharacterization_Report:
-                    //myBoundary.setCommentsReportData(this.changeResultToCommentsReport(result));
+                    myBoundary.setCustomerPeriodicCharacterizationReportData(this.changeResultToCustomerPeriodicCharacterizationReport(result));
                     break;
                 default:
                     break;
@@ -88,11 +89,22 @@ public class GeneratingReportsMarketingManagerController extends BasicController
         return resultList;
     }
 
-    private ArrayList<String> changeResultToCustomersList(SqlResult result) {
+    private ArrayList<CustomerPeriodicCharacterizationReport> changeResultToCustomersList(SqlResult result) {
 
-        ArrayList<String> resultList = new ArrayList<>();
+        ArrayList<CustomerPeriodicCharacterizationReport> resultList = new ArrayList<>();
         for (ArrayList<Object> a : result.getResultData())
-            resultList.add((String) a.get(0));
+            resultList.add(new CustomerPeriodicCharacterizationReport((String) a.get(0), a.get(1).toString()));
+        return resultList;
+    }
+
+    private ArrayList<CustomerPeriodicCharacterizationReport> changeResultToCustomerPeriodicCharacterizationReport(SqlResult result) {
+
+        ArrayList<CustomerPeriodicCharacterizationReport> resultList = new ArrayList<>();
+        for (ArrayList<Object> a : result.getResultData()){
+
+            resultList.add(new CustomerPeriodicCharacterizationReport((String) a.get(0), a.get(1).toString()));
+        }
+
         return resultList;
     }
 
