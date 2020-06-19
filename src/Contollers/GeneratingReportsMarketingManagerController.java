@@ -38,8 +38,14 @@ public class GeneratingReportsMarketingManagerController extends BasicController
                 SqlAction sqlAction = new SqlAction(SqlQueryType.GET_Comments_Report, varArray);
                 super.sendSqlActionToClient(sqlAction);
                 break;
+            /*case "Get Customers List":
+                sqlAction = new SqlAction(SqlQueryType.GET_Customers_List, varArray);
+                super.sendSqlActionToClient(sqlAction);
+                break;*/
             case "Customer Periodic Characterization Report":
-                sqlAction = new SqlAction(SqlQueryType.GET_Comments_Report, varArray);
+                sqlAction = new SqlAction(SqlQueryType.GET_Customers_List, varArray);
+                super.sendSqlActionToClient(sqlAction);
+                sqlAction = new SqlAction(SqlQueryType.GET_CustomerPeriodicCharacterization_Report, varArray);
                 super.sendSqlActionToClient(sqlAction);
                 break;
             default:
@@ -54,7 +60,13 @@ public class GeneratingReportsMarketingManagerController extends BasicController
         Platform.runLater(() -> {
             switch (result.getActionType()) {
                 case GET_Comments_Report:
+                    myBoundary.setCustomersListData(this.changeResultToCustomersList(result));
+                    break;
+                case GET_Customers_List:
                     myBoundary.setCommentsReportData(this.changeResultToCommentsReport(result));
+                    break;
+                case GET_CustomerPeriodicCharacterization_Report:
+                    //myBoundary.setCommentsReportData(this.changeResultToCommentsReport(result));
                     break;
                 default:
                     break;
@@ -73,6 +85,14 @@ public class GeneratingReportsMarketingManagerController extends BasicController
         ArrayList<CommentsReport> resultList = new ArrayList<>();
         for (ArrayList<Object> a : result.getResultData())
             resultList.add(new CommentsReport((String) a.get(0), a.get(1).toString()));
+        return resultList;
+    }
+
+    private ArrayList<String> changeResultToCustomersList(SqlResult result) {
+
+        ArrayList<String> resultList = new ArrayList<>();
+        for (ArrayList<Object> a : result.getResultData())
+            resultList.add((String) a.get(0));
         return resultList;
     }
 
