@@ -1,7 +1,9 @@
 package entity;
 
 /**
+ *Customer Rating class
  *
+ * @author Hana Wiener
  */
 public class Rating {
 

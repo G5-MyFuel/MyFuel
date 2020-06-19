@@ -62,7 +62,9 @@ public class ViewAnalyticDataController extends BasicController {
     }
 
     /**
-     *  this methode
+     * This method is responsible for getting results from the client
+     * Divided into cases to separate getting results from different queries
+     *
      * @param result - The result recieved from the DB
      */
     @Override
@@ -107,23 +109,41 @@ public class ViewAnalyticDataController extends BasicController {
         });
 
     }
+
+    /**
+     * This method is responsible for requesting information from DB through the server
+     * The query: DELETE ALL RATINGS ROWS
+     */
     public void deletePreviosData() {
         SqlAction sqlAction = new SqlAction(SqlQueryType.DELETE_ALL_RATINGS_ROWS);
         super.sendSqlActionToClient(sqlAction);
     }
 
+    /**
+     * This method is responsible for requesting information from DB through the server
+     * The query: GET_ALL_RATING_TABLE
+     */
     public void getRatingTable() {
         SqlAction sqlAction = new SqlAction(SqlQueryType.GET_ALL_RATING_TABLE);
         super.sendSqlActionToClient(sqlAction);
 
     }
 
+    /**
+     * This method is responsible for requesting information from DB through the server
+     * The query: GET_CUSTOMER_X_PURCHASE_TABLE
+     */
     public void getCustomerXPurchaseTable() {
         SqlAction sqlAction = new SqlAction(SqlQueryType.GET_CUSTOMER_X_PURCHASE_TABLE);
         super.sendSqlActionToClient(sqlAction);
 
     }
 
+    /**
+     * This method is responsible for changing the information that came from DB to entities
+     * * Change information to entity: Rating
+     *  
+     */
     private ArrayList<Rating> changeResultToRating(SqlResult result){
         ArrayList<Rating> resultList = new ArrayList<>();
         for(ArrayList<Object> a: result.getResultData()) {
@@ -133,6 +153,11 @@ public class ViewAnalyticDataController extends BasicController {
         return resultList;
     }
 
+    /**
+     * This method is responsible for changing the information that came from DB to entities
+     * * Change information to entity: Rating for time range
+     *  
+     */
     private ArrayList<Rating> changeResultToRatingForTimeRange(SqlResult result) {
         ArrayList<Rating> resultList = new ArrayList<>();
         for(int t=0;t<11;t++)   counters[t]=0;
@@ -159,6 +184,11 @@ public class ViewAnalyticDataController extends BasicController {
          return resultList;
     }
 
+    /**
+     * This method is responsible for changing the information that came from DB to entities
+     * * Change information to entity: Rating for FuelType
+     *  
+     */
     private ArrayList<Rating> changeResultToRatingForFuelType(SqlResult result) {
         ArrayList<Rating> resultList = new ArrayList<>();
         for(int t=0;t<11;t++)   counters[t]=0;
@@ -180,6 +210,11 @@ public class ViewAnalyticDataController extends BasicController {
                 }
         return resultList;
     }
+
+    /**
+     * This method is responsible for requesting of save information in DB through the server
+     * The query: INSERT_RATING
+     */
         private void setRatingTableInDB(ArrayList<Rating> resultList, int i) {
         ArrayList<Object> varArray = new ArrayList<>();
         varArray.add(resultList.get(i).getCustomerID());
@@ -190,12 +225,18 @@ public class ViewAnalyticDataController extends BasicController {
         super.sendSqlActionToClient(sqlAction);
     }
 
-
+    /**
+     * This method is responsible for calculate rankings to customers from the information
+     * that came from DB.
+     * The calculation is done as specified in the notes in the code.
+     * So 0.2 of the rating is calculated by customer type,
+     * 0.4 of the code is calculated by fuel type, 0.4 of the code is calculated by fuel hours
+     *  
+     */
     private ArrayList<Rating> changeResultToInputRating(SqlResult result){
         ArrayList<InputRating> resultList = new ArrayList<>();
         ArrayList<Rating> ratingList = new ArrayList<>();
-        //bring all to array list from db
-        //  customerID   |   customerType   |   purchaseID   |   FuelType   |   purchaseHour
+        /** bring all to array list from db */
         for(ArrayList<Object> a: result.getResultData()) {
             InputRating cos = new InputRating((String) a.get(0),(String)a.get(1), (String)a.get(2),(String)a.get(3), (String) a.get(4));
             resultList.add(cos);
@@ -203,36 +244,41 @@ public class ViewAnalyticDataController extends BasicController {
         int customerTypeRating; //0.2
         int purchaseHourRating; //0.4
         int purchaseTypeRating; //0.4
-        //calculate rating for each customer:
+        /** calculate rating for each customer: */
         for (int i=0; i < resultList.size(); i++ ){
             InputRating my = resultList.get(i);
-            if(my.isFlag() == false) {
+            if(my.isFlag() == false) { /** if we havent calculate for him before */
+                /**    Ranking by customer type       */
                 customerTypeRating = my.getCustomerType().equals("private") ? 1 : 2;
 
                 ArrayList<Integer> hourRatingArray = new ArrayList<>();
-
                 HashMap<String, Integer> fuelTypeCounter = new HashMap<String, Integer>();
                 fuelTypeCounter.put("Gasoline95",0);        fuelTypeCounter.put("Diesel",0);
                 fuelTypeCounter.put("HomeHeatingFuel",0);  fuelTypeCounter.put("ScooterFuel",0);
                 int j=i;
-                if ( j == resultList.size()) {
+                if ( j == resultList.size()) { /**      If it's the last one     */
                     fuelTypeCounter.put(my.getFuelType(), 1);
                     hourRatingArray.add(calculateTimeRating(my.getPurchaseHour()));
                 }
+                /**  Pass on all other customer orders from there on     */
                 for (; j < resultList.size() ; j++ )
                 {
                     InputRating other = resultList.get(j);
+                    /** If it's the same customer - we'll take details of the rest of his purchases  */
                     if (other.getCustomerID()==my.getCustomerID())
                     {
-
+                        /** add to counter of the same type of fuel */
                         fuelTypeCounter.put(other.getFuelType(),fuelTypeCounter.get((other.getFuelType()))+1);
+                        /** calculate Rating of current time (and then average)     */
                         hourRatingArray.add(calculateTimeRating(other.getPurchaseHour()));
-                        other.setFlag(true);
+                        other.setFlag(true); /**   mark it - we "handled" him */
                     }
                 }
+                /** Average of the ratings for the hours and position in the corresponding variable  */
                 purchaseHourRating = calculateAverage(hourRatingArray);
-
+                /**  Check which fuel is the highest and counter and save the appropriate rating    */
                 purchaseTypeRating =find_max(fuelTypeCounter);
+                /** add to customer ratings list  */
                 ratingList.add(new Rating(customerTypeRating+purchaseHourRating+purchaseTypeRating ,
                         my.getCustomerID(), my.getCustomerType()));
             }
@@ -240,15 +286,19 @@ public class ViewAnalyticDataController extends BasicController {
         return ratingList;
     }
 
-
-
-    private int calculateTimeRating(String avgHour){
+    /**
+     * The method calculates a rating for a given hour, and returns the rating
+     *
+     * @param hour
+     * @return purchaseHourRating
+     */
+    private int calculateTimeRating(String hour){
         int purchaseHourRating;
         Time hour6 = java.sql.Time.valueOf("06:00:00");
         Time hour10 = java.sql.Time.valueOf("10:00:00");
         Time hour16 = java.sql.Time.valueOf("16:00:00");
         Time hour20 = java.sql.Time.valueOf("20:00:00");
-        Time avg = java.sql.Time.valueOf(avgHour);
+        Time avg = java.sql.Time.valueOf(hour);
 
         if ((avg.after(hour6) && avg.before(hour10)) || avg.equals(hour6))   {
             purchaseHourRating=4;
@@ -259,6 +309,14 @@ public class ViewAnalyticDataController extends BasicController {
         }else purchaseHourRating=1;
         return purchaseHourRating;
     }
+
+    /**
+     *The method calculates a rating for an array of fuel types and their counters received,
+     * and returns the rating
+     *
+     * @param fuelTypeCounter
+     * @return rating for fuel type
+     */
     private  int find_max(HashMap<String, Integer> fuelTypeCounter){
         int a, b, c, d ;
         a= fuelTypeCounter.get("Gasoline95");
@@ -272,18 +330,28 @@ public class ViewAnalyticDataController extends BasicController {
         else return 1;
     }
 
-    private int calculateAverage(List<Integer> marks) {
-        if (marks == null || marks.isEmpty()) {
+    /**
+     *The method calculates an average of a list of integer numbers
+     *
+     * @param list
+     * @return Average of list of integer
+     */
+    private int calculateAverage(List<Integer> list) {
+        if (list == null || list.isEmpty()) {
             return 0;
         }
         int sum = 0;
-        for (Integer mark : marks) {
+        for (Integer mark : list) {
             sum += mark;
         }
 
-        return sum / marks.size();
+        return sum / list.size();
     }
 
+    /**
+     * This method is responsible for requesting information from DB through the server
+     * The query: GET_RATING_FOR_CUSTUMER_TYPE
+     */
     public void getRatingForCustomerTypeTable(String paramArray) {
         ArrayList<Object> varArray = new ArrayList<>();
         varArray.add(paramArray);
@@ -291,6 +359,10 @@ public class ViewAnalyticDataController extends BasicController {
         super.sendSqlActionToClient(sqlAction);
     }
 
+    /**
+     * This method is responsible for requesting information from DB through the server
+     * The query: GET_RATING_FOR_TIME_RANGE
+     */
     public void getRatingForTimeRangeTable(Time start, Time end) {
         this.start = start;
         this.end= end;
@@ -298,6 +370,10 @@ public class ViewAnalyticDataController extends BasicController {
         super.sendSqlActionToClient(sqlAction);
     }
 
+    /**
+     * This method is responsible for requesting information from DB through the server
+     * The query: GET_RATING_FOR_FUEL_TYPE
+     */
     public void getRatingForFuelTypeTable(String paramArray) {
         ArrayList<Object> varArray = new ArrayList<>();
         varArray.add(paramArray);
