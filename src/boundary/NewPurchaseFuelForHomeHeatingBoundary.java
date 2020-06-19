@@ -44,9 +44,10 @@ import java.util.ResourceBundle;
  */
 public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable {
     private NewPurchaseFuelForHomeHeatingController myController = new NewPurchaseFuelForHomeHeatingController(this);
-    private ArrayList<Costumer> costumerArrayList = new ArrayList<>();
+
+    Costumer currentCostumerDetailsFromDB = null;
     //temp variable to store
-    private String currentCustomerId = null;
+    public String currentCustomerId = null;
     private String dateAndDayPattern = null;
     private boolean allShippingDetailsAdded = false;
     private ImageView iconFastShipping = null;
@@ -457,12 +458,12 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
         this.currentPurchaseHomeHeating.setDeliveryStatus(OrderDeliveryStatus.CONFIRMED_ORDER);
     }
 
-    public ArrayList<Costumer> getCostumerArrayList() {
-        return costumerArrayList;
+    public Costumer getCurrentCostumerDetailsFromDB() {
+        return currentCostumerDetailsFromDB;
     }
 
-    public void setCostumerArrayList(ArrayList<Costumer> costumerArrayList) {
-        this.costumerArrayList = costumerArrayList;
+    public void setCurrentCostumerDetailsFromDB(Costumer currentCostumerDetailsFromDB) {
+        this.currentCostumerDetailsFromDB = currentCostumerDetailsFromDB;
     }
 }
 

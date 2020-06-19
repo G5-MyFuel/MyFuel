@@ -6,6 +6,8 @@ import com.jfoenix.controls.JFXTextField;
 import common.assets.SqlAction;
 import common.assets.SqlQueryType;
 import common.assets.SqlResult;
+import entity.Costumer;
+import entity.CreditCard;
 import entity.ShippingDay;
 import entity.User;
 import javafx.application.Platform;
@@ -71,19 +73,30 @@ public class NewPurchaseFuelForHomeHeatingController extends BasicController {
                     System.out.println("NewPurchaseFuelForHomeHeatingController -> myController.INSERT_NEW_AVAILABLE_DATE_FOR_SHIPPING;");
                     break;
                 case GET_ALL_COSTUMER_TABLE:
-                //    myBoundary.setCostumerArrayList(resultArray);
+                    //    myBoundary.setCostumerArrayList(resultArray);
+                    myBoundary.setCurrentCostumerDetailsFromDB(fromResultSetToCustomers(result, myBoundary.currentCustomerId));
                     break;
             }
         });
     }
 
 
-    public void GET_ALL_COSTUMER_TABLE_FromDB(){
+    public void GET_ALL_COSTUMER_TABLE_FromDB() {
         SqlAction sqlAction = new SqlAction(SqlQueryType.GET_ALL_COSTUMER_TABLE);
         super.sendSqlActionToClient(sqlAction);
     }
 
+    private Costumer fromResultSetToCustomers(SqlResult result, String userID) {
+        Costumer c = null;
+        for (ArrayList<Object> a : result.getResultData()) {
+            c = new Costumer(userID, "", (String) a.get(7), (String) a.get(1), (String) a.get(2), (String) a.get(3), new CreditCard(null, (String) a.get(4), (String) a.get(5), (String) a.get(6)), (String) a.get(9), null, (String) a.get(7));
+            c.getCostumerCreditCard().setCardOwner(c);
+        }
+        return c;
+    }
+
     /////////////////////////
+
     /**
      * get all available shipping dates Table from DB
      */
@@ -99,9 +112,9 @@ public class NewPurchaseFuelForHomeHeatingController extends BasicController {
      */
     public void InsertNewAvailableDateToDB(String dateAsString) throws ParseException {
         Date date = new SimpleDateFormat("yyyy-MM-dd").parse(dateAsString);
-        ArrayList<Object>varArray = new ArrayList<>();
+        ArrayList<Object> varArray = new ArrayList<>();
         varArray.add(dateAsString);
-        SqlAction sqlAction = new SqlAction(SqlQueryType.INSERT_NEW_AVAILABLE_DATE_FOR_SHIPPING,varArray);
+        SqlAction sqlAction = new SqlAction(SqlQueryType.INSERT_NEW_AVAILABLE_DATE_FOR_SHIPPING, varArray);
         super.sendSqlActionToClient(sqlAction);
     }
 

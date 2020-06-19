@@ -318,7 +318,7 @@ public class MysqlConnection {
          * ********** Purchase fuel for home heating ****************
          * **********************************************************
          */
-        sqlArray[SqlQueryType.GET_ALL_COSTUMER_TABLE.getCode()] = "select c.id,userFirstName,userLastName,userEmail,'Credit Card Number',CreditCardExperationDate,CVV,customerType,'Pricing Model','Purchase Plan from User as u,Costumer as c where u.userID=c.ID and c.ID= ?;";
+        sqlArray[SqlQueryType.GET_ALL_COSTUMER_TABLE.getCode()] = "select c.id,userFirstName,userLastName,userEmail,`Credit Card Number`,CreditCardExperationDate,CVV,customerType,`Pricing Model`,`Purchase Plan` from User as u,Costumer as c where u.userID=c.ID and c.ID = ?;";
         sqlArray[SqlQueryType.GET_ALL_SHIPPING_DATES_AVAILABLE.getCode()] = "SELECT * FROM ShippingOptionalDates;";
         sqlArray[SqlQueryType.INSERT_NEW_AVAILABLE_DATE_FOR_SHIPPING.getCode()] = "INSERT INTO ShippingOptionalDates (`DayAndDate`) VALUES (?);";
 
