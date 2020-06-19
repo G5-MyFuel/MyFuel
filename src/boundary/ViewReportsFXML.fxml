@@ -4,6 +4,7 @@
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -20,20 +21,29 @@
             <Font name="System Bold" size="40.0" />
          </font>
       </Label>
-      <JFXButton fx:id="btnViewQuarterlyRevenueReport" buttonType="RAISED" layoutX="38.0" layoutY="378.0" onMouseClicked="#handleViewQuarterlyRevenueReport" prefHeight="38.0" prefWidth="280.0" styleClass="jfx-button" stylesheets="@GeneratingReportsStationManagerCSS.css" text="View Quarterly revenue report" textFill="WHITE">
+      <JFXButton fx:id="btnViewQuarterlyRevenueReport" buttonType="RAISED" layoutX="38.0" layoutY="378.0" onMouseClicked="#handleViewQuarterlyRevenueReport" prefHeight="38.0" prefWidth="280.0" style="-fx-background-radius: 50;" stylesheets="@style.css" text="View Quarterly revenue report" textFill="WHITE">
          <font>
             <Font name="Calibri Bold" size="14.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </JFXButton>
-      <JFXButton fx:id="btnViewPurchasesReport" buttonType="RAISED" layoutX="386.0" layoutY="378.0" onMouseClicked="#handleViewPurchasesReport" prefHeight="38.0" prefWidth="280.0" styleClass="jfx-button" stylesheets="@GeneratingReportsStationManagerCSS.css" text="View Purchases report" textFill="WHITE">
+      <JFXButton fx:id="btnViewPurchasesReport" buttonType="RAISED" layoutX="386.0" layoutY="378.0" onMouseClicked="#handleViewPurchasesReport" prefHeight="38.0" prefWidth="280.0" style="-fx-background-radius: 50;" stylesheets="@style.css" text="View Purchases report" textFill="WHITE">
          <font>
             <Font name="Calibri Bold" size="14.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </JFXButton>
-      <JFXButton fx:id="btnViewQuantityItemsInStockReport" buttonType="RAISED" layoutX="726.0" layoutY="378.0" onMouseClicked="#handleViewQuantityItemsInStockReport" prefHeight="38.0" prefWidth="280.0" styleClass="jfx-button" stylesheets="@GeneratingReportsStationManagerCSS.css" text="View Quantity of items in stock report" textFill="WHITE">
+      <JFXButton fx:id="btnViewQuantityItemsInStockReport" buttonType="RAISED" layoutX="726.0" layoutY="378.0" onMouseClicked="#handleViewQuantityItemsInStockReport" prefHeight="38.0" prefWidth="280.0" style="-fx-background-radius: 50;" stylesheets="@style.css" text="View Quantity of items in stock report" textFill="WHITE">
          <font>
             <Font name="Calibri Bold" size="14.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </JFXButton>
       <ImageView fx:id="imgViewQuantityItemsInStockReport" fitHeight="150.0" fitWidth="150.0" layoutX="769.0" layoutY="205.0" onMouseClicked="#handleViewQuantityItemsInStockReport">
          <image>
@@ -99,6 +109,9 @@
             <Font name="System Bold Italic" size="15.0" />
          </font>
       </JFXTextField>
-      <Button fx:id="btnOK" layoutX="305.0" layoutY="151.0" mnemonicParsing="false" onAction="#handleOKbtn" prefHeight="42.0" prefWidth="81.0" style="-fx-background-color: #2D4578; -fx-background-radius: 50;" stylesheets="@style.css" text="OK" />
+      <Button fx:id="btnOK" layoutX="305.0" layoutY="151.0" mnemonicParsing="false" onAction="#handleOKbtn" prefHeight="42.0" prefWidth="81.0" style="-fx-background-radius: 50;" stylesheets="@style.css" text="OK">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
    </children>
 </Pane>
