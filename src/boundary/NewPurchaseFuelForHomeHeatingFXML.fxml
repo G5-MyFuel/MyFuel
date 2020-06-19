@@ -276,16 +276,12 @@
                                                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                                </rowConstraints>
                                                                <children>
-                                                                  <JFXButton fx:id="t17to19BTN" alignment="CENTER" mouseTransparent="true" prefHeight="73.0" prefWidth="141.0" ripplerFill="#b7b7b7" style="-fx-font-size: 12pt;" styleClass="unavailable-delivery-time" text="17:00 - 19:00" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                                                                   <JFXButton fx:id="t9to11BTN" alignment="CENTER" prefHeight="73.0" prefWidth="141.0" style="-fx-font-size: 12pt;" styleClass="dalivery-time" text="09:00 - 11:00" GridPane.columnIndex="1" />
                                                                   <JFXButton fx:id="t11to13BTN" alignment="CENTER" prefHeight="73.0" prefWidth="141.0" style="-fx-font-size: 12pt;" styleClass="dalivery-time" text="11:00 - 13:00" GridPane.columnIndex="2" />
-                                                                  <JFXButton fx:id="t13to15BTN" alignment="CENTER" mouseTransparent="true" prefHeight="73.0" prefWidth="141.0" ripplerFill="#b7b7b7" style="-fx-font-size: 12pt;" styleClass="unavailable-delivery-time" text="13:00 - 15:00" GridPane.rowIndex="1">
-                                                                     <effect>
-                                                                        <Blend mode="RED" />
-                                                                     </effect>
-                                                                  </JFXButton>
                                                                   <JFXButton fx:id="t15to17BTN" alignment="CENTER" prefHeight="73.0" prefWidth="141.0" style="-fx-font-size: 12pt;" styleClass="dalivery-time" text="15:00 - 17:00" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                                                  <JFXButton fx:id="t7to9BTN" alignment="CENTER" disable="true" prefHeight="73.0" prefWidth="141.0" style="-fx-font-size: 12pt;" styleClass="dalivery-time" text="07:00 - 09:00" />
+                                                                  <JFXButton fx:id="t7to9BTN" alignment="CENTER" prefHeight="73.0" prefWidth="141.0" style="-fx-font-size: 12pt;" styleClass="dalivery-time" text="07:00 - 09:00" />
+                                                                  <JFXButton fx:id="t17to19BTN" alignment="CENTER" prefHeight="73.0" prefWidth="141.0" style="-fx-font-size: 12pt;" styleClass="dalivery-time" text="17:00 - 19:00" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                                                  <JFXButton fx:id="t13to15BTN" alignment="CENTER" prefHeight="73.0" prefWidth="141.0" style="-fx-font-size: 12pt;" styleClass="dalivery-time" text="13:00 - 15:00" GridPane.rowIndex="1" />
                                                                </children>
                                                             </GridPane>
                                                          </children>

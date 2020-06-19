@@ -25,9 +25,13 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
 import java.net.URL;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 
 /**
@@ -285,9 +289,6 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
 
         };
         shippingDatePicker.setDayCellFactory(callB);
-
-        //check if the date selected available in DB (running on Thread)
-
     }
 
 
@@ -298,12 +299,6 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
         ArrayList<ShippingDay> allDatesAvailableAsArrayList = myController.getAvailableTimesInDate();
     }
 
-    public void InitialAndResetAllShippingDates() {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        Date date = new Date(Calendar.getInstance().getTime().getTime());
-        String initialShippingDatesQUERY = "INSERT INTO `bpsdc8o22sikrlpvvxqm`.`ShippingOptionalDates` (`DayAndDate`, `T1`, `T2`, `T3`, `T4`, `T5`, `T6`) VALUES ('2020-05-31', '1', '1', '1', '1', '1', '1');";
-        // ClientApp.chatClient.handleMessageFromClientUI(new Message(OperationType.updateRequirement,initialShippingDatesQUERY));
-    }
 
     @FXML
     void GoToOrderDetailsPage(MouseEvent event) {
@@ -340,48 +335,58 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
         ArrayList<ShippingDay> shippingDayArrayList = myController.getAvailableTimesInDate();
 
         for (ShippingDay sd : shippingDayArrayList) {
-            if (sd.getDate().equals(shippingDatePicker.getValue())) {
-                setShippingTimes(t7to9BTN);
-                if (sd.getT1().equals(1)) {
+            String s1 = sd.getDate();
+            String s2 = String.valueOf(shippingDatePicker.getValue());
+            if (s1.equals(s2)) {
+                if (sd.getT1() == 1) {
                     t7to9BTN.setDisable(true);
-                    break;
+                } else {
+                    t7to9BTN.setDisable(false);
                 }
 
-                setShippingTimes(t9to11BTN);
-                if (sd.getT2().equals(1)) {
+                if (sd.getT2() == 1) {
                     t9to11BTN.setDisable(true);
-                    break;
+                } else {
+                    t11to13BTN.setDisable(false);
                 }
 
-                setShippingTimes(t11to13BTN);
-                if (sd.getT3().equals(1)) {
+                if (sd.getT3() == 1) {
                     t11to13BTN.setDisable(true);
-                    break;
+                } else {
+                    t11to13BTN.setDisable(false);
                 }
 
-                setShippingTimes(t13to15BTN);
-                if (sd.getT4().equals(1)) {
+                if (sd.getT4() == 1) {
                     t13to15BTN.setDisable(true);
-                    break;
+                } else {
+                    t13to15BTN.setDisable(false);
                 }
 
-                setShippingTimes(t15to17BTN);
-                if (sd.getT5().equals(1)) {
+                if (sd.getT5() == 1) {
                     t15to17BTN.setDisable(true);
-                    break;
+                } else {
+                    t15to17BTN.setDisable(false);
                 }
 
-                setShippingTimes(t17to19BTN);
-                if (sd.getT6().equals(1)) {
+                if (sd.getT6() == 1) {
                     t17to19BTN.setDisable(true);
-                    break;
+                } else {
+                    t17to19BTN.setDisable(false);
                 }
-            }else{
+
+            } else {
                 //ניצור את התאריך בDB
+                System.out.println("new row inserted in shipping dates table");
 
             }
+            setShippingTimes(t7to9BTN);
+            setShippingTimes(t9to11BTN);
+            setShippingTimes(t11to13BTN);
+            setShippingTimes(t13to15BTN);
+            setShippingTimes(t15to17BTN);
+            setShippingTimes(t17to19BTN);
+
         }
-        optionalDatesForShippingGridPane.setVisible(true);
     }
 
 
@@ -389,14 +394,27 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
         btn.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                shippingOverviewPane.setVisible(true);
+                if (!shippingOverviewPane.isVisible())
+                    shippingOverviewPane.setVisible(true);
+                ///
+
                 StringBuilder str = new StringBuilder();
                 str.append(StringUtils.capitalize(shippingDatePicker.getValue().getDayOfWeek().toString().toLowerCase()) + ", ");
                 str.append(shippingDatePicker.getValue().toString() + " between ");
                 str.append(btn.getText());
                 shippingSummeryDetailsTXT.setText(str.toString());
+                //
+
             }
         });
+    }
+
+    /**
+     * set new row in ShippingOptionalDates Table
+     */
+    private void insertNewRowToShippingOptionalTable(String dateAsString) throws ParseException {
+        Date date = new SimpleDateFormat("yyyy-MM-dd").parse(dateAsString);
+
     }
 }
 
