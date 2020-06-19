@@ -10,6 +10,8 @@ import entity.ShippingDay;
 import entity.User;
 import javafx.application.Platform;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -65,7 +67,14 @@ public class NewPurchaseFuelForHomeHeatingController extends BasicController {
                 case GET_ALL_SHIPPING_DATES_AVAILABLE:
                     System.out.println("NewPurchaseFuelForHomeHeatingController -> myController.GetAvailableTimesToShippingDate();");
                     availableTimesInDate = changeResultToAvailableShippingDatesArrayList(result);
-                    myBoundary.setAvailableTimesForShipping();
+                    try {
+                        myBoundary.setAvailableTimesForShipping();
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case INSERT_NEW_AVAILABLE_DATE_FOR_SHIPPING:
+                    System.out.println("NewPurchaseFuelForHomeHeatingController -> myController.INSERT_NEW_AVAILABLE_DATE_FOR_SHIPPING;");
                     break;
             }
         });
@@ -79,23 +88,36 @@ public class NewPurchaseFuelForHomeHeatingController extends BasicController {
         super.sendSqlActionToClient(sqlAction);
     }
 
+    //
+
+    /**
+     * set new row in ShippingOptionalDates Table
+     */
+    public void InsertNewAvailableDateToDB(String dateAsString) throws ParseException {
+        Date date = new SimpleDateFormat("yyyy-MM-dd").parse(dateAsString);
+        ArrayList<Object>varArray = new ArrayList<>();
+        varArray.add(dateAsString);
+        SqlAction sqlAction = new SqlAction(SqlQueryType.INSERT_NEW_AVAILABLE_DATE_FOR_SHIPPING,varArray);
+        super.sendSqlActionToClient(sqlAction);
+    }
+
     /**
      * convert the result from db to arrayList of all available dates for shipping
      *
      * @param result
-     * @return
+     * @return ArrayList<ShippingDay>
      */
     private ArrayList<ShippingDay> changeResultToAvailableShippingDatesArrayList(SqlResult result) {
         ArrayList<ShippingDay> shippingDayArrayList = new ArrayList<>();
         for (ArrayList<Object> a : result.getResultData()) {
             String dateStr = String.valueOf((Date) a.get(0));
             ShippingDay sd = new ShippingDay(dateStr,
-                    (Integer)a.get(1),
-                    (Integer)a.get(2),
-                    (Integer)a.get(3),
-                    (Integer)a.get(4),
-                    (Integer)a.get(5),
-                    (Integer)a.get(6));
+                    (Integer) a.get(1),
+                    (Integer) a.get(2),
+                    (Integer) a.get(3),
+                    (Integer) a.get(4),
+                    (Integer) a.get(5),
+                    (Integer) a.get(6));
             shippingDayArrayList.add(sd);
         }
         return shippingDayArrayList;

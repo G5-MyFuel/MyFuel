@@ -2,7 +2,9 @@ package entity;
 
 
 import java.util.ArrayList;
-
+/**
+ * @see Employee - the form's entity class
+ */
 public class Employee extends User {
     String fuelCompanyName;
     String gasStatinID;

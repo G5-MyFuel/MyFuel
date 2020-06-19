@@ -31,20 +31,22 @@ public class GeneralDashBoardController extends BasicController {
     @Override
     public void getResultFromClient(SqlResult result) {
         Platform.runLater(() -> {
-            switch (result.getActionType()) {
-                case GET_ALL_UPDATED_PRICES:
-                    this.changeResultToFuelPrices(result);
-                    break;
-                case GET_ALL_PURCHASE_FUEL_AMOUNT_OF_USER:
-                    this.changeResultToFueAmountOfPreMonthOfCurUser(result, currentUserID);
-                    break;
-                default:
-                    break;
+            try {
+                switch (result.getActionType()) {
+                    case GET_ALL_UPDATED_PRICES:
+                        this.changeResultToFuelPrices(result);
+                        break;
+                    case GET_ALL_PURCHASE_FUEL_AMOUNT_OF_USER:
+                        this.changeResultToFueAmountOfPreMonthOfCurUser(result, currentUserID);
+                        break;
+                    default:
+                        break;
+                }
+            } catch (NullPointerException npe) {
             }
         });
     }
 
-    //קבלת כל הלקוחות
     public void getCustomerPurchaseAmountInLastMonthFromDB(String customerId) {
         ArrayList<Object> vars = new ArrayList<>();
         if (currentUserID != null) vars.add(currentUserID);
@@ -61,7 +63,6 @@ public class GeneralDashBoardController extends BasicController {
     }
 
 
-    //קבלת מחירים עדכניים
     public void getAllUpdatedPricesFromDB() {
         SqlAction sqlAction = new SqlAction(SqlQueryType.GET_ALL_UPDATED_PRICES);
         super.sendSqlActionToClient(sqlAction);

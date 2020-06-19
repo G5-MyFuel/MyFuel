@@ -192,7 +192,7 @@ public class MarketingCampaignTemplateBoundary implements DataInitializable {
         formValidation.isOnlyNumbers(DiscountPercentages, "Discount Percentages");
         formValidation.numberPositiveValidation(DiscountPercentages, "Discount Percentages");
 
-        /*  Start Hour validation */ // פתרון זמני בלבד !!
+        /*  Start Hour validation */
         if (StartHour.getValue() == null) {
             flagValidation = false;
 
@@ -206,7 +206,6 @@ public class MarketingCampaignTemplateBoundary implements DataInitializable {
         /*  Marketing Ad For Template validation */
         formValidation.isEmptyFieldValidation(MarketingAdForTemplate, "Marketing Ad For Template");
 
-        //TODO: add more validation.. לבדוק אורך השדה בשעות ואת הטקסט שקשור
     }
 
 }

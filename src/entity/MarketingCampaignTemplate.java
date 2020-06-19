@@ -1,8 +1,11 @@
 package entity;
 
 import java.sql.Time;
-
+/**
+ * @see MarketingCampaignTemplate - the form's entity class
+ */
 public class MarketingCampaignTemplate {
+
     private String templateID;
     private String templateName;
     private String fuelType;

@@ -1,5 +1,7 @@
 package entity;
-
+/**
+ * @see DiscountRate - the form's entity class
+ */
 public class DiscountRate {
 
     private String subscriptionType;

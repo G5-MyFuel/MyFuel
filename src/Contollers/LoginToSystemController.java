@@ -32,6 +32,7 @@ public class LoginToSystemController extends BasicController {
     @Override
     public void getResultFromClient(SqlResult result) {
         Platform.runLater(() -> {
+            try{
             switch (result.getActionType()) {
                 case GET_ALL_USERS_TABLE:
                     System.out.println("LoginToSystemController -> myController.getUsersTable();");
@@ -52,7 +53,8 @@ public class LoginToSystemController extends BasicController {
                 //
                 default:
                     break;
-            }
+            }}catch (NullPointerException npe){}
+
         });
     }
 
@@ -155,7 +157,6 @@ public class LoginToSystemController extends BasicController {
                 buttonNameArrayList.add(getFuelCompanyBuUserID(temp));
                 //
                 buttonNameArrayList.add("GENERATING_REPORTS_STATION_MANAGER_PAGE");
-                buttonNameArrayList.add("PURCHASE_FUEL_FOR_HOME_HEATING");
                 buttonNameArrayList.add("FUEL_MANAGMENT_PAGE");
                 //
                 Toast.makeText(mainProjectFX.mainStage,"Welcome to MyFuel "+getFullUserNameByUserId(temp),1000,1500,1500,40,380);
