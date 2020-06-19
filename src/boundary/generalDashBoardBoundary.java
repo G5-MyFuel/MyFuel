@@ -303,6 +303,7 @@ public class generalDashBoardBoundary implements DataInitializable {
                         }
                     });
                     break;
+
                 case "FUEL_MANAGMENT_PAGE":
                     image = new Image(getClass().getResourceAsStream("../media/ButtonsDashBoardMedia/fuelManagement.png"));
                     imageView = new ImageView(image);
