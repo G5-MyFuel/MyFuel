@@ -127,7 +127,7 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
         ERRORendBeforStart.setVisible(false);
         ERRORnoOperation.setVisible(false);
 
-        disablePastDates();
+        disableFutureDates();
         EndDateBox.setValue(LocalDate.now());
         StartDateBox.setValue(LocalDate.now());
 
@@ -184,7 +184,7 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
     @FXML
     void handleStartDateBox(ActionEvent event) {
 
-        disableBeforeStartDate();
+        //disableBeforeStartDate();
         //checkValidDateForStartDate();
         checkValidDateForEndDate();
     }
@@ -263,7 +263,7 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
 
     public void setCustomerPeriodicCharacterizationReportData(ArrayList<CustomerPeriodicCharacterizationReport> resultList) {
 
-        if(customerWithTotalSumList.size() >0){
+        if (customerWithTotalSumList.size() > 0) {
             ShowReportMarketingCampaignTxt.setVisible(false);
             CustomerPeriodicCharacterizationReport_CustomerIDCustomerPeriodicCharacterizationReportColumn.setCellValueFactory(new PropertyValueFactory<>("customerID"));
             TotalColumn.setCellValueFactory(new PropertyValueFactory<>("total"));
@@ -286,7 +286,7 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
             ObservableList<CustomerPeriodicCharacterizationReport> data = FXCollections.observableArrayList(customerWithTotalSumList);
             CustomerPeriodicCharacterizationReportTable.setItems(data);
             CustomerPeriodicCharacterizationReportTable.setVisible(true);
-        }else {
+        } else {
             ShowReportMarketingCampaignTxt.setText("No information found for the selected time period!");
             ShowReportMarketingCampaignTxt.setVisible(true);
 
@@ -302,47 +302,18 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
         return EndDateBox.getValue().isBefore(StartDateBox.getValue());
     }
 
-    void checkValidDateForStartDate() {
-
-        disableBeforeStartDate();
-        /*if(isEndDateBoxBeforeStartDateBox())
-            ERROREndAlreadyPassedDate.setVisible(true);
-        else
-            ERROREndAlreadyPassedDate.setVisible(false);
-
-        if (!(isStartDateBoxBeforeLocalDate()) && !(isEndDateBoxBeforeStartDateBox())) {
-            btnGenerateReport.setVisible(true);
-            if (ChooseReportToGenerateCombo.getValue().equals("Comments Report for Marketing Campaign"))
-                EnterOperationSaleTXT.setVisible(true);
-            else
-                EnterOperationSaleTXT.setVisible(false);
-        } else {
-            btnGenerateReport.setVisible(false);
-            EnterOperationSaleTXT.setVisible(false);
-        }*/
-    }
-
     void checkValidDateForEndDate() {
 
-        if (isEndDateBoxBeforeStartDateBox())
+        if (isEndDateBoxBeforeStartDateBox()) {
             ERRORendBeforStart.setVisible(true);
-        else
-            ERRORendBeforStart.setVisible(false);
-
-        if (!(isEndDateBoxBeforeStartDateBox()) /*&& !(isStartDateBoxBeforeLocalDate())*/) {
-            btnGenerateReport.setVisible(true);
-            /*if (ChooseReportToGenerateCombo.getValue().equals("Comments Report for Marketing Campaign"))
-                EnterOperationSaleTXT.setVisible(true);
-            else
-                EnterOperationSaleTXT.setVisible(false);*/
-        } else {
             btnGenerateReport.setVisible(false);
-            //.setVisible(false);
+        } else {
+            ERRORendBeforStart.setVisible(false);
+            btnGenerateReport.setVisible(true);
         }
-
     }
 
-    void disablePastDates() {
+    void disableFutureDates() {
 
         // disable past dates of DatePicker gui obj
         Callback<DatePicker, DateCell> callB = new Callback<DatePicker, DateCell>() {
@@ -353,18 +324,18 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
                     public void updateItem(LocalDate item, boolean empty) {
                         super.updateItem(item, empty); //To change body of generated methods, choose Tools | Templates.
                         LocalDate today = LocalDate.now();
-                        setDisable(empty || item.compareTo(today) < 0);
+                        setDisable(empty || item.compareTo(today) > 0);
                     }
                 };
             }
 
         };
-        //StartDateBox.setDayCellFactory(callB);
+        StartDateBox.setDayCellFactory(callB);
         EndDateBox.setDayCellFactory(callB);
 
     }
 
-    void disableBeforeStartDate() {
+    /*void disableBeforeStartDate() {
 
         // disable past dates of DatePicker gui obj
         Callback<DatePicker, DateCell> callB = new Callback<DatePicker, DateCell>() {
@@ -382,6 +353,6 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
 
         };
         EndDateBox.setDayCellFactory(callB);
-    }
+    }*/
 
 }
