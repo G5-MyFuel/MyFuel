@@ -94,7 +94,10 @@ public class CustomerRegistrationController extends BasicController {
         tempCostumer.setCostumerVehicle(vehicles);
     }
 
-
+    /**
+     *
+     * @param result - The result recieved from the DB
+     */
     @Override
     public void getResultFromClient(SqlResult result) {
         Platform.runLater(() -> {
