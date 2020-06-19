@@ -67,6 +67,7 @@ public enum SqlQueryType {
      * ********** Marketing Manager Reports Queries ****************
      * *****************************************/
     GET_Comments_Report(SqlExecutionType.EXECUTE_QUERY),
+    GET_Customers_List(SqlExecutionType.EXECUTE_QUERY),
     GET_CustomerPeriodicCharacterization_Report(SqlExecutionType.EXECUTE_QUERY),
 
     /* *****************************************

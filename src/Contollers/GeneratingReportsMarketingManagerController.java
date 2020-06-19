@@ -38,8 +38,12 @@ public class GeneratingReportsMarketingManagerController extends BasicController
                 SqlAction sqlAction = new SqlAction(SqlQueryType.GET_Comments_Report, varArray);
                 super.sendSqlActionToClient(sqlAction);
                 break;
+            /*case "Get Customers List":
+                sqlAction = new SqlAction(SqlQueryType.GET_Customers_List, varArray);
+                super.sendSqlActionToClient(sqlAction);
+                break;*/
             case "Customer Periodic Characterization Report":
-                sqlAction = new SqlAction(SqlQueryType.GET_Comments_Report, varArray);
+                sqlAction = new SqlAction(SqlQueryType.GET_CustomerPeriodicCharacterization_Report, varArray);
                 super.sendSqlActionToClient(sqlAction);
                 break;
             default:

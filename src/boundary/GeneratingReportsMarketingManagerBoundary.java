@@ -220,6 +220,7 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
                 paramArray.add(StartDateBox.getValue().toString());
                 paramArray.add(EndDateBox.getValue().toString());
                 myController.GetReportData(paramArray);
+
                 break;
             default:
                 break;
