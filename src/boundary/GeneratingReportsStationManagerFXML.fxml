@@ -82,7 +82,7 @@
             <Font name="System Bold Italic" size="15.0" />
          </font>
       </JFXTextField>
-      <Label fx:id="QuantityItemsStockTxt" layoutX="730.0" layoutY="390.0" text="Quantity of items in stock" />
+      <Label fx:id="QuantityItemsStockTxt" layoutX="695.0" layoutY="390.0" text="Quantity of items in stock" />
       <Label fx:id="ReportSentMessageLabel" layoutX="40.0" layoutY="665.0" text="*The report was sent to the Administrator" textFill="#ff0f02">
          <font>
             <Font name="System Bold Italic" size="18.0" />

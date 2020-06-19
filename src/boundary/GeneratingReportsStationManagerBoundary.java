@@ -199,7 +199,7 @@ public class GeneratingReportsStationManagerBoundary implements DataInitializabl
         btnSavePurchasesReport.setVisible(false);
         btnSaveQuantityReport.setVisible(false);
 
-        QuantityItemsStockTxt.setText("Quantity of items in stock for" + managerCompany + " in Station " + managerStation + ":");
+        QuantityItemsStockTxt.setText("Quantity of items in stock for " + managerCompany + " in Station #" + managerStation + ":");
         ArrayList<String> paramArray = new ArrayList<>();
         paramArray.add("Quantity of items in stock report");
         paramArray.add(managerCompany);
