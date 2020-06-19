@@ -113,7 +113,6 @@ public class ManagerNotificationsPageBoundary implements DataInitializable {
     private void notificationFunction() {
         int AmountOfNotifi = tableView.getItems().size();
         Thread notifi = new Thread() {
-
             public void run() {
                 for (; ; ) {
                     //TODO update the number of notification

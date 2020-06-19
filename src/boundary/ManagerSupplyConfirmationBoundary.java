@@ -179,7 +179,7 @@ public class ManagerSupplyConfirmationBoundary implements DataInitializable {
                     hboxOrderConfirmation.setVisible(true);
                     hboxOrderConfirmation.setDisable(false);
                     SendBtn.setVisible(true);
-                    SendBtn.setDisable(false);
+                    SendBtn.setDisable(true);
                     explanationTxt.setVisible(true);
                     ApprovalTxt.setVisible(false);
                     confirmationCheckBox.setSelected(false);
