@@ -1,9 +1,6 @@
 package boundary;
 
-import client.ChatClient;
-import client.ClientApp;
 import client.ClientConsole;
-import common.assets.ProjectPages;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -11,15 +8,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-
 public class MainForTestAdi extends Application {
 
 
 
     private AnchorPane root;
-    private OrderExecutionBoundary OrderExecutionController;    //אינסטנס של מחלקת הboundary
-
+    private OrderExecutionBoundary OrderExecutionController;
     public static void main(String[] args) {
         launch(args);
     }

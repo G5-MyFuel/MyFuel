@@ -47,7 +47,6 @@ public class GeneralDashBoardController extends BasicController {
         });
     }
 
-    //קבלת כל הלקוחות
     public void getCustomerPurchaseAmountInLastMonthFromDB(String customerId) {
         ArrayList<Object> vars = new ArrayList<>();
         if (currentUserID != null) vars.add(currentUserID);
@@ -64,7 +63,6 @@ public class GeneralDashBoardController extends BasicController {
     }
 
 
-    //קבלת מחירים עדכניים
     public void getAllUpdatedPricesFromDB() {
         SqlAction sqlAction = new SqlAction(SqlQueryType.GET_ALL_UPDATED_PRICES);
         super.sendSqlActionToClient(sqlAction);

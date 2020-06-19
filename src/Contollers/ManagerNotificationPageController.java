@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 /**
  * @author Adi Lampert
- * @see ManagerNotificationPageController - the form's logic class
+ * @see ManagerNotificationPageController - the form's Controller class
  */
 
 public class ManagerNotificationPageController extends BasicController {

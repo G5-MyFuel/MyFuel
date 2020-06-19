@@ -1,5 +1,7 @@
 package entity;
-
+/**
+ * @see ManagerSupplyConfirmation - the form's entity class
+ */
 public class ManagerSupplyConfirmation {
     private String OrderNumber, companyName, FuelType, orderStatus;
     Integer StationNum, Quantity;
