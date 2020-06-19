@@ -184,8 +184,6 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
     @FXML
     void handleStartDateBox(ActionEvent event) {
 
-        //disableBeforeStartDate();
-        //checkValidDateForStartDate();
         checkValidDateForEndDate();
     }
 
@@ -342,25 +340,5 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
         EndDateBox.setDayCellFactory(callB);
 
     }
-
-    /*void disableBeforeStartDate() {
-
-        // disable past dates of DatePicker gui obj
-        Callback<DatePicker, DateCell> callB = new Callback<DatePicker, DateCell>() {
-            @Override
-            public DateCell call(final DatePicker param) {
-                return new DateCell() {
-                    @Override
-                    public void updateItem(LocalDate item, boolean empty) {
-                        super.updateItem(item, empty); //To change body of generated methods, choose Tools | Templates.
-                        LocalDate startDate = StartDateBox.getValue();
-                        setDisable(empty || item.compareTo(startDate) < 0);
-                    }
-                };
-            }
-
-        };
-        EndDateBox.setDayCellFactory(callB);
-    }*/
 
 }
