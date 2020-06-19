@@ -214,7 +214,7 @@ public class MarketingCampaignBoundary implements DataInitializable {
 
         detailsPane.setVisible(true);
     }
-
+//////////////////////////////////////////////////////////////////////////////
     /**
      *
      * @param event
