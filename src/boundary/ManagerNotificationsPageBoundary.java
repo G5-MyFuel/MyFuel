@@ -28,9 +28,9 @@ import java.util.ResourceBundle;
 public class ManagerNotificationsPageBoundary implements DataInitializable {
 
     private ManagerNotificationPageController myController = new ManagerNotificationPageController(this);
-    private String ManagerID = "762550139";
+    private String ManagerID = "";
     private ObservableList<ManagerNotifications> tableData;
-
+    private generalDashBoardBoundary generalDashBoardBoundary;
 
     @FXML
     private TableView<ManagerNotifications> tableView;
@@ -58,12 +58,6 @@ public class ManagerNotificationsPageBoundary implements DataInitializable {
         ManagerNotifications temp= tableView.getSelectionModel().getSelectedItem();
         myController.setNewStatus(temp.getOrderNumber());
         tableView.getItems().remove(temp);
-
-        /*for(int i=0;i<tableView.getItems().size();i++) {
-            temp = tableView.getItems().get(i);
-            myController.setNewStatus(temp.getOrderNumber());
-            tableView.getItems().remove(temp);
-        }*/
     }
 
     @FXML
@@ -111,5 +105,27 @@ public class ManagerNotificationsPageBoundary implements DataInitializable {
                 else CleanBtn.setDisable(false);
             }
         });
+    }
+
+    /**
+     * Function to update the amount of the manager's notifications every 5 minutes
+     */
+    private void notificationFunction() {
+        int AmountOfNotifi = tableView.getItems().size();
+        Thread notifi = new Thread() {
+
+            public void run() {
+                for (; ; ) {
+                    //TODO update the number of notification
+
+                    try {
+                        sleep(300000);
+                    } catch (InterruptedException ex) {
+                        //...
+                    }
+                }
+            }
+        };
+        notifi.start();
     }
 }
