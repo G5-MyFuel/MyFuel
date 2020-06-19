@@ -14,7 +14,13 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+/**
 
+ * the class chose Subscription Plan Boundary
+ *
+ * @author Itay Ziv
+ * @see choseSubscriptionPlanBoundary - the form's Boundary class
+ */
 public class choseSubscriptionPlanBoundary implements DataInitializable {
 
     private CostumerManagmentTablePageBoundary managmentBoundary;

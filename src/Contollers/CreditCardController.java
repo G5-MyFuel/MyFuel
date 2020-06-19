@@ -7,7 +7,13 @@ import common.assets.SqlResult;
 import entity.CreditCard;
 
 import java.util.ArrayList;
-
+/**
+ * the class Credit Card Controller
+ *
+ * @author Itay Ziv
+ * @see CreditCardController - the form's Controller class
+ *
+ */
 public class CreditCardController extends BasicController {
 
 
