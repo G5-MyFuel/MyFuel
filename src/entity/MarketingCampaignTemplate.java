@@ -23,7 +23,6 @@ public class MarketingCampaignTemplate {
         this.fuelType = fuelType;
         this.discountPercentages = Float.parseFloat(discountPercentages);
         this.day = day;
-       // this.marketingAdForTemplate = marketingAdForTemplate;
         this.beginHour = beginHour;
         this.endHour = endHour;
     }

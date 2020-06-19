@@ -379,7 +379,7 @@ public class ViewAnalyticDataBoundary implements DataInitializable {
 
         ObservableList<Rating> data = FXCollections.observableArrayList(cosArray);
         selectedFuelTypeTXT.setText(fuelTypeCombo1.getValue());
-        showPieChartFuelType ();
+        showPieChartFuelType (data);
         RatingTableForFuelType.setItems(data);
     }
 
@@ -396,7 +396,7 @@ public class ViewAnalyticDataBoundary implements DataInitializable {
 
         ObservableList<Rating> data = FXCollections.observableArrayList(cosArray);
         selectedhouresTXT.setText(TimeRangeStart.getValue() + " to " + TimeRangeEnd.getValue());
-        showPieChartHours();
+        showPieChartHours(data);
         RatingTableForTimeRange.setItems(data);
     }
 
@@ -407,18 +407,18 @@ public class ViewAnalyticDataBoundary implements DataInitializable {
      * @param data   An array with ratings
      */
     private void showPieChartCustomerType(ObservableList<Rating> data) {
-        int[] monim = new int[11];
+        int[] counters = new int[11];
         for(int i=0;i<10;i++)
-            monim[i] = 0;
+            counters[i] = 0;
         for (int i=0;i<data.size();i++) {
-            monim[data.get(i).getRating()] ++;
+            counters[data.get(i).getRating()] ++;
         }
         ObservableList<PieChart.Data> piedata = FXCollections.observableArrayList(
-                new PieChart.Data("Rating 1", monim[1]), new PieChart.Data("Rating 2", monim[2]),
-                new PieChart.Data("Rating 3", monim[3]),new PieChart.Data("Rating 4", monim[4]),
-                new PieChart.Data("Rating 5", monim[5]),new PieChart.Data("Rating 6", monim[6]),
-                new PieChart.Data("Rating 7", monim[7]),new PieChart.Data("Rating 8", monim[8]),
-                new PieChart.Data("Rating 9", monim[9]),new PieChart.Data("Rating 10", monim[10]));
+                new PieChart.Data("Rating 1", counters[1]), new PieChart.Data("Rating 2", counters[2]),
+                new PieChart.Data("Rating 3", counters[3]),new PieChart.Data("Rating 4", counters[4]),
+                new PieChart.Data("Rating 5", counters[5]),new PieChart.Data("Rating 6", counters[6]),
+                new PieChart.Data("Rating 7", counters[7]),new PieChart.Data("Rating 8", counters[8]),
+                new PieChart.Data("Rating 9", counters[9]),new PieChart.Data("Rating 10", counters[10]));
         pieChartCustomerType.setData(piedata);
     }
 
@@ -427,14 +427,14 @@ public class ViewAnalyticDataBoundary implements DataInitializable {
      * Segmented by fuel type
      *
      */
-    private void showPieChartFuelType() {
-        int[] monim = myController.counters;
+    private void showPieChartFuelType(ObservableList<Rating> data) {
+        int[] counters = myController.counters;
         ObservableList<PieChart.Data> piedata1 = FXCollections.observableArrayList(
-                new PieChart.Data("Rating 1", monim[1]), new PieChart.Data("Rating 2", monim[2]),
-                new PieChart.Data("Rating 3", monim[3]),new PieChart.Data("Rating 4", monim[4]),
-                new PieChart.Data("Rating 5", monim[5]),new PieChart.Data("Rating 6", monim[6]),
-                new PieChart.Data("Rating 7", monim[7]),new PieChart.Data("Rating 8", monim[8]),
-                new PieChart.Data("Rating 9", monim[9]),new PieChart.Data("Rating 10", monim[10]));
+                new PieChart.Data("Rating 1", counters[1]), new PieChart.Data("Rating 2", counters[2]),
+                new PieChart.Data("Rating 3", counters[3]),new PieChart.Data("Rating 4", counters[4]),
+                new PieChart.Data("Rating 5", counters[5]),new PieChart.Data("Rating 6", counters[6]),
+                new PieChart.Data("Rating 7", counters[7]),new PieChart.Data("Rating 8", counters[8]),
+                new PieChart.Data("Rating 9", counters[9]),new PieChart.Data("Rating 10", counters[10]));
         pieChartFuelType.setData(piedata1);
 
     }
@@ -444,14 +444,14 @@ public class ViewAnalyticDataBoundary implements DataInitializable {
      *Segmented by refueling hours
      *
      */
-    private void showPieChartHours() {
-        int[] monim = myController.counters;
+    private void showPieChartHours(ObservableList<Rating> data) {
+        int[] counters = myController.counters;
         ObservableList<PieChart.Data> piedata2 = FXCollections.observableArrayList(
-                new PieChart.Data("Rating 1", monim[1]), new PieChart.Data("Rating 2", monim[2]),
-                new PieChart.Data("Rating 3", monim[3]),new PieChart.Data("Rating 4", monim[4]),
-                new PieChart.Data("Rating 5", monim[5]),new PieChart.Data("Rating 6", monim[6]),
-                new PieChart.Data("Rating 7", monim[7]),new PieChart.Data("Rating 8", monim[8]),
-                new PieChart.Data("Rating 9", monim[9]),new PieChart.Data("Rating 10", monim[10]));
+                new PieChart.Data("Rating 1", counters[1]), new PieChart.Data("Rating 2", counters[2]),
+                new PieChart.Data("Rating 3", counters[3]),new PieChart.Data("Rating 4", counters[4]),
+                new PieChart.Data("Rating 5", counters[5]),new PieChart.Data("Rating 6", counters[6]),
+                new PieChart.Data("Rating 7", counters[7]),new PieChart.Data("Rating 8", counters[8]),
+                new PieChart.Data("Rating 9", counters[9]),new PieChart.Data("Rating 10", counters[10]));
         pieChartHouers.setData(piedata2);
 
     }

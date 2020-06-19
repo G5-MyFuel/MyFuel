@@ -62,7 +62,7 @@ public class ViewAnalyticDataController extends BasicController {
     }
 
     /**
-     *
+     *  this methode
      * @param result - The result recieved from the DB
      */
     @Override
