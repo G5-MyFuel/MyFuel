@@ -220,7 +220,6 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
                 paramArray.add(StartDateBox.getValue().toString());
                 paramArray.add(EndDateBox.getValue().toString());
                 myController.GetReportData(paramArray);
-
                 break;
             default:
                 break;
@@ -250,6 +249,13 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
             ShowReportMarketingCampaignTxt.setVisible(true);
             ShowReportMarketingCampaignTxt.setText("No information found for Marketing campaign #" + EnterOperationSaleTXT.getText() + " !");
         }
+
+    }
+
+    public void setCustomersListData(ArrayList<String> resultList){
+
+
+
 
     }
 
