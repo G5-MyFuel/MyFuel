@@ -2,13 +2,11 @@ package boundary;
 
 import Contollers.ManagerSupplyConfirmationController;
 import entity.ManagerSupplyConfirmation;
-import entity.OrderFuelFromSupplier;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
@@ -29,7 +27,7 @@ public class ManagerSupplyConfirmationBoundary implements DataInitializable {
 
     private ManagerSupplyConfirmationController myController = new ManagerSupplyConfirmationController(this);
     private ObservableList<ManagerSupplyConfirmation> tableData;
-    private String stationManagerID="762550139";
+    private String stationManagerID;
 
     //TODO: general station manager id
 
