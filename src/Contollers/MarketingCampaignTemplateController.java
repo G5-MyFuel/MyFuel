@@ -1,6 +1,7 @@
 package Contollers;
 
 import boundary.MarketingCampaignTemplateBoundary;
+import boundary.ViewAnalyticDataBoundary;
 import common.assets.SqlAction;
 import common.assets.SqlQueryType;
 import common.assets.SqlResult;
@@ -11,13 +12,23 @@ import java.sql.Time;
 import java.util.ArrayList;
 
 /**
- * @author Hana Wiener
+ *  A department responsible for logical calculations and communicating with the client server and DB
+ *  For page "MarketingCampaignTemplateBoundary"
+ *
+ *  * @author Hana Wiener
+ * @see MarketingCampaignTemplateBoundary - the form's gui controller (boundary) class
  */
 
 public class MarketingCampaignTemplateController extends BasicController  {
-
-    private MarketingCampaignTemplateBoundary myBoundary; /**     * The boundary controlled by this controller     */
-   private MarketingCampaignTemplate tempTemplate;
+    /**     * The boundary controlled by this controller     */
+    private MarketingCampaignTemplateBoundary myBoundary;
+    /**
+     *Variable for use in placing
+     */
+    private MarketingCampaignTemplate tempTemplate;
+    /**
+     *  Responsible for numbering the new templates as follows by numbers
+     */
    private int TemplateCounter;
 
     /**
@@ -29,7 +40,12 @@ public class MarketingCampaignTemplateController extends BasicController  {
         this.myBoundary = myBoundary;
     }
 
-
+    /**
+     * This method is responsible for getting results from the client
+     * Divided into cases to separate getting results from different queries
+     *
+     * @param result - The result recieved from the DB
+     */
     @Override
     public void getResultFromClient(SqlResult result) {
         Platform.runLater(() -> {
@@ -46,11 +62,15 @@ public class MarketingCampaignTemplateController extends BasicController  {
             }
         });
     }
-
+    /**
+     * This method is responsible for requesting information from DB through the server
+     *  The query: GET_ALL_TEMPLATES_TABLE
+     */
     public void getTemplatesTable() {
         SqlAction sqlAction = new SqlAction(SqlQueryType.GET_ALL_TEMPLATES_TABLE);
         super.sendSqlActionToClient(sqlAction);
     }
+
     /**
      * This method create array list of templates from the data base result.
      *
@@ -70,10 +90,21 @@ public class MarketingCampaignTemplateController extends BasicController  {
         return resultList;
     }
 
+    /**
+     * get Template Counter method
+     *
+     * @return TemplateCounter
+     */
     public int getTemplateCounter() {
         return TemplateCounter;
     }
 
+    /**
+     * This method is responsible for requesting of save information in DB through the server
+     * The query: INSERT_NEW_TEMPLATE
+     *
+     * @param template
+     */
     public void setTemplateInDB(MarketingCampaignTemplate template){
         ArrayList<Object> varArray = new ArrayList<>();
         varArray.add(template.getTemplateID());

@@ -139,10 +139,13 @@ public class ViewAnalyticDataController extends BasicController {
 
     }
 
+
     /**
      * This method is responsible for changing the information that came from DB to entities
-     * * Change information to entity: Rating
-     *  
+     * Change information to entity: Rating
+     *
+     * @param result
+     * @return resultList
      */
     private ArrayList<Rating> changeResultToRating(SqlResult result){
         ArrayList<Rating> resultList = new ArrayList<>();
@@ -157,6 +160,8 @@ public class ViewAnalyticDataController extends BasicController {
      * This method is responsible for changing the information that came from DB to entities
      * * Change information to entity: Rating for time range
      *  
+     * @param result
+     * @return resultList
      */
     private ArrayList<Rating> changeResultToRatingForTimeRange(SqlResult result) {
         ArrayList<Rating> resultList = new ArrayList<>();
@@ -188,6 +193,8 @@ public class ViewAnalyticDataController extends BasicController {
      * This method is responsible for changing the information that came from DB to entities
      * * Change information to entity: Rating for FuelType
      *  
+     * @param result
+     * @return resultList
      */
     private ArrayList<Rating> changeResultToRatingForFuelType(SqlResult result) {
         ArrayList<Rating> resultList = new ArrayList<>();
@@ -214,6 +221,9 @@ public class ViewAnalyticDataController extends BasicController {
     /**
      * This method is responsible for requesting of save information in DB through the server
      * The query: INSERT_RATING
+     *
+     * @param resultList
+     * @param i - number of current rating to insert
      */
         private void setRatingTableInDB(ArrayList<Rating> resultList, int i) {
         ArrayList<Object> varArray = new ArrayList<>();
@@ -232,6 +242,8 @@ public class ViewAnalyticDataController extends BasicController {
      * So 0.2 of the rating is calculated by customer type,
      * 0.4 of the code is calculated by fuel type, 0.4 of the code is calculated by fuel hours
      *  
+     * @param result
+     * @return ratingList
      */
     private ArrayList<Rating> changeResultToInputRating(SqlResult result){
         ArrayList<InputRating> resultList = new ArrayList<>();
@@ -351,6 +363,8 @@ public class ViewAnalyticDataController extends BasicController {
     /**
      * This method is responsible for requesting information from DB through the server
      * The query: GET_RATING_FOR_CUSTUMER_TYPE
+     *
+     * @param paramArray
      */
     public void getRatingForCustomerTypeTable(String paramArray) {
         ArrayList<Object> varArray = new ArrayList<>();
@@ -362,6 +376,9 @@ public class ViewAnalyticDataController extends BasicController {
     /**
      * This method is responsible for requesting information from DB through the server
      * The query: GET_RATING_FOR_TIME_RANGE
+     *
+     * @param start
+     * @param end
      */
     public void getRatingForTimeRangeTable(Time start, Time end) {
         this.start = start;
@@ -373,6 +390,7 @@ public class ViewAnalyticDataController extends BasicController {
     /**
      * This method is responsible for requesting information from DB through the server
      * The query: GET_RATING_FOR_FUEL_TYPE
+     * @param paramArray
      */
     public void getRatingForFuelTypeTable(String paramArray) {
         ArrayList<Object> varArray = new ArrayList<>();
