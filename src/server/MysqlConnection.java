@@ -105,8 +105,8 @@ public class MysqlConnection {
                     Boolean bool = (Boolean) obj;
                     ps.setBoolean(i, bool);
                 }
-                if(obj instanceof Byte){
-                    Byte byt = (byte)obj;
+                if (obj instanceof Byte) {
+                    Byte byt = (byte) obj;
                     ps.setByte(i, byt);
                 }
             }
@@ -311,10 +311,11 @@ public class MysqlConnection {
         sqlArray[SqlQueryType.GET_CustomerPeriodicCharacterization_Report.getCode()] = "SELECT p.customerID, SUM(p.totalPrice) AS TotalSum, f.companyName from Purchase AS p, FastFuel AS f " +
                 "where p.purchaseID = f.purchaseID AND p.purchaseDate BETWEEN ? AND ? group by customerID, companyName";
 
-                /* **********************************************************
+        /* **********************************************************
          * ********** Purchase fuel for home heating ****************
          * **********************************************************
          */
+        sqlArray[SqlQueryType.GET_ALL_COSTUMER_TABLE.getCode()] = "select c.id,userFirstName,userLastName,userEmail,'Credit Card Number',CreditCardExperationDate,CVV,customerType,'Pricing Model','Purchase Plan from User as u,Costumer as c where u.userID=c.ID and c.ID= ?;";
         sqlArray[SqlQueryType.GET_ALL_SHIPPING_DATES_AVAILABLE.getCode()] = "SELECT * FROM ShippingOptionalDates;";
         sqlArray[SqlQueryType.INSERT_NEW_AVAILABLE_DATE_FOR_SHIPPING.getCode()] = "INSERT INTO ShippingOptionalDates (`DayAndDate`) VALUES (?);";
 

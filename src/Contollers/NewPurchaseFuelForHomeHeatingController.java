@@ -61,8 +61,6 @@ public class NewPurchaseFuelForHomeHeatingController extends BasicController {
                 case GET_ALL_USERS_TABLE:
                     System.out.println("NewPurchaseFuelForHomeHeatingController -> myController.getUsersTable();");
                     ArrayList<User> resultListUsers = new ArrayList<>();
-//                resultListUsers.addAll(this.changeResultToUsers(result));
-//                myBoundary.setAllDBUsersArrayList(resultListUsers);
                     break;
                 case GET_ALL_SHIPPING_DATES_AVAILABLE:
                     System.out.println("NewPurchaseFuelForHomeHeatingController -> myController.GetAvailableTimesToShippingDate();");
@@ -72,10 +70,20 @@ public class NewPurchaseFuelForHomeHeatingController extends BasicController {
                 case INSERT_NEW_AVAILABLE_DATE_FOR_SHIPPING:
                     System.out.println("NewPurchaseFuelForHomeHeatingController -> myController.INSERT_NEW_AVAILABLE_DATE_FOR_SHIPPING;");
                     break;
+                case GET_ALL_COSTUMER_TABLE:
+                //    myBoundary.setCostumerArrayList(resultArray);
+                    break;
             }
         });
     }
 
+
+    public void GET_ALL_COSTUMER_TABLE_FromDB(){
+        SqlAction sqlAction = new SqlAction(SqlQueryType.GET_ALL_COSTUMER_TABLE);
+        super.sendSqlActionToClient(sqlAction);
+    }
+
+    /////////////////////////
     /**
      * get all available shipping dates Table from DB
      */

@@ -1,16 +1,20 @@
 package entity;
 
-import java.util.Date;
+
+import common.assets.enums.FuelTypes;
+import org.joda.time.LocalDateTime;
 
 public class Purchase {
-    private String purchaseID;
+    private static int purchaseID=1099;
     private String customerID;
-    private Date purchaseDate;
+    private LocalDateTime purchaseDate;
     private double fuelAmount;
     private double totalPrice;
+    private Prices prices;
 
-    public Purchase(String purchaseID, String customerID, Date purchaseDate, double fuelAmount) {
-        this.purchaseID = purchaseID;
+
+    public Purchase(String customerID, LocalDateTime purchaseDate, double fuelAmount) {
+        ++purchaseID;
         this.customerID = customerID;
         this.purchaseDate = purchaseDate;
         this.fuelAmount = fuelAmount;
@@ -18,11 +22,7 @@ public class Purchase {
     }
 
     public String getPurchaseID() {
-        return purchaseID;
-    }
-
-    public void setPurchaseID(String purchaseID) {
-        this.purchaseID = purchaseID;
+        return Integer.toString(purchaseID);
     }
 
     public String getCustomerID() {
@@ -33,11 +33,11 @@ public class Purchase {
         this.customerID = customerID;
     }
 
-    public Date getPurchaseDate() {
+    public LocalDateTime getPurchaseDate() {
         return purchaseDate;
     }
 
-    public void setPurchaseDate(Date purchaseDate) {
+    public void setPurchaseDate(LocalDateTime purchaseDate) {
         this.purchaseDate = purchaseDate;
     }
 
