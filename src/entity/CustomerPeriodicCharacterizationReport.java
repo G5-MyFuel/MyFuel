@@ -62,4 +62,15 @@ public class CustomerPeriodicCharacterizationReport {
     public void setTotal(String total) {
         this.total = total;
     }
+
+    @Override
+    public String toString() {
+        return "\nCustomerPeriodicCharacterizationReport{" +
+                "customerID='" + customerID + '\'' +
+                ", yellow='" + yellow + '\'' +
+                ", sonol='" + sonol + '\'' +
+                ", paz='" + paz + '\'' +
+                ", total='" + total + '\'' +
+                '}';
+    }
 }

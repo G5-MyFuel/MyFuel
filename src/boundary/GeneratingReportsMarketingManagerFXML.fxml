@@ -52,13 +52,13 @@
           <TableColumn fx:id="TotalAmountSpentColumn" minWidth="0.0" prefWidth="190.0" text="Total amount spent" />
         </columns>
       </TableView>
-      <TableView fx:id="CustomerPeriodicCharacterizationReportTable" layoutX="478.0" layoutY="464.0" prefHeight="245.0" prefWidth="550.0">
+      <TableView fx:id="CustomerPeriodicCharacterizationReportTable" layoutX="48.0" layoutY="368.0" prefHeight="341.0" prefWidth="980.0">
         <columns>
-          <TableColumn fx:id="CustomerPeriodicCharacterizationReport_CustomerIDCustomerPeriodicCharacterizationReportColumn" prefWidth="110.0" text="Customer ID" />
-          <TableColumn fx:id="YellowColumn" prefWidth="110.0" text="Yellow" />
-            <TableColumn fx:id="SonolColumn" prefWidth="110.0" text="Sonol" />
-            <TableColumn fx:id="PazColumn" prefWidth="110.0" text="Paz" />
-            <TableColumn fx:id="TotalColumn" prefWidth="110.0" text="Total" />
+          <TableColumn fx:id="CustomerPeriodicCharacterizationReport_CustomerIDCustomerPeriodicCharacterizationReportColumn" prefWidth="195.0" text="Customer ID" />
+          <TableColumn fx:id="YellowColumn" prefWidth="195.0" text="Yellow" />
+            <TableColumn fx:id="SonolColumn" prefWidth="195.0" text="Sonol" />
+            <TableColumn fx:id="PazColumn" prefWidth="195.0" text="Paz" />
+            <TableColumn fx:id="TotalColumn" prefWidth="195.0" text="Total" />
         </columns>
       </TableView>
       <Label fx:id="ERRORendBeforStart" layoutX="387.0" layoutY="263.0" prefHeight="16.0" prefWidth="237.0" text="End date must be later than start date." textFill="RED">

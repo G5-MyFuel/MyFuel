@@ -101,10 +101,22 @@ public class GeneratingReportsMarketingManagerController extends BasicController
 
         ArrayList<CustomerPeriodicCharacterizationReport> resultList = new ArrayList<>();
         for (ArrayList<Object> a : result.getResultData()){
-
-            resultList.add(new CustomerPeriodicCharacterizationReport((String) a.get(0), a.get(1).toString()));
+            String customerID = (String) a.get(0);
+            String companyName = (String) a.get(2);
+            switch ((String) a.get(2)) {
+                case "YELLOW":
+                    resultList.add(new CustomerPeriodicCharacterizationReport((String) a.get(0), a.get(1).toString(), "-","-"));
+                    break;
+                case "SONOL":
+                    resultList.add(new CustomerPeriodicCharacterizationReport((String) a.get(0), "-", a.get(1).toString(),"-"));
+                    break;
+                case "PAZ":
+                    resultList.add(new CustomerPeriodicCharacterizationReport((String) a.get(0), "-", "-",a.get(1).toString()));
+                    break;
+                default:
+                    break;
+            }
         }
-
         return resultList;
     }
 
