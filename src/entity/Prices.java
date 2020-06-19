@@ -38,8 +38,6 @@ public class Prices {
     GeneralDashBoardController generalDashBoardController = new GeneralDashBoardController();
 
     public Prices(String userId, Double fuelAmount, FuelTypes fueltype, PurchasePlanTypes purchasePlan, PricingModelTypes pricingModelType) {
-        //לקחת מהד"ב מחירים עדכניים - ממה שניר עשה - מודל תמחור
-        //להריץ שאילתא שמקבלת את כמות הדלק של כל ההזמנות בטווח התאריכים של חודש קודם - עבור מנוי (4)
         this.userID = userId;
         generalDashBoardController.getCustomerPurchaseAmountInLastMonthFromDB(userId);
         // this.fuelAmountOfPreviousMonth = getAllUserPurchaseAmountInLastMonth();

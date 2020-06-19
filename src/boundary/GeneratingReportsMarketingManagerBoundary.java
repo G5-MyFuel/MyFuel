@@ -6,6 +6,7 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import common.assets.Toast;
 import entity.CommentsReport;
+import entity.CustomerPeriodicCharacterizationReport;
 import entity.PurchasesReport;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -73,22 +74,22 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
     private TableColumn<CommentsReport, String> TotalAmountSpentColumn;
 
     @FXML
-    private TableView<?> CustomerPeriodicCharacterizationReportTable;
+    private TableView<CustomerPeriodicCharacterizationReport> CustomerPeriodicCharacterizationReportTable;
 
     @FXML
-    private TableColumn<String, String> CustomerPeriodicCharacterizationReport_CustomerIDCustomerPeriodicCharacterizationReportColumn;
+    private TableColumn<CustomerPeriodicCharacterizationReport, String> CustomerPeriodicCharacterizationReport_CustomerIDCustomerPeriodicCharacterizationReportColumn;
 
     @FXML
-    private TableColumn<?, ?> YellowColumn;
+    private TableColumn<CustomerPeriodicCharacterizationReport, String> YellowColumn;
 
     @FXML
-    private TableColumn<?, ?> SonolColumn;
+    private TableColumn<CustomerPeriodicCharacterizationReport, String> SonolColumn;
 
     @FXML
-    private TableColumn<?, ?> PazColumn;
+    private TableColumn<CustomerPeriodicCharacterizationReport, String> PazColumn;
 
     @FXML
-    private TableColumn<?, ?> TotalColumn;
+    private TableColumn<CustomerPeriodicCharacterizationReport, String> TotalColumn;
 
     @FXML
     private Label ERRORendBeforStart;
@@ -252,13 +253,23 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
 
     }
 
-    public void setCustomersListData(ArrayList<String> resultList){
+    public void setCustomersListData(ArrayList<CustomerPeriodicCharacterizationReport> resultList){
 
-        CommentsReport_CustomerIDColumn.setCellValueFactory(new PropertyValueFactory<>("customerID"));
-        ObservableList<String> data = FXCollections.observableArrayList(resultList);
-        //CommentsReportForMarketingCampaignTable.setItems(data);
+        CustomerPeriodicCharacterizationReport_CustomerIDCustomerPeriodicCharacterizationReportColumn.setCellValueFactory(new PropertyValueFactory<>("customerID"));
+        TotalColumn.setCellValueFactory(new PropertyValueFactory<>("total"));
+        ObservableList<CustomerPeriodicCharacterizationReport> data = FXCollections.observableArrayList(resultList);
+        CustomerPeriodicCharacterizationReportTable.setItems(data);
+        //CustomerPeriodicCharacterizationReportTable.setVisible(true);
+    }
 
+    public void setCustomerPeriodicCharacterizationReportData(ArrayList<CustomerPeriodicCharacterizationReport> resultList){
 
+        YellowColumn.setCellValueFactory(new PropertyValueFactory<>("yellow"));
+        SonolColumn.setCellValueFactory(new PropertyValueFactory<>("sonol"));
+        PazColumn.setCellValueFactory(new PropertyValueFactory<>("paz"));
+        ObservableList<CustomerPeriodicCharacterizationReport> data = FXCollections.observableArrayList(resultList);
+        CustomerPeriodicCharacterizationReportTable.setItems(data);
+        CustomerPeriodicCharacterizationReportTable.setVisible(true);
     }
 
     /*boolean isStartDateBoxBeforeLocalDate() {
@@ -326,7 +337,7 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
             }
 
         };
-        StartDateBox.setDayCellFactory(callB);
+        //StartDateBox.setDayCellFactory(callB);
         EndDateBox.setDayCellFactory(callB);
 
     }

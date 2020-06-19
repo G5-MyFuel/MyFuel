@@ -1,7 +1,6 @@
 package boundary;
 
 import client.ClientConsole;
-import common.assets.PermissionsManagement;
 import common.assets.ProjectPages;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -48,11 +47,11 @@ public class MainForTestsDaniel extends Application {
 
 }
 //public class MainForTestsDaniel extends Application {
-//    //קובץ בדיקות עבור SaleOperationTemplateController
-//    String pageName = "NewPurchaseFuelForHomeHeatingFXML.fxml";   //שם קובץ הfxml
+//     SaleOperationTemplateController
+//    String pageName = "NewPurchaseFuelForHomeHeatingFXML.fxml";
 //
 //    private AnchorPane root;
-//    private NewPurchaseFuelForHomeHeatingControllerBoundary newPurchaseFuelForHomeHeatingController;    //אינסטנס של מחלקת הboundary
+//    private NewPurchaseFuelForHomeHeatingControllerBoundary newPurchaseFuelForHomeHeatingController;
 //
 //    public static void main(String[] args) {
 //        launch(args);
@@ -64,7 +63,7 @@ public class MainForTestsDaniel extends Application {
 //            FXMLLoader pageLoader = new FXMLLoader();
 //            pageLoader.setLocation(getClass().getResource(pageName + ""));
 //            root = pageLoader.load();
-//            newPurchaseFuelForHomeHeatingController = pageLoader.getController();//קבלת גישה לקונטרולר
+//            newPurchaseFuelForHomeHeatingController = pageLoader.getController();
 //            //
 //
 //            //

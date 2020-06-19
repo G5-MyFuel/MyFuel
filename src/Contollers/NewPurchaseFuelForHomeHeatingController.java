@@ -105,7 +105,7 @@ public class NewPurchaseFuelForHomeHeatingController extends BasicController {
      * convert the result from db to arrayList of all available dates for shipping
      *
      * @param result
-     * @return
+     * @return ArrayList<ShippingDay>
      */
     private ArrayList<ShippingDay> changeResultToAvailableShippingDatesArrayList(SqlResult result) {
         ArrayList<ShippingDay> shippingDayArrayList = new ArrayList<>();

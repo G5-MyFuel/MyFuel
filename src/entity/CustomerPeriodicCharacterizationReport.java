@@ -3,23 +3,24 @@ package entity;
 public class CustomerPeriodicCharacterizationReport {
 
     private String customerID;
-    private String Yellow;
-    private String Sonol;
-    private String Paz;
-    private String Total;
+    private String yellow;
+    private String sonol;
+    private String paz;
+    private String total;
 
     public CustomerPeriodicCharacterizationReport() {
     }
 
     public CustomerPeriodicCharacterizationReport(String customerID, String total) {
         this.customerID = customerID;
-        Total = total;
+        this.total = total;
     }
 
-    public CustomerPeriodicCharacterizationReport(String yellow, String sonol, String paz) {
-        Yellow = yellow;
-        Sonol = sonol;
-        Paz = paz;
+    public CustomerPeriodicCharacterizationReport(String customerID, String yellow, String sonol, String paz) {
+        this.customerID = customerID;
+        this.yellow = yellow;
+        this.sonol = sonol;
+        this.paz = paz;
     }
 
     public String getCustomerID() {
@@ -31,34 +32,34 @@ public class CustomerPeriodicCharacterizationReport {
     }
 
     public String getYellow() {
-        return Yellow;
+        return yellow;
     }
 
     public void setYellow(String yellow) {
-        Yellow = yellow;
+        this.yellow = yellow;
     }
 
     public String getSonol() {
-        return Sonol;
+        return sonol;
     }
 
     public void setSonol(String sonol) {
-        Sonol = sonol;
+        this.sonol = sonol;
     }
 
     public String getPaz() {
-        return Paz;
+        return paz;
     }
 
     public void setPaz(String paz) {
-        Paz = paz;
+        this.paz = paz;
     }
 
     public String getTotal() {
-        return Total;
+        return total;
     }
 
     public void setTotal(String total) {
-        Total = total;
+        this.total = total;
     }
 }

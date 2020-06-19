@@ -2,7 +2,9 @@ package entity;
 
 
 import java.sql.Date; // pay attention that i import the SQL class of date
-
+/**
+ * @see MarketingCampaign - the form's entity class
+ */
 public class MarketingCampaign {
     private String CampaignID;
     private String templateName;

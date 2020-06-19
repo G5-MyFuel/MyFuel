@@ -18,7 +18,6 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -73,7 +72,6 @@ public class LoginToSystemBoundary extends Application {
         LoginValidation();
     }
 
-    //מתודה שמאתחלת את בדיקות הקלט לטופס הלוגין
     public void LoginValidation() {
         //username validation
         formValidation.isEmptyFieldValidation(userIDTextField, "User ID");

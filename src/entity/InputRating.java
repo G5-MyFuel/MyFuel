@@ -1,7 +1,8 @@
 package entity;
 
-import java.sql.Time;
-
+/**
+ * @see InputRating - the form's entity class
+ */
 public class InputRating {
 
     //private int rating;
