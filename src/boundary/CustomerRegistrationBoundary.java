@@ -20,6 +20,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.TextAlignment;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 
@@ -382,6 +385,8 @@ public class CustomerRegistrationBoundary implements DataInitializable {
         WebEngine webEngine = browser.getEngine();
         webEngine.loadContent(htmlStr);
 
+        thisToolTip.setFont(Font.font("Arial", FontPosture.ITALIC, 1.5));
+        thisToolTip.setTextAlignment(TextAlignment.CENTER);
         thisToolTip.setStyle("\n"
                /* + "    -fx-border-color: black;\n"
                 + "    -fx-border-width: 1px;\n"
