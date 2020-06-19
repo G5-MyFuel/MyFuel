@@ -244,10 +244,17 @@ public class generalDashBoardBoundary implements DataInitializable {
                     break;
 
                 case "MANAGER_SUPPLY_CONFIRMATION_PAGE":
+                    image = new Image(getClass().getResourceAsStream("../media/ButtonsDashBoardMedia/approveOrder.png"));
+                    imageView = new ImageView(image);
+                    imageView.setFitHeight(30);
+                    imageView.setFitWidth(30);
+                    currentBtn.setGraphic(imageView);
                     currentBtn.setText("Approve Stock Order");
                     currentBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
                         @Override
-                        public void handle(MouseEvent event) { MANAGER_SUPPLY_CONFIRMATION_PAGE(); }
+                        public void handle(MouseEvent event) {
+                            MANAGER_SUPPLY_CONFIRMATION_PAGE();
+                        }
                     });
                     break;
 
