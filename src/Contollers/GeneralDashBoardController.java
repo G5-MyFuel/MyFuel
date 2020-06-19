@@ -31,15 +31,18 @@ public class GeneralDashBoardController extends BasicController {
     @Override
     public void getResultFromClient(SqlResult result) {
         Platform.runLater(() -> {
-            switch (result.getActionType()) {
-                case GET_ALL_UPDATED_PRICES:
-                    this.changeResultToFuelPrices(result);
-                    break;
-                case GET_ALL_PURCHASE_FUEL_AMOUNT_OF_USER:
-                    this.changeResultToFueAmountOfPreMonthOfCurUser(result, currentUserID);
-                    break;
-                default:
-                    break;
+            try {
+                switch (result.getActionType()) {
+                    case GET_ALL_UPDATED_PRICES:
+                        this.changeResultToFuelPrices(result);
+                        break;
+                    case GET_ALL_PURCHASE_FUEL_AMOUNT_OF_USER:
+                        this.changeResultToFueAmountOfPreMonthOfCurUser(result, currentUserID);
+                        break;
+                    default:
+                        break;
+                }
+            } catch (NullPointerException npe) {
             }
         });
     }

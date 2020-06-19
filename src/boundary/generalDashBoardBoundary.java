@@ -412,7 +412,7 @@ public class generalDashBoardBoundary implements DataInitializable {
     void VIEW_ANALITIC_DATA() {
         currentPagePane.setVisible(true);
         currentPagePane.getChildren().clear();
-        currentPagePane.getStylesheets().add("../boudary/BGcss.css");
+     //   currentPagePane.getStylesheets().add("../boudary/BGcss.css");
         currentPagePane.getChildren().setAll(mainProjectFX.pagingController.loadBoundaryInPane(ProjectPages.VIEW_ANALITIC_DATA.getPath(), this));
         myFuelLogo.setVisible(false);
     }

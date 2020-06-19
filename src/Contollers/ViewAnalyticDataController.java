@@ -68,8 +68,10 @@ public class ViewAnalyticDataController extends BasicController {
     @Override
     public void getResultFromClient(SqlResult result) {
         Platform.runLater(() -> {
+            try{
             switch (result.getActionType()) {
                 case DELETE_ALL_RATINGS_ROWS:
+                    System.out.println("switch->DELETE_ALL_RATINGS_ROWS");
                     break;
                 case GET_CUSTOMER_X_PURCHASE_TABLE:
                     ArrayList<Rating> resultList1 = new ArrayList<>();
@@ -79,6 +81,7 @@ public class ViewAnalyticDataController extends BasicController {
                     }
                     break;
                 case INSERT_RATING:
+                    System.out.println("switch->Insert rating");
                     break;
                 case GET_RATING_FOR_CUSTUMER_TYPE:
                     ArrayList<Rating> resultList2 = new ArrayList<>();
@@ -98,7 +101,11 @@ public class ViewAnalyticDataController extends BasicController {
                 default:
                     break;
             }
+            }catch(NullPointerException npe){
+
+            }
         });
+
     }
     public void deletePreviosData() {
         SqlAction sqlAction = new SqlAction(SqlQueryType.DELETE_ALL_RATINGS_ROWS);

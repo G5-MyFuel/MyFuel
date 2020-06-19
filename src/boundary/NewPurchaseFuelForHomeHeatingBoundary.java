@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -26,7 +27,6 @@ import org.joda.time.format.DateTimeFormatter;
 
 import java.net.URL;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
@@ -43,10 +43,18 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
     private String currentCustomerId;
     private String dateAndDayPattern = "";
     private boolean allShippingDetailsAdded = false;
-
+    private StringBuilder shippingDeatilsStr;
+    private String shippingMethodAndDetails = "";
+    private ArrayList<String> shippingDetailsArrayList = new ArrayList<>();
     private FormValidation formValidation;
 
     //gui variables:
+
+    @FXML
+    private JFXTabPane mainTabPaneOfOrder;
+
+    @FXML
+    private Tab orderDetailsTab;
 
     @FXML
     private JFXTextField anotherContactPhoneNumberTXT;
@@ -79,6 +87,9 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
     private ImageView orderDetailsIndicatorTAB;
 
     @FXML
+    private Tab shippingDetailsTab;
+
+    @FXML
     private JFXComboBox<String> shippingMethodComboBOX;
 
     @FXML
@@ -88,13 +99,13 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
     private VBox whenPane;
 
     @FXML
-    private JFXComboBox<String> dayAndDateComboBox;
+    private JFXDatePicker shippingDatePicker;
+
+    @FXML
+    private Label ShippingHouresAvailableOnThisDateLABLE;
 
     @FXML
     private GridPane optionalDatesForShippingGridPane;
-
-    @FXML
-    private JFXButton t17to19BTN;
 
     @FXML
     private JFXButton t9to11BTN;
@@ -103,13 +114,16 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
     private JFXButton t11to13BTN;
 
     @FXML
-    private JFXButton t13to15BTN;
-
-    @FXML
     private JFXButton t15to17BTN;
 
     @FXML
     private JFXButton t7to9BTN;
+
+    @FXML
+    private JFXButton t17to19BTN;
+
+    @FXML
+    private JFXButton t13to15BTN;
 
     @FXML
     private VBox shippingOverviewPane;
@@ -118,10 +132,10 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
     private Text shippingSummeryDetailsTXT;
 
     @FXML
-    private Label ShippingHouresAvailableOnThisDateLABLE;
+    private ImageView shippingIndicatorTAB1;
 
     @FXML
-    private ImageView shippingIndicatorTAB1;
+    private Tab orderReviewTab;
 
     @FXML
     private Text totalPricesOfAlllInUsdTXT;
@@ -146,9 +160,6 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
 
     @FXML
     private Text deliveryAddressTXT;
-
-    @FXML
-    private JFXDatePicker shippingDatePicker;
 
     @Override
     public void initData(Object data) {
@@ -195,27 +206,6 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
         formValidation.phoneNumberValidation(anotherContactPhoneNumberTXT, "Phone Number");
         /* note validation */
         formValidation.maxLengthValidationTextArea(noteTXT, "Note", 150);
-        //order details page - end
-        //
-        //shipping - start
-        // InitialAndResetAllShippingDates();
-
-    }
-
-    private void setDayAndDateComboBox() {
-        //get current day and date
-        DateTime dt = new DateTime();
-        DateTimeFormatter fmt = DateTimeFormat.forPattern("EEEE dd/MM/yyyy");
-
-        //build arraylist with the days and dates of the next two weeks
-        ArrayList<String> twoWeeksDaysAndDates = new ArrayList<>();
-        twoWeeksDaysAndDates.add(fmt.withLocale(Locale.ENGLISH).print(dt));
-        for (int i = 1; i < 15; i++) {
-            twoWeeksDaysAndDates.add(fmt.withLocale(Locale.ENGLISH).print(dt.plusDays(i)));
-        }
-
-        //adds the arraylist values to the comboBox of optional dates
-        this.dayAndDateComboBox.getItems().addAll(twoWeeksDaysAndDates);
     }
 
     @FXML
@@ -267,6 +257,9 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
     private void FastShippingSelected() {
         whenPane.setVisible(false);
         optionalDatesForShippingGridPane.setVisible(false);
+        shippingOverviewPane.setVisible(false);
+        ImageView fastShippingLogo = new ImageView("media/FuelForHomeHeating/fastShippingLogo.jpg");
+
     }
 
     private void StandardShippingSelected() throws InterruptedException {
@@ -302,7 +295,7 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
 
     @FXML
     void GoToOrderDetailsPage(MouseEvent event) {
-
+        //orderDetailsTab
     }
 
     @FXML
@@ -315,6 +308,11 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
 
     }
 
+    /**
+     * set action for {@link JFXDatePicker} object
+     *
+     * @param event
+     */
     @FXML
     void handleJFXDatePicker(ActionEvent event) {
         myController.GetShippingOptionalDatesTableFromDB(); //get the available shipping dates and times range
@@ -329,7 +327,12 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
     }
 
 
-    public void setAvailableTimesForShipping() {
+    /**
+     * Set the available dates and times for shipping
+     */
+    boolean b = false;
+
+    public void setAvailableTimesForShipping() throws ParseException {
         ShippingHouresAvailableOnThisDateLABLE.setVisible(true);
         optionalDatesForShippingGridPane.setVisible(true);
         ArrayList<ShippingDay> shippingDayArrayList = myController.getAvailableTimesInDate();
@@ -376,45 +379,52 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
 
             } else {
                 //ניצור את התאריך בDB
-                System.out.println("new row inserted in shipping dates table");
+                if (!b) {
+                    System.out.println("new row inserted in shipping dates table");
+                    myController.InsertNewAvailableDateToDB(s2);
+                    b = true;
+                }
 
             }
-            setShippingTimes(t7to9BTN);
-            setShippingTimes(t9to11BTN);
-            setShippingTimes(t11to13BTN);
-            setShippingTimes(t13to15BTN);
-            setShippingTimes(t15to17BTN);
-            setShippingTimes(t17to19BTN);
-
+            setShippingTimesBtnActions(t7to9BTN);
+            setShippingTimesBtnActions(t9to11BTN);
+            setShippingTimesBtnActions(t11to13BTN);
+            setShippingTimesBtnActions(t13to15BTN);
+            setShippingTimesBtnActions(t15to17BTN);
+            setShippingTimesBtnActions(t17to19BTN);
         }
     }
 
-
-    private void setShippingTimes(JFXButton btn) {
+    /**
+     * Set actions for the optional times for shipping
+     *
+     * @param btn
+     */
+    private void setShippingTimesBtnActions(JFXButton btn) {
         btn.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
+                //build the shipping details string
+                shippingDeatilsStr = new StringBuilder();
+                shippingDeatilsStr.append(StringUtils.capitalize(shippingDatePicker.getValue().getDayOfWeek().toString().toLowerCase()) + ", ");
+                shippingDeatilsStr.append(shippingDatePicker.getValue().toString() + " between ");
+                shippingDeatilsStr.append(btn.getText());
+                shippingSummeryDetailsTXT.setText(shippingDeatilsStr.toString());
+                //Show the Label if it is hidden
                 if (!shippingOverviewPane.isVisible())
                     shippingOverviewPane.setVisible(true);
-                ///
-
-                StringBuilder str = new StringBuilder();
-                str.append(StringUtils.capitalize(shippingDatePicker.getValue().getDayOfWeek().toString().toLowerCase()) + ", ");
-                str.append(shippingDatePicker.getValue().toString() + " between ");
-                str.append(btn.getText());
-                shippingSummeryDetailsTXT.setText(str.toString());
+                //save all shipping details for purchase
+                shippingDetailsArrayList.add("Standard Shipping");
+                shippingDetailsArrayList.add(shippingDatePicker.getValue().getDayOfWeek().toString().toLowerCase());
+                shippingDetailsArrayList.add(shippingDatePicker.getValue().toString());
+                shippingDetailsArrayList.add(btn.getText());
                 //
+
 
             }
         });
     }
 
-    /**
-     * set new row in ShippingOptionalDates Table
-     */
-    private void insertNewRowToShippingOptionalTable(String dateAsString) throws ParseException {
-        Date date = new SimpleDateFormat("yyyy-MM-dd").parse(dateAsString);
 
-    }
 }
 
