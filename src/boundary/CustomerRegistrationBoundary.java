@@ -20,6 +20,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.TextAlignment;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 
@@ -29,6 +32,7 @@ import java.util.ResourceBundle;
 
 /**
  * the class costumer registration boundary
+ *
  * @author itay
  * @see CustomerRegistrationBoundary - the form's Boundary class
  */
@@ -381,16 +385,29 @@ public class CustomerRegistrationBoundary implements DataInitializable {
         WebEngine webEngine = browser.getEngine();
         webEngine.loadContent(htmlStr);
 
+        thisToolTip.setFont(Font.font("Arial", FontPosture.ITALIC, 1.5));
+        thisToolTip.setTextAlignment(TextAlignment.CENTER);
         thisToolTip.setStyle("\n"
-                + "    -fx-border-color: black;\n"
+               /* + "    -fx-border-color: black;\n"
                 + "    -fx-border-width: 1px;\n"
                 + "    -fx-font: normal bold 1pt \"Times New Roman\" ;\n"
                 + "    -fx-background-color: #2d4578;\n"
                 + "    -fx-text-fill: black;\n"
                 + "    -fx-background-radius: 20;\n"
                 + "    -fx-border-radius: 15px;\n"
-                + "    -fx-opacity: 1.0;");
+                + "    -fx-opacity: 1.0;");*/
 
+                + "-fx-background: rgba(30,30,30);\n"
+                + "-fx-text-fill:  white;\n"
+                + "-fx-font: normal 1.5pt \"Times New Roman\" ;\n"
+                + "-fx-background-color: #2d4578;\n"
+                + "-fx-background-radius: 6px;\n"
+                + "-fx-text-alignment: center;\n"
+                + "-fx-background-insets: 0;\n"
+                + "-fx-font-weight: bold;\n"
+                + "-fx-padding: 0.667em 0.75em 0.600em 0.75em;\n"
+                + "-fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.5) , 10, 0.0 , 0 , 3 );\n"
+                + "-fx-font-size: 3em;");
 
         thisToolTip.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
 

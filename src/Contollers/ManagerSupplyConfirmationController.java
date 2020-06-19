@@ -56,7 +56,7 @@ public class ManagerSupplyConfirmationController extends BasicController {
     private ArrayList<ManagerSupplyConfirmation> changeResultToOrder(SqlResult result) {
         for (ArrayList<Object> a : result.getResultData()) {
             ManagerSupplyConfirmation x = new ManagerSupplyConfirmation((String) a.get(0), (String) a.get(1),
-                    (Integer) a.get(2), (String) a.get(3), (Integer) a.get(4),(String)a.get(5));
+                    (Integer) a.get(2), (String) a.get(3), (Integer) a.get(4),(String)a.get(5),(String)a.get(6));
             resultList.add(x);
         }
         return resultList;

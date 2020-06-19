@@ -3,17 +3,27 @@ package entity;
  * @see ManagerSupplyConfirmation - the form's entity class
  */
 public class ManagerSupplyConfirmation {
-    private String OrderNumber, companyName, FuelType, orderStatus;
+    private String OrderNumber, companyName, FuelType, orderStatus, managerID;
     Integer StationNum, Quantity;
 
-    public ManagerSupplyConfirmation(String orderNumber, String companyName, Integer stationNum, String fuelType, Integer quantity, String orderStatus) {
+
+    public ManagerSupplyConfirmation(String orderNumber, String companyName, Integer stationNum, String fuelType, Integer quantity, String orderStatus, String managerID) {
         this.OrderNumber = orderNumber;
         this.companyName = companyName;
         this.StationNum = stationNum;
         this.FuelType = fuelType;
         this.Quantity = quantity;
         this.orderStatus = orderStatus;
+        this.managerID=managerID;
     }
+
+    /**
+     *
+     * Getters and Setters
+     */
+    public String getManagerID() { return managerID; }
+
+    public void setManagerID(String managerID) { this.managerID = managerID; }
 
     public String getOrderNumber() {
         return OrderNumber;
@@ -64,9 +74,11 @@ public class ManagerSupplyConfirmation {
         return "ManagerSupplyConfirmation{" +
                 "OrderNumber='" + OrderNumber + '\'' +
                 ", companyName='" + companyName + '\'' +
-                ", StationNum='" + StationNum + '\'' +
                 ", FuelType='" + FuelType + '\'' +
-                ", Quantity='" + Quantity + '\'' +
+                ", orderStatus='" + orderStatus + '\'' +
+                ", managerID='" + managerID + '\'' +
+                ", StationNum=" + StationNum +
+                ", Quantity=" + Quantity +
                 '}';
     }
 }

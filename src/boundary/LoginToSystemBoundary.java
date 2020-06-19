@@ -147,7 +147,12 @@ public class LoginToSystemBoundary extends Application {
                 if (u.getUserPassword().equals(password)) {
                     System.out.println("the userId & password matches");
                     return true;
-                } else break;
+                } else {
+                        ErrorAlert.setTitle("Login Error");
+                        ErrorAlert.setHeaderText("User ID and password do not match");
+                        ErrorAlert.showAndWait();
+                    return false;
+                }
             }
         }
         return false;

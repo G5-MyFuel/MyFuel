@@ -1,20 +1,32 @@
 package entity;
 
 
-import java.util.Date;
+import common.assets.enums.ShippingMethod;
+import javafx.scene.text.Text;
+import org.joda.time.LocalDateTime;
+
 
 public class PurchaseFuelForHomeHeating extends Purchase {
     private String emailForInvoice;
+    private Address addressForShipping;
     private String phoneNumberForContact;
     private String noteForPurchase;
-    private PurchaseDeliveryStatus deliveryStatus;
+    private OrderDeliveryStatus deliveryStatus;
+    private ShippingMethod shippingMethod;
+    private String ShippingDateAndTime;
 
-    public PurchaseFuelForHomeHeating(String purchaseID, String customerID, Date purchaseDate, double fuelAmount, String emailForInvoice, String phoneNumberForContact, String noteForPurchase) {
-        super(purchaseID, customerID, purchaseDate, fuelAmount);
+    public PurchaseFuelForHomeHeating(String customerID, LocalDateTime purchaseDate, double fuelAmount, String emailForInvoice, String phoneNumberForContact, String noteForPurchase, OrderDeliveryStatus deliveryStatus, ShippingMethod shippingMethod, String shippingDateAndTime) {
+        super(customerID, purchaseDate, fuelAmount);
         this.emailForInvoice = emailForInvoice;
         this.phoneNumberForContact = phoneNumberForContact;
         this.noteForPurchase = noteForPurchase;
-        this.deliveryStatus = PurchaseDeliveryStatus.confirmedOrder;
+        this.deliveryStatus = deliveryStatus;
+        this.shippingMethod = shippingMethod;
+        ShippingDateAndTime = shippingDateAndTime;
+    }
+
+    public PurchaseFuelForHomeHeating(String customerID, LocalDateTime purchaseDate, double fuelAmount) {
+        super(customerID,purchaseDate,fuelAmount);
     }
 
     public String getEmailForInvoice() {
@@ -41,11 +53,81 @@ public class PurchaseFuelForHomeHeating extends Purchase {
         this.noteForPurchase = noteForPurchase;
     }
 
-    public PurchaseDeliveryStatus getDeliveryStatus() {
+    public OrderDeliveryStatus getDeliveryStatus() {
         return deliveryStatus;
     }
 
-    public void setDeliveryStatus(PurchaseDeliveryStatus deliveryStatus) {
+    public void setDeliveryStatus(OrderDeliveryStatus deliveryStatus) {
         this.deliveryStatus = deliveryStatus;
+    }
+
+    public ShippingMethod getShippingMethod() {
+        return shippingMethod;
+    }
+
+    public void setShippingMethod(ShippingMethod shippingMethod) {
+        this.shippingMethod = shippingMethod;
+    }
+
+    public String getShippingDateAndTime() {
+        return ShippingDateAndTime;
+    }
+
+    public void setShippingDateAndTime(String shippingDateAndTime) {
+        ShippingDateAndTime = shippingDateAndTime;
+    }
+
+    public Address getAddressForShipping() {
+        return addressForShipping;
+    }
+
+    public void setAddressForShipping(Address addressForShipping) {
+        this.addressForShipping = addressForShipping;
+    }
+
+    public static class Address {
+        String streetName;
+        String ApartmentNumberTXT;
+        String city;
+        String ZipCode;
+
+        public Address(String streetName, String apartmentNumberTXT, String city, String zipCode) {
+            this.streetName = streetName;
+            ApartmentNumberTXT = apartmentNumberTXT;
+            this.city = city;
+            ZipCode = zipCode;
+        }
+
+        public String getStreetName() {
+            return streetName;
+        }
+
+        public void setStreetName(String streetName) {
+            this.streetName = streetName;
+        }
+
+        public String getApartmentNumberTXT() {
+            return ApartmentNumberTXT;
+        }
+
+        public void setApartmentNumberTXT(String apartmentNumberTXT) {
+            ApartmentNumberTXT = apartmentNumberTXT;
+        }
+
+        public String getCity() {
+            return city;
+        }
+
+        public void setCity(String city) {
+            this.city = city;
+        }
+
+        public String getZipCode() {
+            return ZipCode;
+        }
+
+        public void setZipCode(String zipCode) {
+            ZipCode = zipCode;
+        }
     }
 }
