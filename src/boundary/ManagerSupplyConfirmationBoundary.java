@@ -27,7 +27,7 @@ public class ManagerSupplyConfirmationBoundary implements DataInitializable {
 
     private ManagerSupplyConfirmationController myController = new ManagerSupplyConfirmationController(this);
     private ObservableList<ManagerSupplyConfirmation> tableData;
-    private String stationManagerID;
+    private String stationManagerID="";
 
     //TODO: general station manager id
 
