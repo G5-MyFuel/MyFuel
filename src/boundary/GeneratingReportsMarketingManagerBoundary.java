@@ -37,6 +37,7 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
     private final GeneratingReportsMarketingManagerController myController = new GeneratingReportsMarketingManagerController(this);
     private FormValidation formValidation;
     private final Alert ErrorAlert = new Alert(Alert.AlertType.ERROR);
+    ArrayList<CustomerPeriodicCharacterizationReport> customerWithTotalSumList = new ArrayList<>();
     Font font;
     Paint paint;
 
@@ -253,21 +254,40 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
 
     }
 
-    public void setCustomersListData(ArrayList<CustomerPeriodicCharacterizationReport> resultList){
+    public void setCustomersListData(ArrayList<CustomerPeriodicCharacterizationReport> resultList) {
 
-        CustomerPeriodicCharacterizationReport_CustomerIDCustomerPeriodicCharacterizationReportColumn.setCellValueFactory(new PropertyValueFactory<>("customerID"));
+        customerWithTotalSumList.addAll(resultList);
+        //System.out.println(customerWithTotalSumList);
+        /*CustomerPeriodicCharacterizationReport_CustomerIDCustomerPeriodicCharacterizationReportColumn.setCellValueFactory(new PropertyValueFactory<>("customerID"));
         TotalColumn.setCellValueFactory(new PropertyValueFactory<>("total"));
         ObservableList<CustomerPeriodicCharacterizationReport> data = FXCollections.observableArrayList(resultList);
         CustomerPeriodicCharacterizationReportTable.setItems(data);
-        //CustomerPeriodicCharacterizationReportTable.setVisible(true);
+        CustomerPeriodicCharacterizationReportTable.setVisible(true);*/
     }
 
-    public void setCustomerPeriodicCharacterizationReportData(ArrayList<CustomerPeriodicCharacterizationReport> resultList){
+    public void setCustomerPeriodicCharacterizationReportData(ArrayList<CustomerPeriodicCharacterizationReport> resultList) {
 
+        CustomerPeriodicCharacterizationReport_CustomerIDCustomerPeriodicCharacterizationReportColumn.setCellValueFactory(new PropertyValueFactory<>("customerID"));
+        TotalColumn.setCellValueFactory(new PropertyValueFactory<>("total"));
         YellowColumn.setCellValueFactory(new PropertyValueFactory<>("yellow"));
         SonolColumn.setCellValueFactory(new PropertyValueFactory<>("sonol"));
         PazColumn.setCellValueFactory(new PropertyValueFactory<>("paz"));
-        ObservableList<CustomerPeriodicCharacterizationReport> data = FXCollections.observableArrayList(resultList);
+        for (int i = 0; i < customerWithTotalSumList.size(); i++) {
+            for (CustomerPeriodicCharacterizationReport a : resultList) {
+
+                if (customerWithTotalSumList.get(i).getCustomerID().equals(a.getCustomerID())) {
+                    if (customerWithTotalSumList.get(i).getYellow() == null || customerWithTotalSumList.get(i).getYellow().equals("-"))
+                        customerWithTotalSumList.get(i).setYellow(a.getYellow());
+                    if (customerWithTotalSumList.get(i).getSonol() == null || customerWithTotalSumList.get(i).getSonol().equals("-"))
+                        customerWithTotalSumList.get(i).setSonol(a.getSonol());
+                    if (customerWithTotalSumList.get(i).getPaz() == null || customerWithTotalSumList.get(i).getPaz().equals("-"))
+                        customerWithTotalSumList.get(i).setPaz(a.getPaz());
+                }
+
+
+            }
+        }
+        ObservableList<CustomerPeriodicCharacterizationReport> data = FXCollections.observableArrayList(customerWithTotalSumList);
         CustomerPeriodicCharacterizationReportTable.setItems(data);
         CustomerPeriodicCharacterizationReportTable.setVisible(true);
     }
