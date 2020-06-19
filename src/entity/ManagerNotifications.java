@@ -1,5 +1,8 @@
 package entity;
 
+/**
+ * @see ManagerNotifications - the form's entity class
+ */
 public class ManagerNotifications {
     String orderNumber;
 

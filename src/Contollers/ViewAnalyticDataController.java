@@ -148,7 +148,7 @@ public class ViewAnalyticDataController extends BasicController {
                          counter++;
                      }
                 }
-                if (counter ==0 ) {//הכנסה לרשימה שתוצג בסוף
+                if (counter ==0 ) {
                     resultList.add(cos);
                     for(int k=1; k<11; k++)
                         if (cos.getRating()==k)
@@ -171,7 +171,7 @@ public class ViewAnalyticDataController extends BasicController {
                         counter++;
                     }
                 }
-                if (counter ==0 ) {//הכנסה לרשימה שתוצג בסוף
+                if (counter ==0 ) {
                     resultList.add(cos);
                     for(int k=1; k<11; k++)
                         if (cos.getRating()==k)
@@ -204,40 +204,35 @@ public class ViewAnalyticDataController extends BasicController {
         int purchaseHourRating; //0.4
         int purchaseTypeRating; //0.4
         //calculate rating for each customer:
-        for (int i=0; i < resultList.size(); i++ ){ //לשים לב לגודל של המערך אם אין לי נל פוינטר אקספשיין // עבור כל הלקוחות ברשימה שהבאנו
-            InputRating my = resultList.get(i); //נביא אותו מהרשימה
-            if(my.isFlag() == false) { //עוד לא טיפלנו ולכן נטפל עכשיו
-                customerTypeRating = my.getCustomerType().equals("private") ? 1 : 2; //דירוג שקשור לסוג לקוח
+        for (int i=0; i < resultList.size(); i++ ){
+            InputRating my = resultList.get(i);
+            if(my.isFlag() == false) {
+                customerTypeRating = my.getCustomerType().equals("private") ? 1 : 2;
 
                 ArrayList<Integer> hourRatingArray = new ArrayList<>();
-                //קאונטר לסוגי הדלק לראות איזה יש בהזמנות של הלקוח
+
                 HashMap<String, Integer> fuelTypeCounter = new HashMap<String, Integer>();
                 fuelTypeCounter.put("Gasoline95",0);        fuelTypeCounter.put("Diesel",0);
                 fuelTypeCounter.put("HomeHeatingFuel",0);  fuelTypeCounter.put("ScooterFuel",0);
                 int j=i;
-                if ( j == resultList.size()) {//אם אחרון
+                if ( j == resultList.size()) {
                     fuelTypeCounter.put(my.getFuelType(), 1);
                     hourRatingArray.add(calculateTimeRating(my.getPurchaseHour()));
                 }
-                for (; j < resultList.size() ; j++ )//נעבור על כל שאר ההזמנות של הלקוחות ממנו והלאה
+                for (; j < resultList.size() ; j++ )
                 {
                     InputRating other = resultList.get(j);
-                    if (other.getCustomerID()==my.getCustomerID()) //אם זה אותו לקוח - ניקח פרטים על הרכישות שלו
+                    if (other.getCustomerID()==my.getCustomerID())
                     {
-                        //נוסיף לקאונטר של אותו סוג דלק
+
                         fuelTypeCounter.put(other.getFuelType(),fuelTypeCounter.get((other.getFuelType()))+1);
-                        //נמצא דירוג של השעה הנוכחית -ואחכ נעשה ממוצע
                         hourRatingArray.add(calculateTimeRating(other.getPurchaseHour()));
-                        //נסמן שטיפלנו בו
                         other.setFlag(true);
                     }
-                }//סוף המעבר על כל הלקוחות והרכישות ממנו והלאה במערך
-                //ממוצע של הדירוגים עבור השעות והצבה
+                }
                 purchaseHourRating = calculateAverage(hourRatingArray);
 
-                //לבדוק לאיזה דלק יש הכי הרבה בקאונטר ולשמור דירוג לפי סוג הדלק
                 purchaseTypeRating =find_max(fuelTypeCounter);
-                //הכנסה לרשימה של דירוגים
                 ratingList.add(new Rating(customerTypeRating+purchaseHourRating+purchaseTypeRating ,
                         my.getCustomerID(), my.getCustomerType()));
             }
@@ -247,7 +242,6 @@ public class ViewAnalyticDataController extends BasicController {
 
 
 
-    //מחשב דירוג של זמנים
     private int calculateTimeRating(String avgHour){
         int purchaseHourRating;
         Time hour6 = java.sql.Time.valueOf("06:00:00");
@@ -256,16 +250,15 @@ public class ViewAnalyticDataController extends BasicController {
         Time hour20 = java.sql.Time.valueOf("20:00:00");
         Time avg = java.sql.Time.valueOf(avgHour);
 
-        if ((avg.after(hour6) && avg.before(hour10)) || avg.equals(hour6))   {//מ6 כולל עד 10 לא כולל
+        if ((avg.after(hour6) && avg.before(hour10)) || avg.equals(hour6))   {
             purchaseHourRating=4;
-        }else if ((avg.after(hour10) && avg.before(hour16)) || avg.equals(hour10)) {//מ10 כולל עד 15 לא כולל
+        }else if ((avg.after(hour10) && avg.before(hour16)) || avg.equals(hour10)) {
             purchaseHourRating=2;
-        }else if  ((avg.after(hour16) && avg.before(hour20)) || avg.equals(hour16)) {//מ15 כולל עד 20 לא כולל
+        }else if  ((avg.after(hour16) && avg.before(hour20)) || avg.equals(hour16)) {
             purchaseHourRating=3;
         }else purchaseHourRating=1;
         return purchaseHourRating;
     }
-    //מוצא מקסימום מבין 4 ובהתאם מחזיר את הדירוגים המתאימים
     private  int find_max(HashMap<String, Integer> fuelTypeCounter){
         int a, b, c, d ;
         a= fuelTypeCounter.get("Gasoline95");
@@ -279,7 +272,6 @@ public class ViewAnalyticDataController extends BasicController {
         else return 1;
     }
 
-    //חישוב ממוצע של מערך:
     private int calculateAverage(List<Integer> marks) {
         if (marks == null || marks.isEmpty()) {
             return 0;
@@ -309,7 +301,7 @@ public class ViewAnalyticDataController extends BasicController {
     public void getRatingForFuelTypeTable(String paramArray) {
         ArrayList<Object> varArray = new ArrayList<>();
         varArray.add(paramArray);
-        System.out.println(varArray.toString());//todo: להוריד את זה
+        System.out.println(varArray.toString());
         SqlAction sqlAction = new SqlAction(SqlQueryType.GET_RATING_FOR_FUEL_TYPE, varArray);
         super.sendSqlActionToClient(sqlAction);
     }

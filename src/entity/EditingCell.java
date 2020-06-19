@@ -1,4 +1,5 @@
 package entity;
+
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -23,6 +24,10 @@ public class EditingCell extends TableCell<Costumer, String> {
     private TextField textField;
     public EditingCell() {
     }
+
+    /**
+     * this method start edit process of cell
+     */
     @Override
     public void startEdit() {
         super.startEdit();
@@ -39,12 +44,23 @@ public class EditingCell extends TableCell<Costumer, String> {
             }
         });
     }
+
+    /**
+     * method cancel edit
+     * cancel an edit. no changes.
+     */
     @Override
     public void cancelEdit() {
         super.cancelEdit();
         setText((String) getItem());
         setContentDisplay(ContentDisplay.TEXT_ONLY);
     }
+
+    /**
+     * method update Item
+     * @param item item to update
+     * @param empty if empty set null
+     */
     @Override
     public void updateItem(String item, boolean empty) {
         super.updateItem(item, empty);
@@ -64,6 +80,11 @@ public class EditingCell extends TableCell<Costumer, String> {
             }
         }
     }
+
+    /**
+     *this method create functionality to the text field of the cell.
+     * @return
+     */
     private void createTextField() {
         textField = new TextField(getString());
         textField.setMinWidth(this.getWidth() - this.getGraphicTextGap() * 2);

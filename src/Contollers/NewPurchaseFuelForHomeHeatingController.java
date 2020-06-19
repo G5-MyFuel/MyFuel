@@ -67,11 +67,7 @@ public class NewPurchaseFuelForHomeHeatingController extends BasicController {
                 case GET_ALL_SHIPPING_DATES_AVAILABLE:
                     System.out.println("NewPurchaseFuelForHomeHeatingController -> myController.GetAvailableTimesToShippingDate();");
                     availableTimesInDate = changeResultToAvailableShippingDatesArrayList(result);
-                    try {
-                        myBoundary.setAvailableTimesForShipping();
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
+                    myBoundary.setAvailableTimesForShipping();
                     break;
                 case INSERT_NEW_AVAILABLE_DATE_FOR_SHIPPING:
                     System.out.println("NewPurchaseFuelForHomeHeatingController -> myController.INSERT_NEW_AVAILABLE_DATE_FOR_SHIPPING;");
@@ -105,7 +101,7 @@ public class NewPurchaseFuelForHomeHeatingController extends BasicController {
      * convert the result from db to arrayList of all available dates for shipping
      *
      * @param result
-     * @return
+     * @return ArrayList<ShippingDay>
      */
     private ArrayList<ShippingDay> changeResultToAvailableShippingDatesArrayList(SqlResult result) {
         ArrayList<ShippingDay> shippingDayArrayList = new ArrayList<>();
