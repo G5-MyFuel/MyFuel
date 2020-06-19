@@ -25,9 +25,10 @@
             <Font name="System Bold Italic" size="40.0" />
          </font>
       </Text>
-      <TableView fx:id="tableView" layoutX="132.0" layoutY="266.0" prefHeight="433.0" prefWidth="253.0" style="-fx-background-color: #fcf8e8; -fx-border-style: solid; -fx-border-color: #000000;">
+      <TableView fx:id="tableView" layoutX="132.0" layoutY="266.0" onMouseClicked="#getOrderClick" prefHeight="433.0" prefWidth="253.0" style="-fx-background-color: #fcf8e8; -fx-border-style: solid; -fx-border-color: #000000;">
          <columns>
             <TableColumn fx:id="OrderCol" prefWidth="65.0" text="Order Number" />
+            <TableColumn fx:id="StationCol" prefWidth="65.0" text="Station" />
          </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -57,7 +58,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Text layoutX="528.0" layoutY="571.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Press here to clean one of your nonifications">
+      <Text layoutX="501.0" layoutY="572.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mark an order and press here to clean notification">
          <font>
             <Font name="System Bold" size="19.0" />
          </font>
