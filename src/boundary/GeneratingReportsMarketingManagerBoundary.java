@@ -76,7 +76,7 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
     private TableView<?> CustomerPeriodicCharacterizationReportTable;
 
     @FXML
-    private TableColumn<?, ?> CustomerPeriodicCharacterizationReport_CustomerIDCustomerPeriodicCharacterizationReportColumn;
+    private TableColumn<String, String> CustomerPeriodicCharacterizationReport_CustomerIDCustomerPeriodicCharacterizationReportColumn;
 
     @FXML
     private TableColumn<?, ?> YellowColumn;
@@ -254,7 +254,9 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
 
     public void setCustomersListData(ArrayList<String> resultList){
 
-
+        CommentsReport_CustomerIDColumn.setCellValueFactory(new PropertyValueFactory<>("customerID"));
+        ObservableList<String> data = FXCollections.observableArrayList(resultList);
+        //CommentsReportForMarketingCampaignTable.setItems(data);
 
 
     }
