@@ -15,6 +15,12 @@ import javafx.stage.WindowEvent;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
+/**
+ * the class chose Station Boundary
+ *
+ * @author Itay Ziv
+ * @see choseStationBoundary - the form's Boundary class
+ */
 
 public class choseStationBoundary implements DataInitializable {
 

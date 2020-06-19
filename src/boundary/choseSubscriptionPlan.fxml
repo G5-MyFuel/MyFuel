@@ -13,14 +13,14 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="291.0" prefWidth="600.0" stylesheets="@choseSubscriptionPage.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundary.choseSubscriptionPlanBoundary">
+<AnchorPane fx:id="mainAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="291.0" prefWidth="600.0" stylesheets="@BGcss.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundary.choseSubscriptionPlanBoundary">
    <children>
       <Label layoutX="69.0" layoutY="14.0" text="You have to chose new subscription plan:">
          <font>
             <Font name="System Bold Italic" size="24.0" />
          </font>
          <textFill>
-            <LinearGradient endX="1.0" endY="1.0" startY="1.0">
+            <LinearGradient endX="0.519047619047619" endY="1.0" startX="1.0">
                <stops>
                   <Stop color="#374ee8" />
                   <Stop color="#20d3eb" offset="1.0" />

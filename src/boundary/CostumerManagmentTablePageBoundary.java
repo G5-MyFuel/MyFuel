@@ -29,6 +29,12 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import static java.lang.Thread.sleep;
+/**
+ * the class Costumer Management Table Page Boundary
+ *
+ * @author Itay Ziv
+ * @see CostumerManagmentTablePageBoundary - the form's Boundary class
+ */
 
 public class CostumerManagmentTablePageBoundary implements DataInitializable {
 
@@ -126,10 +132,12 @@ public class CostumerManagmentTablePageBoundary implements DataInitializable {
      * when the page initialized.
      */
     public void setCostumerTable(ArrayList<Costumer> cosArray) {
+        costumers.clear();
         costumers.addAll(cosArray);
         setColomsCells();
         ObservableList<Costumer> data = FXCollections.observableArrayList(cosArray);
         CosManageTbale.setItems(data);
+        CosManageTbale.refresh();
         CosManageTbale.setEditable(true);
 
         //Modifying the firstName property
@@ -209,6 +217,9 @@ public class CostumerManagmentTablePageBoundary implements DataInitializable {
         });
     }
 
+    /**
+     *
+     */
     private void setColomsCells() {
 
         //Create a customer cell factory so that cells can support editing.
@@ -259,7 +270,7 @@ public class CostumerManagmentTablePageBoundary implements DataInitializable {
         CostumerTypeCol.setCellFactory(ComboBoxTableCell.forTableColumn(CostumerType));
 
         pricingModelCol.setCellValueFactory(new PropertyValueFactory<Costumer, String>("pricingModel"));
-        ObservableList<String> pricingModelType = FXCollections.observableArrayList("Casual fueling", "Regular monthly subscription", "Full monthly subscription");
+        ObservableList<String> pricingModelType = FXCollections.observableArrayList("Casual fueling", "Regular monthly subscription(singel)","Regular monthly subscription(multiple)", "Full monthly subscription");
         pricingModelCol.setCellFactory(ComboBoxTableCell.forTableColumn(pricingModelType));
 
         PurchasePlanCol.setCellValueFactory(new PropertyValueFactory<Costumer, String>("purchasePlan"));
@@ -269,6 +280,7 @@ public class CostumerManagmentTablePageBoundary implements DataInitializable {
 
     }
 
+
     public void setVehicleTable(ArrayList<Vehicle> vArr) {
         Vehicles.addAll(vArr);
         VehicleIDCol.setCellValueFactory(new PropertyValueFactory<>("VehicleID"));
@@ -276,6 +288,7 @@ public class CostumerManagmentTablePageBoundary implements DataInitializable {
         ObservableList<Vehicle> data = FXCollections.observableArrayList(vArr);
         VehicleTable.setItems(data);
     }
+
 
     @FXML
     public void refreshTable() {

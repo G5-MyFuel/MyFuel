@@ -10,6 +10,13 @@ import entity.Vehicle;
 import javafx.application.Platform;
 
 import java.util.ArrayList;
+/**
+ * the class Costumer Management Controller
+ *
+ * @author Itay Ziv
+ * @see CostumerManagementController - the form's Controller class
+ *
+ */
 
 public class CostumerManagementController extends BasicController {
 

@@ -93,7 +93,7 @@
             <Label layoutX="124.0" layoutY="57.0" prefHeight="35.0" prefWidth="126.0" style="-fx-font-weight: bold;" styleClass="custom-white-title-label" text="Station Manager: " textFill="WHITE" />
             <Label layoutX="122.0" layoutY="120.0" prefHeight="31.0" prefWidth="126.0" style="-fx-font-weight: bold;" styleClass="custom-white-label" text="Company:" textFill="WHITE" />
             <Label layoutX="124.0" layoutY="181.0" prefHeight="33.0" prefWidth="89.0" style="-fx-font-weight: bold;" styleClass="custom-white-label" text="Order Date:" textFill="WHITE" />
-            <ImageView fitHeight="83.0" fitWidth="89.0" layoutX="30.0">
+            <ImageView fitHeight="69.0" fitWidth="74.0" layoutX="30.0">
                <image>
                   <Image url="@../media/icons/contact.png" />
                </image>

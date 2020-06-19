@@ -11,7 +11,8 @@ import javafx.application.Platform;
 
 import java.util.ArrayList;
 
-/**
+
+/** the class Customer Registration Controller
  * @author itay
  * @see CustomerRegistrationController - the form's logic class
  */
@@ -93,7 +94,10 @@ public class CustomerRegistrationController extends BasicController {
         tempCostumer.setCostumerVehicle(vehicles);
     }
 
-
+    /**
+     *
+     * @param result - The result recieved from the DB
+     */
     @Override
     public void getResultFromClient(SqlResult result) {
         Platform.runLater(() -> {

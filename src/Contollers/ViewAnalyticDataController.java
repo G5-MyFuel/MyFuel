@@ -1,50 +1,70 @@
 package Contollers;
 
-import boundary.MarketingCampaignTemplateBoundary;
 import boundary.ViewAnalyticDataBoundary;
 import common.assets.SqlAction;
 import common.assets.SqlQueryType;
 import common.assets.SqlResult;
 import entity.InputRating;
-import entity.MarketingCampaign;
-import entity.MarketingCampaignTemplate;
 import entity.Rating;
 import javafx.application.Platform;
-import server.MysqlConnection;
 
-import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ *  A department responsible for logical calculations and communicating with the client server and DB
+ *  For page "ViewAnalyticDataBoundary"
+ *
+ *  * @author Hana Wiener
+ * @see ViewAnalyticDataBoundary - the form's gui controller (boundary) class
+ */
 public class ViewAnalyticDataController extends BasicController {
+    /**
+     * General variables to save start and end time
+     */
     private Time start;
     private Time end;
-    public int[] monim = new int[11];
+    /**
+     *Array for keeping counters of ratings, for pie diagram
+     */
+    public int[] counters = new int[11];
+    /**
+     * The  by this controller
+     */
+    private ViewAnalyticDataBoundary myBoundary;
 
-    private ViewAnalyticDataBoundary myBoundary; /**     * The boundary controlled by this controller     */
+    /**
+     * Constructor for boundary controlled - save its boundary
+     *
+     * @param myBoundary
+     */
     public ViewAnalyticDataController(ViewAnalyticDataBoundary myBoundary) {
         this.myBoundary = myBoundary;
     }
 
     /**
-     *
+     *  empty constructor for this page (uses on "one in a week" calculation of rankings)
      */
     public ViewAnalyticDataController() {
     }
 
     /**
-     *    * This method will only be activated if the "Generate Analitic Data" button is pressed
-     *      * The method calls for a query that will get customer and purchases data ,
-     *      *  calculate their ratings, and save to DB
+     * This method will only be activated if the "Generate Analitic Data" button is pressed
+     * The method calls for a query that will get customer and purchases data ,
+     *  calculate their ratings, and save to DB
+     *
      */
     public void startCalculate(){
         this.deletePreviosData();
         this.getCustomerXPurchaseTable();
     }
 
+    /**
+     *
+     * @param result - The result recieved from the DB
+     */
     @Override
     public void getResultFromClient(SqlResult result) {
         Platform.runLater(() -> {
@@ -108,7 +128,7 @@ public class ViewAnalyticDataController extends BasicController {
 
     private ArrayList<Rating> changeResultToRatingForTimeRange(SqlResult result) {
         ArrayList<Rating> resultList = new ArrayList<>();
-        for(int t=0;t<11;t++)   monim[t]=0;
+        for(int t=0;t<11;t++)   counters[t]=0;
         for (ArrayList<Object> a : result.getResultData()) {
             if ((Time.valueOf((String) a.get(2)).after(start) && Time.valueOf((String) a.get(2)).before(end)) ||
                     Time.valueOf((String) a.get(2)).equals(start) && Time.valueOf((String) a.get(2)).equals(end)) {
@@ -125,7 +145,7 @@ public class ViewAnalyticDataController extends BasicController {
                     resultList.add(cos);
                     for(int k=1; k<11; k++)
                         if (cos.getRating()==k)
-                            monim[k]++;
+                            counters[k]++;
                 }
             }
         }
@@ -134,7 +154,7 @@ public class ViewAnalyticDataController extends BasicController {
 
     private ArrayList<Rating> changeResultToRatingForFuelType(SqlResult result) {
         ArrayList<Rating> resultList = new ArrayList<>();
-        for(int t=0;t<11;t++)   monim[t]=0;
+        for(int t=0;t<11;t++)   counters[t]=0;
         for (int i=0;i < result.getResultData().size(); i++ ) {
             ArrayList<Object> a = result.getResultData().get(i);
             Rating cos = new Rating((Integer) a.get(0), (String) a.get(1), (String) a.get(2));
@@ -148,7 +168,7 @@ public class ViewAnalyticDataController extends BasicController {
                     resultList.add(cos);
                     for(int k=1; k<11; k++)
                         if (cos.getRating()==k)
-                            monim[k]++;
+                            counters[k]++;
                     }
                 }
         return resultList;

@@ -3,11 +3,15 @@ package boundary;
 import Contollers.FormValidation;
 import Contollers.NewPurchaseFuelForHomeHeatingController;
 import com.jfoenix.controls.*;
+import entity.ShippingDay;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -15,17 +19,20 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
+import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
-import sun.plugin2.jvm.RemoteJVMLauncher;
 
 import java.net.URL;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.*;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 
 /**
  * @author daniel
@@ -35,6 +42,7 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
     private NewPurchaseFuelForHomeHeatingController myController = new NewPurchaseFuelForHomeHeatingController(this);
     private String currentCustomerId;
     private String dateAndDayPattern = "";
+    private boolean allShippingDetailsAdded = false;
 
     private FormValidation formValidation;
 
@@ -110,6 +118,9 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
     private Text shippingSummeryDetailsTXT;
 
     @FXML
+    private Label ShippingHouresAvailableOnThisDateLABLE;
+
+    @FXML
     private ImageView shippingIndicatorTAB1;
 
     @FXML
@@ -146,7 +157,7 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        setDayAndDateComboBox();
+        //setDayAndDateComboBox();
         this.formValidation = FormValidation.getValidator();
         this.orderDetailsIndicatorTAB.setVisible(false);
         this.shippingIndicatorTAB1.setVisible(false);
@@ -204,7 +215,7 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
         }
 
         //adds the arraylist values to the comboBox of optional dates
-        dayAndDateComboBox.getItems().addAll(twoWeeksDaysAndDates);
+        this.dayAndDateComboBox.getItems().addAll(twoWeeksDaysAndDates);
     }
 
     @FXML
@@ -241,14 +252,16 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
                         break;
                     case "Standard Shipping (15$)":
                         System.out.println("Standard Shipping selected");
-                        StandardShippingSelected();
+                        try {
+                            StandardShippingSelected();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                         break;
                 }
             }
         });
-        //get available dates for shipping from DB
-        String getAllAvailableDatesFromDbQUERY = "";    //todo:  query
-//        ClientApp.client.handleMessageFromClientUI(new Message(OperationType.getRequirementData,""));
+
     }
 
     private void FastShippingSelected() {
@@ -256,7 +269,7 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
         optionalDatesForShippingGridPane.setVisible(false);
     }
 
-    private void StandardShippingSelected() {
+    private void StandardShippingSelected() throws InterruptedException {
         whenPane.setVisible(true);
         optionalDatesForShippingGridPane.setVisible(false);
 
@@ -276,18 +289,16 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
 
         };
         shippingDatePicker.setDayCellFactory(callB);
-
-        //check if the date selected available in DB (running on Thread)
-
     }
 
 
-    public void InitialAndResetAllShippingDates() {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        Date date = new Date(Calendar.getInstance().getTime().getTime());
-        String initialShippingDatesQUERY = "INSERT INTO `bpsdc8o22sikrlpvvxqm`.`ShippingOptionalDates` (`DayAndDate`, `T1`, `T2`, `T3`, `T4`, `T5`, `T6`) VALUES ('2020-05-31', '1', '1', '1', '1', '1', '1');";
-        // ClientApp.chatClient.handleMessageFromClientUI(new Message(OperationType.updateRequirement,initialShippingDatesQUERY));
+    //after selected shipping date
+    public void SetAvailableTimesOfDateSelected(Date localDate) {
+        shippingDatePicker.getValue();
+        DateTimeFormatter fmt = DateTimeFormat.forPattern("yyyy-MM-dd");
+        ArrayList<ShippingDay> allDatesAvailableAsArrayList = myController.getAvailableTimesInDate();
     }
+
 
     @FXML
     void GoToOrderDetailsPage(MouseEvent event) {
@@ -303,4 +314,107 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
     void GoToShippingPage(MouseEvent event) {
 
     }
+
+    @FXML
+    void handleJFXDatePicker(ActionEvent event) {
+        myController.GetShippingOptionalDatesTableFromDB(); //get the available shipping dates and times range
+        ShippingHouresAvailableOnThisDateLABLE.setVisible(false);
+
+        java.sql.Date dateSelectedAsDate = java.sql.Date.valueOf(shippingDatePicker.getValue());
+        SetAvailableTimesOfDateSelected(dateSelectedAsDate);
+    }
+
+    public void setAllShippingDetailsAdded(boolean allShippingDetailsAdded) {
+        this.allShippingDetailsAdded = allShippingDetailsAdded;
+    }
+
+
+    public void setAvailableTimesForShipping() {
+        ShippingHouresAvailableOnThisDateLABLE.setVisible(true);
+        optionalDatesForShippingGridPane.setVisible(true);
+        ArrayList<ShippingDay> shippingDayArrayList = myController.getAvailableTimesInDate();
+
+        for (ShippingDay sd : shippingDayArrayList) {
+            String s1 = sd.getDate();
+            String s2 = String.valueOf(shippingDatePicker.getValue());
+            if (s1.equals(s2)) {
+                if (sd.getT1() == 1) {
+                    t7to9BTN.setDisable(true);
+                } else {
+                    t7to9BTN.setDisable(false);
+                }
+
+                if (sd.getT2() == 1) {
+                    t9to11BTN.setDisable(true);
+                } else {
+                    t11to13BTN.setDisable(false);
+                }
+
+                if (sd.getT3() == 1) {
+                    t11to13BTN.setDisable(true);
+                } else {
+                    t11to13BTN.setDisable(false);
+                }
+
+                if (sd.getT4() == 1) {
+                    t13to15BTN.setDisable(true);
+                } else {
+                    t13to15BTN.setDisable(false);
+                }
+
+                if (sd.getT5() == 1) {
+                    t15to17BTN.setDisable(true);
+                } else {
+                    t15to17BTN.setDisable(false);
+                }
+
+                if (sd.getT6() == 1) {
+                    t17to19BTN.setDisable(true);
+                } else {
+                    t17to19BTN.setDisable(false);
+                }
+
+            } else {
+                //ניצור את התאריך בDB
+                System.out.println("new row inserted in shipping dates table");
+
+            }
+            setShippingTimes(t7to9BTN);
+            setShippingTimes(t9to11BTN);
+            setShippingTimes(t11to13BTN);
+            setShippingTimes(t13to15BTN);
+            setShippingTimes(t15to17BTN);
+            setShippingTimes(t17to19BTN);
+
+        }
+    }
+
+
+    private void setShippingTimes(JFXButton btn) {
+        btn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (!shippingOverviewPane.isVisible())
+                    shippingOverviewPane.setVisible(true);
+                ///
+
+                StringBuilder str = new StringBuilder();
+                str.append(StringUtils.capitalize(shippingDatePicker.getValue().getDayOfWeek().toString().toLowerCase()) + ", ");
+                str.append(shippingDatePicker.getValue().toString() + " between ");
+                str.append(btn.getText());
+                shippingSummeryDetailsTXT.setText(str.toString());
+                //
+
+            }
+        });
+    }
+
+    /**
+     * set new row in ShippingOptionalDates Table
+     */
+    private void insertNewRowToShippingOptionalTable(String dateAsString) throws ParseException {
+        Date date = new SimpleDateFormat("yyyy-MM-dd").parse(dateAsString);
+
+    }
 }
+

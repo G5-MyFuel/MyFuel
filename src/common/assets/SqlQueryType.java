@@ -18,8 +18,17 @@ public enum SqlQueryType {
     GET_ALL_PURCHASE_FUEL_AMOUNT_OF_USER(SqlExecutionType.EXECUTE_QUERY),
 
     /* *****************************************
+     * ********** Fuel Management Queries ****************
+     * *****************************************/
+    GET_ALL_MANAGER_STATIONS(SqlExecutionType.EXECUTE_QUERY),
+    UPDATE_FUEL_LIMIT_STOCK(SqlExecutionType.UPDATE_QUERY),
+
+
+    /* *****************************************
      * ********** PurchaseFuelForHomeHeating ****************
      * *****************************************/
+    GET_ALL_SHIPPING_DATES_AVAILABLE(SqlExecutionType.EXECUTE_QUERY),
+    INSERT_NEW_AVAILABLE_DATE_FOR_SHIPPING(SqlExecutionType.EXECUTE_QUERY),
 
     /* *****************************************
      * ********** Discount Rates Queries ****************
@@ -58,6 +67,7 @@ public enum SqlQueryType {
      * ********** Marketing Manager Reports Queries ****************
      * *****************************************/
     GET_Comments_Report(SqlExecutionType.EXECUTE_QUERY),
+    GET_CustomerPeriodicCharacterization_Report(SqlExecutionType.EXECUTE_QUERY),
 
     /* *****************************************
      * ********** Costumer Management Queries ****************

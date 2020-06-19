@@ -13,8 +13,11 @@ import javafx.scene.input.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 /**
+ * the class Editing Cell
  *
  * @author Itay Ziv
+ * @see EditingCell - the form's entity class
+ *
  */
 public class EditingCell extends TableCell<Costumer, String> {
     private TextField textField;

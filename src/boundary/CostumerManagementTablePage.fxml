@@ -21,7 +21,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane prefHeight="796.0" prefWidth="1062.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundary.CostumerManagmentTablePageBoundary">
+<Pane prefHeight="796.0" prefWidth="1062.0" stylesheets="@BGcss.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundary.CostumerManagmentTablePageBoundary">
    <children>
       <Pane prefHeight="780.0" prefWidth="1022.0">
          <children>
@@ -48,7 +48,7 @@
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
                                     </Button>
-                                    <TableView fx:id="CosManageTbale" layoutX="40.0" layoutY="207.0" prefHeight="254.0" prefWidth="958.0" style="-fx-background-color: #fcf8e8; -fx-border-width: 4; -fx-border-color: #2D4578;">
+                                    <TableView fx:id="CosManageTbale" layoutX="40.0" layoutY="207.0" prefHeight="254.0" prefWidth="958.0" style="-fx-border-width: 4; -fx-border-color: #2D4578;">
                                        <columns>
                                           <TableColumn fx:id="CostumerIDCol" maxWidth="90.0" prefWidth="90.0" text="Costumer ID" />
                                           <TableColumn fx:id="firstNameCol" prefWidth="81.0" text="First Name" />
@@ -119,12 +119,12 @@
                                  <children>
                                     <SplitPane dividerPositions="0.16161616161616163" layoutX="3.0" layoutY="4.0" orientation="VERTICAL" prefHeight="285.0" prefWidth="359.0" style="-fx-border-color: #2D4578; -fx-border-width: 4;">
                                        <items>
-                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="35.0" prefWidth="335.0" style="-fx-background-color: #fcf8e8;">
+                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="35.0" prefWidth="335.0">
                                              <children>
                                                 <Label alignment="CENTER" layoutX="96.0" layoutY="7.0" style="-fx-font-weight: Bold;" text="Fill in Vehicle Information" />
                                              </children>
                                           </AnchorPane>
-                                          <AnchorPane prefHeight="218.0" prefWidth="349.0" style="-fx-background-color: #fcf8e8;">
+                                          <AnchorPane prefHeight="218.0" prefWidth="349.0">
                                              <children>
                                                 <Button fx:id="saveVehicleButton" layoutX="153.0" layoutY="186.0" mnemonicParsing="false" onMouseClicked="#ClickSaveVehicleButton" style="-fx-background-radius: 50;" stylesheets="@style.css" text="Save">
                                                    <cursor>
@@ -146,7 +146,7 @@
                               </Button>
                               <Pane layoutX="11.0" layoutY="190.0" prefHeight="264.0" prefWidth="287.0">
                                  <children>
-                                    <TableView fx:id="VehicleTable" layoutY="2.0" prefHeight="293.0" prefWidth="287.0" style="-fx-background-color: #fcf8e8; -fx-border-color: #2D4578; -fx-border-width: 4;">
+                                    <TableView fx:id="VehicleTable" layoutY="2.0" prefHeight="293.0" prefWidth="287.0" style="-fx-border-color: #2D4578; -fx-border-width: 4;">
                                        <columns>
                                           <TableColumn fx:id="VehicleIDCol" prefWidth="140.0" text="VehicleI ID" />
                                           <TableColumn fx:id="GasTypeCol" prefWidth="146.0" text="Gas Type" />
