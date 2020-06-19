@@ -99,29 +99,29 @@ public class GeneratingReportsStationManagerController extends BasicController {
      */
     private String changeResultToQuarterlyReport(SqlResult result) {
 
-        Float TotalPrice = new Float(0);
+        Double TotalPrice = new Double(0);
         for (ArrayList<Object> a : result.getResultData()) {
-            TotalPrice += Float.parseFloat((String) a.get(0));
+            TotalPrice += (Double) a.get(0);
         }
         return TotalPrice.toString();
     }
 
     private ArrayList<PurchasesReport> changeResultToPurchasesReport(SqlResult result) {
 
-        Float[] fuelAmount = new Float[]{Float.valueOf(0),Float.valueOf(0),Float.valueOf(0)};
+        Double[] fuelAmount = new Double[]{Double.valueOf(0),Double.valueOf(0),Double.valueOf(0)};
         Integer[] salesAmount = new Integer[]{0,0,0};
         ArrayList<PurchasesReport> resultList = new ArrayList<>();
         for (ArrayList<Object> a : result.getResultData()) {
-            if (((String) a.get(0)).equals("Gasoline 95")) {
-                fuelAmount[0] += Float.parseFloat((String) a.get(1));
+            if (((String) a.get(0)).equals("Gasoline95")) {
+                fuelAmount[0] += (Double) a.get(1);
                 salesAmount[0]++;
             }
             if (((String) a.get(0)).equals("Diesel")) {
-                fuelAmount[1] += Float.parseFloat((String) a.get(1));
+                fuelAmount[1] += (Double) a.get(1);
                 salesAmount[1]++;
             }
-            if (((String) a.get(0)).equals("Scooter fuel")) {
-                fuelAmount[2] += Float.parseFloat((String) a.get(1));
+            if (((String) a.get(0)).equals("ScooterFuel")) {
+                fuelAmount[2] += (Double) a.get(1);
                 salesAmount[2]++;
             }
         }
