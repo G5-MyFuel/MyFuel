@@ -1,5 +1,8 @@
 package entity;
 
+/**
+ *
+ */
 public class Rating {
 
     private Integer rating;

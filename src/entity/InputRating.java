@@ -1,7 +1,8 @@
 package entity;
 
-import java.sql.Time;
-
+/**
+ *
+ */
 public class InputRating {
 
     //private int rating;

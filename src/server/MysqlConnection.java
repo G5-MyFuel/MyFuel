@@ -232,7 +232,7 @@ public class MysqlConnection {
         sqlArray[SqlQueryType.GET_CUSTOMER_X_PURCHASE_TABLE.getCode()] = "select p.customerID, c.customerType, p.purchaseID, ff.FuelType, p.purchaseHour " +
                 "from Costumer as c, Purchase as p, FastFuel as ff " +
                 "WHERE p.customerID LIKE c.ID AND p.purchaseID LIKE ff.purchaseID";
-        sqlArray[SqlQueryType.INSERT_RATING.getCode()] = "INSERT INTO `Rating`(`CustomerID`, `Rating`, `CustomerType`) VALUES (?,?,?);";
+        sqlArray[SqlQueryType.INSERT_RATING.getCode()] ="INSERT INTO `Rating`(`CustomerID`, `Rating`, `CustomerType`) VALUES (?,?,?);";
         sqlArray[SqlQueryType.DELETE_ALL_RATINGS_ROWS.getCode()] = "DELETE FROM `Rating` WHERE 1";
         sqlArray[SqlQueryType.GET_RATING_FOR_CUSTUMER_TYPE.getCode()] = "SELECT * FROM `Rating` WHERE `CustomerType`= ? ";
         sqlArray[SqlQueryType.GET_RATING_FOR_TIME_RANGE.getCode()] = "SELECT r.Rating, p.customerID, p.purchaseHour from " +
