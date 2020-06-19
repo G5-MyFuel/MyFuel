@@ -28,7 +28,7 @@ import java.util.ResourceBundle;
 public class ManagerNotificationsPageBoundary implements DataInitializable {
 
     private ManagerNotificationPageController myController = new ManagerNotificationPageController(this);
-    private String ManagerID = "";
+    private String ManagerID = "762550139";
     private ObservableList<ManagerNotifications> tableData;
 
 
@@ -37,6 +37,9 @@ public class ManagerNotificationsPageBoundary implements DataInitializable {
 
     @FXML
     private TableColumn<TableView<ManagerNotifications>, String> OrderCol;
+
+    @FXML
+    private TableColumn<TableView<ManagerNotifications>, Integer> StationCol;
 
     @FXML
     private Text explanationTxt;
@@ -49,16 +52,18 @@ public class ManagerNotificationsPageBoundary implements DataInitializable {
 
     /**
      * After the manager saw his notifications- change the status in DB to viewed and clean the tableView
-     * **/
+     **/
     @FXML
     void clickCleanBtn(MouseEvent event) {
-        ManagerNotifications temp = tableView.getSelectionModel().getSelectedItem();
-        ArrayList<ManagerNotifications> delArray = new ArrayList<>();
-        for(int i=0;i<tableView.getItems().size();i++)
-        {
+        ManagerNotifications temp= tableView.getSelectionModel().getSelectedItem();
+        myController.setNewStatus(temp.getOrderNumber());
+        tableView.getItems().remove(temp);
+
+        /*for(int i=0;i<tableView.getItems().size();i++) {
+            temp = tableView.getItems().get(i);
             myController.setNewStatus(temp.getOrderNumber());
-            tableView.getItems().remove(i);
-        }
+            tableView.getItems().remove(temp);
+        }*/
     }
 
     @FXML
@@ -83,23 +88,28 @@ public class ManagerNotificationsPageBoundary implements DataInitializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        CleanBtn.setDisable(true);
         myController.getOrdersFromDB();
         System.out.println("Notifications Page Is Open");
     }
 
     public void setOrdersInTableView(ArrayList<ManagerNotifications> OrderArray) {
         OrderCol.setCellValueFactory(new PropertyValueFactory<>("OrderNumber"));
+        StationCol.setCellValueFactory(new PropertyValueFactory<>("StationNumber"));
         tableData = FXCollections.observableArrayList(OrderArray);
         tableView.setEditable(true);
         tableView.setItems(tableData);
     }
 
-    public void getOrderDetailsFromTableView() {
+    public void getOrderClick() {
         tableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
+                ManagerNotifications temp = tableView.getSelectionModel().getSelectedItem();
+                if(temp.equals(null))
+                    CleanBtn.setDisable(true);
+                else CleanBtn.setDisable(false);
             }
         });
-
     }
 }
