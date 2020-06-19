@@ -217,7 +217,9 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
                 }
                 break;
             case "Customer Periodic Characterization Report":
-
+                paramArray.add(StartDateBox.getValue().toString());
+                paramArray.add(EndDateBox.getValue().toString());
+                myController.GetReportData(paramArray);
                 break;
             default:
                 break;
