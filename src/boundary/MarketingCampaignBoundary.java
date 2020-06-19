@@ -23,17 +23,35 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
+ *  This class This department is responsible for controlling "MarketingCampaignFXML" page
+ *Allows marketing manager to view current campaigns that are running and their dates
+ * And running a new campaign by template existing on the system
+ *
  * @author Hana Wiener
  * @see MarketingCampaignController - the form's logic class
  */
-
 public class MarketingCampaignBoundary implements DataInitializable {
     /**
      * The supervisor boundary controller.
      */
     private MarketingCampaignController myController = new MarketingCampaignController(this);
+    /**
+     * A parameter that represents who enters the page
+     */
     private String marketingManager;
+    /**
+     *  For proper input testing
+     */
     private FormValidation formValidation;
+    /**
+     * choosen Template to send to query
+     */
+    String choosenTemplate = new String();
+    /**
+     * Flag - Can the campaign run
+     */
+    boolean flagSale = true;
+    MarketingCampaign newSale = new MarketingCampaign();
 
     /*
     Gui variables:
@@ -126,16 +144,25 @@ public class MarketingCampaignBoundary implements DataInitializable {
     @FXML
     private Label ERRORnoTemplate;
 
-    String choosenTemplate = new String();
-    boolean flagSale = true;
-    MarketingCampaign newSale = new MarketingCampaign();
 
-
+    /**
+     *  This method allows to save information sent when uploading the page (user id)
+     *
+     * @param data - The data sent to the boundary
+     */
     @Override
     public void initData(Object data) {
         this.marketingManager = (String) data;
     }
 
+    /**
+     * This method initializes the variables, fields, and combo-boxes
+     * What is initialized will appear when the screen is raised
+     *Initializes existing tables on the page - by sending a request
+     *
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.detailsPane.setVisible(false);
@@ -154,7 +181,10 @@ public class MarketingCampaignBoundary implements DataInitializable {
 
 
     /**
-     * this method will set the templates table when we will initialize the page.
+     *This method receives from the controller an array with the values obtained from the DB
+     * And places them in the appropriate table of sales - saleOperationTableView
+     *
+     * * @param cosArray
      */
     public void setSalesTable(ArrayList<MarketingCampaign> cosArray) {
 
@@ -169,7 +199,12 @@ public class MarketingCampaignBoundary implements DataInitializable {
 
     }
 
-
+    /**
+     *This method will only be activated if button "Add Sale" is pressed
+     *Makes the "Add Campaign window appear
+     *
+     * @param event
+     */
     @FXML
     void handleBtnAddSale(ActionEvent event) {
         this.templateDetaildVBOX.setVisible(false);
@@ -179,7 +214,11 @@ public class MarketingCampaignBoundary implements DataInitializable {
 
         detailsPane.setVisible(true);
     }
-
+//////////////////////////////////////////////////////////////////////////////
+    /**
+     *
+     * @param event
+     */
     @FXML
     void handleBtnRunSale(ActionEvent event) {
         if (ChooseTemplateCombo.getSelectionModel().isEmpty()) {

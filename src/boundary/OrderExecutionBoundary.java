@@ -176,6 +176,7 @@ public class OrderExecutionBoundary implements DataInitializable {
             @Override
             public void handle(MouseEvent event) {
                 OrderFuelFromSupplier temp = tableView.getSelectionModel().getSelectedItem();
+
                 if (temp.getOrderStatus().equals("done")) {
                     DoneMsgTxt.setVisible(true);
                     hboxOrderConfirmation.setVisible(false);

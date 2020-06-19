@@ -30,13 +30,16 @@ public class ManagerNotificationsPageBoundary implements DataInitializable {
     private ManagerNotificationPageController myController = new ManagerNotificationPageController(this);
     private String ManagerID = "";
     private ObservableList<ManagerNotifications> tableData;
-
+    private generalDashBoardBoundary generalDashBoardBoundary;
 
     @FXML
     private TableView<ManagerNotifications> tableView;
 
     @FXML
     private TableColumn<TableView<ManagerNotifications>, String> OrderCol;
+
+    @FXML
+    private TableColumn<TableView<ManagerNotifications>, Integer> StationCol;
 
     @FXML
     private Text explanationTxt;
@@ -49,16 +52,12 @@ public class ManagerNotificationsPageBoundary implements DataInitializable {
 
     /**
      * After the manager saw his notifications- change the status in DB to viewed and clean the tableView
-     * **/
+     **/
     @FXML
     void clickCleanBtn(MouseEvent event) {
-        ManagerNotifications temp = tableView.getSelectionModel().getSelectedItem();
-        ArrayList<ManagerNotifications> delArray = new ArrayList<>();
-        for(int i=0;i<tableView.getItems().size();i++)
-        {
-            myController.setNewStatus(temp.getOrderNumber());
-            tableView.getItems().remove(i);
-        }
+        ManagerNotifications temp= tableView.getSelectionModel().getSelectedItem();
+        myController.setNewStatus(temp.getOrderNumber());
+        tableView.getItems().remove(temp);
     }
 
     @FXML
@@ -83,23 +82,49 @@ public class ManagerNotificationsPageBoundary implements DataInitializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        CleanBtn.setDisable(true);
         myController.getOrdersFromDB();
         System.out.println("Notifications Page Is Open");
     }
 
     public void setOrdersInTableView(ArrayList<ManagerNotifications> OrderArray) {
         OrderCol.setCellValueFactory(new PropertyValueFactory<>("OrderNumber"));
+        StationCol.setCellValueFactory(new PropertyValueFactory<>("StationNumber"));
         tableData = FXCollections.observableArrayList(OrderArray);
         tableView.setEditable(true);
         tableView.setItems(tableData);
     }
 
-    public void getOrderDetailsFromTableView() {
+    public void getOrderClick() {
         tableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
+                ManagerNotifications temp = tableView.getSelectionModel().getSelectedItem();
+                if(temp.equals(null))
+                    CleanBtn.setDisable(true);
+                else CleanBtn.setDisable(false);
             }
         });
+    }
 
+    /**
+     * Function to update the amount of the manager's notifications every 5 minutes
+     */
+    private void notificationFunction() {
+        int AmountOfNotifi = tableView.getItems().size();
+        Thread notifi = new Thread() {
+            public void run() {
+                for (; ; ) {
+                    //TODO update the number of notification
+
+                    try {
+                        sleep(300000);
+                    } catch (InterruptedException ex) {
+                        //...
+                    }
+                }
+            }
+        };
+        notifi.start();
     }
 }

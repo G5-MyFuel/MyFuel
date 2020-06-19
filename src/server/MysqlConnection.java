@@ -197,8 +197,11 @@ public class MysqlConnection {
         /* *****************************************************
          * *************** Station Manager Queries ****************
          * *****************************************************/
-        sqlArray[SqlQueryType.GET_ALL_ORDER_TO_SUPPLY_FOR_STATION_MANAGER.getCode()] = "SELECT OrderNumber,companyName,StationNum,FuelType,Quantity,OrderStatus FROM OrderForStock as ofs, GasStation as gs WHERE ofs.StationNum=gs.StationNumber and ofs.GasCompanyName=gs.companyName and ofs.OrderStatus like \"New\" and managerID= ?";
+        sqlArray[SqlQueryType.GET_ALL_ORDER_TO_SUPPLY_FOR_STATION_MANAGER.getCode()] = "SELECT OrderNumber,companyName,StationNum,FuelType,Quantity,OrderStatus FROM OrderForStock as ofs, GasStation as gs, User as u WHERE ofs.StationNum=gs.StationNumber and ofs.GasCompanyName=gs.companyName and ofs.OrderStatus=\"New\" and u.userID=gs.managerID and gs.managerID=?";
         sqlArray[SqlQueryType.UPDATE_STATUS_TO_IN_TREATMENT.getCode()] = "UPDATE `OrderForStock` SET `OrderStatus` = \"In treatment\" WHERE `OrderNumber` = ?";
+        sqlArray[SqlQueryType.GET_ALL_ORDER_WITH_STATUS_DONE.getCode()]="SELECT OrderNumber,StationNumber FROM OrderForStock as ofs, GasStation as gs, User as u WHERE ofs.StationNum=gs.StationNumber and ofs.GasCompanyName=gs.companyName and ofs.OrderStatus=\"Done\" and gs.managerID=u.userID";
+        sqlArray[SqlQueryType.UPDATE_STATUS_TO_VIEWED.getCode()]="UPDATE `OrderForStock` SET `OrderStatus` = \"Viewed\" WHERE `OrderNumber` = ?";
+
         /* *****************************************
          * ********** Orders From Supplier Queries ****************
          * *****************************************/
@@ -232,7 +235,7 @@ public class MysqlConnection {
         sqlArray[SqlQueryType.GET_CUSTOMER_X_PURCHASE_TABLE.getCode()] = "select p.customerID, c.customerType, p.purchaseID, ff.FuelType, p.purchaseHour " +
                 "from Costumer as c, Purchase as p, FastFuel as ff " +
                 "WHERE p.customerID LIKE c.ID AND p.purchaseID LIKE ff.purchaseID";
-        sqlArray[SqlQueryType.INSERT_RATING.getCode()] = "INSERT INTO `Rating`(`CustomerID`, `Rating`, `CustomerType`) VALUES (?,?,?);";
+        sqlArray[SqlQueryType.INSERT_RATING.getCode()] ="INSERT INTO `Rating`(`CustomerID`, `Rating`, `CustomerType`) VALUES (?,?,?);";
         sqlArray[SqlQueryType.DELETE_ALL_RATINGS_ROWS.getCode()] = "DELETE FROM `Rating` WHERE 1";
         sqlArray[SqlQueryType.GET_RATING_FOR_CUSTUMER_TYPE.getCode()] = "SELECT * FROM `Rating` WHERE `CustomerType`= ? ";
         sqlArray[SqlQueryType.GET_RATING_FOR_TIME_RANGE.getCode()] = "SELECT r.Rating, p.customerID, p.purchaseHour from " +
@@ -307,7 +310,7 @@ public class MysqlConnection {
         sqlArray[SqlQueryType.GET_Comments_Report.getCode()] = "select customerID,SUM(totalPrice) as TotalSum " +
                 "from(SELECT totalPrice,customerID from Purchase where CampaignID = ?) as t group by customerID";
         sqlArray[SqlQueryType.GET_Customers_List.getCode()] = "SELECT customerID, sum(totalPrice) from Purchase AS p, FastFuel AS f " +
-                "where p.purchaseID = f.purchaseID AND p.purchaseDate BETWEEN ? AND ? GROUP by customerID";
+                "where p.purchaseID = f.purchaseID AND p.purchaseDate BETWEEN ? AND ? GROUP by customerID ORDER BY sum(totalPrice) DESC";
         sqlArray[SqlQueryType.GET_CustomerPeriodicCharacterization_Report.getCode()] = "SELECT p.customerID, SUM(p.totalPrice) AS TotalSum, f.companyName from Purchase AS p, FastFuel AS f " +
                 "where p.purchaseID = f.purchaseID AND p.purchaseDate BETWEEN ? AND ? group by customerID, companyName";
 

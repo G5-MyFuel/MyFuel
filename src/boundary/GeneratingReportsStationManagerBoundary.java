@@ -199,7 +199,7 @@ public class GeneratingReportsStationManagerBoundary implements DataInitializabl
         btnSavePurchasesReport.setVisible(false);
         btnSaveQuantityReport.setVisible(false);
 
-        QuantityItemsStockTxt.setText("Quantity of items in stock for" + managerCompany + " in Station " + managerStation + ":");
+        QuantityItemsStockTxt.setText("Quantity of items in stock for " + managerCompany + " in Station #" + managerStation + ":");
         ArrayList<String> paramArray = new ArrayList<>();
         paramArray.add("Quantity of items in stock report");
         paramArray.add(managerCompany);
@@ -209,18 +209,25 @@ public class GeneratingReportsStationManagerBoundary implements DataInitializabl
 
     public void setQuantityItemsStockData(ArrayList<QuantityItemsStockReport> resultList) {
 
-        resultList.get(0).setFuelType("Gasoline 95");
-        resultList.get(1).setFuelType("Diesel");
-        resultList.get(2).setFuelType("Scooter fuel");
-        sendQuantityItemsStockReport.addAll(resultList);
-        FuelTypeQuantityReportColumn.setCellValueFactory(new PropertyValueFactory<>("fuelType"));
-        AvailableInventoryColumn.setCellValueFactory(new PropertyValueFactory<>("availableInventory"));
+        System.out.println(resultList.size());
+        if (resultList.size() > 0) {
+            resultList.get(0).setFuelType("Gasoline 95");
+            resultList.get(1).setFuelType("Diesel");
+            resultList.get(2).setFuelType("Scooter fuel");
+            sendQuantityItemsStockReport.addAll(resultList);
+            FuelTypeQuantityReportColumn.setCellValueFactory(new PropertyValueFactory<>("fuelType"));
+            AvailableInventoryColumn.setCellValueFactory(new PropertyValueFactory<>("availableInventory"));
 
-        ObservableList<QuantityItemsStockReport> data = FXCollections.observableArrayList(resultList);
-        QuantityReportTable.setItems(data);
-        QuantityReportTable.setVisible(true);
-        QuantityItemsStockTxt.setVisible(true);
-        btnSaveQuantityReport.setVisible(true);
+            ObservableList<QuantityItemsStockReport> data = FXCollections.observableArrayList(resultList);
+            QuantityReportTable.setItems(data);
+            QuantityReportTable.setVisible(true);
+            QuantityItemsStockTxt.setVisible(true);
+            btnSaveQuantityReport.setVisible(true);
+        } else {
+            QuantityItemsStockTxt.setText("No data is available for Station # " + managerStation + " at " + managerCompany + " Company");
+            QuantityItemsStockTxt.setVisible(true);
+        }
+
     }
 
     public void setManagerData(ArrayList<String> resultList) {
@@ -254,7 +261,7 @@ public class GeneratingReportsStationManagerBoundary implements DataInitializabl
 
         ArrayList<String> paramArray = new ArrayList<>();
         paramArray.add("Send Purchases report");
-        for (PurchasesReport a : sendPurchases){
+        for (PurchasesReport a : sendPurchases) {
             paramArray.add(managerCompany);
             paramArray.add(managerStation);
             paramArray.add(a.getFuelType());
@@ -271,7 +278,7 @@ public class GeneratingReportsStationManagerBoundary implements DataInitializabl
 
         ArrayList<String> paramArray = new ArrayList<>();
         paramArray.add("Send Quantity of items in stock report");
-        for (QuantityItemsStockReport a : sendQuantityItemsStockReport){
+        for (QuantityItemsStockReport a : sendQuantityItemsStockReport) {
             paramArray.add(managerCompany);
             paramArray.add(managerStation);
             paramArray.add(a.getFuelType());

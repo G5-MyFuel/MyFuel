@@ -37,6 +37,7 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
     private final GeneratingReportsMarketingManagerController myController = new GeneratingReportsMarketingManagerController(this);
     private FormValidation formValidation;
     private final Alert ErrorAlert = new Alert(Alert.AlertType.ERROR);
+    ArrayList<CustomerPeriodicCharacterizationReport> customerWithTotalSumList = new ArrayList<>();
     Font font;
     Paint paint;
 
@@ -126,7 +127,7 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
         ERRORendBeforStart.setVisible(false);
         ERRORnoOperation.setVisible(false);
 
-        disablePastDates();
+        disableFutureDates();
         EndDateBox.setValue(LocalDate.now());
         StartDateBox.setValue(LocalDate.now());
 
@@ -163,7 +164,9 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
             EndDateTxt.setVisible(true);
             EndDateBox.setVisible(true);
             EnterOperationSaleTXT.setVisible(false);
+            ERRORnoOperation.setVisible(false);
         } else {
+            EnterOperationSaleTXT.clear();
             StartDateTxt.setVisible(false);
             StartDateBox.setVisible(false);
             EndDateTxt.setVisible(false);
@@ -181,8 +184,6 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
     @FXML
     void handleStartDateBox(ActionEvent event) {
 
-        disableBeforeStartDate();
-        //checkValidDateForStartDate();
         checkValidDateForEndDate();
     }
 
@@ -227,6 +228,10 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
         }
     }
 
+    /**
+     *
+     * @param resultList
+     */
     public void setCommentsReportData(ArrayList<CommentsReport> resultList) {
 
         if (resultList.size() > 0) {
@@ -253,74 +258,68 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
 
     }
 
-    public void setCustomersListData(ArrayList<CustomerPeriodicCharacterizationReport> resultList){
+    public void setCustomersListData(ArrayList<CustomerPeriodicCharacterizationReport> resultList) {
 
-        CustomerPeriodicCharacterizationReport_CustomerIDCustomerPeriodicCharacterizationReportColumn.setCellValueFactory(new PropertyValueFactory<>("customerID"));
-        TotalColumn.setCellValueFactory(new PropertyValueFactory<>("total"));
-        ObservableList<CustomerPeriodicCharacterizationReport> data = FXCollections.observableArrayList(resultList);
-        CustomerPeriodicCharacterizationReportTable.setItems(data);
-        //CustomerPeriodicCharacterizationReportTable.setVisible(true);
+        customerWithTotalSumList.addAll(resultList);
     }
 
-    public void setCustomerPeriodicCharacterizationReportData(ArrayList<CustomerPeriodicCharacterizationReport> resultList){
+    public void setCustomerPeriodicCharacterizationReportData(ArrayList<CustomerPeriodicCharacterizationReport> resultList) {
 
-        YellowColumn.setCellValueFactory(new PropertyValueFactory<>("yellow"));
-        SonolColumn.setCellValueFactory(new PropertyValueFactory<>("sonol"));
-        PazColumn.setCellValueFactory(new PropertyValueFactory<>("paz"));
-        ObservableList<CustomerPeriodicCharacterizationReport> data = FXCollections.observableArrayList(resultList);
-        CustomerPeriodicCharacterizationReportTable.setItems(data);
-        CustomerPeriodicCharacterizationReportTable.setVisible(true);
+        if (customerWithTotalSumList.size() > 0) {
+            ShowReportMarketingCampaignTxt.setVisible(false);
+            CustomerPeriodicCharacterizationReport_CustomerIDCustomerPeriodicCharacterizationReportColumn.setCellValueFactory(new PropertyValueFactory<>("customerID"));
+            TotalColumn.setCellValueFactory(new PropertyValueFactory<>("total"));
+            YellowColumn.setCellValueFactory(new PropertyValueFactory<>("yellow"));
+            SonolColumn.setCellValueFactory(new PropertyValueFactory<>("sonol"));
+            PazColumn.setCellValueFactory(new PropertyValueFactory<>("paz"));
+            for (int i = 0; i < customerWithTotalSumList.size(); i++) {
+                for (CustomerPeriodicCharacterizationReport a : resultList) {
+
+                    if (customerWithTotalSumList.get(i).getCustomerID().equals(a.getCustomerID())) {
+                        if (customerWithTotalSumList.get(i).getYellow() == null || customerWithTotalSumList.get(i).getYellow().equals("-"))
+                            customerWithTotalSumList.get(i).setYellow(a.getYellow());
+                        if (customerWithTotalSumList.get(i).getSonol() == null || customerWithTotalSumList.get(i).getSonol().equals("-"))
+                            customerWithTotalSumList.get(i).setSonol(a.getSonol());
+                        if (customerWithTotalSumList.get(i).getPaz() == null || customerWithTotalSumList.get(i).getPaz().equals("-"))
+                            customerWithTotalSumList.get(i).setPaz(a.getPaz());
+                    }
+                }
+            }
+            ObservableList<CustomerPeriodicCharacterizationReport> data = FXCollections.observableArrayList(customerWithTotalSumList);
+            CustomerPeriodicCharacterizationReportTable.setItems(data);
+            CustomerPeriodicCharacterizationReportTable.setVisible(true);
+        } else {
+            ShowReportMarketingCampaignTxt.setText("No information found for the selected time period!");
+            ShowReportMarketingCampaignTxt.setVisible(true);
+
+        }
+        customerWithTotalSumList.clear();
     }
 
     /*boolean isStartDateBoxBeforeLocalDate() {
         return StartDateBox.getValue().isBefore(java.time.LocalDate.now());
     }*/
 
+    /**
+     *
+     * @return
+     */
     boolean isEndDateBoxBeforeStartDateBox() {
         return EndDateBox.getValue().isBefore(StartDateBox.getValue());
     }
 
-    void checkValidDateForStartDate() {
-
-        disableBeforeStartDate();
-        /*if(isEndDateBoxBeforeStartDateBox())
-            ERROREndAlreadyPassedDate.setVisible(true);
-        else
-            ERROREndAlreadyPassedDate.setVisible(false);
-
-        if (!(isStartDateBoxBeforeLocalDate()) && !(isEndDateBoxBeforeStartDateBox())) {
-            btnGenerateReport.setVisible(true);
-            if (ChooseReportToGenerateCombo.getValue().equals("Comments Report for Marketing Campaign"))
-                EnterOperationSaleTXT.setVisible(true);
-            else
-                EnterOperationSaleTXT.setVisible(false);
-        } else {
-            btnGenerateReport.setVisible(false);
-            EnterOperationSaleTXT.setVisible(false);
-        }*/
-    }
-
     void checkValidDateForEndDate() {
 
-        if (isEndDateBoxBeforeStartDateBox())
+        if (isEndDateBoxBeforeStartDateBox()) {
             ERRORendBeforStart.setVisible(true);
-        else
-            ERRORendBeforStart.setVisible(false);
-
-        if (!(isEndDateBoxBeforeStartDateBox()) /*&& !(isStartDateBoxBeforeLocalDate())*/) {
-            btnGenerateReport.setVisible(true);
-            /*if (ChooseReportToGenerateCombo.getValue().equals("Comments Report for Marketing Campaign"))
-                EnterOperationSaleTXT.setVisible(true);
-            else
-                EnterOperationSaleTXT.setVisible(false);*/
-        } else {
             btnGenerateReport.setVisible(false);
-            //.setVisible(false);
+        } else {
+            ERRORendBeforStart.setVisible(false);
+            btnGenerateReport.setVisible(true);
         }
-
     }
 
-    void disablePastDates() {
+    void disableFutureDates() {
 
         // disable past dates of DatePicker gui obj
         Callback<DatePicker, DateCell> callB = new Callback<DatePicker, DateCell>() {
@@ -331,35 +330,15 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
                     public void updateItem(LocalDate item, boolean empty) {
                         super.updateItem(item, empty); //To change body of generated methods, choose Tools | Templates.
                         LocalDate today = LocalDate.now();
-                        setDisable(empty || item.compareTo(today) < 0);
+                        setDisable(empty || item.compareTo(today) > 0);
                     }
                 };
             }
 
         };
-        //StartDateBox.setDayCellFactory(callB);
+        StartDateBox.setDayCellFactory(callB);
         EndDateBox.setDayCellFactory(callB);
 
-    }
-
-    void disableBeforeStartDate() {
-
-        // disable past dates of DatePicker gui obj
-        Callback<DatePicker, DateCell> callB = new Callback<DatePicker, DateCell>() {
-            @Override
-            public DateCell call(final DatePicker param) {
-                return new DateCell() {
-                    @Override
-                    public void updateItem(LocalDate item, boolean empty) {
-                        super.updateItem(item, empty); //To change body of generated methods, choose Tools | Templates.
-                        LocalDate startDate = StartDateBox.getValue();
-                        setDisable(empty || item.compareTo(startDate) < 0);
-                    }
-                };
-            }
-
-        };
-        EndDateBox.setDayCellFactory(callB);
     }
 
 }

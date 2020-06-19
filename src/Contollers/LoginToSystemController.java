@@ -147,7 +147,16 @@ public class LoginToSystemController extends BasicController {
                 Toast.makeText(mainProjectFX.mainStage,"Welcome to MyFuel "+getFullUserNameByUserId(temp),1000,1500,1500,40,380);
                 break;
             case "COMPANY_MANAGER":
-
+                buttonNameArrayList.add("Company manager");
+                temp = myBoundary.getUserIDTextField().getText();
+                buttonNameArrayList.add(temp);
+                buttonNameArrayList.add(getFullUserNameByUserId(temp));
+                buttonNameArrayList.add(getFuelCompanyBuUserID(temp));
+                //
+                buttonNameArrayList.add("CONFIRM_DISCOUNT_RATES_PAGE");
+                buttonNameArrayList.add("VIEW_REPORTS_PAGE");
+                //
+                Toast.makeText(mainProjectFX.mainStage,"Welcome to MyFuel "+getFullUserNameByUserId(temp),1000,1500,1500,40,380);
                 break;
             case "STATION_MANAGER":
                 buttonNameArrayList.add("Station manager");
@@ -157,6 +166,7 @@ public class LoginToSystemController extends BasicController {
                 buttonNameArrayList.add(getFuelCompanyBuUserID(temp));
                 //
                 buttonNameArrayList.add("GENERATING_REPORTS_STATION_MANAGER_PAGE");
+                buttonNameArrayList.add("MANAGER_SUPPLY_CONFIRMATION_PAGE");
                 buttonNameArrayList.add("FUEL_MANAGMENT_PAGE");
                 //
                 Toast.makeText(mainProjectFX.mainStage,"Welcome to MyFuel "+getFullUserNameByUserId(temp),1000,1500,1500,40,380);
@@ -168,6 +178,8 @@ public class LoginToSystemController extends BasicController {
                 buttonNameArrayList.add(getFullUserNameByUserId(temp));
                 buttonNameArrayList.add(getFuelCompanyBuUserID(temp));
                 buttonNameArrayList.add("RUN_MARKETING_CAMPAIGN_PAGE");
+                buttonNameArrayList.add("GENERATING_REPORTS_MARKETING_MANAGER_PAGE");
+                buttonNameArrayList.add("SETTING_DISCOUNT_RATES_PAGE");
                 buttonNameArrayList.add("VIEW_ANALITIC_DATA");
                 Toast.makeText(mainProjectFX.mainStage,"Welcome to MyFuel "+getFullUserNameByUserId(temp),1000,1500,1500,40,380);
                 break;

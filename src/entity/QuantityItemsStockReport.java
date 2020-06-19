@@ -32,4 +32,12 @@ public class QuantityItemsStockReport {
     public void setAvailableInventory(String availableInventory) {
         this.availableInventory = availableInventory;
     }
+
+    @Override
+    public String toString() {
+        return "\nQuantityItemsStockReport{" +
+                "fuelType='" + fuelType + '\'' +
+                ", availableInventory='" + availableInventory + '\'' +
+                '}';
+    }
 }

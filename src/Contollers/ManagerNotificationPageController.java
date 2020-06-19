@@ -7,7 +7,11 @@ import common.assets.SqlResult;
 import entity.ManagerNotifications;
 import javafx.application.Platform;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  * @author Adi Lampert
@@ -57,9 +61,10 @@ public class ManagerNotificationPageController extends BasicController {
 
     private ArrayList<ManagerNotifications> changeResultToOrder(SqlResult result) {
         for (ArrayList<Object> a : result.getResultData()) {
-            ManagerNotifications x = new ManagerNotifications((String)a.get(0));
+            ManagerNotifications x = new ManagerNotifications((String)a.get(0),(Integer)a.get(1));
             resultList.add(x);
         }
         return resultList;
     }
+
 }
