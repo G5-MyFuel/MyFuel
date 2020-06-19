@@ -29,8 +29,6 @@ public class ManagerSupplyConfirmationBoundary implements DataInitializable {
     private ObservableList<ManagerSupplyConfirmation> tableData;
     private String stationManagerID="";
 
-    //TODO: general station manager id
-
     @FXML
     private Button btnOverview;
 
@@ -78,6 +76,9 @@ public class ManagerSupplyConfirmationBoundary implements DataInitializable {
 
     @FXML
     private Text explanationTxt;
+
+    @FXML
+    private Text noOrdersTxt;
 
     @FXML
     private Text OrderNumberTxt;
@@ -138,6 +139,7 @@ public class ManagerSupplyConfirmationBoundary implements DataInitializable {
     @Override
     public void initData(Object data) {
         stationManagerID = (String) data;
+        myController.getOrdersFromDB(stationManagerID);
     }
 
     @Override
@@ -150,7 +152,7 @@ public class ManagerSupplyConfirmationBoundary implements DataInitializable {
         explanationTxt.setVisible(false);
         orderNumberField.setVisible(false);
         OrderNumberTxt.setVisible(false);
-        myController.getOrdersFromDB(stationManagerID);
+        noOrdersTxt.setVisible(false);
         System.out.println("Manager Supply Confirmation Page Is Open");
     }
 
@@ -163,6 +165,8 @@ public class ManagerSupplyConfirmationBoundary implements DataInitializable {
         tableData = FXCollections.observableArrayList(OrderArray);
         tableView.setEditable(true);
         tableView.setItems(tableData);
+        if(tableView.getItems().isEmpty())
+            noOrdersTxt.setVisible(true);
     }
 
     public void getDetailsFromTableView() {

@@ -95,6 +95,9 @@ public class OrderExecutionBoundary implements DataInitializable {
     private Text DoneMsgTxt;
 
     @FXML
+    private Text noOrdersTxt;
+
+    @FXML
     private ImageView checkBoxImage;
 
     @FXML
@@ -153,6 +156,7 @@ public class OrderExecutionBoundary implements DataInitializable {
         DoneBtn.setDisable(true);
         DoneMsgTxt.setVisible(false);
         OrderViewAnchorPane.setVisible(false);
+        noOrdersTxt.setVisible(false);
         myController.getOrdersFromDB();
         System.out.println("Order Execution Page Is Open");
     }
@@ -166,6 +170,8 @@ public class OrderExecutionBoundary implements DataInitializable {
         tableData = FXCollections.observableArrayList(OrderArray);
         tableView.setEditable(true);
         tableView.setItems(tableData);
+        if(tableView.getItems().isEmpty())
+            noOrdersTxt.setVisible(true);
     }
 
     /**
