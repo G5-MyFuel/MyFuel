@@ -63,7 +63,7 @@ public class ManagerNotificationPageController extends BasicController {
 
     private ArrayList<ManagerNotifications> changeResultToOrder(SqlResult result) {
         for (ArrayList<Object> a : result.getResultData()) {
-            ManagerNotifications x = new ManagerNotifications((String)a.get(0),(Integer)a.get(1));
+            ManagerNotifications x = new ManagerNotifications((String)a.get(0),(Integer)a.get(1),(String)a.get(2),(Integer) a.get(3));
             resultList.add(x);
         }
         return resultList;
