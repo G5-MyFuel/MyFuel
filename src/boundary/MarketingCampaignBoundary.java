@@ -10,7 +10,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
@@ -23,8 +22,8 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
- *  This class This department is responsible for controlling "MarketingCampaignFXML" page
- *Allows marketing manager to view current campaigns that are running and their dates
+ * This class This department is responsible for controlling "MarketingCampaignFXML" page
+ * Allows marketing manager to view current campaigns that are running and their dates
  * And running a new campaign by template existing on the system
  *
  * @author Hana Wiener
@@ -40,7 +39,7 @@ public class MarketingCampaignBoundary implements DataInitializable {
      */
     private String marketingManager;
     /**
-     *  For proper input testing
+     * For proper input testing
      */
     private FormValidation formValidation;
     /**
@@ -146,7 +145,7 @@ public class MarketingCampaignBoundary implements DataInitializable {
 
 
     /**
-     *  This method allows to save information sent when uploading the page (user id)
+     * This method allows to save information sent when uploading the page (user id)
      *
      * @param data - The data sent to the boundary
      */
@@ -158,7 +157,7 @@ public class MarketingCampaignBoundary implements DataInitializable {
     /**
      * This method initializes the variables, fields, and combo-boxes
      * What is initialized will appear when the screen is raised
-     *Initializes existing tables on the page - by sending a request
+     * Initializes existing tables on the page - by sending a request
      *
      * @param location
      * @param resources
@@ -182,9 +181,9 @@ public class MarketingCampaignBoundary implements DataInitializable {
 
 
     /**
-     *This method receives from the controller an array with the values obtained from the DB
+     * This method receives from the controller an array with the values obtained from the DB
      * And places them in the appropriate table of sales - saleOperationTableView
-     *
+     * <p>
      * * @param cosArray
      */
     public void setSalesTable(ArrayList<MarketingCampaign> cosArray) {
@@ -201,8 +200,8 @@ public class MarketingCampaignBoundary implements DataInitializable {
     }
 
     /**
-     *This method will only be activated if button "Add Sale" is pressed
-     *Makes the "Add Campaign window appear
+     * This method will only be activated if button "Add Sale" is pressed
+     * Makes the "Add Campaign window appear
      *
      * @param event
      */
@@ -216,16 +215,15 @@ public class MarketingCampaignBoundary implements DataInitializable {
         detailsPane.setVisible(true);
     }
 //////////////////////////////////////////////////////////////////////////////
+
     /**
-     *
      * @param event
      */
     @FXML
     void handleBtnRunSale(ActionEvent event) {
         if (ChooseTemplateCombo.getSelectionModel().isEmpty()) {
             ERRORnoTemplate.setVisible(true);
-        }
-         else {
+        } else {
             newSale = new MarketingCampaign(String.valueOf(myController.getSaleCounter() + 1), (String) ChooseTemplateCombo.getValue(), Date.valueOf(startDatePicker.getValue()),
                     Date.valueOf(endDatePicker.getValue()));
             // chack if sale can run in this dates:
@@ -233,20 +231,18 @@ public class MarketingCampaignBoundary implements DataInitializable {
         }
     }
 
-    public void setFlagSale(boolean flagSale)
-    {
+    public void setFlagSale(boolean flagSale) {
         this.flagSale = flagSale;
         System.out.println("set function");
 
         //flagSale = myController.getFlagSale();
-        if (flagSale==false) {
+        if (flagSale == false) {
             System.out.println("inside if");
             ERRORoverlap.setVisible(true);
             ERRORoverlap1.setVisible(true);
             startDatePicker.getEditor().clear();
             endDatePicker.getEditor().clear();
-        }
-        else {
+        } else {
             System.out.println("inside else");
             myController.setSaleOperationInDB(newSale);  //insert new sale to db
             myController.getSalesTable(); //refresh
@@ -260,6 +256,7 @@ public class MarketingCampaignBoundary implements DataInitializable {
             btnADDnewSaleOperation1.setVisible(true);
         }
     }
+
     /**
      * this method will set the templates list to the combo choose
      */
@@ -273,7 +270,8 @@ public class MarketingCampaignBoundary implements DataInitializable {
         ERRORnoTemplate.setVisible(false);
         choosenTemplate = ChooseTemplateCombo.getValue();
         //Query to get from the db the chosen template information:
-        myController.getChoosenTemplateDetails(); //start the process that will ask server to execute quarry and get the template details
+        if (!ChooseTemplateCombo.getSelectionModel().isEmpty())
+            myController.getChoosenTemplateDetails(); //start the process that will ask server to execute quarry and get the template details
 
         btnRunSaleOperation.setDisable(false);
         this.templateDetaildVBOX.setVisible(true);
@@ -303,7 +301,7 @@ public class MarketingCampaignBoundary implements DataInitializable {
         ERRORoverlap.setVisible(false);
         ERRORoverlap1.setVisible(false);
         //cant choose date before today:
-        if (startDatePicker.getValue().isBefore(java.time.LocalDate.now()) == true ) {
+        if (startDatePicker.getValue().isBefore(java.time.LocalDate.now()) == true) {
             ERRORalreadyPassedDate.setVisible(true);
         }
     }
@@ -335,7 +333,7 @@ public class MarketingCampaignBoundary implements DataInitializable {
 
     private void FormValidation() {
         /*  Template Date validation */ //not work so well
-      //  formValidation.isEmptyDateField(startDatePicker, "Start Date");
+        //  formValidation.isEmptyDateField(startDatePicker, "Start Date");
         //formValidation.isEmptyDateField(endDatePicker, "End Date");
 
 
