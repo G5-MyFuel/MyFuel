@@ -31,7 +31,7 @@
                      <content>
                         <AnchorPane>
                            <children>
-                              <Pane layoutX="-2.0" layoutY="6.0" prefHeight="662.0" prefWidth="1054.0" style="-fx-background-color: white;" stylesheets="@BGcss.css" AnchorPane.bottomAnchor="-87.0" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="-54.0" AnchorPane.topAnchor="6.0">
+                              <Pane layoutX="-2.0" layoutY="6.0" style="-fx-background-color: white;" stylesheets="@BGcss.css">
                                  <children>
                                     <Label layoutX="14.0" layoutY="29.0" style="-fx-background-color: #f2f2f2; -fx-opacity: 1; -fx-background-radius: 30;" text="Costumers Table">
                                        <font>

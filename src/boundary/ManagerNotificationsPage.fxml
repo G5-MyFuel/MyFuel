@@ -15,7 +15,7 @@
 
 <Pane prefHeight="796.0" prefWidth="1062.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundary.ManagerNotificationsPageBoundary">
    <children>
-      <ImageView fitHeight="400.0" fitWidth="500.0" layoutX="475.0" layoutY="222.0">
+      <ImageView fitHeight="362.0" fitWidth="500.0" layoutX="475.0" layoutY="222.0">
          <image>
             <Image url="@../media/icons/notifi.gif" />
          </image>

@@ -41,7 +41,7 @@ public class CostumerManagmentTablePageBoundary implements DataInitializable {
 
 
     private ArrayList<Vehicle> Vehicles = new ArrayList<>();
-    private ArrayList<Costumer> costumers = new ArrayList<Costumer>();
+    private ArrayList<Costumer> costumers = new ArrayList<>();
     private Alert ErrorAlert = new Alert(Alert.AlertType.ERROR);
     private Costumer cos;
     private FormValidation formValidation;
@@ -443,6 +443,8 @@ public class CostumerManagmentTablePageBoundary implements DataInitializable {
                 myController.removeVehicle(VehicleTable.getSelectionModel().getSelectedItem().getVehicleID());
                 Vehicle selectedItem = VehicleTable.getSelectionModel().getSelectedItem();
                 VehicleTable.getItems().remove(selectedItem);
+                Costumer cos = searchCostumerWithID(OwnerIDtxt1.getText());
+                cos.getCostumerVehicle().remove(selectedItem); //TODO: have to check why vehicle array does not contain vehicle item from tbale
                 if (VehicleTable.getItems().size() <= 1) {
                     ArrayList<Object> obj = new ArrayList<>();
                     obj.add("single");

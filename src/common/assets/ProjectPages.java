@@ -36,7 +36,7 @@ public enum ProjectPages {
 
     MANAGER_SUPPLY_CONFIRMATION_PAGE("/boundary/Manager-Supply-confirmation-adi.fxml"),
     SUPPLY_ORDER_EXECUTION("/boundary/supplierOrderExecution.fxml"),
-    MANAGER_NOTIFICATION_PAGE("/boundary/ManagerNotificationPage.fxml");
+    MANAGER_NOTIFICATION_PAGE("/boundary/ManagerNotificationsPage.fxml");
 
     private String path;
 

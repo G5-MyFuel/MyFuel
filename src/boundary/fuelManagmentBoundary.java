@@ -20,12 +20,12 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+
 /**
  * the class fuel Management Boundary
  *
  * @author Itay Ziv
  * @see fuelManagmentBoundary - the form's Boundary class
- *
  */
 
 public class fuelManagmentBoundary implements DataInitializable {
@@ -87,26 +87,28 @@ public class fuelManagmentBoundary implements DataInitializable {
 
     @FXML
     void confirmFunction(MouseEvent event) {
-        Double limit  = Double.parseDouble(newStockLimitArea.getText());
-        Double gas = Double.parseDouble(gasoliseAmount.getText());
-        Double disel = Double.parseDouble(diselAmount.getText());
-        Double scooter = Double.parseDouble(scooterAmount.getText());
-        Double max = Math.max(gas,disel);
-        max = Math.max(scooter,max);
-        if(limit > max){
-            primStage.setAlwaysOnTop(false);
-            ErrorAlert.setTitle("Field Error");
-            ErrorAlert.setHeaderText("Stock limit must be lower then fuel stock");
-            ErrorAlert.showAndWait();
-            primStage.setAlwaysOnTop(true);
-        }else if (myValidator.isEmptyField() && myValidator.isOnlyNumbers()&& !myValidator.isNumberPositive()) {
-            myController.updateFuelLimit(Double.parseDouble(newStockLimitArea.getText()), currectStationNumber);
-        } else {
+        if (!(myValidator.isEmptyField() && myValidator.isOnlyNumbers() && !myValidator.isNumberPositive())) {
             primStage.setAlwaysOnTop(false);
             ErrorAlert.setTitle("Field Error");
             ErrorAlert.setHeaderText("Stock limit field error.");
             ErrorAlert.showAndWait();
             primStage.setAlwaysOnTop(true);
+        } else {
+            Double limit = Double.parseDouble(newStockLimitArea.getText());
+            Double gas = Double.parseDouble(gasoliseAmount.getText());
+            Double disel = Double.parseDouble(diselAmount.getText());
+            Double scooter = Double.parseDouble(scooterAmount.getText());
+            Double max = Math.max(gas, disel);
+            max = Math.max(scooter, max);
+            if (limit > max) {
+                primStage.setAlwaysOnTop(false);
+                ErrorAlert.setTitle("Field Error");
+                ErrorAlert.setHeaderText("Stock limit must be lower then fuel stock");
+                ErrorAlert.showAndWait();
+                primStage.setAlwaysOnTop(true);
+            } else
+                myController.updateFuelLimit(Double.parseDouble(newStockLimitArea.getText()), currectStationNumber);
+
         }
     }
 
