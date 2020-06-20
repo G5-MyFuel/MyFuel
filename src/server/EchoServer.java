@@ -1,9 +1,17 @@
 package server;
 
 import common.assets.SqlAction;
+import common.assets.SqlFileAction;
 import common.assets.SqlResult;
+import entity.MyFile;
 import ocsf.server.AbstractServer;
 import ocsf.server.ConnectionToClient;
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.math.BigInteger;
+import java.util.ArrayList;
 
 public class EchoServer extends AbstractServer {
     // Class variables *************************************************
@@ -11,7 +19,7 @@ public class EchoServer extends AbstractServer {
      * The default port to listen on.
      */
     final public static int DEFAULT_PORT = 5555;
-    final public static String FILLE_DIRECTORY = "C:\\the place we store the fiels.\\";
+    final public static String FILLE_DIRECTORY = "C:\\Users\\itay_\\IdeaProjects\\MyFuel\\src\\server\\serverFiles";
     public static int portNumber = 0;
 
     // Constructors ****************************************************
@@ -42,38 +50,49 @@ public class EchoServer extends AbstractServer {
 
         System.out.println("Message received: " + sqlAction.getActionType() + " from " + client);
 
-//        /* If it is a file request also upload it to the server */
-//        if (msg instanceof SqlFileAction) {
-//            SqlFileAction sqlFileAction = (SqlFileAction) msg;
-//            if (sqlFileAction.getUpload() == true) {
-//                MyFile uploadedFile = sqlFileAction.getMyFile();
-//                int fileIndex = ((BigInteger) (sqlResult.getResultData().get(0).get(0))).intValue();
-//                String fileExtension = (String) sqlFileAction.getActionVars().get(1);
-//                String filePath = FILLE_DIRECTORY + fileIndex + "." + fileExtension;
-//
-//                System.out.println("File path is: " + filePath);
-//                try (FileOutputStream fileOuputStream = new FileOutputStream(filePath)) {
-//                    fileOuputStream.write(uploadedFile.getMybytearray());
-//                } catch (FileNotFoundException e) {
-//                    e.printStackTrace();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        } else {
-//            ArrayList<Object> newResultData = new ArrayList<Object>();
-//            /* Create my file from path */
-//            if (!sqlResult.getResultData().isEmpty()) {
-//                for (ArrayList<Object> resultRow : sqlResult.getResultData()) {
-//                    String fileName = ((Integer) resultRow.get(0)).toString();
-//                    String fileExtension = (String) resultRow.get(1);
-//                    String path = FILLE_DIRECTORY + fileName + "." + fileExtension;
-//                    MyFile myFile = MyFile.parseToMyFile(path);
-//                    newResultData.add(myFile);
-//                }
-//            }
-//            sqlResult.setResultData(newResultData);
-//        }
+        /* If it is a file request also upload it to the server */
+        if(msg instanceof SqlFileAction)
+        {
+            SqlFileAction sqlFileAction = (SqlFileAction)msg;
+            if (sqlFileAction.getUpload() == true)
+            {
+                MyFile uploadedFile = sqlFileAction.getMyFile();
+                int fileIndex = ((BigInteger) (sqlResult.getResultData().get(0).get(0))).intValue();
+                String fileExtension = (String)sqlFileAction.getActionVars().get(1);
+                String filePath = FILLE_DIRECTORY+fileIndex+"."+fileExtension;
+
+                System.out.println("File path is: " + filePath);
+                try (FileOutputStream fileOuputStream = new FileOutputStream(filePath))
+                {
+                    fileOuputStream.write(uploadedFile.getMybytearray());
+                }
+                catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+                catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            else
+            {
+                ArrayList<Object> newResultData = new ArrayList<Object>();
+                /* Create my file from path */
+                if (!sqlResult.getResultData().isEmpty())
+                {
+                    for(ArrayList<Object> resultRow : sqlResult.getResultData())
+                    {
+                        String fileName = ((Integer)resultRow.get(0)).toString();
+                        String fileExtension = (String)resultRow.get(1);
+                        String path = FILLE_DIRECTORY+fileName+"."+fileExtension;
+                        MyFile myFile = MyFile.parseToMyFile(path);
+                        newResultData.add(myFile);
+                    }
+
+                }
+                sqlResult.setResultData(newResultData);
+            }
+        }
+
 
         this.sendToClient(sqlResult, client);
 

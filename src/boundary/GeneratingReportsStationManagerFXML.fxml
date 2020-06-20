@@ -46,17 +46,17 @@
       </JFXButton>
       <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="770.0" layoutY="140.0" onMouseClicked="#handleQuantityItemsInStockReport">
          <image>
-            <Image url="@../media/GeneratingReports/items.jpeg" />
+            <Image url="@../media/GeneratingReports/items.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="453.0" layoutY="140.0" onMouseClicked="#handlePurchasesReport">
          <image>
-            <Image url="@../media/GeneratingReports/moneyBag.jpeg" />
+            <Image url="@../media/GeneratingReports/moneyBag.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="96.0" layoutY="140.0" onMouseClicked="#handleQuarterlyRevenueReport">
          <image>
-            <Image url="@../media/GeneratingReports/purches.jpeg" />
+            <Image url="@../media/GeneratingReports/purches.png" />
          </image>
       </ImageView>
       <ImageView fx:id="quartInfo" fitHeight="25.0" fitWidth="25.0" layoutX="27.0" layoutY="363.0" pickOnBounds="true" preserveRatio="true">
