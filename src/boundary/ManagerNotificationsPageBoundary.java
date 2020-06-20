@@ -73,7 +73,7 @@ public class ManagerNotificationsPageBoundary implements DataInitializable {
         ManagerNotifications temp = tableView.getSelectionModel().getSelectedItem();
         myController.setNewStatus(temp.getOrderNumber());
         tableView.getItems().remove(temp);
-        Toast.makeText(mainProjectFX.mainStage, "Deleted.", 1000, 1500, 1500, 300, 600);
+        Toast.makeText(mainProjectFX.mainStage, "Deleted", 1000, 1500, 1500, 150, 700);
     }
 
     @FXML
