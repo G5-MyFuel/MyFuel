@@ -43,8 +43,8 @@ public class SettingDiscountRatesBoundary implements DataInitializable {
     @FXML
     private Label RequestSentMessageLabel;
 
-    private final ObservableList<String> SubscriptionType = FXCollections.observableArrayList("Regular monthly subscription - single vehicle",
-            "Full monthly subscription (for single vehicle)", "Regular monthly subscription - number of vehicles");
+    private final ObservableList<String> SubscriptionType = FXCollections.observableArrayList("Regular monthly subscription (single)",
+            "Full monthly subscription", "Regular monthly subscription (multiple)");
 
     @Override
     public void initData(Object data) {
