@@ -93,6 +93,7 @@ public class ManagerSupplyConfirmationBoundary implements DataInitializable {
         else SendBtn.setDisable(true);
     }
 
+    /** When we click "Send" - update status in DB so the supplier can see **/
     @FXML
     void clickSendBtn(MouseEvent event) {
         ManagerSupplyConfirmation temp = tableView.getSelectionModel().getSelectedItem();
@@ -152,6 +153,7 @@ public class ManagerSupplyConfirmationBoundary implements DataInitializable {
         noOrdersTxt.setVisible(false);
     }
 
+    /** Show detail in tableView and check if its empty **/
     public void setOrderForManagerTableView(ArrayList<ManagerSupplyConfirmation> OrderArray) {
         OrderCol.setCellValueFactory(new PropertyValueFactory<>("OrderNumber"));
         CompanyCol.setCellValueFactory(new PropertyValueFactory<>("companyName"));
@@ -165,6 +167,7 @@ public class ManagerSupplyConfirmationBoundary implements DataInitializable {
             noOrdersTxt.setVisible(true);
     }
 
+    /** This function works when we press an order in tableView - show different things depends on Order status **/
     public void getDetailsFromTableView() {
         tableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override

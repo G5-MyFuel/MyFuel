@@ -66,7 +66,7 @@ public class ManagerNotificationsPageBoundary implements DataInitializable {
     private Label QuantityField;
 
     /**
-     * After the manager saw his notifications- change the status in DB to viewed and clean the tableView
+     * After the manager saw his notifications- change the status in DB to "viewed" and clean the notification from tableView
      **/
     @FXML
     void clickCleanBtn(MouseEvent event) {
@@ -104,7 +104,7 @@ public class ManagerNotificationsPageBoundary implements DataInitializable {
         noNotificationTxt.setVisible(false);
         explanationTxt.setVisible(false);
     }
-
+    /** Show details in tableView **/
     public void setOrdersInTableView(ArrayList<ManagerNotifications> OrderArray) {
         OrderCol.setCellValueFactory(new PropertyValueFactory<>("OrderNumber"));
         StationCol.setCellValueFactory(new PropertyValueFactory<>("StationNumber"));
@@ -119,6 +119,7 @@ public class ManagerNotificationsPageBoundary implements DataInitializable {
         else explanationTxt.setVisible(true);
     }
 
+    /** This function works when we press an order on tableView and show details **/
     public void getOrderClick() {
         tableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
