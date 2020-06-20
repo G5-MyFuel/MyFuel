@@ -128,7 +128,9 @@ public class ConfirmDiscountRatesBoundary implements DataInitializable {
         } else {
             NoNewRatePendingLabel.setVisible(false);
             TableSubscriptionType.setVisible(true);
+            btnApprovedRates.setDisable(true);
             btnApprovedRates.setVisible(true);
+            btnRemoveNewRate.setDisable(true);
             btnRemoveNewRate.setVisible(true);
             InstructionsLabel.setVisible(true);
             TableSubscriptionType.setItems(data);
@@ -142,10 +144,9 @@ public class ConfirmDiscountRatesBoundary implements DataInitializable {
         btnRemoveNewRate.setDisable(true);
         sendDiscountRates.clear();
         ArrayList<DiscountRate> discountArray = new ArrayList<DiscountRate>(TableSubscriptionType.getSelectionModel().getSelectedItems());
-        System.out.println(discountArray);
-        System.out.println(TableSubscriptionType.getSelectionModel().getSelectedItems());
+        //System.out.println(discountArray);
+        //System.out.println(TableSubscriptionType.getSelectionModel().getSelectedItems());
         sendDiscountRates.addAll(discountArray);
-
         System.out.println(discountArray.size());
         if (discountArray.size() > 0) {
             btnApprovedRates.setDisable(false);

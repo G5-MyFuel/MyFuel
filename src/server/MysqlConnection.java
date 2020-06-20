@@ -303,9 +303,9 @@ public class MysqlConnection {
          * *****************************************/
         sqlArray[SqlQueryType.Get_DiscountRates_Table.getCode()] = "SELECT * FROM `DiscountRates` WHERE `NewDiscountRate` != \"-\" AND `companyName` = ?";
         sqlArray[SqlQueryType.UPDATE_NEW_DiscountRate.getCode()] = "UPDATE `DiscountRates` " +
-                "SET `CurrentDiscountRate`= `NewDiscountRate`, `Status`= \"Approved\",`NewDiscountRate`= \"-\" AND `companyName` = ? WHERE `Subscription type` = ?";
+                "SET `CurrentDiscountRate`= `NewDiscountRate`, `Status`= \"Approved\",`NewDiscountRate`= \"-\" WHERE `Subscription type` = ? AND `companyName` = ?";
         sqlArray[SqlQueryType.Remove_NEW_DiscountRate.getCode()] = "UPDATE `DiscountRates` " +
-                "SET `Status`= \"Approved\",`NewDiscountRate`= \"-\" AND `companyName` = ? WHERE `Subscription type` = ?";
+                "SET `Status`= \"Approved\",`NewDiscountRate`= \"-\" WHERE `Subscription type` = ? AND `companyName` = ?";
 
         /* *****************************************
          * ********** Marketing Manager Reports Queries ****************
