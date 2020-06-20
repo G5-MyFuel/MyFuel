@@ -48,6 +48,10 @@ public class SettingDiscountRatesController extends BasicController {
                 sqlAction = new SqlAction(SqlQueryType.INSERT_NEW_PRICE, varArray);
                 super.sendSqlActionToClient(sqlAction);
                 break;
+            case "Get Manager data":
+                sqlAction = new SqlAction(SqlQueryType.GET_Manager_Data, varArray);
+                super.sendSqlActionToClient(sqlAction);
+                break;
             default:
                 break;
         }
@@ -66,6 +70,9 @@ public class SettingDiscountRatesController extends BasicController {
     public void getResultFromClient(SqlResult result) {
         Platform.runLater(() -> {
             switch (result.getActionType()) {
+                case GET_Manager_Data:
+                    myBoundary.setManagerData(this.changeResultToManagerData(result));
+                    break;
                 case GET_RegularSubscriptionSingleVehicle_PRICE:
                     myBoundary.setData(this.changeResultToString(result));
                     break;
@@ -97,5 +104,16 @@ public class SettingDiscountRatesController extends BasicController {
         //a = result.getResultData().get(0);
         revenue = (String) a.get(1);    //Saves second column from a to revenue (get(1))
         return revenue;
+    }
+
+    private ArrayList<String> changeResultToManagerData(SqlResult result) {
+
+        ArrayList<String> resultList = new ArrayList<>();
+
+        for (ArrayList<Object> a : result.getResultData()) {
+            resultList.add((String) a.get(1));
+            resultList.add((String) a.get(2));
+        }
+        return resultList;
     }
 }

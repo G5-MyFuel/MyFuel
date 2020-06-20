@@ -19,6 +19,9 @@ import java.util.ResourceBundle;
 
 public class SettingDiscountRatesBoundary implements DataInitializable {
 
+    String managerID;
+    String managerCompany;
+    String managerStation;
     /**
      * The supervisor boundary controller.
      */
@@ -47,15 +50,24 @@ public class SettingDiscountRatesBoundary implements DataInitializable {
     @Override
     public void initData(Object data) {
 
+        this.managerID = (String) data;
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        //managerID = "109268386";
+        ArrayList<String> paramArray = new ArrayList<>();
+        System.out.println(managerID);
+        paramArray.add("Get Manager data");
+        paramArray.add(managerID);
+        myController.getDiscountRatesTable(paramArray); //start the process that will ask server to execute quarry and get the table details
         this.formValidation = new FormValidation();
         ChooseSubscriptionTypeCombo.setItems(SubscriptionType);
         ShowCurrentRateTXT.setVisible(false);
         ShowNewRateTXT.setVisible(false);
         btnSetNewRate.setVisible(false);
+        RequestSentMessageLabel.setVisible(false);
 
         /*  set all fields validators */
         formValidation();
@@ -67,10 +79,17 @@ public class SettingDiscountRatesBoundary implements DataInitializable {
 
         //formValidation.isContainsOnlyNumbers(ShowNewRateTXT, "New price");
         //formValidation.numberPositiveValidation(ShowNewRateTXT, "New price");
-        formValidation.isEmptyFieldValidation(ShowNewRateTXT, "New price");
         //formValidation.maxLengthValidation(ShowNewRateTXT, "New price", 3);
+        /*formValidation.isEmptyFieldValidation(ShowNewRateTXT, "New price");
         formValidation.maxFloatSizeValidation(ShowNewRateTXT, "New price", 100);
-        formValidation.minFloatSizeValidation(ShowNewRateTXT, "New price", 0);
+        formValidation.minFloatSizeValidation(ShowNewRateTXT, "New price", 0);*/
+    }
+
+    public void setManagerData(ArrayList<String> resultList) {
+
+        System.out.println(managerCompany);
+        managerCompany = resultList.get(0);
+        managerStation = resultList.get(1);
     }
 
     @FXML
@@ -78,6 +97,7 @@ public class SettingDiscountRatesBoundary implements DataInitializable {
 
         ArrayList<String> paramArray = new ArrayList<>();
         paramArray.add(ChooseSubscriptionTypeCombo.getValue());
+        paramArray.add(managerCompany);
         myController.getDiscountRatesTable(paramArray); //start the process that will ask server to execute quarry and get the table details
         ShowNewRateTXT.clear();
         ShowCurrentRateTXT.setVisible(true);
@@ -110,6 +130,7 @@ public class SettingDiscountRatesBoundary implements DataInitializable {
             paramArray.add("Insert NewRate");
             paramArray.add(ShowNewRateTXT.getText());
             paramArray.add(ChooseSubscriptionTypeCombo.getValue());
+            paramArray.add(managerCompany);
             System.out.println(paramArray);
             myController.getDiscountRatesTable(paramArray); //start the process that will ask server to execute quarry and get the table details
             RequestSentMessageLabel.setVisible(true);
