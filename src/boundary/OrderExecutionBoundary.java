@@ -123,7 +123,7 @@ public class OrderExecutionBoundary implements DataInitializable {
     void handleRefresh(ActionEvent event) {
 
     }
-
+    /** When we click "Done" - update status in DB and tableView **/
     @FXML
     void ClickDoneBtn(MouseEvent event) {
         EmailHandler sender = new EmailHandler();
@@ -217,19 +217,6 @@ public class OrderExecutionBoundary implements DataInitializable {
                 QuantityField.setText(temp.getQuantity().toString());
             }
         });
-    }
-
-    /**
-     * Update the inventory after the supplier confirm
-     *
-     */
-    public void addToStock(int quantity, String fuelType, int stationNumber, String managerID) {
-        if (fuelType.equals("Gasoline95"))
-            myController.setNewInventory95(quantity, managerID, stationNumber);
-        else if (fuelType.equals("diesel"))
-            myController.setNewInventoryDiesel(quantity, managerID, stationNumber);
-        else if (fuelType.equals("scooterFuel"))
-            myController.setNewInventoryScooter(quantity, managerID, stationNumber);
     }
 
 }
