@@ -78,12 +78,12 @@ public class ManagerNotificationsPageBoundary implements DataInitializable {
     @Override
     public void initData(Object data) {
         this.ManagerID = (String) data;
+        myController.getOrdersFromDB();
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         CleanBtn.setDisable(true);
-        myController.getOrdersFromDB();
         System.out.println("Notifications Page Is Open");
     }
 
@@ -110,7 +110,7 @@ public class ManagerNotificationsPageBoundary implements DataInitializable {
     /**
      * Function to update the amount of the manager's notifications every 5 minutes
      */
-    private void notificationFunction() {
+    /*private void notificationFunction() {
         int AmountOfNotifi = tableView.getItems().size();
         Thread notifi = new Thread() {
             public void run() {
@@ -126,5 +126,5 @@ public class ManagerNotificationsPageBoundary implements DataInitializable {
             }
         };
         notifi.start();
-    }
+    }*/
 }

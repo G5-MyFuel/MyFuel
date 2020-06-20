@@ -168,6 +168,7 @@ public class LoginToSystemController extends BasicController {
                 buttonNameArrayList.add("GENERATING_REPORTS_STATION_MANAGER_PAGE");
                 buttonNameArrayList.add("MANAGER_SUPPLY_CONFIRMATION_PAGE");
                 buttonNameArrayList.add("FUEL_MANAGMENT_PAGE");
+                buttonNameArrayList.add("MANAGER_NOTIFICATION_PAGE");
                 //
                 Toast.makeText(mainProjectFX.mainStage,"Welcome to MyFuel "+getFullUserNameByUserId(temp),1000,1500,1500,40,380);
                 break;

@@ -301,6 +301,22 @@ public class generalDashBoardBoundary implements DataInitializable {
                     });
                     break;
 
+                /*case "MANAGER_NOTIFICATION_PAGE":
+                    image = new Image(getClass().getResourceAsStream("../media/ButtonsDashBoardMedia/rec.png"));
+                    imageView = new ImageView(image);
+                    imageView.setFitHeight(30);
+                    imageView.setFitWidth(30);
+                    currentBtn.setGraphic(imageView);
+                    currentBtn.setText("Notifications");
+                    button2.setVisible(false);
+                    currentBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent event) {
+                            MANAGER_NOTIFICATION_PAGE();
+                        }
+                    });
+                    break;*/
+
                 case "FUEL_MANAGMENT_PAGE":
                     image = new Image(getClass().getResourceAsStream("../media/ButtonsDashBoardMedia/fuelManagement.png"));
                     imageView = new ImageView(image);
@@ -438,6 +454,14 @@ public class generalDashBoardBoundary implements DataInitializable {
         currentPagePane.getChildren().clear();
         currentPagePane.getStylesheets().add("../boudary/BGcss.css");
         currentPagePane.getChildren().setAll(mainProjectFX.pagingController.loadBoundaryInPane(ProjectPages.MANAGER_SUPPLY_CONFIRMATION_PAGE.getPath(), userID));
+        myFuelLogo.setVisible(false);
+    }
+
+    void MANAGER_NOTIFICATION_PAGE() {
+        currentPagePane.setVisible(true);
+        currentPagePane.getChildren().clear();
+        currentPagePane.getStylesheets().add("../boudary/BGcss.css");
+        currentPagePane.getChildren().setAll(mainProjectFX.pagingController.loadBoundaryInPane(ProjectPages.MANAGER_NOTIFICATION_PAGE.getPath(), userID));
         myFuelLogo.setVisible(false);
     }
 
