@@ -145,6 +145,7 @@ public class SettingDiscountRatesBoundary implements DataInitializable {
             paramArray.add(ChooseSubscriptionTypeCombo.getValue());
             paramArray.add(managerCompany);
             myController.getDiscountRatesTable(paramArray); //start the process that will ask server to execute quarry and get the table details
+            ShowNewRateTXT.clear();
             RequestSentMessageLabel.setVisible(true);
         }
     }
@@ -157,5 +158,9 @@ public class SettingDiscountRatesBoundary implements DataInitializable {
     @FXML
     void handleShowNewRate(ActionEvent event) {
 
+        if(ShowNewRateTXT.getText().equals(""))
+            btnSetNewRate.setVisible(false);
+        else
+            btnSetNewRate.setVisible(true);
     }
 }
