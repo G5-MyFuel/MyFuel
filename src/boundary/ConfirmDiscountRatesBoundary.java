@@ -102,6 +102,7 @@ public class ConfirmDiscountRatesBoundary implements DataInitializable {
         //formValidation.maxLengthValidation(ShowNewRateTXT, "New price", 3);
         formValidation.maxSizeValidation(ShowNewRateTXT, "New price", 100);
         formValidation.minSizeValidation(ShowNewRateTXT, "New price", 1);
+        fsdfvsd
         */
 
     }
