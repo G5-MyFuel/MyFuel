@@ -165,6 +165,7 @@ public class MarketingCampaignBoundary implements DataInitializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        System.out.println("******************************************");
         this.detailsPane.setVisible(false);
         ERRORalreadyPassedDate.setVisible(false);
         ERRORendBeforStart.setVisible(false);
@@ -227,7 +228,7 @@ public class MarketingCampaignBoundary implements DataInitializable {
          else {
             newSale = new MarketingCampaign(String.valueOf(myController.getSaleCounter() + 1), (String) ChooseTemplateCombo.getValue(), Date.valueOf(startDatePicker.getValue()),
                     Date.valueOf(endDatePicker.getValue()));
-            // chack if sale can run is this dates:
+            // chack if sale can run in this dates:
             myController.chackIfSaleCanRun(newSale);
         }
     }
