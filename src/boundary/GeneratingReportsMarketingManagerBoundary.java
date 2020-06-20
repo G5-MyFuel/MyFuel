@@ -30,6 +30,7 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
 
     String managerID;
     String managerCompany;
+    String managerStation;
 
     /**
      * The supervisor boundary controller.
@@ -98,16 +99,17 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
     @FXML
     private Label ERRORnoOperation;
 
-    @Override
-    public void initData(Object data) {
-
-    }
-
     private final ObservableList<String> ReportsType = FXCollections.observableArrayList("Comments Report for Marketing Campaign",
             "Customer Periodic Characterization Report");
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initData(Object data) {
+
+        this.managerID = (String) data;
+        ArrayList<String> paramArray = new ArrayList<>();
+        paramArray.add("Get Manager data");
+        paramArray.add(managerID);
+        myController.GetReportData(paramArray); //start the process that will ask server to execute quarry and get the table details
 
         this.formValidation = FormValidation.getValidator();
 
@@ -136,6 +138,17 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
 
         /*  set all fields validators */
         formValidation();
+    }
+
+    public void setManagerData(ArrayList<String> resultList) {
+
+        managerCompany = resultList.get(0);
+        managerStation = resultList.get(1);
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
     }
 
     private void formValidation() {
