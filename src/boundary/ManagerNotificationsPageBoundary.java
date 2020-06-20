@@ -78,7 +78,7 @@ public class ManagerNotificationsPageBoundary implements DataInitializable {
     @Override
     public void initData(Object data) {
         this.ManagerID = (String) data;
-        myController.getOrdersFromDB();
+        myController.getOrdersFromDB(ManagerID);
     }
 
     @Override

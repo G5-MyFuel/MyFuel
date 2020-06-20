@@ -29,8 +29,10 @@ public class ManagerNotificationPageController extends BasicController {
     /**
      To get all the orders with status "Done" to show the manager that the order arrived
      */
-    public void getOrdersFromDB() {
-        SqlAction sqlAction = new SqlAction(SqlQueryType.GET_ALL_ORDER_WITH_STATUS_DONE);
+    public void getOrdersFromDB(String managerID) {
+        ArrayList<Object> varArray= new ArrayList<>();
+        varArray.add(managerID);
+        SqlAction sqlAction = new SqlAction(SqlQueryType.GET_ALL_ORDER_WITH_STATUS_DONE,varArray);
         super.sendSqlActionToClient(sqlAction);
     }
 
