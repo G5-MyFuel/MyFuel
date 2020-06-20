@@ -201,6 +201,11 @@ public class generalDashBoardBoundary implements DataInitializable {
                     break;
 
                 case "CONFIRM_DISCOUNT_RATES_PAGE":
+                    image = new Image(getClass().getResourceAsStream("../media/ButtonsDashBoardMedia/discountRatesBtn.png"));
+                    imageView = new ImageView(image);
+                    imageView.setFitHeight(30);
+                    imageView.setFitWidth(30);
+                    currentBtn.setGraphic(imageView);
                     currentBtn.setText("Confirm discount rates");
                     currentBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
                         @Override
