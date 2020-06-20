@@ -212,7 +212,7 @@ public class CustomerRegistrationBoundary implements DataInitializable {
             ErrorAlert.showAndWait();
         } else {//build costumer
             Costumer costumer = new Costumer(CostumerIDtxt.getText(), CostumerIDtxt.getText(), "", FirstNametxt.getText(),
-                    LastNametxt.getText(), EmailAdresstxt.getText(), null, "",  null);
+                    LastNametxt.getText(), EmailAdresstxt.getText(), null, "", null);
             if (CardClickFlag) {
                 costumer.setCostumerCreditCard(tempCreditCard);
                 if (tempCreditCard != null)
@@ -257,7 +257,12 @@ public class CustomerRegistrationBoundary implements DataInitializable {
 
         tempCos.setCostumerVehicle(tempVehicleArray);
         tempCos.setCostumerCreditCard(tempCreditCard);
-        if (tempCos.getPurchasePlan().equals("Exclusive")) {
+
+        if (CostumertypeChoiceBox.getSelectionModel().isEmpty() || PurchasePlanChoiseBox.getSelectionModel().isEmpty() || PricingModelChoiseBox1.getSelectionModel().isEmpty()) {
+            ErrorAlert.setTitle("Internal Error");
+            ErrorAlert.setHeaderText("One or more of the fields is empty.");
+            ErrorAlert.showAndWait();
+        } else if (tempCos.getPurchasePlan().equals("Exclusive")) {
             if (YELLOWbtn.isSelected())
                 stations.add(0, "YELLOW");
             if (PAZbtn.isSelected())
@@ -282,24 +287,19 @@ public class CustomerRegistrationBoundary implements DataInitializable {
                 ErrorAlert.setTitle("Internal Error");
                 ErrorAlert.setHeaderText("Your plan is Multiple Stations.\nplease select 2 or 3 stations.");
                 ErrorAlert.showAndWait();
-                flag = true;
+            } else {
+                //set costumer final details.
+                tempCos.setCostumerType(CostumertypeChoiceBox.getSelectionModel().getSelectedItem());
+                tempCos.setPurchasePlan(PurchasePlanChoiseBox.getSelectionModel().getSelectedItem());
+                tempCos.setPricingModel(PricingModelChoiseBox1.getValue());
+                tempCos.setFuelCompany(stations);
+                myController.setCostumerInDB(tempCos);
+                planInfoAnchorPane.setVisible(false);
+                loadingImg.setVisible(true);
             }
-        }
-        if (flag || CostumertypeChoiceBox.getSelectionModel().isEmpty() || PurchasePlanChoiseBox.getSelectionModel().isEmpty() || PricingModelChoiseBox1.getSelectionModel().isEmpty()) {
-            ErrorAlert.setTitle("Internal Error");
-            ErrorAlert.setHeaderText("One or more of the fields is empty.");
-            ErrorAlert.showAndWait();
-        } else {
-            //set costumer final details.
-            tempCos.setCostumerType(CostumertypeChoiceBox.getSelectionModel().getSelectedItem());
-            tempCos.setPurchasePlan(PurchasePlanChoiseBox.getSelectionModel().getSelectedItem());
-            tempCos.setPricingModel(PricingModelChoiseBox1.getValue());
-            tempCos.setFuelCompany(stations);
-            myController.setCostumerInDB(tempCos);
-            planInfoAnchorPane.setVisible(false);
-            loadingImg.setVisible(true);
-        }
 
+
+        }
     }
 
     public void onRegisterSuccses() {
@@ -333,7 +333,7 @@ public class CustomerRegistrationBoundary implements DataInitializable {
             ErrorAlert.setTitle("Vehicle ID Error");
             ErrorAlert.setHeaderText("Vehicle ID exists in system");
             ErrorAlert.showAndWait();
-        } else if (validateVehicleIDField()) {
+        } else if (validateVehicleIDField() && !GasTypeChoiseBox.getValue().isEmpty()) {
             Vehicle vehicle = new Vehicle(CostumerIDtxt.getText(), VehicleIDtxt.getText(), GasTypeChoiseBox.getValue());
             tempVehicleArray.add(vehicle);
             ObservableList<Vehicle> data = FXCollections.observableArrayList(tempVehicleArray);
@@ -412,7 +412,6 @@ public class CustomerRegistrationBoundary implements DataInitializable {
                 + " -fx-padding: 0.667em 0.75em 0.667em 0.75em; /* 10px */"
                 + " -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.5) , 10, 0.0 , 0 , 3 );"
                 + " -fx-font-size: 0.85em;");
-
 
 
         thisToolTip.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
