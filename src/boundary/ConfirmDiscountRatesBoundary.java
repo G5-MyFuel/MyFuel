@@ -18,6 +18,9 @@ import java.util.ResourceBundle;
 
 public class ConfirmDiscountRatesBoundary implements DataInitializable {
 
+    String managerID;
+    String managerCompany;
+    String managerStation;
     /**
      * The supervisor boundary controller.
      */
@@ -53,10 +56,12 @@ public class ConfirmDiscountRatesBoundary implements DataInitializable {
     @Override
     public void initData(Object data) {
 
-    }
+        this.managerID = (String) data;
+        ArrayList<String> paramArray = new ArrayList<>();
+        paramArray.add("Get Manager data");
+        paramArray.add(managerID);
+        myController.GetDiscountRatesData(paramArray); //start the process that will ask server to execute quarry and get the table details
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
         this.formValidation = FormValidation.getValidator();
 
         /*btnApprovedRates.setDisable(true);
@@ -69,9 +74,24 @@ public class ConfirmDiscountRatesBoundary implements DataInitializable {
 
         /*  set all fields validators */
         formValidation();
+    }
+
+    public void setManagerData(ArrayList<String> resultList) {
+
+        System.out.println(managerID);
+        managerCompany = resultList.get(0);
+        managerStation = resultList.get(1);
+        System.out.println(managerCompany);
         ArrayList<String> paramArray = new ArrayList<>();
+        paramArray = new ArrayList<>();
         paramArray.add("Get Discount Rates Data");
+        paramArray.add(managerCompany);
         myController.GetDiscountRatesData(paramArray);
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
 
     }
 
@@ -151,11 +171,13 @@ public class ConfirmDiscountRatesBoundary implements DataInitializable {
         for (DiscountRate temp : sendDiscountRates) {
             paramArray.clear();
             paramArray.add(queryName);
+            paramArray.add(managerCompany);
             paramArray.add(temp.getSubscriptionType());
             myController.GetDiscountRatesData(paramArray);
         }
         paramArray.clear();
         paramArray.add("Get Discount Rates Data");
+        paramArray.add(managerCompany);
         myController.GetDiscountRatesData(paramArray);
     }
 

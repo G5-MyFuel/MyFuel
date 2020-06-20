@@ -101,10 +101,8 @@ public class SettingDiscountRatesBoundary implements DataInitializable {
 
     public void setManagerData(ArrayList<String> resultList) {
 
-        System.out.println(managerID);
         managerCompany = resultList.get(0);
         managerStation = resultList.get(1);
-        System.out.println(managerCompany);
     }
 
     @FXML
@@ -146,7 +144,6 @@ public class SettingDiscountRatesBoundary implements DataInitializable {
             paramArray.add(ShowNewRateTXT.getText());
             paramArray.add(ChooseSubscriptionTypeCombo.getValue());
             paramArray.add(managerCompany);
-            System.out.println(paramArray);
             myController.getDiscountRatesTable(paramArray); //start the process that will ask server to execute quarry and get the table details
             RequestSentMessageLabel.setVisible(true);
         }

@@ -301,11 +301,11 @@ public class MysqlConnection {
         /* *****************************************
          * ********** Admin Confirm Discount Rates Queries ****************
          * *****************************************/
-        sqlArray[SqlQueryType.Get_DiscountRates_Table.getCode()] = "SELECT * FROM `DiscountRates` WHERE `NewDiscountRate` != \"-\"";
+        sqlArray[SqlQueryType.Get_DiscountRates_Table.getCode()] = "SELECT * FROM `DiscountRates` WHERE `NewDiscountRate` != \"-\" AND `companyName` = ?";
         sqlArray[SqlQueryType.UPDATE_NEW_DiscountRate.getCode()] = "UPDATE `DiscountRates` " +
-                "SET `CurrentDiscountRate`= `NewDiscountRate`, `Status`= \"Approved\",`NewDiscountRate`= \"-\" WHERE `Subscription type` = ?";
+                "SET `CurrentDiscountRate`= `NewDiscountRate`, `Status`= \"Approved\",`NewDiscountRate`= \"-\" AND `companyName` = ? WHERE `Subscription type` = ?";
         sqlArray[SqlQueryType.Remove_NEW_DiscountRate.getCode()] = "UPDATE `DiscountRates` " +
-                "SET `Status`= \"Approved\",`NewDiscountRate`= \"-\" WHERE `Subscription type` = ?";
+                "SET `Status`= \"Approved\",`NewDiscountRate`= \"-\" AND `companyName` = ? WHERE `Subscription type` = ?";
 
         /* *****************************************
          * ********** Marketing Manager Reports Queries ****************
