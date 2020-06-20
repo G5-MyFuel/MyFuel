@@ -73,11 +73,26 @@
       <AnchorPane fx:id="OrderViewAnchorPane" layoutX="548.0" layoutY="228.0" prefHeight="241.0" prefWidth="433.0" style="-fx-background-color: #00ADD8;" styleClass="card-unpadded">
          <children>
             <Pane layoutX="-1.0" prefHeight="189.0" prefWidth="23.0" style="-fx-background-color: #007390;" />
-            <Label layoutX="106.0" layoutY="107.0" prefHeight="33.0" prefWidth="80.0" style="-fx-font-weight: bold;" styleClass="custom-white-label" text="Fuel Type" textFill="WHITE" />
-            <Label layoutX="105.0" layoutY="165.0" prefHeight="33.0" prefWidth="74.0" style="-fx-font-weight: bold;" styleClass="custom-white-label" text="Quantity" textFill="WHITE" />
-            <Label fx:id="FuelTypeField" layoutX="200.0" layoutY="114.0" prefHeight="21.0" prefWidth="126.0" text="Label" textFill="WHITE" />
-            <Label fx:id="QuantityField" layoutX="200.0" layoutY="172.0" prefHeight="21.0" prefWidth="126.0" text="Label" textFill="WHITE" />
-            <Label layoutX="105.0" layoutY="51.0" prefHeight="33.0" prefWidth="315.0" style="-fx-font-weight: bold;" styleClass="custom-white-label" text="Your stock is now updated with:" textFill="WHITE" />
+            <Label layoutX="106.0" layoutY="107.0" prefHeight="33.0" prefWidth="104.0" style="-fx-font-weight: bold;" styleClass="custom-white-label" text="Fuel Type" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font></Label>
+            <Label layoutX="105.0" layoutY="165.0" prefHeight="33.0" prefWidth="74.0" style="-fx-font-weight: bold;" styleClass="custom-white-label" text="Quantity" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font></Label>
+            <Label fx:id="FuelTypeField" layoutX="217.0" layoutY="110.0" prefHeight="21.0" prefWidth="126.0" text="Label" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font></Label>
+            <Label fx:id="QuantityField" layoutX="217.0" layoutY="168.0" prefHeight="21.0" prefWidth="126.0" text="Label" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font></Label>
+            <Label layoutX="105.0" layoutY="51.0" prefHeight="33.0" prefWidth="315.0" style="-fx-font-weight: bold;" styleClass="custom-white-label" text="Your stock is now updated with:" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font></Label>
             <ImageView fitHeight="87.0" fitWidth="89.0" layoutX="16.0" layoutY="-3.0">
                <image>
                   <Image url="@../media/icons/icons8_new_100px.png" />
