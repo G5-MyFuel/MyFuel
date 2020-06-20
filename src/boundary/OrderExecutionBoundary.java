@@ -142,7 +142,7 @@ public class OrderExecutionBoundary implements DataInitializable {
         sender.sendMessage(temp.getUserEmail(),"Order update","Dear "+temp.getUserFirstName()+" "+temp.getUserLastName()+
                 ", Order number "+temp.getOrderNumber()+" has arrived to your station.\n Have a nice day.\n\n *message from MyFuel");
 
-        Toast.makeText(mainProjectFX.mainStage, "An email was sent to the station manager.", 1000, 1500, 1500, 250, 700);
+        Toast.makeText(mainProjectFX.mainStage, "An email was sent to the station manager.", 1000, 1500, 1500, 250, 650);
     }
 
 

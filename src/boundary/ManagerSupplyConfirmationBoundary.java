@@ -73,9 +73,6 @@ public class ManagerSupplyConfirmationBoundary implements DataInitializable {
     private Button SendBtn;
 
     @FXML
-    private Text ApprovalTxt;
-
-    @FXML
     private Text explanationTxt;
 
     @FXML
@@ -107,7 +104,7 @@ public class ManagerSupplyConfirmationBoundary implements DataInitializable {
         orderNumberField.setVisible(true);
         hboxOrderConfirmation.setDisable(true);
         SendBtn.setDisable(true);
-        Toast.makeText(mainProjectFX.mainStage, "Order was sent to the supplier.", 1000, 2000, 1500, 250, 400);
+        Toast.makeText(mainProjectFX.mainStage, "Order was sent to the supplier.", 1000, 2000, 1500, 700, 550);
         tableData = FXCollections.observableArrayList(myController.resultList);
         tableView.setItems(tableData);
     }
@@ -147,14 +144,12 @@ public class ManagerSupplyConfirmationBoundary implements DataInitializable {
     public void initialize(URL location, ResourceBundle resources) {
         hboxOrderConfirmation.setVisible(false);
         tableView.setVisible(true);
-        ApprovalTxt.setVisible(false);
         SendBtn.setVisible(false);
         SendBtn.setDisable(true);
         explanationTxt.setVisible(false);
         orderNumberField.setVisible(false);
         OrderNumberTxt.setVisible(false);
         noOrdersTxt.setVisible(false);
-        System.out.println("Manager Supply Confirmation Page Is Open");
     }
 
     public void setOrderForManagerTableView(ArrayList<ManagerSupplyConfirmation> OrderArray) {
@@ -184,7 +179,6 @@ public class ManagerSupplyConfirmationBoundary implements DataInitializable {
                     SendBtn.setVisible(true);
                     SendBtn.setDisable(true);
                     explanationTxt.setVisible(true);
-                    ApprovalTxt.setVisible(false);
                     confirmationCheckBox.setSelected(false);
                 } else {
                     orderNumberField.setText(temp.getOrderNumber());
@@ -192,7 +186,6 @@ public class ManagerSupplyConfirmationBoundary implements DataInitializable {
                     orderNumberField.setVisible(true);
                     hboxOrderConfirmation.setDisable(true);
                     SendBtn.setDisable(true);
-                    ApprovalTxt.setVisible(true);
                     confirmationCheckBox.setSelected(true);
                 }
             }
