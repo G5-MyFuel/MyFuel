@@ -78,10 +78,8 @@ public class ConfirmDiscountRatesBoundary implements DataInitializable {
 
     public void setManagerData(ArrayList<String> resultList) {
 
-        System.out.println(managerID);
         managerCompany = resultList.get(0);
         managerStation = resultList.get(1);
-        System.out.println(managerCompany);
         ArrayList<String> paramArray = new ArrayList<>();
         paramArray = new ArrayList<>();
         paramArray.add("Get Discount Rates Data");

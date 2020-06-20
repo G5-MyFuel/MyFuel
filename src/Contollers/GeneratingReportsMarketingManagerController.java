@@ -39,14 +39,14 @@ public class GeneratingReportsMarketingManagerController extends BasicController
                 SqlAction sqlAction = new SqlAction(SqlQueryType.GET_Comments_Report, varArray);
                 super.sendSqlActionToClient(sqlAction);
                 break;
-            /*case "Get Customers List":
-                sqlAction = new SqlAction(SqlQueryType.GET_Customers_List, varArray);
-                super.sendSqlActionToClient(sqlAction);
-                break;*/
             case "Customer Periodic Characterization Report":
                 sqlAction = new SqlAction(SqlQueryType.GET_Customers_List, varArray);
                 super.sendSqlActionToClient(sqlAction);
                 sqlAction = new SqlAction(SqlQueryType.GET_CustomerPeriodicCharacterization_Report, varArray);
+                super.sendSqlActionToClient(sqlAction);
+                break;
+            case "Get Manager data":
+                sqlAction = new SqlAction(SqlQueryType.GET_Manager_Data, varArray);
                 super.sendSqlActionToClient(sqlAction);
                 break;
             default:
@@ -60,6 +60,9 @@ public class GeneratingReportsMarketingManagerController extends BasicController
     public void getResultFromClient(SqlResult result) {
         Platform.runLater(() -> {
             switch (result.getActionType()) {
+                case GET_Manager_Data:
+                    myBoundary.setManagerData(this.changeResultToManagerData(result));
+                    break;
                 case GET_Comments_Report:
                     myBoundary.setCommentsReportData(this.changeResultToCommentsReport(result));
                     break;
@@ -116,6 +119,17 @@ public class GeneratingReportsMarketingManagerController extends BasicController
                 default:
                     break;
             }
+        }
+        return resultList;
+    }
+
+    private ArrayList<String> changeResultToManagerData(SqlResult result) {
+
+        ArrayList<String> resultList = new ArrayList<>();
+
+        for (ArrayList<Object> a : result.getResultData()) {
+            resultList.add((String) a.get(1));
+            resultList.add((String) a.get(2));
         }
         return resultList;
     }

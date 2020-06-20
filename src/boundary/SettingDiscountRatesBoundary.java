@@ -132,8 +132,28 @@ public class SettingDiscountRatesBoundary implements DataInitializable {
     void handleSetNewRate(ActionEvent event) {
 
         RequestSentMessageLabel.setVisible(false);
-        Float NewRate = Float.parseFloat(ShowNewRateTXT.getText());
-        if (NewRate < 0 || NewRate > 100) {
+        if (ShowNewRateTXT.getText().equals("")) {
+            ErrorAlert.setTitle("Price rate ERROR");
+            ErrorAlert.setHeaderText("Please insert between 0-100");
+            ErrorAlert.showAndWait();
+        }
+        else{
+            Float NewRate = Float.parseFloat(ShowNewRateTXT.getText());
+            ArrayList<String> paramArray = new ArrayList<>();
+            paramArray.add("Insert NewRate");
+            paramArray.add(ShowNewRateTXT.getText());
+            paramArray.add(ChooseSubscriptionTypeCombo.getValue());
+            paramArray.add(managerCompany);
+            myController.getDiscountRatesTable(paramArray); //start the process that will ask server to execute quarry and get the table details
+            ShowNewRateTXT.clear();
+            RequestSentMessageLabel.setVisible(true);
+        }
+        //Float NewRate = Float.parseFloat(ShowNewRateTXT.getText());
+        /*if(ShowNewRateTXT.getText().equals(""))
+            btnSetNewRate.setVisible(false);
+        else
+            btnSetNewRate.setVisible(true);*/
+        /*if ((NewRate < 0 || NewRate > 100)|| (ShowNewRateTXT.getText().equals("")) ) {
             ErrorAlert.setTitle("Price rate ERROR");
             ErrorAlert.setHeaderText("Please insert between 0-100");
             ErrorAlert.showAndWait();
@@ -146,7 +166,7 @@ public class SettingDiscountRatesBoundary implements DataInitializable {
             myController.getDiscountRatesTable(paramArray); //start the process that will ask server to execute quarry and get the table details
             ShowNewRateTXT.clear();
             RequestSentMessageLabel.setVisible(true);
-        }
+        }*/
     }
 
     @FXML
@@ -157,9 +177,5 @@ public class SettingDiscountRatesBoundary implements DataInitializable {
     @FXML
     void handleShowNewRate(ActionEvent event) {
 
-        if(ShowNewRateTXT.getText().equals(""))
-            btnSetNewRate.setVisible(false);
-        else
-            btnSetNewRate.setVisible(true);
     }
 }
