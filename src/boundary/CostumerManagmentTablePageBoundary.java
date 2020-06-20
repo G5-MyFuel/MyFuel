@@ -352,7 +352,9 @@ public class CostumerManagmentTablePageBoundary implements DataInitializable {
             myController.addVehicleToDB(OwnerIDtxt1.getText(), VehicleIDtxt.getText(), GasTypeChoiseBox.getValue());
             Vehicle insertItem = new Vehicle(OwnerIDtxt1.getText(), VehicleIDtxt.getText(), GasTypeChoiseBox.getValue());
             Costumer cos = searchCostumerWithID(OwnerIDtxt1.getText());
+            costumers.remove(cos);
             cos.getCostumerVehicle().add(insertItem);
+            costumers.add(cos);
             VehicleTable.getItems().add(insertItem);
             VehicleTable.refresh();
             OwnerIDtxt1.clear();
@@ -443,8 +445,10 @@ public class CostumerManagmentTablePageBoundary implements DataInitializable {
                 myController.removeVehicle(VehicleTable.getSelectionModel().getSelectedItem().getVehicleID());
                 Vehicle selectedItem = VehicleTable.getSelectionModel().getSelectedItem();
                 VehicleTable.getItems().remove(selectedItem);
-                Costumer cos = searchCostumerWithID(OwnerIDtxt1.getText());
-                cos.getCostumerVehicle().remove(selectedItem); //TODO: have to check why vehicle array does not contain vehicle item from tbale
+                Costumer cos = searchCostumerWithID(VehicleSearchCosIDtxt.getText());
+                costumers.remove(cos);
+                cos.getCostumerVehicle().remove(VehicleTable.getSelectionModel().getSelectedItem());
+                costumers.add(cos);
                 if (VehicleTable.getItems().size() <= 1) {
                     ArrayList<Object> obj = new ArrayList<>();
                     obj.add("single");
@@ -452,7 +456,6 @@ public class CostumerManagmentTablePageBoundary implements DataInitializable {
                     PagingController pc = new PagingController();
                     pc.loadAdditionalStage(ProjectPages.CHOOSE_SUBSCRIPTION_TYPE.getPath(), obj);
                 }
-
             }
         }
     }

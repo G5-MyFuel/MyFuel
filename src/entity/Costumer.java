@@ -11,18 +11,18 @@ import java.util.ArrayList;
 public class Costumer extends User {
 
     private CreditCard CostumerCreditCard;
-    private ArrayList<Vehicle> CostumerVehicle = new ArrayList<Vehicle>();
+    private ArrayList<Vehicle> CostumerVehicle;
     private String CostumerType;
     private String pricingModel;
     private String purchasePlan;
 
-    public Costumer(String ID, String CustomerPassword, String CostumerType, String Fname, String Lname, String emailAdress, CreditCard customerCreditCard, String purchasePlan, Vehicle CostumerVehicle,String pricingModel) {
+    public Costumer(String ID, String CustomerPassword, String CostumerType, String Fname, String Lname, String emailAdress, CreditCard customerCreditCard, String purchasePlan, String pricingModel) {
         super(ID,CostumerType,CustomerPassword,0,Fname,Lname,emailAdress,null);
         this.CostumerCreditCard = customerCreditCard;
         this.purchasePlan = purchasePlan;
-        this.CostumerVehicle.add(CostumerVehicle);
         this.pricingModel = pricingModel;
         this.CostumerType = CostumerType;
+        this.CostumerVehicle = new ArrayList<Vehicle>();
         //
     }
 

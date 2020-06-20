@@ -89,7 +89,7 @@ public class NewPurchaseFuelForHomeHeatingController extends BasicController {
     private Costumer fromResultSetToCustomers(SqlResult result, String userID) {
         Costumer c = null;
         for (ArrayList<Object> a : result.getResultData()) {
-            c = new Costumer(userID, "", (String) a.get(7), (String) a.get(1), (String) a.get(2), (String) a.get(3), new CreditCard(null, (String) a.get(4), (String) a.get(5), (String) a.get(6)), (String) a.get(9), null, (String) a.get(7));
+            c = new Costumer(userID, "", (String) a.get(7), (String) a.get(1), (String) a.get(2), (String) a.get(3), new CreditCard(null, (String) a.get(4), (String) a.get(5), (String) a.get(6)), (String) a.get(9), (String) a.get(7));
             c.getCostumerCreditCard().setCardOwner(c);
         }
         return c;

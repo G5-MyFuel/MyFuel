@@ -6,9 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -28,13 +26,7 @@ public class choseSubscriptionPlanBoundary implements DataInitializable {
 
 
     @FXML
-    private AnchorPane mainAnchorPane;
-
-    @FXML
     private JFXComboBox<String> PricingModelChoiseBox1;
-
-    @FXML
-    private ImageView ServicePlanInfo;
 
     @FXML
     private Button ConfirmBtn;
@@ -47,7 +39,6 @@ public class choseSubscriptionPlanBoundary implements DataInitializable {
      */
     @FXML
     void confirmBtnClicked(MouseEvent event) {
-        System.out.println(managmentBoundary.getVehicleSearchCosIDtxt().getText()+" "+PricingModelChoiseBox1.getValue());
         managmentBoundary.getMyController().updateCostumerDetailsInDb(SqlQueryType.UPDATE_COSTUMER_PRICING_MODEL,managmentBoundary.getVehicleSearchCosIDtxt().getText(), PricingModelChoiseBox1.getValue());
         managmentBoundary.refreshTable();
         primStage.close();

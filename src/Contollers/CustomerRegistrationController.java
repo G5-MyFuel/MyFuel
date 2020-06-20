@@ -148,7 +148,7 @@ public class CustomerRegistrationController extends BasicController {
         ArrayList<String> temp = new ArrayList<>();
         for (ArrayList<Object> a : result.getResultData()) {
             Costumer cos = new Costumer((String) a.get(0), (String) a.get(9), (String) a.get(4),
-                    (String) a.get(11), (String) a.get(12), (String) a.get(13), null, (String) a.get(6), null, (String) a.get(5));
+                    (String) a.get(11), (String) a.get(12), (String) a.get(13), null, (String) a.get(6),(String) a.get(5));
             //add fuel companies.
             temp.add((String) a.get(14));
             temp.add((String) a.get(15));

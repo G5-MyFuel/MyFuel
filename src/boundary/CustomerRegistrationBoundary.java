@@ -212,7 +212,7 @@ public class CustomerRegistrationBoundary implements DataInitializable {
             ErrorAlert.showAndWait();
         } else {//build costumer
             Costumer costumer = new Costumer(CostumerIDtxt.getText(), CostumerIDtxt.getText(), "", FirstNametxt.getText(),
-                    LastNametxt.getText(), EmailAdresstxt.getText(), null, "", null, null);
+                    LastNametxt.getText(), EmailAdresstxt.getText(), null, "",  null);
             if (CardClickFlag) {
                 costumer.setCostumerCreditCard(tempCreditCard);
                 if (tempCreditCard != null)
