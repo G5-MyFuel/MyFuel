@@ -20,7 +20,7 @@
 
 <Pane prefHeight="796.0" prefWidth="1062.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundary.ManagerSupplyConfirmationBoundary">
    <children>
-      <Text fill="#2d4578" layoutX="67.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Approve Inventory">
+      <Text fill="#2d4578" layoutX="67.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Approve Orders For Inventory">
          <font>
             <Font name="System Bold Italic" size="40.0" />
          </font>
@@ -92,11 +92,6 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-      <Text fx:id="ApprovalTxt" fill="RED" layoutX="631.0" layoutY="646.0" strokeType="OUTSIDE" strokeWidth="0.0" text="* Order was sent to the supplier" wrappingWidth="284.999979197979">
-         <font>
-            <Font name="System Bold" size="19.0" />
-         </font>
-      </Text>
       <Text layoutX="60.0" layoutY="644.0" strokeType="OUTSIDE" strokeWidth="0.0" text="* Status: New / Done" wrappingWidth="317.6708984375" />
       <Text fx:id="explanationTxt" layoutX="572.0" layoutY="249.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Confirm the order for the supplier to handle the shipment" wrappingWidth="433.04345703125">
          <font>
