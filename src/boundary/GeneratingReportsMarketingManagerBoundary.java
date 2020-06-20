@@ -227,6 +227,7 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
                 } else {
                     ERRORnoOperation.setVisible(false);
                     paramArray.add(EnterOperationSaleTXT.getText());
+                    paramArray.add(managerCompany);
                     ShowReportMarketingCampaignTxt.setVisible(false);
                     myController.GetReportData(paramArray);
                 }
