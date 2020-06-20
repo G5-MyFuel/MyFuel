@@ -53,6 +53,7 @@ public class ChatClient extends AbstractClient {
     protected void handleMessageFromServer(Object msg) {
         SqlResult result = (SqlResult) msg;
         System.out.println("--> handleMessageFromServer");
+        System.out.println(result.getResultData().toString()+ "///////");////////////////////////////
         Platform.runLater(() -> {
             for (BasicController bc : deliverySubscribers) {
                 bc.getResultFromClient(result);

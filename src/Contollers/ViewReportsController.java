@@ -34,8 +34,12 @@ public class ViewReportsController extends BasicController {
         System.out.println(paramArray);
         System.out.println(varArray);
         switch (paramArray.get(0)) {
+            case "Get Manager data":
+                SqlAction sqlAction = new SqlAction(SqlQueryType.GET_Manager_Data, varArray);
+                super.sendSqlActionToClient(sqlAction);
+                break;
             case "View Quarterly revenue report":
-                SqlAction sqlAction = new SqlAction(SqlQueryType.View_Quarterly_Report, varArray);
+                sqlAction = new SqlAction(SqlQueryType.View_Quarterly_Report, varArray);
                 super.sendSqlActionToClient(sqlAction);
                 break;
             case "View Purchases report":
@@ -57,6 +61,9 @@ public class ViewReportsController extends BasicController {
 
         Platform.runLater(() -> {
             switch (result.getActionType()) {
+                case GET_Manager_Data:
+                    myBoundary.setManagerData(this.changeResultToManagerData(result));
+                    break;
                 case View_Quarterly_Report:
                     myBoundary.setQuarterlyData(this.changeResultToQuarterlyReport(result));
                     break;
@@ -141,6 +148,17 @@ public class ViewReportsController extends BasicController {
         for (int i = 0; i < 3; i++)
             //resultList.get(i).setQuantityPurchased(fuelAmount[i]);
             resultList.add(new QuantityItemsStockReport(fuelAvailableInventory[i]));
+        return resultList;
+    }
+
+    private ArrayList<String> changeResultToManagerData(SqlResult result) {
+
+        ArrayList<String> resultList = new ArrayList<>();
+
+        for (ArrayList<Object> a : result.getResultData()) {
+            resultList.add((String) a.get(1));
+            resultList.add((String) a.get(2));
+        }
         return resultList;
     }
 }

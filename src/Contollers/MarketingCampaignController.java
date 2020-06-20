@@ -207,6 +207,7 @@ public class MarketingCampaignController extends BasicController {
      * @param newSale
      */
     public void chackIfSaleCanRun(MarketingCampaign newSale) {
+        flagSale = true;
         this.newSale = newSale;
         //get all sales from db:
         SqlAction sqlAction = new SqlAction(SqlQueryType.GET_ALL_SALES_TO_CHACK_SALE);
