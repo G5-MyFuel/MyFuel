@@ -26,6 +26,9 @@ public class choseStationBoundary implements DataInitializable {
 
     CostumerManagmentTablePageBoundary managmentBoundary;
 
+    /**
+     * ****** FXML PARAMETERS *******
+     */
     @FXML
     private JFXCheckBox pazCheckBox;
 
@@ -48,7 +51,11 @@ public class choseStationBoundary implements DataInitializable {
     @FXML
     private VBox MultipleVbox;
 
-
+    /**
+     * initData this will start in the initialize of the boundary.
+     * sends parameters from anther pages
+     * @param data - The data sent to the boundary
+     */
     @Override
     public void initData(Object data) {
         Stage primStage = (Stage) confirmBtn.getScene().getWindow();
@@ -89,6 +96,10 @@ public class choseStationBoundary implements DataInitializable {
 
     }
 
+    /**
+     * confirm button function. this method is the listener of the confirm button.
+     * @param event
+     */
     @FXML
     public void confirmFunction(MouseEvent event) {
         Stage primStage = (Stage) confirmBtn.getScene().getWindow();

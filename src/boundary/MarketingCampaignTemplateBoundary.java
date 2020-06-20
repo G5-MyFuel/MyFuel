@@ -31,12 +31,14 @@ import java.util.ResourceBundle;
 
 public class MarketingCampaignTemplateBoundary implements DataInitializable {
 
-    /** The supervisor boundary controller. */
+    /**
+     * The supervisor boundary controller.
+     */
     private MarketingCampaignTemplateController myController = new MarketingCampaignTemplateController(this);
     private String marketingDepartmentWorker;
 
     private FormValidation formValidation;
-    private boolean flagValidation=true;
+    private boolean flagValidation = true;
     private String dateAndDayPattern = "";
 
     //gui variables:
@@ -82,7 +84,7 @@ public class MarketingCampaignTemplateBoundary implements DataInitializable {
     @FXML
     private JFXTimePicker EndHour;
 
-     @FXML
+    @FXML
     private TableView<MarketingCampaignTemplate> TemplateTableView;
 
     @FXML
@@ -106,9 +108,9 @@ public class MarketingCampaignTemplateBoundary implements DataInitializable {
     @FXML
     private TableColumn<MarketingCampaignTemplate, Time> EndHourColumn;
 
-   /* @FXML
-    private TableColumn<SaleOperationTemplate, String> MarketingAdColumn;
-*/
+    /* @FXML
+     private TableColumn<SaleOperationTemplate, String> MarketingAdColumn;
+ */
     @FXML
     private JFXComboBox<String> ChooseGasTypeComboSpecialization;
 
@@ -137,9 +139,9 @@ public class MarketingCampaignTemplateBoundary implements DataInitializable {
     }
 
     /**
-     this method will set the templates table when we will initialize the page.
+     * this method will set the templates table when we will initialize the page.
      */
-    public void setTemplateTable(ArrayList<MarketingCampaignTemplate> cosArray){
+    public void setTemplateTable(ArrayList<MarketingCampaignTemplate> cosArray) {
         //
         TemplateIDColumn.setCellValueFactory(new PropertyValueFactory<>("templateID"));
         TemplateNameColumn.setCellValueFactory(new PropertyValueFactory<>("templateName"));
@@ -166,7 +168,7 @@ public class MarketingCampaignTemplateBoundary implements DataInitializable {
     @FXML
     void handleSaveTemplate(ActionEvent event) {
         MarketingCampaignTemplate newTemplate = new MarketingCampaignTemplate
-                (String.valueOf(myController.getTemplateCounter()+1), TemplateName.getText(), (String)ChooseGasTypeComboSpecialization.getValue(), (String)DiscountPercentages.getText(), (String)DayComboSpecialization1.getValue(), Time.valueOf(StartHour.getValue()), Time.valueOf(EndHour.getValue()));
+                (String.valueOf(myController.getTemplateCounter() + 1), TemplateName.getText(), (String) ChooseGasTypeComboSpecialization.getValue(), (String) DiscountPercentages.getText(), (String) DayComboSpecialization1.getValue(), Time.valueOf(StartHour.getValue()), Time.valueOf(EndHour.getValue()));
         myController.setTemplateInDB(newTemplate);
         myController.getTemplatesTable(); //start the process that will ask server to execute quarry and get the table details//refresh
         detailsPane.setVisible(false);
@@ -198,10 +200,10 @@ public class MarketingCampaignTemplateBoundary implements DataInitializable {
 
         }
 
-      //  formValidation.isEmptyTimeField(StartHour, "Start Hour");
+        //  formValidation.isEmptyTimeField(StartHour, "Start Hour");
 
         /*  End Hour validation */
-       // formValidation.isEmptyTimeField(EndHour, "End Hour");
+        // formValidation.isEmptyTimeField(EndHour, "End Hour");
 
         /*  Marketing Ad For Template validation */
         formValidation.isEmptyFieldValidation(MarketingAdForTemplate, "Marketing Ad For Template");

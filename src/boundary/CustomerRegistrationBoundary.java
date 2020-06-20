@@ -50,8 +50,9 @@ public class CustomerRegistrationBoundary implements DataInitializable {
     private Alert ErrorAlert = new Alert(Alert.AlertType.ERROR);
 
 
-    /*Gui variables:
-     * * */
+    /**
+     *  ****** FXML PARAMETERS *******
+     */
     @FXML
     private Tab personalInfoTAB;
     @FXML
@@ -122,7 +123,8 @@ public class CustomerRegistrationBoundary implements DataInitializable {
     private ImageView loadingImg;
 
 
-    /*
+    /**
+     *
     Initialize ObservableList in order to display does strings
     with combo box object.
      * * */
@@ -134,7 +136,13 @@ public class CustomerRegistrationBoundary implements DataInitializable {
 
     private ObservableList<String> SingelVehicle;
 
-
+    /**
+     *
+     *initData this will start in the initialize of the boundary.
+     *sends parameters from anther pages
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         formValidation = new FormValidation();
@@ -200,6 +208,11 @@ public class CustomerRegistrationBoundary implements DataInitializable {
     public void initData(Object data) {
     }
 
+    /**
+     * the following method is the listener for the first button that
+     * forward user to the next phase.
+     * @param event
+     */
     @FXML
     void FirstForwardButtonOnClick(MouseEvent event) {
         if (myController.isCostumerExist(CostumerIDtxt.getText())) { //check if costumer is on system already
@@ -307,7 +320,6 @@ public class CustomerRegistrationBoundary implements DataInitializable {
         planInfoTAB.setDisable(true);
         personalInfoTAB.setDisable(false);
         CostumerIDtxt.clear();
-
         LastNametxt.clear();
         EmailAdresstxt.clear();
         VehicleIDtxt.clear();
@@ -329,11 +341,16 @@ public class CustomerRegistrationBoundary implements DataInitializable {
     @FXML
     void ClickSaveVehicleButton(MouseEvent event) {
         VehicleTable.setEditable(true);
-        if (myController.isVehicleExistInDb(VehicleIDtxt.getText()) || isVehicleExistInTempVehicleArr()) {//in case of vehicle id error
+        if(GasTypeChoiseBox.getSelectionModel().isEmpty()){
+            ErrorAlert.setTitle("Gas Type Error");
+            ErrorAlert.setHeaderText("Gas type is empty");
+            ErrorAlert.showAndWait();
+        }
+        else if (myController.isVehicleExistInDb(VehicleIDtxt.getText()) || isVehicleExistInTempVehicleArr()) {//in case of vehicle id error
             ErrorAlert.setTitle("Vehicle ID Error");
             ErrorAlert.setHeaderText("Vehicle ID exists in system");
             ErrorAlert.showAndWait();
-        } else if (validateVehicleIDField() && !GasTypeChoiseBox.getValue().isEmpty()) {
+        } else if (validateVehicleIDField()) {
             Vehicle vehicle = new Vehicle(CostumerIDtxt.getText(), VehicleIDtxt.getText(), GasTypeChoiseBox.getValue());
             tempVehicleArray.add(vehicle);
             ObservableList<Vehicle> data = FXCollections.observableArrayList(tempVehicleArray);
