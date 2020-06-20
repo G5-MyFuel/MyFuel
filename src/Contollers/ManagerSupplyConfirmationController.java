@@ -22,6 +22,9 @@ public class ManagerSupplyConfirmationController extends BasicController {
         this.myBoundary = myBoundary;
     }
 
+    /**
+     To get all the orders related to this station manager
+     */
     public void getOrdersFromDB(String stationManagerID) {
         ArrayList<Object> al = new ArrayList<>();
         al.add(stationManagerID);
@@ -29,7 +32,9 @@ public class ManagerSupplyConfirmationController extends BasicController {
         System.out.println(al);
         super.sendSqlActionToClient(sqlAction);
     }
-
+    /**
+     * Update order status from "New" to "In treatment"
+     */
     public void setNewStatus(String OrderNumber){
         ArrayList<Object> varArray=new ArrayList<>();
         varArray.add(OrderNumber);
