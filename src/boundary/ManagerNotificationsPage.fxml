@@ -63,5 +63,10 @@
             <Font name="System Bold" size="19.0" />
          </font>
       </Text>
+      <Text fx:id="noNotificationTxt" fill="RED" layoutX="132.0" layoutY="248.0" strokeType="OUTSIDE" strokeWidth="0.0" text="* No new notification" wrappingWidth="433.04345703125">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Text>
    </children>
 </Pane>

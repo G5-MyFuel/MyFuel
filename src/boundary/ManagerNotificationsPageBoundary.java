@@ -45,6 +45,9 @@ public class ManagerNotificationsPageBoundary implements DataInitializable {
     private Text explanationTxt;
 
     @FXML
+    private Text noNotificationTxt;
+
+    @FXML
     private ImageView bellGif;
 
     @FXML
@@ -55,7 +58,7 @@ public class ManagerNotificationsPageBoundary implements DataInitializable {
      **/
     @FXML
     void clickCleanBtn(MouseEvent event) {
-        ManagerNotifications temp= tableView.getSelectionModel().getSelectedItem();
+        ManagerNotifications temp = tableView.getSelectionModel().getSelectedItem();
         myController.setNewStatus(temp.getOrderNumber());
         tableView.getItems().remove(temp);
     }
@@ -78,12 +81,13 @@ public class ManagerNotificationsPageBoundary implements DataInitializable {
     @Override
     public void initData(Object data) {
         this.ManagerID = (String) data;
+        CleanBtn.setDisable(true);
+        noNotificationTxt.setVisible(false);
         myController.getOrdersFromDB(ManagerID);
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        CleanBtn.setDisable(true);
         System.out.println("Notifications Page Is Open");
     }
 
@@ -93,6 +97,9 @@ public class ManagerNotificationsPageBoundary implements DataInitializable {
         tableData = FXCollections.observableArrayList(OrderArray);
         tableView.setEditable(true);
         tableView.setItems(tableData);
+
+        if (tableView.getItems().isEmpty())
+            noNotificationTxt.setVisible(true);
     }
 
     public void getOrderClick() {
@@ -100,7 +107,7 @@ public class ManagerNotificationsPageBoundary implements DataInitializable {
             @Override
             public void handle(MouseEvent event) {
                 ManagerNotifications temp = tableView.getSelectionModel().getSelectedItem();
-                if(temp.equals(null))
+                if (temp.equals(null))
                     CleanBtn.setDisable(true);
                 else CleanBtn.setDisable(false);
             }
