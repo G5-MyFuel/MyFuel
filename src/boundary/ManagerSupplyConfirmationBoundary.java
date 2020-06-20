@@ -1,6 +1,7 @@
 package boundary;
 
 import Contollers.ManagerSupplyConfirmationController;
+import common.assets.Toast;
 import entity.ManagerSupplyConfirmation;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -106,7 +107,7 @@ public class ManagerSupplyConfirmationBoundary implements DataInitializable {
         orderNumberField.setVisible(true);
         hboxOrderConfirmation.setDisable(true);
         SendBtn.setDisable(true);
-        ApprovalTxt.setVisible(true);
+        Toast.makeText(mainProjectFX.mainStage, "Order was sent to the supplier.", 1000, 2000, 1500, 250, 400);
         tableData = FXCollections.observableArrayList(myController.resultList);
         tableView.setItems(tableData);
     }
