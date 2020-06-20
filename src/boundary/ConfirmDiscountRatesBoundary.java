@@ -2,7 +2,6 @@ package boundary;
 
 import Contollers.ConfirmDiscountRatesController;
 import Contollers.FormValidation;
-import entity.Costumer;
 import entity.DiscountRate;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
