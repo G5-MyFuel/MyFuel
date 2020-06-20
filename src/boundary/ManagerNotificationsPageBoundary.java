@@ -72,6 +72,7 @@ public class ManagerNotificationsPageBoundary implements DataInitializable {
     void clickCleanBtn(MouseEvent event) {
         ManagerNotifications temp = tableView.getSelectionModel().getSelectedItem();
         myController.setNewStatus(temp.getOrderNumber());
+        OrderViewAnchorPane.setVisible(false);
         tableView.getItems().remove(temp);
         Toast.makeText(mainProjectFX.mainStage, "Deleted", 1000, 1500, 1500, 150, 700);
     }
