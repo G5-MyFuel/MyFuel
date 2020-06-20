@@ -290,6 +290,8 @@ public class generalDashBoardBoundary implements DataInitializable {
                     imageView = new ImageView(image);
                     imageView.setFitHeight(30);
                     imageView.setFitWidth(30);
+                    button2.setVisible(false);
+                    button4.setVisible(false);
                     currentBtn.setGraphic(imageView);
                     currentBtn.setText("Approve orders");
                     currentBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {

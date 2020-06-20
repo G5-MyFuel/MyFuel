@@ -114,24 +114,4 @@ public class ManagerNotificationsPageBoundary implements DataInitializable {
         });
     }
 
-    /**
-     * Function to update the amount of the manager's notifications every 5 minutes
-     */
-    /*private void notificationFunction() {
-        int AmountOfNotifi = tableView.getItems().size();
-        Thread notifi = new Thread() {
-            public void run() {
-                for (; ; ) {
-                    //TODO update the number of notification
-
-                    try {
-                        sleep(300000);
-                    } catch (InterruptedException ex) {
-                        //...
-                    }
-                }
-            }
-        };
-        notifi.start();
-    }*/
 }
