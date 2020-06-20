@@ -205,7 +205,7 @@ public class MysqlConnection {
         /* *****************************************
          * ********** Orders From Supplier Queries ****************
          * *****************************************/
-        sqlArray[SqlQueryType.GET_ALL_ORDERS_FROM_SUPPLIER_TABLE.getCode()] = "SELECT OrderNumber,OrderStatus,userFirstName,userLastName,StationNumber,OrderDate,FuelType,Quantity,GasCompanyName,managerID,userEmail FROM OrderForStock as ofs, GasStation as gs, User as u WHERE ofs.StationNum=gs.StationNumber and ofs.GasCompanyName=gs.companyName and ofs.OrderStatus=\"In treatment\" and gs.managerID=u.userID ";
+        sqlArray[SqlQueryType.GET_ALL_ORDERS_FROM_SUPPLIER_TABLE.getCode()] = "SELECT OrderNumber,OrderStatus,userFirstName,userLastName,StationNumber,OrderDate,FuelType,Quantity,GasCompanyName,managerID,userEmail,inventory_95,inventory_diesel,inventory_scooter FROM OrderForStock as ofs, GasStation as gs, User as u WHERE ofs.StationNum=gs.StationNumber and ofs.GasCompanyName=gs.companyName and ofs.OrderStatus=\"In treatment\" and gs.managerID=u.userID ";
         sqlArray[SqlQueryType.UPDATE_STATUS_TO_DONE.getCode()] = "UPDATE `OrderForStock` SET `OrderStatus`= \"Done\" WHERE `OrderNumber`= ?";
         sqlArray[SqlQueryType.UPDATE_95_INVENTORY.getCode()] = "UPDATE `GasStation` SET `inventory_95`=? WHERE `managerID`=? and `StationNumber`=?";
         sqlArray[SqlQueryType.UPDATE_DIESEL_INVENTORY.getCode()] = "UPDATE `GasStation` SET `inventory_diesel`=? WHERE `managerID`=? and `StationNumber`=?";
