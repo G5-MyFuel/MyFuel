@@ -51,14 +51,8 @@ public class SettingDiscountRatesBoundary implements DataInitializable {
     public void initData(Object data) {
 
         this.managerID = (String) data;
-    }
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
         //managerID = "109268386";
         ArrayList<String> paramArray = new ArrayList<>();
-        System.out.println(managerID);
         paramArray.add("Get Manager data");
         paramArray.add(managerID);
         myController.getDiscountRatesTable(paramArray); //start the process that will ask server to execute quarry and get the table details
@@ -71,6 +65,26 @@ public class SettingDiscountRatesBoundary implements DataInitializable {
 
         /*  set all fields validators */
         formValidation();
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+        //managerID = "109268386";
+        /*ArrayList<String> paramArray = new ArrayList<>();
+        System.out.println(managerID);
+        paramArray.add("Get Manager data");
+        paramArray.add(managerID);
+        myController.getDiscountRatesTable(paramArray); //start the process that will ask server to execute quarry and get the table details
+        this.formValidation = new FormValidation();
+        ChooseSubscriptionTypeCombo.setItems(SubscriptionType);
+        ShowCurrentRateTXT.setVisible(false);
+        ShowNewRateTXT.setVisible(false);
+        btnSetNewRate.setVisible(false);
+        RequestSentMessageLabel.setVisible(false);*/
+
+        /*  set all fields validators */
+        //formValidation();
     }
 
     private void formValidation() {
@@ -87,9 +101,10 @@ public class SettingDiscountRatesBoundary implements DataInitializable {
 
     public void setManagerData(ArrayList<String> resultList) {
 
-        System.out.println(managerCompany);
+        System.out.println(managerID);
         managerCompany = resultList.get(0);
         managerStation = resultList.get(1);
+        System.out.println(managerCompany);
     }
 
     @FXML
