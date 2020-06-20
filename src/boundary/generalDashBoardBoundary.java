@@ -292,7 +292,6 @@ public class generalDashBoardBoundary implements DataInitializable {
                     imageView.setFitWidth(30);
                     currentBtn.setGraphic(imageView);
                     currentBtn.setText("Approve orders");
-                    button2.setVisible(false);
                     currentBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
                         @Override
                         public void handle(MouseEvent event) {
@@ -301,21 +300,20 @@ public class generalDashBoardBoundary implements DataInitializable {
                     });
                     break;
 
-                /*case "MANAGER_NOTIFICATION_PAGE":
-                    image = new Image(getClass().getResourceAsStream("../media/ButtonsDashBoardMedia/rec.png"));
+                case "MANAGER_NOTIFICATION_PAGE":
+                    image = new Image(getClass().getResourceAsStream("../media/ButtonsDashBoardMedia/alarm.png"));
                     imageView = new ImageView(image);
                     imageView.setFitHeight(30);
                     imageView.setFitWidth(30);
                     currentBtn.setGraphic(imageView);
                     currentBtn.setText("Notifications");
-                    button2.setVisible(false);
                     currentBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
                         @Override
                         public void handle(MouseEvent event) {
                             MANAGER_NOTIFICATION_PAGE();
                         }
                     });
-                    break;*/
+                    break;
 
                 case "FUEL_MANAGMENT_PAGE":
                     image = new Image(getClass().getResourceAsStream("../media/ButtonsDashBoardMedia/fuelManagement.png"));
@@ -364,7 +362,7 @@ public class generalDashBoardBoundary implements DataInitializable {
             button3.setGraphic(btnSignout.getGraphic());
             btnSignout.setVisible(false);
             button4.setVisible(false);
-        }else if(button4.getText().equals("b4")){
+        } else if (button4.getText().equals("b4")) {
             button4.setVisible(false);
         }
 
