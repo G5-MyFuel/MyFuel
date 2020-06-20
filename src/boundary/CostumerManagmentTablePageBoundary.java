@@ -29,6 +29,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import static java.lang.Thread.sleep;
+
 /**
  * the class Costumer Management Table Page Boundary
  *
@@ -49,7 +50,6 @@ public class CostumerManagmentTablePageBoundary implements DataInitializable {
      * The supervisor boundary controller.
      */
     private CostumerManagementController myController = new CostumerManagementController(this);
-
 
 
     @FXML
@@ -106,7 +106,6 @@ public class CostumerManagmentTablePageBoundary implements DataInitializable {
     private JFXTextField VehicleSearchCosIDtxt;
 
 
-
     private JFXComboBox<String> CostumertypeChoiceBox = new JFXComboBox<>();
 
 
@@ -117,8 +116,8 @@ public class CostumerManagmentTablePageBoundary implements DataInitializable {
     public void initialize(URL location, ResourceBundle resources) {
         VehicleInformationPane.setVisible(false);
         GasTypeChoiseBox.setItems(GasType);
-        myController.getCostumerTable(); //start the process that will ask server to execute quarry and get the table details
         myController.getVehicleTable();
+        myController.getCostumerTable(); //start the process that will ask server to execute quarry and get the table details
         tableStyle();
     }
 
@@ -202,8 +201,10 @@ public class CostumerManagmentTablePageBoundary implements DataInitializable {
             @Override
             public void handle(TableColumn.CellEditEvent<Costumer, String> t) {
                 Costumer temp = ((Costumer) t.getTableView().getItems().get(t.getTablePosition().getRow()));
-                temp.setPricingModel(t.getNewValue());
-                myController.updateCostumerDetailsInDb(SqlQueryType.UPDATE_COSTUMER_PRICING_MODEL, temp.getUserID(), temp.getPricingModel());
+                if(checkSubscriptionType(t.getNewValue(),temp)){
+                    temp.setPricingModel(t.getNewValue());
+                    myController.updateCostumerDetailsInDb(SqlQueryType.UPDATE_COSTUMER_PRICING_MODEL, temp.getUserID(), temp.getPricingModel());
+                }
             }
         });
         //Modifying the purchasePlan property
@@ -215,6 +216,25 @@ public class CostumerManagmentTablePageBoundary implements DataInitializable {
                 myController.updateCostumerDetailsInDb(SqlQueryType.UPDATE_COSTUMER_PURCHASE_PLAN, temp.getUserID(), temp.getPurchasePlan());
             }
         });
+    }
+
+    public boolean checkSubscriptionType(String subToCheck, Costumer tempCos) {
+        if (subToCheck.equals("Regular monthly subscription(singel)") || subToCheck.equals("Full monthly subscription")) {
+            if (tempCos.getCostumerVehicle().size() > 1) {
+                ErrorAlert.setTitle("Subscription Type Error");
+                ErrorAlert.setHeaderText("Costumer has more then 1 vehicle.\nYou may chose different subscription plan.");
+                ErrorAlert.showAndWait();
+                return false;
+            }
+        } else if (subToCheck.equals("Regular monthly subscription(multiple)")) {
+            if (tempCos.getCostumerVehicle().size() < 2) {
+                ErrorAlert.setTitle("Subscription Type Error");
+                ErrorAlert.setHeaderText("Costumer has 1 or less vehicles.\nYou may chose different subscription plan.");
+                ErrorAlert.showAndWait();
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
@@ -270,7 +290,7 @@ public class CostumerManagmentTablePageBoundary implements DataInitializable {
         CostumerTypeCol.setCellFactory(ComboBoxTableCell.forTableColumn(CostumerType));
 
         pricingModelCol.setCellValueFactory(new PropertyValueFactory<Costumer, String>("pricingModel"));
-        ObservableList<String> pricingModelType = FXCollections.observableArrayList("Casual fueling", "Regular monthly subscription(singel)","Regular monthly subscription(multiple)", "Full monthly subscription");
+        ObservableList<String> pricingModelType = FXCollections.observableArrayList("Casual fueling", "Regular monthly subscription(singel)", "Regular monthly subscription(multiple)", "Full monthly subscription");
         pricingModelCol.setCellFactory(ComboBoxTableCell.forTableColumn(pricingModelType));
 
         PurchasePlanCol.setCellValueFactory(new PropertyValueFactory<Costumer, String>("purchasePlan"));
@@ -292,6 +312,8 @@ public class CostumerManagmentTablePageBoundary implements DataInitializable {
 
     @FXML
     public void refreshTable() {
+        myController.getVehicleTable();
+        ;
         myController.getCostumerTable();
     }
 

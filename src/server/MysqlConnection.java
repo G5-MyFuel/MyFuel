@@ -131,7 +131,7 @@ public class MysqlConnection {
         } finally {
             this.disconnect();
         }
-        System.out.println(sqlArray[sqlAction.getActionType().getCode()].toString());
+        System.out.println(sqlArray[sqlAction.getActionType().getCode()]);
         return sqlResult;
     }
 
@@ -267,20 +267,21 @@ public class MysqlConnection {
                 "WHERE gs.companyName LIKE ?" +
                 "AND gs.StationNumber LIKE ?";
         sqlArray[SqlQueryType.GET_Manager_Data.getCode()] = "SELECT * FROM Employee WHERE Employee.employeeID LIKE ?";
-        sqlArray[SqlQueryType.INSERT_NEW_Quarterly_Report.getCode()] = "REPLACE INTO `ViewQuarterlyReportsForAdmin`" +
+        sqlArray[SqlQueryType.INSERT_NEW_Quarterly_Report.getCode()] = "INSERT INTO `ViewQuarterlyReportsForAdmin`" +
                 "(`companyName`, `StationNumber`, `Date`, `Quarterly`, `TotalRevenue`) " +
-                "VALUES (?,?,YEAR(curdate()),quarter(curdate()),?)";
-        sqlArray[SqlQueryType.INSERT_NEW_Purchases_Report.getCode()] = "REPLACE INTO `ViewPurchasesReportsForAdmin`" +
-                "(`companyName`, `StationNumber`, `Date`, `Quarterly`, `FuelType`, `LitersPurchased`, `SalesAmount`) " +
-                "VALUES (?,?,YEAR(curdate()),quarter(curdate()),?,?,?)," +
-                "(?,?,YEAR(curdate()),quarter(curdate()),?,?,?)," +
-                "(?,?,YEAR(curdate()),quarter(curdate()),?,?,?)";
+                "VALUES (?,?,curdate(),quarter(curdate()),?)";
 
-        sqlArray[SqlQueryType.INSERT_NEW_QuantityItemsStock_Report.getCode()] = "REPLACE INTO `ViewQuantityItemsStockReportsForAdmin`" +
+        sqlArray[SqlQueryType.INSERT_NEW_Purchases_Report.getCode()] = "INSERT INTO `ViewPurchasesReportsForAdmin`" +
+                "(`companyName`, `StationNumber`, `Date`, `Quarterly`, `FuelType`, `LitersPurchased`, `SalesAmount`) " +
+                "VALUES (?,?,CURRENT_TIME(),quarter(curdate()),?,?,?)," +
+                "(?,?,CURRENT_TIME(),quarter(curdate()),?,?,?)," +
+                "(?,?,curdate(),quarter(curdate()),?,?,?)";
+
+        sqlArray[SqlQueryType.INSERT_NEW_QuantityItemsStock_Report.getCode()] = "INSERT INTO `ViewQuantityItemsStockReportsForAdmin`" +
                 "(`companyName`, `StationNumber`, `Date`, `Quarterly`, `FuelType`, `AvailableInventory`) " +
-                "VALUES (?,?,YEAR(curdate()),quarter(curdate()),?,?)," +
-                "(?,?,YEAR(curdate()),quarter(curdate()),?,?)," +
-                "(?,?,YEAR(curdate()),quarter(curdate()),?,?)";
+                "VALUES (?,?,CURRENT_TIME(),quarter(curdate()),?,?)," +
+                "(?,?,curdate(),quarter(curdate()),?,?)," +
+                "(?,?,curdate(),quarter(curdate()),?,?)";
 
         /* *****************************************
          * ********** Admin View Reports Queries ****************
@@ -317,7 +318,6 @@ public class MysqlConnection {
          * ********** Purchase fuel for home heating ****************
          * **********************************************************
          */
-        sqlArray[SqlQueryType.GET_ALL_COSTUMER_TABLE.getCode()] = "select c.id,userFirstName,userLastName,userEmail,`Credit Card Number`,CreditCardExperationDate,CVV,customerType,`Pricing Model`,`Purchase Plan` from User as u,Costumer as c where u.userID=c.ID and c.ID = ?;";
         sqlArray[SqlQueryType.GET_ALL_SHIPPING_DATES_AVAILABLE.getCode()] = "SELECT * FROM ShippingOptionalDates;";
         sqlArray[SqlQueryType.INSERT_NEW_AVAILABLE_DATE_FOR_SHIPPING.getCode()] = "INSERT INTO ShippingOptionalDates (`DayAndDate`) VALUES (?);";
 

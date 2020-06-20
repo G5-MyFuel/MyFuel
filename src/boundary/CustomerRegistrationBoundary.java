@@ -8,6 +8,7 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import common.assets.ProjectPages;
+import common.assets.Toast;
 import entity.Costumer;
 import entity.CreditCard;
 import entity.Vehicle;
@@ -18,6 +19,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -114,6 +116,10 @@ public class CustomerRegistrationBoundary implements DataInitializable {
     private JFXCheckBox yellowCheckBox;
     @FXML
     private JFXCheckBox sonolCheckBox;
+    @FXML
+    private AnchorPane planInfoAnchorPane;
+    @FXML
+    private ImageView loadingImg;
 
 
     /*
@@ -146,6 +152,7 @@ public class CustomerRegistrationBoundary implements DataInitializable {
         VehicleInformationPane.setVisible(false);
         vehicleMangTAB.setDisable(true);
         planInfoTAB.setDisable(true);
+        loadingImg.setVisible(false);
         //
         //set Observable items into combo box:
         GasTypeChoiseBox.setItems(GasType);
@@ -271,7 +278,7 @@ public class CustomerRegistrationBoundary implements DataInitializable {
                 stations.add(2, "SONOL");
                 counter++;
             }
-            if (counter < 2) {
+            if (counter < 2 && PurchasePlanChoiseBox.getValue().equals("Multiple Stations")) {
                 ErrorAlert.setTitle("Internal Error");
                 ErrorAlert.setHeaderText("Your plan is Multiple Stations.\nplease select 2 or 3 stations.");
                 ErrorAlert.showAndWait();
@@ -289,21 +296,30 @@ public class CustomerRegistrationBoundary implements DataInitializable {
             tempCos.setPricingModel(PricingModelChoiseBox1.getValue());
             tempCos.setFuelCompany(stations);
             myController.setCostumerInDB(tempCos);
-            planInfoTAB.setDisable(true);
-            personalInfoTAB.setDisable(false);
-            vehicleMangTAB.getTabPane().getSelectionModel().selectPrevious();
-            vehicleMangTAB.getTabPane().getSelectionModel().selectPrevious();
-            //clear all fields section:
-            CostumerIDtxt.clear();
-            FirstNametxt.clear();
-            LastNametxt.clear();
-            EmailAdresstxt.clear();
-            VehicleIDtxt.clear();
-            VehicleTable.getItems().clear();
-            CardClickFlag = false;
-            tempVehicleArray.clear();
+            planInfoAnchorPane.setVisible(false);
+            loadingImg.setVisible(true);
         }
 
+    }
+
+    public void onRegisterSuccses() {
+        //clear all fields section:
+        planInfoTAB.setDisable(true);
+        personalInfoTAB.setDisable(false);
+        CostumerIDtxt.clear();
+
+        LastNametxt.clear();
+        EmailAdresstxt.clear();
+        VehicleIDtxt.clear();
+        VehicleTable.getItems().clear();
+        CardClickFlag = false;
+        tempVehicleArray.clear();
+        Toast.makeText(mainProjectFX.mainStage, FirstNametxt.getText() + " has successfully registered to the system.", 1000, 1500, 1500, 250, 400);
+        FirstNametxt.clear();
+        planInfoAnchorPane.setVisible(true);
+        loadingImg.setVisible(false);
+        vehicleMangTAB.getTabPane().getSelectionModel().selectPrevious();
+        vehicleMangTAB.getTabPane().getSelectionModel().selectPrevious();
     }
 
     /**
@@ -388,26 +404,16 @@ public class CustomerRegistrationBoundary implements DataInitializable {
         thisToolTip.setFont(Font.font("Arial", FontPosture.ITALIC, 1.5));
         thisToolTip.setTextAlignment(TextAlignment.CENTER);
         thisToolTip.setStyle("\n"
-               /* + "    -fx-border-color: black;\n"
-                + "    -fx-border-width: 1px;\n"
-                + "    -fx-font: normal bold 1pt \"Times New Roman\" ;\n"
-                + "    -fx-background-color: #2d4578;\n"
-                + "    -fx-text-fill: black;\n"
-                + "    -fx-background-radius: 20;\n"
-                + "    -fx-border-radius: 15px;\n"
-                + "    -fx-opacity: 1.0;");*/
+                + "-fx-background: rgba(30,30,30);"
+                + "-fx-text-fill: white;"
+                + " -fx-background-color: rgba(30,30,30,0.8);"
+                + " -fx-background-radius: 6px;"
+                + " -fx-background-insets: 0;"
+                + " -fx-padding: 0.667em 0.75em 0.667em 0.75em; /* 10px */"
+                + " -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.5) , 10, 0.0 , 0 , 3 );"
+                + " -fx-font-size: 0.85em;");
 
-                + "-fx-background: rgba(30,30,30);\n"
-                + "-fx-text-fill:  white;\n"
-                + "-fx-font: normal 1.5pt \"Times New Roman\" ;\n"
-                + "-fx-background-color: #2d4578;\n"
-                + "-fx-background-radius: 6px;\n"
-                + "-fx-text-alignment: center;\n"
-                + "-fx-background-insets: 0;\n"
-                + "-fx-font-weight: bold;\n"
-                + "-fx-padding: 0.667em 0.75em 0.600em 0.75em;\n"
-                + "-fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.5) , 10, 0.0 , 0 , 3 );\n"
-                + "-fx-font-size: 3em;");
+
 
         thisToolTip.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
 

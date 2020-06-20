@@ -35,6 +35,7 @@ public class CustomerRegistrationController extends BasicController {
     /*Logic Methods*/
 
     public void setCostumerInDB(Costumer costumer) {
+        tempCostumer = costumer;
         //set Costumer data into CostumerTablevarArray
         ArrayList<Object> CostumerTablevarArray = new ArrayList<>();
         //bulding customer
@@ -107,6 +108,9 @@ public class CustomerRegistrationController extends BasicController {
                     break;
                 case GET_ALL_VEHICLE_TABLE:
                     allVehicleArray.addAll(this.changeResultToVehicle(result));
+                    break;
+                case INSERT_NEW_COSTUMER:
+                    myBoundary.onRegisterSuccses();
                 default:
                     break;
             }
@@ -189,4 +193,5 @@ public class CustomerRegistrationController extends BasicController {
         }
         return resultList;
     }
+
 }

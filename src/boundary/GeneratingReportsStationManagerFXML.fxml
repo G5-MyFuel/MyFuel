@@ -59,20 +59,29 @@
             <Image url="@../media/GeneratingReports/purches.jpeg" />
          </image>
       </ImageView>
-      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="27.0" layoutY="363.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="quartInfo" fitHeight="25.0" fitWidth="25.0" layoutX="27.0" layoutY="363.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../media/CostumerRegisterationMedia/help_16px.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
-      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="375.0" layoutY="363.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="purchaseInfo" fitHeight="25.0" fitWidth="25.0" layoutX="375.0" layoutY="363.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../media/CostumerRegisterationMedia/help_16px.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
-      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="715.0" layoutY="363.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="quantityInfo" fitHeight="25.0" fitWidth="25.0" layoutX="715.0" layoutY="363.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../media/CostumerRegisterationMedia/help_16px.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
       <JFXTextField fx:id="ShowTotalRevenueTXT" focusColor="#00add8" labelFloat="true" layoutX="46.0" layoutY="423.0" onAction="#handleTotalRevenue" prefHeight="52.0" prefWidth="283.0" promptText="Total revenue for the last quarter is:" unFocusColor="#868282">
          <padding>

@@ -3,7 +3,6 @@ package boundary;
 import Contollers.FormValidation;
 import Contollers.GeneratingReportsStationManagerController;
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import entity.PurchasesReport;
 import entity.QuantityItemsStockReport;
@@ -13,7 +12,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.TextAlignment;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -81,6 +86,14 @@ public class GeneratingReportsStationManagerBoundary implements DataInitializabl
 
     @FXML
     private Button btnSavePurchasesReport;
+    @FXML
+    private ImageView quartInfo;
+
+    @FXML
+    private ImageView purchaseInfo;
+
+    @FXML
+    private ImageView quantityInfo;
 
     /*private final ObservableList<String> ReportsType = FXCollections.observableArrayList("Quarterly revenue report",
             "Purchases report", "Quantity of items in stock report");
@@ -114,6 +127,12 @@ public class GeneratingReportsStationManagerBoundary implements DataInitializabl
 
         /*  set all fields validators */
         formValidation();
+
+        //set tool tips
+        Tooltip.install(quartInfo, createToolTip("Generate report for annual quarter revenue and display total revenues."));
+        Tooltip.install(purchaseInfo, createToolTip("Generate detailed report for total purchases in your station."));
+        Tooltip.install(quantityInfo, createToolTip("Generate report of item amount that correct in stock.\nSave button will save the report so the company manager could see it."));
+
     }
 
     private void formValidation() {
@@ -234,6 +253,37 @@ public class GeneratingReportsStationManagerBoundary implements DataInitializabl
 
         managerCompany = resultList.get(0);
         managerStation = resultList.get(1);
+    }
+
+    private Tooltip createToolTip(String htmlStr) {
+        Tooltip thisToolTip = new Tooltip();
+
+        WebView browser = new WebView();
+        WebEngine webEngine = browser.getEngine();
+        webEngine.loadContent(htmlStr);
+
+        thisToolTip.setFont(Font.font("Arial", FontPosture.ITALIC, 1.5));
+        thisToolTip.setTextAlignment(TextAlignment.CENTER);
+        thisToolTip.setStyle("\n"
+                + "-fx-background: rgba(30,30,30);"
+                + "-fx-text-fill: white;"
+                + " -fx-background-color: rgba(30,30,30,0.8);"
+                + " -fx-background-radius: 6px;"
+                + " -fx-background-insets: 0;"
+                + " -fx-padding: 0.667em 0.75em 0.667em 0.75em; /* 10px */"
+                + " -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.5) , 10, 0.0 , 0 , 3 );"
+                + " -fx-font-size: 0.85em;");
+
+
+        thisToolTip.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+
+        thisToolTip.setGraphic(browser);
+        thisToolTip.setAutoHide(false);
+        thisToolTip.setMaxWidth(250);
+        thisToolTip.setMaxHeight(100);
+        thisToolTip.setGraphicTextGap(1.5);
+
+        return thisToolTip;
     }
 
 

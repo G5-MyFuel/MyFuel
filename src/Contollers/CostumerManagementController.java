@@ -155,6 +155,10 @@ public class CostumerManagementController extends BasicController {
             temp.clear();
             CreditCard card = new CreditCard(cos, (String) a.get(1), (String) a.get(2), (String) a.get(3));
             cos.setCostumerCreditCard(card);
+            for (Vehicle v : dbVehicles) {
+                if(v.getOwnerID().equals(cos.getUserID()))
+                    cos.getCostumerVehicle().add(v);
+            }
             resultList.add(cos);
         }
         return resultList;
@@ -189,4 +193,11 @@ public class CostumerManagementController extends BasicController {
         }
     }
 
+    public ArrayList<Vehicle> getDbVehicles() {
+        return dbVehicles;
+    }
+
+    public void setDbVehicles(ArrayList<Vehicle> dbVehicles) {
+        this.dbVehicles = dbVehicles;
+    }
 }

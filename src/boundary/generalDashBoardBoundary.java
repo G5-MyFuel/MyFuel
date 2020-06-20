@@ -31,7 +31,7 @@ public class generalDashBoardBoundary implements DataInitializable {
     private ViewAnalyticDataController analiticData = new ViewAnalyticDataController();
     private ArrayList<Prices> resultListFuelPrices = new ArrayList<>();
     private ArrayList<Costumer> resultListCustomers = new ArrayList<>();
-    private  Image image;
+    private Image image;
     private ImageView imageView;
 
 
@@ -61,19 +61,10 @@ public class generalDashBoardBoundary implements DataInitializable {
     private Button button1;
 
     @FXML
-    private ImageView button1img;
-
-    @FXML
     private Button button2;
 
     @FXML
-    private ImageView button2img;
-
-    @FXML
     private Button button3;
-
-    @FXML
-    private ImageView button3img;
 
     @FXML
     private Text time;
@@ -95,6 +86,8 @@ public class generalDashBoardBoundary implements DataInitializable {
 
     @FXML
     public Pane currentPagePane;
+    @FXML
+    private Button button4;
 
 
     @Override
@@ -119,25 +112,16 @@ public class generalDashBoardBoundary implements DataInitializable {
             if (button1.getText().equals("b1")) currentBtn = button1;
             else if (button2.getText().equals("b2")) currentBtn = button2;
             else if (button3.getText().equals("b3")) currentBtn = button3;
+            else if (button4.getText().equals("b4")) currentBtn = button4;
             //
             switch (pn) {
-                case "CONFIRM_DISCOUNT_RATE_PAGE":
-                    currentBtn.setText("Confirm discount rate");
-                    currentBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                        @Override
-                        public void handle(MouseEvent event) {
-                            CONFIRM_DISCOUNT_RATE_PAGE();
-                        }
-                    });
-                    break;
-
                 case "COSTUMER_MANAGEMENT_TABLE_PAGE":
                     image = new Image(getClass().getResourceAsStream("../media/CostumerRegisterationMedia/managment.png"));
                     imageView = new ImageView(image);
                     imageView.setFitHeight(27);
                     imageView.setFitWidth(25);
                     currentBtn.setGraphic(imageView);
-                    currentBtn.setText("Customer management");
+                    currentBtn.setText("Customer\nManagement");
                     currentBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
                         @Override
                         public void handle(MouseEvent event) {
@@ -187,7 +171,12 @@ public class generalDashBoardBoundary implements DataInitializable {
                     break;
 
                 case "RUN_MARKETING_CAMPAIGN_PAGE":
-                    currentBtn.setText("Run sale operation page");
+                    image = new Image(getClass().getResourceAsStream("../media/ButtonsDashBoardMedia/sale.png"));
+                    imageView = new ImageView(image);
+                    imageView.setFitHeight(30);
+                    imageView.setFitWidth(30);
+                    currentBtn.setGraphic(imageView);
+                    currentBtn.setText("Run SALE Operation");
                     currentBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
                         @Override
                         public void handle(MouseEvent event) {
@@ -197,7 +186,12 @@ public class generalDashBoardBoundary implements DataInitializable {
                     break;
 
                 case "SETTING_DISCOUNT_RATES_PAGE":
-                    currentBtn.setText("Setting discount rate page");
+                    image = new Image(getClass().getResourceAsStream("../media/ButtonsDashBoardMedia/discountRatesBtn.png"));
+                    imageView = new ImageView(image);
+                    imageView.setFitHeight(30);
+                    imageView.setFitWidth(30);
+                    currentBtn.setGraphic(imageView);
+                    currentBtn.setText("Setting Discount Rate");
                     currentBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
                         @Override
                         public void handle(MouseEvent event) {
@@ -231,9 +225,12 @@ public class generalDashBoardBoundary implements DataInitializable {
                     });
                     break;
 
-
                 case "GENERATING_REPORTS_MARKETING_MANAGER_PAGE":
-
+                    image = new Image(getClass().getResourceAsStream("../media/ButtonsDashBoardMedia/reports.png"));
+                    imageView = new ImageView(image);
+                    imageView.setFitHeight(30);
+                    imageView.setFitWidth(30);
+                    currentBtn.setGraphic(imageView);
                     currentBtn.setText("Generating reports");
                     currentBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
                         @Override
@@ -318,6 +315,20 @@ public class generalDashBoardBoundary implements DataInitializable {
                         }
                     });
                     break;
+                case "VIEW_REPORTS_PAGE":
+                    image = new Image(getClass().getResourceAsStream("../media/ButtonsDashBoardMedia/reports.png"));
+                    imageView = new ImageView(image);
+                    imageView.setFitHeight(30);
+                    imageView.setFitWidth(30);
+                    currentBtn.setGraphic(imageView);
+                    currentBtn.setText("View reports");
+                    currentBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent event) {
+                            VIEW_REPORTS_PAGE();
+                        }
+                    });
+                    break;
 
                 default:
                     System.err.println("Page incorrect!");
@@ -336,7 +347,11 @@ public class generalDashBoardBoundary implements DataInitializable {
             button3.setOnMouseClicked(btnSignout.getOnMouseClicked());
             button3.setGraphic(btnSignout.getGraphic());
             btnSignout.setVisible(false);
+            button4.setVisible(false);
+        }else if(button4.getText().equals("b4")){
+            button4.setVisible(false);
         }
+
     }
 
 
@@ -394,14 +409,6 @@ public class generalDashBoardBoundary implements DataInitializable {
         myFuelLogo.setVisible(false);
     }
 
-    void CONFIRM_DISCOUNT_RATE_PAGE() {
-        currentPagePane.setVisible(true);
-        currentPagePane.getChildren().clear();
-        currentPagePane.getStylesheets().add("../boudary/BGcss.css");
-        currentPagePane.getChildren().setAll(mainProjectFX.pagingController.loadBoundaryInPane(ProjectPages.CONFIRM_DISCOUNT_RATE_PAGE.getPath(), userID));
-        myFuelLogo.setVisible(false);
-    }
-
     void SALE_OPERATION_TEMPLATE_PAGE() {
         currentPagePane.setVisible(true);
         currentPagePane.getChildren().clear();
@@ -437,7 +444,7 @@ public class generalDashBoardBoundary implements DataInitializable {
     void VIEW_ANALITIC_DATA() {
         currentPagePane.setVisible(true);
         currentPagePane.getChildren().clear();
-     //   currentPagePane.getStylesheets().add("../boudary/BGcss.css");
+        //   currentPagePane.getStylesheets().add("../boudary/BGcss.css");
         currentPagePane.getChildren().setAll(mainProjectFX.pagingController.loadBoundaryInPane(ProjectPages.VIEW_ANALITIC_DATA.getPath(), this));
         myFuelLogo.setVisible(false);
     }
@@ -458,11 +465,20 @@ public class generalDashBoardBoundary implements DataInitializable {
         myFuelLogo.setVisible(false);
     }
 
-    void FUEL_MANAGMENT_PAGE(){
+    void FUEL_MANAGMENT_PAGE() {
         currentPagePane.setVisible(true);
         mainProjectFX.pagingController.loadAdditionalStage(ProjectPages.FUEL_MANAGMENT_PAGE.getPath(), userID);
         myFuelLogo.setVisible(false);
     }
+
+    void VIEW_REPORTS_PAGE() {
+        currentPagePane.setVisible(true);
+        currentPagePane.getChildren().clear();
+        currentPagePane.getStylesheets().add("../boudary/BGcss.css");
+        currentPagePane.getChildren().setAll(mainProjectFX.pagingController.loadBoundaryInPane(ProjectPages.VIEW_REPORTS_PAGE.getPath(), userID));
+        myFuelLogo.setVisible(false);
+    }
+
 
     @FXML
     void homePageClick(MouseEvent event) {

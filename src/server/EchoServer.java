@@ -13,7 +13,6 @@ public class EchoServer extends AbstractServer {
     final public static int DEFAULT_PORT = 5555;
     final public static String FILLE_DIRECTORY = "C:\\the place we store the fiels.\\";
     public static int portNumber = 0;
-    MysqlConnection mysql = MysqlConnection.Instance;
 
     // Constructors ****************************************************
 
