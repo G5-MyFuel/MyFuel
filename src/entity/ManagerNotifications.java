@@ -6,12 +6,15 @@ import org.omg.CORBA.INTERNAL;
  * @see ManagerNotifications - the form's entity class
  */
 public class ManagerNotifications {
-    String orderNumber;
-    Integer stationNumber;
+    String orderNumber,FuelType;
+    Integer stationNumber,Quantity;
 
-    public ManagerNotifications(String orderNumber, Integer stationNumber){
+
+    public ManagerNotifications(String orderNumber, Integer stationNumber, String FuelType, Integer Quantity){
         this.orderNumber=orderNumber;
         this.stationNumber=stationNumber;
+        this.FuelType=FuelType;
+        this.Quantity=Quantity;
     }
 
     /**
@@ -19,12 +22,16 @@ public class ManagerNotifications {
      * **/
     public String getOrderNumber() { return orderNumber; }
     public Integer getStationNumber() { return stationNumber; }
+    public String getFuelType() { return FuelType; }
+    public Integer getQuantity() { return Quantity; }
 
     /**
      * Setters
      * **/
     public void setStationNumber(Integer stationNumber) { this.stationNumber = stationNumber; }
     public void setOrderNumber(String orderNumber) { this.orderNumber = orderNumber;}
+    public void setFuelType(String fuelType) { FuelType = fuelType; }
+    public void setQuantity(Integer quantity) { Quantity = quantity; }
 
     @Override
     public String toString() {

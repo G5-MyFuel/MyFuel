@@ -199,13 +199,13 @@ public class MysqlConnection {
          * *****************************************************/
         sqlArray[SqlQueryType.GET_ALL_ORDER_TO_SUPPLY_FOR_STATION_MANAGER.getCode()] = "SELECT OrderNumber,companyName,StationNum,FuelType,Quantity,OrderStatus,managerID FROM OrderForStock as ofs, GasStation as gs, User as u WHERE ofs.StationNum=gs.StationNumber and ofs.GasCompanyName=gs.companyName and ofs.OrderStatus=\"New\" and u.userID=gs.managerID and gs.managerID=?";
         sqlArray[SqlQueryType.UPDATE_STATUS_TO_IN_TREATMENT.getCode()] = "UPDATE `OrderForStock` SET `OrderStatus` = \"In treatment\" WHERE `OrderNumber` = ?";
-        sqlArray[SqlQueryType.GET_ALL_ORDER_WITH_STATUS_DONE.getCode()]="SELECT OrderNumber,StationNumber FROM OrderForStock as ofs, GasStation as gs, User as u WHERE ofs.StationNum=gs.StationNumber and ofs.GasCompanyName=gs.companyName and ofs.OrderStatus=\"Done\" and gs.managerID=u.userID";
+        sqlArray[SqlQueryType.GET_ALL_ORDER_WITH_STATUS_DONE.getCode()]="SELECT OrderNumber,StationNumber,FuelType,Quantity FROM OrderForStock as ofs, GasStation as gs, User as u WHERE ofs.StationNum=gs.StationNumber and ofs.GasCompanyName=gs.companyName and ofs.OrderStatus=\"Done\" and gs.managerID=u.userID and gs.managerID=?";
         sqlArray[SqlQueryType.UPDATE_STATUS_TO_VIEWED.getCode()]="UPDATE `OrderForStock` SET `OrderStatus` = \"Viewed\" WHERE `OrderNumber` = ?";
 
         /* *****************************************
          * ********** Orders From Supplier Queries ****************
          * *****************************************/
-        sqlArray[SqlQueryType.GET_ALL_ORDERS_FROM_SUPPLIER_TABLE.getCode()] = "SELECT OrderNumber,OrderStatus,userFirstName,userLastName,StationNumber,OrderDate,FuelType,Quantity,GasCompanyName,managerID,userEmail FROM OrderForStock as ofs, GasStation as gs, User as u WHERE ofs.StationNum=gs.StationNumber and ofs.GasCompanyName=gs.companyName and ofs.OrderStatus=\"In treatment\" and gs.managerID=u.userID ";
+        sqlArray[SqlQueryType.GET_ALL_ORDERS_FROM_SUPPLIER_TABLE.getCode()] = "SELECT OrderNumber,OrderStatus,userFirstName,userLastName,StationNumber,OrderDate,FuelType,Quantity,GasCompanyName,managerID,userEmail,inventory_95,inventory_diesel,inventory_scooter FROM OrderForStock as ofs, GasStation as gs, User as u WHERE ofs.StationNum=gs.StationNumber and ofs.GasCompanyName=gs.companyName and ofs.OrderStatus=\"In treatment\" and gs.managerID=u.userID ";
         sqlArray[SqlQueryType.UPDATE_STATUS_TO_DONE.getCode()] = "UPDATE `OrderForStock` SET `OrderStatus`= \"Done\" WHERE `OrderNumber`= ?";
         sqlArray[SqlQueryType.UPDATE_95_INVENTORY.getCode()] = "UPDATE `GasStation` SET `inventory_95`=? WHERE `managerID`=? and `StationNumber`=?";
         sqlArray[SqlQueryType.UPDATE_DIESEL_INVENTORY.getCode()] = "UPDATE `GasStation` SET `inventory_diesel`=? WHERE `managerID`=? and `StationNumber`=?";

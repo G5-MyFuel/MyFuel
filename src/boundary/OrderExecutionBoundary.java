@@ -137,7 +137,14 @@ public class OrderExecutionBoundary implements DataInitializable {
         DoneBtn.setVisible(false);
         tableView.refresh();
 
-        addToStock(temp.getQuantity(), temp.getFuelType(), temp.getStationNumber(), temp.getManagerID());
+        /**  After the supplier approve the order, we update the stock  **/
+        if (temp.getFuelType().equals("Gasoline95"))
+            myController.setNewInventory95(temp.getQuantity()+Integer.parseInt(temp.getInventory95()), temp.getManagerID(), temp.getStationNumber());
+        else if (temp.getFuelType().equals("diesel"))
+            myController.setNewInventoryDiesel(temp.getQuantity()+Integer.parseInt(temp.getInventoryDiesel()), temp.getManagerID(), temp.getStationNumber());
+        else if (temp.getFuelType().equals("scooterFuel"))
+            myController.setNewInventoryScooter(temp.getQuantity()+Integer.parseInt(temp.getInventoryScooter()), temp.getManagerID(), temp.getStationNumber());
+
         /** Send an email to the station manager that the order arrived **/
         sender.sendMessage(temp.getUserEmail(),"Order update","Dear "+temp.getUserFirstName()+" "+temp.getUserLastName()+
                 ", Order number "+temp.getOrderNumber()+" has arrived to your station.\n Have a nice day.\n\n *message from MyFuel");
