@@ -103,17 +103,14 @@ public class GeneratingReportsStationManagerBoundary implements DataInitializabl
 
     @Override
     public void initData(Object data) {
+
+        //managerID = "109268386";
         this.managerID = (String) data;
-    }
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
-        managerID = "109268386";
         ArrayList<String> paramArray = new ArrayList<>();
         paramArray.add("Get Manager data");
         paramArray.add(managerID);
         myController.GetReportData(paramArray); //start the process that will ask server to execute quarry and get the table details
+
         this.formValidation = FormValidation.getValidator();
 
         ShowTotalRevenueTXT.setVisible(false);
@@ -132,6 +129,12 @@ public class GeneratingReportsStationManagerBoundary implements DataInitializabl
         Tooltip.install(quartInfo, createToolTip("Generate report for annual quarter revenue and display total revenues."));
         Tooltip.install(purchaseInfo, createToolTip("Generate detailed report for total purchases in your station."));
         Tooltip.install(quantityInfo, createToolTip("Generate report of item amount that correct in stock.\nSave button will save the report so the company manager could see it."));
+
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
 
     }
 
