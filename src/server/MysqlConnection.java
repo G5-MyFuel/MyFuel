@@ -199,7 +199,7 @@ public class MysqlConnection {
          * *****************************************************/
         sqlArray[SqlQueryType.GET_ALL_ORDER_TO_SUPPLY_FOR_STATION_MANAGER.getCode()] = "SELECT OrderNumber,companyName,StationNum,FuelType,Quantity,OrderStatus,managerID FROM OrderForStock as ofs, GasStation as gs, User as u WHERE ofs.StationNum=gs.StationNumber and ofs.GasCompanyName=gs.companyName and ofs.OrderStatus=\"New\" and u.userID=gs.managerID and gs.managerID=?";
         sqlArray[SqlQueryType.UPDATE_STATUS_TO_IN_TREATMENT.getCode()] = "UPDATE `OrderForStock` SET `OrderStatus` = \"In treatment\" WHERE `OrderNumber` = ?";
-        sqlArray[SqlQueryType.GET_ALL_ORDER_WITH_STATUS_DONE.getCode()]="SELECT OrderNumber,StationNumber FROM OrderForStock as ofs, GasStation as gs, User as u WHERE ofs.StationNum=gs.StationNumber and ofs.GasCompanyName=gs.companyName and ofs.OrderStatus=\"Done\" and gs.managerID=u.userID";
+        sqlArray[SqlQueryType.GET_ALL_ORDER_WITH_STATUS_DONE.getCode()]="SELECT OrderNumber,StationNumber,FuelType,Quantity FROM OrderForStock as ofs, GasStation as gs, User as u WHERE ofs.StationNum=gs.StationNumber and ofs.GasCompanyName=gs.companyName and ofs.OrderStatus=\"Done\" and gs.managerID=u.userID";
         sqlArray[SqlQueryType.UPDATE_STATUS_TO_VIEWED.getCode()]="UPDATE `OrderForStock` SET `OrderStatus` = \"Viewed\" WHERE `OrderNumber` = ?";
 
         /* *****************************************
