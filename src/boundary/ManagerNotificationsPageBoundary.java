@@ -102,6 +102,7 @@ public class ManagerNotificationsPageBoundary implements DataInitializable {
         CleanBtn.setDisable(true);
         OrderViewAnchorPane.setVisible(false);
         noNotificationTxt.setVisible(false);
+        explanationTxt.setVisible(false);
     }
 
     public void setOrdersInTableView(ArrayList<ManagerNotifications> OrderArray) {
@@ -115,6 +116,7 @@ public class ManagerNotificationsPageBoundary implements DataInitializable {
             noNotificationTxt.setVisible(true);
             explanationTxt.setVisible(false);
         }
+        else explanationTxt.setVisible(true);
     }
 
     public void getOrderClick() {
