@@ -142,7 +142,6 @@
             <Font name="Serif Bold" size="18.0" />
          </font>
       </Label>
-      <ExpansionPanel.CollapsedPanel layoutX="810.0" layoutY="208.0" prefWidth="252" />
       <Text fx:id="subscriptionInfo" layoutX="36.0" layoutY="696.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*According to your business terms in the XXXX subscription And the current operation is YYYY" wrappingWidth="403.8779296875" />
       <Label fx:id="vehicleInfoLabel" layoutX="25.0" layoutY="57.0" prefHeight="20.0" prefWidth="547.0" text="NFC sensor detected  vehicle number   56-789-34    customer number ">
          <font>
