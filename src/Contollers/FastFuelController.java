@@ -83,7 +83,11 @@ public class FastFuelController extends BasicController{
         });
     }
 
-
+    /**
+     * This method update Inventory of the appropriate fuel type in DB
+     * @param fuelType
+     * @param myArray
+     */
     public void updateInvetory(String fuelType, ArrayList<String> myArray) {
         ArrayList<Object> varArray =  new  ArrayList<Object>();
         varArray.add(myArray.get(0));
@@ -108,7 +112,10 @@ public class FastFuelController extends BasicController{
         };
     }
 
-
+    /**
+     *  This method get a customer and find the gas stations he can refuel at
+     * @param costumerID
+     */
     public void getOptionalStationForCustomer(String costumerID) {
         ArrayList<Object> varArray = new ArrayList<>();
         varArray.add(costumerID);
@@ -167,6 +174,10 @@ public class FastFuelController extends BasicController{
         return resultList;
     }
 
+    /**
+     * Get a customer and find his vehicles
+     * @param costumerID
+     */
     public void getCarsForCustomer(String costumerID) {
         ArrayList<Object> varArray = new ArrayList<>();
         varArray.add(costumerID);
@@ -174,6 +185,12 @@ public class FastFuelController extends BasicController{
         super.sendSqlActionToClient(sqlAction);
     }
 
+    /**
+     * Modifies the results that came from DB for vehicles Array
+     *
+     * @param result
+     * @return resultList of vehicle
+     */
     private ArrayList<Vehicle> changeResultToCars(SqlResult result){
         //  `Vehicle ID`  |   `Fuel Type`   |   `Owner ID
         ArrayList<Vehicle> resultList = new ArrayList<>();
