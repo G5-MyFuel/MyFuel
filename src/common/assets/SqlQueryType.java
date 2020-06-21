@@ -15,7 +15,7 @@ public enum SqlQueryType {
     GET_EMPLOYEE_TABLE(SqlExecutionType.EXECUTE_QUERY),
     //for Price class
     GET_ALL_UPDATED_PRICES(SqlExecutionType.EXECUTE_QUERY),
-    GET_ALL_PURCHASE_FUEL_AMOUNT_OF_USER(SqlExecutionType.EXECUTE_QUERY),
+    GET_PRE_MONTH_PURCHASE_FUEL_AMOUNT_OF_USER(SqlExecutionType.EXECUTE_QUERY),
 
     /* *****************************************
      * ********** Fuel Management Queries ****************
@@ -29,7 +29,7 @@ public enum SqlQueryType {
      * *****************************************/
     GET_ALL_SHIPPING_DATES_AVAILABLE(SqlExecutionType.EXECUTE_QUERY),
     INSERT_NEW_AVAILABLE_DATE_FOR_SHIPPING(SqlExecutionType.UPDATE_QUERY),
-    GET_CUSTOMER_DETAILS(SqlExecutionType.EXECUTE_QUERY),
+    GET_SPECIFIC_CUSTOMER_DETAILS(SqlExecutionType.EXECUTE_QUERY),
 
     /* *****************************************
      * ********** Discount Rates Queries ****************

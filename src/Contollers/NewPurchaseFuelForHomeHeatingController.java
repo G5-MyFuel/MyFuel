@@ -30,16 +30,7 @@ public class NewPurchaseFuelForHomeHeatingController extends BasicController {
         this.myBoundary = myBoundary;
     }
 
-    /**
-     * NewPurchaseFuelForHomeHeatingLogic Instance getter using SingleTone DesignPatterns
-     *
-     * @return Instance of logic class
-     */
-//    public static NewPurchaseFuelForHomeHeatingController getInstance() {
-//        if (Instance == null)
-//            Instance = new NewPurchaseFuelForHomeHeatingController();
-//        return Instance;
-//    }
+
     public boolean validatePage(Object guiObj) {
         if (guiObj instanceof JFXTextField) {
             JFXTextField jfxTextField = (JFXTextField) guiObj;
@@ -59,37 +50,43 @@ public class NewPurchaseFuelForHomeHeatingController extends BasicController {
     @Override
     public void getResultFromClient(SqlResult result) {
         Platform.runLater(() -> {
-            switch (result.getActionType()) {
-                case GET_ALL_USERS_TABLE:
-                    System.out.println("NewPurchaseFuelForHomeHeatingController -> myController.getUsersTable();");
-                    ArrayList<User> resultListUsers = new ArrayList<>();
-                    break;
-                case GET_ALL_SHIPPING_DATES_AVAILABLE:
-                    System.out.println("NewPurchaseFuelForHomeHeatingController -> myController.GetAvailableTimesToShippingDate();");
-                    availableTimesInDate = changeResultToAvailableShippingDatesArrayList(result);
-                    myBoundary.setAvailableTimesForShipping();
-                    break;
-                case INSERT_NEW_AVAILABLE_DATE_FOR_SHIPPING:
-                    System.out.println("NewPurchaseFuelForHomeHeatingController -> myController.INSERT_NEW_AVAILABLE_DATE_FOR_SHIPPING;");
-                    break;
-                case GET_ALL_COSTUMER_TABLE:
-                    //    myBoundary.setCostumerArrayList(resultArray);
-                    myBoundary.setCurrentCostumerDetailsFromDB(fromResultSetToCustomers(result, myBoundary.currentCustomerId));
-                    break;
+            try {
+                switch (result.getActionType()) {
+                    case GET_ALL_USERS_TABLE:
+                        System.out.println("NewPurchaseFuelForHomeHeatingController -> myController.getUsersTable();");
+                        ArrayList<User> resultListUsers = new ArrayList<>();
+                        break;
+                    case GET_ALL_SHIPPING_DATES_AVAILABLE:
+                        System.out.println("NewPurchaseFuelForHomeHeatingController -> myController.GetAvailableTimesToShippingDate();");
+                        availableTimesInDate = changeResultToAvailableShippingDatesArrayList(result);
+                        myBoundary.setAvailableTimesForShipping();
+                        break;
+                    case INSERT_NEW_AVAILABLE_DATE_FOR_SHIPPING:
+                        System.out.println("NewPurchaseFuelForHomeHeatingController -> myController.INSERT_NEW_AVAILABLE_DATE_FOR_SHIPPING;");
+                        break;
+                    case GET_SPECIFIC_CUSTOMER_DETAILS:
+                        Costumer c = this.fromResultSetToCustomers(result, myBoundary.currentCustomerId);
+                        myBoundary.setCurrentCostumerDetailsFromDB(c);
+                        break;
+                }
+            } catch (NullPointerException npe) {
             }
         });
     }
 
 
-    public void GET_ALL_COSTUMER_TABLE_FromDB() {
-        SqlAction sqlAction = new SqlAction(SqlQueryType.GET_ALL_COSTUMER_TABLE);
+    public void GET_SPECIFIC_CUSTOMER_DETAILS(String str) {
+        ArrayList<Object> varArray = new ArrayList<>();
+        varArray.add(str);
+        SqlAction sqlAction = new SqlAction(SqlQueryType.GET_SPECIFIC_CUSTOMER_DETAILS, varArray);
         super.sendSqlActionToClient(sqlAction);
     }
 
     private Costumer fromResultSetToCustomers(SqlResult result, String userID) {
         Costumer c = null;
         for (ArrayList<Object> a : result.getResultData()) {
-            c = new Costumer(userID, "", (String) a.get(7), (String) a.get(1), (String) a.get(2), (String) a.get(3), new CreditCard(null, (String) a.get(4), (String) a.get(5), (String) a.get(6)), (String) a.get(9), (String) a.get(7));
+            c = new Costumer(userID, "", (String) a.get(7), (String) a.get(1), (String) a.get(2),
+                    (String) a.get(3), new CreditCard(null, (String) a.get(4), (String) a.get(5), (String) a.get(6)), (String) a.get(9), (String) a.get(8));
             c.getCostumerCreditCard().setCardOwner(c);
         }
         return c;

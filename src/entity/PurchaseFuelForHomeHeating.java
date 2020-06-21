@@ -14,6 +14,7 @@ public class PurchaseFuelForHomeHeating extends Purchase {
     private OrderDeliveryStatus deliveryStatus;
     private ShippingMethod shippingMethod;
     private String ShippingDateAndTime;
+    private Prices priceOfOrder;
 
     public PurchaseFuelForHomeHeating(String customerID, LocalDateTime purchaseDate, double fuelAmount, String emailForInvoice, String phoneNumberForContact, String noteForPurchase, OrderDeliveryStatus deliveryStatus, ShippingMethod shippingMethod, String shippingDateAndTime) {
         super(customerID, purchaseDate, fuelAmount);
@@ -85,6 +86,14 @@ public class PurchaseFuelForHomeHeating extends Purchase {
         this.addressForShipping = addressForShipping;
     }
 
+    public Prices getPriceOfOrder() {
+        return priceOfOrder;
+    }
+
+    public void setPriceOfOrder(Prices priceOfOrder) {
+        this.priceOfOrder = priceOfOrder;
+    }
+
     public static class Address {
         String streetName;
         String ApartmentNumberTXT;
@@ -129,5 +138,6 @@ public class PurchaseFuelForHomeHeating extends Purchase {
         public void setZipCode(String zipCode) {
             ZipCode = zipCode;
         }
+
     }
 }

@@ -1,28 +1,33 @@
 package common.assets.enums;
 
 public enum FuelTypes {
-    Gasoline95 {
-        @Override
-        public String toString() {
-            return "Gasoline95";
+    Gasoline95 ("Gasoline95"),
+    Diesel("Diesel"),
+    ScooterFuel ("ScooterFuel"),
+    HomeHeatingFuel ("HomeHeatingFuel");
+
+    private String fuelTypeString;
+
+    FuelTypes(String s){
+        this.fuelTypeString = s;
+    }
+
+    public static FuelTypes fromString(String text) {
+        for (FuelTypes b : FuelTypes.values()) {
+            if (b.fuelTypeString.equalsIgnoreCase(text)) {
+                return b;
+            }
         }
-    },
-    Diesel {
-        @Override
-        public String toString() {
-            return "Diesel";
+        return null;
+    }
+
+    public static <T extends Enum<T>> T getEnumFromString(Class<T> c, String string) {
+        if (c != null && string != null) {
+            try {
+                return Enum.valueOf(c, string.trim().toUpperCase());
+            } catch (IllegalArgumentException ex) {
+            }
         }
-    },
-    ScooterFuel {
-        @Override
-        public String toString() {
-            return "ScooterFuel";
-        }
-    },
-    HomeHeatingFuel {
-        @Override
-        public String toString() {
-            return "HomeHeatingFuel";
-        }
-    };
+        return null;
+    }
 }

@@ -476,7 +476,6 @@ public class generalDashBoardBoundary implements DataInitializable {
     void newPurchaseFuelForHomeHeatingClick() {
         currentPagePane.setVisible(true);
         currentPagePane.getChildren().clear();
-        currentPagePane.getStylesheets().add("../boudary/BGcss.css");
         currentPagePane.getChildren().setAll(mainProjectFX.pagingController.loadBoundaryInPane(ProjectPages.PURCHASE_FUEL_FOR_HOME_HEATING.getPath(), userID));
         myFuelLogo.setVisible(false);
     }

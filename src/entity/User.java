@@ -112,7 +112,6 @@ public class User implements Serializable {
                 ", userFirstName='" + userFirstName + '\'' +
                 ", userLastName='" + userLastName + '\'' +
                 ", userEmail='" + userEmail + '\'' +
-                ", fuelCompany=" + fuelCompany.toString() +
                 '}';
     }
 

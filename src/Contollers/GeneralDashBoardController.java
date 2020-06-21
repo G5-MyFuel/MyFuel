@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class GeneralDashBoardController extends BasicController {
     private generalDashBoardBoundary myBoundary;
-    private Double fuelAmountOfPreMonthForCurrentUser = 0.0;
+    private static Double fuelAmountOfPreMonthForCurrentUser = 0.0;
     private String currentUserID = null;
 
 
@@ -36,8 +36,9 @@ public class GeneralDashBoardController extends BasicController {
                     case GET_ALL_UPDATED_PRICES:
                         this.changeResultToFuelPrices(result);
                         break;
-                    case GET_ALL_PURCHASE_FUEL_AMOUNT_OF_USER:
+                    case GET_PRE_MONTH_PURCHASE_FUEL_AMOUNT_OF_USER:
                         this.changeResultToFueAmountOfPreMonthOfCurUser(result, currentUserID);
+                        Prices.fuelAmountOfPreviousMonth = Double.valueOf(fuelAmountOfPreMonthForCurrentUser);
                         break;
                     default:
                         break;
@@ -51,7 +52,7 @@ public class GeneralDashBoardController extends BasicController {
         ArrayList<Object> vars = new ArrayList<>();
         if (currentUserID != null) vars.add(currentUserID);
         if (customerId != null) vars.add(customerId);
-        SqlAction sqlAction = new SqlAction(SqlQueryType.GET_ALL_PURCHASE_FUEL_AMOUNT_OF_USER, vars);
+        SqlAction sqlAction = new SqlAction(SqlQueryType.GET_PRE_MONTH_PURCHASE_FUEL_AMOUNT_OF_USER, vars);
         super.sendSqlActionToClient(sqlAction);
     }
 

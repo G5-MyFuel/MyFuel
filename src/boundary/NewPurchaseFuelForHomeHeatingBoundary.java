@@ -3,10 +3,9 @@ package boundary;
 import Contollers.FormValidation;
 import Contollers.NewPurchaseFuelForHomeHeatingController;
 import com.jfoenix.controls.*;
-import entity.Costumer;
-import entity.OrderDeliveryStatus;
-import entity.PurchaseFuelForHomeHeating;
-import entity.ShippingDay;
+import common.assets.enums.FuelTypes;
+import common.assets.enums.ShippingMethod;
+import entity.*;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -32,6 +31,7 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
@@ -98,6 +98,12 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
     private Tab shippingDetailsTab;
 
     @FXML
+    private AnchorPane topAnchorPane;
+
+    @FXML
+    private VBox mainVbox;
+
+    @FXML
     private HBox hboxOfStandart;
 
     @FXML
@@ -108,9 +114,6 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
 
     @FXML
     private VBox whenPane;
-
-    @FXML
-    private Label whenLable;
 
     @FXML
     private HBox dayAndDateComboBoxHboxLine;
@@ -137,19 +140,52 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
     private JFXButton t7to9BTN;
 
     @FXML
-    private VBox vboxOfShippingDetails;
-
-    @FXML
     private JFXButton t17to19BTN;
-
-    @FXML
-    private Text firstOverviewText;
 
     @FXML
     private JFXButton t13to15BTN;
 
     @FXML
+    private VBox whenPane1;
+
+    @FXML
+    private Label whenLable1;
+
+    @FXML
+    private HBox dayAndDateComboBoxHboxLine1;
+
+    @FXML
+    private JFXDatePicker shippingDatePicker1;
+
+    @FXML
+    private Label ShippingHouresAvailableOnThisDateLABLE1;
+
+    @FXML
+    private GridPane optionalDatesForShippingGridPane1;
+
+    @FXML
+    private JFXButton t9to11BTN1;
+
+    @FXML
+    private JFXButton t11to13BTN1;
+
+    @FXML
+    private JFXButton t15to17BTN1;
+
+    @FXML
+    private JFXButton t7to9BTN1;
+
+    @FXML
+    private JFXButton t17to19BTN1;
+
+    @FXML
+    private JFXButton t13to15BTN1;
+
+    @FXML
     private VBox shippingOverviewPane;
+
+    @FXML
+    private Text firstOverviewText;
 
     @FXML
     private Text shippingSummeryDetailsTXT;
@@ -160,10 +196,6 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
     @FXML
     private Tab orderReviewTab;
 
-    @FXML
-    private AnchorPane topAnchorPane;
-    @FXML
-    private VBox mainVbox;
     @FXML
     private Text totalPricesOfAlllInUsdTXT;
 
@@ -192,13 +224,12 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
     public void initData(Object data) {
         this.currentCustomerId = (String) data;
         LocalDate.now().toString();
+        myController.GET_SPECIFIC_CUSTOMER_DETAILS(this.currentCustomerId);
         this.currentPurchaseHomeHeating = new PurchaseFuelForHomeHeating(currentCustomerId, LocalDateTime.now(), 0.0);
-        myController.GET_ALL_COSTUMER_TABLE_FromDB();
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //setDayAndDateComboBox();
         this.formValidation = FormValidation.getValidator();
         this.orderDetailsIndicatorTAB.setVisible(false);
         this.shippingIndicatorTAB1.setVisible(false);
@@ -256,7 +287,6 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
         orderDetailsIndicatorTAB.setVisible(true);
     }
 
-    //todo: להמשיך להגדיר את התאריכים האופציונלים שיובאו מהדטהבייס מטבלת ShippingOptionalDates
     public void SetShippingTab() {
         shippingOverviewPane.setVisible(false);
         whenPane.setVisible(false);
@@ -286,30 +316,19 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
 
 
     private void FastShippingSelected() {
-        whenPane.setVisible(true);
-        whenPane.getChildren().remove(shippingDatePicker);
-        whenPane.getChildren().remove(ShippingHouresAvailableOnThisDateLABLE);
-        whenPane.getChildren().remove(optionalDatesForShippingGridPane);
-        Image img = new Image("/media/FuelForHomeHeating/fastDelivery1GIF.gif");
-        iconFastShipping = new ImageView(img);
-        iconFastShipping.setPreserveRatio(true);
-        whenPane.getChildren().add(1, iconFastShipping);
+        whenPane.setVisible(false);
+        whenPane1.setVisible(true);
+        //
         firstOverviewText.setText("You chose a fast shipping method!");
         shippingSummeryDetailsTXT.setText("You will receive your invitation to the address you entered in the next 6 hours");
         shippingOverviewPane.setVisible(true);
     }
 
     private void StandardShippingSelected() throws InterruptedException {
+        whenPane1.setVisible(false);
+        shippingOverviewPane.setVisible(false);
         whenPane.setVisible(true);
-        whenPane.getChildren().remove(iconFastShipping);
-        whenPane.setAlignment(Pos.TOP_CENTER);
-        whenPane.getChildren().add(shippingDatePicker);
-        whenPane.getChildren().add(ShippingHouresAvailableOnThisDateLABLE);
-        whenPane.getChildren().add(optionalDatesForShippingGridPane);
-        shippingDatePicker.setVisible(true);
-        ShippingHouresAvailableOnThisDateLABLE.setVisible(false);
-        optionalDatesForShippingGridPane.setVisible(false);
-
+        //
         // disable past dates of DatePicker gui obj
         Callback<DatePicker, DateCell> callB = new Callback<DatePicker, DateCell>() {
             @Override
@@ -337,7 +356,6 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
         ArrayList<ShippingDay> allDatesAvailableAsArrayList = myController.getAvailableTimesInDate();
     }
 
-
     @FXML
     void GoToOrderDetailsPage(MouseEvent event) {
 
@@ -354,10 +372,68 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
     }
 
     @FXML
+    void ClickOnREVIEWtab() {
+        if (checkAndSetShippingMethod()) {
+            //shipping details setters
+            currentPurchaseHomeHeating.setCustomerID(currentCustomerId);
+            firstNameTXT.setText(" " + currentCostumerDetailsFromDB.getUserFirstName());
+            lastNameTXT.setText(" " + currentCostumerDetailsFromDB.getUserLastName());
+            //
+            StringBuilder deliveryAddressFormat = new StringBuilder();
+            deliveryAddressFormat.append(streetNameTXT.getText());
+            deliveryAddressFormat.append(" | ");
+            deliveryAddressFormat.append(ApartmentNumberTXT.getText());
+            deliveryAddressFormat.append(" | ");
+            deliveryAddressFormat.append(cityTXT.getText());
+            deliveryAddressFormat.append(" | ");
+            deliveryAddressFormat.append(zipCodeTXT.getText());
+            //
+            deliveryAddressTXT.setText(deliveryAddressFormat.toString());
+            //
+            if (currentPurchaseHomeHeating.getShippingMethod().equals(ShippingMethod.STANDARD)) {
+                scheduledDeliveryDateTXT.setText(" " + shippingSummeryDetailsTXT.getText());
+                DeliveryFeeTXT.setText("15 $");
+            } else{
+                scheduledDeliveryDateTXT.setText(" You will receive the shipment in the next 6 hours");
+                DeliveryFeeTXT.setText("40 $");
+            }
+
+            //Prices sets
+            String fuelQuantityStr = fuelQuantityTXT.getText() + " Liters";
+            Double totalPrice = calculateOrderPrice();
+            fuelQuantityInLitersTXT.setText(fuelQuantityStr);
+            totalPricesOfAlllInUsdTXT.setText(new DecimalFormat("##.##").format(totalPrice) + "$");
+            subTotalPriceInUsdTXT.setText(String.valueOf(Prices.basePrice_homeHeating * Double.parseDouble(fuelQuantityTXT.getText())));
+
+        }
+    }
+
+    private boolean checkAndSetShippingMethod() {
+        //set shipping method
+        //check if shipping method selected
+        switch (shippingMethodComboBOX.getValue()) {
+            case "Fast Shipping (40$)":
+                this.currentPurchaseHomeHeating.setShippingMethod(ShippingMethod.FAST);
+                return true;
+            case "Standard Shipping (15$)":
+                this.currentPurchaseHomeHeating.setShippingMethod(ShippingMethod.STANDARD);
+                return true;
+        }
+        return false;
+    }
+
+    private Double calculateOrderPrice() {
+        Double totalPrice = 0.0;
+        Double fuelAmount = Double.valueOf(fuelQuantityTXT.getText());
+        Prices thisOrderPrice = new Prices(currentCustomerId, fuelAmount, FuelTypes.HomeHeatingFuel, currentCostumerDetailsFromDB.getPurchasePlanAsEnum(), currentCostumerDetailsFromDB.getPricingModelTypeAsEnum(), currentPurchaseHomeHeating.getShippingMethod());
+        currentPurchaseHomeHeating.setPriceOfOrder(thisOrderPrice);
+        return thisOrderPrice.getTotalPrice();
+    }
+
+    @FXML
     void handleJFXDatePicker(ActionEvent event) {
         myController.GetShippingOptionalDatesTableFromDB(); //get the available shipping dates and times range
-        ShippingHouresAvailableOnThisDateLABLE.setVisible(false);
-
+        //
         java.sql.Date dateSelectedAsDate = java.sql.Date.valueOf(shippingDatePicker.getValue());
         SetAvailableTimesOfDateSelected(dateSelectedAsDate);
     }
@@ -443,6 +519,9 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
                 shippingSummeryDetailsTXT.setText(str.toString());
                 //
 
+//                DateTimeFormatter fmt = DateTimeFormat.forPattern("yyyy-MM-dd");
+                String date = shippingDatePicker.getValue().format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                currentPurchaseHomeHeating.setShippingDateAndTime(date);
             }
         });
     }
@@ -451,7 +530,7 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
     private void SetReviewOrderPane() {
         this.currentPurchaseHomeHeating.setFuelAmount(Double.valueOf(fuelQuantityTXT.getText()));
         this.currentPurchaseHomeHeating.setEmailForInvoice(emailAddressTXT.getText());
-        PurchaseFuelForHomeHeating.Address address = new PurchaseFuelForHomeHeating.Address(streetNameTXT.getText(),ApartmentNumberTXT.getText(),cityTXT.getText(),zipCodeTXT.getText());
+        PurchaseFuelForHomeHeating.Address address = new PurchaseFuelForHomeHeating.Address(streetNameTXT.getText(), ApartmentNumberTXT.getText(), cityTXT.getText(), zipCodeTXT.getText());
         this.currentPurchaseHomeHeating.setAddressForShipping(address);
         this.currentPurchaseHomeHeating.setPhoneNumberForContact(anotherContactPhoneNumberTXT.getText());
         this.currentPurchaseHomeHeating.setNoteForPurchase(noteTXT.getText());

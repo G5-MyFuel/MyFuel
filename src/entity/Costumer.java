@@ -1,6 +1,9 @@
 package entity;
 
 
+import common.assets.enums.PricingModelTypes;
+import common.assets.enums.PurchasePlanTypes;
+
 import java.util.ArrayList;
 
 /**
@@ -15,12 +18,16 @@ public class Costumer extends User {
     private String CostumerType;
     private String pricingModel;
     private String purchasePlan;
+    private PurchasePlanTypes purchasePlanType;
+    private PricingModelTypes pricingModelType;
 
     public Costumer(String ID, String CustomerPassword, String CostumerType, String Fname, String Lname, String emailAdress, CreditCard customerCreditCard, String purchasePlan, String pricingModel) {
-        super(ID,CostumerType,CustomerPassword,0,Fname,Lname,emailAdress,null);
+        super(ID, CostumerType, CustomerPassword, 0, Fname, Lname, emailAdress, null);
         this.CostumerCreditCard = customerCreditCard;
         this.purchasePlan = purchasePlan;
+        this.purchasePlanType = PurchasePlanTypes.fromString(purchasePlan);
         this.pricingModel = pricingModel;
+        this.pricingModelType = PricingModelTypes.fromString(pricingModel);
         this.CostumerType = CostumerType;
         this.CostumerVehicle = new ArrayList<Vehicle>();
         //
@@ -29,8 +36,17 @@ public class Costumer extends User {
     public void setPurchasePlan(String purchasePlan) {
         this.purchasePlan = purchasePlan;
     }
+
     public String getPurchasePlan() {
         return this.purchasePlan;
+    }
+
+    public PurchasePlanTypes getPurchasePlanAsEnum() {
+        return purchasePlanType;
+    }
+
+    public PricingModelTypes getPricingModelTypeAsEnum(){
+        return pricingModelType;
     }
 
     public CreditCard getCostumerCreditCard() {
@@ -53,9 +69,11 @@ public class Costumer extends User {
     public ArrayList<Vehicle> getCostumerVehicle() {
         return CostumerVehicle;
     }
+
     public void addCostumerVehicle(Vehicle costumerVehicle) {
         this.CostumerVehicle.add(costumerVehicle);
     }
+
     public void setCostumerVehicle(ArrayList<Vehicle> costumerVehicle) {
         CostumerVehicle = costumerVehicle;
     }
