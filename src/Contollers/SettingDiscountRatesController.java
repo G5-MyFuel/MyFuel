@@ -1,6 +1,5 @@
 package Contollers;
 
-import boundary.ConfirmDiscountRatesBoundary;
 import boundary.SettingDiscountRatesBoundary;
 import common.assets.SqlAction;
 import common.assets.SqlQueryType;
@@ -10,10 +9,11 @@ import javafx.application.Platform;
 import java.util.ArrayList;
 
 /**
- *  A department responsible for logical calculations and communicating with the client server and DB
- *  For page "SettingDiscountRatesBoundary"
+ * A department responsible for logical calculations and communicating with the client server and DB
+ * For page "SettingDiscountRatesBoundary"
+ * <p>
+ * * @author Nir Asulin
  *
- *  * @author Nir Asulin
  * @see SettingDiscountRatesBoundary - the form's gui controller (boundary) class
  */
 
@@ -36,6 +36,7 @@ public class SettingDiscountRatesController extends BasicController {
     /**
      * This method is responsible for requesting information from DB through the server
      * Divided into cases to separate sending a different queries
+     *
      * @param paramArray - An array of variables for query
      */
     public void getDiscountRatesTable(ArrayList<String> paramArray /*String SubscriptionType*/) {
@@ -77,21 +78,25 @@ public class SettingDiscountRatesController extends BasicController {
     @Override
     public void getResultFromClient(SqlResult result) {
         Platform.runLater(() -> {
-            switch (result.getActionType()) {
-                case GET_Manager_Data:
-                    myBoundary.setManagerData(this.changeResultToManagerData(result));
-                    break;
-                case GET_RegularSubscriptionSingleVehicle_PRICE:
-                    myBoundary.setData(this.changeResultToString(result));
-                    break;
-                case GET_FullSubscriptionSingleVehicle_PRICE:
-                    myBoundary.setData(this.changeResultToString(result));
-                    break;
-                case GET_RegularSubscriptionMultiVehicle_PRICE:
-                    myBoundary.setData(this.changeResultToString(result));
-                    break;
-                default:
-                    break;
+            try {
+                switch (result.getActionType()) {
+                    case GET_Manager_Data:
+                        myBoundary.setManagerData(this.changeResultToManagerData(result));
+                        break;
+                    case GET_RegularSubscriptionSingleVehicle_PRICE:
+                        myBoundary.setData(this.changeResultToString(result));
+                        break;
+                    case GET_FullSubscriptionSingleVehicle_PRICE:
+                        myBoundary.setData(this.changeResultToString(result));
+                        break;
+                    case GET_RegularSubscriptionMultiVehicle_PRICE:
+                        myBoundary.setData(this.changeResultToString(result));
+                        break;
+                    default:
+                        break;
+                }
+            } catch (NullPointerException e) {
+
             }
         });
     }

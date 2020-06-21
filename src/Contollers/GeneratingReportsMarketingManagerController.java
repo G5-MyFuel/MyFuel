@@ -1,7 +1,6 @@
 package Contollers;
 
 import boundary.GeneratingReportsMarketingManagerBoundary;
-import boundary.SettingDiscountRatesBoundary;
 import common.assets.SqlAction;
 import common.assets.SqlQueryType;
 import common.assets.SqlResult;
@@ -11,13 +10,12 @@ import javafx.application.Platform;
 
 import java.util.ArrayList;
 
-import static java.sql.Types.DOUBLE;
-
 /**
- *  A department responsible for logical calculations and communicating with the client server and DB
- *  For page "GeneratingReportsMarketingManagerBoundary"
+ * A department responsible for logical calculations and communicating with the client server and DB
+ * For page "GeneratingReportsMarketingManagerBoundary"
+ * <p>
+ * * @author Nir Asulin
  *
- *  * @author Nir Asulin
  * @see GeneratingReportsMarketingManagerBoundary - the form's gui controller (boundary) class
  */
 
@@ -40,6 +38,7 @@ public class GeneratingReportsMarketingManagerController extends BasicController
     /**
      * This method is responsible for requesting information from DB through the server
      * Divided into cases to separate sending a different queries
+     *
      * @param paramArray - An array of variables for query
      */
     public void GetReportData(ArrayList<String> paramArray) {
@@ -75,21 +74,27 @@ public class GeneratingReportsMarketingManagerController extends BasicController
     @Override
     public void getResultFromClient(SqlResult result) {
         Platform.runLater(() -> {
-            switch (result.getActionType()) {
-                case GET_Manager_Data:
-                    myBoundary.setManagerData(this.changeResultToManagerData(result));
-                    break;
-                case GET_Comments_Report:
-                    myBoundary.setCommentsReportData(this.changeResultToCommentsReport(result));
-                    break;
-                case GET_Customers_List:
-                    myBoundary.setCustomersListData(this.changeResultToCustomersList(result));
-                    break;
-                case GET_CustomerPeriodicCharacterization_Report:
-                    myBoundary.setCustomerPeriodicCharacterizationReportData(this.changeResultToCustomerPeriodicCharacterizationReport(result));
-                    break;
-                default:
-                    break;
+            try {
+
+                switch (result.getActionType()) {
+                    case GET_Manager_Data:
+                        myBoundary.setManagerData(this.changeResultToManagerData(result));
+                        break;
+                    case GET_Comments_Report:
+                        myBoundary.setCommentsReportData(this.changeResultToCommentsReport(result));
+                        break;
+                    case GET_Customers_List:
+                        myBoundary.setCustomersListData(this.changeResultToCustomersList(result));
+                        break;
+                    case GET_CustomerPeriodicCharacterization_Report:
+                        myBoundary.setCustomerPeriodicCharacterizationReportData(this.changeResultToCustomerPeriodicCharacterizationReport(result));
+                        break;
+                    default:
+
+                        break;
+                }
+            } catch (NullPointerException e) {
+
             }
         });
     }
@@ -98,7 +103,6 @@ public class GeneratingReportsMarketingManagerController extends BasicController
      * This method create array list of Comments Report from the data base result.
      *
      * @param result - The result received from the DB
-     *
      * @return ArrayList<CommentsReport>
      */
     private ArrayList<CommentsReport> changeResultToCommentsReport(SqlResult result) {
@@ -121,24 +125,23 @@ public class GeneratingReportsMarketingManagerController extends BasicController
      * This method create array list of Customer Periodic Characterization Report from the data base result.
      *
      * @param result - The result received from the DB
-     *
      * @return ArrayList<CustomerPeriodicCharacterizationReport>
      */
     private ArrayList<CustomerPeriodicCharacterizationReport> changeResultToCustomerPeriodicCharacterizationReport(SqlResult result) {
 
         ArrayList<CustomerPeriodicCharacterizationReport> resultList = new ArrayList<>();
-        for (ArrayList<Object> a : result.getResultData()){
+        for (ArrayList<Object> a : result.getResultData()) {
             String customerID = (String) a.get(0);
             String companyName = (String) a.get(2);
             switch ((String) a.get(2)) {
                 case "YELLOW":
-                    resultList.add(new CustomerPeriodicCharacterizationReport((String) a.get(0), a.get(1).toString(), "-","-"));
+                    resultList.add(new CustomerPeriodicCharacterizationReport((String) a.get(0), a.get(1).toString(), "-", "-"));
                     break;
                 case "SONOL":
-                    resultList.add(new CustomerPeriodicCharacterizationReport((String) a.get(0), "-", a.get(1).toString(),"-"));
+                    resultList.add(new CustomerPeriodicCharacterizationReport((String) a.get(0), "-", a.get(1).toString(), "-"));
                     break;
                 case "PAZ":
-                    resultList.add(new CustomerPeriodicCharacterizationReport((String) a.get(0), "-", "-",a.get(1).toString()));
+                    resultList.add(new CustomerPeriodicCharacterizationReport((String) a.get(0), "-", "-", a.get(1).toString()));
                     break;
                 default:
                     break;
