@@ -3,10 +3,10 @@ package boundary;
 import Contollers.FastFuelController;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
-import entity.Costumer;
-import entity.GasStation;
-import entity.User;
-import entity.Vehicle;
+import common.assets.enums.FuelTypes;
+import common.assets.enums.PricingModelTypes;
+import common.assets.enums.PurchasePlanTypes;
+import entity.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -146,33 +146,16 @@ private String CarFuelType;
      */
     @FXML
     void startFuelingProccess(MouseEvent event) {
-        //calculatePrice();
 
-       /* Thread fuelingCounterThread = new Thread() {
-            public void run() {
-                for (; ; ) {
-                    startFuelingBtn.setDisable(true);
-                    //TODO: check literAmount input fields (validate) - need to chose pump .
-                    Integer fuelCounter = Integer.parseInt(literAmountTxt.getText());
-                    Integer literCounter = 0;
-                    if (fuelCounter == 0) {
-                        break;
-                    }
-                    literCounter++;
-                    literCountertxt.setText(literCounter.toString());
-                    fuelCounter--;
+        //customerID
+        //fuelAmount
+        //CarFuelType
+        //PricingModelTypes
+        //PurchasePlan
+        //Prices p = new Prices(customerIdLable.getText(),Double.valueOf(literAmountTxt.getText()), FuelTypes.fromString(CarFuelType), PricingModelTypes.Full_monthly_subscription);
 
-                    try {
-                        sleep(500);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-                startFuelingBtn.setDisable(false);
-            }
-        };
-        fuelingCounterThread.start();
-*/
+        Prices p = new Prices("555999888",602.2,FuelTypes.Gasoline95, PurchasePlanTypes.MULTIPLE_STATIONS,PricingModelTypes.Full_monthly_subscription);
+        p.calculateTotalPrice();
     }
 
     /**

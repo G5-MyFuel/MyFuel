@@ -1,6 +1,7 @@
 package entity;
 
 import Contollers.GeneralDashBoardController;
+import Contollers.PricesController;
 import common.assets.enums.FuelTypes;
 import common.assets.enums.PricingModelTypes;
 import common.assets.enums.PurchasePlanTypes;
@@ -41,23 +42,39 @@ public class Prices {
 
     public static Double marketingCapmeignDiscount = 1.0;
 
+    public PricesController myController = new PricesController(this);
+
     public Prices() {
 
     }
 
     GeneralDashBoardController generalDashBoardController = new GeneralDashBoardController();
 
-    public Prices(String userId, Double fuelAmount, FuelTypes fueltype, PurchasePlanTypes purchasePlan, PricingModelTypes pricingModelType, ShippingMethod shippingMethod) {
 
+    public Prices(String userId, Double fuelAmount, FuelTypes fueltype, PurchasePlanTypes purchasePlan, PricingModelTypes pricingModelType, ShippingMethod shippingMethod) {
+        //todo: עדכון משתני פרייסינג מודל מהטבלה של ניר
         this.userID = userId;
-        generalDashBoardController.getCustomerPurchaseAmountInLastMonthFromDB(userId);
+        if (pricingModelType.getPricingModelString().equals(PricingModelTypes.Full_monthly_subscription))
+            generalDashBoardController.getCustomerPurchaseAmountInLastMonthFromDB(userId);
         this.fuelAmount = fuelAmount;
         this.fuelType = fueltype;
         this.purchasePlan = purchasePlan;
         this.pricingModelType = pricingModelType;
         this.totalPrice = 0.0;
         this.sm = shippingMethod;
-        generalDashBoardController.GET_CURRENT_MARKETING_CAMPEIGN_fromDB();
+        myController.GET_CURRENT_MARKETING_CAMPEIGN_fromDB();
+        calculateTotalPrice();
+    }
+
+    public Prices(String userId, Double fuelAmount, FuelTypes fuelType, PurchasePlanTypes purchasePlan, PricingModelTypes pricingModelType) {
+        this.userID = userId;
+        generalDashBoardController.getCustomerPurchaseAmountInLastMonthFromDB(userId);
+        this.fuelAmount = fuelAmount;
+        this.fuelType = fuelType;
+        this.purchasePlan = purchasePlan;
+        this.pricingModelType = pricingModelType;
+        this.totalPrice = 0.0;
+        myController.GET_CURRENT_MARKETING_CAMPEIGN_fromDB();
         calculateTotalPrice();
     }
 
@@ -75,21 +92,21 @@ public class Prices {
                     case "HomeHeatingFuel":
                         break;
                     case "ScooterFuel":
-                        Prices.totalPrice =  Prices.totalPrice * marketingCapmeignDiscount;
+                        Prices.totalPrice = Prices.totalPrice * marketingCapmeignDiscount;
                         break;
                     case "Diesel":
-                        Prices.totalPrice =  Prices.totalPrice * marketingCapmeignDiscount;
+                        Prices.totalPrice = Prices.totalPrice * marketingCapmeignDiscount;
                         break;
 
                     case "Gasoline95":
-                        Prices.totalPrice =  Prices.totalPrice * marketingCapmeignDiscount;
+                        Prices.totalPrice = Prices.totalPrice * marketingCapmeignDiscount;
                         break;
                 }
             }
         }
     }
 
-    public static void marketingCapmeignDiscount(ArrayList<String> resArr) {
+    public void marketingCapmeignDiscount(ArrayList<String> resArr) {
         backFromCurrentMarketingCampeign(resArr);
     }
 

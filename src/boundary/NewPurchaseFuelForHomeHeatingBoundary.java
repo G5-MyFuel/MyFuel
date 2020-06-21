@@ -586,7 +586,6 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
                 } else {
                     t7to9BTN.setDisable(false);
                 }
-
                 if (sd.getT2() == 1) {
                     t9to11BTN.setDisable(true);
                 } else {
@@ -618,8 +617,6 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
                 }
 
             } else {
-                //ניצור את התאריך בDB
-                System.out.println("new row inserted in shipping dates table");
 
             }
             setShippingTimes(t7to9BTN);
@@ -696,4 +693,3 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
         INSERT_NEW_PURCHASE_FUEL_FOR_HOME_HEATING();
     }
 }
-

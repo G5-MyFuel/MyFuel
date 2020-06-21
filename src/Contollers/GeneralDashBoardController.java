@@ -49,10 +49,7 @@ public class GeneralDashBoardController extends BasicController {
                         this.changeResultToFueAmountOfPreMonthOfCurUser(result, currentUserID);
                         Prices.fuelAmountOfPreviousMonth = Double.valueOf(fuelAmountOfPreMonthForCurrentUser);
                         break;
-                    case GET_CURRENT_MARKETING_CAMPEIGN:
-                        //
-                        this.fromResultToMrketingCampaignArrayList(result);
-                        break;
+
                     default:
                         break;
                 }
@@ -87,21 +84,9 @@ public class GeneralDashBoardController extends BasicController {
         }
     }
 
-    public void GET_CURRENT_MARKETING_CAMPEIGN_fromDB() {
-        SqlAction sqlAction = new SqlAction(SqlQueryType.GET_CURRENT_MARKETING_CAMPEIGN);
-        super.sendSqlActionToClient(sqlAction);
-    }
 
-    public void fromResultToMrketingCampaignArrayList(SqlResult result) {
-        ArrayList<String> resArr = new ArrayList<>();
-        for (ArrayList<Object> a : result.getResultData()) {
-            resArr.add((String) a.get(0)); //CampaignID
-            resArr.add((String) a.get(1)); //TemplateName
-            resArr.add((String) a.get(2)); //fuelType
-            resArr.add((String) a.get(3)); //DiscountPercentages
-        }
-        Prices.marketingCapmeignDiscount(resArr);
-    }
+
+
 
     /**
      * get All Updated Prices From DB
