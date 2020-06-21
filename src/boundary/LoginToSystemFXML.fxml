@@ -21,7 +21,7 @@
    <children>
       <ImageView fitHeight="600.0" fitWidth="807.0">
          <image>
-            <Image url="@../media/BGs/3315591.png" />
+            <Image url="@../media/BGs/whiteBG.png" />
          </image>
       </ImageView>
       <BorderPane layoutX="7.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0">

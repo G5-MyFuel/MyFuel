@@ -30,7 +30,7 @@ public enum ProjectPages {
     VIEW_REPORTS_PAGE("/boundary/ViewReportsFXML.fxml"),
 
 
-    FAST_FUEL_PAGE("/boundary/CustomerRegistrationFXML2.fxml"),
+    FAST_FUEL_PAGE("/boundary/FastFuel.fxml"),
     PURCHASE_FUEL_FOR_HOME_HEATING("/boundary/NewPurchaseFuelForHomeHeatingFXML.fxml"),
     LOGIN_PAGE("/boundary/LoginToSystemFXML.fxml"),
 

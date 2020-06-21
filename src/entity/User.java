@@ -62,6 +62,10 @@ public class User implements Serializable {
         this.fuelCompany = fuelCompany;
     }
 
+    public User() {
+    }
+
+
     /**
      * get User ID userID
      * @return userID

@@ -203,8 +203,6 @@ public class MarketingCampaignBoundary implements DataInitializable {
 
         ObservableList<MarketingCampaign> data = FXCollections.observableArrayList(cosArray);
         saleOperationTableView.setItems(data);
-        System.out.println("finish with table");
-
     }
 
     /**

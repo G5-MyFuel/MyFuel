@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.gluonhq.charm.glisten.control.ExpansionPanel.CollapsedPanel?>
 <?import com.jfoenix.controls.JFXRadioButton?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
@@ -14,7 +13,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="796.0" prefWidth="1062.0" stylesheets="@BGcss.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundary.fastFuelBoundary">
    <children>
@@ -71,7 +69,7 @@
                   <Insets top="15.0" />
                </VBox.margin>
             </JFXRadioButton>
-            <JFXRadioButton fx:id="diselRbtn" text="Disel">
+            <JFXRadioButton fx:id="diselRbtn" text="Diesel">
                <font>
                   <Font size="23.0" />
                </font>
@@ -146,7 +144,22 @@
       </Label>
       <ExpansionPanel.CollapsedPanel layoutX="810.0" layoutY="208.0" prefWidth="252" />
       <Text fx:id="subscriptionInfo" layoutX="36.0" layoutY="696.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*According to your business terms in the XXXX subscription And the current operation is YYYY" wrappingWidth="403.8779296875" />
-      <Label fx:id="vehicleInfoLabel" layoutX="25.0" layoutY="57.0" prefHeight="20.0" prefWidth="425.0" text="NFC sensor detected the vehicle number  is 56-789-34">
+      <Label fx:id="vehicleInfoLabel" layoutX="25.0" layoutY="57.0" prefHeight="20.0" prefWidth="547.0" text="NFC sensor detected  vehicle number   56-789-34    customer number ">
+         <font>
+            <Font name="Serif Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="customerIdLable" layoutX="572.0" layoutY="57.0" prefHeight="20.0" prefWidth="121.0" text="get customerID">
+         <font>
+            <Font name="Serif Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="26.0" layoutY="91.0" prefHeight="20.0" prefWidth="141.0" text="station number:">
+         <font>
+            <Font name="Serif Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="stationNumberLable" layoutX="167.0" layoutY="91.0" prefHeight="20.0" prefWidth="141.0">
          <font>
             <Font name="Serif Bold" size="18.0" />
          </font>
