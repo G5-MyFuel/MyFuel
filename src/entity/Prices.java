@@ -189,7 +189,7 @@ public class Prices {
     public Double getPurchasePlanDiscount_multiple() {
         return purchasePlanDiscount_multiple;
     }
-
+/////////////
 
     public static void setBasePrice_95(Double basePrice_95) {
         Prices.basePrice_95 = basePrice_95;
