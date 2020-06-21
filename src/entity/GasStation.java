@@ -9,7 +9,6 @@ import common.assets.EmailHandler;
  *
  */
 public class GasStation {
-
     private Integer stationNumber;
     private String companyName;
     private String gasStationName;

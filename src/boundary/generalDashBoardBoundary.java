@@ -27,7 +27,6 @@ import java.util.TimeZone;
 
 /**
  *
- *
  */
 public class generalDashBoardBoundary implements DataInitializable {
 
@@ -96,6 +95,7 @@ public class generalDashBoardBoundary implements DataInitializable {
     /**
      * initData this will start in the initialize of the boundary.
      * sends parameters from anther pages
+     *
      * @param data - The data sent to the boundary
      */
     @Override
@@ -157,6 +157,11 @@ public class generalDashBoardBoundary implements DataInitializable {
                     break;
 
                 case "FAST_FUEL_PAGE":
+                    image = new Image(getClass().getResourceAsStream("../media/ButtonsDashBoardMedia/fastfuel.png"));
+                    imageView = new ImageView(image);
+                    imageView.setFitHeight(30);
+                    imageView.setFitWidth(30);
+                    currentBtn.setGraphic(imageView);
                     currentBtn.setText("Fast fueling");
                     currentBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
                         @Override
@@ -388,6 +393,7 @@ public class generalDashBoardBoundary implements DataInitializable {
 
     /**
      * initialize pase.
+     *
      * @param location
      * @param resources
      */
@@ -498,6 +504,7 @@ public class generalDashBoardBoundary implements DataInitializable {
 
     /**
      * set MANAGER_SUPPLY_CONFIRMATION_PAGE page
+     *
      */
     void MANAGER_SUPPLY_CONFIRMATION_PAGE() {
         currentPagePane.setVisible(true);
@@ -519,7 +526,7 @@ public class generalDashBoardBoundary implements DataInitializable {
     }
 
     /**
-     * set VIEW_ANALITIC_DATA page
+     * set VIEW_ANALYTIC_DATA page
      */
     void VIEW_ANALITIC_DATA() {
         currentPagePane.setVisible(true);
@@ -575,6 +582,7 @@ public class generalDashBoardBoundary implements DataInitializable {
 
     /**
      * set homePageClick button
+     *
      * @param event
      */
     @FXML
@@ -585,6 +593,7 @@ public class generalDashBoardBoundary implements DataInitializable {
 
     /**
      * set signOut button
+     *
      * @param event
      */
     @FXML
@@ -687,6 +696,7 @@ public class generalDashBoardBoundary implements DataInitializable {
 
     /**
      * get all updated prices from database.
+     *
      * @return
      */
     public ArrayList<Prices> getResultListFuelPrices() {

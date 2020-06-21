@@ -82,7 +82,7 @@
                                                       </JFXTextArea>
                                                       <Pane prefHeight="278.0" prefWidth="460.0">
                                                          <children>
-                                                            <ImageView fx:id="orderDetailsToShipping" accessibleRole="BUTTON" fitHeight="70.0" fitWidth="87.0" layoutX="390.0" layoutY="192.0" onMouseClicked="#GoToShippingPage" onMouseEntered="#afterOrderDetails" pickOnBounds="true" preserveRatio="true">
+                                                            <ImageView fx:id="orderDetailsToShipping" accessibleRole="BUTTON" fitHeight="70.0" fitWidth="87.0" layoutX="390.0" layoutY="192.0" onMouseClicked="#GoToShippingPage" pickOnBounds="true" preserveRatio="true">
                                                                <image>
                                                                   <Image url="@../media/CostumerRegisterationMedia/forward_button_40px.png" />
                                                                </image>
@@ -90,7 +90,7 @@
                                                                   <Blend />
                                                                </effect>
                                                                <cursor>
-                                                                  <Cursor fx:constant="OPEN_HAND" />
+                                                                  <Cursor fx:constant="HAND" />
                                                                </cursor>
                                                             </ImageView>
                                                             <Label layoutX="-10.0" layoutY="233.0" text="* Required field" textFill="RED">
@@ -328,7 +328,7 @@
                                                                   <Blend />
                                                                </effect>
                                                                <cursor>
-                                                                  <Cursor fx:constant="OPEN_HAND" />
+                                                                  <Cursor fx:constant="HAND" />
                                                                </cursor>
                                                             </ImageView>
                                                             <JFXButton text=" " />
@@ -337,7 +337,7 @@
                                                                   <Image url="@../media/CostumerRegisterationMedia/forward_button_40px.png" />
                                                                </image>
                                                                <cursor>
-                                                                  <Cursor fx:constant="OPEN_HAND" />
+                                                                  <Cursor fx:constant="HAND" />
                                                                </cursor>
                                                             </ImageView>
                                                          </children>
@@ -492,7 +492,7 @@
                                                       <Image url="@../media/CostumerRegisterationMedia/forward_button_40px.png" />
                                                    </image>
                                                    <cursor>
-                                                      <Cursor fx:constant="OPEN_HAND" />
+                                                      <Cursor fx:constant="HAND" />
                                                    </cursor>
                                                 </ImageView>
                                              </graphic>

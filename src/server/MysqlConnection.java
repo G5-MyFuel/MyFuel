@@ -169,8 +169,17 @@ public class MysqlConnection {
         sqlArray[SqlQueryType.GET_ALL_MANAGER_STATIONS.getCode()] = "SELECT * FROM `GasStation` WHERE managerID = ?";
         sqlArray[SqlQueryType.UPDATE_FUEL_LIMIT_STOCK.getCode()] = "UPDATE `GasStation` SET `FUEL_LIMIT`= ? WHERE StationNumber = ?";
 
+        sqlArray[SqlQueryType.GET_OPTIONAL_STATIONS.getCode()] = "Select gs.StationNumber, companyName,inventory_95 , inventory_scooter, inventory_diesel, FUEL_LIMIT " +
+                "from GasStation as gs , (SELECT u.userID,u.FuelCompany1,u.FuelCompany2,u.FuelCompany3 FROM User AS u where u.userID = ?)" +
+                "as ins WHERE gs.companyName = ins.FuelCompany1 or gs.companyName = ins.FuelCompany2 or gs.companyName = ins.FuelCompany3";
+        //no need: sqlArray[SqlQueryType.GET_GASSTATION_INVENTORY_TABLE.getCode()] = "SELECT `StationNumber`,`inventory_95`,`inventory_scooter`,`inventory_diesel`,`FUEL_LIMIT` FROM `GasStation` WHERE `StationNumber`=?";
+       // sqlArray[SqlQueryType.INSERT_FASTFUEL_PURCHES_TO_FASTFUEL_TABLE.getCode()] = " ";
+        //sqlArray[SqlQueryType.INSERT_FASTFUEL_PURCHES.getCode()] = " ";
+        sqlArray[SqlQueryType.UPDATE_95_INVENTORY_CUSTOMER_PURCHASE.getCode()] = "UPDATE `GasStation` SET `inventory_95`=? WHERE `StationNumber`=?";
+        sqlArray[SqlQueryType.UPDATE_DIESEL_INVENTORY_CUSTOMER_PURCHASE.getCode()] = "UPDATE `GasStation` SET `inventory_diesel`=? WHERE `StationNumber`=?";
+        sqlArray[SqlQueryType.UPDATE_SCOOTER_INVENTORY_CUSTOMER_PURCHASE.getCode()] = "UPDATE `GasStation` SET `inventory_scooter`=? WHERE `StationNumber`=?";
 
-        /* *****************************************
+                /* *****************************************
          * ********** Costumer Management Queries ****************
          * *****************************************/
         sqlArray[SqlQueryType.GET_ALL_COSTUMER_TABLE.getCode()] = "SELECT* FROM Costumer AS C, User AS U WHERE C.ID = U.userID";
@@ -218,7 +227,6 @@ public class MysqlConnection {
 
         /* *****************************************
          * ********** Templates+Campaigns Management Queries ***************
-         *
          * *****************************************/
         sqlArray[SqlQueryType.GET_ALL_TEMPLATES_TABLE.getCode()] = "SELECT * FROM `CampaignTemplates`";
         sqlArray[SqlQueryType.INSERT_NEW_TEMPLATE.getCode()] =
@@ -253,10 +261,14 @@ public class MysqlConnection {
         /* *****************************************
          * ********** Discount Rates Queries ****************
          * *****************************************/
-        sqlArray[SqlQueryType.GET_RegularSubscriptionSingleVehicle_PRICE.getCode()] = "SELECT * FROM `DiscountRates` WHERE `Subscription type` LIKE \"Regular monthly subscription - single vehicle\"";
-        sqlArray[SqlQueryType.GET_FullSubscriptionSingleVehicle_PRICE.getCode()] = "SELECT * FROM `DiscountRates` WHERE `Subscription type` LIKE \"Full monthly subscription (for single vehicle)\"";
-        sqlArray[SqlQueryType.GET_RegularSubscriptionMultiVehicle_PRICE.getCode()] = "SELECT * FROM `DiscountRates` WHERE `Subscription type` LIKE \"Regular monthly subscription - number of vehicles\"";
-        sqlArray[SqlQueryType.INSERT_NEW_PRICE.getCode()] = "UPDATE `DiscountRates` SET `NewDiscountRate`= ?,`Status`= \"Pending approval\" WHERE `Subscription type` LIKE ?";
+        sqlArray[SqlQueryType.GET_RegularSubscriptionSingleVehicle_PRICE.getCode()] = "SELECT * FROM `DiscountRates` " +
+                "WHERE `Subscription type` LIKE \"Regular monthly subscription (single)\" AND `companyName` = ?";
+        sqlArray[SqlQueryType.GET_FullSubscriptionSingleVehicle_PRICE.getCode()] = "SELECT * FROM `DiscountRates` " +
+                "WHERE `Subscription type` LIKE \"Full monthly subscription\" AND `companyName` = ?";
+        sqlArray[SqlQueryType.GET_RegularSubscriptionMultiVehicle_PRICE.getCode()] = "SELECT * FROM `DiscountRates` " +
+                "WHERE `Subscription type` LIKE \"Regular monthly subscription (multiple)\" AND `companyName` = ?";
+        sqlArray[SqlQueryType.INSERT_NEW_PRICE.getCode()] = "UPDATE `DiscountRates` SET `NewDiscountRate`= ?,`Status`= \"Pending approval\" " +
+                "WHERE `Subscription type` LIKE ? AND `companyName` = ?";
 
         /* *****************************************
          * ********** Station Manager Reports Queries ****************
@@ -273,36 +285,45 @@ public class MysqlConnection {
                 "WHERE gs.companyName LIKE ?" +
                 "AND gs.StationNumber LIKE ?";
         sqlArray[SqlQueryType.GET_Manager_Data.getCode()] = "SELECT * FROM Employee WHERE Employee.employeeID LIKE ?";
-        sqlArray[SqlQueryType.INSERT_NEW_Quarterly_Report.getCode()] = "INSERT INTO `ViewQuarterlyReportsForAdmin`" +
+        sqlArray[SqlQueryType.INSERT_NEW_Quarterly_Report.getCode()] = "REPLACE INTO `ViewQuarterlyReportsForAdmin`" +
                 "(`companyName`, `StationNumber`, `Date`, `Quarterly`, `TotalRevenue`) " +
-                "VALUES (?,?,curdate(),quarter(curdate()),?)";
-
-        sqlArray[SqlQueryType.INSERT_NEW_Purchases_Report.getCode()] = "INSERT INTO `ViewPurchasesReportsForAdmin`" +
+                "VALUES (?,?,YEAR(curdate()),quarter(curdate()),?)";
+        sqlArray[SqlQueryType.INSERT_NEW_Purchases_Report.getCode()] = "REPLACE INTO `ViewPurchasesReportsForAdmin`" +
                 "(`companyName`, `StationNumber`, `Date`, `Quarterly`, `FuelType`, `LitersPurchased`, `SalesAmount`) " +
-                "VALUES (?,?,CURRENT_TIME(),quarter(curdate()),?,?,?)," +
-                "(?,?,CURRENT_TIME(),quarter(curdate()),?,?,?)," +
-                "(?,?,curdate(),quarter(curdate()),?,?,?)";
+                "VALUES (?,?,YEAR(curdate()),quarter(curdate()),?,?,?)," +
+                "(?,?,YEAR(curdate()),quarter(curdate()),?,?,?)," +
+                "(?,?,YEAR(curdate()),quarter(curdate()),?,?,?)";
 
-        sqlArray[SqlQueryType.INSERT_NEW_QuantityItemsStock_Report.getCode()] = "INSERT INTO `ViewQuantityItemsStockReportsForAdmin`" +
+        sqlArray[SqlQueryType.INSERT_NEW_QuantityItemsStock_Report.getCode()] = "REPLACE INTO `ViewQuantityItemsStockReportsForAdmin`" +
                 "(`companyName`, `StationNumber`, `Date`, `Quarterly`, `FuelType`, `AvailableInventory`) " +
-                "VALUES (?,?,CURRENT_TIME(),quarter(curdate()),?,?)," +
-                "(?,?,curdate(),quarter(curdate()),?,?)," +
-                "(?,?,curdate(),quarter(curdate()),?,?)";
+                "VALUES (?,?,YEAR(curdate()),quarter(curdate()),?,?)," +
+                "(?,?,YEAR(curdate()),quarter(curdate()),?,?)," +
+                "(?,?,YEAR(curdate()),quarter(curdate()),?,?)";
 
         /* *****************************************
          * ********** Admin View Reports Queries ****************
          * *****************************************/
-        sqlArray[SqlQueryType.CheckIfExists_Quarterly_Report.getCode()] = "SELECT IF( EXISTS" +
+        sqlArray[SqlQueryType.Get_YearList.getCode()] = "SELECT `Date` FROM `ViewQuarterlyReportsForAdmin` " +
+                "WHERE companyName = ? AND StationNumber = ? " +
+                "UNION SELECT `Date` FROM `ViewPurchasesReportsForAdmin` " +
+                "WHERE companyName = ? AND StationNumber = ? " +
+                "UNION SELECT `Date` FROM `ViewQuantityItemsStockReportsForAdmin` " +
+                "WHERE companyName = ? AND StationNumber = ?";
+                sqlArray[SqlQueryType.CheckIfExists_Quarterly_Report.getCode()] = "SELECT IF( EXISTS" +
                 "(SELECT `TotalRevenue` FROM `ViewQuarterlyReportsForAdmin` WHERE `companyName` = ? AND `StationNumber` = ? " +
                 "AND `Quarterly` = quarter(?) AND `Date` = YEAR(?)), 1, 0)";
         sqlArray[SqlQueryType.View_Quarterly_Report.getCode()] = "SELECT `TotalRevenue` FROM `ViewQuarterlyReportsForAdmin` " +
                 "WHERE `companyName` = ? AND `StationNumber` = ? AND `Quarterly` = quarter(?) AND `Date` = YEAR(?)";
-        sqlArray[SqlQueryType.CheckIfExists_Purchases_Report.getCode()] = "SELECT IF( EXISTS\" +\n" +
-                "                \"(SELECT LitersPurchased, SalesAmount FROM `ViewPurchasesReportsForAdmin` WHERE `companyName` = ? AND `StationNumber` = ? \" +\n" +
-                "                \"AND `Quarterly` = quarter(?) AND `Date` = YEAR(?)), 1, 0)";
-                sqlArray[SqlQueryType.View_Purchases_Report.getCode()] = "SELECT `FuelType`, `LitersPurchased`, `SalesAmount` FROM `ViewPurchasesReportsForAdmin` " +
+        sqlArray[SqlQueryType.CheckIfExists_Purchases_Report.getCode()] = "SELECT IF( EXISTS " +
+                "(SELECT `LitersPurchased`, `SalesAmount` FROM `ViewPurchasesReportsForAdmin` " +
+                "WHERE `companyName` = ? AND `StationNumber` = ? AND `Quarterly` = quarter(?) AND `Date` = YEAR(?)), 1, 0)";
+        sqlArray[SqlQueryType.View_Purchases_Report.getCode()] = "SELECT `FuelType`, `LitersPurchased`, `SalesAmount` FROM `ViewPurchasesReportsForAdmin` " +
                 "WHERE `companyName` = ? AND `StationNumber` = ? AND `Quarterly` = quarter(?) AND " +
                 "(`FuelType` = \"Diesel\" OR `FuelType` = \"Gasoline 95\" OR `FuelType` = \"Scooter fuel\") AND `Date` = YEAR(?)";
+        sqlArray[SqlQueryType.CheckIfExists_QuantityItemsStock_Report.getCode()] = "SELECT IF( EXISTS " +
+                "(SELECT `FuelType`, `AvailableInventory` FROM `ViewQuantityItemsStockReportsForAdmin` " +
+                "WHERE `companyName` = ? AND `StationNumber` = ? " +
+                "AND `Quarterly` = quarter(?) AND (`FuelType` = \"Diesel\" OR `FuelType` = \"Gasoline 95\" OR `FuelType` = \"Scooter fuel\") AND `Date` = YEAR(?)), 1, 0)";
         sqlArray[SqlQueryType.View_QuantityItemsStock_Report.getCode()] = "SELECT `FuelType`, `AvailableInventory` FROM `ViewQuantityItemsStockReportsForAdmin` " +
                 "WHERE `companyName` = ? AND `StationNumber` = ? AND `Quarterly` = quarter(?) " +
                 "AND (`FuelType` = \"Diesel\" OR `FuelType` = \"Gasoline 95\" OR `FuelType` = \"Scooter fuel\") AND `Date` = YEAR(?)";
@@ -331,7 +352,7 @@ public class MysqlConnection {
          * **********************************************************
          */
         sqlArray[SqlQueryType.GET_ALL_SHIPPING_DATES_AVAILABLE.getCode()] = "SELECT * FROM ShippingOptionalDates;";
-        sqlArray[SqlQueryType.GET_SPECIFIC_CUSTOMER_DETAILS.getCode()] =" select c.id,userFirstName,userLastName,userEmail,'Credit Card Number',CreditCardExperationDate,CVV,customerType,'Pricing Model','Purchase Plan' from User as u,Costumer as c where u.userID=c.ID and c.ID= ?;";
+        sqlArray[SqlQueryType.GET_SPECIFIC_CUSTOMER_DETAILS.getCode()] = " select c.id,userFirstName,userLastName,userEmail,'Credit Card Number',CreditCardExperationDate,CVV,customerType,'Pricing Model','Purchase Plan' from User as u,Costumer as c where u.userID=c.ID and c.ID= ?;";
         sqlArray[SqlQueryType.INSERT_NEW_AVAILABLE_DATE_FOR_SHIPPING.getCode()] = "INSERT INTO ShippingOptionalDates (`DayAndDate`) VALUES (?);";
         sqlArray[SqlQueryType.INSERT_NEW_PURCHASE_FUEL_FOR_HOME_HEATING.getCode()] = "INSERT INTO `bpsdc8o22sikrlpvvxqm`.`PurchaseFuelForHomeHeating`\n" +
                 "(`purchaseID`,\n" +

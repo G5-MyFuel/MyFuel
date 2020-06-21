@@ -23,6 +23,15 @@ public enum SqlQueryType {
     GET_ALL_MANAGER_STATIONS(SqlExecutionType.EXECUTE_QUERY),
     UPDATE_FUEL_LIMIT_STOCK(SqlExecutionType.UPDATE_QUERY),
 
+    //fast fuel :
+    UPDATE_95_INVENTORY_CUSTOMER_PURCHASE(SqlExecutionType.UPDATE_QUERY),
+    UPDATE_DIESEL_INVENTORY_CUSTOMER_PURCHASE (SqlExecutionType.UPDATE_QUERY),
+    UPDATE_SCOOTER_INVENTORY_CUSTOMER_PURCHASE(SqlExecutionType.UPDATE_QUERY),
+    GET_GASSTATION_INVENTORY_TABLE(SqlExecutionType.EXECUTE_QUERY),
+    GET_OPTIONAL_STATIONS(SqlExecutionType.EXECUTE_QUERY),
+   // INSERT_FASTFUEL_PURCHES(SqlExecutionType.UPDATE_QUERY),
+    //INSERT_FASTFUEL_PURCHES_TO_FASTFUEL_TABLE(SqlExecutionType.UPDATE_QUERY),
+
 
     /* *****************************************
      * ********** PurchaseFuelForHomeHeating ****************
@@ -59,7 +68,9 @@ public enum SqlQueryType {
     View_Quarterly_Report(SqlExecutionType.EXECUTE_QUERY),
     CheckIfExists_Purchases_Report(SqlExecutionType.EXECUTE_QUERY),
     View_Purchases_Report(SqlExecutionType.EXECUTE_QUERY),
+    CheckIfExists_QuantityItemsStock_Report(SqlExecutionType.EXECUTE_QUERY),
     View_QuantityItemsStock_Report(SqlExecutionType.EXECUTE_QUERY),
+    Get_YearList(SqlExecutionType.EXECUTE_QUERY),
 
     /* *****************************************
      * ********** Admin Confirm Discount Rates Queries ****************
