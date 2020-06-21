@@ -61,6 +61,7 @@ public enum SqlQueryType {
     View_Purchases_Report(SqlExecutionType.EXECUTE_QUERY),
     CheckIfExists_QuantityItemsStock_Report(SqlExecutionType.EXECUTE_QUERY),
     View_QuantityItemsStock_Report(SqlExecutionType.EXECUTE_QUERY),
+    Get_YearList(SqlExecutionType.EXECUTE_QUERY),
 
     /* *****************************************
      * ********** Admin Confirm Discount Rates Queries ****************
