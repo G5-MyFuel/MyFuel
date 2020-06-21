@@ -1,6 +1,5 @@
 package boundary;
 
-import Contollers.FormValidation;
 import Contollers.SettingDiscountRatesController;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
@@ -16,18 +15,36 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+/**
+ * This department is responsible for controlling "SettingDiscountRatesFXML" page
+ * Allows marketing manager to view current pricing model rates
+ * And submit a request to set a new rate
+ *
+ * @author Nir Asulin
+ * @see SettingDiscountRatesController - the form's logic class
+ */
 public class SettingDiscountRatesBoundary implements DataInitializable {
 
+    /**
+     * A parameters that represents who enters the page
+     */
     String managerID;
     String managerCompany;
     String managerStation;
+
     /**
      * The supervisor boundary controller.
      */
     private final SettingDiscountRatesController myController = new SettingDiscountRatesController(this);
-    private FormValidation formValidation;
+
+    /**
+     * For proper validation
+     */
     private Alert ErrorAlert = new Alert(Alert.AlertType.ERROR);
 
+    /**
+     * Gui variables:
+     */
     @FXML
     private JFXComboBox<String> ChooseSubscriptionTypeCombo;
 
@@ -46,64 +63,50 @@ public class SettingDiscountRatesBoundary implements DataInitializable {
     private final ObservableList<String> SubscriptionType = FXCollections.observableArrayList("Regular monthly subscription (single)",
             "Full monthly subscription", "Regular monthly subscription (multiple)");
 
+    /**
+     * This method allows to save information sent when uploading the page (user id)
+     * In addition initializes the variables, fields, and combo-boxes
+     * What is initialized will appear when the screen is raised
+     *
+     * @param data - The data sent to the boundary
+     */
     @Override
     public void initData(Object data) {
 
         this.managerID = (String) data;
-        //managerID = "109268386";
         ArrayList<String> paramArray = new ArrayList<>();
         paramArray.add("Get Manager data");
         paramArray.add(managerID);
         myController.getDiscountRatesTable(paramArray); //start the process that will ask server to execute quarry and get the table details
-        this.formValidation = new FormValidation();
         ChooseSubscriptionTypeCombo.setItems(SubscriptionType);
         ShowCurrentRateTXT.setVisible(false);
         ShowNewRateTXT.setVisible(false);
         btnSetNewRate.setVisible(false);
         RequestSentMessageLabel.setVisible(false);
-
-        /*  set all fields validators */
-        formValidation();
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        //managerID = "109268386";
-        /*ArrayList<String> paramArray = new ArrayList<>();
-        System.out.println(managerID);
-        paramArray.add("Get Manager data");
-        paramArray.add(managerID);
-        myController.getDiscountRatesTable(paramArray); //start the process that will ask server to execute quarry and get the table details
-        this.formValidation = new FormValidation();
-        ChooseSubscriptionTypeCombo.setItems(SubscriptionType);
-        ShowCurrentRateTXT.setVisible(false);
-        ShowNewRateTXT.setVisible(false);
-        btnSetNewRate.setVisible(false);
-        RequestSentMessageLabel.setVisible(false);*/
-
-        /*  set all fields validators */
-        //formValidation();
     }
 
-    private void formValidation() {
-
-        /*  New price validation */
-
-        //formValidation.isContainsOnlyNumbers(ShowNewRateTXT, "New price");
-        //formValidation.numberPositiveValidation(ShowNewRateTXT, "New price");
-        //formValidation.maxLengthValidation(ShowNewRateTXT, "New price", 3);
-        /*formValidation.isEmptyFieldValidation(ShowNewRateTXT, "New price");
-        formValidation.maxFloatSizeValidation(ShowNewRateTXT, "New price", 100);
-        formValidation.minFloatSizeValidation(ShowNewRateTXT, "New price", 0);*/
-    }
-
+    /**
+     * This method will set the Manager Data when we will initialize the page.
+     *
+     * @param resultList
+     */
     public void setManagerData(ArrayList<String> resultList) {
 
         managerCompany = resultList.get(0);
         managerStation = resultList.get(1);
     }
 
+    /**
+     * This method save manager selection Pricing model
+     * And sends a query to get the current rate
+     *
+     * @param event
+     */
     @FXML
     void handleChoseSubscriptionType(ActionEvent event) {
 
@@ -119,6 +122,11 @@ public class SettingDiscountRatesBoundary implements DataInitializable {
         RequestSentMessageLabel.setVisible(false);
     }
 
+    /**
+     * This method will set the current rate.
+     *
+     * @param currentRate
+     */
     public void setData(String currentRate) {
         ShowCurrentRateTXT.setText(currentRate + "%");
     }
@@ -128,6 +136,12 @@ public class SettingDiscountRatesBoundary implements DataInitializable {
 
     }
 
+    /**
+     * This method will Check the validation of the input
+     * And Submit a rate approval request to administrator
+     *
+     * @param event
+     */
     @FXML
     void handleSetNewRate(ActionEvent event) {
 
@@ -136,8 +150,7 @@ public class SettingDiscountRatesBoundary implements DataInitializable {
             ErrorAlert.setTitle("Price rate ERROR");
             ErrorAlert.setHeaderText("Please insert between 0-100");
             ErrorAlert.showAndWait();
-        }
-        else{
+        } else {
             Float NewRate = Float.parseFloat(ShowNewRateTXT.getText());
             ArrayList<String> paramArray = new ArrayList<>();
             paramArray.add("Insert NewRate");
@@ -148,25 +161,6 @@ public class SettingDiscountRatesBoundary implements DataInitializable {
             ShowNewRateTXT.clear();
             RequestSentMessageLabel.setVisible(true);
         }
-        //Float NewRate = Float.parseFloat(ShowNewRateTXT.getText());
-        /*if(ShowNewRateTXT.getText().equals(""))
-            btnSetNewRate.setVisible(false);
-        else
-            btnSetNewRate.setVisible(true);*/
-        /*if ((NewRate < 0 || NewRate > 100)|| (ShowNewRateTXT.getText().equals("")) ) {
-            ErrorAlert.setTitle("Price rate ERROR");
-            ErrorAlert.setHeaderText("Please insert between 0-100");
-            ErrorAlert.showAndWait();
-        } else {
-            ArrayList<String> paramArray = new ArrayList<>();
-            paramArray.add("Insert NewRate");
-            paramArray.add(ShowNewRateTXT.getText());
-            paramArray.add(ChooseSubscriptionTypeCombo.getValue());
-            paramArray.add(managerCompany);
-            myController.getDiscountRatesTable(paramArray); //start the process that will ask server to execute quarry and get the table details
-            ShowNewRateTXT.clear();
-            RequestSentMessageLabel.setVisible(true);
-        }*/
     }
 
     @FXML

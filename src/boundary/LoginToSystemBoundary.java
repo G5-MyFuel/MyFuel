@@ -23,6 +23,10 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/**
+ * login to system Boundary class- Handle user connection to system - gui
+ * @author Daniel Gabbay
+ */
 public class LoginToSystemBoundary extends Application {
     /* variables: */
     private static LoginToSystemBoundary Instance;
@@ -64,6 +68,9 @@ public class LoginToSystemBoundary extends Application {
         return Instance;
     }
 
+    /**
+     *
+     */
     @FXML
     void initialize() {
         myController.getUsersTable();   //start the process that will ask server to execute query and get the Users table details

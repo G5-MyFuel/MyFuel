@@ -25,6 +25,11 @@ public class fuelManagmentController extends BasicController {
     public fuelManagmentController(fuelManagmentBoundary myBoundary){
         this.myBoundary = myBoundary;
     }
+
+    /**
+     * this method execute quarry GET_ALL_MANAGER_STATIONS to get all manager station form data base.
+     * @param managerID
+     */
     public void getAllManagerStations(String managerID){
         ArrayList<Object> varArray = new ArrayList<>();
         varArray.add(managerID);
@@ -32,6 +37,12 @@ public class fuelManagmentController extends BasicController {
         super.sendSqlActionToClient(sqlAction);
     }
 
+    /**
+     * this method will update the fuel limit in database.
+     * quarry UPDATE_FUEL_LIMIT_STOCK
+     * @param amount
+     * @param stationNumber
+     */
     public void updateFuelLimit(Double amount , Integer stationNumber){
         ArrayList<Object> varArray = new ArrayList<>();
         varArray.add(amount);
@@ -40,6 +51,10 @@ public class fuelManagmentController extends BasicController {
         super.sendSqlActionToClient(sqlAction);
     }
 
+    /**
+     *
+     * @param result - The result received from the DB
+     */
     @Override
     public void getResultFromClient(SqlResult result) {
         Platform.runLater(() -> {
@@ -56,6 +71,12 @@ public class fuelManagmentController extends BasicController {
 
     }
 
+    /**
+     * this method will change the result from database into
+     * a arraylist of GasStation entity.
+     * @param result
+     * @return
+     */
     private ArrayList<GasStation> changeResultToGasStation(SqlResult result){
         ArrayList<GasStation> resultList = new ArrayList<>();
         for (ArrayList<Object> a : result.getResultData()) {

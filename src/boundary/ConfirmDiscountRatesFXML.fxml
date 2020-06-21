@@ -10,7 +10,7 @@
 
 <Pane prefHeight="796.0" prefWidth="1062.0" style="-fx-position-shape: center; -fx-border-color: transparent;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundary.ConfirmDiscountRatesBoundary">
    <children>
-      <Label layoutX="39.0" layoutY="55.0" text="Confirm Discount Rates" textFill="#2d4578">
+      <Label layoutX="39.0" layoutY="55.0" text="Confirm Pricing Model" textFill="#2d4578">
          <font>
             <Font name="System Bold" size="40.0" />
          </font>

@@ -35,17 +35,31 @@ public class CostumerManagementController extends BasicController {
         this.myBoundary = myBoundary;
     }
 
-
+    /**
+     * this method send quarry GET_ALL_COSTUMER_TABLE to data base
+     * in order to get the costumer details.
+     */
     public void getCostumerTable() {
         SqlAction sqlAction = new SqlAction(SqlQueryType.GET_ALL_COSTUMER_TABLE);
         super.sendSqlActionToClient(sqlAction);
     }
 
+    /**
+     * this method send quarry GET_ALL_VEHICLE_TABLE to get all
+     * the vehicle table from data base
+     */
     public void getVehicleTable() {
         SqlAction sqlAction = new SqlAction(SqlQueryType.GET_ALL_VEHICLE_TABLE);
         super.sendSqlActionToClient(sqlAction);
     }
 
+    /**
+     * this method get a quarry type and UPDATE specific costumer
+     * and parameter of costumer in databse
+     * @param colm
+     * @param cosID
+     * @param val
+     */
     public void updateCostumerDetailsInDb(SqlQueryType colm, String cosID, String val) {
         //set Costumer data into varArray
         ArrayList<Object> varArray = new ArrayList<>();
@@ -55,6 +69,10 @@ public class CostumerManagementController extends BasicController {
         super.sendSqlActionToClient(sqlAction);
     }
 
+    /**
+     * this method UPDATE costumer stations in data base.
+     * @param cos
+     */
     public void setCostumerStation(Costumer cos) {
         ArrayList<Object> varArray = new ArrayList<>();
         for (int i = 0; i < 3; i++)
@@ -64,6 +82,10 @@ public class CostumerManagementController extends BasicController {
         super.sendSqlActionToClient(sqlAction);
     }
 
+    /**
+     * this method get the costumer vehicles.
+     * @param CostumerID
+     */
     public void getCostumerVehicles(String CostumerID) {
         ArrayList<Object> varArray = new ArrayList<>();
         varArray.add(CostumerID);
@@ -71,6 +93,10 @@ public class CostumerManagementController extends BasicController {
         super.sendSqlActionToClient(sqlAction);
     }
 
+    /**
+     * this method remove a given vehicle form data base
+     * @param vehicleID
+     */
     public void removeVehicle(String vehicleID) {
         ArrayList<Object> varArray = new ArrayList<>();
         varArray.add(vehicleID);
@@ -78,6 +104,10 @@ public class CostumerManagementController extends BasicController {
         super.sendSqlActionToClient(sqlAction);
     }
 
+    /**
+     * this method remove a given costumer from database.
+     * @param CostumerID
+     */
     public void removeCostumer(String CostumerID) {
         ArrayList<Object> varArray = new ArrayList<>();
         varArray.add(CostumerID);
@@ -96,7 +126,7 @@ public class CostumerManagementController extends BasicController {
 
     /**
      *
-     * @param result - The result recieved from the DB
+     * @param result - The result received from the DB
      */
     @Override
     public void getResultFromClient(SqlResult result) {

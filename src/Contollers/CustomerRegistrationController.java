@@ -12,7 +12,9 @@ import javafx.application.Platform;
 import java.util.ArrayList;
 
 
-/** the class Customer Registration Controller
+/**
+ * the class Customer Registration Controller
+ *
  * @author itay
  * @see CustomerRegistrationController - the form's logic class
  */
@@ -27,13 +29,23 @@ public class CustomerRegistrationController extends BasicController {
     private ArrayList<Vehicle> allVehicleArray = new ArrayList<>();
     private Costumer tempCostumer;
 
-
+    /**
+     * initialize registration boundary.
+     *
+     * @param myBoundary
+     */
     public CustomerRegistrationController(CustomerRegistrationBoundary myBoundary) {
         this.myBoundary = myBoundary;
     }
 
     /*Logic Methods*/
 
+    /**
+     * this method will build costumer from all 3 phases in the finish phase.
+     * the method will execute a quarry to insert the costumer into the data base.
+     *
+     * @param costumer
+     */
     public void setCostumerInDB(Costumer costumer) {
         tempCostumer = costumer;
         //set Costumer data into CostumerTablevarArray
@@ -83,21 +95,35 @@ public class CustomerRegistrationController extends BasicController {
         tempCostumer = null;
     }
 
+    /**
+     * add costumer credit card.
+     *
+     * @param card
+     */
     public void addCostumerCreditCard(CreditCard card) {
         this.tempCostumer.setCostumerCreditCard(card);
     }
 
+    /**
+     * this method set costumer after finishing registration first phase.
+     *
+     * @param costumer
+     */
     public void setCostumerFirstPhase(Costumer costumer) {
         this.tempCostumer = costumer;
     }
 
+    /**
+     * set costumer vehicles after finishing registration second phase.
+     *
+     * @param vehicles
+     */
     public void setCostumerSecoundPhase(ArrayList<Vehicle> vehicles) {
         tempCostumer.setCostumerVehicle(vehicles);
     }
 
     /**
-     *
-     * @param result - The result recieved from the DB
+     * @param result - The result received from the DB
      */
     @Override
     public void getResultFromClient(SqlResult result) {
@@ -112,17 +138,29 @@ public class CustomerRegistrationController extends BasicController {
                 case INSERT_NEW_COSTUMER:
                     myBoundary.onRegisterSuccses();
                 default:
+                    try {
+                    } catch (NullPointerException e) {
+
+                    }
                     break;
             }
         });
 
     }
 
+    /**
+     * this method will start a quarry GET_ALL_VEHICLE_TABLE
+     * in order to get all vehicles form data base
+     */
     public void getVehicleTable() {
         SqlAction sqlAction = new SqlAction(SqlQueryType.GET_ALL_VEHICLE_TABLE);
         super.sendSqlActionToClient(sqlAction);
     }
 
+    /**
+     * this method will start a quarry GET_ALL_COSTUMER_TABLE
+     * in order to get all costumers form data base
+     */
     public void getCostumerTable() {
         SqlAction sqlAction = new SqlAction(SqlQueryType.GET_ALL_COSTUMER_TABLE);
         super.sendSqlActionToClient(sqlAction);
@@ -148,7 +186,7 @@ public class CustomerRegistrationController extends BasicController {
         ArrayList<String> temp = new ArrayList<>();
         for (ArrayList<Object> a : result.getResultData()) {
             Costumer cos = new Costumer((String) a.get(0), (String) a.get(9), (String) a.get(4),
-                    (String) a.get(11), (String) a.get(12), (String) a.get(13), null, (String) a.get(6),(String) a.get(5));
+                    (String) a.get(11), (String) a.get(12), (String) a.get(13), null, (String) a.get(6), (String) a.get(5));
             //add fuel companies.
             temp.add((String) a.get(14));
             temp.add((String) a.get(15));
@@ -162,6 +200,12 @@ public class CustomerRegistrationController extends BasicController {
         return resultList;
     }
 
+    /**
+     * this method will check if costumer exist in db
+     *
+     * @param cosID
+     * @return boolean
+     */
     public boolean isCostumerExist(String cosID) {
         for (Costumer cos : allDBCostumerArray) {
             if (cos.getUserID().equals(cosID))
@@ -170,6 +214,12 @@ public class CustomerRegistrationController extends BasicController {
         return false;
     }
 
+    /**
+     * this method will check if vehicle exist in db
+     *
+     * @param vehicleID
+     * @return boolean
+     */
     public boolean isVehicleExistInDb(String vehicleID) {
         for (Vehicle v : allVehicleArray) {
             if (v.getVehicleID().equals(vehicleID))

@@ -44,7 +44,7 @@ public class MarketingCampaignTemplateController extends BasicController  {
      * This method is responsible for getting results from the client
      * Divided into cases to separate getting results from different queries
      *
-     * @param result - The result recieved from the DB
+     * @param result - The result received from the DB
      */
     @Override
     public void getResultFromClient(SqlResult result) {
@@ -75,7 +75,7 @@ public class MarketingCampaignTemplateController extends BasicController  {
      * This method create array list of templates from the data base result.
      *
      * @param result the result
-     * @return Array list of costumers
+     * @return Array list of Template
      */
     private ArrayList<MarketingCampaignTemplate> changeResultToTemplate(SqlResult result){
         ArrayList<MarketingCampaignTemplate> resultList = new ArrayList<>();

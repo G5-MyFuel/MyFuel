@@ -25,6 +25,9 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
+ * This department is responsible for controlling "MarketingCampaignTemplateFXML" page
+ * Allows marketing department worker to view current templates and add new ones
+ *
  * @author Hana Wiener
  * @see MarketingCampaignTemplateController - the form's logic class
  */
@@ -35,13 +38,19 @@ public class MarketingCampaignTemplateBoundary implements DataInitializable {
      * The supervisor boundary controller.
      */
     private MarketingCampaignTemplateController myController = new MarketingCampaignTemplateController(this);
+    /**
+     * A parameter that represents who enters the page
+     */
     private String marketingDepartmentWorker;
-
+    /**
+     * For proper input testing
+     */
     private FormValidation formValidation;
     private boolean flagValidation = true;
-    private String dateAndDayPattern = "";
 
-    //gui variables:
+    /**
+    * Gui variables:
+     */
     @FXML
     private Button btnOverview;
 
@@ -108,9 +117,6 @@ public class MarketingCampaignTemplateBoundary implements DataInitializable {
     @FXML
     private TableColumn<MarketingCampaignTemplate, Time> EndHourColumn;
 
-    /* @FXML
-     private TableColumn<SaleOperationTemplate, String> MarketingAdColumn;
- */
     @FXML
     private JFXComboBox<String> ChooseGasTypeComboSpecialization;
 
@@ -120,11 +126,24 @@ public class MarketingCampaignTemplateBoundary implements DataInitializable {
     private ObservableList<String> DayType = FXCollections.observableArrayList("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "All");
     private ObservableList<String> FuelType = FXCollections.observableArrayList("Gasoline95", "Diesel", "ScooterFuel");
 
+    /**
+     * This method allows to save information sent when uploading the page (user id)
+     *
+     * @param data - The data sent to the boundary
+     */
     @Override
     public void initData(Object data) {
         this.marketingDepartmentWorker = (String) data;
     }
 
+    /**
+     * This method initializes the variables, fields, and combo-boxes
+     * What is initialized will appear when the screen is raised
+     * Initializes existing tables on the page - by sending a request
+     *
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         ChooseGasTypeComboSpecialization.setItems(FuelType);
@@ -133,13 +152,15 @@ public class MarketingCampaignTemplateBoundary implements DataInitializable {
         MarketingAdForTemplate.setVisible(false);
 
         this.formValidation = FormValidation.getValidator();
-        FormValidation();        //TODO: formValidation();   set all fields validators
+        FormValidation();
 
         myController.getTemplatesTable(); //start the process that will ask server to execute quarry and get the table details
     }
 
     /**
      * this method will set the templates table when we will initialize the page.
+     *
+     * @param cosArray
      */
     public void setTemplateTable(ArrayList<MarketingCampaignTemplate> cosArray) {
         //
@@ -155,16 +176,22 @@ public class MarketingCampaignTemplateBoundary implements DataInitializable {
         TemplateTableView.setItems(data);
     }
 
+    /**
+     *The method displays a window that allows you to add a template, when click the Add button
+     * @param event
+     */
     @FXML
     void handleBtnAddTemplate(ActionEvent event) {
         this.detailsPane.setVisible(true);
     }
 
-    @FXML
-    void handleChoseDayType(ActionEvent event) {
-
-    }
-
+    /**
+     *When you click the "Save Template" button
+     * The method saves the new template in DB
+     * and refreshes the table for the template to appear in it
+     *
+     * @param event
+     */
     @FXML
     void handleSaveTemplate(ActionEvent event) {
         MarketingCampaignTemplate newTemplate = new MarketingCampaignTemplate
@@ -183,7 +210,9 @@ public class MarketingCampaignTemplateBoundary implements DataInitializable {
         EndHour.getEditor().clear();
     }
 
-
+    /**
+     *A method responsible for input validity checks
+     */
     private void FormValidation() {
         /*  Template Name validation */
         formValidation.isEmptyFieldValidation(TemplateName, "Template Name");
@@ -197,17 +226,7 @@ public class MarketingCampaignTemplateBoundary implements DataInitializable {
         /*  Start Hour validation */
         if (StartHour.getValue() == null) {
             flagValidation = false;
-
         }
-
-        //  formValidation.isEmptyTimeField(StartHour, "Start Hour");
-
-        /*  End Hour validation */
-        // formValidation.isEmptyTimeField(EndHour, "End Hour");
-
-        /*  Marketing Ad For Template validation */
-        formValidation.isEmptyFieldValidation(MarketingAdForTemplate, "Marketing Ad For Template");
-
     }
 
 }

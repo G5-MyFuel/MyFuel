@@ -6,6 +6,12 @@ import common.assets.SqlResult;
 
 import java.sql.*;
 
+/**
+ * A department that is responsible for communicating with the DB
+ * in a concentrated manner, containing all the queries
+ *
+ * @author Hana Wiener
+ */
 public class MysqlConnection {
     /* Initialize database constants */
     /**
@@ -257,11 +263,12 @@ public class MysqlConnection {
          * *****************************************/
         sqlArray[SqlQueryType.GET_Quarterly_Revenue.getCode()] = "select p.totalPrice from FastFuel as ff, Purchase as p " +
                 "WHERE ff.purchaseID LIKE p.purchaseID AND ff.StationNumber LIKE ? AND ff.companyName LIKE ? " +
-                "AND quarter(p.purchaseDate) LIKE quarter(curdate())";
+                "AND quarter(p.purchaseDate) LIKE quarter(curdate()) AND YEAR(p.purchaseDate) = YEAR(curdate())";
         sqlArray[SqlQueryType.GET_Purchases_Report.getCode()] = "select ff.FuelType, p.fuelAmount from FastFuel as ff, Purchase as p " +
                 "WHERE ff.purchaseID LIKE p.purchaseID " +
                 "AND ff.StationNumber LIKE ? " +
-                "AND ff.companyName LIKE ?";
+                "AND ff.companyName LIKE ? " +
+                "AND quarter(p.purchaseDate) LIKE quarter(curdate()) AND YEAR(p.purchaseDate) = YEAR(curdate())";
         sqlArray[SqlQueryType.GET_QuantityItemsStock_Report.getCode()] = "SELECT gs.inventory_95, gs.inventory_diesel, gs.inventory_scooter from GasStation as gs " +
                 "WHERE gs.companyName LIKE ?" +
                 "AND gs.StationNumber LIKE ?";

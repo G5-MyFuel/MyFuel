@@ -18,7 +18,7 @@ import assets.SqlResult;
 
 /**
  * The Class BasicController.
- *  * @author hani
+ *  * @author Hana Wiener
  */
 @SuppressWarnings("serial")
 public abstract class BasicController implements Serializable {

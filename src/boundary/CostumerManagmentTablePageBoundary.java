@@ -108,10 +108,17 @@ public class CostumerManagmentTablePageBoundary implements DataInitializable {
 
     private JFXComboBox<String> CostumertypeChoiceBox = new JFXComboBox<>();
 
-
+    /**
+     * initialize observable arrays to set in view objects.
+     */
     private ObservableList<String> CostumerType = FXCollections.observableArrayList("Private", "Company");
     private ObservableList<String> GasType = FXCollections.observableArrayList("Gasoline-95", "Diesel", "Scooter Fuel");
-
+    /**
+     * initialize this will start in the initialize of the boundary.
+     * sends parameters from anther pages
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         VehicleInformationPane.setVisible(false);
@@ -121,9 +128,6 @@ public class CostumerManagmentTablePageBoundary implements DataInitializable {
         tableStyle();
     }
 
-    private void tableStyle() {
-        CosManageTbale.setStyle("-fx-font-weight: bold;");
-    }
 
 
     /**
@@ -218,6 +222,13 @@ public class CostumerManagmentTablePageBoundary implements DataInitializable {
         });
     }
 
+    /**
+     * this method checks the costumer subscription type and return
+     * true if costumer can have certen subscription from the selected subscriptions.
+     * @param subToCheck
+     * @param tempCos
+     * @return boolean
+     */
     public boolean checkSubscriptionType(String subToCheck, Costumer tempCos) {
         if (subToCheck.equals("Regular monthly subscription(singel)") || subToCheck.equals("Full monthly subscription")) {
             if (tempCos.getCostumerVehicle().size() > 1) {
@@ -238,7 +249,8 @@ public class CostumerManagmentTablePageBoundary implements DataInitializable {
     }
 
     /**
-     *
+     *the following method will program the table cell.
+     * each cell has its own listener and functionality.
      */
     private void setColomsCells() {
 
@@ -276,7 +288,6 @@ public class CostumerManagmentTablePageBoundary implements DataInitializable {
             }
         });
 
-
         CostumerIDCol.setCellValueFactory(new PropertyValueFactory<Costumer, String>("userID"));
         CostumerIDCol.setEditable(false);
         firstNameCol.setCellValueFactory(new PropertyValueFactory<Costumer, String>("userFirstName"));
@@ -297,10 +308,13 @@ public class CostumerManagmentTablePageBoundary implements DataInitializable {
         ObservableList<String> purchasePlan = FXCollections.observableArrayList("Exclusive", "Multiple Stations");
         PurchasePlanCol.setCellFactory(ComboBoxTableCell.forTableColumn(purchasePlan));
 
-
     }
 
-
+    /**
+     * this method initialize vehicle table view with a spesific costumer
+     * vehicles.
+     * @param vArr
+     */
     public void setVehicleTable(ArrayList<Vehicle> vArr) {
         Vehicles.addAll(vArr);
         VehicleIDCol.setCellValueFactory(new PropertyValueFactory<>("VehicleID"));
@@ -310,13 +324,20 @@ public class CostumerManagmentTablePageBoundary implements DataInitializable {
     }
 
 
+    /**
+     * this method simply refresh costumer table view.
+     */
     @FXML
     public void refreshTable() {
         myController.getVehicleTable();
-        ;
         myController.getCostumerTable();
     }
 
+    /**
+     * the following method search for specific costumer and display it
+     * in the costumer table view.
+     * @param event
+     */
     @FXML
     void ClickSearchCostumer(MouseEvent event) {
         Costumer cos = searchCostumerWithID(CostumerIDtxt.getText());
@@ -371,6 +392,10 @@ public class CostumerManagmentTablePageBoundary implements DataInitializable {
 
     }
 
+    /**
+     * this method removes selected costumer when user click "YES"
+     * costumer will be removed both from db and costumer tableview.
+     */
     @FXML
     void removeSelectedCostumer() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -403,6 +428,9 @@ public class CostumerManagmentTablePageBoundary implements DataInitializable {
         }
     }
 
+    /**
+     * this method simply refresh vehicle table view.
+     */
     @FXML
     void refreshVehicleTable() {
         if (!VehicleTable.getItems().isEmpty()) {
@@ -413,6 +441,11 @@ public class CostumerManagmentTablePageBoundary implements DataInitializable {
 
     }
 
+    /**
+     * the following method will start a process that will ask
+     * data base to get all vehicle of specific costumer.
+     * @param event
+     */
     @FXML
     void ClickSearchCostumerVehicles(MouseEvent event) {
         Costumer cos = searchCostumerWithID(VehicleSearchCosIDtxt.getText());
@@ -430,6 +463,11 @@ public class CostumerManagmentTablePageBoundary implements DataInitializable {
         }
     }
 
+    /**
+     * the following method will remove selected vehicle by click remove button.
+     * both from table and from db.
+     * @param event
+     */
     @FXML
     void removeSelectedVehicle(MouseEvent event) {
 
@@ -460,6 +498,11 @@ public class CostumerManagmentTablePageBoundary implements DataInitializable {
         }
     }
 
+    /**
+     * the following method set vehicle info visible if the user
+     * has chosen to add a vehicle
+     * @param event
+     */
     @FXML
     void setVehicleInfoVisible(MouseEvent event) {
         if (!(VehicleSearchCosIDtxt.getText().isEmpty())) {
@@ -471,6 +514,11 @@ public class CostumerManagmentTablePageBoundary implements DataInitializable {
             VehicleInformationPane.setVisible(true);
     }
 
+    /**
+     * the following method is a listener that opens the credit card window
+     * of selcted costumer from the costumer table
+     * @param event
+     */
     @FXML
     void showCreditCard(MouseEvent event) {
         PagingController pc = new PagingController();
@@ -484,6 +532,10 @@ public class CostumerManagmentTablePageBoundary implements DataInitializable {
         }
     }
 
+    /**
+     * the following function opens the station pages
+     * that allowed the user to change costumer stations.
+     */
     @FXML
     void openStationPage() {
         if (CosManageTbale.getSelectionModel().isEmpty()) {
@@ -497,6 +549,13 @@ public class CostumerManagmentTablePageBoundary implements DataInitializable {
         }
     }
 
+    /**
+     * pick costumer from the costumer table and change his stations
+     * according to the giving parameters
+     * @param station1
+     * @param station2
+     * @param station3
+     */
     public void changeSelectedCostumerStations(String station1, String station2, String station3) {
         Costumer cos = CosManageTbale.getSelectionModel().getSelectedItem();
         ArrayList<String> temp = new ArrayList<>();
@@ -516,6 +575,12 @@ public class CostumerManagmentTablePageBoundary implements DataInitializable {
         this.cos = cos;
     }
 
+    /**
+     * this method search specific costumer in the costumers array
+     * that initialized from db.
+     * @param costumerID
+     * @return
+     */
     private Costumer searchCostumerWithID(String costumerID) {
         for (Costumer cos : costumers) {
             if (cos.getUserID().equals(costumerID))
@@ -524,11 +589,25 @@ public class CostumerManagmentTablePageBoundary implements DataInitializable {
         return null;
     }
 
+    /**
+     * set table style css
+     */
+    private void tableStyle() {
+        CosManageTbale.setStyle("-fx-font-weight: bold;");
+    }
 
+    /**
+     * get costumers tableview
+     * @return CosManageTbale
+     */
     public TableView<Costumer> getCosManageTbale() {
         return CosManageTbale;
     }
 
+    /**
+     * get my controller
+     * @return myController
+     */
     public CostumerManagementController getMyController() {
         return myController;
     }

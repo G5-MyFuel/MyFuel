@@ -10,6 +10,12 @@ import javafx.application.Platform;
 
 import java.util.ArrayList;
 
+/**
+ * A department responsible for bringing the appropriate navigation buttons
+ * to each user as they log on
+ *
+ * @author itay ziv
+ */
 public class GeneralDashBoardController extends BasicController {
     private generalDashBoardBoundary myBoundary;
     private static Double fuelAmountOfPreMonthForCurrentUser = 0.0;
@@ -28,6 +34,10 @@ public class GeneralDashBoardController extends BasicController {
         this.myBoundary = myBoundary;
     }
 
+    /**
+     *
+     * @param result - The result received from the DB
+     */
     @Override
     public void getResultFromClient(SqlResult result) {
         Platform.runLater(() -> {
@@ -48,6 +58,10 @@ public class GeneralDashBoardController extends BasicController {
         });
     }
 
+    /**
+     * get Customer Purchase Amount In Last Month From DB
+     * @param customerId
+     */
     public void getCustomerPurchaseAmountInLastMonthFromDB(String customerId) {
         ArrayList<Object> vars = new ArrayList<>();
         if (currentUserID != null) vars.add(currentUserID);
@@ -56,6 +70,11 @@ public class GeneralDashBoardController extends BasicController {
         super.sendSqlActionToClient(sqlAction);
     }
 
+    /**
+     * change Result To Fuel Amount Of Pre Month Of Cur User
+     * @param result
+     * @param userID
+     */
     private void changeResultToFueAmountOfPreMonthOfCurUser(SqlResult result, String userID) {
         for (ArrayList<Object> a : result.getResultData()) {
             this.fuelAmountOfPreMonthForCurrentUser = (Double) a.get(1);
@@ -63,12 +82,19 @@ public class GeneralDashBoardController extends BasicController {
         }
     }
 
-
+    /**
+     * get All Updated Prices From DB
+     * execute GET_ALL_UPDATED_PRICES quarry
+     */
     public void getAllUpdatedPricesFromDB() {
         SqlAction sqlAction = new SqlAction(SqlQueryType.GET_ALL_UPDATED_PRICES);
         super.sendSqlActionToClient(sqlAction);
     }
 
+    /**
+     * change result to fuel prices.
+     * @param result
+     */
     private void changeResultToFuelPrices(SqlResult result) {
         FuelTypes ft;
         String s;
@@ -93,18 +119,34 @@ public class GeneralDashBoardController extends BasicController {
         }
     }
 
+    /**
+     * getFuelAmountOfPreMonthForCurrentUser
+     * @return Double
+     */
     public Double getFuelAmountOfPreMonthForCurrentUser() {
         return fuelAmountOfPreMonthForCurrentUser;
     }
 
+    /**
+     * set Fuel Amount Of Pre Month For CurrentUser method
+     * @param fuelAmountOfPreMonthForCurrentUser
+     */
     public void setFuelAmountOfPreMonthForCurrentUser(Double fuelAmountOfPreMonthForCurrentUser) {
         this.fuelAmountOfPreMonthForCurrentUser = fuelAmountOfPreMonthForCurrentUser;
     }
 
+    /**
+     * get Current User ID method
+     * @return currentUserID
+     */
     public String getCurrentUserID() {
         return currentUserID;
     }
 
+    /**
+     * set Current User ID method
+     * @param currentUserID
+     */
     public void setCurrentUserID(String currentUserID) {
         this.currentUserID = currentUserID;
     }
