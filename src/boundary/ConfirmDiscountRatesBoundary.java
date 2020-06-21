@@ -1,7 +1,6 @@
 package boundary;
 
 import Contollers.ConfirmDiscountRatesController;
-import Contollers.FormValidation;
 import entity.DiscountRate;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,7 +12,10 @@ import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
+
+import static java.lang.Thread.sleep;
 
 public class ConfirmDiscountRatesBoundary implements DataInitializable {
 
@@ -24,7 +26,6 @@ public class ConfirmDiscountRatesBoundary implements DataInitializable {
      * The supervisor boundary controller.
      */
     private final ConfirmDiscountRatesController myController = new ConfirmDiscountRatesController(this);
-    private FormValidation formValidation;
     private final Alert ErrorAlert = new Alert(Alert.AlertType.ERROR);
     ArrayList<DiscountRate> sendDiscountRates = new ArrayList<>();
 
@@ -61,26 +62,20 @@ public class ConfirmDiscountRatesBoundary implements DataInitializable {
         paramArray.add(managerID);
         myController.GetDiscountRatesData(paramArray); //start the process that will ask server to execute quarry and get the table details
 
-        this.formValidation = FormValidation.getValidator();
-
         /*btnApprovedRates.setDisable(true);
         btnRemoveNewRate.setDisable(true);*/
         NoNewRatePendingLabel.setVisible(false);
         TableSubscriptionType.setVisible(false);
+        TableSubscriptionType.setEditable(true);
         btnApprovedRates.setVisible(false);
         btnRemoveNewRate.setVisible(false);
         InstructionsLabel.setVisible(false);
-
-        /*  set all fields validators */
-        formValidation();
     }
 
     public void setManagerData(ArrayList<String> resultList) {
-
         managerCompany = resultList.get(0);
         managerStation = resultList.get(1);
         ArrayList<String> paramArray = new ArrayList<>();
-        paramArray = new ArrayList<>();
         paramArray.add("Get Discount Rates Data");
         paramArray.add(managerCompany);
         myController.GetDiscountRatesData(paramArray);
@@ -89,23 +84,8 @@ public class ConfirmDiscountRatesBoundary implements DataInitializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-
     }
 
-    private void formValidation() {
-
-        /*  New price validation */
-/*
-        //formValidation.isContainsOnlyNumbers(ShowNewRateTXT, "New price");
-        formValidation.numberPositiveValidation(ShowNewRateTXT, "New price");
-        formValidation.isEmptyField(ShowNewRateTXT, "New price");
-        //formValidation.maxLengthValidation(ShowNewRateTXT, "New price", 3);
-        formValidation.maxSizeValidation(ShowNewRateTXT, "New price", 100);
-        formValidation.minSizeValidation(ShowNewRateTXT, "New price", 1);
-        fsdfvsd
-        */
-
-    }
 
     public void setDiscountRatesData(ArrayList<DiscountRate> resultList) {
 
@@ -142,28 +122,54 @@ public class ConfirmDiscountRatesBoundary implements DataInitializable {
         btnRemoveNewRate.setDisable(true);
         sendDiscountRates.clear();
         ArrayList<DiscountRate> discountArray = new ArrayList<DiscountRate>(TableSubscriptionType.getSelectionModel().getSelectedItems());
-        //System.out.println(discountArray);
-        //System.out.println(TableSubscriptionType.getSelectionModel().getSelectedItems());
         sendDiscountRates.addAll(discountArray);
-        System.out.println(discountArray.size());
         if (discountArray.size() > 0) {
             btnApprovedRates.setDisable(false);
             btnRemoveNewRate.setDisable(false);
         }
     }
 
+    /**
+     * this method listen to remove button and start update function
+     * @param event
+     */
     @FXML
     void handleApprovedRates(ActionEvent event) {
 
         updateDiscountRate("Update New Discount Rate");
     }
 
+    /**
+     * this method listen to remove button and start update function
+     * @param event
+     */
     @FXML
     void handleRemoveNewRate(ActionEvent event) {
-
-        updateDiscountRate("Remove New Discount Rate");
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.getButtonTypes().remove(ButtonType.OK);
+        alert.getButtonTypes().add(ButtonType.CANCEL);
+        alert.getButtonTypes().add(ButtonType.YES);
+        alert.setTitle("Remove Discount Rate Row");
+        alert.setContentText(String.format("Are you sure you want to remove this row?\n"));
+        Optional<ButtonType> res = alert.showAndWait();
+        if (res.get().getText().equals("Yes")) {
+            updateDiscountRate("Remove New Discount Rate");
+            if (!TableSubscriptionType.getSelectionModel().isEmpty()) {
+                DiscountRate selectedItem = TableSubscriptionType.getSelectionModel().getSelectedItem();
+                TableSubscriptionType.getItems().remove(selectedItem);
+                TableSubscriptionType.refresh();
+                try {//wait for the quarry to execute
+                    sleep(2000);
+                } catch (InterruptedException ex) {
+                    //...
+                }
+            }
+        }
     }
 
+    /**
+     * @param queryName
+     */
     void updateDiscountRate(String queryName) {
 
         ArrayList<String> paramArray = new ArrayList<>();
