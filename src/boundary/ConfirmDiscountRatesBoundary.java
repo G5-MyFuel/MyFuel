@@ -176,8 +176,9 @@ public class ConfirmDiscountRatesBoundary implements DataInitializable {
         for (DiscountRate temp : sendDiscountRates) {
             paramArray.clear();
             paramArray.add(queryName);
-            paramArray.add(managerCompany);
             paramArray.add(temp.getSubscriptionType());
+            paramArray.add(managerCompany);
+            System.out.println(temp.getSubscriptionType());
             myController.GetDiscountRatesData(paramArray);
         }
         paramArray.clear();
