@@ -120,6 +120,9 @@ public class ViewReportsBoundary implements DataInitializable {
     @FXML
     private Button btnOK;
 
+    @FXML
+    private Label NoDataLabel;
+
     /**
      * For enter data to combo-boxes
      */
@@ -167,6 +170,7 @@ public class ViewReportsBoundary implements DataInitializable {
         QuestionMark2.setVisible(false);
         QuestionMark3.setVisible(false);
         QuestionMark4.setVisible(false);
+        NoDataLabel.setVisible(false);
 
         //set tool tips
         Tooltip.install(QuestionMark1, createToolTip("Each station got a unique number that identify the station."));
@@ -231,12 +235,36 @@ public class ViewReportsBoundary implements DataInitializable {
         ViewTotalRevenueTXT.setVisible(false);
 
         ArrayList<String> paramArray = new ArrayList<>();
-        paramArray.add("View Quarterly revenue report");
+        paramArray.add("Check if exists Quarterly revenue report");
         paramArray.add(managerCompany);
         paramArray.add(managerStation);
         GetReportYearAndQuarter();
         paramArray.add(ReportYearAndQuarter);
+        paramArray.add(ReportYearAndQuarter);
         myController.GetReportData(paramArray); //start the process that will ask server to execute quarry and get the table details
+    }
+
+    /**
+     * This method check if Quarterly Report is exists for a given quarter from the data base result.
+     *
+     * @param isExsits - The result received from the DB
+     */
+    public void checkIfExists(String isExsits) {
+
+        if (isExsits.equals("1")) {
+            ArrayList<String> paramArray = new ArrayList<>();
+            paramArray.add("View Quarterly revenue report");
+            paramArray.add(managerCompany);
+            paramArray.add(managerStation);
+            GetReportYearAndQuarter();
+            paramArray.add(ReportYearAndQuarter);
+            paramArray.add(ReportYearAndQuarter);
+            myController.GetReportData(paramArray); //start the process that will ask server to execute quarry and get the table details
+        } else {
+            NoDataLabel.setVisible(true);
+            ViewTotalRevenueTXT.setVisible(false);
+        }
+
     }
 
     /**
@@ -246,7 +274,7 @@ public class ViewReportsBoundary implements DataInitializable {
      */
     public void setQuarterlyData(String revenue) {
 
-        System.out.println(revenue);
+        NoDataLabel.setVisible(false);
         ViewTotalRevenueTXT.setText(revenue);
         ViewTotalRevenueTXT.setVisible(true);
     }
@@ -269,6 +297,7 @@ public class ViewReportsBoundary implements DataInitializable {
         paramArray.add(managerCompany);
         paramArray.add(managerStation);
         GetReportYearAndQuarter();
+        paramArray.add(ReportYearAndQuarter);
         paramArray.add(ReportYearAndQuarter);
         myController.GetReportData(paramArray); //start the process that will ask server to execute quarry and get the table details
     }
@@ -307,6 +336,7 @@ public class ViewReportsBoundary implements DataInitializable {
         paramArray.add(managerCompany);
         paramArray.add(managerStation);
         GetReportYearAndQuarter();
+        paramArray.add(ReportYearAndQuarter);
         paramArray.add(ReportYearAndQuarter);
         myController.GetReportData(paramArray); //start the process that will ask server to execute quarry and get the table details
 
@@ -414,7 +444,6 @@ public class ViewReportsBoundary implements DataInitializable {
 
     /**
      * This method will save the chosen Year And Quarter
-     *
      */
     public void GetReportYearAndQuarter() {
 

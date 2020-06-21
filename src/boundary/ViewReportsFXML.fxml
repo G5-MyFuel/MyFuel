@@ -77,7 +77,7 @@
       </ImageView>
       <JFXComboBox fx:id="ChooseReportYearCombo" layoutX="462.0" layoutY="110.0" onAction="#handleChooseReportYear" prefHeight="31.0" prefWidth="204.0" promptText="Please select a year" />
       <JFXComboBox fx:id="ChooseReportQuarterCombo" layoutX="462.0" layoutY="161.0" onAction="#handleChooseReportQuarter" promptText="Please Select a quarter" />
-      <Label fx:id="QuantityItemsStockTxt" layoutX="778.0" layoutY="455.0" text="Quantity of items in stock" />
+      <Label fx:id="QuantityItemsStockTxt" layoutX="755.0" layoutY="455.0" text="Quantity of items in stock" />
       <TableView fx:id="ViewPurchasesReportTable" layoutX="349.0" layoutY="488.0" prefHeight="147.0" prefWidth="390.0">
          <columns>
             <TableColumn fx:id="FuelTypeColumn" prefWidth="116.0" text="Fuel type" />
@@ -113,5 +113,10 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
+      <Label fx:id="NoDataLabel" layoutX="38.0" layoutY="514.0" text="*There is no data for this station currently!" textFill="#ff0f02">
+         <font>
+            <Font name="System Bold Italic" size="18.0" />
+         </font>
+      </Label>
    </children>
 </Pane>

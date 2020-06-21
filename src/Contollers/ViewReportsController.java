@@ -46,9 +46,14 @@ public class ViewReportsController extends BasicController {
         ArrayList<Object> varArray = new ArrayList<>();
         varArray.addAll(paramArray);
         varArray.remove(0);
+        System.out.println(varArray);
         switch (paramArray.get(0)) {
             case "Get Manager data":
                 SqlAction sqlAction = new SqlAction(SqlQueryType.GET_Manager_Data, varArray);
+                super.sendSqlActionToClient(sqlAction);
+                break;
+            case "Check if exists Quarterly revenue report":
+                sqlAction = new SqlAction(SqlQueryType.CheckIfExists_Quarterly_Report, varArray);
                 super.sendSqlActionToClient(sqlAction);
                 break;
             case "View Quarterly revenue report":
@@ -81,6 +86,9 @@ public class ViewReportsController extends BasicController {
             switch (result.getActionType()) {
                 case GET_Manager_Data:
                     myBoundary.setManagerData(this.changeResultToManagerData(result));
+                    break;
+                case CheckIfExists_Quarterly_Report:
+                    myBoundary.checkIfExists(this.checkIfExists(result));
                     break;
                 case View_Quarterly_Report:
                     myBoundary.setQuarterlyData(this.changeResultToQuarterlyReport(result));
@@ -188,5 +196,19 @@ public class ViewReportsController extends BasicController {
             resultList.add((String) a.get(2));
         }
         return resultList;
+    }
+
+    /**
+     * This method check if Quarterly Report is exists for a given quarter from the data base result.
+     *
+     * @param result - The result received from the DB
+     * @return String
+     */
+    private String checkIfExists (SqlResult result){
+
+        Long isExsits;
+        ArrayList<Object> a = result.getResultData().get(0);
+        isExsits = (Long) a.get(0);
+        return isExsits.toString();
     }
 }

@@ -269,7 +269,9 @@ public class MysqlConnection {
                 "AND ff.StationNumber LIKE ? " +
                 "AND ff.companyName LIKE ? " +
                 "AND quarter(p.purchaseDate) LIKE quarter(curdate()) AND YEAR(p.purchaseDate) = YEAR(curdate())";
-        sqlArray[SqlQueryType.GET_QuantityItemsStock_Report.getCode()] = "SELECT gs.inventory_95, gs.inventory_diesel, gs.inventory_scooter from GasStation as gs ";
+        sqlArray[SqlQueryType.GET_QuantityItemsStock_Report.getCode()] = "SELECT gs.inventory_95, gs.inventory_diesel, gs.inventory_scooter from GasStation as gs " +
+                "WHERE gs.companyName LIKE ?" +
+                "AND gs.StationNumber LIKE ?";
         sqlArray[SqlQueryType.GET_Manager_Data.getCode()] = "SELECT * FROM Employee WHERE Employee.employeeID LIKE ?";
         sqlArray[SqlQueryType.INSERT_NEW_Quarterly_Report.getCode()] = "INSERT INTO `ViewQuarterlyReportsForAdmin`" +
                 "(`companyName`, `StationNumber`, `Date`, `Quarterly`, `TotalRevenue`) " +
@@ -290,14 +292,20 @@ public class MysqlConnection {
         /* *****************************************
          * ********** Admin View Reports Queries ****************
          * *****************************************/
+        sqlArray[SqlQueryType.CheckIfExists_Quarterly_Report.getCode()] = "SELECT IF( EXISTS" +
+                "(SELECT `TotalRevenue` FROM `ViewQuarterlyReportsForAdmin` WHERE `companyName` = ? AND `StationNumber` = ? " +
+                "AND `Quarterly` = quarter(?) AND `Date` = YEAR(?)), 1, 0)";
         sqlArray[SqlQueryType.View_Quarterly_Report.getCode()] = "SELECT `TotalRevenue` FROM `ViewQuarterlyReportsForAdmin` " +
-                "WHERE `companyName` = ? AND `StationNumber` = ? AND `Quarterly` = quarter(?)";
-        sqlArray[SqlQueryType.View_Purchases_Report.getCode()] = "SELECT `FuelType`, `LitersPurchased`, `SalesAmount` FROM `ViewPurchasesReportsForAdmin` " +
+                "WHERE `companyName` = ? AND `StationNumber` = ? AND `Quarterly` = quarter(?) AND `Date` = YEAR(?)";
+        sqlArray[SqlQueryType.CheckIfExists_Purchases_Report.getCode()] = "SELECT IF( EXISTS\" +\n" +
+                "                \"(SELECT LitersPurchased, SalesAmount FROM `ViewPurchasesReportsForAdmin` WHERE `companyName` = ? AND `StationNumber` = ? \" +\n" +
+                "                \"AND `Quarterly` = quarter(?) AND `Date` = YEAR(?)), 1, 0)";
+                sqlArray[SqlQueryType.View_Purchases_Report.getCode()] = "SELECT `FuelType`, `LitersPurchased`, `SalesAmount` FROM `ViewPurchasesReportsForAdmin` " +
                 "WHERE `companyName` = ? AND `StationNumber` = ? AND `Quarterly` = quarter(?) AND " +
-                "(`FuelType` = \"Diesel\" OR `FuelType` = \"Gasoline 95\" OR `FuelType` = \"Scooter fuel\")";
+                "(`FuelType` = \"Diesel\" OR `FuelType` = \"Gasoline 95\" OR `FuelType` = \"Scooter fuel\") AND `Date` = YEAR(?)";
         sqlArray[SqlQueryType.View_QuantityItemsStock_Report.getCode()] = "SELECT `FuelType`, `AvailableInventory` FROM `ViewQuantityItemsStockReportsForAdmin` " +
                 "WHERE `companyName` = ? AND `StationNumber` = ? AND `Quarterly` = quarter(?) " +
-                "AND (`FuelType` = \"Diesel\" OR `FuelType` = \"Gasoline 95\" OR `FuelType` = \"Scooter fuel\")";
+                "AND (`FuelType` = \"Diesel\" OR `FuelType` = \"Gasoline 95\" OR `FuelType` = \"Scooter fuel\") AND `Date` = YEAR(?)";
 
         /* *****************************************
          * ********** Admin Confirm Discount Rates Queries ****************
