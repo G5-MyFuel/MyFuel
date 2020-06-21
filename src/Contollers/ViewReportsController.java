@@ -68,6 +68,10 @@ public class ViewReportsController extends BasicController {
                 sqlAction = new SqlAction(SqlQueryType.View_Purchases_Report, varArray);
                 super.sendSqlActionToClient(sqlAction);
                 break;
+            case "Check if exists Quantity of items in stock report":
+                sqlAction = new SqlAction(SqlQueryType.CheckIfExists_QuantityItemsStock_Report, varArray);
+                super.sendSqlActionToClient(sqlAction);
+                break;
             case "View Quantity of items in stock report":
                 sqlAction = new SqlAction(SqlQueryType.View_QuantityItemsStock_Report, varArray);
                 super.sendSqlActionToClient(sqlAction);
@@ -102,6 +106,9 @@ public class ViewReportsController extends BasicController {
                     break;
                 case View_Purchases_Report:
                     myBoundary.setPurchasesData(this.changeResultToPurchasesReport(result));
+                    break;
+                case CheckIfExists_QuantityItemsStock_Report:
+                    myBoundary.checkIfExistsQuantityItemsStock(this.checkIfExistsQuantityItemsStock(result));
                     break;
                 case View_QuantityItemsStock_Report:
                     myBoundary.setQuantityItemsStockData(changeResultToQuantityItemsStockReport(result));
@@ -226,6 +233,20 @@ public class ViewReportsController extends BasicController {
      * @return String
      */
     private String checkIfExistsPurchases (SqlResult result){
+
+        Long isExsits;
+        ArrayList<Object> a = result.getResultData().get(0);
+        isExsits = (Long) a.get(0);
+        return isExsits.toString();
+    }
+
+    /**
+     * This method check if Purchases Report is exists for a given quarter from the data base result.
+     *
+     * @param result - The result received from the DB
+     * @return String
+     */
+    private String checkIfExistsQuantityItemsStock (SqlResult result){
 
         Long isExsits;
         ArrayList<Object> a = result.getResultData().get(0);
