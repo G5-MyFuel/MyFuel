@@ -209,7 +209,6 @@ public class ViewReportsController extends BasicController {
         Long isExsits;
         ArrayList<Object> a = result.getResultData().get(0);
         isExsits = (Long) a.get(0);
-        System.out.println(isExsits);
         return isExsits.toString();
     }
 }

@@ -251,7 +251,6 @@ public class ViewReportsBoundary implements DataInitializable {
      */
     public void checkIfExists(String isExsits) {
 
-        System.out.println("isExsits:" + isExsits);
         if (isExsits.equals("1")) {
             ArrayList<String> paramArray = new ArrayList<>();
             paramArray.add("View Quarterly revenue report");
@@ -275,7 +274,6 @@ public class ViewReportsBoundary implements DataInitializable {
      */
     public void setQuarterlyData(String revenue) {
 
-        System.out.println(revenue);
         NoDataLabel.setVisible(false);
         ViewTotalRevenueTXT.setText(revenue);
         ViewTotalRevenueTXT.setVisible(true);

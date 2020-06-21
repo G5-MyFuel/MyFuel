@@ -44,15 +44,15 @@ public class SettingDiscountRatesController extends BasicController {
         varArray.addAll(paramArray);
         varArray.remove(0);
         switch (paramArray.get(0)) {
-            case "Regular monthly subscription (single)":   //20
+            case "Regular monthly subscription (single)":
                 SqlAction sqlAction = new SqlAction(SqlQueryType.GET_RegularSubscriptionSingleVehicle_PRICE, varArray);
                 super.sendSqlActionToClient(sqlAction);
                 break;
-            case "Full monthly subscription":  //7
+            case "Full monthly subscription":
                 sqlAction = new SqlAction(SqlQueryType.GET_FullSubscriptionSingleVehicle_PRICE, varArray);
                 super.sendSqlActionToClient(sqlAction);
                 break;
-            case "Regular monthly subscription (multiple)":   //15
+            case "Regular monthly subscription (multiple)":
                 sqlAction = new SqlAction(SqlQueryType.GET_RegularSubscriptionMultiVehicle_PRICE, varArray);
                 super.sendSqlActionToClient(sqlAction);
                 break;
