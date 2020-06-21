@@ -37,6 +37,7 @@ public class Costumer extends User {
         this.purchasePlan = purchasePlan;
     }
 
+
     public String getPurchasePlan() {
         return this.purchasePlan;
     }

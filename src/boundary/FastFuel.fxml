@@ -100,7 +100,7 @@
                <graphic>
                   <ImageView fitHeight="56.0" fitWidth="55.0">
                      <image>
-                        <Image url="@../media/icons/1_100px.png" />
+                        <Image url="@../media/icons/icons8_1_100px.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -130,7 +130,7 @@
                <graphic>
                   <ImageView fitHeight="56.0" fitWidth="55.0">
                      <image>
-                        <Image url="@../media/icons/3_100px.png" />
+                        <Image url="@../media/icons/icons8_3_100px.png" />
                      </image>
                   </ImageView>
                </graphic>
