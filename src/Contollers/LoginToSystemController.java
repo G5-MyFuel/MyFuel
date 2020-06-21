@@ -65,8 +65,6 @@ public class LoginToSystemController extends BasicController {
                     break;
                 case GET_EMPLOYEE_TABLE:
                     System.out.println("PermissionsManagement -> GET_EMPLOYEE_TABLE query");
-//                    employeeArrayList.addAll(this.changeResultToEmployees(result));
-//                    System.out.println(employeeArrayList);
                     break;
 
                 //
