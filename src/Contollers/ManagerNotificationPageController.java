@@ -26,8 +26,10 @@ public class ManagerNotificationPageController extends BasicController {
         this.myBoundary = myBoundary;
     }
 
+
     /**
-     To get all the orders with status "Done" to show the manager that the order arrived
+     * To get all the orders with status "Done" to show the manager that the order arrived
+     * @param managerID
      */
     public void getOrdersFromDB(String managerID) {
         ArrayList<Object> varArray= new ArrayList<>();
@@ -36,8 +38,10 @@ public class ManagerNotificationPageController extends BasicController {
         super.sendSqlActionToClient(sqlAction);
     }
 
+
     /**
-     This function sets a new status after the manager saw his notification
+     * This function sets a new status after the manager saw his notification
+     * @param OrderNumber
      */
     public void setNewStatus(String OrderNumber) {
         ArrayList<Object> varArray = new ArrayList<>();

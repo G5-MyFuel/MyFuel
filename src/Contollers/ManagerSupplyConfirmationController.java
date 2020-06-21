@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 /**
  * @author Adi Lampert
- * @see ManagerSupplyConfirmationController - the form's logic class
+ * @see ManagerSupplyConfirmationController - the form's Controller class
  */
 public class ManagerSupplyConfirmationController extends BasicController {
 
@@ -23,7 +23,8 @@ public class ManagerSupplyConfirmationController extends BasicController {
     }
 
     /**
-     To get all the orders related to this station manager
+     * To get all the orders related to this station manager
+     * @param stationManagerID
      */
     public void getOrdersFromDB(String stationManagerID) {
         ArrayList<Object> al = new ArrayList<>();
@@ -32,8 +33,10 @@ public class ManagerSupplyConfirmationController extends BasicController {
         System.out.println(al);
         super.sendSqlActionToClient(sqlAction);
     }
+
     /**
      * Update order status from "New" to "In treatment"
+     * @param OrderNumber
      */
     public void setNewStatus(String OrderNumber){
         ArrayList<Object> varArray=new ArrayList<>();

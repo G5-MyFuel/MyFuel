@@ -21,7 +21,7 @@ import java.util.ResourceBundle;
 
 /**
  * @author Adi Lampert
- * @see ManagerSupplyConfirmationBoundary - the from's logic class
+ * @see ManagerSupplyConfirmationBoundary - the from's boundary class
  */
 
 public class ManagerSupplyConfirmationBoundary implements DataInitializable {
@@ -30,6 +30,9 @@ public class ManagerSupplyConfirmationBoundary implements DataInitializable {
     private ObservableList<ManagerSupplyConfirmation> tableData;
     private String stationManagerID="";
 
+    /**
+     * FXML
+     */
     @FXML
     private Button btnOverview;
 
@@ -84,16 +87,21 @@ public class ManagerSupplyConfirmationBoundary implements DataInitializable {
     @FXML
     private Label orderNumberField;
 
-
+    /**
+     * To check if there a "check" mark in the check box
+     * @param event
+     */
     @FXML
     void OrderConfirmationCheck(MouseEvent event) {
-        /**  If there is a check sign   **/
         if (confirmationCheckBox.isSelected())
             SendBtn.setDisable(false);
         else SendBtn.setDisable(true);
     }
 
-    /** When we click "Send" - update status in DB so the supplier can see **/
+    /**
+     * When we click "Send" - update status in DB so the supplier can see
+     * @param event
+     */
     @FXML
     void clickSendBtn(MouseEvent event) {
         ManagerSupplyConfirmation temp = tableView.getSelectionModel().getSelectedItem();
@@ -153,7 +161,10 @@ public class ManagerSupplyConfirmationBoundary implements DataInitializable {
         noOrdersTxt.setVisible(false);
     }
 
-    /** Show detail in tableView and check if its empty **/
+    /**
+     * Show detail in tableView and check if its empty
+     * @param OrderArray
+     */
     public void setOrderForManagerTableView(ArrayList<ManagerSupplyConfirmation> OrderArray) {
         OrderCol.setCellValueFactory(new PropertyValueFactory<>("OrderNumber"));
         CompanyCol.setCellValueFactory(new PropertyValueFactory<>("companyName"));
@@ -168,7 +179,8 @@ public class ManagerSupplyConfirmationBoundary implements DataInitializable {
     }
 
     /**
-     *  This function works when we press an order in tableView - show different things depends on Order status **/
+     *  This function works when we press an order in tableView - show different things depends on Order status
+     *  **/
     public void getDetailsFromTableView() {
         tableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override

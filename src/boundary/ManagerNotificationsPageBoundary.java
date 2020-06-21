@@ -25,7 +25,7 @@ import java.util.ResourceBundle;
 
 /**
  * @author Adi Lampert
- * @see ManagerNotificationsPageBoundary - the from's logic class
+ * @see ManagerNotificationsPageBoundary - the from's boundary class
  */
 
 public class ManagerNotificationsPageBoundary implements DataInitializable {
@@ -35,6 +35,9 @@ public class ManagerNotificationsPageBoundary implements DataInitializable {
     private ObservableList<ManagerNotifications> tableData;
     private generalDashBoardBoundary generalDashBoardBoundary;
 
+    /**
+     * FXML
+     */
     @FXML
     private TableView<ManagerNotifications> tableView;
 
@@ -67,7 +70,8 @@ public class ManagerNotificationsPageBoundary implements DataInitializable {
 
     /**
      * After the manager saw his notifications- change the status in DB to "viewed" and clean the notification from tableView
-     **/
+     * @param event
+     */
     @FXML
     void clickCleanBtn(MouseEvent event) {
         ManagerNotifications temp = tableView.getSelectionModel().getSelectedItem();
@@ -105,7 +109,10 @@ public class ManagerNotificationsPageBoundary implements DataInitializable {
         noNotificationTxt.setVisible(false);
         explanationTxt.setVisible(false);
     }
-    /** Show details in tableView **/
+    /**
+     * Show details in tableView
+     * @param OrderArray
+     */
     public void setOrdersInTableView(ArrayList<ManagerNotifications> OrderArray) {
         OrderCol.setCellValueFactory(new PropertyValueFactory<>("OrderNumber"));
         StationCol.setCellValueFactory(new PropertyValueFactory<>("StationNumber"));

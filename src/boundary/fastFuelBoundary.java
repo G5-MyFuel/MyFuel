@@ -100,6 +100,7 @@ public class fastFuelBoundary implements DataInitializable {
         myController.getCustomer();
     }
 
+
     public void updateInvatoryInDB() {
         //array of station number, fuel type ולשלוח
         //עדכון של ההזמנה ב2 טבלאות

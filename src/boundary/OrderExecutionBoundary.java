@@ -26,7 +26,7 @@ import java.util.ResourceBundle;
 
 /**
  * @author Adi Lampert
- * @see OrderExecutionBoundary - the from's logic class
+ * @see OrderExecutionBoundary - the from's boundary class
  */
 public class OrderExecutionBoundary implements DataInitializable {
 
@@ -34,7 +34,9 @@ public class OrderExecutionBoundary implements DataInitializable {
     private OrderFromSupplierController myController = new OrderFromSupplierController(this);
     private String SupplierID = "";
 
-
+    /**
+     * FXML
+     */
     @FXML
     private Button MenuHomePageBtn;
 
@@ -106,9 +108,12 @@ public class OrderExecutionBoundary implements DataInitializable {
 
     private ObservableList<OrderFuelFromSupplier> tableData;
 
+    /**
+     * To check if there a "check" mark in the check box
+     * @param event
+     */
     @FXML
     void OrderConfirmationCheck(MouseEvent event) {
-        /******* If there is a 'check' sign *******/
         if (confirmationCheckBox.isSelected())
             DoneBtn.setDisable(false);
         else DoneBtn.setDisable(true);
@@ -123,7 +128,11 @@ public class OrderExecutionBoundary implements DataInitializable {
     void handleRefresh(ActionEvent event) {
 
     }
-    /** When we click "Done" - update status in DB and tableView **/
+
+    /**
+     * When we click "Done" - update status in DB and tableView
+     * @param event
+     */
     @FXML
     void ClickDoneBtn(MouseEvent event) {
         EmailHandler sender = new EmailHandler();
@@ -173,7 +182,8 @@ public class OrderExecutionBoundary implements DataInitializable {
 
     /**
      * This function set the details from DB to TableView
-     **/
+     * @param OrderArray
+     */
     public void setOrderFuelFromSupplierTableView(ArrayList<OrderFuelFromSupplier> OrderArray) {
         orderCol.setCellValueFactory(new PropertyValueFactory<>("OrderNumber"));
         statusCol.setCellValueFactory(new PropertyValueFactory<>("OrderStatus"));
