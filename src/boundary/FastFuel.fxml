@@ -148,7 +148,7 @@
             <Font name="Serif Bold" size="18.0" />
          </font>
       </Label>
-      <Label fx:id="customerIdLable" layoutX="572.0" layoutY="57.0" prefHeight="20.0" prefWidth="121.0" text="get customerID">
+      <Label fx:id="customerIdLable" layoutX="572.0" layoutY="57.0" prefHeight="20.0" prefWidth="121.0" text="             ">
          <font>
             <Font name="Serif Bold" size="18.0" />
          </font>

@@ -11,7 +11,7 @@ public class Purchase {
     private double fuelAmount;
     private double totalPrice;
     private Prices prices;
-
+    private String saleId;
 
     public Purchase(String customerID, LocalDateTime purchaseDate, double fuelAmount) {
         this.purchaseID = customerID+"O";
@@ -19,6 +19,16 @@ public class Purchase {
         this.purchaseDate = purchaseDate;
         this.fuelAmount = fuelAmount;
         this.totalPrice = 0.0;
+    }
+
+    public Purchase(String purchaseID, String customerID, LocalDateTime purchaseDate, double fuelAmount, double totalPrice, Prices prices, String saleId) {
+        this.purchaseID = purchaseID;
+        this.customerID = customerID;
+        this.purchaseDate = purchaseDate;
+        this.fuelAmount = fuelAmount;
+        this.totalPrice = totalPrice;
+        this.prices = prices;
+        this.saleId = saleId;
     }
 
     public String getPurchaseID() {

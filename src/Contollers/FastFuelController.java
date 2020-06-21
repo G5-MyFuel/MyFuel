@@ -36,17 +36,16 @@ public class FastFuelController extends BasicController{
                         myBoundary.setStationsInArrayAndChooseRandomly(resultList1);
                         break;
 
-                  /*  case INSERT_FASTFUEL_PURCHES:
+                     case INSERT_FASTFUEL_PURCHES:
                         break;
-                         case INSERT_FASTFUEL_PURCHES_TO_FASTFUEL_TABLE:
+                    case INSERT_FASTFUEL_PURCHES_TO_FASTFUEL_TABLE:
                         break;
-
                     case GET_GASSTATION_INVENTORY_TABLE:
-                        ArrayList<GasStation> resultList = new ArrayList<>();
-                        resultList.addAll(this.changeResultToGasStation(result));
-                     //  myBoundary.setSalesTable(resultList); // ??
+                        ArrayList<GasStation> resultList2 = new ArrayList<>();
+                    //    resultList2.addAll(this.changeResultToGasStation(result));
+                     //  myBoundary.setSalesTable(resultList2); // ??
                         break;
-                    case UPDATE_DIESEL_INVENTORY_CUSTOMER_PURCHASE:
+                  /*  case UPDATE_DIESEL_INVENTORY_CUSTOMER_PURCHASE:
                         break;
                     case UPDATE_95_INVENTORY_CUSTOMER_PURCHASE:
                         break;
@@ -101,10 +100,13 @@ public class FastFuelController extends BasicController{
         ArrayList<GasStation> resultList = new ArrayList<>();
         for(ArrayList<Object> a: result.getResultData()) {
            ArrayList<String> gasStations = new ArrayList<String>();
-           gasStations.add((String) a.get(0));
-           gasStations.add((String) a.get(1));
-           gasStations.add((String) a.get(2));
-            GasStation gasStation = new GasStation(Integer.parseInt((String) a.get(0)),(String) a.get(1),null,null,(String) a.get(2), (String) a.get(3),(String) a.get(4),Double.parseDouble((String) a.get(5)));
+
+            GasStation gasStation = new GasStation((Integer) a.get(0),
+                    (String) a.get(1),
+                    null,null,
+                    (String) a.get(2), (String) a.get(3),
+                    (String) a.get(4),
+                    (Double) a.get(5));
             resultList.add(gasStation);
         }
         return resultList;
