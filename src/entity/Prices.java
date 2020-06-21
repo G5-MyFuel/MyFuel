@@ -58,7 +58,10 @@ public class Prices {
     public Double calculateTotalPrice() {
         if (userID.isEmpty() || fuelAmount == null || fuelType == null || purchasePlan == null || pricingModelType.isEmpty() || totalPrice == null)
             return null;
+        //fuel amount
         totalPrice = getFuelPriceByFuelType(fuelType) * fuelAmount;
+
+        //pricing model
         switch (pricingModelType) {
             case Casual_fueling:
                 totalPrice *= pricingModel_Casual_fueling;
@@ -81,7 +84,7 @@ public class Prices {
         }
 
         //
-        //
+        //purchase plan
         switch (purchasePlan) {
             case EXCLUSIVE:
                 totalPrice = (totalPrice * purchasePlanDiscount_exclusive);
@@ -96,6 +99,9 @@ public class Prices {
         }
         if (fuelType.name().equals(FuelTypes.HomeHeatingFuel.toString())) {
             addHomeHeatingPricesAndDiscounts(sm);//Shipping method of Home heating order
+        }
+        if(fuelType.name().equals(FuelTypes.Diesel)||fuelType.name().equals(FuelTypes.Gasoline95)||fuelType.name().equals(FuelTypes.ScooterFuel)){
+
         }
 
         return totalPrice;
