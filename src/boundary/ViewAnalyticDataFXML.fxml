@@ -61,7 +61,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton fx:id="btnFuleType" buttonType="RAISED" layoutX="790.0" layoutY="132.0" onAction="#handleBtnFuleType" prefHeight="50.0" prefWidth="227.0" styleClass="jfx-button" stylesheets="@GeneratingReportsStationManagerCSS.css" text="Segmentation by fuel type" textFill="WHITE">
+            <JFXButton fx:id="btnFuleType" buttonType="RAISED" layoutX="790.0" layoutY="132.0" onAction="#handleBtnFuelType" prefHeight="50.0" prefWidth="227.0" styleClass="jfx-button" stylesheets="@GeneratingReportsStationManagerCSS.css" text="Segmentation by fuel type" textFill="WHITE">
                <font>
                   <Font name="Calibri Bold" size="14.0" />
                </font>
@@ -77,7 +77,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <Pane fx:id="paneByTime" layoutX="45.0" layoutY="232.0" prefHeight="515.0" prefWidth="979.0">
+            <Pane fx:id="paneByTime" layoutX="45.0" layoutY="232.0" prefHeight="515.0" prefWidth="979.0" visible="false">
                <children>
                   <TableView fx:id="RatingTableForTimeRange" layoutX="21.0" layoutY="81.0" prefHeight="433.0" prefWidth="296.0">
                      <columns>
@@ -150,7 +150,7 @@
                   </Text>
                </children>
             </Pane>
-            <Pane fx:id="paneByFuelType" layoutX="21.0" layoutY="232.0" prefHeight="515.0" prefWidth="1014.0" visible="false">
+            <Pane fx:id="paneByFuelType" layoutX="21.0" layoutY="232.0" prefHeight="515.0" prefWidth="1014.0">
                <children>
                   <TableView fx:id="RatingTableForFuelType" layoutX="42.0" layoutY="81.0" prefHeight="433.0" prefWidth="296.0">
                      <columns>
