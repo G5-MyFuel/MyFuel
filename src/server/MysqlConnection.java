@@ -372,6 +372,9 @@ public class MysqlConnection {
                 "`CampaignID`)\n" +
                 "VALUES\n" +
                 "(?,?,curdate(),?,?,?,?);\n";
+        sqlArray[SqlQueryType.GET_CUSTOMER_PFH_TABLE.getCode()] = "SELECT p.purchaseDate as 'Order date',p.purchaseHour as 'Order time', ph.status as 'Order status',ph.shippingDateAndTime as 'Expected delivery date'\n" +
+                "FROM Purchase AS p , PurchaseFuelForHomeHeating AS ph\n" +
+                "WHERE p.purchaseID = ph.purchaseID and p.customerID= ?;";
 
     }
 

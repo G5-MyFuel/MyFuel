@@ -32,6 +32,7 @@ public enum ProjectPages {
 
     FAST_FUEL_PAGE("/boundary/FastFuel.fxml"),
     PURCHASE_FUEL_FOR_HOME_HEATING("/boundary/NewPurchaseFuelForHomeHeatingFXML.fxml"),
+    PURCHASE_FUEL_FOR_HOME_HEATING_TRACKING("/boundary/PurchaseFuelForHomeHeatingTrackingFXML.fxml"),
     LOGIN_PAGE("/boundary/LoginToSystemFXML.fxml"),
 
     MANAGER_SUPPLY_CONFIRMATION_PAGE("/boundary/Manager-Supply-confirmation-adi.fxml"),

@@ -27,7 +27,6 @@ public class NewPurchaseFuelForHomeHeatingController extends BasicController {
     private NewPurchaseFuelForHomeHeatingBoundary myBoundary;
     private ArrayList<ShippingDay> availableTimesInDate = new ArrayList<>();
 
-
     /* Methods*/
     public NewPurchaseFuelForHomeHeatingController(NewPurchaseFuelForHomeHeatingBoundary myBoundary) {
         this.myBoundary = myBoundary;
