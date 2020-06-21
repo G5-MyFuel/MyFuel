@@ -1,6 +1,7 @@
 package boundary;
 
 import Contollers.ConfirmDiscountRatesController;
+import Contollers.MarketingCampaignController;
 import entity.DiscountRate;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,18 +18,41 @@ import java.util.ResourceBundle;
 
 import static java.lang.Thread.sleep;
 
+/**
+ * This department is responsible for controlling "ConfirmDiscountRatesFXML" page
+ * Allows Administrator to view and approve new pricing model rates
+ *
+ * @author Nir Asulin
+ * @see ConfirmDiscountRatesController - the form's logic class
+ */
+
 public class ConfirmDiscountRatesBoundary implements DataInitializable {
 
+    /**
+     * A parameters that represents who enters the page
+     */
     String managerID;
     String managerCompany;
     String managerStation;
+
     /**
      * The supervisor boundary controller.
      */
     private final ConfirmDiscountRatesController myController = new ConfirmDiscountRatesController(this);
+
+    /**
+     * For proper validation
+     */
     private final Alert ErrorAlert = new Alert(Alert.AlertType.ERROR);
+
+    /**
+     * For saving marked Discount Rates from table
+     */
     ArrayList<DiscountRate> sendDiscountRates = new ArrayList<>();
 
+    /**
+     * Gui variables:
+     */
     @FXML
     private TableView<DiscountRate> TableSubscriptionType;
 
@@ -53,6 +77,14 @@ public class ConfirmDiscountRatesBoundary implements DataInitializable {
     @FXML
     private Label InstructionsLabel;
 
+    /**
+     * This method allows to save information sent when uploading the page (user id)
+     * In addition initializes the variables and fields
+     * What is initialized will appear when the screen is raised
+     * Initializes existing tables on the page - by sending a request
+     *
+     * @param data - The data sent to the boundary
+     */
     @Override
     public void initData(Object data) {
 
@@ -62,8 +94,6 @@ public class ConfirmDiscountRatesBoundary implements DataInitializable {
         paramArray.add(managerID);
         myController.GetDiscountRatesData(paramArray); //start the process that will ask server to execute quarry and get the table details
 
-        /*btnApprovedRates.setDisable(true);
-        btnRemoveNewRate.setDisable(true);*/
         NoNewRatePendingLabel.setVisible(false);
         TableSubscriptionType.setVisible(false);
         TableSubscriptionType.setEditable(true);
@@ -72,6 +102,11 @@ public class ConfirmDiscountRatesBoundary implements DataInitializable {
         InstructionsLabel.setVisible(false);
     }
 
+    /**
+     * this method will set the Manager Data when we will initialize the page.
+     *
+     * @param resultList
+     */
     public void setManagerData(ArrayList<String> resultList) {
         managerCompany = resultList.get(0);
         managerStation = resultList.get(1);
@@ -86,7 +121,11 @@ public class ConfirmDiscountRatesBoundary implements DataInitializable {
 
     }
 
-
+    /**
+     * This method will set the Discount Rates table Data when we will initialize the page.
+     *
+     * @param resultList
+     */
     public void setDiscountRatesData(ArrayList<DiscountRate> resultList) {
 
         TableSubscriptionType.getSelectionModel().setSelectionMode(
@@ -115,6 +154,12 @@ public class ConfirmDiscountRatesBoundary implements DataInitializable {
         }
     }
 
+    /**
+     * This method will handles clicking the table
+     * Enable / disable buttons and save selected purchase plans in sendDiscountRates
+     *
+     * @param event
+     */
     @FXML
     void TableClicked(MouseEvent event) {
 
@@ -130,7 +175,8 @@ public class ConfirmDiscountRatesBoundary implements DataInitializable {
     }
 
     /**
-     * this method listen to remove button and start update function
+     * This method listen to Approve button and start update function
+     *
      * @param event
      */
     @FXML
@@ -140,7 +186,8 @@ public class ConfirmDiscountRatesBoundary implements DataInitializable {
     }
 
     /**
-     * this method listen to remove button and start update function
+     * This method listen to remove button and start update function
+     *
      * @param event
      */
     @FXML
@@ -168,6 +215,8 @@ public class ConfirmDiscountRatesBoundary implements DataInitializable {
     }
 
     /**
+     * This method will handles Approve/Remove buttons and start update function
+     *
      * @param queryName
      */
     void updateDiscountRate(String queryName) {

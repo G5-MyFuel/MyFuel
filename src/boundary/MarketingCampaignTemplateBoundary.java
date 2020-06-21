@@ -152,7 +152,7 @@ public class MarketingCampaignTemplateBoundary implements DataInitializable {
         MarketingAdForTemplate.setVisible(false);
 
         this.formValidation = FormValidation.getValidator();
-        FormValidation();        //TODO: formValidation();   set all fields validators
+        FormValidation();
 
         myController.getTemplatesTable(); //start the process that will ask server to execute quarry and get the table details
     }

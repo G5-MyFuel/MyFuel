@@ -1,6 +1,7 @@
 package boundary;
 
 import Contollers.FormValidation;
+import Contollers.GeneratingReportsMarketingManagerController;
 import Contollers.GeneratingReportsStationManagerController;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
@@ -24,21 +25,45 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+/**
+ * This department is responsible for controlling "GeneratingReportsStationManagerFXML" page
+ * Allows station manager to generate Quarterly Revenue Report, Purchases Report
+ * And Quantity Items In Stock Report
+ *
+ * @author Nir Asulin
+ * @see GeneratingReportsStationManagerController - the form's logic class
+ */
 public class GeneratingReportsStationManagerBoundary implements DataInitializable {
 
+    /**
+     * A parameters that represents who enters the page
+     */
     String managerID;
     String managerCompany;
     String managerStation;
+
     /**
      * The supervisor boundary controller.
      */
     private final GeneratingReportsStationManagerController myController = new GeneratingReportsStationManagerController(this);
-    private FormValidation formValidation;
+
+    /**
+     * For proper validation
+     */
     private final Alert ErrorAlert = new Alert(Alert.AlertType.ERROR);
+
+    /**
+     * For saving Quarterly revenue Data
+     */
     String sendRevenue;
+
+
     ArrayList<PurchasesReport> sendPurchases = new ArrayList<>();
     ArrayList<QuantityItemsStockReport> sendQuantityItemsStockReport = new ArrayList<>();
 
+    /**
+     * Gui variables:
+     */
     @FXML
     private JFXButton btnQuarterlyRevenueReport;
 
@@ -95,23 +120,21 @@ public class GeneratingReportsStationManagerBoundary implements DataInitializabl
     @FXML
     private ImageView quantityInfo;
 
-    /*private final ObservableList<String> ReportsType = FXCollections.observableArrayList("Quarterly revenue report",
-            "Purchases report", "Quantity of items in stock report");
-    private final ObservableList<String> YearList = FXCollections.observableArrayList("2020", "2019", "2018", "2017", "2016", "2015",
-            "2014", "2013", "2012", "2011", "2010");
-    private final ObservableList<String> quarterList = FXCollections.observableArrayList("First", "Second", "Third", "Fourth");*/
-
+    /**
+     * This method allows to save information sent when uploading the page (user id)
+     * In addition initializes the variables and fields
+     * What is initialized will appear when the screen is raised
+     *
+     * @param data - The data sent to the boundary
+     */
     @Override
     public void initData(Object data) {
 
-        //managerID = "109268386";
         this.managerID = (String) data;
         ArrayList<String> paramArray = new ArrayList<>();
         paramArray.add("Get Manager data");
         paramArray.add(managerID);
         myController.GetReportData(paramArray); //start the process that will ask server to execute quarry and get the table details
-
-        this.formValidation = FormValidation.getValidator();
 
         ShowTotalRevenueTXT.setVisible(false);
         PurchasesReportTable.setVisible(false);
@@ -122,9 +145,6 @@ public class GeneratingReportsStationManagerBoundary implements DataInitializabl
         btnSavePurchasesReport.setVisible(false);
         btnSaveQuantityReport.setVisible(false);
 
-        /*  set all fields validators */
-        formValidation();
-
         //set tool tips
         Tooltip.install(quartInfo, createToolTip("Generate report for annual quarter revenue and display total revenues."));
         Tooltip.install(purchaseInfo, createToolTip("Generate detailed report for total purchases in your station."));
@@ -134,23 +154,14 @@ public class GeneratingReportsStationManagerBoundary implements DataInitializabl
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-
     }
 
-    private void formValidation() {
-
-        /*  New price validation */
-/*
-        //formValidation.isContainsOnlyNumbers(ShowNewRateTXT, "New price");
-        formValidation.numberPositiveValidation(ShowNewRateTXT, "New price");
-        formValidation.isEmptyField(ShowNewRateTXT, "New price");
-        //formValidation.maxLengthValidation(ShowNewRateTXT, "New price", 3);
-        formValidation.maxSizeValidation(ShowNewRateTXT, "New price", 100);
-        formValidation.minSizeValidation(ShowNewRateTXT, "New price", 1);
-*/
-    }
-
+    /**
+     * This method will appears appropriate buttons for Quarterly Revenue Report
+     * And sends a query to generate this report
+     *
+     * @param event
+     */
     @FXML
     void handleQuarterlyRevenueReport(MouseEvent event) {
 
@@ -170,6 +181,12 @@ public class GeneratingReportsStationManagerBoundary implements DataInitializabl
         myController.GetReportData(paramArray); //start the process that will ask server to execute quarry and get the table details
     }
 
+
+    /**
+     * This method will set Quarterly revenue Data
+     *
+     * @param revenue
+     */
     public void setQuarterlyData(String revenue) {
         ShowTotalRevenueTXT.setText(revenue);
         sendRevenue = revenue;
@@ -177,6 +194,12 @@ public class GeneratingReportsStationManagerBoundary implements DataInitializabl
         btnSaveQuarterlyReport.setVisible(true);
     }
 
+    /**
+     * This method will appears appropriate buttons for Purchases Report
+     * And sends a query to generate this report
+     *
+     * @param event
+     */
     @FXML
     void handlePurchasesReport(MouseEvent event) {
 
@@ -196,6 +219,11 @@ public class GeneratingReportsStationManagerBoundary implements DataInitializabl
         myController.GetReportData(paramArray); //start the process that will ask server to execute quarry and get the table details
     }
 
+    /**
+     * This method will set Purchases Data
+     *
+     * @param resultList
+     */
     public void setPurchasesData(ArrayList<PurchasesReport> resultList) {
 
         sendPurchases.addAll(resultList);
@@ -209,6 +237,12 @@ public class GeneratingReportsStationManagerBoundary implements DataInitializabl
         btnSavePurchasesReport.setVisible(true);
     }
 
+    /**
+     * This method will appears appropriate buttons for Quantity Items In Stock Report
+     * And sends a query to generate this report
+     *
+     * @param event
+     */
     @FXML
     void handleQuantityItemsInStockReport(MouseEvent event) {
 
@@ -229,6 +263,11 @@ public class GeneratingReportsStationManagerBoundary implements DataInitializabl
         myController.GetReportData(paramArray); //start the process that will ask server to execute quarry and get the table details
     }
 
+    /**
+     * This method will set Quantity Items In Stock Data
+     *
+     * @param resultList
+     */
     public void setQuantityItemsStockData(ArrayList<QuantityItemsStockReport> resultList) {
 
         System.out.println(resultList.size());
@@ -252,12 +291,23 @@ public class GeneratingReportsStationManagerBoundary implements DataInitializabl
 
     }
 
+    /**
+     * This method will set the Manager Data when we will initialize the page.
+     *
+     * @param resultList
+     */
     public void setManagerData(ArrayList<String> resultList) {
 
         managerCompany = resultList.get(0);
         managerStation = resultList.get(1);
     }
 
+    /**
+     * This method will info When standing with the cursor on the question mark
+     *
+     * @param htmlStr
+     * @return
+     */
     private Tooltip createToolTip(String htmlStr) {
         Tooltip thisToolTip = new Tooltip();
 
@@ -295,6 +345,11 @@ public class GeneratingReportsStationManagerBoundary implements DataInitializabl
 
     }
 
+    /**
+     * This method will Save the Quarterly report for the administrator
+     *
+     * @param event
+     */
     @FXML
     void handleSaveQuarterlyReportBtn(ActionEvent event) {
 
@@ -308,6 +363,11 @@ public class GeneratingReportsStationManagerBoundary implements DataInitializabl
         ReportSentMessageLabel.setVisible(true);
     }
 
+    /**
+     * This method will Save the Purchases report for the administrator
+     *
+     * @param event
+     */
     @FXML
     void handleSavePurchasesReportBtn(ActionEvent event) {
 
@@ -326,6 +386,11 @@ public class GeneratingReportsStationManagerBoundary implements DataInitializabl
         ReportSentMessageLabel.setVisible(true);
     }
 
+    /**
+     * This method will Save the Quantity report for the administrator
+     *
+     * @param event
+     */
     @FXML
     void handleSaveQuantityReportBtn(ActionEvent event) {
 

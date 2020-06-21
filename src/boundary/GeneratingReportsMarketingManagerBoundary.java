@@ -2,6 +2,7 @@ package boundary;
 
 import Contollers.FormValidation;
 import Contollers.GeneratingReportsMarketingManagerController;
+import Contollers.SettingDiscountRatesController;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import common.assets.Toast;
@@ -26,8 +27,19 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
 
+/**
+ * This department is responsible for controlling "GeneratingReportsMarketingManagerFXML" page
+ * Allows marketing manager to generate Comments Report for Marketing Campaign
+ * And Customer Periodic Characterization Report
+ *
+ * @author Nir Asulin
+ * @see GeneratingReportsMarketingManagerController - the form's logic class
+ */
 public class GeneratingReportsMarketingManagerBoundary implements DataInitializable {
 
+    /**
+     * A parameters that represents who enters the page
+     */
     String managerID;
     String managerCompany;
     String managerStation;
@@ -36,12 +48,26 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
      * The supervisor boundary controller.
      */
     private final GeneratingReportsMarketingManagerController myController = new GeneratingReportsMarketingManagerController(this);
-    private FormValidation formValidation;
+
+    /**
+     * For proper validation
+     */
     private final Alert ErrorAlert = new Alert(Alert.AlertType.ERROR);
+
+    /**
+     * For saving customer Total Sum
+     */
     ArrayList<CustomerPeriodicCharacterizationReport> customerWithTotalSumList = new ArrayList<>();
+
+    /**
+     * For saving ShowReportMarketingCampaignTxt font and paint
+     */
     Font font;
     Paint paint;
 
+    /**
+     * Gui variables:
+     */
     @FXML
     private Button btnGenerateReport;
 
@@ -99,9 +125,19 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
     @FXML
     private Label ERRORnoOperation;
 
+    /**
+     * For enter data to combo-boxes
+     */
     private final ObservableList<String> ReportsType = FXCollections.observableArrayList("Comments Report for Marketing Campaign",
             "Customer Periodic Characterization Report");
 
+    /**
+     * This method allows to save information sent when uploading the page (user id)
+     * In addition initializes the variables, fields, and combo-boxes
+     * What is initialized will appear when the screen is raised
+     *
+     * @param data - The data sent to the boundary
+     */
     @Override
     public void initData(Object data) {
 
@@ -110,8 +146,6 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
         paramArray.add("Get Manager data");
         paramArray.add(managerID);
         myController.GetReportData(paramArray); //start the process that will ask server to execute quarry and get the table details
-
-        this.formValidation = FormValidation.getValidator();
 
         ChooseReportToGenerateCombo.setItems(ReportsType);
 
@@ -135,11 +169,13 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
 
         font = ShowReportMarketingCampaignTxt.getFont();
         paint = ShowReportMarketingCampaignTxt.getTextFill();
-
-        /*  set all fields validators */
-        formValidation();
     }
 
+    /**
+     * This method will set the Manager Data when we will initialize the page.
+     *
+     * @param resultList
+     */
     public void setManagerData(ArrayList<String> resultList) {
 
         managerCompany = resultList.get(0);
@@ -151,20 +187,12 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
 
     }
 
-    private void formValidation() {
-
-        //formValidation.isEmptyFieldValidation(EnterOperationSaleTXT, "Operation Sale");
-        /*  EnterOperationSaleTXT validation */
-/*
-        //formValidation.isContainsOnlyNumbers(ShowNewRateTXT, "New price");
-        formValidation.numberPositiveValidation(ShowNewRateTXT, "New price");
-        formValidation.isEmptyField(ShowNewRateTXT, "New price");
-        //formValidation.maxLengthValidation(ShowNewRateTXT, "New price", 3);
-        formValidation.maxSizeValidation(ShowNewRateTXT, "New price", 100);
-        formValidation.minSizeValidation(ShowNewRateTXT, "New price", 1);
-*/
-    }
-
+    /**
+     * This method will appears appropriate buttons depending on the report selection
+     * And make date validation
+     *
+     * @param event
+     */
     @FXML
     void handleChooseReportToGenerate(ActionEvent event) {
 
@@ -194,13 +222,24 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
 
     }
 
+    /**
+     * This method will make date validation when manager
+     * enter Start Date Box value
+     *
+     * @param event
+     */
     @FXML
     void handleStartDateBox(ActionEvent event) {
 
         checkValidDateForEndDate();
     }
 
-
+    /**
+     * This method will make date validation when manager
+     * enter End Date Box value
+     *
+     * @param event
+     */
     @FXML
     void handleEndDateBox(ActionEvent event) {
 
@@ -212,6 +251,12 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
 
     }
 
+    /**
+     * This method will which report was chosen
+     * And sends a query to generate this report
+     *
+     * @param event
+     */
     @FXML
     void handleGenerateReportBtn(ActionEvent event) {
 
@@ -243,6 +288,7 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
     }
 
     /**
+     * This method will set Comments Report table Data
      *
      * @param resultList
      */
@@ -272,11 +318,22 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
 
     }
 
+    /**
+     * This method will save Customers total sum in customerWithTotalSumList
+     *
+     * @param resultList
+     */
     public void setCustomersListData(ArrayList<CustomerPeriodicCharacterizationReport> resultList) {
 
         customerWithTotalSumList.addAll(resultList);
     }
 
+    /**
+     * This method will save Customers total sum for each company
+     * And will show all data table for Customer Periodic Characterization Report
+     *
+     * @param resultList
+     */
     public void setCustomerPeriodicCharacterizationReportData(ArrayList<CustomerPeriodicCharacterizationReport> resultList) {
 
         if (customerWithTotalSumList.size() > 0) {
@@ -310,18 +367,18 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
         customerWithTotalSumList.clear();
     }
 
-    /*boolean isStartDateBoxBeforeLocalDate() {
-        return StartDateBox.getValue().isBefore(java.time.LocalDate.now());
-    }*/
-
     /**
-     *
+     * This method will make date validation if End Date is Before Start Date
      * @return
      */
     boolean isEndDateBoxBeforeStartDateBox() {
         return EndDateBox.getValue().isBefore(StartDateBox.getValue());
     }
 
+    /**
+     * This method will show error message if isEndDateBoxBeforeStartDateBox
+     *
+     */
     void checkValidDateForEndDate() {
 
         if (isEndDateBoxBeforeStartDateBox()) {
@@ -333,6 +390,10 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
         }
     }
 
+    /**
+     * This method wil turns off the manager to choose a future date
+     *
+     */
     void disableFutureDates() {
 
         // disable past dates of DatePicker gui obj

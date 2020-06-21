@@ -1,5 +1,6 @@
 package boundary;
 
+import Contollers.GeneratingReportsStationManagerController;
 import Contollers.ViewReportsController;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -24,8 +25,19 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+/**
+ * This department is responsible for controlling "ViewReportsFXML" page
+ * Allows administrator to view Quarterly Revenue Report, Purchases Report
+ * And Quantity Items In Stock Report
+ *
+ * @author Nir Asulin
+ * @see ViewReportsController - the form's logic class
+ */
 public class ViewReportsBoundary implements DataInitializable {
 
+    /**
+     * A parameters that represents who enters the page
+     */
     String managerID;
     String managerCompany;
     String managerStation;
@@ -34,12 +46,11 @@ public class ViewReportsBoundary implements DataInitializable {
     /**
      * The supervisor boundary controller.
      */
-
     private final ViewReportsController myController = new ViewReportsController(this);
-    //private FormValidation formValidation;
-    //private final Alert ErrorAlert = new Alert(Alert.AlertType.ERROR);
-    //ArrayList<PurchasesReport> PurchasesArray = new ArrayList<>();
 
+    /**
+     * Gui variables:
+     */
     @FXML
     private JFXButton btnViewQuarterlyRevenueReport;
 
@@ -109,14 +120,22 @@ public class ViewReportsBoundary implements DataInitializable {
     @FXML
     private Button btnOK;
 
+    /**
+     * For enter data to combo-boxes
+     */
     private final ObservableList<String> YearList = FXCollections.observableArrayList("2020", "2019", "2018", "2017", "2016", "2015",
             "2014", "2013", "2012", "2011", "2010");
     private final ObservableList<String> quarterList = FXCollections.observableArrayList("First", "Second", "Third", "Fourth");
 
+    /**
+     * This method allows to save information sent when uploading the page (user id)
+     * In addition initializes the variables, fields, and combo-boxes
+     * What is initialized will appear when the screen is raised
+     *
+     * @param data - The data sent to the boundary
+     */
     @Override
     public void initData(Object data) {
-
-        //managerCompany = "YELLOW";
 
         this.managerID = (String) data;
         ArrayList<String> paramArray = new ArrayList<>();
@@ -156,6 +175,11 @@ public class ViewReportsBoundary implements DataInitializable {
         Tooltip.install(QuestionMark4, createToolTip("Generate report of item amount that correct in stock.\nSave button will save the report so the company manager could see it."));
     }
 
+    /**
+     * This method will set the Manager Data when we will initialize the page.
+     *
+     * @param resultList
+     */
     public void setManagerData(ArrayList<String> resultList) {
 
         managerCompany = resultList.get(0);
@@ -172,6 +196,11 @@ public class ViewReportsBoundary implements DataInitializable {
 
     }
 
+    /**
+     * This method will save the Station Number that admin enter
+     *
+     * @param event
+     */
     @FXML
     void handleOKbtn(ActionEvent event) {
 
@@ -187,6 +216,12 @@ public class ViewReportsBoundary implements DataInitializable {
         ViewTotalRevenueTXT.setVisible(false);
     }
 
+    /**
+     * This method will appears appropriate buttons for Quarterly Revenue Report
+     * And sends a query to show this report
+     *
+     * @param event
+     */
     @FXML
     void handleViewQuarterlyRevenueReport(MouseEvent event) {
 
@@ -204,6 +239,11 @@ public class ViewReportsBoundary implements DataInitializable {
         myController.GetReportData(paramArray); //start the process that will ask server to execute quarry and get the table details
     }
 
+    /**
+     * This method will set Quarterly revenue Data
+     *
+     * @param revenue
+     */
     public void setQuarterlyData(String revenue) {
 
         System.out.println(revenue);
@@ -211,6 +251,12 @@ public class ViewReportsBoundary implements DataInitializable {
         ViewTotalRevenueTXT.setVisible(true);
     }
 
+    /**
+     * This method will appears appropriate buttons for Purchases Report
+     * And sends a query to show this report
+     *
+     * @param event
+     */
     @FXML
     void handleViewPurchasesReport(MouseEvent event) {
 
@@ -227,6 +273,11 @@ public class ViewReportsBoundary implements DataInitializable {
         myController.GetReportData(paramArray); //start the process that will ask server to execute quarry and get the table details
     }
 
+    /**
+     * This method will set Purchases Data
+     *
+     * @param resultList
+     */
     public void setPurchasesData(ArrayList<PurchasesReport> resultList) {
 
         System.out.println(resultList);
@@ -239,6 +290,12 @@ public class ViewReportsBoundary implements DataInitializable {
         ViewPurchasesReportTable.setVisible(true);
     }
 
+    /**
+     * This method will appears appropriate buttons for Quantity Items In Stock Report
+     * And sends a query to show this report
+     *
+     * @param event
+     */
     @FXML
     void handleViewQuantityItemsInStockReport(MouseEvent event) {
 
@@ -255,6 +312,11 @@ public class ViewReportsBoundary implements DataInitializable {
 
     }
 
+    /**
+     * This method will set Quantity Items In Stock Data
+     *
+     * @param resultList
+     */
     public void setQuantityItemsStockData(ArrayList<QuantityItemsStockReport> resultList) {
 
         resultList.get(0).setFuelType("Gasoline 95");
@@ -269,10 +331,13 @@ public class ViewReportsBoundary implements DataInitializable {
         QuantityItemsStockTxt.setVisible(true);
     }
 
+    /**
+     * This method will hide report selection until quarter selection
+     *
+     * @param event
+     */
     @FXML
     void handleChooseReportYear(ActionEvent event) {
-
-        //ReportYear = ChooseReportYearCombo.getValue();
 
         QuantityItemsStockTxt.setVisible(false);
         ViewPurchasesReportTable.setVisible(false);
@@ -280,6 +345,11 @@ public class ViewReportsBoundary implements DataInitializable {
         ViewTotalRevenueTXT.setVisible(false);
     }
 
+    /**
+     * This method will show report selection
+     *
+     * @param event
+     */
     @FXML
     void handleChooseReportQuarter(ActionEvent event) {
 
@@ -304,6 +374,13 @@ public class ViewReportsBoundary implements DataInitializable {
     void handleViewTotalRevenue(ActionEvent event) {
 
     }
+
+    /**
+     * This method will info When standing with the cursor on the question mark
+     *
+     * @param htmlStr
+     * @return
+     */
     private Tooltip createToolTip(String htmlStr) {
         Tooltip thisToolTip = new Tooltip();
 
@@ -335,7 +412,10 @@ public class ViewReportsBoundary implements DataInitializable {
         return thisToolTip;
     }
 
-
+    /**
+     * This method will save the chosen Year And Quarter
+     *
+     */
     public void GetReportYearAndQuarter() {
 
         switch (ChooseReportQuarterCombo.getValue()) {
