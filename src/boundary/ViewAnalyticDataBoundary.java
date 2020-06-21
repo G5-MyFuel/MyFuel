@@ -159,7 +159,7 @@ public class ViewAnalyticDataBoundary implements DataInitializable {
       with combo box object.
        * * */
     private ObservableList<String> CustomerType = FXCollections.observableArrayList("private" , "Company");
-    private ObservableList<String> FuelType = FXCollections.observableArrayList("Gasoline95", "Diesel", "ScooterFuel", "HomeHeatingFuel");
+    private ObservableList<String> FuelType = FXCollections.observableArrayList("Gasoline95", "Diesel", "ScooterFuel");
 
     /**
      *  This method allows to save information sent when uploading the page (user id)
@@ -212,7 +212,7 @@ public class ViewAnalyticDataBoundary implements DataInitializable {
      * @param event
      */
     @FXML
-    void handleBtnFuleType(ActionEvent event) {
+    void handleBtnFuelType(ActionEvent event) {
         paneByCustomerType.setVisible(false);
         paneByTime.setVisible(false);
         paneByFuelType.setVisible(true);
