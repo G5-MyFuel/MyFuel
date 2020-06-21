@@ -52,6 +52,10 @@ public class ViewReportsController extends BasicController {
                 SqlAction sqlAction = new SqlAction(SqlQueryType.GET_Manager_Data, varArray);
                 super.sendSqlActionToClient(sqlAction);
                 break;
+            case "Check if exists Quarterly revenue report":
+                sqlAction = new SqlAction(SqlQueryType.CheckIfExists_Quarterly_Report, varArray);
+                super.sendSqlActionToClient(sqlAction);
+                break;
             case "View Quarterly revenue report":
                 sqlAction = new SqlAction(SqlQueryType.View_Quarterly_Report, varArray);
                 super.sendSqlActionToClient(sqlAction);
@@ -82,6 +86,9 @@ public class ViewReportsController extends BasicController {
             switch (result.getActionType()) {
                 case GET_Manager_Data:
                     myBoundary.setManagerData(this.changeResultToManagerData(result));
+                    break;
+                case CheckIfExists_Quarterly_Report:
+                    myBoundary.checkIfExists(this.checkIfExists(result));
                     break;
                 case View_Quarterly_Report:
                     myBoundary.setQuarterlyData(this.changeResultToQuarterlyReport(result));
@@ -189,5 +196,14 @@ public class ViewReportsController extends BasicController {
             resultList.add((String) a.get(2));
         }
         return resultList;
+    }
+
+    private String checkIfExists (SqlResult result){
+
+        Long isExsits;
+        ArrayList<Object> a = result.getResultData().get(0);
+        isExsits = (Long) a.get(0);
+        System.out.println(isExsits);
+        return isExsits.toString();
     }
 }
