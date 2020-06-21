@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXTreeTableView?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.effect.Glow?>
 <?import javafx.scene.effect.Lighting?>
 <?import javafx.scene.effect.Shadow?>
@@ -17,146 +18,145 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="780.0" prefWidth="1022.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundary.PurchaseFuelForHomeHeatingTrackingBoundary">
+
+<AnchorPane prefHeight="804.0" prefWidth="1088.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundary.PurchaseFuelForHomeHeatingTrackingBoundary">
    <children>
-      <Pane prefHeight="802.0" prefWidth="1284.0" />
-      <HBox prefHeight="804.0" prefWidth="1284.0">
+      <Pane prefHeight="796.0" prefWidth="1034.0">
          <children>
-            <AnchorPane prefHeight="804.0" prefWidth="1088.0">
+            <Label layoutX="27.0" layoutY="16.0" text="Order Fuel For Home Heating - Delivery Tracking" textFill="#2d4578">
+               <font>
+                  <Font name="System Bold Italic" size="40.0" />
+               </font>
+            </Label>
+            <Pane layoutX="53.0" layoutY="123.0" prefHeight="350.0" prefWidth="942.0">
                <children>
-                  <Pane prefHeight="796.0" prefWidth="1034.0">
+                  <TableView fx:id="treeTableOfALlCustomerOrders" layoutX="146.0" layoutY="2.0" prefHeight="350.0" prefWidth="647.0">
+                     <columns>
+                        <TableColumn fx:id="orderDateCol" prefWidth="75.0" resizable="false" sortable="false" text="Column X" />
+                        <TableColumn fx:id="orderTimeCol" prefWidth="75.0" text="Column X" />
+                        <TableColumn fx:id="statusCol" prefWidth="75.0" text="Column X" />
+                        <TableColumn fx:id="expectedDeliveryDate" prefWidth="75.0" text="Column X" />
+                     </columns>
+                  </TableView>
+               </children>
+            </Pane>
+            <AnchorPane layoutX="42.0" layoutY="458.0" prefHeight="173.0" prefWidth="954.0">
+               <children>
+                  <ProgressBar fx:id="progressBarShipping" layoutX="14.0" layoutY="43.0" prefHeight="93.0" prefWidth="940.0" progress="0.0">
+                     <effect>
+                        <Lighting diffuseConstant="2.0" specularConstant="1.14" specularExponent="18.92" surfaceScale="0.0">
+                           <bumpInput>
+                              <Shadow>
+                                 <input>
+                                    <Glow />
+                                 </input>
+                              </Shadow>
+                           </bumpInput>
+                           <light>
+                                       </light>
+                        </Lighting>
+                     </effect>
+                  </ProgressBar>
+                  <HBox layoutX="13.0" layoutY="44.0" prefHeight="90.0" prefWidth="940.0" style="-fx-border-color: #2D4578; -fx-border-width: 2;">
                      <children>
-                        <Label layoutX="27.0" layoutY="16.0" text="Order Fuel For Home Heating - Delivery Tracking" textFill="#2d4578">
-                           <font>
-                              <Font name="System Bold Italic" size="40.0" />
-                           </font>
-                        </Label>
-                        <Pane layoutX="53.0" layoutY="123.0" prefHeight="350.0" prefWidth="942.0">
+                        <Pane prefHeight="90.0" prefWidth="235.0" style="-fx-border-color: #2D4578; -fx-border-width: 2;">
                            <children>
-                              <JFXTreeTableView fx:id="treeTableOfALlCustomerOrders" layoutX="347.0" layoutY="1.0" prefHeight="350.0" prefWidth="232.0" />
+                              <Label alignment="CENTER" layoutY="3.0" prefHeight="30.0" prefWidth="232.0" text="Confirmed Order" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="35.0" fitWidth="34.0" layoutX="101.0" layoutY="40.0">
+                                 <image>
+                                    <Image url="@../media/shipping/icons8_purchase_order_26px.png" />
+                                 </image>
+                              </ImageView>
                            </children>
                         </Pane>
-                        <AnchorPane layoutX="42.0" layoutY="458.0" prefHeight="173.0" prefWidth="954.0">
+                        <Pane prefHeight="90.0" prefWidth="235.0" style="-fx-border-color: #2D4578; -fx-border-width: 2;">
                            <children>
-                              <ProgressBar fx:id="progressBarOfShipping" layoutX="14.0" layoutY="43.0" prefHeight="93.0" prefWidth="940.0" progress="0.48">
-                                 <effect>
-                                    <Lighting diffuseConstant="2.0" specularConstant="1.14" specularExponent="18.92" surfaceScale="0.0">
-                                       <bumpInput>
-                                          <Shadow>
-                                             <input>
-                                                <Glow />
-                                             </input>
-                                          </Shadow>
-                                       </bumpInput>
-                                       <light>
-                                       </light>
-                                    </Lighting>
-                                 </effect>
-                              </ProgressBar>
-                              <HBox layoutX="13.0" layoutY="44.0" prefHeight="90.0" prefWidth="940.0" style="-fx-border-color: #2D4578; -fx-border-width: 2;">
-                                 <children>
-                                    <Pane prefHeight="90.0" prefWidth="235.0" style="-fx-border-color: #2D4578; -fx-border-width: 2;">
-                                       <children>
-                                          <Label alignment="CENTER" layoutY="3.0" prefHeight="30.0" prefWidth="232.0" text="Confirmed Order" textAlignment="CENTER">
-                                             <font>
-                                                <Font name="System Bold" size="20.0" />
-                                             </font>
-                                          </Label>
-                                          <ImageView fitHeight="35.0" fitWidth="34.0" layoutX="101.0" layoutY="40.0">
-                                             <image>
-                                                <Image url="@../media/shipping/icons8_purchase_order_26px.png" />
-                                             </image>
-                                          </ImageView>
-                                       </children>
-                                    </Pane>
-                                    <Pane prefHeight="90.0" prefWidth="235.0" style="-fx-border-color: #2D4578; -fx-border-width: 2;">
-                                       <children>
-                                          <Label alignment="CENTER" layoutY="3.0" prefHeight="30.0" prefWidth="235.0" text="Preparing To Ship" textAlignment="CENTER">
-                                             <font>
-                                                <Font name="System Bold" size="20.0" />
-                                             </font>
-                                          </Label>
-                                          <ImageView fitHeight="35.0" fitWidth="34.0" layoutX="101.0" layoutY="41.0">
-                                             <image>
-                                                <Image url="@../media/shipping/icons8_oil_storage_tank_50px_1.png" />
-                                             </image>
-                                          </ImageView>
-                                       </children>
-                                    </Pane>
-                                    <Pane prefHeight="90.0" prefWidth="235.0" style="-fx-border-color: #2D4578; -fx-border-width: 2;">
-                                       <children>
-                                          <Label alignment="CENTER" layoutY="3.0" prefHeight="30.0" prefWidth="237.0" text="In Transit" textAlignment="CENTER">
-                                             <font>
-                                                <Font name="System Bold" size="20.0" />
-                                             </font>
-                                          </Label>
-                                          <ImageView fitHeight="35.0" fitWidth="34.0" layoutX="100.0" layoutY="38.0">
-                                             <image>
-                                                <Image url="@../media/shipping/icons8_fuel_tank_30px.png" />
-                                             </image>
-                                          </ImageView>
-                                       </children>
-                                    </Pane>
-                                    <Pane prefHeight="90.0" prefWidth="235.0" style="-fx-border-color: #2D4578; -fx-border-width: 2;">
-                                       <children>
-                                          <Label alignment="CENTER" layoutY="3.0" prefHeight="30.0" prefWidth="235.0" text="Completed" textAlignment="CENTER">
-                                             <font>
-                                                <Font name="System Bold" size="20.0" />
-                                             </font>
-                                          </Label>
-                                          <ImageView fitHeight="35.0" fitWidth="34.0" layoutX="102.0" layoutY="40.0">
-                                             <image>
-                                                <Image url="@../media/shipping/icons8_task_completed_48px.png" />
-                                             </image>
-                                          </ImageView>
-                                       </children>
-                                    </Pane>
-                                 </children>
-                              </HBox>
+                              <Label alignment="CENTER" layoutY="3.0" prefHeight="30.0" prefWidth="235.0" text="Preparing To Ship" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="35.0" fitWidth="34.0" layoutX="101.0" layoutY="41.0">
+                                 <image>
+                                    <Image url="@../media/shipping/icons8_oil_storage_tank_50px_1.png" />
+                                 </image>
+                              </ImageView>
                            </children>
-                        </AnchorPane>
-                        <GridPane gridLinesVisible="true" layoutX="53.0" layoutY="633.0" prefHeight="77.0" prefWidth="945.0">
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                          </rowConstraints>
+                        </Pane>
+                        <Pane prefHeight="90.0" prefWidth="235.0" style="-fx-border-color: #2D4578; -fx-border-width: 2;">
                            <children>
-                              <Text lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" STATUS" textAlignment="CENTER" wrappingWidth="472.99578857421875">
+                              <Label alignment="CENTER" layoutY="3.0" prefHeight="30.0" prefWidth="237.0" text="In Transit" textAlignment="CENTER">
                                  <font>
-                                    <Font name="System Bold" size="19.0" />
+                                    <Font name="System Bold" size="20.0" />
                                  </font>
-                              </Text>
-                              <Text lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" EXPECTED" textAlignment="CENTER" wrappingWidth="472.995849609375" GridPane.columnIndex="1">
-                                 <font>
-                                    <Font name="System Bold" size="19.0" />
-                                 </font>
-                              </Text>
-                              <Text fx:id="orderStatisLable" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Preparing To Shipping" textAlignment="CENTER" wrappingWidth="470.6253662109375" GridPane.rowIndex="1">
-                                 <font>
-                                    <Font size="20.0" />
-                                 </font>
-                              </Text>
-                              <Text fx:id="expectedLable" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fri. May 22 09:00-11:00" textAlignment="CENTER" wrappingWidth="468.84771728515625" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                 <font>
-                                    <Font size="20.0" />
-                                 </font>
-                              </Text>
+                              </Label>
+                              <ImageView fitHeight="35.0" fitWidth="34.0" layoutX="100.0" layoutY="38.0">
+                                 <image>
+                                    <Image url="@../media/shipping/icons8_fuel_tank_30px.png" />
+                                 </image>
+                              </ImageView>
                            </children>
-                        </GridPane>
-                        <Label alignment="CENTER" layoutX="373.0" layoutY="91.0" text="Click on the order you want to track:">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
+                        </Pane>
+                        <Pane prefHeight="90.0" prefWidth="235.0" style="-fx-border-color: #2D4578; -fx-border-width: 2;">
+                           <children>
+                              <Label alignment="CENTER" layoutY="3.0" prefHeight="30.0" prefWidth="235.0" text="Completed" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="35.0" fitWidth="34.0" layoutX="102.0" layoutY="40.0">
+                                 <image>
+                                    <Image url="@../media/shipping/icons8_task_completed_48px.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
                      </children>
-                  </Pane>
+                  </HBox>
                </children>
             </AnchorPane>
+            <GridPane gridLinesVisible="true" layoutX="53.0" layoutY="633.0" prefHeight="77.0" prefWidth="945.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Text lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" STATUS" textAlignment="CENTER" wrappingWidth="472.99578857421875">
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
+                  </Text>
+                  <Text lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" EXPECTED" textAlignment="CENTER" wrappingWidth="472.995849609375" GridPane.columnIndex="1">
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="shippingStatusLable" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Preparing To Shipping" textAlignment="CENTER" wrappingWidth="470.6253662109375" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="expectedLable" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fri. May 22 09:00-11:00" textAlignment="CENTER" wrappingWidth="468.84771728515625" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Text>
+               </children>
+            </GridPane>
+            <Label alignment="CENTER" layoutX="373.0" layoutY="91.0" text="Click on the order you want to track:">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
          </children>
-      </HBox>
+      </Pane>
    </children>
 </AnchorPane>
