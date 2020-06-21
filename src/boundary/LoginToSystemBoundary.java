@@ -16,6 +16,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -205,6 +206,10 @@ public class LoginToSystemBoundary extends Application {
             e.printStackTrace();
         }
     }
+    @FXML
+    public void openFastFuelSimulation(MouseEvent event){
+        mainProjectFX.pagingController.loadAdditionalStage(ProjectPages.FAST_FUEL_PAGE.getPath());
+    }
 
     public JFXComboBox<String> getLoginAsComboBox() {
         return loginAsComboBox;
@@ -217,6 +222,7 @@ public class LoginToSystemBoundary extends Application {
     public void setAllDBUsersArrayList(ArrayList<User> allDBUsersArrayList) {
         this.allDBUsersArrayList = allDBUsersArrayList;
     }
+
 
 }
 

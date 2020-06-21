@@ -1,21 +1,19 @@
 package boundary;
 
 import Contollers.FastFuelController;
-import Contollers.NewPurchaseFuelForHomeHeatingController;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import entity.Costumer;
 import entity.GasStation;
-import entity.MarketingCampaignTemplate;
 import entity.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.ResourceBundle;
 
 import static java.lang.Thread.sleep;
@@ -34,7 +32,7 @@ public class fastFuelBoundary implements DataInitializable {
     private Label pricaeCounter;
 
     @FXML
-    private Label literCounter;
+    private Text literCountertxt;
 
     @FXML
     private JFXTextField literAmountTxt;
@@ -68,6 +66,8 @@ public class fastFuelBoundary implements DataInitializable {
 
     @FXML
     private Label stationNumberLable;
+    @FXML
+    private Button startFuelingBtn;
 
     @Override
     public void initData(Object data) {
@@ -84,7 +84,7 @@ public class fastFuelBoundary implements DataInitializable {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        String customerID =  customerIdLable.getText();
+        String customerID = customerIdLable.getText();
         //choose random station to refuel:
         myController.getOptionalStationForCustomer(customerID);
 
@@ -110,11 +110,39 @@ public class fastFuelBoundary implements DataInitializable {
         User myUser = new User();
         // gs.StationNumber, companyName,inventory_95 , inventory_scooter, inventory_diesel
 
-        Random r = new Random();
-        int low = 0;
-        int high = 2;
-        int result = r.nextInt(high-low) + low;
-        stationNumberLable.setText(resultList.get(result).getStationNumber().toString());
+//        Random r = new Random();
+//        int low = 0;
+//        int high = 2;
+//        int result = r.nextInt(high-low) + low;
+//        stationNumberLable.setText(resultList.get(result).getStationNumber().toString());
+
+    }
+
+    @FXML
+    void startFuelingProccess(MouseEvent event) {
+        Thread fuelingCounterThread = new Thread() {
+            //TODO: check literAmount input fields (validate) - need to chose pump .
+            Integer fuelCounter = Integer.parseInt(literAmountTxt.getText().toString());
+            Integer literCounter = 0;
+            public void run() {
+                for (; ; ) {
+                    if (fuelCounter == 0) {
+                        break;
+                    }
+                    literCounter++;
+                    System.out.println(literCounter.toString());
+                    literCountertxt.setText(literCounter.toString());
+                    fuelCounter--;
+                    try {
+                        sleep(150);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+        };
+        fuelingCounterThread.start();
 
     }
 
@@ -122,6 +150,8 @@ public class fastFuelBoundary implements DataInitializable {
     public void setCostumerTable(ArrayList<Costumer> costumerTable) {
         customerIdLable.setText(costumerTable.get(0).getUserID());
     }
+
+
 /*
     public ArrayList<Costumer> getCostumerTable() {
        // return costumerTable;
