@@ -6,6 +6,7 @@ import com.jfoenix.controls.JFXTextField;
 import entity.Costumer;
 import entity.GasStation;
 import entity.User;
+import entity.Vehicle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

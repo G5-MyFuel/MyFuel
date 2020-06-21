@@ -88,6 +88,7 @@ public class FastFuelController extends BasicController{
         ArrayList<Object> varArray =  new  ArrayList<Object>();
         varArray.add(myArray.get(0));
         varArray.add(myArray.get(1));
+
         switch (fuelType) {
             case "Diesel":
                 varArray.add("Diesel");
