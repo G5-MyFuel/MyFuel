@@ -187,7 +187,7 @@ public class ViewReportsBoundary implements DataInitializable {
 
         managerCompany = resultList.get(0);
         managerStation = resultList.get(1);
-        getYearListData();
+        //getYearListData();
     }
 
     public void getYearListData(){
@@ -236,12 +236,11 @@ public class ViewReportsBoundary implements DataInitializable {
     void handleOKbtn(ActionEvent event) {
 
         if (!(EnterStationNumberTXT.getText().equals(""))) {
-            getYearListData();
             NoDataLabel.setVisible(false);
             NoDataLabel.setLayoutX(38);
             NoDataLabel.setLayoutY(514);
             managerStation = EnterStationNumberTXT.getText();
-            //ChooseReportYearCombo.setItems(YearList);
+            getYearListData();
             ChooseReportYearCombo.setVisible(true);
             ChooseReportQuarterCombo.setItems(quarterList);
             ChooseReportQuarterCombo.setVisible(true);
@@ -250,6 +249,7 @@ public class ViewReportsBoundary implements DataInitializable {
             ViewPurchasesReportTable.setVisible(false);
             ViewQuantityReportTable.setVisible(false);
             ViewTotalRevenueTXT.setVisible(false);
+
         } else {
             System.out.println("fds");
             ChooseReportYearCombo.setVisible(false);
