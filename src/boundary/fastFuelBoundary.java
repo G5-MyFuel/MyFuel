@@ -113,30 +113,30 @@ public class fastFuelBoundary implements DataInitializable {
 
     @FXML
     void startFuelingProccess(MouseEvent event) {
-        Thread fuelingCounterThread = new Thread() {
-            public void run() {
-                for (; ; ) {
-                    startFuelingBtn.setDisable(true);
-                    //TODO: check literAmount input fields (validate) - need to chose pump .
-                    Integer fuelCounter = Integer.parseInt(literAmountTxt.getText());
-                    Integer literCounter = 0;
-                    if (fuelCounter == 0) {
-                        break;
-                    }
-                    literCounter++;
-                    literCountertxt.setText(literCounter.toString());
-                    fuelCounter--;
-
-                    try {
-                        sleep(500);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-                startFuelingBtn.setDisable(false);
-            }
-        };
-        fuelingCounterThread.start();
+//        Thread fuelingCounterThread = new Thread() {
+//            public void run() {
+//                for (; ; ) {
+//                    startFuelingBtn.setDisable(true);
+//                    //TODO: check literAmount input fields (validate) - need to chose pump .
+//                    Integer fuelCounter = Integer.parseInt(literAmountTxt.getText());
+//                    Integer literCounter = 0;
+//                    if (fuelCounter == 0) {
+//                        break;
+//                    }
+//                    literCounter++;
+//                    literCountertxt.setText(literCounter.toString());
+//                    fuelCounter--;
+//
+//                    try {
+//                        sleep(500);
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//                startFuelingBtn.setDisable(false);
+//            }
+//        };
+//        fuelingCounterThread.start();
 
     }
 

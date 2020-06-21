@@ -375,6 +375,9 @@ public class MysqlConnection {
         sqlArray[SqlQueryType.GET_CUSTOMER_PFH_TABLE.getCode()] = "SELECT p.purchaseDate as 'Order date',p.purchaseHour as 'Order time', ph.status as 'Order status',ph.shippingDateAndTime as 'Expected delivery date'\n" +
                 "FROM Purchase AS p , PurchaseFuelForHomeHeating AS ph\n" +
                 "WHERE p.purchaseID = ph.purchaseID and p.customerID= ?;";
+        sqlArray[SqlQueryType.GET_CURRENT_MARKETING_CAMPEIGN.getCode()] = "SELECT mc.CampaignID,mc.TemplateName,ct.fuelType,ct.DiscountPercentages\n" +
+                "FROM MarketingCampaign AS mc , CampaignTemplates as ct\n" +
+                "WHERE (CURDATE() BETWEEN BeginDate AND EndDate) and mc.TemplateName=ct.templateName;";
 
     }
 
