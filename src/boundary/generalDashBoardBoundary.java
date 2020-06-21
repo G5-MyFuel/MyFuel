@@ -126,6 +126,20 @@ public class generalDashBoardBoundary implements DataInitializable {
             else if (button4.getText().equals("b4")) currentBtn = button4;
             //
             switch (pn) {
+                case "PURCHASE_FUEL_FOR_HOME_HEATING_TRACKING":
+                    image = new Image(getClass().getResourceAsStream("../media/FuelForHomeHeating/orderTrackingIcon.png"));
+                    imageView = new ImageView(image);
+                    imageView.setFitHeight(27);
+                    imageView.setFitWidth(25);
+                    currentBtn.setGraphic(imageView);
+                    currentBtn.setText("Orders Tracking");
+                    currentBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent event) {
+                            PURCHASE_FUEL_FOR_HOME_HEATING_TRACKING();
+                        }
+                    });
+                    break;
                 case "COSTUMER_MANAGEMENT_TABLE_PAGE":
                     image = new Image(getClass().getResourceAsStream("../media/CostumerRegisterationMedia/managment.png"));
                     imageView = new ImageView(image);
@@ -401,6 +415,17 @@ public class generalDashBoardBoundary implements DataInitializable {
     public void initialize(URL location, ResourceBundle resources) {
         clockFuntion();
         weekDay();
+    }
+
+    /**
+     * set PURCHASE_FUEL_FOR_HOME_HEATING_TRACKING page
+     */
+    void PURCHASE_FUEL_FOR_HOME_HEATING_TRACKING(){
+        currentPagePane.setVisible(true);
+        currentPagePane.getChildren().clear();
+      //  currentPagePane.getStylesheets().add("../boudary/BGcss.css");
+        currentPagePane.getChildren().setAll(mainProjectFX.pagingController.loadBoundaryInPane(ProjectPages.PURCHASE_FUEL_FOR_HOME_HEATING_TRACKING.getPath(), userID));
+        myFuelLogo.setVisible(false);
     }
 
     /**

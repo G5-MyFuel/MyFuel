@@ -41,6 +41,8 @@ public enum SqlQueryType {
     GET_SPECIFIC_CUSTOMER_DETAILS(SqlExecutionType.EXECUTE_QUERY),
     INSERT_NEW_PURCHASE_FUEL_FOR_HOME_HEATING(SqlExecutionType.UPDATE_QUERY),
     INSERT_NEW_PURCHASE_FUEL_FOR_HOME_HEATING1(SqlExecutionType.UPDATE_QUERY),
+    //
+    GET_CUSTOMER_PFH_TABLE(SqlExecutionType.EXECUTE_QUERY),
 
     /* *****************************************
      * ********** Discount Rates Queries ****************
