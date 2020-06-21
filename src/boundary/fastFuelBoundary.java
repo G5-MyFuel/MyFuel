@@ -23,6 +23,7 @@ import static java.lang.Thread.sleep;
 /**
  * @author Daniel Gabbay
  */
+
 public class fastFuelBoundary implements DataInitializable {
     private FastFuelController myController = new FastFuelController(this);
 
@@ -121,8 +122,8 @@ public class fastFuelBoundary implements DataInitializable {
     public void setCostumerTable(ArrayList<Costumer> costumerTable) {
         customerIdLable.setText(costumerTable.get(0).getUserID());
     }
-
+/*
     public ArrayList<Costumer> getCostumerTable() {
        // return costumerTable;
-    }
+    }*/
 }
