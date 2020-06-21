@@ -1,6 +1,7 @@
 package Contollers;
 
 import boundary.GeneratingReportsMarketingManagerBoundary;
+import boundary.SettingDiscountRatesBoundary;
 import common.assets.SqlAction;
 import common.assets.SqlQueryType;
 import common.assets.SqlResult;
@@ -11,6 +12,14 @@ import javafx.application.Platform;
 import java.util.ArrayList;
 
 import static java.sql.Types.DOUBLE;
+
+/**
+ *  A department responsible for logical calculations and communicating with the client server and DB
+ *  For page "GeneratingReportsMarketingManagerBoundary"
+ *
+ *  * @author Nir Asulin
+ * @see GeneratingReportsMarketingManagerBoundary - the form's gui controller (boundary) class
+ */
 
 public class GeneratingReportsMarketingManagerController extends BasicController {
 
@@ -28,12 +37,15 @@ public class GeneratingReportsMarketingManagerController extends BasicController
         this.myBoundary = myBoundary;
     }
 
+    /**
+     * This method is responsible for requesting information from DB through the server
+     * Divided into cases to separate sending a different queries
+     * @param paramArray - An array of variables for query
+     */
     public void GetReportData(ArrayList<String> paramArray) {
         ArrayList<Object> varArray = new ArrayList<>();
         varArray.addAll(paramArray);
         varArray.remove(0);
-        System.out.println(paramArray);
-        System.out.println(varArray);
         switch (paramArray.get(0)) {
             case "Comments Report for Marketing Campaign":
                 SqlAction sqlAction = new SqlAction(SqlQueryType.GET_Comments_Report, varArray);
@@ -54,8 +66,12 @@ public class GeneratingReportsMarketingManagerController extends BasicController
         }
     }
 
-    /*Logic Methods*/
-
+    /**
+     * This method is responsible for getting results from the client
+     * Divided into cases to separate getting results from different queries
+     *
+     * @param result - The result received from the DB
+     */
     @Override
     public void getResultFromClient(SqlResult result) {
         Platform.runLater(() -> {
@@ -79,9 +95,10 @@ public class GeneratingReportsMarketingManagerController extends BasicController
     }
 
     /**
-     * This method create Comments Report from the data base result.
+     * This method create array list of Comments Report from the data base result.
      *
-     * @param result the result
+     * @param result - The result received from the DB
+     *
      * @return ArrayList<CommentsReport>
      */
     private ArrayList<CommentsReport> changeResultToCommentsReport(SqlResult result) {
@@ -100,6 +117,13 @@ public class GeneratingReportsMarketingManagerController extends BasicController
         return resultList;
     }
 
+    /**
+     * This method create array list of Customer Periodic Characterization Report from the data base result.
+     *
+     * @param result - The result received from the DB
+     *
+     * @return ArrayList<CustomerPeriodicCharacterizationReport>
+     */
     private ArrayList<CustomerPeriodicCharacterizationReport> changeResultToCustomerPeriodicCharacterizationReport(SqlResult result) {
 
         ArrayList<CustomerPeriodicCharacterizationReport> resultList = new ArrayList<>();
@@ -123,6 +147,12 @@ public class GeneratingReportsMarketingManagerController extends BasicController
         return resultList;
     }
 
+    /**
+     * This method create array list of String from the data base result.
+     *
+     * @param result - The result received from the DB
+     * @return Array list of String contains manager company and manager station
+     */
     private ArrayList<String> changeResultToManagerData(SqlResult result) {
 
         ArrayList<String> resultList = new ArrayList<>();

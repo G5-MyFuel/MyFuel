@@ -1,5 +1,6 @@
 package Contollers;
 
+import boundary.GeneratingReportsStationManagerBoundary;
 import boundary.ViewReportsBoundary;
 import common.assets.SqlAction;
 import common.assets.SqlQueryType;
@@ -9,6 +10,15 @@ import entity.QuantityItemsStockReport;
 import javafx.application.Platform;
 
 import java.util.ArrayList;
+
+/**
+ * A department responsible for logical calculations and communicating with the client server and DB
+ * For page "ViewReportsBoundary"
+ * <p>
+ * * @author Nir Asulin
+ *
+ * @see ViewReportsBoundary - the form's gui controller (boundary) class
+ */
 
 public class ViewReportsController extends BasicController {
 
@@ -26,13 +36,16 @@ public class ViewReportsController extends BasicController {
         this.myBoundary = myBoundary;
     }
 
-
+    /**
+     * This method is responsible for requesting information from DB through the server
+     * Divided into cases to separate sending a different queries
+     *
+     * @param paramArray - An array of variables for query
+     */
     public void GetReportData(ArrayList<String> paramArray) {
         ArrayList<Object> varArray = new ArrayList<>();
         varArray.addAll(paramArray);
         varArray.remove(0);
-        System.out.println(paramArray);
-        System.out.println(varArray);
         switch (paramArray.get(0)) {
             case "Get Manager data":
                 SqlAction sqlAction = new SqlAction(SqlQueryType.GET_Manager_Data, varArray);
@@ -55,7 +68,12 @@ public class ViewReportsController extends BasicController {
         }
     }
 
-
+    /**
+     * This method is responsible for getting results from the client
+     * Divided into cases to separate getting results from different queries
+     *
+     * @param result - The result received from the DB
+     */
     @Override
     public void getResultFromClient(SqlResult result) {
 
@@ -80,9 +98,9 @@ public class ViewReportsController extends BasicController {
     }
 
     /**
-     * This method create String from the data base result.
+     * This method create Quarterly Report from the data base result.
      *
-     * @param result the result
+     * @param result - The result received from the DB
      * @return String
      */
     private String changeResultToQuarterlyReport(SqlResult result) {
@@ -95,10 +113,10 @@ public class ViewReportsController extends BasicController {
     }
 
     /**
-     * This method create String from the data base result.
+     * This method create array list of Purchases Report from the data base result.
      *
-     * @param result the result
-     * @return String
+     * @param result - The result received from the DB
+     * @return ArrayList<PurchasesReport>
      */
     private ArrayList<PurchasesReport> changeResultToPurchasesReport(SqlResult result) {
 
@@ -106,7 +124,6 @@ public class ViewReportsController extends BasicController {
         String[] salesAmount = new String[]{"0 purchase", "0 purchase", "0 purchase"};
         ArrayList<PurchasesReport> resultList = new ArrayList<>();
         for (ArrayList<Object> a : result.getResultData()) {
-            System.out.println(a);
             if (((String) a.get(0)).equals("Gasoline 95")) {
                 fuelAmount[0] = (String) a.get(1);
                 salesAmount[0] = (String) a.get(2);
@@ -130,13 +147,19 @@ public class ViewReportsController extends BasicController {
         return resultList;
     }
 
+    /**
+     * This method create array list of Quantity Items Stock Report from the data base result.
+     *
+     * @param result - The result received from the DB
+     *
+     * @return ArrayList<QuantityItemsStockReport>
+     */
     private ArrayList<QuantityItemsStockReport> changeResultToQuantityItemsStockReport(SqlResult result) {
 
         String[] fuelAvailableInventory = new String[]{"0.0 liters", "0.0 liters", "0.0 liters"};
         ArrayList<QuantityItemsStockReport> resultList = new ArrayList<>();
 
         for (ArrayList<Object> a : result.getResultData()) {
-            System.out.println(a);
             if (((String) a.get(0)).equals("Gasoline 95"))
                 fuelAvailableInventory[0] = (String) a.get(1);
             if (((String) a.get(0)).equals("Diesel"))
@@ -146,11 +169,16 @@ public class ViewReportsController extends BasicController {
         }
 
         for (int i = 0; i < 3; i++)
-            //resultList.get(i).setQuantityPurchased(fuelAmount[i]);
             resultList.add(new QuantityItemsStockReport(fuelAvailableInventory[i]));
         return resultList;
     }
 
+    /**
+     * This method create array list of String from the data base result.
+     *
+     * @param result - The result received from the DB
+     * @return Array list of String contains manager company and manager station
+     */
     private ArrayList<String> changeResultToManagerData(SqlResult result) {
 
         ArrayList<String> resultList = new ArrayList<>();
