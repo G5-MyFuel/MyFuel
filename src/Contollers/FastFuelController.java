@@ -45,6 +45,7 @@ public class FastFuelController extends BasicController{
                     //    resultList2.addAll(this.changeResultToGasStation(result));
                      //  myBoundary.setSalesTable(resultList2); // ??
                         break;
+
                   /*  case UPDATE_DIESEL_INVENTORY_CUSTOMER_PURCHASE:
                         break;
                     case UPDATE_95_INVENTORY_CUSTOMER_PURCHASE:
