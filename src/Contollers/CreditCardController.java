@@ -28,7 +28,10 @@ public class CreditCardController extends BasicController {
         this.myBoundary = myBoundary;
     }
 
-
+    /**
+     * this method will update the credit card given in the database.
+     * @param card
+     */
     public void updateCostumerCreditCardInDb(CreditCard card) {
         ArrayList<Object> varArray = new ArrayList<>();
         if (card != null) {

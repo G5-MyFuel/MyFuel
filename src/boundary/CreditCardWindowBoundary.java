@@ -57,10 +57,17 @@ public class CreditCardWindowBoundary implements DataInitializable {
     @FXML
     private Button addCardBtn;
 
+    /**
+     * initialize the observable items for the card expiration dates.
+     */
     private ObservableList<String> Years = FXCollections.observableArrayList("21", "22", "23", "24", "25", "26", "27", "28", "29", "30");
     private ObservableList<String> Month = FXCollections.observableArrayList("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
 
-
+    /**
+     * initialize function that star when boundary start.
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         CVVtxt.clear();
@@ -75,6 +82,10 @@ public class CreditCardWindowBoundary implements DataInitializable {
 
     }
 
+    /**
+     * validation for card fields.
+     * @return boolean
+     */
     private boolean validateCardFields() {
         if (formValidation.isOnlyNumbers() && formValidation.isExactlyInLength())
             return true;
@@ -82,6 +93,11 @@ public class CreditCardWindowBoundary implements DataInitializable {
             return false;
     }
 
+    /**
+     * this method adds the credit card to db if all
+     * inputs are valid.
+     * @param event
+     */
     @FXML
     public void addCardOnClick(MouseEvent event) {
         Stage primStage = (Stage) addCardBtn.getScene().getWindow();
@@ -120,6 +136,11 @@ public class CreditCardWindowBoundary implements DataInitializable {
         return this.tempCreditCard;
     }
 
+    /**
+     * initData this will start in the initialize of the boundary.
+     * sends parameters from anther pages
+     * @param data - The data sent to the boundary
+     */
     @Override
     public void initData(Object data) {
         YearCombo.setItems(Years);
@@ -143,6 +164,11 @@ public class CreditCardWindowBoundary implements DataInitializable {
         }
 
         primStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            /**
+             * this function handle the request to close the page.
+             * simply ask user if he is sure.
+             * @param e
+             */
             @Override
             public void handle(WindowEvent e) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);

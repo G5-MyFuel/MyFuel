@@ -93,7 +93,11 @@ public class generalDashBoardBoundary implements DataInitializable {
     @FXML
     private Button button4;
 
-
+    /**
+     * initData this will start in the initialize of the boundary.
+     * sends parameters from anther pages
+     * @param data - The data sent to the boundary
+     */
     @Override
     public void initData(Object data) {
         ArrayList<String> pageNameArrayList = (ArrayList<String>) data;
@@ -112,6 +116,9 @@ public class generalDashBoardBoundary implements DataInitializable {
         pageNameArrayList.remove(0);
         pageNameArrayList.remove(0);
         pageNameArrayList.remove(0);
+        /**
+         * the following loop will set the buttons and pages according to the user premissions.
+         */
         for (String pn : pageNameArrayList) {
             if (button1.getText().equals("b1")) currentBtn = button1;
             else if (button2.getText().equals("b2")) currentBtn = button2;
@@ -379,13 +386,20 @@ public class generalDashBoardBoundary implements DataInitializable {
 
     }
 
-
+    /**
+     * initialize pase.
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         clockFuntion();
         weekDay();
     }
 
+    /**
+     * set SUPPLY_ORDER_EXECUTION page
+     */
     void SUPPLY_ORDER_EXECUTION() {
         currentPagePane.setVisible(true);
         currentPagePane.getChildren().clear();
@@ -394,6 +408,9 @@ public class generalDashBoardBoundary implements DataInitializable {
         myFuelLogo.setVisible(false);
     }
 
+    /**
+     * set GENERATING_REPORTS_MARKETING_MANAGER_PAGE page
+     */
     void GENERATING_REPORTS_MARKETING_MANAGER_PAGE() {
         currentPagePane.setVisible(true);
         currentPagePane.getChildren().clear();
@@ -402,6 +419,9 @@ public class generalDashBoardBoundary implements DataInitializable {
         myFuelLogo.setVisible(false);
     }
 
+    /**
+     * set CONFIRM_DISCOUNT_RATES_PAGE page
+     */
     void CONFIRM_DISCOUNT_RATES_PAGE() {
         currentPagePane.setVisible(true);
         currentPagePane.getChildren().clear();
@@ -410,6 +430,9 @@ public class generalDashBoardBoundary implements DataInitializable {
         myFuelLogo.setVisible(false);
     }
 
+    /**
+     * set SETTING_DISCOUNT_RATES_PAGE page.
+     */
     void SETTING_DISCOUNT_RATES_PAGE() {
         currentPagePane.setVisible(true);
         currentPagePane.getChildren().clear();
@@ -418,6 +441,9 @@ public class generalDashBoardBoundary implements DataInitializable {
         myFuelLogo.setVisible(false);
     }
 
+    /**
+     * set RUN_SALE_OPERATION_PAGE page
+     */
     void RUN_SALE_OPERATION_PAGE() {
         currentPagePane.setVisible(true);
         currentPagePane.getChildren().clear();
@@ -426,6 +452,9 @@ public class generalDashBoardBoundary implements DataInitializable {
         myFuelLogo.setVisible(false);
     }
 
+    /**
+     * set COSTUMER_REGISTRATION_PAGE page
+     */
     void COSTUMER_REGISTRATION_PAGE() {
         currentPagePane.setVisible(true);
         currentPagePane.getChildren().clear();
@@ -434,6 +463,9 @@ public class generalDashBoardBoundary implements DataInitializable {
         myFuelLogo.setVisible(false);
     }
 
+    /**
+     * set SALE_OPERATION_TEMPLATE_PAGE page
+     */
     void SALE_OPERATION_TEMPLATE_PAGE() {
         currentPagePane.setVisible(true);
         currentPagePane.getChildren().clear();
@@ -442,6 +474,9 @@ public class generalDashBoardBoundary implements DataInitializable {
         myFuelLogo.setVisible(false);
     }
 
+    /**
+     * set FAST_FUEL_PAGE page
+     */
     void FAST_FUEL_PAGE() {
         currentPagePane.setVisible(true);
         currentPagePane.getChildren().clear();
@@ -450,6 +485,9 @@ public class generalDashBoardBoundary implements DataInitializable {
         myFuelLogo.setVisible(false);
     }
 
+    /**
+     * set GENERATING_REPORTS_STATION_MANAGER_PAGE page
+     */
     void GENERATING_REPORTS_STATION_MANAGER_PAGE() {
         currentPagePane.setVisible(true);
         currentPagePane.getChildren().clear();
@@ -458,6 +496,9 @@ public class generalDashBoardBoundary implements DataInitializable {
         myFuelLogo.setVisible(false);
     }
 
+    /**
+     * set MANAGER_SUPPLY_CONFIRMATION_PAGE page
+     */
     void MANAGER_SUPPLY_CONFIRMATION_PAGE() {
         currentPagePane.setVisible(true);
         currentPagePane.getChildren().clear();
@@ -466,6 +507,9 @@ public class generalDashBoardBoundary implements DataInitializable {
         myFuelLogo.setVisible(false);
     }
 
+    /**
+     * set MANAGER_NOTIFICATION_PAGE page
+     */
     void MANAGER_NOTIFICATION_PAGE() {
         currentPagePane.setVisible(true);
         currentPagePane.getChildren().clear();
@@ -474,6 +518,9 @@ public class generalDashBoardBoundary implements DataInitializable {
         myFuelLogo.setVisible(false);
     }
 
+    /**
+     * set VIEW_ANALITIC_DATA page
+     */
     void VIEW_ANALITIC_DATA() {
         currentPagePane.setVisible(true);
         currentPagePane.getChildren().clear();
@@ -482,6 +529,9 @@ public class generalDashBoardBoundary implements DataInitializable {
         myFuelLogo.setVisible(false);
     }
 
+    /**
+     * set newPurchaseFuelForHomeHeatingClick page
+     */
     void newPurchaseFuelForHomeHeatingClick() {
         currentPagePane.setVisible(true);
         currentPagePane.getChildren().clear();
@@ -490,6 +540,9 @@ public class generalDashBoardBoundary implements DataInitializable {
         myFuelLogo.setVisible(false);
     }
 
+    /**
+     * set costumerMenagmentClick page
+     */
     void costumerMenagmentClick() {
         currentPagePane.setVisible(true);
         currentPagePane.getChildren().clear();
@@ -498,12 +551,18 @@ public class generalDashBoardBoundary implements DataInitializable {
         myFuelLogo.setVisible(false);
     }
 
+    /**
+     * set FUEL_MANAGMENT_PAGE page
+     */
     void FUEL_MANAGMENT_PAGE() {
         currentPagePane.setVisible(true);
         mainProjectFX.pagingController.loadAdditionalStage(ProjectPages.FUEL_MANAGMENT_PAGE.getPath(), userID);
         myFuelLogo.setVisible(false);
     }
 
+    /**
+     * set VIEW_REPORTS_PAGE page
+     */
     void VIEW_REPORTS_PAGE() {
         currentPagePane.setVisible(true);
         currentPagePane.getChildren().clear();
@@ -512,13 +571,20 @@ public class generalDashBoardBoundary implements DataInitializable {
         myFuelLogo.setVisible(false);
     }
 
-
+    /**
+     * set homePageClick button
+     * @param event
+     */
     @FXML
     void homePageClick(MouseEvent event) {
         currentPagePane.setVisible(false);
         myFuelLogo.setVisible(true);
     }
 
+    /**
+     * set signOut button
+     * @param event
+     */
     @FXML
     void signOutClick(MouseEvent event) {
         mainProjectFX.pagingController.loadBoundary(ProjectPages.LOGIN_PAGE.getPath());
@@ -617,10 +683,10 @@ public class generalDashBoardBoundary implements DataInitializable {
     }
 
 
-    /*
-    Get all updated prices from DB
+    /**
+     * get all updated prices from database.
+     * @return
      */
-
     public ArrayList<Prices> getResultListFuelPrices() {
         return resultListFuelPrices;
     }

@@ -27,13 +27,21 @@ public class CustomerRegistrationController extends BasicController {
     private ArrayList<Vehicle> allVehicleArray = new ArrayList<>();
     private Costumer tempCostumer;
 
-
+    /**
+     * initialize registration boundary.
+     * @param myBoundary
+     */
     public CustomerRegistrationController(CustomerRegistrationBoundary myBoundary) {
         this.myBoundary = myBoundary;
     }
 
     /*Logic Methods*/
 
+    /**
+     * this method will build costumer from all 3 phases in the finish phase.
+     * the method will execute a quarry to insert the costumer into the data base.
+     * @param costumer
+     */
     public void setCostumerInDB(Costumer costumer) {
         tempCostumer = costumer;
         //set Costumer data into CostumerTablevarArray
@@ -83,21 +91,33 @@ public class CustomerRegistrationController extends BasicController {
         tempCostumer = null;
     }
 
+    /**
+     * add costumer credit card.
+     * @param card
+     */
     public void addCostumerCreditCard(CreditCard card) {
         this.tempCostumer.setCostumerCreditCard(card);
     }
 
+    /**
+     * this method set costumer after finishing registration first phase.
+     * @param costumer
+     */
     public void setCostumerFirstPhase(Costumer costumer) {
         this.tempCostumer = costumer;
     }
 
+    /**
+     * set costumer vehicles after finishing registration second phase.
+     * @param vehicles
+     */
     public void setCostumerSecoundPhase(ArrayList<Vehicle> vehicles) {
         tempCostumer.setCostumerVehicle(vehicles);
     }
 
     /**
      *
-     * @param result - The result recieved from the DB
+     * @param result - The result received from the DB
      */
     @Override
     public void getResultFromClient(SqlResult result) {
@@ -118,11 +138,19 @@ public class CustomerRegistrationController extends BasicController {
 
     }
 
+    /**
+     * this method will start a quarry GET_ALL_VEHICLE_TABLE
+     * in order to get all vehicles form data base
+     */
     public void getVehicleTable() {
         SqlAction sqlAction = new SqlAction(SqlQueryType.GET_ALL_VEHICLE_TABLE);
         super.sendSqlActionToClient(sqlAction);
     }
 
+    /**
+     * this method will start a quarry GET_ALL_COSTUMER_TABLE
+     * in order to get all costumers form data base
+     */
     public void getCostumerTable() {
         SqlAction sqlAction = new SqlAction(SqlQueryType.GET_ALL_COSTUMER_TABLE);
         super.sendSqlActionToClient(sqlAction);
@@ -162,6 +190,11 @@ public class CustomerRegistrationController extends BasicController {
         return resultList;
     }
 
+    /**
+     * this method will check if costumer exist in db
+     * @param cosID
+     * @return boolean
+     */
     public boolean isCostumerExist(String cosID) {
         for (Costumer cos : allDBCostumerArray) {
             if (cos.getUserID().equals(cosID))
@@ -169,7 +202,11 @@ public class CustomerRegistrationController extends BasicController {
         }
         return false;
     }
-
+    /**
+     * this method will check if vehicle exist in db
+     * @param vehicleID
+     * @return boolean
+     */
     public boolean isVehicleExistInDb(String vehicleID) {
         for (Vehicle v : allVehicleArray) {
             if (v.getVehicleID().equals(vehicleID))
