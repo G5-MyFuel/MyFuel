@@ -85,7 +85,6 @@
          <center>
             <ImageView fitHeight="321.0" fitWidth="330.0" preserveRatio="true" BorderPane.alignment="CENTER">
                <image>
-                  <Image url="@../media/22472%20%5BConverted%5D.png" />
                </image>
             </ImageView>
          </center>
