@@ -17,15 +17,18 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ *
+ * @author Daniel Gabbay
+ */
 public class NewPurchaseFuelForHomeHeatingController extends BasicController {
     /* Variables*/
-    private NewPurchaseFuelForHomeHeatingBoundary myBoundary;
     private static NewPurchaseFuelForHomeHeatingController Instance = null;
+    private NewPurchaseFuelForHomeHeatingBoundary myBoundary;
     private ArrayList<ShippingDay> availableTimesInDate = new ArrayList<>();
 
 
     /* Methods*/
-
     public NewPurchaseFuelForHomeHeatingController(NewPurchaseFuelForHomeHeatingBoundary myBoundary) {
         this.myBoundary = myBoundary;
     }

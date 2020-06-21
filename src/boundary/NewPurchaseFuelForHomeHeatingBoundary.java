@@ -40,9 +40,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.ResourceBundle;
 
-
 /**
- * @author daniel
+ *
+ *
+ * @author Daniel Gabbay
  * @see NewPurchaseFuelForHomeHeatingController - the form's logic class
  */
 public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable {

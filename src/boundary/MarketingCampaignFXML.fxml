@@ -24,7 +24,7 @@
                   <Font name="System Bold Italic" size="40.0" />
                </font>
             </Label>
-            <Label layoutX="126.0" layoutY="128.0" text="Currently running sale operations:">
+            <Label layoutX="145.0" layoutY="128.0" text="Marketing Campaign in system:">
                <font>
                   <Font size="18.0" />
                </font>
