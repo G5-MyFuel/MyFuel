@@ -25,14 +25,18 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
 import org.apache.commons.lang3.StringUtils;
+import org.joda.time.DateTime;
 import org.joda.time.LocalDateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
 import java.net.URL;
+import java.sql.PreparedStatement;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.ResourceBundle;
 
@@ -348,13 +352,40 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
         varArray.add(noteTXT.getText());
         varArray.add(shippingMethodTXT);
         varArray.add(shippingSummeryDetailsTXT.getText());
+        myController.INSERT_NEW_PURCHASE_FUEL_FOR_HOME_HEATING(varArray);
         //
         ArrayList<Object> varArray1 = new ArrayList<>();
-        varArray1.add(currentPurchaseHomeHeating.getPurchaseID());
         varArray1.add(currentCostumerDetailsFromDB.getUserID());
-        varArray1.add(currentPurchaseHomeHeating.getFuelAmount());
+        varArray1.add(currentCostumerDetailsFromDB.getUserID());
+//        String timeStamp = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
+//        varArray1.add(timeStamp);
+        varArray1.add(fuelQuantityTXT.getText());
         varArray1.add(totalPrice);
-        myController.INSERT_NEW_PURCHASE_FUEL_FOR_HOME_HEATING(varArray,varArray1);
+        String timeStamp1 = new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime());
+        varArray1.add(timeStamp1);
+        varArray1.add("0");
+        System.out.println(varArray1);
+        myController.INSERT_NEW_PURCHASE_FUEL_FOR_HOME_HEATING1(varArray1);
+        /**
+         * INSERT INTO `bpsdc8o22sikrlpvvxqm`.`Purchase`
+         * (`purchaseID`,
+         * `customerID`,
+         * `purchaseDate`,
+         * `fuelAmount`,
+         * `totalPrice`,
+         * `purchaseHour`,
+         * `CampaignID`)
+         * VALUES
+         * ("238015088","238015088",curdate(),601.0,0.0,"10:57:00","0");
+         *  "(?,?,curdate(),?,?,?,?);\n";
+         * purchaseID varchar(25)
+         * customerID varchar(25)
+         * purchaseDate date ..
+         * fuelAmount double
+         * totalPrice double
+         * purchaseHour varchar(10)
+         * CampaignID varchar(10)
+         */
     }
 
     private void FastShippingSelected() {
