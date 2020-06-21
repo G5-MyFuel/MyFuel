@@ -116,12 +116,15 @@ public class ViewReportsBoundary implements DataInitializable {
     @Override
     public void initData(Object data) {
 
-    }
+        //managerCompany = "YELLOW";
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+        this.managerID = (String) data;
+        ArrayList<String> paramArray = new ArrayList<>();
+        paramArray.add("Get Manager data");
+        paramArray.add(managerID);
+        myController.GetReportData(paramArray); //start the process that will ask server to execute quarry and get the table details
 
-        managerCompany = "YELLOW";
+
         EnterStationNumberTXT.setVisible(true);
         QuestionMark1.setVisible(true);
 
@@ -151,6 +154,17 @@ public class ViewReportsBoundary implements DataInitializable {
         Tooltip.install(QuestionMark2, createToolTip("Generate report for annual quarter revenue and display total revenues."));
         Tooltip.install(QuestionMark3, createToolTip("Generate detailed report for total purchases in your station."));
         Tooltip.install(QuestionMark4, createToolTip("Generate report of item amount that correct in stock.\nSave button will save the report so the company manager could see it."));
+    }
+
+    public void setManagerData(ArrayList<String> resultList) {
+
+        managerCompany = resultList.get(0);
+        managerStation = resultList.get(1);
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
     }
 
     @FXML

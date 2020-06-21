@@ -8,7 +8,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -19,6 +18,9 @@ import java.util.ResourceBundle;
 
 public class SettingDiscountRatesBoundary implements DataInitializable {
 
+    String managerID;
+    String managerCompany;
+    String managerStation;
     /**
      * The supervisor boundary controller.
      */
@@ -41,24 +43,47 @@ public class SettingDiscountRatesBoundary implements DataInitializable {
     @FXML
     private Label RequestSentMessageLabel;
 
-    private final ObservableList<String> SubscriptionType = FXCollections.observableArrayList("Regular monthly subscription - single vehicle",
-            "Full monthly subscription (for single vehicle)", "Regular monthly subscription - number of vehicles");
+    private final ObservableList<String> SubscriptionType = FXCollections.observableArrayList("Regular monthly subscription (single)",
+            "Full monthly subscription", "Regular monthly subscription (multiple)");
 
     @Override
     public void initData(Object data) {
 
-    }
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+        this.managerID = (String) data;
+        //managerID = "109268386";
+        ArrayList<String> paramArray = new ArrayList<>();
+        paramArray.add("Get Manager data");
+        paramArray.add(managerID);
+        myController.getDiscountRatesTable(paramArray); //start the process that will ask server to execute quarry and get the table details
         this.formValidation = new FormValidation();
         ChooseSubscriptionTypeCombo.setItems(SubscriptionType);
         ShowCurrentRateTXT.setVisible(false);
         ShowNewRateTXT.setVisible(false);
         btnSetNewRate.setVisible(false);
+        RequestSentMessageLabel.setVisible(false);
 
         /*  set all fields validators */
         formValidation();
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+        //managerID = "109268386";
+        /*ArrayList<String> paramArray = new ArrayList<>();
+        System.out.println(managerID);
+        paramArray.add("Get Manager data");
+        paramArray.add(managerID);
+        myController.getDiscountRatesTable(paramArray); //start the process that will ask server to execute quarry and get the table details
+        this.formValidation = new FormValidation();
+        ChooseSubscriptionTypeCombo.setItems(SubscriptionType);
+        ShowCurrentRateTXT.setVisible(false);
+        ShowNewRateTXT.setVisible(false);
+        btnSetNewRate.setVisible(false);
+        RequestSentMessageLabel.setVisible(false);*/
+
+        /*  set all fields validators */
+        //formValidation();
     }
 
     private void formValidation() {
@@ -67,10 +92,16 @@ public class SettingDiscountRatesBoundary implements DataInitializable {
 
         //formValidation.isContainsOnlyNumbers(ShowNewRateTXT, "New price");
         //formValidation.numberPositiveValidation(ShowNewRateTXT, "New price");
-        formValidation.isEmptyFieldValidation(ShowNewRateTXT, "New price");
         //formValidation.maxLengthValidation(ShowNewRateTXT, "New price", 3);
+        /*formValidation.isEmptyFieldValidation(ShowNewRateTXT, "New price");
         formValidation.maxFloatSizeValidation(ShowNewRateTXT, "New price", 100);
-        formValidation.minFloatSizeValidation(ShowNewRateTXT, "New price", 0);
+        formValidation.minFloatSizeValidation(ShowNewRateTXT, "New price", 0);*/
+    }
+
+    public void setManagerData(ArrayList<String> resultList) {
+
+        managerCompany = resultList.get(0);
+        managerStation = resultList.get(1);
     }
 
     @FXML
@@ -78,6 +109,7 @@ public class SettingDiscountRatesBoundary implements DataInitializable {
 
         ArrayList<String> paramArray = new ArrayList<>();
         paramArray.add(ChooseSubscriptionTypeCombo.getValue());
+        paramArray.add(managerCompany);
         myController.getDiscountRatesTable(paramArray); //start the process that will ask server to execute quarry and get the table details
         ShowNewRateTXT.clear();
         ShowCurrentRateTXT.setVisible(true);
@@ -100,8 +132,28 @@ public class SettingDiscountRatesBoundary implements DataInitializable {
     void handleSetNewRate(ActionEvent event) {
 
         RequestSentMessageLabel.setVisible(false);
-        Float NewRate = Float.parseFloat(ShowNewRateTXT.getText());
-        if (NewRate < 0 || NewRate > 100) {
+        if (ShowNewRateTXT.getText().equals("")) {
+            ErrorAlert.setTitle("Price rate ERROR");
+            ErrorAlert.setHeaderText("Please insert between 0-100");
+            ErrorAlert.showAndWait();
+        }
+        else{
+            Float NewRate = Float.parseFloat(ShowNewRateTXT.getText());
+            ArrayList<String> paramArray = new ArrayList<>();
+            paramArray.add("Insert NewRate");
+            paramArray.add(ShowNewRateTXT.getText());
+            paramArray.add(ChooseSubscriptionTypeCombo.getValue());
+            paramArray.add(managerCompany);
+            myController.getDiscountRatesTable(paramArray); //start the process that will ask server to execute quarry and get the table details
+            ShowNewRateTXT.clear();
+            RequestSentMessageLabel.setVisible(true);
+        }
+        //Float NewRate = Float.parseFloat(ShowNewRateTXT.getText());
+        /*if(ShowNewRateTXT.getText().equals(""))
+            btnSetNewRate.setVisible(false);
+        else
+            btnSetNewRate.setVisible(true);*/
+        /*if ((NewRate < 0 || NewRate > 100)|| (ShowNewRateTXT.getText().equals("")) ) {
             ErrorAlert.setTitle("Price rate ERROR");
             ErrorAlert.setHeaderText("Please insert between 0-100");
             ErrorAlert.showAndWait();
@@ -110,10 +162,11 @@ public class SettingDiscountRatesBoundary implements DataInitializable {
             paramArray.add("Insert NewRate");
             paramArray.add(ShowNewRateTXT.getText());
             paramArray.add(ChooseSubscriptionTypeCombo.getValue());
-            System.out.println(paramArray);
+            paramArray.add(managerCompany);
             myController.getDiscountRatesTable(paramArray); //start the process that will ask server to execute quarry and get the table details
+            ShowNewRateTXT.clear();
             RequestSentMessageLabel.setVisible(true);
-        }
+        }*/
     }
 
     @FXML

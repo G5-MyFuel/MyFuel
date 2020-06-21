@@ -15,18 +15,18 @@
             <Font name="System Bold" size="40.0" />
          </font>
       </Label>
-      <TableView fx:id="TableSubscriptionType" layoutX="39.0" layoutY="164.0" onMouseClicked="#TableClicked" prefHeight="253.0" prefWidth="996.0">
+      <TableView fx:id="TableSubscriptionType" layoutX="39.0" layoutY="164.0" onMouseClicked="#TableClicked" prefHeight="187.0" prefWidth="600.0">
          <columns>
-            <TableColumn fx:id="SubscriptionTypeColumn" prefWidth="332.0" text="Subscription type" />
-            <TableColumn fx:id="CurrentPriceColumnColumn" minWidth="1.0" prefWidth="332.0" text="Current price" />
-            <TableColumn fx:id="NewPriceColumn" prefWidth="332.0" text="New price" />
+            <TableColumn fx:id="SubscriptionTypeColumn" prefWidth="300.0" text="Subscription type" />
+            <TableColumn fx:id="CurrentPriceColumnColumn" minWidth="1.0" prefWidth="150.0" text="Current price" />
+            <TableColumn fx:id="NewPriceColumn" prefWidth="150.0" text="New price" />
          </columns>
       </TableView>
-      <Button fx:id="btnApprovedRates" layoutX="138.0" layoutY="500.0" mnemonicParsing="false" onAction="#handleApprovedRates" prefHeight="42.0" prefWidth="156.0" style="-fx-background-radius: 50;" stylesheets="@style.css" text="Approved">
+      <Button fx:id="btnApprovedRates" layoutX="112.0" layoutY="398.0" mnemonicParsing="false" onAction="#handleApprovedRates" prefHeight="42.0" prefWidth="156.0" style="-fx-background-radius: 50;" stylesheets="@style.css" text="Approved">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-      <Button fx:id="btnRemoveNewRate" layoutX="635.0" layoutY="500.0" mnemonicParsing="false" onAction="#handleRemoveNewRate" prefHeight="42.0" prefWidth="156.0" style="-fx-background-radius: 50;" stylesheets="@style.css" text="Remove">
+      <Button fx:id="btnRemoveNewRate" layoutX="388.0" layoutY="398.0" mnemonicParsing="false" onAction="#handleRemoveNewRate" prefHeight="42.0" prefWidth="156.0" style="-fx-background-radius: 50;" stylesheets="@style.css" text="Remove">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>

@@ -23,13 +23,16 @@ public class OrderFromSupplierController extends BasicController {
         this.myBoundary = myBoundary;
     }
 
+    /**
+     To get all the orders that all station managers approved
+     */
     public void getOrdersFromDB() {
         SqlAction sqlAction = new SqlAction(SqlQueryType.GET_ALL_ORDERS_FROM_SUPPLIER_TABLE);
         super.sendSqlActionToClient(sqlAction);
     }
 
     /**
-     This function sets a new status after we done take care of the order
+     This function sets a new status - from "In treatment" to "Done"
      */
     public void setNewStatus(String OrderNumber) {
         ArrayList<Object> varArray = new ArrayList<>();
@@ -38,6 +41,9 @@ public class OrderFromSupplierController extends BasicController {
         super.sendSqlActionToClient(sqlAction);
     }
 
+    /**
+     * After the supplier approve, update the stock with the specific quantity (if its 95 fuel type)
+     */
     public void setNewInventory95(int quantity,String managerID,int stationNumber){
         ArrayList<Object> varArray = new ArrayList<>();
         varArray.add(quantity);
@@ -47,6 +53,9 @@ public class OrderFromSupplierController extends BasicController {
         super.sendSqlActionToClient(sqlAction);
     }
 
+    /**
+     * After the supplier approve, update the stock with the specific quantity (if its diesel fuel type)
+     */
     public void setNewInventoryDiesel(int quantity,String managerID,int stationNumber){
         ArrayList<Object> varArray = new ArrayList<>();
         varArray.add(quantity);
@@ -56,6 +65,9 @@ public class OrderFromSupplierController extends BasicController {
         super.sendSqlActionToClient(sqlAction);
     }
 
+    /**
+     * After the supplier approve, update the stock with the specific quantity (if its scooter fuel type)
+     */
     public void setNewInventoryScooter(int quantity,String managerID,int stationNumber){
         ArrayList<Object> varArray = new ArrayList<>();
         varArray.add(quantity);
@@ -85,7 +97,8 @@ public class OrderFromSupplierController extends BasicController {
         for (ArrayList<Object> a : result.getResultData()) {
             OrderFuelFromSupplier x = new OrderFuelFromSupplier((String) a.get(0), (String) a.get(1),
                     (String) a.get(2), (String) a.get(3), (int) a.get(4), (Date) a.get(5), (String) a.get(6),
-                    (int)a.get(7),(String)a.get(8),(String)a.get(9),(String)a.get(10));
+                    (int)a.get(7),(String)a.get(8),(String)a.get(9),(String)a.get(10),
+                    (String)a.get(11),(String)a.get(12),(String)a.get(13));
             resultList.add(x);
         }
         return resultList;

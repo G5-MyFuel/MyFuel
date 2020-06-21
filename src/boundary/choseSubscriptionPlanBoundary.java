@@ -34,7 +34,7 @@ public class choseSubscriptionPlanBoundary implements DataInitializable {
     private ObservableList<String> SingelVehicle;
 
     /**
-     *
+     *Confirm button listener.
      * @param event
      */
     @FXML
@@ -45,7 +45,8 @@ public class choseSubscriptionPlanBoundary implements DataInitializable {
     }
 
     /**
-     *
+     * initData this will start in the initialize of the boundary.
+     * sends parameters from anther pages
      * @param data - The data sent to the boundary
      */
     @Override

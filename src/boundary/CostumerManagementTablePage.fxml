@@ -75,12 +75,12 @@
                                     <Label layoutX="51.0" layoutY="190.0" text="*Right Click to Delete / Refresh" />
                                     <VBox layoutX="51.0" layoutY="473.0" prefHeight="108.0" prefWidth="293.0">
                                        <children>
-                                          <Button mnemonicParsing="false" onMouseClicked="#showCreditCard" prefHeight="33.0" prefWidth="293.0" style="-fx-background-radius: 50;" stylesheets="@style.css" text="Click To View Selected Costumer Credit Card Details" textFill="WHITE">
+                                          <Button mnemonicParsing="false" onMouseClicked="#showCreditCard" style="-fx-background-radius: 50;" stylesheets="@style.css" text="Click To View Selected Costumer Credit Card Details" textFill="WHITE">
                                              <cursor>
                                                 <Cursor fx:constant="HAND" />
                                              </cursor>
                                           </Button>
-                                          <Button mnemonicParsing="false" onMouseClicked="#openStationPage" prefHeight="33.0" prefWidth="165.0" style="-fx-background-radius: 50;" stylesheets="@style.css" text="Chose Costumer Stations" textFill="WHITE">
+                                          <Button mnemonicParsing="false" onMouseClicked="#openStationPage" style="-fx-background-radius: 50;" stylesheets="@style.css" text="Chose Costumer Stations" textFill="WHITE">
                                              <cursor>
                                                 <Cursor fx:constant="HAND" />
                                              </cursor>

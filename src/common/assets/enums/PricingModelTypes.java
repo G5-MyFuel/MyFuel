@@ -3,7 +3,7 @@ package common.assets.enums;
 public enum PricingModelTypes {
     Casual_fueling("Casual fueling"),
     Regular_monthly_subscription_single("Regular monthly subscription (single)"),
-    Regular_monthly_subscription_multiple("Regular monthly subscription multiple)"),
+    Regular_monthly_subscription_multiple("Regular monthly subscription (multiple)"),
     Full_monthly_subscription("Full monthly subscription");
 
     private String pricingModelString;

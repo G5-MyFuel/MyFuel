@@ -123,7 +123,7 @@ public class OrderExecutionBoundary implements DataInitializable {
     void handleRefresh(ActionEvent event) {
 
     }
-
+    /** When we click "Done" - update status in DB and tableView **/
     @FXML
     void ClickDoneBtn(MouseEvent event) {
         EmailHandler sender = new EmailHandler();
@@ -137,7 +137,14 @@ public class OrderExecutionBoundary implements DataInitializable {
         DoneBtn.setVisible(false);
         tableView.refresh();
 
-        addToStock(temp.getQuantity(), temp.getFuelType(), temp.getStationNumber(), temp.getManagerID());
+        /**  After the supplier approve the order, we update the stock  **/
+        if (temp.getFuelType().equals("Gasoline95"))
+            myController.setNewInventory95(temp.getQuantity()+Integer.parseInt(temp.getInventory95()), temp.getManagerID(), temp.getStationNumber());
+        else if (temp.getFuelType().equals("diesel"))
+            myController.setNewInventoryDiesel(temp.getQuantity()+Integer.parseInt(temp.getInventoryDiesel()), temp.getManagerID(), temp.getStationNumber());
+        else if (temp.getFuelType().equals("scooterFuel"))
+            myController.setNewInventoryScooter(temp.getQuantity()+Integer.parseInt(temp.getInventoryScooter()), temp.getManagerID(), temp.getStationNumber());
+
         /** Send an email to the station manager that the order arrived **/
         sender.sendMessage(temp.getUserEmail(),"Order update","Dear "+temp.getUserFirstName()+" "+temp.getUserLastName()+
                 ", Order number "+temp.getOrderNumber()+" has arrived to your station.\n Have a nice day.\n\n *message from MyFuel");
@@ -210,19 +217,6 @@ public class OrderExecutionBoundary implements DataInitializable {
                 QuantityField.setText(temp.getQuantity().toString());
             }
         });
-    }
-
-    /**
-     * Update the inventory after the supplier confirm
-     *
-     */
-    public void addToStock(int quantity, String fuelType, int stationNumber, String managerID) {
-        if (fuelType.equals("Gasoline95"))
-            myController.setNewInventory95(quantity, managerID, stationNumber);
-        else if (fuelType.equals("diesel"))
-            myController.setNewInventoryDiesel(quantity, managerID, stationNumber);
-        else if (fuelType.equals("scooterFuel"))
-            myController.setNewInventoryScooter(quantity, managerID, stationNumber);
     }
 
 }

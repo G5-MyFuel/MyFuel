@@ -35,7 +35,7 @@ public class ConfirmDiscountRatesController extends BasicController {
         System.out.println(varArray);
         switch (paramArray.get(0)) {
             case "Get Discount Rates Data":
-                SqlAction sqlAction = new SqlAction(SqlQueryType.Get_DiscountRates_Table);
+                SqlAction sqlAction = new SqlAction(SqlQueryType.Get_DiscountRates_Table, varArray);
                 super.sendSqlActionToClient(sqlAction);
                 break;
             case "Update New Discount Rate":
@@ -44,6 +44,10 @@ public class ConfirmDiscountRatesController extends BasicController {
                 break;
             case "Remove New Discount Rate":
                 sqlAction = new SqlAction(SqlQueryType.Remove_NEW_DiscountRate, varArray);
+                super.sendSqlActionToClient(sqlAction);
+                break;
+            case "Get Manager data":
+                sqlAction = new SqlAction(SqlQueryType.GET_Manager_Data, varArray);
                 super.sendSqlActionToClient(sqlAction);
                 break;
             default:
@@ -57,6 +61,9 @@ public class ConfirmDiscountRatesController extends BasicController {
 
         Platform.runLater(() -> {
             switch (result.getActionType()) {
+                case GET_Manager_Data:
+                    myBoundary.setManagerData(this.changeResultToManagerData(result));
+                    break;
                 case Get_DiscountRates_Table:
                     myBoundary.setDiscountRatesData(this.changeResultToDiscountRatesData(result));
                     break;
@@ -85,6 +92,17 @@ public class ConfirmDiscountRatesController extends BasicController {
         }
         //return TotalPrice.toString();
         System.out.println(resultList);
+        return resultList;
+    }
+
+    private ArrayList<String> changeResultToManagerData(SqlResult result) {
+
+        ArrayList<String> resultList = new ArrayList<>();
+
+        for (ArrayList<Object> a : result.getResultData()) {
+            resultList.add((String) a.get(1));
+            resultList.add((String) a.get(2));
+        }
         return resultList;
     }
 

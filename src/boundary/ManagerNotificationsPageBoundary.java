@@ -1,6 +1,7 @@
 package boundary;
 
 import Contollers.ManagerNotificationPageController;
+import common.assets.Toast;
 import entity.ManagerNotifications;
 import entity.OrderFuelFromSupplier;
 import javafx.collections.FXCollections;
@@ -9,11 +10,13 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
 import java.net.URL;
@@ -53,14 +56,25 @@ public class ManagerNotificationsPageBoundary implements DataInitializable {
     @FXML
     private Button CleanBtn;
 
+    @FXML
+    private AnchorPane OrderViewAnchorPane;
+
+    @FXML
+    private Label FuelTypeField;
+
+    @FXML
+    private Label QuantityField;
+
     /**
-     * After the manager saw his notifications- change the status in DB to viewed and clean the tableView
+     * After the manager saw his notifications- change the status in DB to "viewed" and clean the notification from tableView
      **/
     @FXML
     void clickCleanBtn(MouseEvent event) {
         ManagerNotifications temp = tableView.getSelectionModel().getSelectedItem();
         myController.setNewStatus(temp.getOrderNumber());
+        OrderViewAnchorPane.setVisible(false);
         tableView.getItems().remove(temp);
+        Toast.makeText(mainProjectFX.mainStage, "Deleted", 1000, 1500, 1500, 150, 700);
     }
 
     @FXML
@@ -81,16 +95,17 @@ public class ManagerNotificationsPageBoundary implements DataInitializable {
     @Override
     public void initData(Object data) {
         this.ManagerID = (String) data;
-        CleanBtn.setDisable(true);
-        noNotificationTxt.setVisible(false);
         myController.getOrdersFromDB(ManagerID);
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        System.out.println("Notifications Page Is Open");
+        CleanBtn.setDisable(true);
+        OrderViewAnchorPane.setVisible(false);
+        noNotificationTxt.setVisible(false);
+        explanationTxt.setVisible(false);
     }
-
+    /** Show details in tableView **/
     public void setOrdersInTableView(ArrayList<ManagerNotifications> OrderArray) {
         OrderCol.setCellValueFactory(new PropertyValueFactory<>("OrderNumber"));
         StationCol.setCellValueFactory(new PropertyValueFactory<>("StationNumber"));
@@ -98,18 +113,24 @@ public class ManagerNotificationsPageBoundary implements DataInitializable {
         tableView.setEditable(true);
         tableView.setItems(tableData);
 
-        if (tableView.getItems().isEmpty())
+        if (tableView.getItems().isEmpty()) {
             noNotificationTxt.setVisible(true);
+            explanationTxt.setVisible(false);
+        }
+        else explanationTxt.setVisible(true);
     }
 
+    /** This function works when we press an order on tableView and show details **/
     public void getOrderClick() {
         tableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 ManagerNotifications temp = tableView.getSelectionModel().getSelectedItem();
-                if (temp.equals(null))
-                    CleanBtn.setDisable(true);
-                else CleanBtn.setDisable(false);
+                OrderViewAnchorPane.setVisible(true);
+                CleanBtn.setDisable(false);
+                /**Update Fields **/
+                FuelTypeField.setText(temp.getFuelType().toString());
+                QuantityField.setText(temp.getQuantity().toString());
             }
         });
     }

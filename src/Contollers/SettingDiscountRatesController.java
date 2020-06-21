@@ -30,22 +30,26 @@ public class SettingDiscountRatesController extends BasicController {
         ArrayList<Object> varArray = new ArrayList<>();
         varArray.addAll(paramArray);
         varArray.remove(0);
-
+        System.out.println(varArray);
         switch (paramArray.get(0)) {
-            case "Regular monthly subscription - single vehicle":   //20
+            case "Regular monthly subscription (single)":   //20
                 SqlAction sqlAction = new SqlAction(SqlQueryType.GET_RegularSubscriptionSingleVehicle_PRICE, varArray);
                 super.sendSqlActionToClient(sqlAction);
                 break;
-            case "Full monthly subscription (for single vehicle)":  //7
+            case "Full monthly subscription":  //7
                 sqlAction = new SqlAction(SqlQueryType.GET_FullSubscriptionSingleVehicle_PRICE, varArray);
                 super.sendSqlActionToClient(sqlAction);
                 break;
-            case "Regular monthly subscription - number of vehicles":   //15
+            case "Regular monthly subscription (multiple)":   //15
                 sqlAction = new SqlAction(SqlQueryType.GET_RegularSubscriptionMultiVehicle_PRICE, varArray);
                 super.sendSqlActionToClient(sqlAction);
                 break;
             case "Insert NewRate":
                 sqlAction = new SqlAction(SqlQueryType.INSERT_NEW_PRICE, varArray);
+                super.sendSqlActionToClient(sqlAction);
+                break;
+            case "Get Manager data":
+                sqlAction = new SqlAction(SqlQueryType.GET_Manager_Data, varArray);
                 super.sendSqlActionToClient(sqlAction);
                 break;
             default:
@@ -66,6 +70,9 @@ public class SettingDiscountRatesController extends BasicController {
     public void getResultFromClient(SqlResult result) {
         Platform.runLater(() -> {
             switch (result.getActionType()) {
+                case GET_Manager_Data:
+                    myBoundary.setManagerData(this.changeResultToManagerData(result));
+                    break;
                 case GET_RegularSubscriptionSingleVehicle_PRICE:
                     myBoundary.setData(this.changeResultToString(result));
                     break;
@@ -97,5 +104,16 @@ public class SettingDiscountRatesController extends BasicController {
         //a = result.getResultData().get(0);
         revenue = (String) a.get(1);    //Saves second column from a to revenue (get(1))
         return revenue;
+    }
+
+    private ArrayList<String> changeResultToManagerData(SqlResult result) {
+
+        ArrayList<String> resultList = new ArrayList<>();
+
+        for (ArrayList<Object> a : result.getResultData()) {
+            resultList.add((String) a.get(1));
+            resultList.add((String) a.get(2));
+        }
+        return resultList;
     }
 }
