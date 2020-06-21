@@ -137,7 +137,6 @@ public class CustomerRegistrationBoundary implements DataInitializable {
     private ObservableList<String> SingelVehicle;
 
     /**
-     *
      *initData this will start in the initialize of the boundary.
      *sends parameters from anther pages
      * @param location
@@ -180,7 +179,10 @@ public class CustomerRegistrationBoundary implements DataInitializable {
         tempCreditCard = null;
         stationPane.setVisible(false);
 
-
+        /**
+         * listener for the PurchasePlanChoiseBox, every click of this item
+         * will jump here and execute the code.
+         */
         PurchasePlanChoiseBox.valueProperty().addListener((composant, oldValue, newValue) -> {
             PAZbtn.setSelected(false);
             YELLOWbtn.setSelected(false);
@@ -239,7 +241,10 @@ public class CustomerRegistrationBoundary implements DataInitializable {
         }
     }
 
-
+    /**
+     * this method set the second phase of the registration process.
+     * @param event
+     */
     @FXML
     void SecondForwardButtonOnClick(MouseEvent event) {
         myController.setCostumerSecoundPhase(tempVehicleArray);
@@ -315,6 +320,10 @@ public class CustomerRegistrationBoundary implements DataInitializable {
         }
     }
 
+    /**
+     * this method will display to user a success massage upon
+     * costumer registration process success
+     */
     public void onRegisterSuccses() {
         //clear all fields section:
         planInfoTAB.setDisable(true);
@@ -362,17 +371,31 @@ public class CustomerRegistrationBoundary implements DataInitializable {
         }
     }
 
+    /**
+     * set Vehicle Info Visible
+     * @param event
+     */
     @FXML
     void setVehicleInfoVisible(MouseEvent event) {
         VehicleInformationPane.setVisible(true);
     }
 
+    /**
+     * upon clicking credit card like this mthod will open
+     * credit card page.
+     * @param event
+     */
     @FXML
     void creditCardLinkOnClick(MouseEvent event) {
         PagingController pc = new PagingController();
         pc.loadAdditionalStage(ProjectPages.CREDIT_CARD_DIALOG_PAGE.getPath(), this);
     }
 
+    /**
+     * this method will move back from phase 2
+     * back to phase 1.
+     * @param event
+     */
     @FXML
     void FirstBackwardButtonOnClick(MouseEvent event) {
         personalInfoTAB.setDisable(false);
@@ -380,6 +403,11 @@ public class CustomerRegistrationBoundary implements DataInitializable {
         vehicleMangTAB.getTabPane().getSelectionModel().selectPrevious();
     }
 
+    /**
+     * this method will move back from phase 3
+     * back to phase 2
+     * @param event
+     */
     @FXML
     void SecondBackwardButtonOnClick(MouseEvent event) {
         planInfoTAB.setDisable(true);
@@ -387,6 +415,11 @@ public class CustomerRegistrationBoundary implements DataInitializable {
         vehicleMangTAB.getTabPane().getSelectionModel().selectPrevious();
     }
 
+    /**
+     * the following method will remove selected vehicle
+     * both from vehicle table and data base.
+     * @param event
+     */
     @FXML
     void RemoveSelectedVe(MouseEvent event) {
         tempVehicleArray.remove(VehicleTable.getSelectionModel().getSelectedItem());
@@ -394,7 +427,11 @@ public class CustomerRegistrationBoundary implements DataInitializable {
         VehicleTable.setItems(data);
     }
 
-
+    /**
+     * the following method checks if database vehicle array contain
+     * a specific vehicle
+     * @return
+     */
     private boolean isVehicleExistInTempVehicleArr() {
         for (Vehicle v : tempVehicleArray) {
             if (v.getVehicleID().toString().equals(VehicleIDtxt.getText()))
@@ -407,10 +444,19 @@ public class CustomerRegistrationBoundary implements DataInitializable {
         this.tempCreditCard = tempCreditCard;
     }
 
+    /**
+     * set a flag if credit card window opened.
+     * @param cardClickFlag
+     */
     public void setCardClickFlag(boolean cardClickFlag) {
         CardClickFlag = cardClickFlag;
     }
 
+    /**
+     * this method create tool tip .
+     * @param htmlStr
+     * @return Tooltip
+     */
     private Tooltip createToolTip(String htmlStr) {
         Tooltip thisToolTip = new Tooltip();
 
@@ -442,7 +488,9 @@ public class CustomerRegistrationBoundary implements DataInitializable {
         return thisToolTip;
     }
 
-
+    /**
+     * this method start validator for all relevant fields.
+     */
     private void giValidation() {
         //costumer ID field check
         formValidation.isOnlyNumbers(CostumerIDtxt, "Costumer ID");
@@ -470,6 +518,10 @@ public class CustomerRegistrationBoundary implements DataInitializable {
 
     }
 
+    /**
+     * this method validate Vehicle ID Field
+     * @return boolean
+     */
     private boolean validateVehicleIDField() {
         if (formValidation.isEmptyField() && formValidation.isExactlyInLength() && formValidation.isOnlyNumbers())
             return true;
@@ -477,6 +529,10 @@ public class CustomerRegistrationBoundary implements DataInitializable {
             return false;
     }
 
+    /**
+     * this method validate Input First Phase
+     * @return boolean
+     */
     private boolean validateInputFirstPhase() {
         if (formValidation.isOnlyNumbers() && formValidation.isExactlyInLength() && formValidation.isOnlyLetters() && formValidation.isEmailAddress() && formValidation.isEmptyField())
             return true;

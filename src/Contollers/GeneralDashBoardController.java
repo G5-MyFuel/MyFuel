@@ -28,6 +28,10 @@ public class GeneralDashBoardController extends BasicController {
         this.myBoundary = myBoundary;
     }
 
+    /**
+     *
+     * @param result - The result received from the DB
+     */
     @Override
     public void getResultFromClient(SqlResult result) {
         Platform.runLater(() -> {
@@ -47,6 +51,10 @@ public class GeneralDashBoardController extends BasicController {
         });
     }
 
+    /**
+     * get Customer Purchase Amount In Last Month From DB
+     * @param customerId
+     */
     public void getCustomerPurchaseAmountInLastMonthFromDB(String customerId) {
         ArrayList<Object> vars = new ArrayList<>();
         if (currentUserID != null) vars.add(currentUserID);
@@ -55,6 +63,11 @@ public class GeneralDashBoardController extends BasicController {
         super.sendSqlActionToClient(sqlAction);
     }
 
+    /**
+     * change Result To Fuel Amount Of Pre Month Of Cur User
+     * @param result
+     * @param userID
+     */
     private void changeResultToFueAmountOfPreMonthOfCurUser(SqlResult result, String userID) {
         for (ArrayList<Object> a : result.getResultData()) {
             this.fuelAmountOfPreMonthForCurrentUser = (Double) a.get(1);
@@ -62,12 +75,19 @@ public class GeneralDashBoardController extends BasicController {
         }
     }
 
-
+    /**
+     * get All Updated Prices From DB
+     * execute GET_ALL_UPDATED_PRICES quarry
+     */
     public void getAllUpdatedPricesFromDB() {
         SqlAction sqlAction = new SqlAction(SqlQueryType.GET_ALL_UPDATED_PRICES);
         super.sendSqlActionToClient(sqlAction);
     }
 
+    /**
+     * change result to fuel prices.
+     * @param result
+     */
     private void changeResultToFuelPrices(SqlResult result) {
         FuelTypes ft;
         String s;
@@ -92,6 +112,10 @@ public class GeneralDashBoardController extends BasicController {
         }
     }
 
+    /**
+     * getFuelAmountOfPreMonthForCurrentUser
+     * @return Double
+     */
     public Double getFuelAmountOfPreMonthForCurrentUser() {
         return fuelAmountOfPreMonthForCurrentUser;
     }

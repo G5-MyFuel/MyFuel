@@ -16,7 +16,7 @@
 <?import javafx.scene.text.Text?>
 
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="796.0" prefWidth="1062.0" stylesheets="@BGcss.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="796.0" prefWidth="1062.0" stylesheets="@BGcss.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundary.fastFuelBoundary">
    <children>
       <Button fx:id="getVehicleButoon" layoutX="894.0" layoutY="42.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="130.0" text="Get Vehicle" />
       <AnchorPane layoutX="478.0" layoutY="519.0" prefHeight="141.0" prefWidth="248.0" style="-fx-background-color: #8abbeb;" styleClass="card-unpadded">

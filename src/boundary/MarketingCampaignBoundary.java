@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
- * This class This department is responsible for controlling "MarketingCampaignFXML" page
+ * This department is responsible for controlling "MarketingCampaignFXML" page
  * Allows marketing manager to view current campaigns that are running and their dates
  * And running a new campaign by template existing on the system
  *
@@ -222,9 +222,13 @@ public class MarketingCampaignBoundary implements DataInitializable {
 
         detailsPane.setVisible(true);
     }
-//////////////////////////////////////////////////////////////////////////////
 
     /**
+     * The function is activated when you press the "" button
+     * Checks whether all fields have been filled in,
+     * and if so sends to a function to check if the sale can be run,
+     * and if it is - save in DB
+     *
      * @param event
      */
     @FXML
@@ -247,6 +251,10 @@ public class MarketingCampaignBoundary implements DataInitializable {
         }
     }
 
+    /**
+     *Checks whether the Sale can be run - by the flag, and if so, it is save in DB
+     * @param flagSale
+     */
     public void setFlagSale(boolean flagSale) {
         this.flagSale = flagSale;
 
@@ -273,12 +281,19 @@ public class MarketingCampaignBoundary implements DataInitializable {
 
     /**
      * this method will set the templates list to the combo choose
+     *
+     * @param cosArray
      */
     public void setTemplateList(ArrayList<String> cosArray) {
         ObservableList<String> TemplateName = FXCollections.observableArrayList(cosArray);
         ChooseTemplateCombo.setItems(TemplateName);
     }
 
+    /**
+     *This method is enabled when selecting a template (in combo boxe)
+     * This method fetches the data for this template and displays it on the screen
+     * @param event
+     */
     @FXML
     void handleChooseTemplate(ActionEvent event) {
         ERRORemptyFiled.setVisible(false);
@@ -294,10 +309,19 @@ public class MarketingCampaignBoundary implements DataInitializable {
         this.startDatePicker.setVisible(true);
     }
 
+    /**
+     *The function returns the selected template
+     *
+     * @return choosenTemplate
+     */
     public String getChoosenTemplate() {
         return choosenTemplate;
     }
 
+    /**
+     *The method places the details of the selected template in the appropriate fields
+     * @param cosArray
+     */
     public void setChosenTemplateDetails(ArrayList<MarketingCampaignTemplate> cosArray) {
         MarketingCampaignTemplate my = new MarketingCampaignTemplate();
         my = cosArray.get(0);
@@ -310,7 +334,10 @@ public class MarketingCampaignBoundary implements DataInitializable {
         flagFileds[0]=true;
     }
 
-
+    /**
+     * The method saves the start date
+     * @param event
+     */
     @FXML
     void handleStartDate(ActionEvent event) {
         ERRORemptyFiled.setVisible(false);
@@ -326,6 +353,10 @@ public class MarketingCampaignBoundary implements DataInitializable {
 
     }
 
+    /**
+     *The method handles the visibility of the error messages on start-date picker
+     * @param event
+     */
     @FXML
     void handleStartDateNew(MouseEvent event) {
         ERRORemptyFiled.setVisible(false);
@@ -334,6 +365,10 @@ public class MarketingCampaignBoundary implements DataInitializable {
         ERRORoverlap1.setVisible(false);
     }
 
+    /**
+     * The method saves the end date
+     * @param event
+     */
     @FXML
     void handleEndDate(ActionEvent event) {
         ERRORemptyFiled.setVisible(false);
@@ -347,7 +382,10 @@ public class MarketingCampaignBoundary implements DataInitializable {
             }
         }
     }
-
+    /**
+     *The method handles the visibility of the error messages on end-date picker
+     * @param event
+     */
     @FXML
     void handleEndDateNew(MouseEvent event) {
         ERRORemptyFiled.setVisible(false);
