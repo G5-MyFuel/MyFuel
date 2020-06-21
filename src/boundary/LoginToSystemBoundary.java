@@ -14,6 +14,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -61,6 +63,9 @@ public class LoginToSystemBoundary extends Application {
     @FXML
     public Stage primaryStage;
 
+    @FXML
+    private ImageView imageView;
+
 
     public static LoginToSystemBoundary getInstance() {
         if (Instance == null)
@@ -77,6 +82,8 @@ public class LoginToSystemBoundary extends Application {
         formValidation = FormValidation.getValidator(); //for form validation instance
         loginAsComboBox.getItems().addAll("Customer", "Employee", "Supplier");  //set the user types
         LoginValidation();
+        Image img = new Image("/media/loginBeautiful.png");
+        imageView.setImage(img);
     }
 
     public void LoginValidation() {
