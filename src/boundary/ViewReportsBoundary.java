@@ -244,6 +244,11 @@ public class ViewReportsBoundary implements DataInitializable {
         myController.GetReportData(paramArray); //start the process that will ask server to execute quarry and get the table details
     }
 
+    /**
+     * This method check if Quarterly Report is exists for a given quarter from the data base result.
+     *
+     * @param isExsits - The result received from the DB
+     */
     public void checkIfExists(String isExsits) {
 
         System.out.println("isExsits:" + isExsits);
@@ -295,6 +300,7 @@ public class ViewReportsBoundary implements DataInitializable {
         paramArray.add(managerStation);
         GetReportYearAndQuarter();
         paramArray.add(ReportYearAndQuarter);
+        paramArray.add(ReportYearAndQuarter);
         myController.GetReportData(paramArray); //start the process that will ask server to execute quarry and get the table details
     }
 
@@ -332,6 +338,7 @@ public class ViewReportsBoundary implements DataInitializable {
         paramArray.add(managerCompany);
         paramArray.add(managerStation);
         GetReportYearAndQuarter();
+        paramArray.add(ReportYearAndQuarter);
         paramArray.add(ReportYearAndQuarter);
         myController.GetReportData(paramArray); //start the process that will ask server to execute quarry and get the table details
 

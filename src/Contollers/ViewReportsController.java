@@ -198,6 +198,12 @@ public class ViewReportsController extends BasicController {
         return resultList;
     }
 
+    /**
+     * This method check if Quarterly Report is exists for a given quarter from the data base result.
+     *
+     * @param result - The result received from the DB
+     * @return String
+     */
     private String checkIfExists (SqlResult result){
 
         Long isExsits;
