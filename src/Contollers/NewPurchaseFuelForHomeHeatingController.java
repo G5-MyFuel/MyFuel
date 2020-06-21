@@ -1,5 +1,6 @@
 package Contollers;
 
+import boundary.ManagerNotificationsPageBoundary;
 import boundary.NewPurchaseFuelForHomeHeatingBoundary;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
@@ -18,9 +19,10 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
- *
- * @author Daniel Gabbay
+ * @author Daniel
+ * @see NewPurchaseFuelForHomeHeatingController - the from's Controller class
  */
+
 public class NewPurchaseFuelForHomeHeatingController extends BasicController {
     /* Variables*/
     private static NewPurchaseFuelForHomeHeatingController Instance = null;
@@ -32,7 +34,11 @@ public class NewPurchaseFuelForHomeHeatingController extends BasicController {
         this.myBoundary = myBoundary;
     }
 
-
+    /**
+     * validate page-check if text filed is empty and return answer
+     * @param guiObj
+     * @return
+     */
     public boolean validatePage(Object guiObj) {
         if (guiObj instanceof JFXTextField) {
             JFXTextField jfxTextField = (JFXTextField) guiObj;
@@ -49,6 +55,10 @@ public class NewPurchaseFuelForHomeHeatingController extends BasicController {
         return false;
     }
 
+    /**
+     * Every action in this page
+     * @param result - The result recieved from the DB
+     */
     @Override
     public void getResultFromClient(SqlResult result) {
         Platform.runLater(() -> {
@@ -83,25 +93,35 @@ public class NewPurchaseFuelForHomeHeatingController extends BasicController {
         });
     }
 
-
+    /**
+     * Active when there is a new purchase by costumer and saves it in DB
+     * @param varArray
+     */
     public void INSERT_NEW_PURCHASE_FUEL_FOR_HOME_HEATING(ArrayList<Object> varArray) {
         SqlAction sqlAction = new SqlAction(SqlQueryType.INSERT_NEW_PURCHASE_FUEL_FOR_HOME_HEATING, varArray);
         super.sendSqlActionToClient(sqlAction);
     }
 
+    /**
+     * Active when there is a new purchase by costumer and saves it in DB
+     * @param varArray1
+     */
     public void INSERT_NEW_PURCHASE_FUEL_FOR_HOME_HEATING1(ArrayList<Object> varArray1) {
         SqlAction sqlAction2 = new SqlAction(SqlQueryType.INSERT_NEW_PURCHASE_FUEL_FOR_HOME_HEATING1, varArray1);
         super.sendSqlActionToClient(sqlAction2);
     }
 
-    //
-
+    /**
+     * Get a specific costumer from DB
+     * @param str
+     */
     public void GET_SPECIFIC_CUSTOMER_DETAILS(String str) {
         ArrayList<Object> varArray = new ArrayList<>();
         varArray.add(str);
         SqlAction sqlAction = new SqlAction(SqlQueryType.GET_SPECIFIC_CUSTOMER_DETAILS, varArray);
         super.sendSqlActionToClient(sqlAction);
     }
+
 
     private Costumer fromResultSetToCustomers(SqlResult result, String userID) {
         Costumer c = null;
@@ -113,7 +133,6 @@ public class NewPurchaseFuelForHomeHeatingController extends BasicController {
         return c;
     }
 
-    /////////////////////////
 
     /**
      * get all available shipping dates Table from DB

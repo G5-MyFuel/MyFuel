@@ -22,8 +22,10 @@ import java.util.Observable;
 import java.util.ResourceBundle;
 
 /**
- * @author Daniel
+ * @author  Daniel
+ * @see PurchaseFuelForHomeHeatingTrackingBoundary - the from's boundary class
  */
+
 public class PurchaseFuelForHomeHeatingTrackingBoundary implements DataInitializable{
     /**
      * Gloable Variables:
@@ -87,6 +89,10 @@ public class PurchaseFuelForHomeHeatingTrackingBoundary implements DataInitializ
         return arrayListOfCustomerOrders;
     }
 
+    /**
+     * Update the tableView with costumer orders
+     * @param arrayListOfCustomerOrders
+     */
     public void setArrayListOfCustomerOrders(ArrayList<HomeHeatingOrderTracking> arrayListOfCustomerOrders) {
         this.arrayListOfCustomerOrders = arrayListOfCustomerOrders;
         System.out.println(arrayListOfCustomerOrders);

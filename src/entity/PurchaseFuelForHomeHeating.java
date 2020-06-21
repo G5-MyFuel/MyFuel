@@ -1,10 +1,15 @@
 package entity;
 
 
+import Contollers.NewPurchaseFuelForHomeHeatingController;
 import common.assets.enums.ShippingMethod;
 import javafx.scene.text.Text;
 import org.joda.time.LocalDateTime;
 
+/**
+ * @author Daniel
+ * @see PurchaseFuelForHomeHeating - the from's Entity class
+ */
 
 public class PurchaseFuelForHomeHeating extends Purchase {
     private String emailForInvoice;
@@ -16,6 +21,9 @@ public class PurchaseFuelForHomeHeating extends Purchase {
     private String ShippingDateAndTime;
     private Prices priceOfOrder;
 
+    /**
+     * constructor
+     */
     public PurchaseFuelForHomeHeating(String customerID, LocalDateTime purchaseDate, double fuelAmount, String emailForInvoice, String phoneNumberForContact, String noteForPurchase, OrderDeliveryStatus deliveryStatus, ShippingMethod shippingMethod, String shippingDateAndTime) {
         super(customerID, purchaseDate, fuelAmount);
         this.emailForInvoice = emailForInvoice;
@@ -30,6 +38,10 @@ public class PurchaseFuelForHomeHeating extends Purchase {
         super(customerID,purchaseDate,fuelAmount);
     }
 
+    /**
+     * Getters and setters
+     * @return
+     */
     public String getEmailForInvoice() {
         return emailForInvoice;
     }
@@ -100,6 +112,10 @@ public class PurchaseFuelForHomeHeating extends Purchase {
         String city;
         String ZipCode;
 
+        /**
+         *
+         * constructor
+         */
         public Address(String streetName, String apartmentNumberTXT, String city, String zipCode) {
             this.streetName = streetName;
             ApartmentNumberTXT = apartmentNumberTXT;
@@ -107,6 +123,10 @@ public class PurchaseFuelForHomeHeating extends Purchase {
             ZipCode = zipCode;
         }
 
+        /**
+         * Getters and setters
+         * @return
+         */
         public String getStreetName() {
             return streetName;
         }

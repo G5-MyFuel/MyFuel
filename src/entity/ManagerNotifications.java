@@ -3,8 +3,10 @@ package entity;
 import org.omg.CORBA.INTERNAL;
 
 /**
- * @see ManagerNotifications - the form's entity class
+ * @author Adi Lampert
+ * @see ManagerNotifications - The entity
  */
+
 public class ManagerNotifications {
     String orderNumber,FuelType;
     Integer stationNumber,Quantity;
