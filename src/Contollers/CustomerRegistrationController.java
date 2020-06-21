@@ -12,7 +12,9 @@ import javafx.application.Platform;
 import java.util.ArrayList;
 
 
-/** the class Customer Registration Controller
+/**
+ * the class Customer Registration Controller
+ *
  * @author itay
  * @see CustomerRegistrationController - the form's logic class
  */
@@ -29,6 +31,7 @@ public class CustomerRegistrationController extends BasicController {
 
     /**
      * initialize registration boundary.
+     *
      * @param myBoundary
      */
     public CustomerRegistrationController(CustomerRegistrationBoundary myBoundary) {
@@ -40,6 +43,7 @@ public class CustomerRegistrationController extends BasicController {
     /**
      * this method will build costumer from all 3 phases in the finish phase.
      * the method will execute a quarry to insert the costumer into the data base.
+     *
      * @param costumer
      */
     public void setCostumerInDB(Costumer costumer) {
@@ -93,6 +97,7 @@ public class CustomerRegistrationController extends BasicController {
 
     /**
      * add costumer credit card.
+     *
      * @param card
      */
     public void addCostumerCreditCard(CreditCard card) {
@@ -101,6 +106,7 @@ public class CustomerRegistrationController extends BasicController {
 
     /**
      * this method set costumer after finishing registration first phase.
+     *
      * @param costumer
      */
     public void setCostumerFirstPhase(Costumer costumer) {
@@ -109,6 +115,7 @@ public class CustomerRegistrationController extends BasicController {
 
     /**
      * set costumer vehicles after finishing registration second phase.
+     *
      * @param vehicles
      */
     public void setCostumerSecoundPhase(ArrayList<Vehicle> vehicles) {
@@ -116,7 +123,6 @@ public class CustomerRegistrationController extends BasicController {
     }
 
     /**
-     *
      * @param result - The result received from the DB
      */
     @Override
@@ -132,6 +138,10 @@ public class CustomerRegistrationController extends BasicController {
                 case INSERT_NEW_COSTUMER:
                     myBoundary.onRegisterSuccses();
                 default:
+                    try {
+                    } catch (NullPointerException e) {
+
+                    }
                     break;
             }
         });
@@ -176,7 +186,7 @@ public class CustomerRegistrationController extends BasicController {
         ArrayList<String> temp = new ArrayList<>();
         for (ArrayList<Object> a : result.getResultData()) {
             Costumer cos = new Costumer((String) a.get(0), (String) a.get(9), (String) a.get(4),
-                    (String) a.get(11), (String) a.get(12), (String) a.get(13), null, (String) a.get(6),(String) a.get(5));
+                    (String) a.get(11), (String) a.get(12), (String) a.get(13), null, (String) a.get(6), (String) a.get(5));
             //add fuel companies.
             temp.add((String) a.get(14));
             temp.add((String) a.get(15));
@@ -192,6 +202,7 @@ public class CustomerRegistrationController extends BasicController {
 
     /**
      * this method will check if costumer exist in db
+     *
      * @param cosID
      * @return boolean
      */
@@ -202,8 +213,10 @@ public class CustomerRegistrationController extends BasicController {
         }
         return false;
     }
+
     /**
      * this method will check if vehicle exist in db
+     *
      * @param vehicleID
      * @return boolean
      */
