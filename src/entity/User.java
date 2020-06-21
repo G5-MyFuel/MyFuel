@@ -41,11 +41,18 @@ public class User implements Serializable {
         this.fuelCompany = fuelCompany;
     }
 
-
+    /**
+     * get User ID userID
+     * @return
+     */
     public String getUserID() {
         return userID;
     }
 
+    /**
+     * get User Type
+     * @return
+     */
     public String getUserType() {
         return userType;
     }

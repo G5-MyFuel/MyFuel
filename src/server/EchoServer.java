@@ -13,6 +13,11 @@ import java.io.IOException;
 import java.math.BigInteger;
 import java.util.ArrayList;
 
+/**
+ * A department responsible for communicating with the server
+ *
+ * @author itay ziv
+ */
 public class EchoServer extends AbstractServer {
     // Class variables *************************************************
     /**
