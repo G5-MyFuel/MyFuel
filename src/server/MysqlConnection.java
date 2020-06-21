@@ -334,15 +334,17 @@ public class MysqlConnection {
                 "`shippingMethod`,\n" +
                 "`shippingDateAndTime`)\n" +
                 "VALUES(?,?,?,?,\"CONFIRMED_ORDER\",?,?);\n";
-        sqlArray[SqlQueryType.INSERT_NEW_PURCHASE_FUEL_FOR_HOME_HEATING1.getCode()] = "\"INSERT INTO `bpsdc8o22sikrlpvvxqm`.`Purchase`\\n\" +\n" +
-                "                \"(`purchaseID`,\\n\" +\n" +
-                "                \"`customerID`,\\n\" +\n" +
-                "                \"`purchaseDate`,\\n\" +\n" +
-                "                \"`fuelAmount`,\\n\" +\n" +
-                "                \"`totalPrice`,\\n\" +\n" +
-                "                \"`purchaseHour`,\\n\" +\n" +
-                "                \"`CampaignID`)\\n\" +\n" +
-                "                \"VALUES(?,?,current_date(),?,?,current_time(),0);\\n\";";
+        sqlArray[SqlQueryType.INSERT_NEW_PURCHASE_FUEL_FOR_HOME_HEATING1.getCode()] = "INSERT INTO `bpsdc8o22sikrlpvvxqm`.`Purchase`\n" +
+                "(`purchaseID`,\n" +
+                "`customerID`,\n" +
+                "`purchaseDate`,\n" +
+                "`fuelAmount`,\n" +
+                "`totalPrice`,\n" +
+                "`purchaseHour`,\n" +
+                "`CampaignID`)\n" +
+                "VALUES\n" +
+                "(?,?,curdate(),?,?,?,?);\n";
+
     }
 
 

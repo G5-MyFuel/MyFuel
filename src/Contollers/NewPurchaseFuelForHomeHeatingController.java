@@ -77,19 +77,20 @@ public class NewPurchaseFuelForHomeHeatingController extends BasicController {
                         break;
                 }
             } catch (NullPointerException npe) {
-                npe.printStackTrace();
             }
         });
     }
 
 
-    public void INSERT_NEW_PURCHASE_FUEL_FOR_HOME_HEATING(ArrayList<Object> varArray,ArrayList<Object>varArray1) {
+    public void INSERT_NEW_PURCHASE_FUEL_FOR_HOME_HEATING(ArrayList<Object> varArray) {
         SqlAction sqlAction = new SqlAction(SqlQueryType.INSERT_NEW_PURCHASE_FUEL_FOR_HOME_HEATING, varArray);
         super.sendSqlActionToClient(sqlAction);
+    }
+
+    public void INSERT_NEW_PURCHASE_FUEL_FOR_HOME_HEATING1(ArrayList<Object> varArray1) {
         SqlAction sqlAction2 = new SqlAction(SqlQueryType.INSERT_NEW_PURCHASE_FUEL_FOR_HOME_HEATING1, varArray1);
         super.sendSqlActionToClient(sqlAction2);
     }
-
 
     //
 
