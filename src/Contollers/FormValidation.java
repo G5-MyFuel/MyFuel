@@ -34,10 +34,17 @@ public class FormValidation {
     private boolean maxSizeIndicator;
     private boolean minSizeIndicator;
 
+    /**
+     * empty constractor
+     */
     public FormValidation() {
 
     }
 
+    /**
+     *
+     * @return Validator
+     */
     public static FormValidation getValidator() {
         if (Validator == null) {
             Validator = new FormValidation();

@@ -1,6 +1,7 @@
 package entity;
 
 /**
+ * ENUM class for days
  * @see Day - the form's entity class - enum class
  */
 

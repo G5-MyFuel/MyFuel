@@ -4,6 +4,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Objects;
 
+/**
+ * user in the system entity
+ * @author itay ziv
+ */
 public class User implements Serializable {
     private String userID;
     private String userType;

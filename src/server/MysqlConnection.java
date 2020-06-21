@@ -6,6 +6,9 @@ import common.assets.SqlResult;
 
 import java.sql.*;
 
+/**
+ *
+ */
 public class MysqlConnection {
     /* Initialize database constants */
     /**

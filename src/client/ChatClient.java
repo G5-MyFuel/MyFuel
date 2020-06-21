@@ -9,6 +9,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Client and server communication department - client side
+ * @author Hana Wiener
+ */
 
 public class ChatClient extends AbstractClient {
     // Instance variables **********************************************
