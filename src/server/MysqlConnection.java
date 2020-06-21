@@ -300,9 +300,12 @@ public class MysqlConnection {
         sqlArray[SqlQueryType.CheckIfExists_Purchases_Report.getCode()] = "SELECT IF( EXISTS " +
                 "(SELECT `LitersPurchased`, `SalesAmount` FROM `ViewPurchasesReportsForAdmin` " +
                 "WHERE `companyName` = ? AND `StationNumber` = ? AND `Quarterly` = quarter(?) AND `Date` = YEAR(?)), 1, 0)";
-                sqlArray[SqlQueryType.View_Purchases_Report.getCode()] = "SELECT `FuelType`, `LitersPurchased`, `SalesAmount` FROM `ViewPurchasesReportsForAdmin` " +
+        sqlArray[SqlQueryType.View_Purchases_Report.getCode()] = "SELECT `FuelType`, `LitersPurchased`, `SalesAmount` FROM `ViewPurchasesReportsForAdmin` " +
                 "WHERE `companyName` = ? AND `StationNumber` = ? AND `Quarterly` = quarter(?) AND " +
                 "(`FuelType` = \"Diesel\" OR `FuelType` = \"Gasoline 95\" OR `FuelType` = \"Scooter fuel\") AND `Date` = YEAR(?)";
+        sqlArray[SqlQueryType.CheckIfExists_QuantityItemsStock_Report.getCode()] = "SELECT `FuelType`, `AvailableInventory` FROM `ViewQuantityItemsStockReportsForAdmin` " +
+                "WHERE `companyName` = ? AND `StationNumber` = ? " +
+                "AND `Quarterly` = quarter(?) AND (`FuelType` = \"Diesel\" OR `FuelType` = \"Gasoline 95\" OR `FuelType` = \"Scooter fuel\") AND `Date` = YEAR(?)";
         sqlArray[SqlQueryType.View_QuantityItemsStock_Report.getCode()] = "SELECT `FuelType`, `AvailableInventory` FROM `ViewQuantityItemsStockReportsForAdmin` " +
                 "WHERE `companyName` = ? AND `StationNumber` = ? AND `Quarterly` = quarter(?) " +
                 "AND (`FuelType` = \"Diesel\" OR `FuelType` = \"Gasoline 95\" OR `FuelType` = \"Scooter fuel\") AND `Date` = YEAR(?)";
@@ -331,7 +334,7 @@ public class MysqlConnection {
          * **********************************************************
          */
         sqlArray[SqlQueryType.GET_ALL_SHIPPING_DATES_AVAILABLE.getCode()] = "SELECT * FROM ShippingOptionalDates;";
-        sqlArray[SqlQueryType.GET_SPECIFIC_CUSTOMER_DETAILS.getCode()] =" select c.id,userFirstName,userLastName,userEmail,'Credit Card Number',CreditCardExperationDate,CVV,customerType,'Pricing Model','Purchase Plan' from User as u,Costumer as c where u.userID=c.ID and c.ID= ?;";
+        sqlArray[SqlQueryType.GET_SPECIFIC_CUSTOMER_DETAILS.getCode()] = " select c.id,userFirstName,userLastName,userEmail,'Credit Card Number',CreditCardExperationDate,CVV,customerType,'Pricing Model','Purchase Plan' from User as u,Costumer as c where u.userID=c.ID and c.ID= ?;";
         sqlArray[SqlQueryType.INSERT_NEW_AVAILABLE_DATE_FOR_SHIPPING.getCode()] = "INSERT INTO ShippingOptionalDates (`DayAndDate`) VALUES (?);";
         sqlArray[SqlQueryType.INSERT_NEW_PURCHASE_FUEL_FOR_HOME_HEATING.getCode()] = "INSERT INTO `bpsdc8o22sikrlpvvxqm`.`PurchaseFuelForHomeHeating`\n" +
                 "(`purchaseID`,\n" +
