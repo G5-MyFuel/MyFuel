@@ -504,6 +504,7 @@ public class generalDashBoardBoundary implements DataInitializable {
 
     /**
      * set MANAGER_SUPPLY_CONFIRMATION_PAGE page
+     *
      */
     void MANAGER_SUPPLY_CONFIRMATION_PAGE() {
         currentPagePane.setVisible(true);
@@ -525,7 +526,7 @@ public class generalDashBoardBoundary implements DataInitializable {
     }
 
     /**
-     * set VIEW_ANALITIC_DATA page
+     * set VIEW_ANALYTIC_DATA page
      */
     void VIEW_ANALITIC_DATA() {
         currentPagePane.setVisible(true);
