@@ -44,13 +44,13 @@ public class GeneratingReportsStationManagerController extends BasicController {
         ArrayList<Object> varArray = new ArrayList<>();
         varArray.addAll(paramArray);
         varArray.remove(0);
+        System.out.println(varArray);
         switch (paramArray.get(0)) {
             case "Get Manager data":
                 SqlAction sqlAction = new SqlAction(SqlQueryType.GET_Manager_Data, varArray);
                 super.sendSqlActionToClient(sqlAction);
                 break;
             case "Quarterly revenue report":
-                //varArray.add(endDate);
                 sqlAction = new SqlAction(SqlQueryType.GET_Quarterly_Revenue, varArray);
                 super.sendSqlActionToClient(sqlAction);
                 break;

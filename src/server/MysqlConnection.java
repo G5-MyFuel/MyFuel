@@ -253,10 +253,14 @@ public class MysqlConnection {
         /* *****************************************
          * ********** Discount Rates Queries ****************
          * *****************************************/
-        sqlArray[SqlQueryType.GET_RegularSubscriptionSingleVehicle_PRICE.getCode()] = "SELECT * FROM `DiscountRates` WHERE `Subscription type` LIKE \"Regular monthly subscription - single vehicle\"";
-        sqlArray[SqlQueryType.GET_FullSubscriptionSingleVehicle_PRICE.getCode()] = "SELECT * FROM `DiscountRates` WHERE `Subscription type` LIKE \"Full monthly subscription (for single vehicle)\"";
-        sqlArray[SqlQueryType.GET_RegularSubscriptionMultiVehicle_PRICE.getCode()] = "SELECT * FROM `DiscountRates` WHERE `Subscription type` LIKE \"Regular monthly subscription - number of vehicles\"";
-        sqlArray[SqlQueryType.INSERT_NEW_PRICE.getCode()] = "UPDATE `DiscountRates` SET `NewDiscountRate`= ?,`Status`= \"Pending approval\" WHERE `Subscription type` LIKE ?";
+        sqlArray[SqlQueryType.GET_RegularSubscriptionSingleVehicle_PRICE.getCode()] = "SELECT * FROM `DiscountRates` " +
+                "WHERE `Subscription type` LIKE \"Regular monthly subscription (single)\" AND `companyName` = ?";
+        sqlArray[SqlQueryType.GET_FullSubscriptionSingleVehicle_PRICE.getCode()] = "SELECT * FROM `DiscountRates` " +
+                "WHERE `Subscription type` LIKE \"Full monthly subscription\" AND `companyName` = ?";
+        sqlArray[SqlQueryType.GET_RegularSubscriptionMultiVehicle_PRICE.getCode()] = "SELECT * FROM `DiscountRates` " +
+                "WHERE `Subscription type` LIKE \"Regular monthly subscription (multiple)\" AND `companyName` = ?";
+        sqlArray[SqlQueryType.INSERT_NEW_PRICE.getCode()] = "UPDATE `DiscountRates` SET `NewDiscountRate`= ?,`Status`= \"Pending approval\" " +
+                "WHERE `Subscription type` LIKE ? AND `companyName` = ?";
 
         /* *****************************************
          * ********** Station Manager Reports Queries ****************
@@ -273,21 +277,20 @@ public class MysqlConnection {
                 "WHERE gs.companyName LIKE ?" +
                 "AND gs.StationNumber LIKE ?";
         sqlArray[SqlQueryType.GET_Manager_Data.getCode()] = "SELECT * FROM Employee WHERE Employee.employeeID LIKE ?";
-        sqlArray[SqlQueryType.INSERT_NEW_Quarterly_Report.getCode()] = "INSERT INTO `ViewQuarterlyReportsForAdmin`" +
+        sqlArray[SqlQueryType.INSERT_NEW_Quarterly_Report.getCode()] = "REPLACE INTO `ViewQuarterlyReportsForAdmin`" +
                 "(`companyName`, `StationNumber`, `Date`, `Quarterly`, `TotalRevenue`) " +
-                "VALUES (?,?,curdate(),quarter(curdate()),?)";
-
-        sqlArray[SqlQueryType.INSERT_NEW_Purchases_Report.getCode()] = "INSERT INTO `ViewPurchasesReportsForAdmin`" +
+                "VALUES (?,?,YEAR(curdate()),quarter(curdate()),?)";
+        sqlArray[SqlQueryType.INSERT_NEW_Purchases_Report.getCode()] = "REPLACE INTO `ViewPurchasesReportsForAdmin`" +
                 "(`companyName`, `StationNumber`, `Date`, `Quarterly`, `FuelType`, `LitersPurchased`, `SalesAmount`) " +
-                "VALUES (?,?,CURRENT_TIME(),quarter(curdate()),?,?,?)," +
-                "(?,?,CURRENT_TIME(),quarter(curdate()),?,?,?)," +
-                "(?,?,curdate(),quarter(curdate()),?,?,?)";
+                "VALUES (?,?,YEAR(curdate()),quarter(curdate()),?,?,?)," +
+                "(?,?,YEAR(curdate()),quarter(curdate()),?,?,?)," +
+                "(?,?,YEAR(curdate()),quarter(curdate()),?,?,?)";
 
-        sqlArray[SqlQueryType.INSERT_NEW_QuantityItemsStock_Report.getCode()] = "INSERT INTO `ViewQuantityItemsStockReportsForAdmin`" +
+        sqlArray[SqlQueryType.INSERT_NEW_QuantityItemsStock_Report.getCode()] = "REPLACE INTO `ViewQuantityItemsStockReportsForAdmin`" +
                 "(`companyName`, `StationNumber`, `Date`, `Quarterly`, `FuelType`, `AvailableInventory`) " +
-                "VALUES (?,?,CURRENT_TIME(),quarter(curdate()),?,?)," +
-                "(?,?,curdate(),quarter(curdate()),?,?)," +
-                "(?,?,curdate(),quarter(curdate()),?,?)";
+                "VALUES (?,?,YEAR(curdate()),quarter(curdate()),?,?)," +
+                "(?,?,YEAR(curdate()),quarter(curdate()),?,?)," +
+                "(?,?,YEAR(curdate()),quarter(curdate()),?,?)";
 
         /* *****************************************
          * ********** Admin View Reports Queries ****************
