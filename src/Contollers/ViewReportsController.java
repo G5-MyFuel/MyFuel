@@ -60,6 +60,10 @@ public class ViewReportsController extends BasicController {
                 sqlAction = new SqlAction(SqlQueryType.View_Quarterly_Report, varArray);
                 super.sendSqlActionToClient(sqlAction);
                 break;
+            case "Check if exists Purchases report":
+                sqlAction = new SqlAction(SqlQueryType.CheckIfExists_Purchases_Report, varArray);
+                super.sendSqlActionToClient(sqlAction);
+                break;
             case "View Purchases report":
                 sqlAction = new SqlAction(SqlQueryType.View_Purchases_Report, varArray);
                 super.sendSqlActionToClient(sqlAction);
@@ -88,10 +92,13 @@ public class ViewReportsController extends BasicController {
                     myBoundary.setManagerData(this.changeResultToManagerData(result));
                     break;
                 case CheckIfExists_Quarterly_Report:
-                    myBoundary.checkIfExists(this.checkIfExists(result));
+                    myBoundary.checkIfExistsQuarterly(this.checkIfExistsQuarterly(result));
                     break;
                 case View_Quarterly_Report:
                     myBoundary.setQuarterlyData(this.changeResultToQuarterlyReport(result));
+                    break;
+                case CheckIfExists_Purchases_Report:
+                    myBoundary.checkIfExistsPurchases(this.checkIfExistsPurchases(result));
                     break;
                 case View_Purchases_Report:
                     myBoundary.setPurchasesData(this.changeResultToPurchasesReport(result));
@@ -204,7 +211,21 @@ public class ViewReportsController extends BasicController {
      * @param result - The result received from the DB
      * @return String
      */
-    private String checkIfExists (SqlResult result){
+    private String checkIfExistsQuarterly (SqlResult result){
+
+        Long isExsits;
+        ArrayList<Object> a = result.getResultData().get(0);
+        isExsits = (Long) a.get(0);
+        return isExsits.toString();
+    }
+
+    /**
+     * This method check if Purchases Report is exists for a given quarter from the data base result.
+     *
+     * @param result - The result received from the DB
+     * @return String
+     */
+    private String checkIfExistsPurchases (SqlResult result){
 
         Long isExsits;
         ArrayList<Object> a = result.getResultData().get(0);

@@ -208,16 +208,42 @@ public class ViewReportsBoundary implements DataInitializable {
     @FXML
     void handleOKbtn(ActionEvent event) {
 
-        managerStation = EnterStationNumberTXT.getText();
-        ChooseReportYearCombo.setItems(YearList);
-        ChooseReportYearCombo.setVisible(true);
-        ChooseReportQuarterCombo.setItems(quarterList);
-        ChooseReportQuarterCombo.setVisible(true);
+        if(!(EnterStationNumberTXT.getText().equals(""))){
+            NoDataLabel.setVisible(false);
+            NoDataLabel.setLayoutX(38);
+            NoDataLabel.setLayoutY(514);
+            managerStation = EnterStationNumberTXT.getText();
+            ChooseReportYearCombo.setItems(YearList);
+            ChooseReportYearCombo.setVisible(true);
+            ChooseReportQuarterCombo.setItems(quarterList);
+            ChooseReportQuarterCombo.setVisible(true);
 
-        QuantityItemsStockTxt.setVisible(false);
-        ViewPurchasesReportTable.setVisible(false);
-        ViewQuantityReportTable.setVisible(false);
-        ViewTotalRevenueTXT.setVisible(false);
+            QuantityItemsStockTxt.setVisible(false);
+            ViewPurchasesReportTable.setVisible(false);
+            ViewQuantityReportTable.setVisible(false);
+            ViewTotalRevenueTXT.setVisible(false);
+        }
+        else{
+            ChooseReportYearCombo.setVisible(false);
+            ChooseReportQuarterCombo.setVisible(false);
+            QuantityItemsStockTxt.setVisible(false);
+            ViewPurchasesReportTable.setVisible(false);
+            ViewQuantityReportTable.setVisible(false);
+            ViewTotalRevenueTXT.setVisible(false);
+            btnViewQuarterlyRevenueReport.setVisible(false);
+            btnViewPurchasesReport.setVisible(false);
+            btnViewQuantityItemsInStockReport.setVisible(false);
+            imgViewQuantityItemsInStockReport.setVisible(false);
+            imgViewPurchasesReport.setVisible(false);
+            imgViewQuarterlyRevenueReport.setVisible(false);
+            QuestionMark2.setVisible(false);
+            QuestionMark3.setVisible(false);
+            QuestionMark4.setVisible(false);
+            NoDataLabel.setLayoutX(38);
+            NoDataLabel.setLayoutY(195);
+            NoDataLabel.setText("You must enter a station number!");
+            NoDataLabel.setVisible(true);
+        }
     }
 
     /**
@@ -228,6 +254,7 @@ public class ViewReportsBoundary implements DataInitializable {
      */
     @FXML
     void handleViewQuarterlyRevenueReport(MouseEvent event) {
+
 
         QuantityItemsStockTxt.setVisible(false);
         ViewPurchasesReportTable.setVisible(false);
@@ -249,7 +276,7 @@ public class ViewReportsBoundary implements DataInitializable {
      *
      * @param isExsits - The result received from the DB
      */
-    public void checkIfExists(String isExsits) {
+    public void checkIfExistsQuarterly(String isExsits) {
 
         if (isExsits.equals("1")) {
             ArrayList<String> paramArray = new ArrayList<>();
@@ -261,11 +288,13 @@ public class ViewReportsBoundary implements DataInitializable {
             paramArray.add(ReportYearAndQuarter);
             myController.GetReportData(paramArray); //start the process that will ask server to execute quarry and get the table details
         } else {
+            NoDataLabel.setText("*There is no data for this station currently!");
             NoDataLabel.setVisible(true);
             ViewTotalRevenueTXT.setVisible(false);
         }
 
     }
+
 
     /**
      * This method will set Quarterly revenue Data
@@ -293,7 +322,7 @@ public class ViewReportsBoundary implements DataInitializable {
         ViewTotalRevenueTXT.setVisible(false);
 
         ArrayList<String> paramArray = new ArrayList<>();
-        paramArray.add("View Purchases report");
+        paramArray.add("Check if exists Purchases report");
         paramArray.add(managerCompany);
         paramArray.add(managerStation);
         GetReportYearAndQuarter();
@@ -303,13 +332,37 @@ public class ViewReportsBoundary implements DataInitializable {
     }
 
     /**
+     * This method check if Purchases Report is exists for a given quarter from the data base result.
+     *
+     * @param isExsits - The result received from the DB
+     */
+    public void checkIfExistsPurchases(String isExsits) {
+
+        if (isExsits.equals("1")) {
+            ArrayList<String> paramArray = new ArrayList<>();
+            paramArray.add("View Purchases report");
+            paramArray.add(managerCompany);
+            paramArray.add(managerStation);
+            GetReportYearAndQuarter();
+            paramArray.add(ReportYearAndQuarter);
+            paramArray.add(ReportYearAndQuarter);
+            myController.GetReportData(paramArray); //start the process that will ask server to execute quarry and get the table details
+        } else {
+            NoDataLabel.setText("*There is no data for this station currently!");
+            NoDataLabel.setVisible(true);
+            ViewTotalRevenueTXT.setVisible(false);
+        }
+
+    }
+
+    /**
      * This method will set Purchases Data
      *
      * @param resultList
      */
     public void setPurchasesData(ArrayList<PurchasesReport> resultList) {
 
-        System.out.println(resultList);
+        NoDataLabel.setVisible(false);
         FuelTypeColumn.setCellValueFactory(new PropertyValueFactory<>("fuelType"));
         QuantityPurchasedColumn.setCellValueFactory(new PropertyValueFactory<>("quantityPurchased"));
         SalesAmountColumn.setCellValueFactory(new PropertyValueFactory<>("salesAmount"));
@@ -369,6 +422,7 @@ public class ViewReportsBoundary implements DataInitializable {
     @FXML
     void handleChooseReportYear(ActionEvent event) {
 
+        NoDataLabel.setVisible(false);
         QuantityItemsStockTxt.setVisible(false);
         ViewPurchasesReportTable.setVisible(false);
         ViewQuantityReportTable.setVisible(false);
