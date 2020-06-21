@@ -15,6 +15,9 @@ public class OrderFuelFromSupplier {
     private Integer StationNumber, Quantity;
     private Date OrderDate;
 
+    /**
+     * Constructor
+     */
     public OrderFuelFromSupplier(String OrderNumber, String OrderStatus, String userFirstName, String userLastName, Integer StationNumber,
                                  Date OrderDate, String FuelType, Integer Quantity, String GasCompanyName, String managerID,
                                  String userEmail, String inventory95, String inventoryDiesel, String inventoryScooter) {

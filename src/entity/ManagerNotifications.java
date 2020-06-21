@@ -11,7 +11,13 @@ public class ManagerNotifications {
     String orderNumber,FuelType;
     Integer stationNumber,Quantity;
 
-
+    /**
+     * Constructor
+     * @param orderNumber
+     * @param stationNumber
+     * @param FuelType
+     * @param Quantity
+     */
     public ManagerNotifications(String orderNumber, Integer stationNumber, String FuelType, Integer Quantity){
         this.orderNumber=orderNumber;
         this.stationNumber=stationNumber;
@@ -35,6 +41,10 @@ public class ManagerNotifications {
     public void setFuelType(String fuelType) { FuelType = fuelType; }
     public void setQuantity(Integer quantity) { Quantity = quantity; }
 
+    /**
+     * To string
+     * @return
+     */
     @Override
     public String toString() {
         return "ManagerNotifications{" +

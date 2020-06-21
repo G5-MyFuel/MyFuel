@@ -12,7 +12,7 @@ import java.util.Date;
 
 /**
  * @author Adi Lampert
- * @see OrderFromSupplierController - the form's logic class
+ * @see OrderFromSupplierController - the form's Controller class
  */
 
 public class OrderFromSupplierController extends BasicController {
@@ -32,7 +32,8 @@ public class OrderFromSupplierController extends BasicController {
     }
 
     /**
-     This function sets a new status - from "In treatment" to "Done"
+     * This function sets a new status - from "In treatment" to "Done"
+     * @param OrderNumber
      */
     public void setNewStatus(String OrderNumber) {
         ArrayList<Object> varArray = new ArrayList<>();
@@ -43,6 +44,9 @@ public class OrderFromSupplierController extends BasicController {
 
     /**
      * After the supplier approve, update the stock with the specific quantity (if its 95 fuel type)
+     * @param quantity
+     * @param managerID
+     * @param stationNumber
      */
     public void setNewInventory95(int quantity,String managerID,int stationNumber){
         ArrayList<Object> varArray = new ArrayList<>();
@@ -55,6 +59,9 @@ public class OrderFromSupplierController extends BasicController {
 
     /**
      * After the supplier approve, update the stock with the specific quantity (if its diesel fuel type)
+     * @param quantity
+     * @param managerID
+     * @param stationNumber
      */
     public void setNewInventoryDiesel(int quantity,String managerID,int stationNumber){
         ArrayList<Object> varArray = new ArrayList<>();
@@ -65,8 +72,12 @@ public class OrderFromSupplierController extends BasicController {
         super.sendSqlActionToClient(sqlAction);
     }
 
+
     /**
      * After the supplier approve, update the stock with the specific quantity (if its scooter fuel type)
+     * @param quantity
+     * @param managerID
+     * @param stationNumber
      */
     public void setNewInventoryScooter(int quantity,String managerID,int stationNumber){
         ArrayList<Object> varArray = new ArrayList<>();

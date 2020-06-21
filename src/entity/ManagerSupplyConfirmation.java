@@ -7,7 +7,16 @@ public class ManagerSupplyConfirmation {
     private String OrderNumber, companyName, FuelType, orderStatus, managerID;
     Integer StationNum, Quantity;
 
-
+    /**
+     * Constructor
+     * @param orderNumber
+     * @param companyName
+     * @param stationNum
+     * @param fuelType
+     * @param quantity
+     * @param orderStatus
+     * @param managerID
+     */
     public ManagerSupplyConfirmation(String orderNumber, String companyName, Integer stationNum, String fuelType, Integer quantity, String orderStatus, String managerID) {
         this.OrderNumber = orderNumber;
         this.companyName = companyName;
@@ -70,6 +79,10 @@ public class ManagerSupplyConfirmation {
 
     public String getOrderStatus() {return orderStatus; }
 
+    /**
+     * To string
+     * @return
+     */
     @Override
     public String toString() {
         return "ManagerSupplyConfirmation{" +
