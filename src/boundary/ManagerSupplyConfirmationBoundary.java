@@ -167,7 +167,8 @@ public class ManagerSupplyConfirmationBoundary implements DataInitializable {
             noOrdersTxt.setVisible(true);
     }
 
-    /** This function works when we press an order in tableView - show different things depends on Order status **/
+    /**
+     *  This function works when we press an order in tableView - show different things depends on Order status **/
     public void getDetailsFromTableView() {
         tableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
