@@ -89,6 +89,11 @@
                      <image>
                         <Image url="@../media/loginBeautiful.png" />
                      </image></ImageView>
+                  <Button fx:id="fastFuelSimulationBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="71.0" layoutY="483.0" mnemonicParsing="false" onMouseClicked="#openFastFuelSimulation" prefHeight="48.0" prefWidth="279.0" style="-fx-background-radius: 100;" text="Open fast fuel simulation">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Button>
                </children>
             </Pane>
          </center>
