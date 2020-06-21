@@ -57,6 +57,7 @@ public enum SqlQueryType {
      * *****************************************/
     CheckIfExists_Quarterly_Report(SqlExecutionType.EXECUTE_QUERY),
     View_Quarterly_Report(SqlExecutionType.EXECUTE_QUERY),
+    CheckIfExists_Purchases_Report(SqlExecutionType.EXECUTE_QUERY),
     View_Purchases_Report(SqlExecutionType.EXECUTE_QUERY),
     View_QuantityItemsStock_Report(SqlExecutionType.EXECUTE_QUERY),
 
