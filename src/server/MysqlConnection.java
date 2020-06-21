@@ -6,6 +6,12 @@ import common.assets.SqlResult;
 
 import java.sql.*;
 
+/**
+ * A department that is responsible for communicating with the DB
+ * in a concentrated manner, containing all the queries
+ *
+ * @author Hana Wiener
+ */
 public class MysqlConnection {
     /* Initialize database constants */
     /**

@@ -11,24 +11,43 @@ import javafx.application.Platform;
 
 import java.util.ArrayList;
 
+/**
+ * login to system class- Handles user connection to system
+ * @author Daniel Gabbay
+ */
 public class LoginToSystemController extends BasicController {
     public static ArrayList<User> usersArrayList;
     private LoginToSystemBoundary myBoundary;
     private String userID;
 
-
+    /**
+     * constructor
+     * @param myBoundary
+     */
     public LoginToSystemController(LoginToSystemBoundary myBoundary) {
         this.myBoundary = myBoundary;
     }
 
+    /**
+     * get users ArrayList method
+     * @return usersArrayList
+     */
     public ArrayList<User> getUsersArrayList() {
         return usersArrayList;
     }
 
+    /**
+     * set users ArrayList method
+     * @param usersArrayList
+     */
     public void setUsersArrayList(ArrayList<User> usersArrayList) {
         this.usersArrayList = usersArrayList;
     }
 
+    /**
+     *Getting the data back from the client and according to cases doing what is needed
+     * @param result - The result recieved from the DB
+     */
     @Override
     public void getResultFromClient(SqlResult result) {
         Platform.runLater(() -> {
@@ -46,8 +65,6 @@ public class LoginToSystemController extends BasicController {
                     break;
                 case GET_EMPLOYEE_TABLE:
                     System.out.println("PermissionsManagement -> GET_EMPLOYEE_TABLE query");
-//                    employeeArrayList.addAll(this.changeResultToEmployees(result));
-//                    System.out.println(employeeArrayList);
                     break;
 
                 //
@@ -58,6 +75,11 @@ public class LoginToSystemController extends BasicController {
         });
     }
 
+    /**
+     * Changes the results that came from what DB to users
+     * @param result
+     * @return resultList
+     */
     private ArrayList<User> changeResultToUsers(SqlResult result) {
         ArrayList<User> resultList = new ArrayList<>();
         for (ArrayList<Object> a : result.getResultData()) {
@@ -71,11 +93,22 @@ public class LoginToSystemController extends BasicController {
         return resultList;
     }
 
+    /**
+     * Requests a query from DB to return all uesrs table
+     */
     public void getUsersTable() {
         SqlAction sqlAction = new SqlAction(SqlQueryType.GET_ALL_USERS_TABLE);
         super.sendSqlActionToClient(sqlAction);
     }
 
+    /**
+     * Requests a query from DB to update user fields
+     *
+     * @param theFieldName
+     * @param theNewValueAsString
+     * @param userId
+     * @param userType
+     */
     public void setNewUserFieldValue(String theFieldName, String theNewValueAsString, String userId, String userType) {
         ArrayList<Object> varArray = new ArrayList<>();
         varArray.add(theFieldName);
@@ -87,14 +120,27 @@ public class LoginToSystemController extends BasicController {
         super.sendSqlActionToClient(sqlAction);
     }
 
+    /**
+     * get the userID method
+     * @return userID
+     */
     public String getUserID() {
         return userID;
     }
 
+    /**
+     * get userID method
+     * @param userID
+     */
     public void setUserID(String userID) {
         this.userID = userID;
     }
 
+    /**
+     * get Full User Name By User Id method
+     * @param userID
+     * @return string of
+     */
     public String getFullUserNameByUserId(String userID) {
         for (User u : myBoundary.getAllDBUsersArrayList()) {
             if (u.getUserID().equals(userID)) {
@@ -104,6 +150,11 @@ public class LoginToSystemController extends BasicController {
         return "failed full user name";
     }
 
+    /**
+     *
+     * @param userID
+     * @return
+     */
     public String getFuelCompanyBuUserID(String userID){
         for (User u : myBoundary.getAllDBUsersArrayList()) {
             if (u.getUserID().equals(userID)) {
@@ -113,6 +164,12 @@ public class LoginToSystemController extends BasicController {
         return "failed full user name";
     }
 
+    /**
+     * Bring the navigation buttons on the system according to the permissions of that user
+     * @param loginToSystemBoundary
+     * @param userType
+     * @return button Name Array List
+     */
     public ArrayList<String> getUserButtons(LoginToSystemBoundary loginToSystemBoundary, String userType) {
         ArrayList<String> buttonNameArrayList = new ArrayList<>();
         String temp;
@@ -124,8 +181,6 @@ public class LoginToSystemController extends BasicController {
                 buttonNameArrayList.add(getFullUserNameByUserId(temp));
                 buttonNameArrayList.add(getFuelCompanyBuUserID(temp));
                 buttonNameArrayList.add("PURCHASE_FUEL_FOR_HOME_HEATING");
-//                buttonNameArrayList.add("COSTUMER_MANAGEMENT_TABLE_PAGE");
-//                buttonNameArrayList.add("GENERATING_REPORTS_STATION_MANAGER_PAGE");
                 Toast.makeText(mainProjectFX.mainStage,"Welcome to MyFuel "+getFullUserNameByUserId(temp),1000,1500,1500,40,380);
                 break;
             case "SUPPLIER":
@@ -202,8 +257,6 @@ public class LoginToSystemController extends BasicController {
                 buttonNameArrayList.add(getFuelCompanyBuUserID(temp));
                 buttonNameArrayList.add("SALE_OPERATION_TEMPLATE_PAGE");
                 buttonNameArrayList.add("VIEW_ANALITIC_DATA");
-//                buttonNameArrayList.add("COSTUMER_MANAGEMENT_TABLE_PAGE");
-//                buttonNameArrayList.add("COSTUMER_REGISTRATION_PAGE");
                 Toast.makeText(mainProjectFX.mainStage,"Welcome to MyFuel "+getFullUserNameByUserId(temp),1000,1500,1500,40,380);
                 break;
 

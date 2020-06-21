@@ -10,6 +10,12 @@ import javafx.application.Platform;
 
 import java.util.ArrayList;
 
+/**
+ * A department responsible for bringing the appropriate navigation buttons
+ * to each user as they log on
+ *
+ * @author itay ziv
+ */
 public class GeneralDashBoardController extends BasicController {
     private generalDashBoardBoundary myBoundary;
     private Double fuelAmountOfPreMonthForCurrentUser = 0.0;
@@ -120,14 +126,26 @@ public class GeneralDashBoardController extends BasicController {
         return fuelAmountOfPreMonthForCurrentUser;
     }
 
+    /**
+     * set Fuel Amount Of Pre Month For CurrentUser method
+     * @param fuelAmountOfPreMonthForCurrentUser
+     */
     public void setFuelAmountOfPreMonthForCurrentUser(Double fuelAmountOfPreMonthForCurrentUser) {
         this.fuelAmountOfPreMonthForCurrentUser = fuelAmountOfPreMonthForCurrentUser;
     }
 
+    /**
+     * get Current User ID method
+     * @return currentUserID
+     */
     public String getCurrentUserID() {
         return currentUserID;
     }
 
+    /**
+     * set Current User ID method
+     * @param currentUserID
+     */
     public void setCurrentUserID(String currentUserID) {
         this.currentUserID = currentUserID;
     }

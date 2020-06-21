@@ -82,8 +82,11 @@ public class MarketingCampaignController extends BasicController {
                     flagSale = true;
                     myBoundary.setFlagSale(this.changeResultToSaleAndCheck(result));
                     break;
-
                 default:
+                    try {
+                    } catch (NullPointerException e) {
+
+                    }
                     break;
             }
         });
