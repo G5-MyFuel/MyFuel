@@ -126,8 +126,7 @@ public class ViewReportsBoundary implements DataInitializable {
     /**
      * For enter data to combo-boxes
      */
-    private final ObservableList<String> YearList = FXCollections.observableArrayList("2020", "2019", "2018", "2017", "2016", "2015",
-            "2014", "2013", "2012", "2011", "2010");
+    private ObservableList<String> YearList;
     private final ObservableList<String> quarterList = FXCollections.observableArrayList("First", "Second", "Third", "Fourth");
 
     /**
@@ -188,6 +187,34 @@ public class ViewReportsBoundary implements DataInitializable {
 
         managerCompany = resultList.get(0);
         managerStation = resultList.get(1);
+        getYearListData();
+    }
+
+    public void getYearListData(){
+
+        ArrayList<String> paramArray = new ArrayList<>();
+        paramArray.add("Get YearList data");
+        paramArray.add(managerCompany);
+        paramArray.add(managerStation);
+        paramArray.add(managerCompany);
+        paramArray.add(managerStation);
+        paramArray.add(managerCompany);
+        paramArray.add(managerStation);
+        myController.GetReportData(paramArray); //start the process that will ask server to execute quarry and get the table details
+    }
+
+    public void setYearListData(ArrayList<String> resultList) {
+
+        System.out.println(resultList);
+        YearList  = FXCollections.observableArrayList(resultList);
+        System.out.println(YearList);
+        ChooseReportYearCombo.setItems(YearList);
+        if(resultList.size() == 0){
+            NoDataLabel.setLayoutX(38);
+            NoDataLabel.setLayoutY(195);
+            NoDataLabel.setText("No info available for this station number!");
+            NoDataLabel.setVisible(true);
+        }
     }
 
     @Override
@@ -209,11 +236,12 @@ public class ViewReportsBoundary implements DataInitializable {
     void handleOKbtn(ActionEvent event) {
 
         if (!(EnterStationNumberTXT.getText().equals(""))) {
+            getYearListData();
             NoDataLabel.setVisible(false);
             NoDataLabel.setLayoutX(38);
             NoDataLabel.setLayoutY(514);
             managerStation = EnterStationNumberTXT.getText();
-            ChooseReportYearCombo.setItems(YearList);
+            //ChooseReportYearCombo.setItems(YearList);
             ChooseReportYearCombo.setVisible(true);
             ChooseReportQuarterCombo.setItems(quarterList);
             ChooseReportQuarterCombo.setVisible(true);
@@ -223,6 +251,7 @@ public class ViewReportsBoundary implements DataInitializable {
             ViewQuantityReportTable.setVisible(false);
             ViewTotalRevenueTXT.setVisible(false);
         } else {
+            System.out.println("fds");
             ChooseReportYearCombo.setVisible(false);
             ChooseReportQuarterCombo.setVisible(false);
             QuantityItemsStockTxt.setVisible(false);

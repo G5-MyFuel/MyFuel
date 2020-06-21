@@ -52,6 +52,10 @@ public class ViewReportsController extends BasicController {
                 SqlAction sqlAction = new SqlAction(SqlQueryType.GET_Manager_Data, varArray);
                 super.sendSqlActionToClient(sqlAction);
                 break;
+            case "Get YearList data":
+                sqlAction = new SqlAction(SqlQueryType.Get_YearList, varArray);
+                super.sendSqlActionToClient(sqlAction);
+                break;
             case "Check if exists Quarterly revenue report":
                 sqlAction = new SqlAction(SqlQueryType.CheckIfExists_Quarterly_Report, varArray);
                 super.sendSqlActionToClient(sqlAction);
@@ -94,6 +98,9 @@ public class ViewReportsController extends BasicController {
             switch (result.getActionType()) {
                 case GET_Manager_Data:
                     myBoundary.setManagerData(this.changeResultToManagerData(result));
+                    break;
+                case Get_YearList:
+                    myBoundary.setYearListData(this.changeResultToYearListData(result));
                     break;
                 case CheckIfExists_Quarterly_Report:
                     myBoundary.checkIfExistsQuarterly(this.checkIfExistsQuarterly(result));
@@ -173,7 +180,6 @@ public class ViewReportsController extends BasicController {
      * This method create array list of Quantity Items Stock Report from the data base result.
      *
      * @param result - The result received from the DB
-     *
      * @return ArrayList<QuantityItemsStockReport>
      */
     private ArrayList<QuantityItemsStockReport> changeResultToQuantityItemsStockReport(SqlResult result) {
@@ -218,7 +224,7 @@ public class ViewReportsController extends BasicController {
      * @param result - The result received from the DB
      * @return String
      */
-    private String checkIfExistsQuarterly (SqlResult result){
+    private String checkIfExistsQuarterly(SqlResult result) {
 
         Long isExsits;
         ArrayList<Object> a = result.getResultData().get(0);
@@ -232,7 +238,7 @@ public class ViewReportsController extends BasicController {
      * @param result - The result received from the DB
      * @return String
      */
-    private String checkIfExistsPurchases (SqlResult result){
+    private String checkIfExistsPurchases(SqlResult result) {
 
         Long isExsits;
         ArrayList<Object> a = result.getResultData().get(0);
@@ -246,11 +252,26 @@ public class ViewReportsController extends BasicController {
      * @param result - The result received from the DB
      * @return String
      */
-    private String checkIfExistsQuantityItemsStock (SqlResult result){
+    private String checkIfExistsQuantityItemsStock(SqlResult result) {
 
         Long isExsits;
         ArrayList<Object> a = result.getResultData().get(0);
         isExsits = (Long) a.get(0);
         return isExsits.toString();
     }
+
+    private ArrayList<String> changeResultToYearListData(SqlResult result) {
+
+        ArrayList<String> resultList = new ArrayList<>();
+
+        for (ArrayList<Object> a : result.getResultData()) {
+            String temp = a.get(0).toString();
+            StringBuilder year = new StringBuilder();
+            year.append(temp);
+            resultList.add(year.substring(0,4));
+            year.delete(0,year.length());
+        }
+        return resultList;
+    }
+
 }
