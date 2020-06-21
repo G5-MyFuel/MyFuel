@@ -172,13 +172,16 @@ public class MysqlConnection {
         sqlArray[SqlQueryType.GET_OPTIONAL_STATIONS.getCode()] = "Select gs.StationNumber, companyName,inventory_95 , inventory_scooter, inventory_diesel, FUEL_LIMIT " +
                 "from GasStation as gs , (SELECT u.userID,u.FuelCompany1,u.FuelCompany2,u.FuelCompany3 FROM User AS u where u.userID = ?)" +
                 "as ins WHERE gs.companyName = ins.FuelCompany1 or gs.companyName = ins.FuelCompany2 or gs.companyName = ins.FuelCompany3";
-        sqlArray[SqlQueryType.INSERT_FASTFUEL_PURCHES.getCode()] = " ";
-        sqlArray[SqlQueryType.INSERT_FASTFUEL_PURCHES_TO_FASTFUEL_TABLE.getCode()] = " ";
+        sqlArray[SqlQueryType.INSERT_FASTFUEL_PURCHES.getCode()] = "INSERT INTO `Purchase`(`purchaseID`, `customerID`, `purchaseDate`," +
+                " `fuelAmount`, `totalPrice`, `purchaseHour`, `CampaignID`) VALUES (?,?,?,?,?,?,?)";
+        sqlArray[SqlQueryType.INSERT_FASTFUEL_PURCHES_TO_FASTFUEL_TABLE.getCode()] = "INSERT INTO `FastFuel`(`purchaseID`, `FuelType`," +
+                " `StationNumber`, `companyName`, `PAZ`, `SONOL`, `YELLOW`, `vehicleID`) VALUES (?,?,?,?,?,?,?,?)";
         sqlArray[SqlQueryType.UPDATE_95_INVENTORY_CUSTOMER_PURCHASE.getCode()] = "UPDATE `GasStation` SET `inventory_95`=? WHERE `StationNumber`=?";
         sqlArray[SqlQueryType.UPDATE_DIESEL_INVENTORY_CUSTOMER_PURCHASE.getCode()] = "UPDATE `GasStation` SET `inventory_diesel`=? WHERE `StationNumber`=?";
         sqlArray[SqlQueryType.UPDATE_SCOOTER_INVENTORY_CUSTOMER_PURCHASE.getCode()] = "UPDATE `GasStation` SET `inventory_scooter`=? WHERE `StationNumber`=?";
 
-                /* *****************************************
+
+    /* *****************************************
          * ********** Costumer Management Queries ****************
          * *****************************************/
         sqlArray[SqlQueryType.GET_ALL_COSTUMER_TABLE.getCode()] = "SELECT* FROM Costumer AS C, User AS U WHERE C.ID = U.userID";

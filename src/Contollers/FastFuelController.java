@@ -49,6 +49,11 @@ public class FastFuelController extends BasicController{
                         resultList.addAll(this.changeResultToCostumer(result));
                         myBoundary.setCostumerTable(resultList);
                         break;
+                    case GET_ALL_COSTUMER_VEHICLES:
+                        ArrayList<Vehicle> VehicalList = new ArrayList<>();
+                        VehicalList.addAll(this.changeResultToCars(result));
+                        myBoundary.setCarOfCustomer(VehicalList);
+                        break;
                     case GET_OPTIONAL_STATIONS:
                         ArrayList<GasStation> resultList1 = new ArrayList<>();
                         resultList1.addAll(this.changeResultToUserStation(result));
@@ -130,6 +135,7 @@ public class FastFuelController extends BasicController{
         return resultList;
     }
 
+
     /**
      * this method send quarry GET_ALL_COSTUMER_TABLE to data base
      * in order to get the costumer details.
@@ -161,4 +167,20 @@ public class FastFuelController extends BasicController{
         return resultList;
     }
 
+    public void getCarsForCustomer(String costumerID) {
+        ArrayList<Object> varArray = new ArrayList<>();
+        varArray.add(costumerID);
+        SqlAction sqlAction = new SqlAction(SqlQueryType.GET_ALL_COSTUMER_VEHICLES, varArray);
+        super.sendSqlActionToClient(sqlAction);
+    }
+
+    private ArrayList<Vehicle> changeResultToCars(SqlResult result){
+        //  `Vehicle ID`  |   `Fuel Type`   |   `Owner ID
+        ArrayList<Vehicle> resultList = new ArrayList<>();
+        for(ArrayList<Object> a: result.getResultData()) {
+            Vehicle vehicle = new Vehicle((String) a.get(2), (String) a.get(0),(String) a.get(1));
+            resultList.add(vehicle);
+        }
+        return resultList;
+    }
 }

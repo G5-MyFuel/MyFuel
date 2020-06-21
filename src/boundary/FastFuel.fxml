@@ -16,39 +16,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="796.0" prefWidth="1062.0" stylesheets="@BGcss.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundary.fastFuelBoundary">
    <children>
-      <Button fx:id="getVehicleButoon" layoutX="894.0" layoutY="42.0" mnemonicParsing="false" onAction="#getVehicleHandler" prefHeight="69.0" prefWidth="130.0" text="Get Vehicle" />
-      <AnchorPane layoutX="478.0" layoutY="519.0" prefHeight="141.0" prefWidth="248.0" style="-fx-background-color: #8abbeb;" styleClass="card-unpadded">
-         <children>
-            <Pane layoutX="-1.0" prefHeight="141.0" prefWidth="23.0" style="-fx-background-color: #007390;" />
-            <Label layoutX="182.0" layoutY="14.0" prefHeight="67.0" prefWidth="89.0" styleClass="custom-white-title-label" />
-            <Text layoutX="29.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price:  *" wrappingWidth="343.8779296875">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Text>
-            <Label fx:id="pricaeCounter" layoutX="84.0" layoutY="47.0" text="price counter">
-               <font>
-                  <Font name="System Bold Italic" size="32.0" />
-               </font>
-            </Label>
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="36.0" layoutY="519.0" prefHeight="83.0" prefWidth="324.0" style="-fx-background-color: #8abbeb;" styleClass="card-unpadded">
-         <children>
-            <Pane layoutX="-1.0" prefHeight="141.0" prefWidth="23.0" style="-fx-background-color: #007390;" />
-            <Label layoutX="182.0" layoutY="14.0" prefHeight="67.0" prefWidth="89.0" styleClass="custom-white-title-label" />
-            <Text layoutX="29.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liters:" wrappingWidth="343.8779296875">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Text>
-            <Text fx:id="" layoutX="71.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="liter counter" wrappingWidth="287.421875">
-               <font>
-                  <Font size="48.0" />
-               </font>
-            </Text>
-         </children>
-      </AnchorPane>
+      <Button fx:id="getVehicleButoon" layoutX="894.0" layoutY="42.0" mnemonicParsing="false" onAction="#getVehicleHandler" prefHeight="69.0" prefWidth="130.0" text="Get Vehicle" visible="false" />
       <JFXTextField fx:id="literAmountTxt" labelFloat="true" layoutX="36.0" layoutY="161.0" prefHeight="56.0" prefWidth="358.0" promptText="Please enter amount in liters.">
          <font>
             <Font size="26.0" />
@@ -142,13 +110,7 @@
             <Font name="Serif Bold" size="23.0" />
          </font>
       </Label>
-      <Text fx:id="subscriptionInfo" layoutX="36.0" layoutY="696.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*According to your business terms in the XXXX subscription And the current operation is YYYY" wrappingWidth="403.8779296875" />
-      <Label fx:id="vehicleInfoLabel" layoutX="25.0" layoutY="57.0" prefHeight="20.0" prefWidth="547.0" text="NFC sensor detected  vehicle number   56-789-34    customer number ">
-         <font>
-            <Font name="Serif Bold" size="18.0" />
-         </font>
-      </Label>
-      <Label fx:id="customerIdLable" layoutX="572.0" layoutY="57.0" prefHeight="20.0" prefWidth="121.0" text="get customerID">
+      <Label fx:id="customerIdLable" layoutX="638.0" layoutY="57.0" prefHeight="20.0" prefWidth="121.0" text="get customerID">
          <font>
             <Font name="Serif Bold" size="18.0" />
          </font>
@@ -168,5 +130,62 @@
             <Font name="System Bold" size="22.0" />
          </font>
       </Button>
+      <Label fx:id="vehicleInfoLabel" layoutX="29.0" layoutY="57.0" prefHeight="20.0" prefWidth="599.0" text="NFC sensor detected  vehicle number                                   customer number ">
+         <font>
+            <Font name="Serif Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="customerIdLable1" layoutX="638.0" layoutY="81.0" prefHeight="20.0" prefWidth="121.0" text="             ">
+         <font>
+            <Font name="Serif Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="carNumberLable" layoutX="339.0" layoutY="57.0" prefHeight="20.0" prefWidth="121.0" text="             ">
+         <font>
+            <Font name="Serif Bold" size="18.0" />
+         </font>
+      </Label>
+      <Pane fx:id="paneFinishRefuel" layoutX="29.0" layoutY="448.0" prefHeight="346.0" prefWidth="1015.0">
+         <children>
+            <AnchorPane layoutX="458.0" layoutY="44.0" prefHeight="141.0" prefWidth="248.0" style="-fx-background-color: #8abbeb;" styleClass="card-unpadded">
+               <children>
+                  <Pane layoutX="-1.0" prefHeight="141.0" prefWidth="23.0" style="-fx-background-color: #007390;" />
+                  <Label layoutX="182.0" layoutY="14.0" prefHeight="67.0" prefWidth="89.0" styleClass="custom-white-title-label" />
+                  <Text layoutX="29.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price:  *" wrappingWidth="343.8779296875">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Text>
+                  <Label fx:id="pricaeCounter" layoutX="84.0" layoutY="47.0" text="price counter">
+                     <font>
+                        <Font name="System Bold Italic" size="32.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="50.0" layoutY="44.0" prefHeight="83.0" prefWidth="324.0" style="-fx-background-color: #8abbeb;" styleClass="card-unpadded">
+               <children>
+                  <Pane layoutX="-1.0" prefHeight="141.0" prefWidth="23.0" style="-fx-background-color: #007390;" />
+                  <Label layoutX="182.0" layoutY="14.0" prefHeight="67.0" prefWidth="89.0" styleClass="custom-white-title-label" />
+                  <Text layoutX="29.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liters:" wrappingWidth="343.8779296875">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Text>
+                  <Label fx:id="literCounter" layoutX="95.0" layoutY="47.0" text="liter counter">
+                     <font>
+                        <Font name="System Bold Italic" size="32.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <Text fx:id="subscriptionInfo2" layoutX="54.0" layoutY="201.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*According to your business terms in the XXXX subscription And the current operation is YYYY" wrappingWidth="403.8779296875" />
+            <Text fx:id="subscriptionInfo1" fill="#6190ff" layoutX="271.0" layoutY="273.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fueling ended successfully!" wrappingWidth="335.8779296875">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
    </children>
 </Pane>
