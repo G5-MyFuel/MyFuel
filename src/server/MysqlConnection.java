@@ -269,9 +269,7 @@ public class MysqlConnection {
                 "AND ff.StationNumber LIKE ? " +
                 "AND ff.companyName LIKE ? " +
                 "AND quarter(p.purchaseDate) LIKE quarter(curdate()) AND YEAR(p.purchaseDate) = YEAR(curdate())";
-        sqlArray[SqlQueryType.GET_QuantityItemsStock_Report.getCode()] = "SELECT gs.inventory_95, gs.inventory_diesel, gs.inventory_scooter from GasStation as gs " +
-                "WHERE gs.companyName LIKE ?" +
-                "AND gs.StationNumber LIKE ?";
+        sqlArray[SqlQueryType.GET_QuantityItemsStock_Report.getCode()] = "SELECT gs.inventory_95, gs.inventory_diesel, gs.inventory_scooter from GasStation as gs ";
         sqlArray[SqlQueryType.GET_Manager_Data.getCode()] = "SELECT * FROM Employee WHERE Employee.employeeID LIKE ?";
         sqlArray[SqlQueryType.INSERT_NEW_Quarterly_Report.getCode()] = "INSERT INTO `ViewQuarterlyReportsForAdmin`" +
                 "(`companyName`, `StationNumber`, `Date`, `Quarterly`, `TotalRevenue`) " +
