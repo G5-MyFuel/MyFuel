@@ -395,7 +395,6 @@ public class ViewAnalyticDataController extends BasicController {
     public void getRatingForFuelTypeTable(String paramArray) {
         ArrayList<Object> varArray = new ArrayList<>();
         varArray.add(paramArray);
-        System.out.println(varArray.toString());
         SqlAction sqlAction = new SqlAction(SqlQueryType.GET_RATING_FOR_FUEL_TYPE, varArray);
         super.sendSqlActionToClient(sqlAction);
     }

@@ -50,6 +50,10 @@ public class MarketingCampaignBoundary implements DataInitializable {
      * Flag - Can the campaign run
      */
     boolean flagSale = true;
+    /**
+     * Flag - all fileda are not empty
+     */
+    boolean[] flagFileds = new boolean[3];
     MarketingCampaign newSale = new MarketingCampaign();
 
     /*
@@ -143,6 +147,9 @@ public class MarketingCampaignBoundary implements DataInitializable {
     @FXML
     private Label ERRORnoTemplate;
 
+    @FXML
+    private Label ERRORemptyFiled;
+
 
     /**
      * This method allows to save information sent when uploading the page (user id)
@@ -171,9 +178,10 @@ public class MarketingCampaignBoundary implements DataInitializable {
         ERRORoverlap.setVisible(false);
         ERRORoverlap1.setVisible(false);
         ERRORnoTemplate.setVisible(false);
+        ERRORemptyFiled.setVisible(false);
 
-        this.formValidation = FormValidation.getValidator();
-        FormValidation();   // check all required fields are'nt empty
+        for(int i=0;i<3;i++)
+            flagFileds[i] = false;
 
         myController.getSalesTable(); //start the process that will ask server to execute quarry and get the table details
         myController.getTemplateList(); //start the process that will ask server to execute quarry and get the template list
@@ -221,29 +229,33 @@ public class MarketingCampaignBoundary implements DataInitializable {
      */
     @FXML
     void handleBtnRunSale(ActionEvent event) {
-        if (ChooseTemplateCombo.getSelectionModel().isEmpty()) {
-            ERRORnoTemplate.setVisible(true);
-        } else {
-            newSale = new MarketingCampaign(String.valueOf(myController.getSaleCounter() + 1), (String) ChooseTemplateCombo.getValue(), Date.valueOf(startDatePicker.getValue()),
-                    Date.valueOf(endDatePicker.getValue()));
-            // chack if sale can run in this dates:
-            myController.chackIfSaleCanRun(newSale);
+        if (flagFileds[0]==true && flagFileds[1]==true && flagFileds[2]==true) {
+            if (ChooseTemplateCombo.getSelectionModel().isEmpty()) {
+                ERRORnoTemplate.setVisible(true);
+            } else {
+                if(endDatePicker.getValue()!=null) {
+                    newSale = new MarketingCampaign(String.valueOf(myController.getSaleCounter() + 1), (String) ChooseTemplateCombo.getValue(), Date.valueOf(startDatePicker.getValue()),
+                            Date.valueOf(endDatePicker.getValue()));
+                    // chack if sale can run in this dates:
+                    myController.chackIfSaleCanRun(newSale);
+                }
+            }
+        }
+        else
+        {
+            ERRORemptyFiled.setVisible(true);
         }
     }
 
     public void setFlagSale(boolean flagSale) {
         this.flagSale = flagSale;
-        System.out.println("set function");
 
-        //flagSale = myController.getFlagSale();
         if (flagSale == false) {
-            System.out.println("inside if");
             ERRORoverlap.setVisible(true);
             ERRORoverlap1.setVisible(true);
             startDatePicker.getEditor().clear();
             endDatePicker.getEditor().clear();
         } else {
-            System.out.println("inside else");
             myController.setSaleOperationInDB(newSale);  //insert new sale to db
             myController.getSalesTable(); //refresh
             detailsPane.setVisible(false);
@@ -253,6 +265,8 @@ public class MarketingCampaignBoundary implements DataInitializable {
             ChooseTemplateCombo.getSelectionModel().clearSelection();
             startDatePicker.getEditor().clear();
             endDatePicker.getEditor().clear();
+            for(int i=0;i<3;i++)
+                flagFileds[i] = false;
             btnADDnewSaleOperation1.setVisible(true);
         }
     }
@@ -267,6 +281,7 @@ public class MarketingCampaignBoundary implements DataInitializable {
 
     @FXML
     void handleChooseTemplate(ActionEvent event) {
+        ERRORemptyFiled.setVisible(false);
         ERRORnoTemplate.setVisible(false);
         choosenTemplate = ChooseTemplateCombo.getValue();
         //Query to get from the db the chosen template information:
@@ -292,22 +307,28 @@ public class MarketingCampaignBoundary implements DataInitializable {
         dayFromDB.setText(my.getDay());
         beginHourFromDB.setText(String.valueOf(my.getBeginHour()));
         endHourFromDB.setText(String.valueOf(my.getEndHour()));
-
+        flagFileds[0]=true;
     }
 
 
     @FXML
     void handleStartDate(ActionEvent event) {
+        ERRORemptyFiled.setVisible(false);
         ERRORoverlap.setVisible(false);
         ERRORoverlap1.setVisible(false);
         //cant choose date before today:
-        if (startDatePicker.getValue().isBefore(java.time.LocalDate.now()) == true) {
-            ERRORalreadyPassedDate.setVisible(true);
+        if (startDatePicker.getValue() != null) {
+            flagFileds[1]=true;
+            if (startDatePicker.getValue().isBefore(java.time.LocalDate.now()) == true) {
+                ERRORalreadyPassedDate.setVisible(true);
+            }
         }
+
     }
 
     @FXML
     void handleStartDateNew(MouseEvent event) {
+        ERRORemptyFiled.setVisible(false);
         ERRORalreadyPassedDate.setVisible(false);
         ERRORoverlap.setVisible(false);
         ERRORoverlap1.setVisible(false);
@@ -315,34 +336,24 @@ public class MarketingCampaignBoundary implements DataInitializable {
 
     @FXML
     void handleEndDate(ActionEvent event) {
+        ERRORemptyFiled.setVisible(false);
         ERRORoverlap.setVisible(false);
         ERRORoverlap1.setVisible(false);
         //cant choose end date earlier then start date
-        if (endDatePicker.getValue().isBefore(startDatePicker.getValue()) == true) {
-            ERRORendBeforStart.setVisible(true);
+        if (endDatePicker.getValue() != null) {
+            flagFileds[2] = true;
+            if (endDatePicker.getValue().isBefore(startDatePicker.getValue()) == true) {
+                ERRORendBeforStart.setVisible(true);
+            }
         }
     }
 
     @FXML
     void handleEndDateNew(MouseEvent event) {
+        ERRORemptyFiled.setVisible(false);
         ERRORendBeforStart.setVisible(false);
         ERRORoverlap.setVisible(false);
         ERRORoverlap1.setVisible(false);
     }
-
-
-    private void FormValidation() {
-        /*  Template Date validation */ //not work so well
-        //  formValidation.isEmptyDateField(startDatePicker, "Start Date");
-        //formValidation.isEmptyDateField(endDatePicker, "End Date");
-
-
-    }
-
-    @FXML
-    void handleClicks(ActionEvent event) {
-
-    }
-
 
 }
