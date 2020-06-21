@@ -6,7 +6,6 @@ import com.jfoenix.controls.JFXTextField;
 import entity.Costumer;
 import entity.GasStation;
 import entity.User;
-import entity.Vehicle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -134,6 +133,7 @@ private String CarFuelType;
       myController.insertPurcheseFastFuelToDB();
 
         //עדכון של המלאי ובדיקה אם הוא ירד מתחת ללימיט
+        /*
         myController.updateInvetory();
 */
     }
@@ -182,6 +182,7 @@ private String CarFuelType;
      */
     public void setStationsInArrayAndChooseRandomly(ArrayList<GasStation> resultList) {
         User myUser = new User();
+        // gs.StationNumber, companyName, inventory_95 , inventory_scooter, inventory_diesel
 
         Random r = new Random();
         int low = 1;
@@ -228,23 +229,40 @@ private String CarFuelType;
         String customerID = customerIdLable.getText();
         //choose random station to refuel:
         myController.getOptionalStationForCustomer(customerID);
+
+        /*while(true)
+        {//ברגע שמגיעים לסף הדלק שביקשו - לעדכן את ההזמנה בDB
+            if(literCounter.getText().equals(literAmountTxt.getText())) {
+                this.updateInvatoryInDB();
+            }
+        }*/
     }
 
 
+/*
+    public ArrayList<Costumer> getCostumerTable() {
+       // return costumerTable;
+    }*/
 }
 
 /*
 נתונים שצריך לשמור:
-     String purchaseID; //דניאל
-     //String customerID; //
+     String purchaseID;//דניאל
+     //String customerID;//
      //LocalDateTime purchaseDate;// להשתמש בנוכחי
      //double fuelAmount;//מוכנס מהמשתמש
      double totalPrice;//דניאל
-     Prices prices; //דניאל // ----> cosID, fuelAmount , fueltype
+     Prices prices; //דניאל
      String saleId;//דניאל
 
 
-     //String FuelType;// להביא
+     //String FuelType;//
      //String StationNumber;
      //String companyName;
+     ?
+     //String PAZ;
+     //String SONOL;
+     //String YELLOW;
+
+
  */

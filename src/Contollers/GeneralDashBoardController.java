@@ -35,7 +35,6 @@ public class GeneralDashBoardController extends BasicController {
     }
 
     /**
-     *
      * @param result - The result received from the DB
      */
     @Override
@@ -50,6 +49,10 @@ public class GeneralDashBoardController extends BasicController {
                         this.changeResultToFueAmountOfPreMonthOfCurUser(result, currentUserID);
                         Prices.fuelAmountOfPreviousMonth = Double.valueOf(fuelAmountOfPreMonthForCurrentUser);
                         break;
+                    case GET_CURRENT_MARKETING_CAMPEIGN:
+                        //
+                        this.fromResultToMrketingCampaignArrayList(result);
+                        break;
                     default:
                         break;
                 }
@@ -60,6 +63,7 @@ public class GeneralDashBoardController extends BasicController {
 
     /**
      * get Customer Purchase Amount In Last Month From DB
+     *
      * @param customerId
      */
     public void getCustomerPurchaseAmountInLastMonthFromDB(String customerId) {
@@ -72,6 +76,7 @@ public class GeneralDashBoardController extends BasicController {
 
     /**
      * change Result To Fuel Amount Of Pre Month Of Cur User
+     *
      * @param result
      * @param userID
      */
@@ -80,6 +85,22 @@ public class GeneralDashBoardController extends BasicController {
             this.fuelAmountOfPreMonthForCurrentUser = (Double) a.get(1);
             System.out.println(fuelAmountOfPreMonthForCurrentUser.getClass().getName() + "-->" + fuelAmountOfPreMonthForCurrentUser.toString());
         }
+    }
+
+    public void GET_CURRENT_MARKETING_CAMPEIGN_fromDB() {
+        SqlAction sqlAction = new SqlAction(SqlQueryType.GET_CURRENT_MARKETING_CAMPEIGN);
+        super.sendSqlActionToClient(sqlAction);
+    }
+
+    public void fromResultToMrketingCampaignArrayList(SqlResult result) {
+        ArrayList<String> resArr = new ArrayList<>();
+        for (ArrayList<Object> a : result.getResultData()) {
+            resArr.add((String) a.get(0)); //CampaignID
+            resArr.add((String) a.get(1)); //TemplateName
+            resArr.add((String) a.get(2)); //fuelType
+            resArr.add((String) a.get(3)); //DiscountPercentages
+        }
+        Prices.marketingCapmeignDiscount(resArr);
     }
 
     /**
@@ -93,6 +114,7 @@ public class GeneralDashBoardController extends BasicController {
 
     /**
      * change result to fuel prices.
+     *
      * @param result
      */
     private void changeResultToFuelPrices(SqlResult result) {
@@ -121,6 +143,7 @@ public class GeneralDashBoardController extends BasicController {
 
     /**
      * getFuelAmountOfPreMonthForCurrentUser
+     *
      * @return Double
      */
     public Double getFuelAmountOfPreMonthForCurrentUser() {
@@ -129,6 +152,7 @@ public class GeneralDashBoardController extends BasicController {
 
     /**
      * set Fuel Amount Of Pre Month For CurrentUser method
+     *
      * @param fuelAmountOfPreMonthForCurrentUser
      */
     public void setFuelAmountOfPreMonthForCurrentUser(Double fuelAmountOfPreMonthForCurrentUser) {
@@ -137,6 +161,7 @@ public class GeneralDashBoardController extends BasicController {
 
     /**
      * get Current User ID method
+     *
      * @return currentUserID
      */
     public String getCurrentUserID() {
@@ -145,6 +170,7 @@ public class GeneralDashBoardController extends BasicController {
 
     /**
      * set Current User ID method
+     *
      * @param currentUserID
      */
     public void setCurrentUserID(String currentUserID) {

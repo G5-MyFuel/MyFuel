@@ -6,6 +6,8 @@ import common.assets.enums.PricingModelTypes;
 import common.assets.enums.PurchasePlanTypes;
 import common.assets.enums.ShippingMethod;
 
+import java.util.ArrayList;
+
 public class Prices {
     //Misrad Hatahbura prices
     private static Double basePrice_95 = 4.7;
@@ -33,9 +35,11 @@ public class Prices {
     private FuelTypes fuelType;
     private PurchasePlanTypes purchasePlan;
     private PricingModelTypes pricingModelType;
-    private Double totalPrice;
+    private static Double totalPrice;
     private String userID;
     private ShippingMethod sm;
+
+    public static Double marketingCapmeignDiscount = 1.0;
 
     public Prices() {
 
@@ -44,6 +48,7 @@ public class Prices {
     GeneralDashBoardController generalDashBoardController = new GeneralDashBoardController();
 
     public Prices(String userId, Double fuelAmount, FuelTypes fueltype, PurchasePlanTypes purchasePlan, PricingModelTypes pricingModelType, ShippingMethod shippingMethod) {
+
         this.userID = userId;
         generalDashBoardController.getCustomerPurchaseAmountInLastMonthFromDB(userId);
         this.fuelAmount = fuelAmount;
@@ -52,7 +57,40 @@ public class Prices {
         this.pricingModelType = pricingModelType;
         this.totalPrice = 0.0;
         this.sm = shippingMethod;
+        generalDashBoardController.GET_CURRENT_MARKETING_CAMPEIGN_fromDB();
         calculateTotalPrice();
+    }
+
+    public static void backFromCurrentMarketingCampeign(ArrayList<String> a) {
+        for (int i = 0; i < a.size(); i++) {
+            String CampaignID = a.get(i);
+            String TemplateName = a.get(++i);
+            String fuelType = a.get(++i);
+            String DiscountPercentages = a.get(++i);
+            //
+            marketingCapmeignDiscount = Double.valueOf(DiscountPercentages);
+            //
+            if (FuelTypes.contains(fuelType)) {
+                switch (fuelType) {
+                    case "HomeHeatingFuel":
+                        break;
+                    case "ScooterFuel":
+                        Prices.totalPrice =  Prices.totalPrice * marketingCapmeignDiscount;
+                        break;
+                    case "Diesel":
+                        Prices.totalPrice =  Prices.totalPrice * marketingCapmeignDiscount;
+                        break;
+
+                    case "Gasoline95":
+                        Prices.totalPrice =  Prices.totalPrice * marketingCapmeignDiscount;
+                        break;
+                }
+            }
+        }
+    }
+
+    public static void marketingCapmeignDiscount(ArrayList<String> resArr) {
+        backFromCurrentMarketingCampeign(resArr);
     }
 
     public Double calculateTotalPrice() {
@@ -100,11 +138,17 @@ public class Prices {
         if (fuelType.name().equals(FuelTypes.HomeHeatingFuel.toString())) {
             addHomeHeatingPricesAndDiscounts(sm);//Shipping method of Home heating order
         }
-        if(fuelType.name().equals(FuelTypes.Diesel)||fuelType.name().equals(FuelTypes.Gasoline95)||fuelType.name().equals(FuelTypes.ScooterFuel)){
-
+        //marketing campeign
+        if (fuelType.name().equals(FuelTypes.Diesel) || fuelType.name().equals(FuelTypes.Gasoline95) || fuelType.name().equals(FuelTypes.ScooterFuel)) {
+            setFastShippingTotalPrice();
         }
 
         return totalPrice;
+    }
+
+
+    public void setFastShippingTotalPrice() {
+
     }
 
     public Double getFuelPriceByFuelType(FuelTypes ft) {

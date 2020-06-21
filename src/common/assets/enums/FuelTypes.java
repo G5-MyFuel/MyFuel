@@ -1,14 +1,14 @@
 package common.assets.enums;
 
 public enum FuelTypes {
-    Gasoline95 ("Gasoline95"),
+    Gasoline95("Gasoline95"),
     Diesel("Diesel"),
-    ScooterFuel ("ScooterFuel"),
-    HomeHeatingFuel ("HomeHeatingFuel");
+    ScooterFuel("ScooterFuel"),
+    HomeHeatingFuel("HomeHeatingFuel");
 
     private String fuelTypeString;
 
-    FuelTypes(String s){
+    FuelTypes(String s) {
         this.fuelTypeString = s;
     }
 
@@ -19,6 +19,13 @@ public enum FuelTypes {
             }
         }
         return null;
+    }
+
+    public static  boolean contains(String fuelTypeString) {
+        for (FuelTypes f : FuelTypes.values()) {
+            if (f.name().equals(fuelTypeString)) return true;
+        }
+        return false;
     }
 
     public static <T extends Enum<T>> T getEnumFromString(Class<T> c, String string) {

@@ -42,15 +42,16 @@ import java.util.ResourceBundle;
 
 /**
  *
- *
  * @author Daniel Gabbay
- * @see NewPurchaseFuelForHomeHeatingController - the form's logic class
+ * @see NewPurchaseFuelForHomeHeatingController - the form's boundary class
  */
 public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable {
     private NewPurchaseFuelForHomeHeatingController myController = new NewPurchaseFuelForHomeHeatingController(this);
     generalDashBoardBoundary myDashBoundary;
     Costumer currentCostumerDetailsFromDB = null;
-    //temp variable to store
+    /**
+     * temp variable to store
+     */
     public String currentCustomerId = null;
     private String dateAndDayPattern = null;
     private boolean allShippingDetailsAdded = false;
@@ -61,8 +62,9 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
 
     private FormValidation formValidation;
 
-    //gui variables:
-
+    /**
+     * gui variables
+     */
     @FXML
     private JFXTabPane mainTabPaneOfOrder;
 
@@ -250,27 +252,45 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
         SetShippingTab();
     }
 
+    /**
+     *
+     * @param event
+     */
     @FXML
     void afterOrderDetails(MouseEvent event) {
         orderDetailsTab.getTabPane().getSelectionModel().selectNext();
     }
 
+    /**
+     *
+     * @param event
+     */
     @FXML
     void afterShipping(MouseEvent event) {
         shippingDetailsTab.getTabPane().getSelectionModel().selectNext();
     }
 
+    /**
+     *
+     * @param event
+     */
     @FXML
     void beforeReview(MouseEvent event) {
         orderReviewTab.getTabPane().getSelectionModel().selectPrevious();
-
     }
 
+    /**
+     *
+     * @param event
+     */
     @FXML
     void beforeShipping(MouseEvent event) {
         shippingDetailsTab.getTabPane().getSelectionModel().selectPrevious();
     }
 
+    /**
+     * To validate all the details that was entered to the fields
+     */
     private void FormValidation() {
         //order details page - start
         /*  fuel quantity validation */
@@ -300,6 +320,9 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
         formValidation.maxLengthValidationTextArea(noteTXT, "Note", 150);
     }
 
+    /**
+     *
+     */
     @FXML
     public void CheckOrderDetails() {
         ArrayList<Object> guiObjects = new ArrayList<Object>();
@@ -318,6 +341,9 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
         orderDetailsIndicatorTAB.setVisible(true);
     }
 
+    /**
+     *
+     */
     public void SetShippingTab() {
         shippingOverviewPane.setVisible(false);
         whenPane.setVisible(false);
@@ -345,6 +371,9 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
 
     }
 
+    /**
+     * To insert all the details for this purchase in DB
+     */
     public void INSERT_NEW_PURCHASE_FUEL_FOR_HOME_HEATING() {
         ArrayList<Object> varArray = new ArrayList<>();
         varArray.add(currentCostumerDetailsFromDB.getUserID());
@@ -389,6 +418,9 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
          */
     }
 
+    /**
+     * Show specific things after we select fast shipping
+     */
     private void FastShippingSelected() {
         whenPane.setVisible(false);
         whenPane1.setVisible(true);
@@ -398,6 +430,10 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
         shippingOverviewPane.setVisible(true);
     }
 
+    /**
+     *
+     * @throws InterruptedException
+     */
     private void StandardShippingSelected() throws InterruptedException {
         whenPane1.setVisible(false);
         shippingOverviewPane.setVisible(false);
@@ -445,6 +481,9 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
 
     }
 
+    /**
+     *
+     */
     @FXML
     void ClickOnREVIEWtab() {
         if (checkAndSetShippingMethod()) {
@@ -480,6 +519,10 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
         }
     }
 
+    /**
+     *
+     * @return
+     */
     private boolean checkAndSetShippingMethod() {
         //set shipping method
         //check if shipping method selected
@@ -496,6 +539,10 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
         return false;
     }
 
+    /**
+     *
+     * @return
+     */
     private Double calculateOrderPrice() {
         Double totalPrice = 0.0;
         Double fuelAmount = Double.valueOf(fuelQuantityTXT.getText());
@@ -506,6 +553,10 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
         return thisOrderPrice.getTotalPrice();
     }
 
+    /**
+     *
+     * @param event
+     */
     @FXML
     void handleJFXDatePicker(ActionEvent event) {
         myController.GetShippingOptionalDatesTableFromDB(); //get the available shipping dates and times range
@@ -518,7 +569,10 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
         this.allShippingDetailsAdded = allShippingDetailsAdded;
     }
 
-
+    /**
+     *
+     * @param shippingDayArrayList
+     */
     public void setAvailableTimesForShipping(ArrayList<ShippingDay> shippingDayArrayList) {
         ShippingHouresAvailableOnThisDateLABLE.setVisible(true);
         optionalDatesForShippingGridPane.setVisible(true);
@@ -578,6 +632,10 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
         }
     }
 
+    /**
+     *
+     * @param btn
+     */
     private void setShippingTimes(JFXButton btn) {
         btn.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -602,7 +660,9 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
         });
     }
 
-    //review order tab setting
+    /**
+     * review order tab setting
+     */
     private void SetReviewOrderPane() {
         this.currentPurchaseHomeHeating.setFuelAmount(Double.valueOf(fuelQuantityTXT.getText()));
         this.currentPurchaseHomeHeating.setEmailForInvoice(emailAddressTXT.getText());
@@ -627,7 +687,10 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
 
     }
 
-
+    /**
+     * To insert details in DB
+     * @param event
+     */
     @FXML
     void confirmOrder(ActionEvent event) {
         INSERT_NEW_PURCHASE_FUEL_FOR_HOME_HEATING();
