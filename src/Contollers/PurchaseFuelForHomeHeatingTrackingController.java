@@ -4,6 +4,8 @@ import boundary.PurchaseFuelForHomeHeatingTrackingBoundary;
 import common.assets.SqlAction;
 import common.assets.SqlQueryType;
 import common.assets.SqlResult;
+import entity.HomeHeatingOrderTracking;
+import entity.OrderDeliveryStatus;
 import javafx.application.Platform;
 
 import java.sql.Date;
@@ -22,7 +24,7 @@ public class PurchaseFuelForHomeHeatingTrackingController extends BasicControlle
             try {
                 switch (result.getActionType()) {
                     case GET_CUSTOMER_PFH_TABLE:
-                        ArrayList<String[]> arrayListOfCustomerOrders = new ArrayList<>();
+                        ArrayList<HomeHeatingOrderTracking> arrayListOfCustomerOrders = new ArrayList<>();
                         arrayListOfCustomerOrders = fromResultSetToCustomers(result);
                         System.out.println(arrayListOfCustomerOrders);
                         myBoundary.setArrayListOfCustomerOrders(arrayListOfCustomerOrders);
@@ -39,15 +41,26 @@ public class PurchaseFuelForHomeHeatingTrackingController extends BasicControlle
     }
 
 
-    private ArrayList<String[]> fromResultSetToCustomers(SqlResult result) {
-        ArrayList<String[]> res = new ArrayList<>();
-        String[] resin = new String[4];
+//    private ArrayList<String[]> fromResultSetToCustomers(SqlResult result) {
+//        ArrayList<String[]> res = new ArrayList<>();
+//        String[] resin = new String[4];
+//        for (ArrayList<Object> a : result.getResultData()) {
+//            Date tempDate = (Date)a.get(0);
+//            resin[0]= tempDate.toString();
+//            for (int i = 1; i < 4; i++)
+//                resin[i] = (String) a.get(i);
+//            res.add(resin);
+//        }
+//        return res;
+//    }
+
+    private ArrayList<HomeHeatingOrderTracking> fromResultSetToCustomers(SqlResult result) {
+        ArrayList<HomeHeatingOrderTracking> res = new ArrayList<>();
+        HomeHeatingOrderTracking pfh;
         for (ArrayList<Object> a : result.getResultData()) {
             Date tempDate = (Date)a.get(0);
-            resin[0]= tempDate.toString();
-            for (int i = 1; i < 4; i++)
-                resin[i] = (String) a.get(i);
-            res.add(resin);
+            pfh = new HomeHeatingOrderTracking(tempDate.toString(),(String)a.get(1),(String)a.get(2),(String)a.get(3));
+            res.add(pfh);
         }
         return res;
     }
