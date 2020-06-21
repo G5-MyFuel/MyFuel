@@ -32,7 +32,7 @@ public class fastFuelBoundary implements DataInitializable {
     private Label pricaeCounter;
 
     @FXML
-    private Label literCountertxt;
+    private Text literCountertxt;
 
     @FXML
     private JFXTextField literAmountTxt;
@@ -84,7 +84,7 @@ public class fastFuelBoundary implements DataInitializable {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        String customerID =  customerIdLable.getText();
+        String customerID = customerIdLable.getText();
         //choose random station to refuel:
         myController.getOptionalStationForCustomer(customerID);
 
@@ -119,29 +119,28 @@ public class fastFuelBoundary implements DataInitializable {
     }
 
     @FXML
-    void startFuelingProccess(MouseEvent event){
+    void startFuelingProccess(MouseEvent event) {
         Thread fuelingCounterThread = new Thread() {
+            //TODO: check literAmount input fields (validate) - need to chose pump .
+            Integer fuelCounter = Integer.parseInt(literAmountTxt.getText().toString());
+            Integer literCounter = 0;
             public void run() {
                 for (; ; ) {
-                    startFuelingBtn.setDisable(true);
-                    //TODO: check literAmount input fields (validate) - need to chose pump .
-                    Integer fuelCounter = Integer.parseInt(literAmountTxt.getText());
-                    Integer literCounter = 0;
-                    if(fuelCounter == 0){
+                    if (fuelCounter == 0) {
                         break;
                     }
-                        literCounter++;
-                        literCountertxt.setText(literCounter.toString());
-                        fuelCounter--;
-
-                        try {
-                            sleep(500);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
+                    literCounter++;
+                    System.out.println(literCounter.toString());
+                    literCountertxt.setText(literCounter.toString());
+                    fuelCounter--;
+                    try {
+                        sleep(150);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
-                startFuelingBtn.setDisable(false);
             }
+
         };
         fuelingCounterThread.start();
 
