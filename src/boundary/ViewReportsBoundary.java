@@ -236,6 +236,7 @@ public class ViewReportsBoundary implements DataInitializable {
         paramArray.add(managerStation);
         GetReportYearAndQuarter();
         paramArray.add(ReportYearAndQuarter);
+        paramArray.add(ReportYearAndQuarter);
         myController.GetReportData(paramArray); //start the process that will ask server to execute quarry and get the table details
     }
 
