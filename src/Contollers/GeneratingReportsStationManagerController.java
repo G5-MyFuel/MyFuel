@@ -1,5 +1,6 @@
 package Contollers;
 
+import boundary.GeneratingReportsMarketingManagerBoundary;
 import boundary.GeneratingReportsStationManagerBoundary;
 import common.assets.SqlAction;
 import common.assets.SqlQueryType;
@@ -9,6 +10,14 @@ import entity.QuantityItemsStockReport;
 import javafx.application.Platform;
 
 import java.util.ArrayList;
+
+/**
+ *  A department responsible for logical calculations and communicating with the client server and DB
+ *  For page "GeneratingReportsStationManagerBoundary"
+ *
+ *  * @author Nir Asulin
+ * @see GeneratingReportsStationManagerBoundary - the form's gui controller (boundary) class
+ */
 
 public class GeneratingReportsStationManagerController extends BasicController {
 
@@ -26,12 +35,15 @@ public class GeneratingReportsStationManagerController extends BasicController {
         this.myBoundary = myBoundary;
     }
 
+    /**
+     * This method is responsible for requesting information from DB through the server
+     * Divided into cases to separate sending a different queries
+     * @param paramArray - An array of variables for query
+     */
     public void GetReportData(ArrayList<String> paramArray) {
         ArrayList<Object> varArray = new ArrayList<>();
         varArray.addAll(paramArray);
         varArray.remove(0);
-        System.out.println(paramArray);
-        System.out.println(varArray);
         switch (paramArray.get(0)) {
             case "Get Manager data":
                 SqlAction sqlAction = new SqlAction(SqlQueryType.GET_Manager_Data, varArray);
@@ -67,6 +79,12 @@ public class GeneratingReportsStationManagerController extends BasicController {
         }
     }
 
+    /**
+     * This method is responsible for getting results from the client
+     * Divided into cases to separate getting results from different queries
+     *
+     * @param result - The result received from the DB
+     */
     @Override
     public void getResultFromClient(SqlResult result) {
         Platform.runLater(() -> {
@@ -78,7 +96,6 @@ public class GeneratingReportsStationManagerController extends BasicController {
                     myBoundary.setQuarterlyData(this.changeResultToQuarterlyReport(result));
                     break;
                 case GET_Purchases_Report:
-                    //PurchasesReport resultList = changeResultToPurchasesReport(result);
                     myBoundary.setPurchasesData(changeResultToPurchasesReport(result));
                     break;
                 case GET_QuantityItemsStock_Report:
@@ -92,9 +109,10 @@ public class GeneratingReportsStationManagerController extends BasicController {
     }
 
     /**
-     * This method create String from the data base result.
+     * This method create Quarterly Report from the data base result.
      *
-     * @param result the result
+     * @param result - The result received from the DB
+     *
      * @return String
      */
     private String changeResultToQuarterlyReport(SqlResult result) {
@@ -106,6 +124,13 @@ public class GeneratingReportsStationManagerController extends BasicController {
         return TotalPrice.toString();
     }
 
+    /**
+     * This method create array list of Purchases Report from the data base result.
+     *
+     * @param result - The result received from the DB
+     *
+     * @return ArrayList<PurchasesReport>
+     */
     private ArrayList<PurchasesReport> changeResultToPurchasesReport(SqlResult result) {
 
         Double[] fuelAmount = new Double[]{Double.valueOf(0),Double.valueOf(0),Double.valueOf(0)};
@@ -135,6 +160,13 @@ public class GeneratingReportsStationManagerController extends BasicController {
         return resultList;
     }
 
+    /**
+     * This method create array list of Quantity Items Stock Report from the data base result.
+     *
+     * @param result - The result received from the DB
+     *
+     * @return ArrayList<QuantityItemsStockReport>
+     */
     private ArrayList<QuantityItemsStockReport> changeResultToQuantityItemsStockReport(SqlResult result) {
 
         ArrayList<QuantityItemsStockReport> resultList = new ArrayList<>();
@@ -147,6 +179,12 @@ public class GeneratingReportsStationManagerController extends BasicController {
         return resultList;
     }
 
+    /**
+     * This method create array list of String from the data base result.
+     *
+     * @param result - The result received from the DB
+     * @return Array list of String contains manager company and manager station
+     */
     private ArrayList<String> changeResultToManagerData(SqlResult result) {
 
         ArrayList<String> resultList = new ArrayList<>();

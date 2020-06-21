@@ -1,6 +1,7 @@
 package Contollers;
 
 import boundary.ConfirmDiscountRatesBoundary;
+import boundary.MarketingCampaignTemplateBoundary;
 import common.assets.SqlAction;
 import common.assets.SqlQueryType;
 import common.assets.SqlResult;
@@ -8,6 +9,14 @@ import entity.DiscountRate;
 import javafx.application.Platform;
 
 import java.util.ArrayList;
+
+/**
+ *  A department responsible for logical calculations and communicating with the client server and DB
+ *  For page "ConfirmDiscountRatesBoundary"
+ *
+ *  * @author Nir Asulin
+ * @see ConfirmDiscountRatesBoundary - the form's gui controller (boundary) class
+ */
 
 public class ConfirmDiscountRatesController extends BasicController {
 
@@ -25,14 +34,15 @@ public class ConfirmDiscountRatesController extends BasicController {
         this.myBoundary = myBoundary;
     }
 
-    /*Logic Methods*/
-
+    /**
+     * This method is responsible for requesting information from DB through the server
+     * Divided into cases to separate sending a different queries
+     * @param paramArray - An array of variables for query
+     */
     public void GetDiscountRatesData(ArrayList<String> paramArray) {
         ArrayList<Object> varArray = new ArrayList<>();
         varArray.addAll(paramArray);
         varArray.remove(0);
-        System.out.println(paramArray);
-        System.out.println(varArray);
         switch (paramArray.get(0)) {
             case "Get Discount Rates Data":
                 SqlAction sqlAction = new SqlAction(SqlQueryType.Get_DiscountRates_Table, varArray);
@@ -55,7 +65,12 @@ public class ConfirmDiscountRatesController extends BasicController {
         }
     }
 
-
+    /**
+     * This method is responsible for getting results from the client
+     * Divided into cases to separate getting results from different queries
+     *
+     * @param result - The result received from the DB
+     */
     @Override
     public void getResultFromClient(SqlResult result) {
 
@@ -76,25 +91,27 @@ public class ConfirmDiscountRatesController extends BasicController {
     }
 
     /**
-     * This method create String from the data base result.
+     * This method create array list of DiscountRate from the data base result.
      *
-     * @param result the result
-     * @return String
+     * @param result - The result received from the DB
+     * @return Array list of DiscountRate
      */
     private ArrayList<DiscountRate> changeResultToDiscountRatesData(SqlResult result) {
 
-
-        //Float TotalPrice = new Float(0);
         ArrayList<DiscountRate> resultList = new ArrayList<>();
         for (ArrayList<Object> a : result.getResultData()) {
             resultList.add(new DiscountRate((String) a.get(0), (String) a.get(1), (String) a.get(3)));
-            //TotalPrice += Float.parseFloat((String) a.get(0));
         }
-        //return TotalPrice.toString();
         System.out.println(resultList);
         return resultList;
     }
 
+    /**
+     * This method create array list of String from the data base result.
+     *
+     * @param result - The result received from the DB
+     * @return Array list of String contains manager company and manager station
+     */
     private ArrayList<String> changeResultToManagerData(SqlResult result) {
 
         ArrayList<String> resultList = new ArrayList<>();
