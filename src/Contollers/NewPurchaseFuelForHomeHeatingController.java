@@ -59,7 +59,8 @@ public class NewPurchaseFuelForHomeHeatingController extends BasicController {
                     case GET_ALL_SHIPPING_DATES_AVAILABLE:
                         System.out.println("NewPurchaseFuelForHomeHeatingController -> myController.GetAvailableTimesToShippingDate();");
                         availableTimesInDate = changeResultToAvailableShippingDatesArrayList(result);
-                        myBoundary.setAvailableTimesForShipping();
+                        System.out.println(availableTimesInDate);
+                        myBoundary.setAvailableTimesForShipping(availableTimesInDate);
                         break;
                     case INSERT_NEW_AVAILABLE_DATE_FOR_SHIPPING:
                         System.out.println("NewPurchaseFuelForHomeHeatingController -> myController.INSERT_NEW_AVAILABLE_DATE_FOR_SHIPPING;");
@@ -68,12 +69,29 @@ public class NewPurchaseFuelForHomeHeatingController extends BasicController {
                         Costumer c = this.fromResultSetToCustomers(result, myBoundary.currentCustomerId);
                         myBoundary.setCurrentCostumerDetailsFromDB(c);
                         break;
+                    case INSERT_NEW_PURCHASE_FUEL_FOR_HOME_HEATING:
+                        System.out.println("N");
+                        break;
+                    case INSERT_NEW_PURCHASE_FUEL_FOR_HOME_HEATING1:
+                        System.out.println("N1");
+                        break;
                 }
             } catch (NullPointerException npe) {
+                npe.printStackTrace();
             }
         });
     }
 
+
+    public void INSERT_NEW_PURCHASE_FUEL_FOR_HOME_HEATING(ArrayList<Object> varArray,ArrayList<Object>varArray1) {
+        SqlAction sqlAction = new SqlAction(SqlQueryType.INSERT_NEW_PURCHASE_FUEL_FOR_HOME_HEATING, varArray);
+        super.sendSqlActionToClient(sqlAction);
+        SqlAction sqlAction2 = new SqlAction(SqlQueryType.INSERT_NEW_PURCHASE_FUEL_FOR_HOME_HEATING1, varArray1);
+        super.sendSqlActionToClient(sqlAction2);
+    }
+
+
+    //
 
     public void GET_SPECIFIC_CUSTOMER_DETAILS(String str) {
         ArrayList<Object> varArray = new ArrayList<>();

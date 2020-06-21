@@ -198,8 +198,8 @@ public class MysqlConnection {
          * *****************************************************/
         sqlArray[SqlQueryType.GET_ALL_ORDER_TO_SUPPLY_FOR_STATION_MANAGER.getCode()] = "SELECT OrderNumber,companyName,StationNum,FuelType,Quantity,OrderStatus,managerID FROM OrderForStock as ofs, GasStation as gs, User as u WHERE ofs.StationNum=gs.StationNumber and ofs.GasCompanyName=gs.companyName and ofs.OrderStatus=\"New\" and u.userID=gs.managerID and gs.managerID=?";
         sqlArray[SqlQueryType.UPDATE_STATUS_TO_IN_TREATMENT.getCode()] = "UPDATE `OrderForStock` SET `OrderStatus` = \"In treatment\" WHERE `OrderNumber` = ?";
-        sqlArray[SqlQueryType.GET_ALL_ORDER_WITH_STATUS_DONE.getCode()]="SELECT OrderNumber,StationNumber FROM OrderForStock as ofs, GasStation as gs, User as u WHERE ofs.StationNum=gs.StationNumber and ofs.GasCompanyName=gs.companyName and ofs.OrderStatus=\"Done\" and gs.managerID=u.userID and gs.managerID=?";
-        sqlArray[SqlQueryType.UPDATE_STATUS_TO_VIEWED.getCode()]="UPDATE `OrderForStock` SET `OrderStatus` = \"Viewed\" WHERE `OrderNumber` = ?";
+        sqlArray[SqlQueryType.GET_ALL_ORDER_WITH_STATUS_DONE.getCode()] = "SELECT OrderNumber,StationNumber FROM OrderForStock as ofs, GasStation as gs, User as u WHERE ofs.StationNum=gs.StationNumber and ofs.GasCompanyName=gs.companyName and ofs.OrderStatus=\"Done\" and gs.managerID=u.userID and gs.managerID=?";
+        sqlArray[SqlQueryType.UPDATE_STATUS_TO_VIEWED.getCode()] = "UPDATE `OrderForStock` SET `OrderStatus` = \"Viewed\" WHERE `OrderNumber` = ?";
 
         /* *****************************************
          * ********** Orders From Supplier Queries ****************
@@ -234,7 +234,7 @@ public class MysqlConnection {
         sqlArray[SqlQueryType.GET_CUSTOMER_X_PURCHASE_TABLE.getCode()] = "select p.customerID, c.customerType, p.purchaseID, ff.FuelType, p.purchaseHour " +
                 "from Costumer as c, Purchase as p, FastFuel as ff " +
                 "WHERE p.customerID LIKE c.ID AND p.purchaseID LIKE ff.purchaseID";
-        sqlArray[SqlQueryType.INSERT_RATING.getCode()] ="INSERT INTO `Rating`(`CustomerID`, `Rating`, `CustomerType`) VALUES (?,?,?);";
+        sqlArray[SqlQueryType.INSERT_RATING.getCode()] = "INSERT INTO `Rating`(`CustomerID`, `Rating`, `CustomerType`) VALUES (?,?,?);";
         sqlArray[SqlQueryType.DELETE_ALL_RATINGS_ROWS.getCode()] = "DELETE FROM `Rating` WHERE 1";
         sqlArray[SqlQueryType.GET_RATING_FOR_CUSTUMER_TYPE.getCode()] = "SELECT * FROM `Rating` WHERE `CustomerType`= ? ";
         sqlArray[SqlQueryType.GET_RATING_FOR_TIME_RANGE.getCode()] = "SELECT r.Rating, p.customerID, p.purchaseHour from " +
@@ -318,9 +318,28 @@ public class MysqlConnection {
          * **********************************************************
          */
         sqlArray[SqlQueryType.GET_ALL_SHIPPING_DATES_AVAILABLE.getCode()] = "SELECT * FROM ShippingOptionalDates;";
+        sqlArray[SqlQueryType.GET_SPECIFIC_CUSTOMER_DETAILS.getCode()] =" select c.id,userFirstName,userLastName,userEmail,'Credit Card Number',CreditCardExperationDate,CVV,customerType,'Pricing Model','Purchase Plan' from User as u,Costumer as c where u.userID=c.ID and c.ID= ?;";
         sqlArray[SqlQueryType.INSERT_NEW_AVAILABLE_DATE_FOR_SHIPPING.getCode()] = "INSERT INTO ShippingOptionalDates (`DayAndDate`) VALUES (?);";
-
+        sqlArray[SqlQueryType.INSERT_NEW_PURCHASE_FUEL_FOR_HOME_HEATING.getCode()] = "INSERT INTO `bpsdc8o22sikrlpvvxqm`.`PurchaseFuelForHomeHeating`\n" +
+                "(`purchaseID`,\n" +
+                "`emailForInvoice`,\n" +
+                "`phoneNumberForContact`,\n" +
+                "`noteForPurchase`,\n" +
+                "`status`,\n" +
+                "`shippingMethod`,\n" +
+                "`shippingDateAndTime`)\n" +
+                "VALUES(?,?,?,?,\"CONFIRMED_ORDER\",?,?);\n";
+        sqlArray[SqlQueryType.INSERT_NEW_PURCHASE_FUEL_FOR_HOME_HEATING1.getCode()] = "\"INSERT INTO `bpsdc8o22sikrlpvvxqm`.`Purchase`\\n\" +\n" +
+                "                \"(`purchaseID`,\\n\" +\n" +
+                "                \"`customerID`,\\n\" +\n" +
+                "                \"`purchaseDate`,\\n\" +\n" +
+                "                \"`fuelAmount`,\\n\" +\n" +
+                "                \"`totalPrice`,\\n\" +\n" +
+                "                \"`purchaseHour`,\\n\" +\n" +
+                "                \"`CampaignID`)\\n\" +\n" +
+                "                \"VALUES(?,?,current_date(),?,?,current_time(),0);\\n\";";
     }
+
 
     public Connection getConnection() {
         return connection;

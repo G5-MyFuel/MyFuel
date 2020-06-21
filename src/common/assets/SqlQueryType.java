@@ -30,6 +30,8 @@ public enum SqlQueryType {
     GET_ALL_SHIPPING_DATES_AVAILABLE(SqlExecutionType.EXECUTE_QUERY),
     INSERT_NEW_AVAILABLE_DATE_FOR_SHIPPING(SqlExecutionType.UPDATE_QUERY),
     GET_SPECIFIC_CUSTOMER_DETAILS(SqlExecutionType.EXECUTE_QUERY),
+    INSERT_NEW_PURCHASE_FUEL_FOR_HOME_HEATING(SqlExecutionType.UPDATE_QUERY),
+    INSERT_NEW_PURCHASE_FUEL_FOR_HOME_HEATING1(SqlExecutionType.UPDATE_QUERY),
 
     /* *****************************************
      * ********** Discount Rates Queries ****************

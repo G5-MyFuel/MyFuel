@@ -47,7 +47,7 @@ public class generalDashBoardBoundary implements DataInitializable {
     private Label userPermissionsTitel;
 
     @FXML
-    private Label userFirstName;
+    public Label userFirstName;
 
     @FXML
     private GridPane allDashButtonsGridPane;
@@ -485,7 +485,10 @@ public class generalDashBoardBoundary implements DataInitializable {
     void newPurchaseFuelForHomeHeatingClick() {
         currentPagePane.setVisible(true);
         currentPagePane.getChildren().clear();
-        currentPagePane.getChildren().setAll(mainProjectFX.pagingController.loadBoundaryInPane(ProjectPages.PURCHASE_FUEL_FOR_HOME_HEATING.getPath(), userID));
+        ArrayList<Object> varArray = new ArrayList<>();
+        varArray.add(userID);
+        varArray.add(this);
+        currentPagePane.getChildren().setAll(mainProjectFX.pagingController.loadBoundaryInPane(ProjectPages.PURCHASE_FUEL_FOR_HOME_HEATING.getPath(), varArray));
         myFuelLogo.setVisible(false);
     }
 

@@ -5,7 +5,7 @@ import common.assets.enums.FuelTypes;
 import org.joda.time.LocalDateTime;
 
 public class Purchase {
-    private static int purchaseID=1099;
+    private String purchaseID;
     private String customerID;
     private LocalDateTime purchaseDate;
     private double fuelAmount;
@@ -14,7 +14,7 @@ public class Purchase {
 
 
     public Purchase(String customerID, LocalDateTime purchaseDate, double fuelAmount) {
-        ++purchaseID;
+        this.purchaseID = customerID+"O";
         this.customerID = customerID;
         this.purchaseDate = purchaseDate;
         this.fuelAmount = fuelAmount;
@@ -22,7 +22,7 @@ public class Purchase {
     }
 
     public String getPurchaseID() {
-        return Integer.toString(purchaseID);
+        return purchaseID;
     }
 
     public String getCustomerID() {

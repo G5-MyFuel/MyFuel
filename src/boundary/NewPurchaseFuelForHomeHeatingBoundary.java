@@ -11,7 +11,6 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.geometry.Pos;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -44,7 +43,7 @@ import java.util.ResourceBundle;
  */
 public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable {
     private NewPurchaseFuelForHomeHeatingController myController = new NewPurchaseFuelForHomeHeatingController(this);
-
+    generalDashBoardBoundary myDashBoundary;
     Costumer currentCostumerDetailsFromDB = null;
     //temp variable to store
     public String currentCustomerId = null;
@@ -52,7 +51,8 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
     private boolean allShippingDetailsAdded = false;
     private ImageView iconFastShipping = null;
     private PurchaseFuelForHomeHeating currentPurchaseHomeHeating;
-
+    private String shippingMethodTXT = null;
+    private Double totalPrice;
 
     private FormValidation formValidation;
 
@@ -222,7 +222,13 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
 
     @Override
     public void initData(Object data) {
-        this.currentCustomerId = (String) data;
+        ArrayList<Object> varArray = (ArrayList<Object>) data;
+        String currentCustomerId1 = (String) varArray.get(0);
+        this.currentCustomerId = currentCustomerId1;
+        myDashBoundary = (generalDashBoardBoundary) varArray.get(1);
+        String[] words = myDashBoundary.userFirstName.getText().split("\\s+");
+        firstNameTXT.setText(words[0]);
+        lastNameTXT.setText(words[1]);
         LocalDate.now().toString();
         myController.GET_SPECIFIC_CUSTOMER_DETAILS(this.currentCustomerId);
         this.currentPurchaseHomeHeating = new PurchaseFuelForHomeHeating(currentCustomerId, LocalDateTime.now(), 0.0);
@@ -239,6 +245,26 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
         SetShippingTab();
     }
 
+    @FXML
+    void afterOrderDetails(MouseEvent event) {
+        orderDetailsTab.getTabPane().getSelectionModel().selectNext();
+    }
+
+    @FXML
+    void afterShipping(MouseEvent event) {
+        shippingDetailsTab.getTabPane().getSelectionModel().selectNext();
+    }
+
+    @FXML
+    void beforeReview(MouseEvent event) {
+        orderReviewTab.getTabPane().getSelectionModel().selectPrevious();
+
+    }
+
+    @FXML
+    void beforeShipping(MouseEvent event) {
+        shippingDetailsTab.getTabPane().getSelectionModel().selectPrevious();
+    }
 
     private void FormValidation() {
         //order details page - start
@@ -314,6 +340,22 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
 
     }
 
+    public void INSERT_NEW_PURCHASE_FUEL_FOR_HOME_HEATING() {
+        ArrayList<Object> varArray = new ArrayList<>();
+        varArray.add(currentCostumerDetailsFromDB.getUserID());
+        varArray.add(emailAddressTXT.getText());
+        varArray.add(anotherContactPhoneNumberTXT.getText());
+        varArray.add(noteTXT.getText());
+        varArray.add(shippingMethodTXT);
+        varArray.add(shippingSummeryDetailsTXT.getText());
+        //
+        ArrayList<Object> varArray1 = new ArrayList<>();
+        varArray1.add(currentPurchaseHomeHeating.getPurchaseID());
+        varArray1.add(currentCostumerDetailsFromDB.getUserID());
+        varArray1.add(currentPurchaseHomeHeating.getFuelAmount());
+        varArray1.add(totalPrice);
+        myController.INSERT_NEW_PURCHASE_FUEL_FOR_HOME_HEATING(varArray,varArray1);
+    }
 
     private void FastShippingSelected() {
         whenPane.setVisible(false);
@@ -376,8 +418,6 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
         if (checkAndSetShippingMethod()) {
             //shipping details setters
             currentPurchaseHomeHeating.setCustomerID(currentCustomerId);
-            firstNameTXT.setText(" " + currentCostumerDetailsFromDB.getUserFirstName());
-            lastNameTXT.setText(" " + currentCostumerDetailsFromDB.getUserLastName());
             //
             StringBuilder deliveryAddressFormat = new StringBuilder();
             deliveryAddressFormat.append(streetNameTXT.getText());
@@ -393,14 +433,14 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
             if (currentPurchaseHomeHeating.getShippingMethod().equals(ShippingMethod.STANDARD)) {
                 scheduledDeliveryDateTXT.setText(" " + shippingSummeryDetailsTXT.getText());
                 DeliveryFeeTXT.setText("15 $");
-            } else{
+            } else {
                 scheduledDeliveryDateTXT.setText(" You will receive the shipment in the next 6 hours");
                 DeliveryFeeTXT.setText("40 $");
             }
 
             //Prices sets
             String fuelQuantityStr = fuelQuantityTXT.getText() + " Liters";
-            Double totalPrice = calculateOrderPrice();
+            totalPrice = calculateOrderPrice();
             fuelQuantityInLitersTXT.setText(fuelQuantityStr);
             totalPricesOfAlllInUsdTXT.setText(new DecimalFormat("##.##").format(totalPrice) + "$");
             subTotalPriceInUsdTXT.setText(String.valueOf(Prices.basePrice_homeHeating * Double.parseDouble(fuelQuantityTXT.getText())));
@@ -413,9 +453,11 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
         //check if shipping method selected
         switch (shippingMethodComboBOX.getValue()) {
             case "Fast Shipping (40$)":
+                this.shippingMethodTXT = "Fast Shipping";
                 this.currentPurchaseHomeHeating.setShippingMethod(ShippingMethod.FAST);
                 return true;
             case "Standard Shipping (15$)":
+                shippingMethodTXT = "Standard Shipping";
                 this.currentPurchaseHomeHeating.setShippingMethod(ShippingMethod.STANDARD);
                 return true;
         }
@@ -425,6 +467,8 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
     private Double calculateOrderPrice() {
         Double totalPrice = 0.0;
         Double fuelAmount = Double.valueOf(fuelQuantityTXT.getText());
+        System.out.println(FuelTypes.HomeHeatingFuel);
+        System.out.println();
         Prices thisOrderPrice = new Prices(currentCustomerId, fuelAmount, FuelTypes.HomeHeatingFuel, currentCostumerDetailsFromDB.getPurchasePlanAsEnum(), currentCostumerDetailsFromDB.getPricingModelTypeAsEnum(), currentPurchaseHomeHeating.getShippingMethod());
         currentPurchaseHomeHeating.setPriceOfOrder(thisOrderPrice);
         return thisOrderPrice.getTotalPrice();
@@ -443,10 +487,9 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
     }
 
 
-    public void setAvailableTimesForShipping() {
+    public void setAvailableTimesForShipping(ArrayList<ShippingDay> shippingDayArrayList) {
         ShippingHouresAvailableOnThisDateLABLE.setVisible(true);
         optionalDatesForShippingGridPane.setVisible(true);
-        ArrayList<ShippingDay> shippingDayArrayList = myController.getAvailableTimesInDate();
 
         for (ShippingDay sd : shippingDayArrayList) {
             String s1 = sd.getDate();
@@ -503,7 +546,6 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
         }
     }
 
-
     private void setShippingTimes(JFXButton btn) {
         btn.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -520,8 +562,10 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
                 //
 
 //                DateTimeFormatter fmt = DateTimeFormat.forPattern("yyyy-MM-dd");
-                String date = shippingDatePicker.getValue().format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-                currentPurchaseHomeHeating.setShippingDateAndTime(date);
+                StringBuilder date = new StringBuilder();
+                date.append(shippingDatePicker.getValue().format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+                date.append(" " + btn.getText());
+                currentPurchaseHomeHeating.setShippingDateAndTime(date.toString());
             }
         });
     }
@@ -543,6 +587,18 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
 
     public void setCurrentCostumerDetailsFromDB(Costumer currentCostumerDetailsFromDB) {
         this.currentCostumerDetailsFromDB = currentCostumerDetailsFromDB;
+    }
+
+    //
+    @FXML
+    public void beforeReview() {
+
+    }
+
+
+    @FXML
+    void confirmOrder(ActionEvent event) {
+        INSERT_NEW_PURCHASE_FUEL_FOR_HOME_HEATING();
     }
 }
 
