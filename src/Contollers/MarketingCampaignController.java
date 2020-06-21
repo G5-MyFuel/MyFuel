@@ -40,7 +40,7 @@ public class MarketingCampaignController extends BasicController {
     private int SaleCounter;
 
     /**
-     * Instantiates a new Sale-Operation Management controller.
+     * Instantiates a new Marketing-Campaign Management controller.
      *
      * @param myBoundary the my boundary
      */

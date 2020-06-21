@@ -10,20 +10,24 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 import static java.lang.Thread.sleep;
 
 /**
- * @author Daniel Gabbay
+ *
+ * @author Hana Wiener
  */
 
 public class fastFuelBoundary implements DataInitializable {
     private FastFuelController myController = new FastFuelController(this);
+    private int SaleNumber;
 
     @FXML
     private Button getVehicleButoon;
@@ -69,6 +73,19 @@ public class fastFuelBoundary implements DataInitializable {
     @FXML
     private Button startFuelingBtn;
 
+    @FXML
+    private Label carNumberLable;
+
+    @FXML
+    private Pane paneFinishRefuel;
+
+    @FXML
+    private Label literCounter;
+
+    @FXML
+    private Text subscriptionInfo1;
+
+
     @Override
     public void initData(Object data) {
 
@@ -77,23 +94,7 @@ public class fastFuelBoundary implements DataInitializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-//בחירת לקוח
         myController.getCustomer();
-        try {
-            sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        String customerID =  customerIdLable.getText();
-        //choose random station to refuel:
-        myController.getOptionalStationForCustomer(customerID);
-
-        /*while(true)
-        {//ברגע שמגיעים לסף הדלק שביקשו - לעדכן את ההזמנה בDB
-            if(literCounter.getText().equals(literAmountTxt.getText())) {
-                this.updateInvatoryInDB();
-            }
-        }*/
     }
 
     public void updateInvatoryInDB() {
@@ -108,13 +109,13 @@ public class fastFuelBoundary implements DataInitializable {
 
     public void setStationsInArrayAndChooseRandomly(ArrayList<GasStation> resultList) {
         User myUser = new User();
-        // gs.StationNumber, companyName,inventory_95 , inventory_scooter, inventory_diesel
+        // gs.StationNumber, companyName, inventory_95 , inventory_scooter, inventory_diesel
 
-//        Random r = new Random();
-//        int low = 0;
-//        int high = 2;
-//        int result = r.nextInt(high-low) + low;
-//        stationNumberLable.setText(resultList.get(result).getStationNumber().toString());
+       Random r = new Random();
+      int low = 0;
+       int high = 30;
+        int result = r.nextInt(high-low) + low;
+       stationNumberLable.setText(resultList.get(result).getStationNumber().toString());
 
     }
 
@@ -150,6 +151,18 @@ public class fastFuelBoundary implements DataInitializable {
 
     public void setCostumerTable(ArrayList<Costumer> costumerTable) {
         customerIdLable.setText(costumerTable.get(0).getUserID());
+        carNumberLable.setText("עוד לא מומש");
+
+        String customerID =  customerIdLable.getText();
+        //choose random station to refuel:
+        myController.getOptionalStationForCustomer(customerID);
+
+        /*while(true)
+        {//ברגע שמגיעים לסף הדלק שביקשו - לעדכן את ההזמנה בDB
+            if(literCounter.getText().equals(literAmountTxt.getText())) {
+                this.updateInvatoryInDB();
+            }
+        }*/
     }
 
 
@@ -158,3 +171,25 @@ public class fastFuelBoundary implements DataInitializable {
        // return costumerTable;
     }*/
 }
+
+/*
+נתונים שצריך לשמור:
+     String purchaseID;//דניאל
+     //String customerID;//
+     //LocalDateTime purchaseDate;// להשתמש בנוכחי
+     //double fuelAmount;//מוכנס מהמשתמש
+     double totalPrice;//דניאל
+     Prices prices; //דניאל
+     String saleId;//דניאל
+
+
+     //String FuelType;//
+     //String StationNumber;
+     //String companyName;
+     ?
+     //String PAZ;
+     //String SONOL;
+     //String YELLOW;
+
+
+ */

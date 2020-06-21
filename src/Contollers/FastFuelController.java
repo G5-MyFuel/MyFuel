@@ -11,15 +11,34 @@ import java.sql.Date;
 import java.util.ArrayList;
 
 /**
- * @author Daniel Gabbay
+ *  *  A department responsible for logical calculations and communicating with the client server and DB
+ *  *  For page "fastFuelBoundary"
+ *
+ * @author Hana Wiener
+ * @see fastFuelBoundary - - the form's Boundary class
  */
 public class FastFuelController extends BasicController{
+    /**
+     * The boundary controlled by this controller
+     */
     private fastFuelBoundary myBoundary;
 
+    /**
+     * Instantiates a new Marketing-Campaign Management controller.
+     *
+     * @param myBoundary
+     */
     public FastFuelController(fastFuelBoundary myBoundary) {
         this.myBoundary = myBoundary;
     }
+    /*Logic Methods*/
 
+    /**
+     * This method is responsible for getting results from the client
+     * Divided into cases to separate getting results from different queries
+     *
+     * @param result - The result recieved from the DB
+     */
     @Override
     public void getResultFromClient(SqlResult result) {
         Platform.runLater(() -> {
@@ -40,13 +59,12 @@ public class FastFuelController extends BasicController{
                         break;
                     case INSERT_FASTFUEL_PURCHES_TO_FASTFUEL_TABLE:
                         break;
-                    case GET_GASSTATION_INVENTORY_TABLE:
+                   /* case GET_GASSTATION_INVENTORY_TABLE:
                         ArrayList<GasStation> resultList2 = new ArrayList<>();
-                    //    resultList2.addAll(this.changeResultToGasStation(result));
-                     //  myBoundary.setSalesTable(resultList2); // ??
+                        resultList2.addAll(this.changeResultToGasStation(result));
+                       myBoundary.setSalesTable(resultList2); // ??
                         break;
-
-                  /*  case UPDATE_DIESEL_INVENTORY_CUSTOMER_PURCHASE:
+                    case UPDATE_DIESEL_INVENTORY_CUSTOMER_PURCHASE:
                         break;
                     case UPDATE_95_INVENTORY_CUSTOMER_PURCHASE:
                         break;
@@ -68,15 +86,18 @@ public class FastFuelController extends BasicController{
 
         switch (fuelType) {
             case "Diesel":
+                varArray.add("Diesel");
                 SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_95_INVENTORY_CUSTOMER_PURCHASE, varArray);
                 super.sendSqlActionToClient(sqlAction);
                 break;
             case "Gasoline95":
+                varArray.add("Gasoline95");
                  sqlAction = new SqlAction(SqlQueryType.UPDATE_DIESEL_INVENTORY_CUSTOMER_PURCHASE, varArray);
                 super.sendSqlActionToClient(sqlAction);
                 break;
             case "ScooterFuel":
-                 sqlAction = new SqlAction(SqlQueryType.UPDATE_SCOOTER_INVENTORY_CUSTOMER_PURCHASE, varArray);
+                varArray.add("ScooterFuel");
+                sqlAction = new SqlAction(SqlQueryType.UPDATE_SCOOTER_INVENTORY_CUSTOMER_PURCHASE, varArray);
                 super.sendSqlActionToClient(sqlAction);
                 break;
         };
@@ -102,12 +123,8 @@ public class FastFuelController extends BasicController{
         for(ArrayList<Object> a: result.getResultData()) {
            ArrayList<String> gasStations = new ArrayList<String>();
 
-            GasStation gasStation = new GasStation((Integer) a.get(0),
-                    (String) a.get(1),
-                    null,null,
-                    (String) a.get(2), (String) a.get(3),
-                    (String) a.get(4),
-                    (Double) a.get(5));
+            GasStation gasStation = new GasStation((Integer) a.get(0), (String) a.get(1),null,null,                  (String) a.get(2), (String) a.get(3),
+                    (String) a.get(4),(Double) a.get(5));
             resultList.add(gasStation);
         }
         return resultList;
