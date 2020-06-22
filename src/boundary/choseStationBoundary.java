@@ -15,6 +15,7 @@ import javafx.stage.WindowEvent;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
+
 /**
  * the class chose Station Boundary
  *
@@ -24,7 +25,8 @@ import java.util.ResourceBundle;
 
 public class choseStationBoundary implements DataInitializable {
 
-    CostumerManagmentTablePageBoundary managmentBoundary;
+    public CostumerManagmentTablePageBoundary managmentBoundary;
+    private Alert ErrorAlert = new Alert(Alert.AlertType.ERROR);
 
     /**
      * ****** FXML PARAMETERS *******
@@ -54,6 +56,7 @@ public class choseStationBoundary implements DataInitializable {
     /**
      * initData this will start in the initialize of the boundary.
      * sends parameters from anther pages
+     *
      * @param data - The data sent to the boundary
      */
     @Override
@@ -98,30 +101,59 @@ public class choseStationBoundary implements DataInitializable {
 
     /**
      * confirm button function. this method is the listener of the confirm button.
+     *
      * @param event
      */
     @FXML
     public void confirmFunction(MouseEvent event) {
+        boolean unSelectedFlag = true;
+        int counter = 0;
         Stage primStage = (Stage) confirmBtn.getScene().getWindow();
         String station1 = "NULL", station2 = "NULL", station3 = "NULL";
         if (MultipleVbox.isVisible()) {
-            if (pazCheckBox.isSelected())
+            if (pazCheckBox.isSelected()) {
                 station1 = "PAZ";
-            if (yellowCheckBox.isSelected())
+                counter++;
+            }
+            if (yellowCheckBox.isSelected()) {
                 station2 = "YELLOW";
-            if (sonolCheckBox.isSelected())
+                counter++;
+            }
+            if (sonolCheckBox.isSelected()) {
                 station3 = "SONOL";
-        }else{
-            if (PAZbtn.isSelected())
+                counter++;
+            }
+            if (counter < 2) {
+                ErrorAlert.setTitle("Selection Error");
+                ErrorAlert.setHeaderText("According to your plan you must select 2 or 3 stations.");
+                ErrorAlert.showAndWait();
+            } else {
+                managmentBoundary.changeSelectedCostumerStations(station1, station2, station3);
+                managmentBoundary.getCosManageTbale().setDisable(false);
+                primStage.close();
+            }
+        } else {
+            if (PAZbtn.isSelected()) {
                 station1 = "PAZ";
-            if (YELLOWbtn.isSelected())
+                unSelectedFlag = false;
+            }
+            if (YELLOWbtn.isSelected()) {
                 station2 = "YELLOW";
-            if (SONOLbtn.isSelected())
+                unSelectedFlag = false;
+            }
+            if (SONOLbtn.isSelected()) {
                 station3 = "SONOL";
+                unSelectedFlag = false;
+            }
+            if (unSelectedFlag) {
+                ErrorAlert.setTitle("Selection Error");
+                ErrorAlert.setHeaderText("According to your plan you must select 1 station.");
+                ErrorAlert.showAndWait();
+            } else {
+                managmentBoundary.changeSelectedCostumerStations(station1, station2, station3);
+                managmentBoundary.getCosManageTbale().setDisable(false);
+                primStage.close();
+            }
         }
-        managmentBoundary.changeSelectedCostumerStations(station1, station2, station3);
-        managmentBoundary.getCosManageTbale().setDisable(false);
-        primStage.close();
     }
-
-}
+}//end of choseStationBoundary.
