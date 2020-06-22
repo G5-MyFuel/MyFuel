@@ -43,6 +43,7 @@ public class ConfirmDiscountRatesController extends BasicController {
         ArrayList<Object> varArray = new ArrayList<>();
         varArray.addAll(paramArray);
         varArray.remove(0);
+        System.out.println(varArray);
         switch (paramArray.get(0)) {
             case "Get Discount Rates Data":
                 SqlAction sqlAction = new SqlAction(SqlQueryType.Get_DiscountRates_Table, varArray);

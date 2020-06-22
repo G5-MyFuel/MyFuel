@@ -1,6 +1,5 @@
 package boundary;
 
-import Contollers.GeneratingReportsStationManagerController;
 import Contollers.ViewReportsController;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -192,7 +191,7 @@ public class ViewReportsBoundary implements DataInitializable {
     /**
      * This method will send a query to bring year list Data for the selected station.
      */
-    public void getYearListData(){
+    public void getYearListData() {
 
         ArrayList<String> paramArray = new ArrayList<>();
         paramArray.add("Get YearList data");
@@ -212,16 +211,37 @@ public class ViewReportsBoundary implements DataInitializable {
      */
     public void setYearListData(ArrayList<String> resultList) {
 
-        System.out.println(resultList);
-        YearList  = FXCollections.observableArrayList(resultList);
+        YearList = FXCollections.observableArrayList(resultList);
         System.out.println(YearList);
+        ObservableList<String> emptyList = FXCollections.observableArrayList("");
+        ChooseReportQuarterCombo.setItems(emptyList);
         ChooseReportYearCombo.setItems(YearList);
-        if(resultList.size() == 0){
-            NoDataLabel.setLayoutX(38);
-            NoDataLabel.setLayoutY(195);
+        if (resultList.size() == 0) {
+            makePageInvisible();
             NoDataLabel.setText("No info available for this station number!");
-            NoDataLabel.setVisible(true);
-        }
+        } else
+            ChooseReportYearCombo.setVisible(true);
+    }
+
+    private void makePageInvisible() {
+        ChooseReportYearCombo.setVisible(false);
+        ChooseReportQuarterCombo.setVisible(false);
+        QuantityItemsStockTxt.setVisible(false);
+        ViewPurchasesReportTable.setVisible(false);
+        ViewQuantityReportTable.setVisible(false);
+        ViewTotalRevenueTXT.setVisible(false);
+        btnViewQuarterlyRevenueReport.setVisible(false);
+        btnViewPurchasesReport.setVisible(false);
+        btnViewQuantityItemsInStockReport.setVisible(false);
+        imgViewQuantityItemsInStockReport.setVisible(false);
+        imgViewPurchasesReport.setVisible(false);
+        imgViewQuarterlyRevenueReport.setVisible(false);
+        QuestionMark2.setVisible(false);
+        QuestionMark3.setVisible(false);
+        QuestionMark4.setVisible(false);
+        NoDataLabel.setLayoutX(38);
+        NoDataLabel.setLayoutY(195);
+        NoDataLabel.setVisible(true);
     }
 
     @Override
@@ -248,9 +268,6 @@ public class ViewReportsBoundary implements DataInitializable {
             NoDataLabel.setLayoutY(514);
             managerStation = EnterStationNumberTXT.getText();
             getYearListData();
-            ChooseReportYearCombo.setVisible(true);
-            ChooseReportQuarterCombo.setItems(quarterList);
-            ChooseReportQuarterCombo.setVisible(true);
 
             QuantityItemsStockTxt.setVisible(false);
             ViewPurchasesReportTable.setVisible(false);
@@ -258,26 +275,8 @@ public class ViewReportsBoundary implements DataInitializable {
             ViewTotalRevenueTXT.setVisible(false);
 
         } else {
-            System.out.println("fds");
-            ChooseReportYearCombo.setVisible(false);
-            ChooseReportQuarterCombo.setVisible(false);
-            QuantityItemsStockTxt.setVisible(false);
-            ViewPurchasesReportTable.setVisible(false);
-            ViewQuantityReportTable.setVisible(false);
-            ViewTotalRevenueTXT.setVisible(false);
-            btnViewQuarterlyRevenueReport.setVisible(false);
-            btnViewPurchasesReport.setVisible(false);
-            btnViewQuantityItemsInStockReport.setVisible(false);
-            imgViewQuantityItemsInStockReport.setVisible(false);
-            imgViewPurchasesReport.setVisible(false);
-            imgViewQuarterlyRevenueReport.setVisible(false);
-            QuestionMark2.setVisible(false);
-            QuestionMark3.setVisible(false);
-            QuestionMark4.setVisible(false);
-            NoDataLabel.setLayoutX(38);
-            NoDataLabel.setLayoutY(195);
+            makePageInvisible();
             NoDataLabel.setText("You must enter a station number!");
-            NoDataLabel.setVisible(true);
         }
     }
 
@@ -481,11 +480,13 @@ public class ViewReportsBoundary implements DataInitializable {
     @FXML
     void handleChooseReportYear(ActionEvent event) {
 
+        ChooseReportQuarterCombo.setItems(quarterList);
         NoDataLabel.setVisible(false);
         QuantityItemsStockTxt.setVisible(false);
         ViewPurchasesReportTable.setVisible(false);
         ViewQuantityReportTable.setVisible(false);
         ViewTotalRevenueTXT.setVisible(false);
+        ChooseReportQuarterCombo.setVisible(true);
     }
 
     /**
