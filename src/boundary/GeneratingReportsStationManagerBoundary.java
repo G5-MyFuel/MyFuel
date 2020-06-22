@@ -339,7 +339,6 @@ public class GeneratingReportsStationManagerBoundary implements DataInitializabl
         return thisToolTip;
     }
 
-
     @FXML
     void handleClicks(ActionEvent event) {
 

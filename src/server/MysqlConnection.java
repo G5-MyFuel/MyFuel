@@ -181,7 +181,7 @@ public class MysqlConnection {
         sqlArray[SqlQueryType.UPDATE_SCOOTER_INVENTORY_CUSTOMER_PURCHASE.getCode()] = "UPDATE `GasStation` SET `inventory_scooter`=? WHERE `StationNumber`=?";
 
 
-    /* *****************************************
+        /* *****************************************
          * ********** Costumer Management Queries ****************
          * *****************************************/
         sqlArray[SqlQueryType.GET_ALL_COSTUMER_TABLE.getCode()] = "SELECT* FROM Costumer AS C, User AS U WHERE C.ID = U.userID";
@@ -311,7 +311,7 @@ public class MysqlConnection {
                 "WHERE companyName = ? AND StationNumber = ? " +
                 "UNION SELECT `Date` FROM `ViewQuantityItemsStockReportsForAdmin` " +
                 "WHERE companyName = ? AND StationNumber = ?";
-                sqlArray[SqlQueryType.CheckIfExists_Quarterly_Report.getCode()] = "SELECT IF( EXISTS" +
+        sqlArray[SqlQueryType.CheckIfExists_Quarterly_Report.getCode()] = "SELECT IF( EXISTS" +
                 "(SELECT `TotalRevenue` FROM `ViewQuarterlyReportsForAdmin` WHERE `companyName` = ? AND `StationNumber` = ? " +
                 "AND `Quarterly` = quarter(?) AND `Date` = YEAR(?)), 1, 0)";
         sqlArray[SqlQueryType.View_Quarterly_Report.getCode()] = "SELECT `TotalRevenue` FROM `ViewQuarterlyReportsForAdmin` " +

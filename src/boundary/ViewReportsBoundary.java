@@ -187,9 +187,11 @@ public class ViewReportsBoundary implements DataInitializable {
 
         managerCompany = resultList.get(0);
         managerStation = resultList.get(1);
-        //getYearListData();
     }
 
+    /**
+     * This method will send a query to bring year list Data for the selected station.
+     */
     public void getYearListData(){
 
         ArrayList<String> paramArray = new ArrayList<>();
@@ -203,6 +205,11 @@ public class ViewReportsBoundary implements DataInitializable {
         myController.GetReportData(paramArray); //start the process that will ask server to execute quarry and get the table details
     }
 
+    /**
+     * This method will set the year list Data for the selected station.
+     *
+     * @param resultList - The result received from the DB
+     */
     public void setYearListData(ArrayList<String> resultList) {
 
         System.out.println(resultList);
