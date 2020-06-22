@@ -169,6 +169,16 @@ public class MysqlConnection {
         sqlArray[SqlQueryType.GET_ALL_MANAGER_STATIONS.getCode()] = "SELECT * FROM `GasStation` WHERE managerID = ?";
         sqlArray[SqlQueryType.UPDATE_FUEL_LIMIT_STOCK.getCode()] = "UPDATE `GasStation` SET `FUEL_LIMIT`= ? WHERE StationNumber = ?";
 
+        /* *****************************************************
+         * *************** FastFuel quarries. ****************
+         * *****************************************************/
+        sqlArray[SqlQueryType.GET_OWNER_DETAILS.getCode()] = "SELECT * FROM Costumer as C, User as U WHERE C.ID = ? AND U.userID = ?";
+        sqlArray[SqlQueryType.GET_VEHICLE_DETAILS.getCode()] = "SELECT* FROM Vehicle WHERE Vehicle.`Vehicle ID` = ?";
+        sqlArray[SqlQueryType.GET_ALL_STATIONS.getCode()] = "SELECT* FROM GasStation";
+
+
+
+
         sqlArray[SqlQueryType.GET_OPTIONAL_STATIONS.getCode()] = "Select gs.StationNumber, companyName,inventory_95 , inventory_scooter, inventory_diesel, FUEL_LIMIT " +
                 "from GasStation as gs , (SELECT u.userID,u.FuelCompany1,u.FuelCompany2,u.FuelCompany3 FROM User AS u where u.userID = ?)" +
                 "as ins WHERE gs.companyName = ins.FuelCompany1 or gs.companyName = ins.FuelCompany2 or gs.companyName = ins.FuelCompany3";

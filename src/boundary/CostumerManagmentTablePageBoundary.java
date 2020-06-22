@@ -219,6 +219,7 @@ public class CostumerManagmentTablePageBoundary implements DataInitializable {
                 Costumer temp = t.getTableView().getItems().get(t.getTablePosition().getRow());
                 temp.setPurchasePlan(t.getNewValue());
                 myController.updateCostumerDetailsInDb(SqlQueryType.UPDATE_COSTUMER_PURCHASE_PLAN, temp.getUserID(), temp.getPurchasePlan());
+                openStationPage();
             }
         });
     }

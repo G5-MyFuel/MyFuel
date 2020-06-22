@@ -11,162 +11,119 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="796.0" prefWidth="1062.0" stylesheets="@BGcss.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundary.fastFuelBoundary">
    <children>
-      <Button fx:id="getVehicleButoon" layoutX="894.0" layoutY="42.0" mnemonicParsing="false" onAction="#getVehicleHandler" prefHeight="69.0" prefWidth="130.0" text="Get Vehicle" visible="false" />
-      <JFXTextField fx:id="literAmountTxt" labelFloat="true" layoutX="36.0" layoutY="161.0" prefHeight="56.0" prefWidth="358.0" promptText="Please enter amount in liters.">
+      <Label layoutX="14.0" layoutY="59.0" text="NFC sensor detected  vehicle number :">
          <font>
-            <Font size="26.0" />
+            <Font name="System Bold Italic" size="18.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0" startX="0.19523809523809524" startY="1.0">
+               <stops>
+                  <Stop color="#2750d7" />
+                  <Stop color="#00d9ff" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+      <JFXTextField fx:id="vehicleIDinput" labelFloat="true" layoutX="378.0" layoutY="54.0" prefHeight="38.0" prefWidth="245.0" promptText="Enter VehicleID and press enter">
+         <font>
+            <Font size="17.0" />
          </font>
       </JFXTextField>
-      <VBox layoutX="873.0" layoutY="156.0">
+      <VBox layoutX="26.0" layoutY="216.0">
          <children>
-            <Label text="Vehicle fuel type">
+            <Label text="Please Select pump:">
                <font>
-                  <Font name="Serif Bold" size="18.0" />
+                  <Font name="System Bold Italic" size="18.0" />
                </font>
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0" startX="0.19523809523809524" startY="1.0">
+                     <stops>
+                        <Stop color="#2750d7" />
+                        <Stop color="#00d9ff" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </textFill>
             </Label>
-            <JFXRadioButton fx:id="gasolinRbtn" text="Gasolin-95" textFill="#209409">
-               <font>
-                  <Font size="23.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="15.0" />
-               </VBox.margin>
-            </JFXRadioButton>
-            <JFXRadioButton fx:id="diselRbtn" text="Diesel">
-               <font>
-                  <Font size="23.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="15.0" />
-               </VBox.margin>
-            </JFXRadioButton>
-            <JFXRadioButton fx:id="scooterRbtn" prefHeight="34.0" prefWidth="173.0" text="Scooter-Fuel" textFill="RED">
-               <font>
-                  <Font size="23.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="15.0" />
-               </VBox.margin>
-            </JFXRadioButton>
-         </children>
-      </VBox>
-      <VBox layoutX="308.0" layoutY="161.0" />
-      <HBox layoutX="36.0" layoutY="297.0">
-         <children>
-            <JFXRadioButton fx:id="pump1" text="pump-1">
-               <font>
-                  <Font name="System Bold" size="23.0" />
-               </font>
-               <HBox.margin>
-                  <Insets right="10.0" />
-               </HBox.margin>
-               <graphic>
+            <HBox>
+               <children>
                   <ImageView fitHeight="56.0" fitWidth="55.0">
                      <image>
                         <Image url="@../media/icons/1_100px.png" />
                      </image>
                   </ImageView>
-               </graphic>
-            </JFXRadioButton>
-            <JFXRadioButton fx:id="pump2" text="pump-2">
-               <font>
-                  <Font name="System Bold" size="23.0" />
-               </font>
-               <HBox.margin>
-                  <Insets left="20.0" />
-               </HBox.margin>
-               <graphic>
+                  <JFXRadioButton fx:id="pump1" prefHeight="58.0" prefWidth="119.0" text="pump-1">
+                     <font>
+                        <Font name="System Bold" size="23.0" />
+                     </font>
+                  </JFXRadioButton>
+               </children>
+            </HBox>
+            <HBox prefHeight="31.0" prefWidth="200.0">
+               <children>
                   <ImageView fitHeight="56.0" fitWidth="55.0">
                      <image>
                         <Image url="@../media/icons/icons8_2_100px.png" />
                      </image>
                   </ImageView>
-               </graphic>
-            </JFXRadioButton>
-            <JFXRadioButton fx:id="pump3" text="pump-3">
-               <font>
-                  <Font name="System Bold" size="23.0" />
-               </font>
-               <HBox.margin>
-                  <Insets left="20.0" />
-               </HBox.margin>
-               <graphic>
+                  <JFXRadioButton fx:id="pump2" prefHeight="56.0" prefWidth="119.0" text="pump-2">
+                     <font>
+                        <Font name="System Bold" size="23.0" />
+                     </font>
+                  </JFXRadioButton>
+               </children>
+            </HBox>
+            <HBox>
+               <children>
                   <ImageView fitHeight="56.0" fitWidth="55.0">
                      <image>
                         <Image url="@../media/icons/3_100px.png" />
                      </image>
                   </ImageView>
-               </graphic>
-            </JFXRadioButton>
-         </children>
-      </HBox>
-      <Label layoutX="36.0" layoutY="270.0" text="Select pump:">
-         <font>
-            <Font name="Serif Bold" size="23.0" />
-         </font>
-      </Label>
-      <Label fx:id="customerIdLable" layoutX="638.0" layoutY="57.0" prefHeight="20.0" prefWidth="121.0" text="get customerID">
-         <font>
-            <Font name="Serif Bold" size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="26.0" layoutY="91.0" prefHeight="20.0" prefWidth="141.0" text="station number:">
-         <font>
-            <Font name="Serif Bold" size="18.0" />
-         </font>
-      </Label>
-      <Label fx:id="stationNumberLable" layoutX="167.0" layoutY="91.0" prefHeight="20.0" prefWidth="141.0">
-         <font>
-            <Font name="Serif Bold" size="18.0" />
-         </font>
-      </Label>
-      <Button fx:id="startFuelingBtn" layoutX="26.0" layoutY="381.0" mnemonicParsing="false" onMouseClicked="#startFuelingProccess" prefHeight="67.0" prefWidth="257.0" style="-fx-background-radius: 50;" text="Start fueling" textFill="RED">
+                  <JFXRadioButton fx:id="pump3" prefHeight="57.0" prefWidth="119.0" text="pump-3">
+                     <font>
+                        <Font name="System Bold" size="23.0" />
+                     </font>
+                  </JFXRadioButton>
+               </children>
+            </HBox>
+         </children></VBox>
+      <Button fx:id="startFuelingBtn" layoutX="402.0" layoutY="431.0" mnemonicParsing="false" onMouseClicked="#startFuelingProccess" prefHeight="67.0" prefWidth="257.0" style="-fx-background-radius: 50;" text="Start fueling" textFill="RED">
          <font>
             <Font name="System Bold" size="22.0" />
          </font>
       </Button>
-      <Label fx:id="vehicleInfoLabel" layoutX="29.0" layoutY="57.0" prefHeight="20.0" prefWidth="599.0" text="NFC sensor detected  vehicle number                                   customer number ">
-         <font>
-            <Font name="Serif Bold" size="18.0" />
-         </font>
-      </Label>
-      <Label fx:id="customerIdLable1" layoutX="638.0" layoutY="81.0" prefHeight="20.0" prefWidth="121.0" text="             ">
-         <font>
-            <Font name="Serif Bold" size="18.0" />
-         </font>
-      </Label>
-      <Label fx:id="carNumberLable" layoutX="339.0" layoutY="57.0" prefHeight="20.0" prefWidth="121.0" text="             ">
-         <font>
-            <Font name="Serif Bold" size="18.0" />
-         </font>
-      </Label>
-      <Pane fx:id="paneFinishRefuel" layoutX="29.0" layoutY="448.0" prefHeight="346.0" prefWidth="1015.0">
+      <Pane fx:id="paneFinishRefuel" layoutX="88.0" layoutY="498.0" prefHeight="263.0" prefWidth="886.0">
          <children>
             <AnchorPane layoutX="458.0" layoutY="44.0" prefHeight="141.0" prefWidth="248.0" style="-fx-background-color: #8abbeb;" styleClass="card-unpadded">
                <children>
                   <Pane layoutX="-1.0" prefHeight="141.0" prefWidth="23.0" style="-fx-background-color: #007390;" />
-                  <Label layoutX="182.0" layoutY="14.0" prefHeight="67.0" prefWidth="89.0" styleClass="custom-white-title-label" />
-                  <Text layoutX="29.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price:  *" wrappingWidth="343.8779296875">
+                  <Text layoutX="29.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price:  " wrappingWidth="343.8779296875">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Text>
-                  <Label fx:id="pricaeCounter" layoutX="84.0" layoutY="47.0" text="price counter">
+                  <Text fx:id="subscriptionInfo2" layoutX="29.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*According to your business terms" wrappingWidth="256.8779296875">
                      <font>
-                        <Font name="System Bold Italic" size="32.0" />
+                        <Font size="14.0" />
                      </font>
-                  </Label>
+                  </Text>
+                  <Text fx:id="priceCounterLabel" layoutX="29.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="price counter" wrappingWidth="327.35449880361557">
+                     <font>
+                        <Font name="System Bold" size="35.0" />
+                     </font>
+                  </Text>
                </children>
             </AnchorPane>
             <AnchorPane layoutX="50.0" layoutY="44.0" prefHeight="83.0" prefWidth="324.0" style="-fx-background-color: #8abbeb;" styleClass="card-unpadded">
                <children>
                   <Pane layoutX="-1.0" prefHeight="141.0" prefWidth="23.0" style="-fx-background-color: #007390;" />
-                  <Label layoutX="182.0" layoutY="14.0" prefHeight="67.0" prefWidth="89.0" styleClass="custom-white-title-label" />
                   <Text layoutX="29.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liters:" wrappingWidth="343.8779296875">
                      <font>
                         <Font size="18.0" />
@@ -179,13 +136,137 @@
                   </Text>
                </children>
             </AnchorPane>
-            <Text fx:id="subscriptionInfo2" layoutX="54.0" layoutY="201.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*According to your business terms in the XXXX subscription And the current operation is YYYY" wrappingWidth="403.8779296875" />
-            <Text fx:id="subscriptionInfo1" fill="#6190ff" layoutX="271.0" layoutY="273.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fueling ended successfully!" wrappingWidth="335.8779296875">
+            <Text fx:id="fuelEndedLabel" fill="#6190ff" layoutX="50.0" layoutY="251.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fueling ended successfully!" wrappingWidth="335.8779296875">
                <font>
                   <Font name="System Bold" size="25.0" />
                </font>
             </Text>
+            <HBox layoutX="458.0" layoutY="191.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Your subscription type is:">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </Text>
+                  <Text fx:id="costumerSubscriptionType" strokeType="OUTSIDE" strokeWidth="0.0" text="subscriptionType">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="25.0" />
+                     </HBox.margin>
+                  </Text>
+               </children>
+            </HBox>
          </children>
       </Pane>
+      <VBox layoutX="417.0" layoutY="216.0" prefHeight="198.0" prefWidth="227.0" style="-fx-background-color: #F5F5F5; -fx-background-radius: 50;">
+         <children>
+            <Label text="Details:">
+               <VBox.margin>
+                  <Insets left="75.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="System Bold Italic" size="18.0" />
+               </font>
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0" startX="0.19523809523809524" startY="1.0">
+                     <stops>
+                        <Stop color="#2750d7" />
+                        <Stop color="#00d9ff" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </textFill>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Label>
+            <HBox>
+               <children>
+                  <Label prefHeight="20.0" prefWidth="111.0" text="Owner ID:">
+                     <font>
+                        <Font name="Serif Bold" size="18.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Label>
+                  <Text fx:id="ownerIDtxt" strokeType="OUTSIDE" strokeWidth="0.0" text="ownerID">
+                     <HBox.margin>
+                        <Insets left="15.0" />
+                     </HBox.margin>
+                  </Text>
+               </children>
+               <VBox.margin>
+                  <Insets top="15.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox>
+               <children>
+                  <Label prefHeight="20.0" prefWidth="111.0" text="Vehicle ID:">
+                     <font>
+                        <Font name="Serif Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Text fx:id="vehicleIDtxt" strokeType="OUTSIDE" strokeWidth="0.0" text="Vehicle ID">
+                     <HBox.margin>
+                        <Insets left="15.0" />
+                     </HBox.margin>
+                  </Text>
+               </children>
+               <VBox.margin>
+                  <Insets top="15.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox>
+               <children>
+                  <Label prefHeight="20.0" prefWidth="111.0" text="Fuel Type:">
+                     <font>
+                        <Font name="Serif Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Text fx:id="fuelTypeTxt" strokeType="OUTSIDE" strokeWidth="0.0" text="Fuel Type">
+                     <HBox.margin>
+                        <Insets left="15.0" />
+                     </HBox.margin>
+                  </Text>
+               </children>
+               <VBox.margin>
+                  <Insets top="15.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox>
+               <children>
+                  <Label text="Station Name:">
+                     <font>
+                        <Font name="Serif Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Text fx:id="stationNameTxt" strokeType="OUTSIDE" strokeWidth="0.0" text="station Name">
+                     <HBox.margin>
+                        <Insets left="15.0" />
+                     </HBox.margin>
+                  </Text>
+               </children>
+               <VBox.margin>
+                  <Insets top="15.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
+      <ImageView fx:id="companyImage" fitHeight="150.0" fitWidth="200.0" layoutX="754.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true" />
+      <JFXTextField fx:id="literAmountInput" labelFloat="true" layoutX="26.0" layoutY="118.0" prefHeight="56.0" prefWidth="344.0" promptText="Please enter amount in liters">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </JFXTextField>
+      <ImageView fx:id="zikok" fitHeight="356.0" fitWidth="599.0" layoutX="349.0" layoutY="346.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../media/CostumerRegisterationMedia/oie_oie_twinkles.gif" />
+         </image>
+      </ImageView>
    </children>
 </Pane>

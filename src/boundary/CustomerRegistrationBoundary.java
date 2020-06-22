@@ -514,8 +514,6 @@ public class CustomerRegistrationBoundary implements DataInitializable {
         formValidation.isOnlyNumbers(VehicleIDtxt, "Vehicle ID");
         formValidation.ExactlyInLengthValidation(VehicleIDtxt, "Vehicle ID", 7);
         formValidation.isEmptyFieldValidation(VehicleIDtxt, "Vehicle ID");
-
-
     }
 
     /**

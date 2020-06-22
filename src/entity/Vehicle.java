@@ -1,5 +1,7 @@
 package entity;
 
+import common.assets.enums.FuelTypes;
+
 import java.util.Objects;
 
 
@@ -13,11 +15,13 @@ public class Vehicle {
     private String VehicleID;
     private String GasType;
     private String ownerID;
+    private FuelTypes fuelTypes;
 
     public Vehicle(String ownerID,String vehicleID, String gasType) {
         this.VehicleID = vehicleID;
         this.GasType = gasType;
         this.ownerID = ownerID;
+        this.fuelTypes = FuelTypes.fromString(gasType);
     }
     public Vehicle(String vehicleID, String gasType) {
         this.VehicleID = vehicleID;
@@ -40,6 +44,13 @@ public class Vehicle {
         GasType = gasType;
     }
 
+    public FuelTypes getFuelTypes() {
+        return fuelTypes;
+    }
+
+    public void setFuelTypes(FuelTypes fuelTypes) {
+        this.fuelTypes = fuelTypes;
+    }
 
     //need to implements comparator for table view.
     @Override

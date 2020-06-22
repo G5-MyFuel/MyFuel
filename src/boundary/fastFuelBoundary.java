@@ -5,13 +5,17 @@ import Contollers.FormValidation;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import common.assets.enums.FuelTypes;
-import entity.*;
-import javafx.event.ActionEvent;
+import entity.Costumer;
+import entity.GasStation;
+import entity.Prices;
+import entity.Vehicle;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -37,34 +41,28 @@ public class fastFuelBoundary implements DataInitializable {
     /**
      * temp  variables
      */
-    private int SaleNumber;
-    private String CarFuelType;
     private ToggleGroup group = new ToggleGroup();
-    private FormValidation formValidation;
+    private FormValidation LiterAmountValidato,vehicleNumberValidator;
     private Alert ErrorAlert = new Alert(Alert.AlertType.ERROR);
-    private Costumer chosenCos;
-    private Vehicle costumerVehicles;
+    private Costumer owner;
+    private Vehicle correctVehicleFueling;
+    private String correctCompanyName = "NULL";
+    private Image image;
+    private ArrayList<GasStation> allStation = new ArrayList<>();
+    private GasStation correctStation;
+    private ArrayList<Vehicle> allVehicleArray;
     /**
      * gui variables
      */
-    @FXML
-    private Button getVehicleButoon;
 
     @FXML
-    private Label pricaeCounter;
-
-
-    @FXML
-    private JFXTextField literAmountTxt;
+    private Text priceCounterLabel;
 
     @FXML
-    private JFXRadioButton gasolinRbtn;
+    private JFXTextField literAmountInput;
 
     @FXML
-    private JFXRadioButton diselRbtn;
-
-    @FXML
-    private JFXRadioButton scooterRbtn;
+    private JFXTextField vehicleIDinput;
 
     @FXML
     private JFXRadioButton pump1;
@@ -76,35 +74,32 @@ public class fastFuelBoundary implements DataInitializable {
     private JFXRadioButton pump3;
 
     @FXML
-    private Text subscriptionInfo;
+    private Text costumerSubscriptionType;
 
     @FXML
-    private Label vehicleInfoLabel;
+    private Text ownerIDtxt;
 
     @FXML
-    private Label customerIdLable;
+    private Text stationNameTxt;
 
-    @FXML
-    private Label stationNumberLable;
     @FXML
     private Button startFuelingBtn;
 
     @FXML
-    private Label carNumberLable;
+    private Text vehicleIDtxt;
+    @FXML
+    private Text fuelTypeTxt;
 
     @FXML
     private Pane paneFinishRefuel;
 
     @FXML
     private Text literCountertxt;
-
     @FXML
-    private Text subscriptionInfo1;
-
+    private ImageView companyImage;
     @FXML
-    void getVehicleHandler(ActionEvent event) {
+    private ImageView zikok;
 
-    }
 
 
     @Override
@@ -121,40 +116,46 @@ public class fastFuelBoundary implements DataInitializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        //
         pump1.setToggleGroup(group);
         pump2.setToggleGroup(group);
         pump3.setToggleGroup(group);
-        formValidation = new FormValidation();
-        getVehicleButoon.setVisible(false);
-        paneFinishRefuel.setVisible(false);
-        subscriptionInfo1.setVisible(false);
-        myController.getCustomer();
+        //
+        LiterAmountValidato = new FormValidation();
+        vehicleNumberValidator = new FormValidation();
         validateFields();
-        pricaeCounter.setVisible(false);
+        //
+        paneFinishRefuel.setVisible(false);
+        priceCounterLabel.setVisible(false);
         startFuelingBtn.setDisable(true);
-    }
-    private void validateFields(){
-        formValidation.isOnlyNumbers(literAmountTxt, "Liter Amount");
-        formValidation.isEmptyFieldValidation(literAmountTxt, "Liter Amount");
-        formValidation.numberPositiveValidation(literAmountTxt,"Liter Amount");
-        formValidation.maxFloatSizeValidation(literAmountTxt,"Liter Amount",200);
-    }
+        zikok.setVisible(false);
+        //get necessary details from db.
+        myController.getAllStations();
+        myController.getVehicleTable();
 
-    /**
-     * A method responsible for keeping the purchase information in DB
-     * And updating of available inventory
-     */
-    public void updateInvatoryInDB() {
-        //array of station number, fuel type ולשלוח
-        //עדכון של ההזמנה ב2 טבלאות
-      /*
-      myController.insertPurcheseToDB();
-      myController.insertPurcheseFastFuelToDB();
-
-        //עדכון של המלאי ובדיקה אם הוא ירד מתחת ללימיט
-        /*
-        myController.updateInvetory();
-*/
+        //setting a listener to the vehicle text area:
+        vehicleIDinput.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                if (keyEvent.getCode() == KeyCode.ENTER) {
+                    String text = vehicleIDinput.getText();
+                    boolean length = text.length() != 7 ? false:true;
+                    boolean isOnlyNumber = text.matches("\\d*");
+                    if (isOnlyNumber && length && !vehicleIDinput.getText().isEmpty()) {
+                        myController.getVehicleDetails(text);
+                        literAmountInput.requestFocus();
+                    } else if(!isVehicleExistInDb(text)){
+                        ErrorAlert.setTitle("Internal Error");
+                        ErrorAlert.setHeaderText("Vehicle does not exists in data base.");
+                        ErrorAlert.showAndWait();
+                    } else{
+                        ErrorAlert.setTitle("Internal Error");
+                        ErrorAlert.setHeaderText("Wrong Vehicle ID");
+                        ErrorAlert.showAndWait();
+                    }
+                }
+            }
+        });
     }
 
     /**
@@ -164,47 +165,47 @@ public class fastFuelBoundary implements DataInitializable {
      */
     @FXML
     void startFuelingProccess(MouseEvent event) {
-        //calculatePrice();
-
-        if(!group.getSelectedToggle().isSelected()){
+        if (!group.getSelectedToggle().isSelected()) {
             ErrorAlert.setTitle("Internal Error");
-            ErrorAlert.setHeaderText("need to chose pump.");
+            ErrorAlert.setHeaderText("You need to chose a pump first.");
             ErrorAlert.showAndWait();
-        }
-        else if(formValidation.isEmptyField() && formValidation.isNumberPositive() && formValidation.isOnlyNumbers() ){
-
-
-
-
-            Prices p = new Prices(chosenCos.getUserID(),Double.valueOf(literAmountTxt.getText()),FuelTypes.Gasoline95,chosenCos.getPurchasePlanAsEnum(),chosenCos.getPricingModelTypeAsEnum());
-            Double totalPrice = p.calculateTotalPrice();
-        paneFinishRefuel.setVisible(true);
-        Thread fuelingCounterThread = new Thread() {
-            public void run() {
-                Integer fuelCounter = Integer.parseInt(literAmountTxt.getText());
-                Integer literCounter = 0;
-                for (; ; ) {
-                    startFuelingBtn.setDisable(true);
-                    if (fuelCounter == 0) {
-                        subscriptionInfo1.setVisible(true);
-                        break;
+        } else if (LiterAmountValidato.isEmptyField() && LiterAmountValidato.isNumberPositive() && LiterAmountValidato.isOnlyNumbers()) {
+            paneFinishRefuel.setVisible(true);
+            Thread fuelingCounterThread = new Thread() {
+                public void run() {
+                    Integer fuelAmountToFueling = Integer.parseInt(literAmountInput.getText());
+                    Integer literCounter = 0;
+                    for (; ; ) {
+                        startFuelingBtn.setDisable(true);
+                        if (fuelAmountToFueling == 0) {
+                            costumerSubscriptionType.setVisible(true);
+                            break;
+                        }
+                        literCounter++;
+                        literCountertxt.setText(literCounter.toString());
+                        fuelAmountToFueling--;
+                        try {
+                            sleep(250);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                     }
-                    literCounter++;
-                    literCountertxt.setText(literCounter.toString());
-                    fuelCounter--;
+                    zikok.setVisible(true);
+                    priceCounterLabel.setText("Daniel need to calculate me :D");
+                    priceCounterLabel.setVisible(true);
+                    startFuelingBtn.setDisable(false);
                     try {
-                        sleep(250);
+                        sleep(2500);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
+                    zikok.setVisible(false);
+                    paneFinishRefuel.setVisible(false);
+                    startFuelingBtn.setDisable(true);
                 }
-                System.out.println(totalPrice.toString());
-                pricaeCounter.setText(totalPrice.toString());
-                pricaeCounter.setVisible(true);
-                startFuelingBtn.setDisable(false);
-            }
-        };
-        fuelingCounterThread.start();}else{
+            };
+            fuelingCounterThread.start();
+        } else {
             ErrorAlert.setTitle("Internal Error");
             ErrorAlert.setHeaderText("One or more of the fields is empty.");
             ErrorAlert.showAndWait();
@@ -213,80 +214,111 @@ public class fastFuelBoundary implements DataInitializable {
     }
 
     /**
-     * A method that gets a list of gas stations,
-     * Selects one at random and places it as a current station
+     * the following method will calculate price of purchase by giving the owner,
+     * amount of liters and fuelType.
      *
-     * @param resultList
+     * @param owner
+     * @param amountOfLiters
+     * @param fuelType
+     * @return Double total price.
      */
-    public void setStationsInArrayAndChooseRandomly(ArrayList<GasStation> resultList) {
-        User myUser = new User();
-        // gs.StationNumber, companyName, inventory_95 , inventory_scooter, inventory_diesel
-
-        Random r = new Random();
-        int low = 1;
-        int high = resultList.size();
-        int result = r.nextInt(high - low) + low;
-        stationNumberLable.setText(resultList.get(result).getStationNumber().toString());
-
+    private Double calculatePrice(Costumer owner, Double amountOfLiters, FuelTypes fuelType) {
+        Prices p = new Prices(owner.getUserID(), amountOfLiters, fuelType, owner.getPurchasePlanAsEnum(), owner.getPricingModelTypeAsEnum());
+        return p.calculateTotalPrice();
     }
 
-    /**
-     * A method that gets a list of customers,
-     * Selects one at random and sends a request for a query that will return the vehicles of the selected customer
-     *
-     * @param costumerTable
-     */
-    public void setCostumersArry(ArrayList<Costumer> costumerTable) {
-        Random r = new Random();
-        int low = 0;
-        int high = costumerTable.size();
-        int result = r.nextInt(high - low);
-        chosenCos = costumerTable.get(result);
-
-        customerIdLable.setText(chosenCos.getUserID());
-        myController.getCarsForCustomer(chosenCos.getUserID());
+    public void setCorrectVehicleFueling(Vehicle v) {
+        correctVehicleFueling = v;
     }
-    /**
-     * A method that gets a list of vehicles,
-     * Randomly selects one and sends a query to return the selected customer's possible stations
-     *
-     * @param VehicalList
-     */
-    public void setCarOfCustomer(ArrayList<Vehicle> VehicalList) {
-        Random r = new Random();
-        int low = 1;
-        int high = VehicalList.size();
-        try {
-            int result = r.nextInt(high - low) + low;
-            costumerVehicles = VehicalList.get(result);
-            carNumberLable.setText(VehicalList.get(result).getVehicleID());
-            CarFuelType = VehicalList.get(result).getGasType();
-        } catch (IllegalArgumentException ex) {
-            customerIdLable.setText("305286965");
-            carNumberLable.setText("6549875");
+
+
+    public void setOwner(Costumer owner) {
+        this.owner = owner;
+        //setting owner details
+        ownerIDtxt.setText(owner.getUserID());
+        vehicleIDtxt.setText(correctVehicleFueling.getVehicleID());
+        fuelTypeTxt.setText(correctVehicleFueling.getGasType());
+        costumerSubscriptionType.setText(owner.getPricingModel());
+        //get random company from owner companies.
+        Random rand = new Random();
+        while (correctCompanyName.equals("NULL")) {
+            correctCompanyName = owner.getFuelCompany().get(rand.nextInt(3));
         }
-
-        String customerID = customerIdLable.getText();
-        //choose random station to refuel:
-        myController.getOptionalStationForCustomer(customerID);
+        System.out.println(correctCompanyName);
+        //set the image of the company.
+        if (correctCompanyName.equals("PAZ")) {
+            image = new Image(getClass().getResourceAsStream("../media/CostumerRegisterationMedia/pazLogoimg.png"));
+            companyImage.setImage(image);
+        }
+        else if (correctCompanyName.equals("SONOL")) {
+            image = new Image(getClass().getResourceAsStream("../media/CostumerRegisterationMedia/sonollogoimg.png"));
+            companyImage.setImage(image);
+        }
+        else if (correctCompanyName.equals("YELLOW")) {
+            image = new Image(getClass().getResourceAsStream("../media/CostumerRegisterationMedia/yellowLogo.png"));
+            companyImage.setImage(image);
+        }
+        //chose the first station that fit the client company name.
+        for (GasStation station : allStation) {
+            if (station.getCompanyName().equals(correctCompanyName)) {
+                correctStation = station;
+            }
+        }
+        stationNameTxt.setText(correctStation.getGasStationName());
         startFuelingBtn.setDisable(false);
 
-        /*while(true)
-        {//ברגע שמגיעים לסף הדלק שביקשו - לעדכן את ההזמנה בDB
-            if(literCounter.getText().equals(literAmountTxt.getText())) {
-                this.updateInvatoryInDB();
-            }
-        }*/
     }
 
+    public void setAllStation(ArrayList<GasStation> stations) {
+        allStation = stations;
+    }
+
+    private void validateFields() {
+        LiterAmountValidato.isOnlyNumbers(literAmountInput, "Liter Amount");
+        LiterAmountValidato.isEmptyFieldValidation(literAmountInput, "Liter Amount");
+        LiterAmountValidato.numberPositiveValidation(literAmountInput, "Liter Amount");
+        LiterAmountValidato.maxFloatSizeValidation(literAmountInput, "Liter Amount", 200);
+        //
+    }
+    /**
+     * this method will check if vehicle exist in db
+     *
+     * @param vehicleID
+     * @return boolean
+     */
+    public boolean isVehicleExistInDb(String vehicleID) {
+        for (Vehicle v : allVehicleArray) {
+            if (v.getVehicleID().equals(vehicleID))
+                return true;
+        }
+        return false;
+    }
+
+    public void setAllVehicleArray(ArrayList<Vehicle> allVehicleArray) {
+        this.allVehicleArray = allVehicleArray;
+    }
+}//end of the class
+
 
 /*
-    public ArrayList<Costumer> getCostumerTable() {
-       // return costumerTable;
-    }*/
-}
+    /**
+     * A method responsible for keeping the purchase information in DB
+     * And updating of available inventory
 
-/*
+    public void updateInvatoryInDB() {
+        //array of station number, fuel type ולשלוח
+        //עדכון של ההזמנה ב2 טבלאות
+
+      myController.insertPurcheseToDB();
+      myController.insertPurcheseFastFuelToDB();
+
+        //עדכון של המלאי ובדיקה אם הוא ירד מתחת ללימיט
+
+        myController.updateInvetory();
+    }
+
+ */
+    /*
 נתונים שצריך לשמור:
      String purchaseID;//דניאל
      //String customerID;//
@@ -305,5 +337,14 @@ public class fastFuelBoundary implements DataInitializable {
      //String SONOL;
      //String YELLOW;
 
-
- */
+*/
+/*
+    public ArrayList<Costumer> getCostumerTable() {
+       // return costumerTable;
+    }*/
+ /*while(true)
+        {//ברגע שמגיעים לסף הדלק שביקשו - לעדכן את ההזמנה בDB
+            if(literCounter.getText().equals(literAmountTxt.getText())) {
+                this.updateInvatoryInDB();
+            }
+        }*/

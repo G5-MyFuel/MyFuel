@@ -65,7 +65,7 @@ public class choseStationBoundary implements DataInitializable {
         primStage.setTitle("Chose your favourite stations");
         if (data instanceof CostumerManagmentTablePageBoundary)
             managmentBoundary = (CostumerManagmentTablePageBoundary) data;
-
+        managmentBoundary.getCosManageTbale().setDisable(false);
         if (managmentBoundary.getCosManageTbale().getSelectionModel().getSelectedItem().getPurchasePlan().equals("Exclusive")) {
             exclusiveVbox.setVisible(true);
             MultipleVbox.setVisible(false);
@@ -73,6 +73,8 @@ public class choseStationBoundary implements DataInitializable {
             exclusiveVbox.setVisible(false);
             MultipleVbox.setVisible(true);
         }
+        managmentBoundary.getCosManageTbale().setDisable(true);
+
 
         primStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override

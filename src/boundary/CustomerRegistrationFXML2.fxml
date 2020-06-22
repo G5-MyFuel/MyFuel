@@ -328,7 +328,7 @@
                                              <graphic>
                                                 <ImageView fx:id="SONOLimg" fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
-                                                      <Image url="@../media/CostumerRegisterationMedia/sonollogoimg.jpg" />
+                                                      <Image url="@../media/CostumerRegisterationMedia/sonollogoimg.png" />
                                                    </image>
                                                 </ImageView>
                                              </graphic></JFXRadioButton>
@@ -373,7 +373,7 @@
                                              <graphic>
                                                 <ImageView fitHeight="33.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
-                                                      <Image url="@../media/CostumerRegisterationMedia/sonollogoimg.jpg" />
+                                                      <Image url="@../media/CostumerRegisterationMedia/sonollogoimg.png" />
                                                    </image>
                                                 </ImageView>
                                              </graphic>
