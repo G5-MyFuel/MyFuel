@@ -181,7 +181,7 @@ public class MysqlConnection {
         sqlArray[SqlQueryType.UPDATE_SCOOTER_INVENTORY_CUSTOMER_PURCHASE.getCode()] = "UPDATE `GasStation` SET `inventory_scooter`=? WHERE `StationNumber`=?";
 
 
-    /* *****************************************
+        /* *****************************************
          * ********** Costumer Management Queries ****************
          * *****************************************/
         sqlArray[SqlQueryType.GET_ALL_COSTUMER_TABLE.getCode()] = "SELECT* FROM Costumer AS C, User AS U WHERE C.ID = U.userID";
@@ -215,13 +215,13 @@ public class MysqlConnection {
          * *****************************************************/
         sqlArray[SqlQueryType.GET_ALL_ORDER_TO_SUPPLY_FOR_STATION_MANAGER.getCode()] = "SELECT OrderNumber,companyName,StationNum,FuelType,Quantity,OrderStatus,managerID FROM OrderForStock as ofs, GasStation as gs, User as u WHERE ofs.StationNum=gs.StationNumber and ofs.GasCompanyName=gs.companyName and ofs.OrderStatus=\"New\" and u.userID=gs.managerID and gs.managerID=?";
         sqlArray[SqlQueryType.UPDATE_STATUS_TO_IN_TREATMENT.getCode()] = "UPDATE `OrderForStock` SET `OrderStatus` = \"In treatment\" WHERE `OrderNumber` = ?";
-        sqlArray[SqlQueryType.GET_ALL_ORDER_WITH_STATUS_DONE.getCode()] = "SELECT OrderNumber,StationNumber FROM OrderForStock as ofs, GasStation as gs, User as u WHERE ofs.StationNum=gs.StationNumber and ofs.GasCompanyName=gs.companyName and ofs.OrderStatus=\"Done\" and gs.managerID=u.userID and gs.managerID=?";
+        sqlArray[SqlQueryType.GET_ALL_ORDER_WITH_STATUS_DONE.getCode()] = "SELECT OrderNumber,StationNumber,FuelType,Quantity FROM OrderForStock as ofs, GasStation as gs, User as u WHERE ofs.StationNum=gs.StationNumber and ofs.GasCompanyName=gs.companyName and ofs.OrderStatus=\"Done\" and gs.managerID=u.userID and gs.managerID=?";
         sqlArray[SqlQueryType.UPDATE_STATUS_TO_VIEWED.getCode()] = "UPDATE `OrderForStock` SET `OrderStatus` = \"Viewed\" WHERE `OrderNumber` = ?";
 
         /* *****************************************
          * ********** Orders From Supplier Queries ****************
          * *****************************************/
-        sqlArray[SqlQueryType.GET_ALL_ORDERS_FROM_SUPPLIER_TABLE.getCode()] = "SELECT OrderNumber,OrderStatus,userFirstName,userLastName,StationNumber,OrderDate,FuelType,Quantity,GasCompanyName,managerID,userEmail FROM OrderForStock as ofs, GasStation as gs, User as u WHERE ofs.StationNum=gs.StationNumber and ofs.GasCompanyName=gs.companyName and ofs.OrderStatus=\"In treatment\" and gs.managerID=u.userID ";
+        sqlArray[SqlQueryType.GET_ALL_ORDERS_FROM_SUPPLIER_TABLE.getCode()] = "SELECT OrderNumber,OrderStatus,userFirstName,userLastName,StationNumber,OrderDate,FuelType,Quantity,GasCompanyName,managerID,userEmail,inventory_95,inventory_scooter,inventory_diesel FROM OrderForStock as ofs, GasStation as gs, User as u WHERE ofs.StationNum=gs.StationNumber and ofs.GasCompanyName=gs.companyName and ofs.OrderStatus=\"In treatment\" and gs.managerID=u.userID ";
         sqlArray[SqlQueryType.UPDATE_STATUS_TO_DONE.getCode()] = "UPDATE `OrderForStock` SET `OrderStatus`= \"Done\" WHERE `OrderNumber`= ?";
         sqlArray[SqlQueryType.UPDATE_95_INVENTORY.getCode()] = "UPDATE `GasStation` SET `inventory_95`=? WHERE `managerID`=? and `StationNumber`=?";
         sqlArray[SqlQueryType.UPDATE_DIESEL_INVENTORY.getCode()] = "UPDATE `GasStation` SET `inventory_diesel`=? WHERE `managerID`=? and `StationNumber`=?";
@@ -311,7 +311,7 @@ public class MysqlConnection {
                 "WHERE companyName = ? AND StationNumber = ? " +
                 "UNION SELECT `Date` FROM `ViewQuantityItemsStockReportsForAdmin` " +
                 "WHERE companyName = ? AND StationNumber = ?";
-                sqlArray[SqlQueryType.CheckIfExists_Quarterly_Report.getCode()] = "SELECT IF( EXISTS" +
+        sqlArray[SqlQueryType.CheckIfExists_Quarterly_Report.getCode()] = "SELECT IF( EXISTS" +
                 "(SELECT `TotalRevenue` FROM `ViewQuarterlyReportsForAdmin` WHERE `companyName` = ? AND `StationNumber` = ? " +
                 "AND `Quarterly` = quarter(?) AND `Date` = YEAR(?)), 1, 0)";
         sqlArray[SqlQueryType.View_Quarterly_Report.getCode()] = "SELECT `TotalRevenue` FROM `ViewQuarterlyReportsForAdmin` " +
@@ -333,17 +333,18 @@ public class MysqlConnection {
         /* *****************************************
          * ********** Admin Confirm Discount Rates Queries ****************
          * *****************************************/
-        sqlArray[SqlQueryType.Get_DiscountRates_Table.getCode()] = "SELECT * FROM `DiscountRates` WHERE `NewDiscountRate` != \"-\"";
+        sqlArray[SqlQueryType.Get_DiscountRates_Table.getCode()] = "SELECT * FROM `DiscountRates` WHERE `NewDiscountRate` != \"-\" AND `companyName` = ?";
         sqlArray[SqlQueryType.UPDATE_NEW_DiscountRate.getCode()] = "UPDATE `DiscountRates` " +
-                "SET `CurrentDiscountRate`= `NewDiscountRate`, `Status`= \"Approved\",`NewDiscountRate`= \"-\" WHERE `Subscription type` = ?";
+                "SET `CurrentDiscountRate`= `NewDiscountRate`, `Status`= \"Approved\",`NewDiscountRate`= \"-\" WHERE `Subscription type` = ? AND `companyName` = ?";
         sqlArray[SqlQueryType.Remove_NEW_DiscountRate.getCode()] = "UPDATE `DiscountRates` " +
-                "SET `Status`= \"Approved\",`NewDiscountRate`= \"-\" WHERE `Subscription type` = ?";
+                "SET `Status`= \"Approved\",`NewDiscountRate`= \"-\" WHERE `Subscription type` = ? AND `companyName` = ?";
 
         /* *****************************************
          * ********** Marketing Manager Reports Queries ****************
          * *****************************************/
         sqlArray[SqlQueryType.GET_Comments_Report.getCode()] = "select customerID,SUM(totalPrice) as TotalSum " +
-                "from(SELECT totalPrice,customerID from Purchase where CampaignID = ?) as t group by customerID";
+                "from(SELECT totalPrice,customerID from Purchase, FastFuel " +
+                "where CampaignID = ? AND companyName = ? AND Purchase.purchaseID = FastFuel.purchaseID) as t group by customerID";
         sqlArray[SqlQueryType.GET_Customers_List.getCode()] = "SELECT customerID, sum(totalPrice) from Purchase AS p, FastFuel AS f " +
                 "where p.purchaseID = f.purchaseID AND p.purchaseDate BETWEEN ? AND ? GROUP by customerID ORDER BY sum(totalPrice) DESC";
         sqlArray[SqlQueryType.GET_CustomerPeriodicCharacterization_Report.getCode()] = "SELECT p.customerID, SUM(p.totalPrice) AS TotalSum, f.companyName from Purchase AS p, FastFuel AS f " +

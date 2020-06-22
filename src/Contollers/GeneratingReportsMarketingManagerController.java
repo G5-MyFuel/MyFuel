@@ -113,6 +113,13 @@ public class GeneratingReportsMarketingManagerController extends BasicController
         return resultList;
     }
 
+    /**
+     * This method create array list of Customer Periodic Characterization Report from the data base result.
+     * This will contains only customer ID and customer Total Sum
+     *
+     * @param result - The result received from the DB
+     * @return ArrayList<CustomerPeriodicCharacterizationReport>
+     */
     private ArrayList<CustomerPeriodicCharacterizationReport> changeResultToCustomersList(SqlResult result) {
 
         ArrayList<CustomerPeriodicCharacterizationReport> resultList = new ArrayList<>();
@@ -123,6 +130,7 @@ public class GeneratingReportsMarketingManagerController extends BasicController
 
     /**
      * This method create array list of Customer Periodic Characterization Report from the data base result.
+     * This will contains only customer ID and customer Total Sum for each fuel company
      *
      * @param result - The result received from the DB
      * @return ArrayList<CustomerPeriodicCharacterizationReport>

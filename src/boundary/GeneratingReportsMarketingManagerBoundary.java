@@ -290,6 +290,7 @@ public class GeneratingReportsMarketingManagerBoundary implements DataInitializa
     /**
      * This method will set Comments Report table Data
      *
+     *
      * @param resultList
      */
     public void setCommentsReportData(ArrayList<CommentsReport> resultList) {

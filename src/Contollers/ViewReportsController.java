@@ -260,6 +260,12 @@ public class ViewReportsController extends BasicController {
         return isExsits.toString();
     }
 
+    /**
+     * create array list of String from the data base result.
+     *
+     * @param result - The result received from the DB
+     * @return ArrayList<String>
+     */
     private ArrayList<String> changeResultToYearListData(SqlResult result) {
 
         ArrayList<String> resultList = new ArrayList<>();
