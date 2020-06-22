@@ -1,24 +1,19 @@
 package boundary;
 
-import Contollers.BasicController;
 import Contollers.PurchaseFuelForHomeHeatingTrackingController;
-import com.jfoenix.controls.JFXTreeTableColumn;
-import com.jfoenix.controls.JFXTreeTableView;
-import common.assets.SqlResult;
-import entity.EditingCell;
 import entity.HomeHeatingOrderTracking;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
-import javafx.util.Callback;
 
+import java.awt.event.MouseEvent;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Observable;
 import java.util.ResourceBundle;
 
 /**
@@ -83,6 +78,10 @@ public class PurchaseFuelForHomeHeatingTrackingBoundary implements DataInitializ
     public void initialize(URL location, ResourceBundle resources) {
 
 
+    }
+    @FXML
+    void showSelectedRowDetails(MouseEvent event){
+        HomeHeatingOrderTracking tempOrder = treeTableOfALlCustomerOrders.getSelectionModel().getSelectedItem();
     }
 
     public ArrayList<HomeHeatingOrderTracking> getArrayListOfCustomerOrders() {

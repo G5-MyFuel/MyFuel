@@ -4,10 +4,12 @@ import boundary.fastFuelBoundary;
 import common.assets.SqlAction;
 import common.assets.SqlQueryType;
 import common.assets.SqlResult;
-import entity.*;
+import entity.Costumer;
+import entity.CreditCard;
+import entity.GasStation;
+import entity.Vehicle;
 import javafx.application.Platform;
 
-import java.sql.Date;
 import java.util.ArrayList;
 
 /**
@@ -47,7 +49,7 @@ public class FastFuelController extends BasicController{
                     case GET_ALL_COSTUMER_TABLE:
                         ArrayList<Costumer> resultList = new ArrayList<>();
                         resultList.addAll(this.changeResultToCostumer(result));
-                        myBoundary.setCostumerTable(resultList);
+                        myBoundary.setCostumersArry(resultList);
                         break;
                     case GET_ALL_COSTUMER_VEHICLES:
                         ArrayList<Vehicle> VehicalList = new ArrayList<>();
@@ -135,7 +137,7 @@ public class FastFuelController extends BasicController{
         for(ArrayList<Object> a: result.getResultData()) {
            ArrayList<String> gasStations = new ArrayList<String>();
 
-            GasStation gasStation = new GasStation((Integer) a.get(0), (String) a.get(1),null,null,                  (String) a.get(2), (String) a.get(3),
+            GasStation gasStation = new GasStation((Integer) a.get(0), (String) a.get(1),null,null,(String) a.get(2), (String) a.get(3),
                     (String) a.get(4),(Double) a.get(5));
             resultList.add(gasStation);
         }
@@ -162,13 +164,16 @@ public class FastFuelController extends BasicController{
         ArrayList<Costumer> resultList = new ArrayList<>();
         ArrayList<String> temp = new ArrayList<>();
         for (ArrayList<Object> a : result.getResultData()) {
-            temp.add((String)a.get(14));
-            temp.add((String)a.get(15));
-            temp.add((String)a.get(16));
-            Costumer cos = new Costumer((String) a.get(0), null, null,
-                    null, null, null, null, null, null);
+            Costumer cos = new Costumer((String) a.get(0), (String) a.get(9), (String) a.get(4),
+                    (String) a.get(11), (String) a.get(12), (String) a.get(13), null, (String) a.get(6), (String) a.get(5));
+            //add fuel companies.
+            temp.add((String) a.get(14));
+            temp.add((String) a.get(15));
+            temp.add((String) a.get(16));
             cos.setFuelCompany(temp);
             temp.clear();
+            CreditCard card = new CreditCard(cos, (String) a.get(1), (String) a.get(2), (String) a.get(3));
+            cos.setCostumerCreditCard(card);
             resultList.add(cos);
         }
         return resultList;

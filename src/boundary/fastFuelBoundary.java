@@ -1,16 +1,17 @@
 package boundary;
 
 import Contollers.FastFuelController;
+import Contollers.FormValidation;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import common.assets.enums.FuelTypes;
-import common.assets.enums.PricingModelTypes;
-import common.assets.enums.PurchasePlanTypes;
 import entity.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -37,7 +38,12 @@ public class fastFuelBoundary implements DataInitializable {
      * temp  variables
      */
     private int SaleNumber;
-private String CarFuelType;
+    private String CarFuelType;
+    private ToggleGroup group = new ToggleGroup();
+    private FormValidation formValidation;
+    private Alert ErrorAlert = new Alert(Alert.AlertType.ERROR);
+    private Costumer chosenCos;
+    private Vehicle costumerVehicles;
     /**
      * gui variables
      */
@@ -47,8 +53,6 @@ private String CarFuelType;
     @FXML
     private Label pricaeCounter;
 
-    @FXML
-    private Label literCountertxt;
 
     @FXML
     private JFXTextField literAmountTxt;
@@ -92,7 +96,7 @@ private String CarFuelType;
     private Pane paneFinishRefuel;
 
     @FXML
-    private Label literCounter;
+    private Text literCountertxt;
 
     @FXML
     private Text subscriptionInfo1;
@@ -117,9 +121,23 @@ private String CarFuelType;
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        pump1.setToggleGroup(group);
+        pump2.setToggleGroup(group);
+        pump3.setToggleGroup(group);
+        formValidation = new FormValidation();
         getVehicleButoon.setVisible(false);
         paneFinishRefuel.setVisible(false);
+        subscriptionInfo1.setVisible(false);
         myController.getCustomer();
+        validateFields();
+        pricaeCounter.setVisible(false);
+        startFuelingBtn.setDisable(true);
+    }
+    private void validateFields(){
+        formValidation.isOnlyNumbers(literAmountTxt, "Liter Amount");
+        formValidation.isEmptyFieldValidation(literAmountTxt, "Liter Amount");
+        formValidation.numberPositiveValidation(literAmountTxt,"Liter Amount");
+        formValidation.maxFloatSizeValidation(literAmountTxt,"Liter Amount",200);
     }
 
     /**
@@ -146,16 +164,52 @@ private String CarFuelType;
      */
     @FXML
     void startFuelingProccess(MouseEvent event) {
+        //calculatePrice();
 
-        //customerID
-        //fuelAmount
-        //CarFuelType
-        //PricingModelTypes
-        //PurchasePlan
-        //Prices p = new Prices(customerIdLable.getText(),Double.valueOf(literAmountTxt.getText()), FuelTypes.fromString(CarFuelType), PricingModelTypes.Full_monthly_subscription);
+        if(!group.getSelectedToggle().isSelected()){
+            ErrorAlert.setTitle("Internal Error");
+            ErrorAlert.setHeaderText("need to chose pump.");
+            ErrorAlert.showAndWait();
+        }
+        else if(formValidation.isEmptyField() && formValidation.isNumberPositive() && formValidation.isOnlyNumbers() ){
 
-        Prices p = new Prices("555999888",602.2,FuelTypes.Gasoline95, PurchasePlanTypes.MULTIPLE_STATIONS,PricingModelTypes.Full_monthly_subscription);
-        p.calculateTotalPrice();
+
+
+
+            Prices p = new Prices(chosenCos.getUserID(),Double.valueOf(literAmountTxt.getText()),FuelTypes.Gasoline95,chosenCos.getPurchasePlanAsEnum(),chosenCos.getPricingModelTypeAsEnum());
+            Double totalPrice = p.calculateTotalPrice();
+        paneFinishRefuel.setVisible(true);
+        Thread fuelingCounterThread = new Thread() {
+            public void run() {
+                Integer fuelCounter = Integer.parseInt(literAmountTxt.getText());
+                Integer literCounter = 0;
+                for (; ; ) {
+                    startFuelingBtn.setDisable(true);
+                    if (fuelCounter == 0) {
+                        subscriptionInfo1.setVisible(true);
+                        break;
+                    }
+                    literCounter++;
+                    literCountertxt.setText(literCounter.toString());
+                    fuelCounter--;
+                    try {
+                        sleep(250);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                System.out.println(totalPrice.toString());
+                pricaeCounter.setText(totalPrice.toString());
+                pricaeCounter.setVisible(true);
+                startFuelingBtn.setDisable(false);
+            }
+        };
+        fuelingCounterThread.start();}else{
+            ErrorAlert.setTitle("Internal Error");
+            ErrorAlert.setHeaderText("One or more of the fields is empty.");
+            ErrorAlert.showAndWait();
+        }
+
     }
 
     /**
@@ -177,24 +231,25 @@ private String CarFuelType;
     }
 
     /**
-     *A method that gets a list of customers,
+     * A method that gets a list of customers,
      * Selects one at random and sends a request for a query that will return the vehicles of the selected customer
+     *
      * @param costumerTable
      */
-    public void setCostumerTable(ArrayList<Costumer> costumerTable) {
+    public void setCostumersArry(ArrayList<Costumer> costumerTable) {
         Random r = new Random();
         int low = 0;
         int high = costumerTable.size();
-        int result = r.nextInt(high - low) + low;
+        int result = r.nextInt(high - low);
+        chosenCos = costumerTable.get(result);
 
-        customerIdLable.setText(costumerTable.get(result).getUserID());
-        myController.getCarsForCustomer(costumerTable.get(result).getUserID());///???
-        myController.getCarsForCustomer("305286965");
+        customerIdLable.setText(chosenCos.getUserID());
+        myController.getCarsForCustomer(chosenCos.getUserID());
     }
-
     /**
      * A method that gets a list of vehicles,
-     *   Randomly selects one and sends a query to return the selected customer's possible stations
+     * Randomly selects one and sends a query to return the selected customer's possible stations
+     *
      * @param VehicalList
      */
     public void setCarOfCustomer(ArrayList<Vehicle> VehicalList) {
@@ -203,9 +258,10 @@ private String CarFuelType;
         int high = VehicalList.size();
         try {
             int result = r.nextInt(high - low) + low;
+            costumerVehicles = VehicalList.get(result);
             carNumberLable.setText(VehicalList.get(result).getVehicleID());
-            CarFuelType =VehicalList.get(result).getGasType();
-        }catch (IllegalArgumentException ex){
+            CarFuelType = VehicalList.get(result).getGasType();
+        } catch (IllegalArgumentException ex) {
             customerIdLable.setText("305286965");
             carNumberLable.setText("6549875");
         }
@@ -213,6 +269,7 @@ private String CarFuelType;
         String customerID = customerIdLable.getText();
         //choose random station to refuel:
         myController.getOptionalStationForCustomer(customerID);
+        startFuelingBtn.setDisable(false);
 
         /*while(true)
         {//ברגע שמגיעים לסף הדלק שביקשו - לעדכן את ההזמנה בDB

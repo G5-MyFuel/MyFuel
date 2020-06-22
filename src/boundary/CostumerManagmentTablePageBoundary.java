@@ -44,7 +44,7 @@ public class CostumerManagmentTablePageBoundary implements DataInitializable {
     private ArrayList<Costumer> costumers = new ArrayList<>();
     private Alert ErrorAlert = new Alert(Alert.AlertType.ERROR);
     private Costumer cos;
-    private FormValidation formValidation;
+    private FormValidation myValidator;
 
     /**
      * The supervisor boundary controller.
@@ -126,6 +126,7 @@ public class CostumerManagmentTablePageBoundary implements DataInitializable {
         myController.getVehicleTable();
         myController.getCostumerTable(); //start the process that will ask server to execute quarry and get the table details
         tableStyle();
+        myValidator = new FormValidation();
     }
 
 
@@ -367,7 +368,12 @@ public class CostumerManagmentTablePageBoundary implements DataInitializable {
             ErrorAlert.setTitle("Internal Error");
             ErrorAlert.setHeaderText("Vehicle ID already exists.\nPlease chose different ID.");
             ErrorAlert.showAndWait();
-        } else {
+        }else if(!myValidator.isOnlyNumbers()){
+            ErrorAlert.setTitle("Internal Error");
+            ErrorAlert.setHeaderText("Vehicle ID must contain only numbers.");
+            ErrorAlert.showAndWait();
+        }
+        else {
             if (VehicleTable.getItems().size() == 1)
                 flag = true;
             myController.addVehicleToDB(OwnerIDtxt1.getText(), VehicleIDtxt.getText(), GasTypeChoiseBox.getValue());
