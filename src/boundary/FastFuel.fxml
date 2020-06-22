@@ -172,11 +172,11 @@
                         <Font size="18.0" />
                      </font>
                   </Text>
-                  <Label fx:id="literCounter" layoutX="95.0" layoutY="47.0" text="liter counter">
+                  <Text fx:id="literCountertxt" layoutX="113.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
                      <font>
-                        <Font name="System Bold Italic" size="32.0" />
+                        <Font size="75.0" />
                      </font>
-                  </Label>
+                  </Text>
                </children>
             </AnchorPane>
             <Text fx:id="subscriptionInfo2" layoutX="54.0" layoutY="201.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*According to your business terms in the XXXX subscription And the current operation is YYYY" wrappingWidth="403.8779296875" />
