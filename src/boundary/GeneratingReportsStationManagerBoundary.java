@@ -57,8 +57,14 @@ public class GeneratingReportsStationManagerBoundary implements DataInitializabl
      */
     String sendRevenue;
 
-
+    /**
+     * For saving Purchases Data
+     */
     ArrayList<PurchasesReport> sendPurchases = new ArrayList<>();
+
+    /**
+     * For saving Quantity Items Stock Data
+     */
     ArrayList<QuantityItemsStockReport> sendQuantityItemsStockReport = new ArrayList<>();
 
     /**
