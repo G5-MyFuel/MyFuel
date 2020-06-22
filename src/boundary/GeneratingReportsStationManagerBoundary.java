@@ -232,6 +232,7 @@ public class GeneratingReportsStationManagerBoundary implements DataInitializabl
      */
     public void setPurchasesData(ArrayList<PurchasesReport> resultList) {
 
+        sendPurchases.clear();
         sendPurchases.addAll(resultList);
         FuelTypeColumn.setCellValueFactory(new PropertyValueFactory<>("fuelType"));
         QuantityPurchasedColumn.setCellValueFactory(new PropertyValueFactory<>("quantityPurchased"));
@@ -276,6 +277,7 @@ public class GeneratingReportsStationManagerBoundary implements DataInitializabl
      */
     public void setQuantityItemsStockData(ArrayList<QuantityItemsStockReport> resultList) {
 
+        sendQuantityItemsStockReport.clear();
         System.out.println(resultList.size());
         if (resultList.size() > 0) {
             resultList.get(0).setFuelType("Gasoline 95");
@@ -407,7 +409,6 @@ public class GeneratingReportsStationManagerBoundary implements DataInitializabl
             paramArray.add(a.getFuelType());
             paramArray.add(a.getAvailableInventory());
         }
-
         myController.GetReportData(paramArray); //start the process that will ask server to execute quarry and get the table details
         ReportSentMessageLabel.setVisible(true);
     }
