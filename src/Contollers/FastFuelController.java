@@ -80,7 +80,7 @@ public class FastFuelController extends BasicController{
             try {
                 switch (result.getActionType()) {
                     case GET_OWNER_DETAILS:
-                        myBoundary.setOwner(this.changeResultToCostumer(result));
+                        myBoundary.setOwnerAndDetails(this.changeResultToCostumer(result));
                         break;
                     case GET_VEHICLE_DETAILS:
                         Vehicle temp = this.changeResultToVehicle(result);

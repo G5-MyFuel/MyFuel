@@ -10,12 +10,15 @@ import common.assets.ProjectPages;
 import entity.User;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -85,6 +88,16 @@ public class LoginToSystemBoundary extends Application {
         LoginValidation();
         Image img = new Image("/media/loginBeautiful.png");
         imageView.setImage(img);
+
+        //setting a listener to the vehicle text area:
+        passwordField.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                if (keyEvent.getCode() == KeyCode.ENTER) {
+                    clickLoginBtn();
+                }
+            }
+        });
     }
 
     public void LoginValidation() {
