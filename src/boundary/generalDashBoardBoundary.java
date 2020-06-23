@@ -739,4 +739,8 @@ public class generalDashBoardBoundary implements DataInitializable {
     public void setResultListCustomers(ArrayList<Costumer> resultListCustomers) {
         this.resultListCustomers = resultListCustomers;
     }
+
+    public Text getTime() {
+        return time;
+    }
 }

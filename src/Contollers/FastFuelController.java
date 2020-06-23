@@ -102,6 +102,11 @@ public class FastFuelController extends BasicController{
         super.sendSqlActionToClient(sqlAction);
     }
 
+    public void updatePurchase(ArrayList<Object> varArray){
+        SqlAction sqlAction = new SqlAction(SqlQueryType.INSERT_NEW_PURCHASE_FUEL_FOR_HOME_HEATING1,varArray);
+        super.sendSqlActionToClient(sqlAction);
+    }
+
 
     /**
      * This method is responsible for getting results from the client

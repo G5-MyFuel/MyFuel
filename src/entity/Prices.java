@@ -143,7 +143,6 @@ public class Prices {
     public Double calculateTotalPrice() {
 
         if (correctCostumer == null || fuelAmount == null || fuelType == null || purchasePlan == null || pricingModelType.isEmpty() || totalPrice == null) {
-            System.out.println("return nullllllllllllllllll");
             return null;
         }
         System.out.println("first: " + totalPrice);

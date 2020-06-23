@@ -25,7 +25,10 @@ import javafx.scene.text.Text;
 
 import java.net.URL;
 import java.text.DecimalFormat;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Random;
 import java.util.ResourceBundle;
 
@@ -188,11 +191,11 @@ public class fastFuelBoundary implements DataInitializable {
         } else if (LiterAmountValidato.isEmptyField() && LiterAmountValidato.isNumberPositive() && LiterAmountValidato.isOnlyNumbers()) {
             priceCounterLabel.setText("Your price being calculate.");
             Double newInventory =  correctFuelStationInventory() - Double.parseDouble(literAmountInput.getText());
-
+            ArrayList<Object> varArrayForPurchase = new ArrayList<>();
+            Random rand = new Random();
+            Integer n = rand.nextInt(9000)+1000;
             if(newInventory < correctStation.getFuelLimit()){
                 ArrayList<Object> varArray = new ArrayList<>();
-                Random rand = new Random();
-                Integer n = rand.nextInt(9000)+1000;
                 varArray.add(n.toString());
                 varArray.add(correctStation.getStationNumber());
                 varArray.add(1000);
@@ -202,6 +205,7 @@ public class fastFuelBoundary implements DataInitializable {
             }
             myController.updateFuelInventory(newInventory.toString(),correctStation.getStationNumber(),fuelTypeTxt.getText());
             price = new Prices(owner,Double.parseDouble(literAmountInput.getText()), FuelTypes.fromString(correctVehicleFueling.getGasType()));
+
             paneFinishRefuel.setVisible(true);
             Thread fuelingCounterThread = new Thread() {
                 public void run() {
@@ -214,6 +218,17 @@ public class fastFuelBoundary implements DataInitializable {
                             totalPrice = price.calculateTotalPrice();
                             totalPrice = Double.parseDouble(new DecimalFormat("#####.##").format(totalPrice));
                             priceCounterLabel.setText(totalPrice.toString());
+                            varArrayForPurchase.add(n.toString());
+                            varArrayForPurchase.add(owner.getUserID());
+                            varArrayForPurchase.add(Double.parseDouble(literAmountInput.getText()));
+                            varArrayForPurchase.add(totalPrice);
+
+                            Format f = new SimpleDateFormat("HH:mm:ss");
+                            String strResult = f.format(new Date());
+                            varArrayForPurchase.add(strResult);
+
+                            varArrayForPurchase.add(price.getCampaignID());
+                            myController.updatePurchase(varArrayForPurchase);
                             break;
                         }
                         literCounter++;
@@ -246,6 +261,10 @@ public class fastFuelBoundary implements DataInitializable {
         }
 
     }
+
+    private void updatePurchase(ArrayList<Object> varArrayForPurchase){
+    }
+
     private Double correctFuelStationInventory(){
 
         switch (fuelTypeTxt.getText()){

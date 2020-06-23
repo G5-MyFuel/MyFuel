@@ -20,6 +20,7 @@ public class PricesController extends BasicController {
 
     public void getPricingModelDiscount(ArrayList<String> vArray) {
         ArrayList<Object> varArray = new ArrayList<>();
+        System.out.println("pooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo"+vArray.toString());
         varArray.add(vArray.get(0));
         varArray.add(vArray.get(1));
         SqlAction sqlAction = new SqlAction(SqlQueryType.GET_PRICING_MODEL_DISCOUNT, varArray);
@@ -71,7 +72,7 @@ public class PricesController extends BasicController {
     }
 
     public void fromResultToMrketingCampaignArrayList(SqlResult result) {
-
+        System.out.println(result.getResultData().toString());
         ArrayList<String> resArr = new ArrayList<>();
         for (ArrayList<Object> a : result.getResultData()) {
             resArr.add((String) a.get(0)); //CampaignID
@@ -90,6 +91,7 @@ public class PricesController extends BasicController {
         for (ArrayList<Object> a : result.getResultData()) {
             resArr.add((String) a.get(0)); //discount
         }
+        System.out.println(resArr.toString());
         myPrices.setPricingModelDiscount(resArr);
     }
 }
