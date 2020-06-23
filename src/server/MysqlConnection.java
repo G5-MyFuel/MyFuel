@@ -177,6 +177,11 @@ public class MysqlConnection {
         sqlArray[SqlQueryType.GET_ALL_STATIONS.getCode()] = "SELECT* FROM GasStation";
         sqlArray[SqlQueryType.GET_COMPANY_FOR_CUSTOMER.getCode()] = "SELECT U.FuelCompany1, U.FuelCompany2, U.FuelCompany3 " +
                 "FROM Costumer as C, User as U WHERE C.ID = ? AND U.userID = C.ID";
+        sqlArray[SqlQueryType.UPDATE_95_INVENTORY_CUSTOMER_PURCHASE.getCode()] = "UPDATE `GasStation` SET `inventory_95`=? WHERE `StationNumber`=?";
+        sqlArray[SqlQueryType.UPDATE_DIESEL_INVENTORY_CUSTOMER_PURCHASE.getCode()] = "UPDATE `GasStation` SET `inventory_diesel`=? WHERE `StationNumber`=?";
+        sqlArray[SqlQueryType.UPDATE_SCOOTER_INVENTORY_CUSTOMER_PURCHASE.getCode()] = "UPDATE `GasStation` SET `inventory_scooter`=? WHERE `StationNumber`=?";
+        sqlArray[SqlQueryType.INSERT_NEW_ORDERFORSTOCK.getCode()] = "INSERT INTO `OrderForStock`(`OrderNumber`, `StationNum`, `OrderDate`, `Quantity`, `OrderStatus`, `FuelType`, `GasCompanyName`) VALUES (?,?,curdate(),?,\"New\",?,?)";
+
 
 
 

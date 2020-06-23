@@ -1,9 +1,9 @@
 package common.assets.enums;
 
 public enum FuelTypes {
-    Gasoline95("Gasoline95"),
+    Gasoline95("Gasoline-95"),
     Diesel("Diesel"),
-    ScooterFuel("ScooterFuel"),
+    ScooterFuel("Scooter Fuel"),
     HomeHeatingFuel("HomeHeatingFuel");
 
     private String fuelTypeString;
@@ -37,4 +37,10 @@ public enum FuelTypes {
         }
         return null;
     }
+
+    public String getFuelTypeString() {
+        return fuelTypeString;
+    }
+
+
 }

@@ -67,6 +67,41 @@ public class FastFuelController extends BasicController{
         super.sendSqlActionToClient(sqlAction);
     }
 
+    /**
+     * this method will update fuel inventory in a spesific station.
+     *
+     * @param newInventory
+     * @param stationNumber
+     */
+    public void updateFuelInventory(String newInventory,Integer stationNumber,String gasType){
+        ArrayList<Object> varArray = new ArrayList<>();
+        SqlAction sqlAction;
+        varArray.add(newInventory);
+        varArray.add(stationNumber);
+        switch (gasType){
+            case "Scooter Fuel":
+                 sqlAction = new SqlAction(SqlQueryType.UPDATE_SCOOTER_INVENTORY_CUSTOMER_PURCHASE,varArray);
+                super.sendSqlActionToClient(sqlAction);
+                break;
+            case "Diesel":
+                 sqlAction = new SqlAction(SqlQueryType.UPDATE_DIESEL_INVENTORY_CUSTOMER_PURCHASE,varArray);
+                super.sendSqlActionToClient(sqlAction);
+                break;
+            case "Gasoline-95":
+                 sqlAction = new SqlAction(SqlQueryType.UPDATE_95_INVENTORY_CUSTOMER_PURCHASE,varArray);
+                super.sendSqlActionToClient(sqlAction);
+                break;
+            default:
+                break;
+        }
+
+
+    }
+    public void insertNewOrderForStock(ArrayList<Object> varArray){
+        SqlAction sqlAction = new SqlAction(SqlQueryType.INSERT_NEW_ORDERFORSTOCK,varArray);
+        super.sendSqlActionToClient(sqlAction);
+    }
+
 
     /**
      * This method is responsible for getting results from the client
@@ -102,16 +137,7 @@ public class FastFuelController extends BasicController{
         });
     }
 
-    /**
-     * this method will update fuel inventory in a spesific station.
-     *
-     * @param fuelType
-     * @param stationID
-     */
-    public void updateInvetory(String fuelType, Integer stationID) {
-        ArrayList<Object> varArray = new ArrayList<>();
 
-    }
 
 
     /**

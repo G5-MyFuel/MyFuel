@@ -279,11 +279,6 @@
             <Font size="26.0" />
          </font>
       </JFXTextField>
-      <ImageView fx:id="zikok" fitHeight="356.0" fitWidth="599.0" layoutX="349.0" layoutY="346.0" pickOnBounds="true" preserveRatio="true" visible="false">
-         <image>
-            <Image url="@../media/CostumerRegisterationMedia/oie_oie_twinkles.gif" />
-         </image>
-      </ImageView>
       <ImageView fx:id="loadingImage" fitHeight="250.0" fitWidth="450.0" layoutX="297.0" layoutY="201.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../media/CostumerRegisterationMedia/loadingGifNoBG.gif" />

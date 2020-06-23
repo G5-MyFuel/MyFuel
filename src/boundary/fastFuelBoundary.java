@@ -24,6 +24,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.ResourceBundle;
@@ -44,16 +45,19 @@ public class fastFuelBoundary implements DataInitializable {
     /**
      * temp  variables
      */
-    private ToggleGroup group;
-    private FormValidation LiterAmountValidato,vehicleNumberValidator;
-    private Alert ErrorAlert = new Alert(Alert.AlertType.ERROR);
+    private Prices price;
     private Costumer owner;
+    private Image image;
+    private Double totalPrice;
+    private ToggleGroup group;
+    private GasStation correctStation;
     private Vehicle correctVehicleFueling;
     private String correctCompanyName = "NULL";
-    private Image image;
-    private ArrayList<GasStation> allStation = new ArrayList<>();
-    private GasStation correctStation;
+    private FormValidation LiterAmountValidato;
     private ArrayList<Vehicle> allVehicleArray;
+    private Alert ErrorAlert = new Alert(Alert.AlertType.ERROR);
+    private ArrayList<GasStation> allStation = new ArrayList<>();
+
     /**
      * gui variables
      */
@@ -100,8 +104,7 @@ public class fastFuelBoundary implements DataInitializable {
     private Text literCountertxt;
     @FXML
     private ImageView companyImage;
-    @FXML
-    private ImageView zikok;
+
     @FXML
     private ImageView loadingImage;
     @FXML
@@ -133,13 +136,11 @@ public class fastFuelBoundary implements DataInitializable {
         pump3.setToggleGroup(group);
         //
         LiterAmountValidato = new FormValidation();
-        vehicleNumberValidator = new FormValidation();
         validateFields();
         //
         paneFinishRefuel.setVisible(false);
         priceCounterLabel.setVisible(false);
         startFuelingBtn.setDisable(true);
-        zikok.setVisible(false);
         //get necessary details from db.
         myController.getAllStations();
         myController.getVehicleTable();
@@ -180,12 +181,27 @@ public class fastFuelBoundary implements DataInitializable {
      */
     @FXML
     void startFuelingProccess(MouseEvent event) {
-        //TODO: after daniel write the function that calculate the price , need to show user the price and update details.
         if (group.getSelectedToggle() == null) {
             ErrorAlert.setTitle("Internal Error");
             ErrorAlert.setHeaderText("You need to chose a pump first.");
             ErrorAlert.showAndWait();
         } else if (LiterAmountValidato.isEmptyField() && LiterAmountValidato.isNumberPositive() && LiterAmountValidato.isOnlyNumbers()) {
+            priceCounterLabel.setText("Your price being calculate.");
+            Double newInventory =  correctFuelStationInventory() - Double.parseDouble(literAmountInput.getText());
+
+            if(newInventory < correctStation.getFuelLimit()){
+                ArrayList<Object> varArray = new ArrayList<>();
+                Random rand = new Random();
+                Integer n = rand.nextInt(9000)+1000;
+                varArray.add(n.toString());
+                varArray.add(correctStation.getStationNumber());
+                varArray.add(1000);
+                varArray.add(fuelTypeTxt.getText());
+                varArray.add(correctCompanyName);
+                myController.insertNewOrderForStock(varArray);
+            }
+            myController.updateFuelInventory(newInventory.toString(),correctStation.getStationNumber(),fuelTypeTxt.getText());
+            price = new Prices(owner,Double.parseDouble(literAmountInput.getText()), FuelTypes.fromString(correctVehicleFueling.getGasType()));
             paneFinishRefuel.setVisible(true);
             Thread fuelingCounterThread = new Thread() {
                 public void run() {
@@ -195,6 +211,9 @@ public class fastFuelBoundary implements DataInitializable {
                         startFuelingBtn.setDisable(true);
                         if (fuelAmountToFueling == 0) {
                             costumerSubscriptionType.setVisible(true);
+                            totalPrice = price.calculateTotalPrice();
+                            totalPrice = Double.parseDouble(new DecimalFormat("#####.##").format(totalPrice));
+                            priceCounterLabel.setText(totalPrice.toString());
                             break;
                         }
                         literCounter++;
@@ -206,18 +225,17 @@ public class fastFuelBoundary implements DataInitializable {
                             e.printStackTrace();
                         }
                     }
-                    zikok.setVisible(true);
-                    priceCounterLabel.setText("Daniel need to calculate me :D");
+                    //priceCounterLabel.setText(totalPrice.toString());
                     priceCounterLabel.setVisible(true);
                     startFuelingBtn.setDisable(false);
                     try {
-                        sleep(2500);
+                        sleep(6000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    zikok.setVisible(false);
                     paneFinishRefuel.setVisible(false);
                     startFuelingBtn.setDisable(true);
+                    //TODO: here i need to update DB about the results.
                 }
             };
             fuelingCounterThread.start();
@@ -228,20 +246,21 @@ public class fastFuelBoundary implements DataInitializable {
         }
 
     }
+    private Double correctFuelStationInventory(){
 
-    /**
-     * the following method will calculate price of purchase by giving the owner,
-     * amount of liters and fuelType.
-     *
-     * @param owner
-     * @param amountOfLiters
-     * @param fuelType
-     * @return Double total price.
-     */
-    private Double calculatePrice(Costumer owner, Double amountOfLiters, FuelTypes fuelType) {
-        Prices p = new Prices();
-        return p.calculateTotalPrice();
+        switch (fuelTypeTxt.getText()){
+            case "Scooter Fuel":
+                return Double.parseDouble(correctStation.getInventoryScooter());
+            case "Diesel":
+                return Double.parseDouble(correctStation.getInventoryDiesel());
+            case "Gasoline-95":
+                return Double.parseDouble(correctStation.getInventory_95());
+            default:
+                break;
+        }
+        return 0.0;
     }
+
 
     public void setCorrectVehicleFueling(Vehicle v) {
         correctVehicleFueling = v;

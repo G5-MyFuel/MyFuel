@@ -51,7 +51,7 @@ public class Prices {
     private Costumer correctCostumer;
     private ShippingMethod sm;
     private String companyName;
-    private Double discountOfPricingModel = null;
+    private Double discountOfPricingModel = 1.0;
 
     public static Double marketingCapmeignDiscount = 1.0;
 
@@ -93,13 +93,19 @@ public class Prices {
      * @param fuelType
      */
     public Prices(Costumer correctCostumer, Double fuelAmount, FuelTypes fuelType) {
-        generalDashBoardController.getCustomerPurchaseAmountInLastMonthFromDB(correctCostumer.getUserID());
+        this.correctCostumer = correctCostumer;
         this.fuelAmount = fuelAmount;
         this.fuelType = fuelType;
         this.purchasePlan = correctCostumer.getPurchasePlanAsEnum();
         this.pricingModelType = correctCostumer.getPricingModelTypeAsEnum();
         this.totalPrice = 0.0;
+        for (String correctCompanyName : correctCostumer.getFuelCompany()) {
+            if (!correctCompanyName.equals("NULL")) {
+                companyName = correctCompanyName;
+            }
+        }
         myController.GET_CURRENT_MARKETING_CAMPEIGN_fromDB();
+        getDicsount();
     }
 
 
@@ -127,7 +133,6 @@ public class Prices {
                     break;
             }
         }
-        calculateTotalPrice();
     }
 
     public void marketingCapmeignDiscount(ArrayList<String> resArr) {
@@ -137,6 +142,7 @@ public class Prices {
     public Double calculateTotalPrice() {
 
         if (correctCostumer == null || fuelAmount == null || fuelType == null || purchasePlan == null || pricingModelType.isEmpty() || totalPrice == null) {
+            System.out.println("return nullllllllllllllllll");
             return null;
         }
         System.out.println("first: " + totalPrice);

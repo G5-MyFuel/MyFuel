@@ -11,6 +11,8 @@ import java.util.ArrayList;
 public class PricesController extends BasicController {
 
     private Prices myPrices;
+    private  Double fuelAmountOfPreMonthForCurrentUser = 0.0;
+
 
     public PricesController(Prices p) {
         this.myPrices = p;
@@ -36,6 +38,30 @@ public class PricesController extends BasicController {
                     break;
             }
         });
+    }
+
+    /**
+     * get Customer Purchase Amount In Last Month From DB
+     *
+     * @param customerId
+     */
+    public void getCustomerPurchaseAmountInLastMonthFromDB(String customerId) {
+        ArrayList<Object> vars = new ArrayList<>();
+        vars.add(customerId);
+        vars.add(customerId);
+        SqlAction sqlAction = new SqlAction(SqlQueryType.GET_PRE_MONTH_PURCHASE_FUEL_AMOUNT_OF_USER, vars);
+        super.sendSqlActionToClient(sqlAction);
+    }
+
+    /**
+     * change Result To Fuel Amount Of Pre Month Of Cur User
+     *
+     * @param result
+     */
+    private void changeResultToFueAmountOfPreMonthOfCurUser(SqlResult result) {
+        for (ArrayList<Object> a : result.getResultData()) {
+            this.fuelAmountOfPreMonthForCurrentUser = (Double) a.get(1);
+        }
     }
 
 
