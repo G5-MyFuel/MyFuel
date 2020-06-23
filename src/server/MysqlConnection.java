@@ -175,6 +175,8 @@ public class MysqlConnection {
         sqlArray[SqlQueryType.GET_OWNER_DETAILS.getCode()] = "SELECT * FROM Costumer as C, User as U WHERE C.ID = ? AND U.userID = ?";
         sqlArray[SqlQueryType.GET_VEHICLE_DETAILS.getCode()] = "SELECT* FROM Vehicle WHERE Vehicle.`Vehicle ID` = ?";
         sqlArray[SqlQueryType.GET_ALL_STATIONS.getCode()] = "SELECT* FROM GasStation";
+        sqlArray[SqlQueryType.GET_COMPANY_FOR_CUSTOMER.getCode()] = "SELECT U.FuelCompany1, U.FuelCompany2, U.FuelCompany3 " +
+                "FROM Costumer as C, User as U WHERE C.ID = ? AND U.userID = C.ID";
 
 
 
@@ -394,7 +396,8 @@ public class MysqlConnection {
         sqlArray[SqlQueryType.GET_CURRENT_MARKETING_CAMPEIGN.getCode()] = "SELECT mc.CampaignID,mc.TemplateName,ct.fuelType,ct.DiscountPercentages" +
                 " FROM MarketingCampaign AS mc , CampaignTemplates as ct WHERE (CURDATE() BETWEEN mc.BeginDate AND mc.EndDate)and " +
                 "(CURRENT_TIME BETWEEN ct.beginHour AND ct.endHour) and mc.TemplateName=ct.templateName";
-
+        sqlArray[SqlQueryType.GET_PRICING_MODEL_DISCOUNT.getCode()] ="SELECT DiscountRates.CurrentDiscountRate FROM " +
+                "`DiscountRates` WHERE `Subscription type` LIKE ? AND `companyName` = ?";
     }
 
     /**

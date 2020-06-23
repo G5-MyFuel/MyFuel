@@ -38,7 +38,8 @@ public enum SqlQueryType {
     INSERT_FASTFUEL_PURCHES(SqlExecutionType.UPDATE_QUERY),
     INSERT_FASTFUEL_PURCHES_TO_FASTFUEL_TABLE(SqlExecutionType.UPDATE_QUERY),
     GET_CURRENT_MARKETING_CAMPEIGN(SqlExecutionType.EXECUTE_QUERY),
-
+    GET_PRICING_MODEL_DISCOUNT(SqlExecutionType.EXECUTE_QUERY),
+    GET_COMPANY_FOR_CUSTOMER(SqlExecutionType.EXECUTE_QUERY),
 
     /* *****************************************
      * ********** PurchaseFuelForHomeHeating ****************

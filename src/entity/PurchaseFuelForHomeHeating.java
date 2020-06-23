@@ -104,6 +104,7 @@ public class PurchaseFuelForHomeHeating extends Purchase {
 
     public void setPriceOfOrder(Prices priceOfOrder) {
         this.priceOfOrder = priceOfOrder;
+        System.out.println(this.priceOfOrder);
     }
 
     public static class Address {
