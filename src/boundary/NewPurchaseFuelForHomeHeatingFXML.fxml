@@ -399,22 +399,22 @@
                                                       <Font name="System Bold" size="20.0" />
                                                    </font>
                                                 </Text>
-                                                <Text fx:id="totalPricesOfAlllInUsdTXT" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2163$" textAlignment="CENTER" wrappingWidth="176.8681640625" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                                <Text fx:id="totalPricesOfAlllInUsdTXT" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="                    " textAlignment="CENTER" wrappingWidth="176.8681640625" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                                    <font>
                                                       <Font name="System Bold" size="23.0" />
                                                    </font>
                                                 </Text>
-                                                <Text fx:id="DeliveryFeeTXT" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="40 $" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                                <Text fx:id="DeliveryFeeTXT" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="     " GridPane.columnIndex="1" GridPane.rowIndex="2">
                                                    <font>
                                                       <Font size="20.0" />
                                                    </font>
                                                 </Text>
-                                                <Text fx:id="subTotalPriceInUsdTXT" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2123 $" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                <Text fx:id="subTotalPriceInUsdTXT" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="     " GridPane.columnIndex="1" GridPane.rowIndex="1">
                                                    <font>
                                                       <Font size="20.0" />
                                                    </font>
                                                 </Text>
-                                                <Text fx:id="fuelQuantityInLitersTXT" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="400 L" GridPane.columnIndex="1">
+                                                <Text fx:id="fuelQuantityInLitersTXT" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="     " GridPane.columnIndex="1">
                                                    <font>
                                                       <Font size="20.0" />
                                                    </font>

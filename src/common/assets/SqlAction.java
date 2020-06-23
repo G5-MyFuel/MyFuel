@@ -2,8 +2,6 @@ package common.assets;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-
-
 /**
  * This class is used to send sql queries to the database.
  *

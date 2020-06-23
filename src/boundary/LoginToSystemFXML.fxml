@@ -4,6 +4,7 @@
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
@@ -53,9 +54,18 @@
                                         <font>
                                             <Font size="22.0" />
                                         </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
                                     </Button>
-                              <JFXTextField fx:id="userIDTextField" prefWidth="326.0" promptText="User ID" style="-fx-font-size: 14pt;" unFocusColor="BLUE" />
-                              <JFXPasswordField fx:id="passwordField" prefHeight="41.0" prefWidth="326.0" promptText="Password" style="-fx-font-size: 14pt;" unFocusColor="BLUE" GridPane.rowIndex="1" />
+                              <JFXTextField fx:id="userIDTextField" prefWidth="326.0" promptText="User ID" style="-fx-font-size: 14pt;" unFocusColor="BLUE">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor></JFXTextField>
+                              <JFXPasswordField fx:id="passwordField" prefHeight="41.0" prefWidth="326.0" promptText="Password" style="-fx-font-size: 14pt;" unFocusColor="BLUE" GridPane.rowIndex="1">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor></JFXPasswordField>
                            </children>
                         </GridPane>
                         <VBox alignment="CENTER" layoutX="-5.0" prefHeight="96.0" prefWidth="384.0">
@@ -69,6 +79,9 @@
                                  <VBox.margin>
                                     <Insets top="15.0" />
                                  </VBox.margin>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
                               </JFXComboBox>
                            </children>
                         </VBox>
@@ -93,6 +106,9 @@
                      <font>
                         <Font size="22.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
                </children>
             </Pane>

@@ -365,7 +365,9 @@ public class MysqlConnection {
          * **********************************************************
          */
         sqlArray[SqlQueryType.GET_ALL_SHIPPING_DATES_AVAILABLE.getCode()] = "SELECT * FROM ShippingOptionalDates;";
-        sqlArray[SqlQueryType.GET_SPECIFIC_CUSTOMER_DETAILS.getCode()] = " select c.id,userFirstName,userLastName,userEmail,'Credit Card Number',CreditCardExperationDate,CVV,customerType,'Pricing Model','Purchase Plan' from User as u,Costumer as c where u.userID=c.ID and c.ID= ?;";
+        sqlArray[SqlQueryType.GET_SPECIFIC_CUSTOMER_DETAILS.getCode()] = "select c.id,userFirstName,userLastName,userEmail,`Credit Card Number`," +
+                "CreditCardExperationDate,CVV,customerType,`Pricing Model`,`Purchase Plan` from User as u,Costumer as c " +
+                "where u.userID=c.ID and c.ID= ?;";
         sqlArray[SqlQueryType.INSERT_NEW_AVAILABLE_DATE_FOR_SHIPPING.getCode()] = "INSERT INTO ShippingOptionalDates (`DayAndDate`) VALUES (?);";
         sqlArray[SqlQueryType.INSERT_NEW_PURCHASE_FUEL_FOR_HOME_HEATING.getCode()] = "INSERT INTO `bpsdc8o22sikrlpvvxqm`.`PurchaseFuelForHomeHeating`\n" +
                 "(`purchaseID`,\n" +
@@ -389,17 +391,19 @@ public class MysqlConnection {
         sqlArray[SqlQueryType.GET_CUSTOMER_PFH_TABLE.getCode()] = "SELECT p.purchaseDate as 'Order date',p.purchaseHour as 'Order time', ph.status as 'Order status',ph.shippingDateAndTime as 'Expected delivery date'\n" +
                 "FROM Purchase AS p , PurchaseFuelForHomeHeating AS ph\n" +
                 "WHERE p.purchaseID = ph.purchaseID and p.customerID= ?;";
-        sqlArray[SqlQueryType.GET_CURRENT_MARKETING_CAMPEIGN.getCode()] = "SELECT mc.CampaignID,mc.TemplateName,ct.fuelType,ct.DiscountPercentages\n" +
-                "FROM MarketingCampaign AS mc , CampaignTemplates as ct\n" +
-                "WHERE (CURDATE() BETWEEN BeginDate AND EndDate) and mc.TemplateName=ct.templateName;";
+        sqlArray[SqlQueryType.GET_CURRENT_MARKETING_CAMPEIGN.getCode()] = "SELECT mc.CampaignID,mc.TemplateName,ct.fuelType,ct.DiscountPercentages" +
+                " FROM MarketingCampaign AS mc , CampaignTemplates as ct WHERE (CURDATE() BETWEEN mc.BeginDate AND mc.EndDate)and " +
+                "(CURRENT_TIME BETWEEN ct.beginHour AND ct.endHour) and mc.TemplateName=ct.templateName";
 
     }
 
-
+    /**
+     *  get Connection to DB method
+     * @return connection to DB
+     */
     public Connection getConnection() {
         return connection;
     }
-
     /**
      * Disconnect.
      */
@@ -415,7 +419,7 @@ public class MysqlConnection {
     }
 
     /**
-     * Disconnect all logged users.
+     * Disconnect all logged users method.
      */
     public void disconnectAllLoggedUsers() {
         this.connect();

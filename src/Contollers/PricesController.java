@@ -21,7 +21,6 @@ public class PricesController extends BasicController {
         Platform.runLater(() -> {
             switch (result.getActionType()) {
                 case GET_CURRENT_MARKETING_CAMPEIGN:
-                    //
                     this.fromResultToMrketingCampaignArrayList(result);
                     break;
             }

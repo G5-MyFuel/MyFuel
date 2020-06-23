@@ -13,13 +13,13 @@ import javafx.application.Platform;
 import java.util.ArrayList;
 
 /**
- * *  A department responsible for logical calculations and communicating with the client server and DB
- * *  For page "fastFuelBoundary"
+ *  *  A department responsible for logical calculations and communicating with the client server and DB
+ *  *  For page "fastFuelBoundary"
  *
  * @author Hana Wiener
  * @see fastFuelBoundary - - the form's Boundary class
  */
-public class FastFuelController extends BasicController {
+public class FastFuelController extends BasicController{
     /**
      * The boundary controlled by this controller
      */
@@ -95,6 +95,19 @@ public class FastFuelController extends BasicController {
                         break;
                     default:
                         break;
+                   /* case GET_GASSTATION_INVENTORY_TABLE:
+                        ArrayList<GasStation> resultList2 = new ArrayList<>();
+                        resultList2.addAll(this.changeResultToGasStation(result));
+                       myBoundary.setSalesTable(resultList2); // ??
+                        break;
+                    case UPDATE_DIESEL_INVENTORY_CUSTOMER_PURCHASE:
+                        break;
+                    case UPDATE_95_INVENTORY_CUSTOMER_PURCHASE:
+                        break;
+                    case UPDATE_SCOOTER_INVENTORY_CUSTOMER_PURCHASE:
+                        break;
+                        // IF STOCK OUT OF LIMIT -> ALART
+                        */
                 }
             } catch (NullPointerException npe) {
             }

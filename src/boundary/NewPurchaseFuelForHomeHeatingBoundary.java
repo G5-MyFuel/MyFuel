@@ -547,7 +547,7 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
         Double totalPrice = 0.0;
         Double fuelAmount = Double.valueOf(fuelQuantityTXT.getText());
         System.out.println(FuelTypes.HomeHeatingFuel);
-        System.out.println();
+        System.out.println("going to calc order price");
         Prices thisOrderPrice = new Prices(currentCustomerId, fuelAmount, FuelTypes.HomeHeatingFuel, currentCostumerDetailsFromDB.getPurchasePlanAsEnum(), currentCostumerDetailsFromDB.getPricingModelTypeAsEnum(), currentPurchaseHomeHeating.getShippingMethod());
         currentPurchaseHomeHeating.setPriceOfOrder(thisOrderPrice);
         return thisOrderPrice.getTotalPrice();

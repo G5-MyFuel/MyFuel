@@ -129,6 +129,7 @@ public class NewPurchaseFuelForHomeHeatingController extends BasicController {
             c = new Costumer(userID, "", (String) a.get(7), (String) a.get(1), (String) a.get(2),
                     (String) a.get(3), new CreditCard(null, (String) a.get(4), (String) a.get(5), (String) a.get(6)), (String) a.get(9), (String) a.get(8));
             c.getCostumerCreditCard().setCardOwner(c);
+            System.out.println(c.toString());
         }
         return c;
     }
