@@ -82,7 +82,7 @@
                                                       </JFXTextArea>
                                                       <Pane prefHeight="278.0" prefWidth="460.0">
                                                          <children>
-                                                            <ImageView fx:id="orderDetailsToShipping" accessibleRole="BUTTON" fitHeight="70.0" fitWidth="87.0" layoutX="390.0" layoutY="192.0" onMouseClicked="#GoToShippingPage" pickOnBounds="true" preserveRatio="true">
+                                                            <ImageView fx:id="orderDetailsToShipping" accessibleRole="BUTTON" fitHeight="70.0" fitWidth="87.0" layoutX="390.0" layoutY="192.0" onMouseClicked="#afterOrderDetails" pickOnBounds="true" preserveRatio="true">
                                                                <image>
                                                                   <Image url="@../media/CostumerRegisterationMedia/forward_button_40px.png" />
                                                                </image>
@@ -302,6 +302,9 @@
                                                                </children>
                                                             </VBox>
                                                          </children>
+                                                         <cursor>
+                                                            <Cursor fx:constant="DEFAULT" />
+                                                         </cursor>
                                                       </StackPane>
                                                       <VBox fx:id="shippingOverviewPane" alignment="CENTER" maxWidth="968.0" prefHeight="90.0" prefWidth="968.0" spacing="10.0" style="-fx-background-color: #DCDCDC; -fx-background-radius: 50;" visible="false">
                                                          <children>

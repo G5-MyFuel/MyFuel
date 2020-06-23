@@ -367,9 +367,7 @@ public class MysqlConnection {
          * **********************************************************
          */
         sqlArray[SqlQueryType.GET_ALL_SHIPPING_DATES_AVAILABLE.getCode()] = "SELECT * FROM ShippingOptionalDates;";
-        sqlArray[SqlQueryType.GET_SPECIFIC_CUSTOMER_DETAILS.getCode()] = "select c.id,userFirstName,userLastName,userEmail,`Credit Card Number`," +
-                "CreditCardExperationDate,CVV,customerType,`Pricing Model`,`Purchase Plan` from User as u,Costumer as c " +
-                "where u.userID=c.ID and c.ID= ?;";
+        sqlArray[SqlQueryType.GET_SPECIFIC_CUSTOMER_DETAILS.getCode()] = "SELECT * FROM Costumer as C, User as U WHERE C.ID = ? AND U.userID = ?";
         sqlArray[SqlQueryType.INSERT_NEW_AVAILABLE_DATE_FOR_SHIPPING.getCode()] = "INSERT INTO ShippingOptionalDates (`DayAndDate`) VALUES (?);";
         sqlArray[SqlQueryType.INSERT_NEW_PURCHASE_FUEL_FOR_HOME_HEATING.getCode()] = "INSERT INTO `bpsdc8o22sikrlpvvxqm`.`PurchaseFuelForHomeHeating`\n" +
                 "(`purchaseID`,\n" +

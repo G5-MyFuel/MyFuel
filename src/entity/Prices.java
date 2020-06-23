@@ -7,17 +7,16 @@ import common.assets.enums.PricingModelTypes;
 import common.assets.enums.PurchasePlanTypes;
 import common.assets.enums.ShippingMethod;
 
-import java.security.SecureRandom;
 import java.util.ArrayList;
-import java.util.Random;
 
 /**
- *
  * @author Daniel Gabbay
  */
 public class Prices {
+
+
     /**
-     *     Misrad Hatahbura prices
+     * Misrad Hatahbura prices
      */
     private static Double basePrice_95 = 4.7;
     private static Double basePrice_scooter = 3.8;
@@ -25,13 +24,13 @@ public class Prices {
     public static Double basePrice_homeHeating = 6.2;
 
     /**
-     *     Shipping fuel for home heating prices
+     * Shipping fuel for home heating prices
      */
     private final Double fastShipping = 0.0;
     private final Double standardShipping = 0.0;
 
     /**
-     *     Purchase plan discount
+     * Purchase plan discount
      */
     private final Double purchasePlanDiscount_exclusive = 0.95;
     private final Double purchasePlanDiscount_multiple = 0.92;
@@ -49,10 +48,10 @@ public class Prices {
     private PurchasePlanTypes purchasePlan;
     private PricingModelTypes pricingModelType;
     private static Double totalPrice;
-    private String userID;
+    private Costumer correctCostumer;
     private ShippingMethod sm;
     private String companyName;
-    private Double discountOfPricingModel;
+    private Double discountOfPricingModel = null;
 
     public static Double marketingCapmeignDiscount = 1.0;
 
@@ -67,71 +66,67 @@ public class Prices {
     /**
      * constructor for home heating purchase
      *
-     * @param userId
      * @param fuelAmount
      * @param fueltype
-     * @param purchasePlan
-     * @param pricingModelType
      * @param shippingMethod
      */
-    public Prices(String userId, Double fuelAmount, FuelTypes fueltype, PurchasePlanTypes purchasePlan, PricingModelTypes pricingModelType, ShippingMethod shippingMethod) {
-        this.userID = userId;
-        //if (pricingModelType.getPricingModelString().equals(PricingModelTypes.Full_monthly_subscription.getPricingModelString())){}
-          //generalDashBoardController.getCustomerPurchaseAmountInLastMonthFromDB(userId);
+    public Prices(Costumer correctCostumer, Double fuelAmount, FuelTypes fueltype, ShippingMethod shippingMethod) {
+        this.correctCostumer = correctCostumer;
         this.fuelAmount = fuelAmount;
         this.fuelType = fueltype;
-        this.purchasePlan = purchasePlan;
-        this.pricingModelType = pricingModelType;
+        this.purchasePlan = correctCostumer.getPurchasePlanAsEnum();
+        this.pricingModelType = correctCostumer.getPricingModelTypeAsEnum();
         this.sm = shippingMethod;
         this.totalPrice = 0.0;
-        myController.getCompanysForCustomer(userId);
+        for (String correctCompanyName : correctCostumer.getFuelCompany()) {
+            if (!correctCompanyName.equals("NULL")) {
+                companyName = correctCompanyName;
+            }
+        }
+        getDicsount();
     }
 
     /**
      * constructor for fast fuel purchase
-     * @param userId
+     *
      * @param fuelAmount
      * @param fuelType
-     * @param purchasePlan
-     * @param pricingModelType
      */
-    public Prices(String userId, Double fuelAmount, FuelTypes fuelType, PurchasePlanTypes purchasePlan, PricingModelTypes pricingModelType) {
-        this.userID = userId;
-        generalDashBoardController.getCustomerPurchaseAmountInLastMonthFromDB(userId);
+    public Prices(Costumer correctCostumer, Double fuelAmount, FuelTypes fuelType) {
+        generalDashBoardController.getCustomerPurchaseAmountInLastMonthFromDB(correctCostumer.getUserID());
         this.fuelAmount = fuelAmount;
         this.fuelType = fuelType;
-        this.purchasePlan = purchasePlan;
-        this.pricingModelType = pricingModelType;
+        this.purchasePlan = correctCostumer.getPurchasePlanAsEnum();
+        this.pricingModelType = correctCostumer.getPricingModelTypeAsEnum();
         this.totalPrice = 0.0;
         myController.GET_CURRENT_MARKETING_CAMPEIGN_fromDB();
-        calculateTotalPrice();
     }
 
 
     public void backFromCurrentMarketingCampeign(ArrayList<String> a) {
-            String CampaignID = a.get(0);
-            String TemplateName = a.get(1);
-            String campaignFuelType = a.get(2);
-            String DiscountPercentages = a.get(3);
-            marketingCapmeignDiscount = Double.valueOf(DiscountPercentages);
-            if (FuelTypes.contains(campaignFuelType)) {
-                switch (campaignFuelType) {
-                    case "HomeHeatingFuel":
-                        break;
-                    case "ScooterFuel":
-                        if(fuelType==(FuelTypes.ScooterFuel))
-                            Prices.totalPrice = Prices.totalPrice * marketingCapmeignDiscount;
-                        break;
-                    case "Diesel":
-                        if(fuelType==(FuelTypes.Diesel))
-                             Prices.totalPrice = Prices.totalPrice * marketingCapmeignDiscount;
-                        break;
-                    case "Gasoline95":
-                        if(fuelType==(FuelTypes.Gasoline95))
-                            Prices.totalPrice = Prices.totalPrice * marketingCapmeignDiscount;
-                        break;
-                }
+        String CampaignID = a.get(0);
+        String TemplateName = a.get(1);
+        String campaignFuelType = a.get(2);
+        String DiscountPercentages = a.get(3);
+        marketingCapmeignDiscount = Double.valueOf(DiscountPercentages);
+        if (FuelTypes.contains(campaignFuelType)) {
+            switch (campaignFuelType) {
+                case "HomeHeatingFuel":
+                    break;
+                case "ScooterFuel":
+                    if (fuelType == (FuelTypes.ScooterFuel))
+                        Prices.totalPrice = Prices.totalPrice * marketingCapmeignDiscount;
+                    break;
+                case "Diesel":
+                    if (fuelType == (FuelTypes.Diesel))
+                        Prices.totalPrice = Prices.totalPrice * marketingCapmeignDiscount;
+                    break;
+                case "Gasoline95":
+                    if (fuelType == (FuelTypes.Gasoline95))
+                        Prices.totalPrice = Prices.totalPrice * marketingCapmeignDiscount;
+                    break;
             }
+        }
         calculateTotalPrice();
     }
 
@@ -140,7 +135,8 @@ public class Prices {
     }
 
     public Double calculateTotalPrice() {
-        if (userID.isEmpty() || fuelAmount == null || fuelType == null || purchasePlan == null || pricingModelType.isEmpty() ||  totalPrice == null) {
+
+        if (correctCostumer == null || fuelAmount == null || fuelType == null || purchasePlan == null || pricingModelType.isEmpty() || totalPrice == null) {
             return null;
         }
         System.out.println("first: " + totalPrice);
@@ -153,23 +149,7 @@ public class Prices {
         totalPrice *= discountOfPricingModel;
         System.out.println("after d: " + totalPrice);
 
-        /*switch (pricingModelType) {
-            case Casual_fueling:
-                totalPrice *= 1.0;
-                break;
-            case Regular_monthly_subscription_single:
-                totalPrice *= pricingModel_Regular_monthly_subscription_single;
-                break;
-            case Regular_monthly_subscription_multiple:
-                totalPrice = (totalPrice *= pricingModel_Regular_monthly_subscription_single) * purchasePlanDiscount_multiple;
-                break;
-            case Full_monthly_subscription: // מה קורה פה ?
-                //((((totalPrice*previousMonthFuelAmount)*0.96)*0.9))*0.97
-                //totalPrice = (((totalPrice * generalDashBoardController.getFuelAmountOfPreMonthForCurrentUser()) * pricingModel_Regular_monthly_subscription_single)) * pricingModel_Full_monthly_subscription;
-                break;
-            default:
-                System.err.println("error in pricingModelType - > number between 1-4");
-        }*/
+
         // calculate purchase plan influence on price
         switch (purchasePlan) {
             case EXCLUSIVE:
@@ -188,25 +168,17 @@ public class Prices {
         //marketing campeign - fast fuel
         if (fuelType.name().equals(FuelTypes.Diesel) || fuelType.name().equals(FuelTypes.Gasoline95) || fuelType.name().equals(FuelTypes.ScooterFuel)) {
             System.out.println("fast fuel");
-           setMarketingCampaignDiscountOnTotalPrice();
+            setMarketingCampaignDiscountOnTotalPrice();
         }
         //home heating
         if (fuelType.name().equals(FuelTypes.HomeHeatingFuel.toString())) {
             System.out.println("home heating");
             addHomeHeatingPricesAndDiscounts(sm);//Shipping method of Home heating order + amount discount
         }
-
         return totalPrice;
-    }
 
-    private void setMarketingCampaignDiscountOnTotalPrice() {
+    }//end of calculateTotalPrice
 
-    }
-
-
-    public void setFastShippingTotalPrice() {
-//????????
-    }
 
     public Double getFuelPriceByFuelType(FuelTypes ft) {
         switch (ft) {
@@ -223,6 +195,49 @@ public class Prices {
     }
 
 
+    public void addHomeHeatingPricesAndDiscounts(ShippingMethod sm) {
+        switch (sm) {
+            case FAST:
+                totalPrice = totalPrice * 1.02;
+                break;
+            case STANDARD:
+                //  totalPrice = totalPrice + standardShipping;
+                break;
+            default:
+                break;
+        }
+        //amount discount:
+        Double fuelQuantityNum = Double.valueOf(fuelAmount);
+
+        if (fuelQuantityNum >= 600.0 && fuelQuantityNum <= 800.0) {
+            totalPrice = totalPrice * 0.97;
+        }
+        if (fuelQuantityNum > 800.0) {
+            totalPrice = totalPrice * 0.96;
+        }
+        System.out.println(totalPrice);
+    }
+
+
+    public void getDicsount() {
+        if (!pricingModelType.getPricingModelString().equals(PricingModelTypes.Casual_fueling.getPricingModelString())) {
+            ArrayList<String> varArray = new ArrayList<>();
+            varArray.add(pricingModelType.getPricingModelString());
+            varArray.add(companyName);
+            myController.getPricingModelDiscount(varArray);
+        } else {
+            discountOfPricingModel = 1.0;
+        }
+    }
+
+    public void setPricingModelDiscount(ArrayList<String> resArr) {
+        discountOfPricingModel = (100 - Double.parseDouble(resArr.get(0))) / 100;
+    }
+
+    /* *****************getters and setter*******************
+     * *****************getters and setter*******************
+     * *****************getters and setter*******************
+     * */
     public Double getBasePrice_95() {
         return basePrice_95;
     }
@@ -246,7 +261,6 @@ public class Prices {
     public Double getPurchasePlanDiscount_multiple() {
         return purchasePlanDiscount_multiple;
     }
-/////////////
 
     public static void setBasePrice_95(Double basePrice_95) {
         Prices.basePrice_95 = basePrice_95;
@@ -312,29 +326,6 @@ public class Prices {
         this.fuelAmountOfPreviousMonth = fuelAmountOfPreviousMonth;
     }
 
-    public void addHomeHeatingPricesAndDiscounts(ShippingMethod sm) {
-        switch (sm) {
-            case FAST:
-                totalPrice = totalPrice * 1.02;
-                break;
-            case STANDARD:
-              //  totalPrice = totalPrice + standardShipping;
-                break;
-            default:
-                break;
-        }
-        //amount discount:
-        Double fuelQuantityNum = Double.valueOf(fuelAmount);
-
-        if (fuelQuantityNum >= 600.0 && fuelQuantityNum <= 800.0) {
-            totalPrice = totalPrice * 0.97;
-        }
-        if (fuelQuantityNum > 800.0) {
-            totalPrice = totalPrice * 0.96;
-        }
-        System.out.println(totalPrice);
-    }
-
     public Double getTotalPrice() {
         return totalPrice;
     }
@@ -343,25 +334,37 @@ public class Prices {
         this.totalPrice = totalPrice;
     }
 
-    public void myCompanies(ArrayList<String> resArr) {
-        //get the first company from owner companies.
-        for (String correctCompanyName : resArr){
-            if (!correctCompanyName.equals("NULL")) {
-                companyName = correctCompanyName;
-            }
-        }
-        System.out.println(companyName);
-        if (!pricingModelType.getPricingModelString().equals(PricingModelTypes.Casual_fueling.getPricingModelString())) {
-            ArrayList<String> varArray = new ArrayList<>();
-            varArray.add(pricingModelType.getPricingModelString());
-            varArray.add(companyName);
-            myController.getPricingModelDiscount(varArray);
-        }
+    //
+    private void setMarketingCampaignDiscountOnTotalPrice() {
+
     }
 
-    public void setPricingModelDiscount(ArrayList<String> resArr) {
-        discountOfPricingModel = (100-Double.parseDouble(resArr.get(0)))/100;
-        System.out.println(discountOfPricingModel);
-        //TODO: itay
+
+    public void setFastShippingTotalPrice() {
+//????????
     }
-}
+
+
+}//End of class
+
+/*switch (pricingModelType) {
+            case Casual_fueling:
+                totalPrice *= 1.0;
+                break;
+            case Regular_monthly_subscription_single:
+                totalPrice *= pricingModel_Regular_monthly_subscription_single;
+                break;
+            case Regular_monthly_subscription_multiple:
+                totalPrice = (totalPrice *= pricingModel_Regular_monthly_subscription_single) * purchasePlanDiscount_multiple;
+                break;
+            case Full_monthly_subscription: // מה קורה פה ?
+                //((((totalPrice*previousMonthFuelAmount)*0.96)*0.9))*0.97
+                //totalPrice = (((totalPrice * generalDashBoardController.getFuelAmountOfPreMonthForCurrentUser()) * pricingModel_Regular_monthly_subscription_single)) * pricingModel_Full_monthly_subscription;
+                break;
+            default:
+                System.err.println("error in pricingModelType - > number between 1-4");
+        }*/
+
+//constractor commaned
+//if (pricingModelType.getPricingModelString().equals(PricingModelTypes.Full_monthly_subscription.getPricingModelString())){}
+//generalDashBoardController.getCustomerPurchaseAmountInLastMonthFromDB(userId);

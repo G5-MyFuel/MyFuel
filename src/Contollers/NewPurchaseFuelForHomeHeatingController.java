@@ -1,6 +1,5 @@
 package Contollers;
 
-import boundary.ManagerNotificationsPageBoundary;
 import boundary.NewPurchaseFuelForHomeHeatingBoundary;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
@@ -78,8 +77,7 @@ public class NewPurchaseFuelForHomeHeatingController extends BasicController {
                         System.out.println("NewPurchaseFuelForHomeHeatingController -> myController.INSERT_NEW_AVAILABLE_DATE_FOR_SHIPPING;");
                         break;
                     case GET_SPECIFIC_CUSTOMER_DETAILS:
-                        Costumer c = this.fromResultSetToCustomers(result, myBoundary.currentCustomerId);
-                        myBoundary.setCurrentCostumerDetailsFromDB(c);
+                        myBoundary.setCurrentCostumerDetailsFromDB(this.fromResultSetToCustomers(result));
                         break;
                     case INSERT_NEW_PURCHASE_FUEL_FOR_HOME_HEATING:
                         System.out.println("N");
@@ -118,20 +116,36 @@ public class NewPurchaseFuelForHomeHeatingController extends BasicController {
     public void GET_SPECIFIC_CUSTOMER_DETAILS(String str) {
         ArrayList<Object> varArray = new ArrayList<>();
         varArray.add(str);
+        varArray.add(str);
         SqlAction sqlAction = new SqlAction(SqlQueryType.GET_SPECIFIC_CUSTOMER_DETAILS, varArray);
         super.sendSqlActionToClient(sqlAction);
     }
 
 
-    private Costumer fromResultSetToCustomers(SqlResult result, String userID) {
-        Costumer c = null;
-        for (ArrayList<Object> a : result.getResultData()) {
-            c = new Costumer(userID, "", (String) a.get(7), (String) a.get(1), (String) a.get(2),
-                    (String) a.get(3), new CreditCard(null, (String) a.get(4), (String) a.get(5), (String) a.get(6)), (String) a.get(9), (String) a.get(8));
-            c.getCostumerCreditCard().setCardOwner(c);
-            System.out.println(c.toString());
-        }
-        return c;
+
+    /**
+     * This method create array list of costumers from the data base result.
+     *
+     * @param result the result
+     * @return Array list of costumers
+     */
+    private Costumer fromResultSetToCustomers(SqlResult result) {
+        /*result coloms: 0-ID ,1-creditCardNumber ,2-cardExpirationDate ,3-CVV ,4-cosType ,5-pricingModel ,6-purchasePlan ,7-userID ,8-userType ,
+         9-userPassword, 10-isLogin, 11-firstName, 12-lastName, 13-Email, 14-FuelCompany1, 15-FuelCompany2, 16-FuelCompany3
+         */
+        ArrayList<Object> a = new ArrayList<>(result.getResultData().get(0));
+        ArrayList<String> stations = new ArrayList<>();
+        Costumer spesificCostumer;
+        spesificCostumer = new Costumer((String) a.get(0), (String) a.get(9), (String) a.get(4),
+                (String) a.get(11), (String) a.get(12), (String) a.get(13), null, (String) a.get(6), (String) a.get(5));
+        //add fuel companies.
+        stations.add((String) a.get(14));
+        stations.add((String) a.get(15));
+        stations.add((String) a.get(16));
+        spesificCostumer.setFuelCompany(stations);
+        CreditCard card = new CreditCard(spesificCostumer, (String) a.get(1), (String) a.get(2), (String) a.get(3));
+        spesificCostumer.setCostumerCreditCard(card);
+        return spesificCostumer;
     }
 
 

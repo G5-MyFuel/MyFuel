@@ -95,19 +95,7 @@ public class FastFuelController extends BasicController{
                         break;
                     default:
                         break;
-                   /* case GET_GASSTATION_INVENTORY_TABLE:
-                        ArrayList<GasStation> resultList2 = new ArrayList<>();
-                        resultList2.addAll(this.changeResultToGasStation(result));
-                       myBoundary.setSalesTable(resultList2); // ??
-                        break;
-                    case UPDATE_DIESEL_INVENTORY_CUSTOMER_PURCHASE:
-                        break;
-                    case UPDATE_95_INVENTORY_CUSTOMER_PURCHASE:
-                        break;
-                    case UPDATE_SCOOTER_INVENTORY_CUSTOMER_PURCHASE:
-                        break;
-                        // IF STOCK OUT OF LIMIT -> ALART
-                        */
+
                 }
             } catch (NullPointerException npe) {
             }
@@ -191,6 +179,20 @@ public class FastFuelController extends BasicController{
 
 
 }
+
+ /* case GET_GASSTATION_INVENTORY_TABLE:
+                        ArrayList<GasStation> resultList2 = new ArrayList<>();
+                        resultList2.addAll(this.changeResultToGasStation(result));
+                       myBoundary.setSalesTable(resultList2); // ??
+                        break;
+                    case UPDATE_DIESEL_INVENTORY_CUSTOMER_PURCHASE:
+                        break;
+                    case UPDATE_95_INVENTORY_CUSTOMER_PURCHASE:
+                        break;
+                    case UPDATE_SCOOTER_INVENTORY_CUSTOMER_PURCHASE:
+                        break;
+                        // IF STOCK OUT OF LIMIT -> ALART
+                        */
 
 /*
 //hani comments - myabie will be good for use later.

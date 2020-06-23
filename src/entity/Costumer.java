@@ -33,6 +33,19 @@ public class Costumer extends User {
         //
     }
 
+    @Override
+    public String toString() {
+        return "Costumer{" +
+                "CostumerCreditCard=" + CostumerCreditCard +
+                ", CostumerVehicle=" + CostumerVehicle +
+                ", CostumerType='" + CostumerType + '\'' +
+                ", pricingModel='" + pricingModel + '\'' +
+                ", purchasePlan='" + purchasePlan + '\'' +
+                ", purchasePlanType=" + purchasePlanType +
+                ", pricingModelType=" + pricingModelType +
+                '}';
+    }
+
     public void setPurchasePlan(String purchasePlan) {
         this.purchasePlan = purchasePlan;
     }

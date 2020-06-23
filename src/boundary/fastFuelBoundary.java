@@ -239,7 +239,7 @@ public class fastFuelBoundary implements DataInitializable {
      * @return Double total price.
      */
     private Double calculatePrice(Costumer owner, Double amountOfLiters, FuelTypes fuelType) {
-        Prices p = new Prices(owner.getUserID(), amountOfLiters, fuelType, owner.getPurchasePlanAsEnum(), owner.getPricingModelTypeAsEnum());
+        Prices p = new Prices();
         return p.calculateTotalPrice();
     }
 

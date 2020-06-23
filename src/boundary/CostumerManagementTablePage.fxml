@@ -101,7 +101,7 @@
                      <graphic>
                         <ImageView fitHeight="90.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../media/CostumerUpdateMedia/icons8_registration_40px.png" />
+                              <Image url="@../media/CostumerRegisterationMedia/search_client_80px.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -213,7 +213,7 @@
                   </Tab>
                </tabs>
             </JFXTabPane>
-            <Label layoutX="27.0" layoutY="16.0" text="Update Costumer" textFill="#2d4578">
+            <Label layoutX="27.0" layoutY="16.0" text="Costumer Management" textFill="#2d4578">
                <font>
                   <Font name="System Bold Italic" size="40.0" />
                </font>

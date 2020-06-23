@@ -25,13 +25,11 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
 import org.apache.commons.lang3.StringUtils;
-import org.joda.time.DateTime;
 import org.joda.time.LocalDateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
 import java.net.URL;
-import java.sql.PreparedStatement;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -48,7 +46,7 @@ import java.util.ResourceBundle;
 public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable {
     private NewPurchaseFuelForHomeHeatingController myController = new NewPurchaseFuelForHomeHeatingController(this);
     generalDashBoardBoundary myDashBoundary;
-    Costumer currentCostumerDetailsFromDB = null;
+    Costumer currentCostumerDetailsFromDB;
     /**
      * temp variable to store
      */
@@ -59,6 +57,7 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
     private PurchaseFuelForHomeHeating currentPurchaseHomeHeating;
     private String shippingMethodTXT = null;
     private Double totalPrice;
+    private Prices thisOrderPrice;
 
     private FormValidation formValidation;
 
@@ -250,6 +249,26 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
         FormValidation();   //
         /* set form items */
         SetShippingTab();
+
+        shippingMethodComboBOX.getSelectionModel().selectedItemProperty().addListener( (options, oldValue, newValue) -> {
+            boolean flag = true;
+            switch (shippingMethodComboBOX.getValue()) {
+                case "Fast Shipping (40$)":
+                    this.shippingMethodTXT = "Fast Shipping";
+                    this.currentPurchaseHomeHeating.setShippingMethod(ShippingMethod.FAST);
+                    break;
+                case "Standard Shipping (15$)":
+                    shippingMethodTXT = "Standard Shipping";
+                    this.currentPurchaseHomeHeating.setShippingMethod(ShippingMethod.STANDARD);
+                    break;
+                default:
+                    flag = false;
+                    break;
+            }
+            if(flag)
+                thisOrderPrice = new Prices(currentCostumerDetailsFromDB,Double.parseDouble(fuelQuantityTXT.getText()), FuelTypes.HomeHeatingFuel,currentPurchaseHomeHeating.getShippingMethod());
+                }
+        );
     }
 
     /**
@@ -258,6 +277,8 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
      */
     @FXML
     void afterOrderDetails(MouseEvent event) {
+        CheckOrderDetails();
+        //TODO: here need to check if all order details are correct and if and only if correct allowed to move to shipping.
         orderDetailsTab.getTabPane().getSelectionModel().selectNext();
     }
 
@@ -268,6 +289,7 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
     @FXML
     void afterShipping(MouseEvent event) {
         shippingDetailsTab.getTabPane().getSelectionModel().selectNext();
+
     }
 
     /**
@@ -544,16 +566,11 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
      * @return
      */
     private Double calculateOrderPrice() {
-        Double totalPrice = 0.0;
-        Double fuelAmount = Double.valueOf(fuelQuantityTXT.getText());
-        System.out.println(FuelTypes.HomeHeatingFuel);
-        Prices thisOrderPrice = new Prices(currentCustomerId, fuelAmount, FuelTypes.HomeHeatingFuel, currentCostumerDetailsFromDB.getPurchasePlanAsEnum(), currentCostumerDetailsFromDB.getPricingModelTypeAsEnum(), currentPurchaseHomeHeating.getShippingMethod());
-
+        totalPrice = 0.0;
         thisOrderPrice.calculateTotalPrice();
-
         currentPurchaseHomeHeating.setPriceOfOrder(thisOrderPrice);
-        System.out.println(currentPurchaseHomeHeating);
-        return thisOrderPrice.getTotalPrice();
+        totalPrice = thisOrderPrice.getTotalPrice();
+        return totalPrice;
     }
 
 
