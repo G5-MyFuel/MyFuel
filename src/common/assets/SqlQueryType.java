@@ -37,12 +37,12 @@ public enum SqlQueryType {
     UPDATE_SCOOTER_INVENTORY_CUSTOMER_PURCHASE(SqlExecutionType.UPDATE_QUERY),
     GET_GASSTATION_INVENTORY_TABLE(SqlExecutionType.EXECUTE_QUERY),
     GET_OPTIONAL_STATIONS(SqlExecutionType.EXECUTE_QUERY),
-    INSERT_FASTFUEL_PURCHES(SqlExecutionType.UPDATE_QUERY),
+    INSERT_NEW_PURCHES(SqlExecutionType.UPDATE_QUERY),
     INSERT_FASTFUEL_PURCHES_TO_FASTFUEL_TABLE(SqlExecutionType.UPDATE_QUERY),
     GET_CURRENT_MARKETING_CAMPEIGN(SqlExecutionType.EXECUTE_QUERY),
     GET_PRICING_MODEL_DISCOUNT(SqlExecutionType.EXECUTE_QUERY),
     GET_COMPANY_FOR_CUSTOMER(SqlExecutionType.EXECUTE_QUERY),
-
+    INSERT_NEW_PURCHES_TO_HOME_HEATING(SqlExecutionType.UPDATE_QUERY),
     /* *****************************************
      * ********** PurchaseFuelForHomeHeating ****************
      * *****************************************/

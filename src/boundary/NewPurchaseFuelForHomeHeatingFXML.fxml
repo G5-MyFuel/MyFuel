@@ -69,6 +69,9 @@
                                                                <font>
                                                                   <Font size="18.0" />
                                                                </font>
+                                                               <cursor>
+                                                                  <Cursor fx:constant="HAND" />
+                                                               </cursor>
                                                             </JFXTextField>
                                                          </children>
                                                       </GridPane>
@@ -79,6 +82,9 @@
                                                          <font>
                                                             <Font size="20.0" />
                                                          </font>
+                                                         <cursor>
+                                                            <Cursor fx:constant="HAND" />
+                                                         </cursor>
                                                       </JFXTextArea>
                                                       <Pane prefHeight="278.0" prefWidth="460.0">
                                                          <children>
@@ -131,6 +137,9 @@
                                                                <GridPane.margin>
                                                                   <Insets top="-10.0" />
                                                                </GridPane.margin>
+                                                               <cursor>
+                                                                  <Cursor fx:constant="HAND" />
+                                                               </cursor>
                                                             </JFXTextField>
                                                             <JFXTextField fx:id="fuelQuantityTXT" focusColor="#00add8" labelFloat="true" maxWidth="240.0" minWidth="189.0" prefHeight="39.0" prefWidth="207.0" promptText="Fuel Quantity (liters) *" unFocusColor="BLUE">
                                                                <font>
@@ -139,6 +148,9 @@
                                                                <GridPane.margin>
                                                                   <Insets top="-10.0" />
                                                                </GridPane.margin>
+                                                               <cursor>
+                                                                  <Cursor fx:constant="HAND" />
+                                                               </cursor>
                                                             </JFXTextField>
                                                          </children>
                                                       </GridPane>
@@ -165,21 +177,33 @@
                                                                <font>
                                                                   <Font size="18.0" />
                                                                </font>
+                                                               <cursor>
+                                                                  <Cursor fx:constant="HAND" />
+                                                               </cursor>
                                                             </JFXTextField>
                                                             <JFXTextField fx:id="ApartmentNumberTXT" focusColor="#00add8" labelFloat="true" maxWidth="350.0" promptText="Apartment Number *" unFocusColor="BLUE" GridPane.rowIndex="1">
                                                                <font>
                                                                   <Font size="18.0" />
                                                                </font>
+                                                               <cursor>
+                                                                  <Cursor fx:constant="HAND" />
+                                                               </cursor>
                                                             </JFXTextField>
                                                             <JFXTextField fx:id="cityTXT" focusColor="#00add8" labelFloat="true" maxWidth="350.0" promptText="City *" unFocusColor="BLUE" GridPane.rowIndex="2">
                                                                <font>
                                                                   <Font size="18.0" />
                                                                </font>
+                                                               <cursor>
+                                                                  <Cursor fx:constant="HAND" />
+                                                               </cursor>
                                                             </JFXTextField>
                                                             <JFXTextField fx:id="zipCodeTXT" focusColor="#00add8" labelFloat="true" maxWidth="350.0" promptText="ZIP Code *" unFocusColor="BLUE" GridPane.rowIndex="3">
                                                                <font>
                                                                   <Font size="18.0" />
                                                                </font>
+                                                               <cursor>
+                                                                  <Cursor fx:constant="HAND" />
+                                                               </cursor>
                                                             </JFXTextField>
                                                          </children>
                                                       </GridPane>
@@ -370,7 +394,7 @@
                                  <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1129.0">
                                        <children>
-                                          <GridPane gridLinesVisible="true" layoutX="226.0" layoutY="345.0" prefHeight="191.0" prefWidth="482.0">
+                                          <GridPane gridLinesVisible="true" layoutX="258.0" layoutY="316.0" prefHeight="191.0" prefWidth="482.0">
                                             <columnConstraints>
                                               <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="263.5185546875" minWidth="10.0" prefWidth="239.22216796875" />
                                               <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="228.999755859375" minWidth="10.0" prefWidth="166.77783203125" />
@@ -392,7 +416,7 @@
                                                       <Font size="20.0" />
                                                    </font>
                                                 </Text>
-                                                <Text lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Delivery fee" GridPane.rowIndex="2">
+                                                <Text lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Delivery " GridPane.rowIndex="2">
                                                    <font>
                                                       <Font size="20.0" />
                                                    </font>
@@ -500,11 +524,19 @@
                                                 </ImageView>
                                              </graphic>
                                           </JFXButton>
-                                          <JFXButton layoutX="348.0" layoutY="565.0" onAction="#confirmOrder" prefHeight="74.0" prefWidth="302.0" ripplerFill="WHITE" stylesheets="@NewPurchaseFuelForHomeHeatingCSS.css" text="Confirm &amp; Pay">
+                                          <JFXButton layoutX="360.0" layoutY="515.0" onAction="#confirmOrder" prefHeight="74.0" prefWidth="302.0" ripplerFill="WHITE" stylesheets="@NewPurchaseFuelForHomeHeatingCSS.css" text="Confirm &amp; Pay">
                                              <font>
                                                 <Font name="System Bold" size="23.0" />
                                              </font>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
                                           </JFXButton>
+                                          <Text fx:id="confirmMassage" fill="#44b6cd" layoutX="212.0" layoutY="617.0" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Invitation accepted and saved on system!  " textAlignment="CENTER" wrappingWidth="613.4179629916325">
+                                             <font>
+                                                <Font name="System Bold" size="20.0" />
+                                             </font>
+                                          </Text>
                                        </children></AnchorPane>
                                  </content>
                                  <graphic>

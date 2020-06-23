@@ -96,6 +96,8 @@ public class NewPurchaseFuelForHomeHeatingController extends BasicController {
      * @param varArray
      */
     public void INSERT_NEW_PURCHASE_FUEL_FOR_HOME_HEATING(ArrayList<Object> varArray) {
+        System.out.println("*****HH*****");
+        varArray.toString();
         SqlAction sqlAction = new SqlAction(SqlQueryType.INSERT_NEW_PURCHASE_FUEL_FOR_HOME_HEATING, varArray);
         super.sendSqlActionToClient(sqlAction);
     }
@@ -203,4 +205,26 @@ public class NewPurchaseFuelForHomeHeatingController extends BasicController {
         this.availableTimesInDate = availableTimesInDate;
     }
 
+    /**
+
+    public void INSERT_NEW_PURCHES_toDB(ArrayList<String> myPurchase) {
+        ArrayList<Object> varArray = new ArrayList<>();
+        varArray.add(myPurchase.get(0));
+        varArray.add(myPurchase.get(1));
+        varArray.add(myPurchase.get(2));
+        varArray.add(myPurchase.get(3));
+        varArray.add(myPurchase.get(4));
+        varArray.add(myPurchase.get(6));
+
+        SqlAction sqlAction = new SqlAction(SqlQueryType.INSERT_NEW_PURCHES, varArray);
+        super.sendSqlActionToClient(sqlAction);
+    }
+
+    public void INSERT_NEW_PURCHES_TO_HOME_HEATING_toDB(ArrayList<String> myPurchase) {
+        ArrayList<Object> varArray = new ArrayList<>();
+        varArray.add();
+        SqlAction sqlAction = new SqlAction(SqlQueryType.INSERT_NEW_PURCHES_TO_HOME_HEATING, varArray);
+        super.sendSqlActionToClient(sqlAction);
+    }
+     */
 }

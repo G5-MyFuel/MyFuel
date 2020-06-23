@@ -90,7 +90,6 @@ public class PricesController extends BasicController {
         for (ArrayList<Object> a : result.getResultData()) {
             resArr.add((String) a.get(0)); //discount
         }
-        System.out.println("fromResultToPricingModelDiscount");
         myPrices.setPricingModelDiscount(resArr);
     }
 }

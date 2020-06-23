@@ -33,10 +33,8 @@ import java.net.URL;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.ResourceBundle;
+import java.time.LocalTime;
+import java.util.*;
 
 /**
  *
@@ -58,7 +56,7 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
     private String shippingMethodTXT = null;
     private Double totalPrice;
     private Prices thisOrderPrice;
-
+    private String campaignID;
     private FormValidation formValidation;
 
     /**
@@ -226,6 +224,9 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
     @FXML
     private Text deliveryAddressTXT;
 
+    @FXML
+    private Text confirmMassage;
+
     @Override
     public void initData(Object data) {
         ArrayList<Object> varArray = (ArrayList<Object>) data;
@@ -244,6 +245,7 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
     public void initialize(URL location, ResourceBundle resources) {
         this.formValidation = FormValidation.getValidator();
         this.orderDetailsIndicatorTAB.setVisible(false);
+        this.confirmMassage.setVisible(false);
         this.shippingIndicatorTAB1.setVisible(false);
         /*  set all fields validators */
         FormValidation();   //
@@ -253,11 +255,11 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
         shippingMethodComboBOX.getSelectionModel().selectedItemProperty().addListener( (options, oldValue, newValue) -> {
             boolean flag = true;
             switch (shippingMethodComboBOX.getValue()) {
-                case "Fast Shipping (40$)":
+                case "Fast Shipping - Extra 2% per liter of fuel":
                     this.shippingMethodTXT = "Fast Shipping";
                     this.currentPurchaseHomeHeating.setShippingMethod(ShippingMethod.FAST);
                     break;
-                case "Standard Shipping (15$)":
+                case "Standard Shipping":
                     shippingMethodTXT = "Standard Shipping";
                     this.currentPurchaseHomeHeating.setShippingMethod(ShippingMethod.STANDARD);
                     break;
@@ -369,17 +371,17 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
     public void SetShippingTab() {
         shippingOverviewPane.setVisible(false);
         whenPane.setVisible(false);
-        shippingMethodComboBOX.getItems().addAll("Fast Shipping (40$)", "Standard Shipping (15$)");
+        shippingMethodComboBOX.getItems().addAll("Fast Shipping - Extra 2% per liter of fuel", "Standard Shipping");
         shippingMethodComboBOX.valueProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 switch (shippingMethodComboBOX.getValue()) {
-                    case "Fast Shipping (40$)":
+                    case "Fast Shipping - Extra 2% per liter of fuel":
                         System.out.println("Fast Shipping selected");
                         FastShippingSelected();
 
                         break;
-                    case "Standard Shipping (15$)":
+                    case "Standard Shipping":
                         System.out.println("Standard Shipping selected");
                         try {
                             StandardShippingSelected();
@@ -394,11 +396,13 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
     }
 
     /**
-     * To insert all the details for this purchase in DB
+     * To insert all the details of this purchase to DB
      */
     public void INSERT_NEW_PURCHASE_FUEL_FOR_HOME_HEATING() {
         ArrayList<Object> varArray = new ArrayList<>();
-        varArray.add(currentCostumerDetailsFromDB.getUserID());
+        Random rand = new Random();
+        Integer p_id = rand.nextInt(9000)+1000;
+        varArray.add(p_id);
         varArray.add(emailAddressTXT.getText());
         varArray.add(anotherContactPhoneNumberTXT.getText());
         varArray.add(noteTXT.getText());
@@ -407,7 +411,7 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
         myController.INSERT_NEW_PURCHASE_FUEL_FOR_HOME_HEATING(varArray);
         //
         ArrayList<Object> varArray1 = new ArrayList<>();
-        varArray1.add(currentCostumerDetailsFromDB.getUserID());
+        varArray1.add(p_id);
         varArray1.add(currentCostumerDetailsFromDB.getUserID());
 //        String timeStamp = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
 //        varArray1.add(timeStamp);
@@ -417,27 +421,10 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
         varArray1.add(timeStamp1);
         varArray1.add("0");
         System.out.println(varArray1);
+        System.out.println("******purches******");
+        varArray1.toString();
+
         myController.INSERT_NEW_PURCHASE_FUEL_FOR_HOME_HEATING1(varArray1);
-        /**
-         * INSERT INTO `bpsdc8o22sikrlpvvxqm`.`Purchase`
-         * (`purchaseID`,
-         * `customerID`,
-         * `purchaseDate`,
-         * `fuelAmount`,
-         * `totalPrice`,
-         * `purchaseHour`,
-         * `CampaignID`)
-         * VALUES
-         * ("238015088","238015088",curdate(),601.0,0.0,"10:57:00","0");
-         *  "(?,?,curdate(),?,?,?,?);\n";
-         * purchaseID varchar(25)
-         * customerID varchar(25)
-         * purchaseDate date ..
-         * fuelAmount double
-         * totalPrice double
-         * purchaseHour varchar(10)
-         * CampaignID varchar(10)
-         */
     }
 
     /**
@@ -525,10 +512,10 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
             //
             if (currentPurchaseHomeHeating.getShippingMethod().equals(ShippingMethod.STANDARD)) {
                 scheduledDeliveryDateTXT.setText(" " + shippingSummeryDetailsTXT.getText());
-                DeliveryFeeTXT.setText("15 $");
+                DeliveryFeeTXT.setText("Fast Shipping");
             } else {
                 scheduledDeliveryDateTXT.setText(" You will receive the shipment in the next 6 hours");
-                DeliveryFeeTXT.setText("40 $");
+                DeliveryFeeTXT.setText("Standard Shipping");
             }
 
             //Prices sets
@@ -549,11 +536,11 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
         //set shipping method
         //check if shipping method selected
         switch (shippingMethodComboBOX.getValue()) {
-            case "Fast Shipping (40$)":
+            case "Fast Shipping - Extra 2% per liter of fuel":
                 this.shippingMethodTXT = "Fast Shipping";
                 this.currentPurchaseHomeHeating.setShippingMethod(ShippingMethod.FAST);
                 return true;
-            case "Standard Shipping (15$)":
+            case "Standard Shipping":
                 shippingMethodTXT = "Standard Shipping";
                 this.currentPurchaseHomeHeating.setShippingMethod(ShippingMethod.STANDARD);
                 return true;
@@ -711,6 +698,38 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
      */
     @FXML
     void confirmOrder(ActionEvent event) {
-        INSERT_NEW_PURCHASE_FUEL_FOR_HOME_HEATING();
+        this.INSERT_NEW_PURCHASE_FUEL_FOR_HOME_HEATING();
+       /* ArrayList<String> myPurchase = new ArrayList<>();
+        ArrayList<String> myHHPurchase = new ArrayList<>();
+        Random rand = new Random();
+        Integer p_id = rand.nextInt(9000)+1000;
+
+        myPurchase.add(String.valueOf(p_id));
+        myPurchase.add(this.currentCustomerId);
+        myPurchase.add(fuelQuantityTXT.getText());
+        myPurchase.add(String.valueOf(totalPrice));
+        myPurchase.add(LocalTime.now().toString());
+        myPurchase.add(this.thisOrderPrice.getCampaignID());
+        myPurchase.toString();
+        myController.INSERT_NEW_PURCHES_toDB(myPurchase);
+
+        myHHPurchase.add(String.valueOf(p_id));
+        myHHPurchase.add(emailAddressTXT.getText());
+        myHHPurchase.add(anotherContactPhoneNumberTXT.getText());
+        myHHPurchase.add(noteTXT.getText());
+        myHHPurchase.add("CONFIRMED_ORDER");
+        myHHPurchase.add(shippingMethodComboBOX.getValue());
+        myHHPurchase.add(t9to11BTN.getText());
+        myController.INSERT_NEW_PURCHES_TO_HOME_HEATING_toDB(myHHPurchase);
+        confirmMassage.setVisible(true);
+*/
+    }
+
+    public String getCampaignID() {
+        return campaignID;
+    }
+
+    public void setCampaignID(String campaignID) {
+        this.campaignID = campaignID;
     }
 }
