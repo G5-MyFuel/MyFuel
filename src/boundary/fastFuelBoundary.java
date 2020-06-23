@@ -41,7 +41,7 @@ public class fastFuelBoundary implements DataInitializable {
     /**
      * temp  variables
      */
-    private ToggleGroup group = new ToggleGroup();
+    private ToggleGroup group;
     private FormValidation LiterAmountValidato,vehicleNumberValidator;
     private Alert ErrorAlert = new Alert(Alert.AlertType.ERROR);
     private Costumer owner;
@@ -117,6 +117,7 @@ public class fastFuelBoundary implements DataInitializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //
+        group = new ToggleGroup();
         pump1.setToggleGroup(group);
         pump2.setToggleGroup(group);
         pump3.setToggleGroup(group);
@@ -156,6 +157,7 @@ public class fastFuelBoundary implements DataInitializable {
                 }
             }
         });
+
     }
 
     /**
@@ -165,7 +167,8 @@ public class fastFuelBoundary implements DataInitializable {
      */
     @FXML
     void startFuelingProccess(MouseEvent event) {
-        if (!group.getSelectedToggle().isSelected()) {
+        //TODO: after daniel write the function that calculate the price , need to show user the price and update details.
+        if (group.getSelectedToggle() == null) {
             ErrorAlert.setTitle("Internal Error");
             ErrorAlert.setHeaderText("You need to chose a pump first.");
             ErrorAlert.showAndWait();
@@ -185,7 +188,7 @@ public class fastFuelBoundary implements DataInitializable {
                         literCountertxt.setText(literCounter.toString());
                         fuelAmountToFueling--;
                         try {
-                            sleep(250);
+                            sleep(200);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
@@ -244,7 +247,6 @@ public class fastFuelBoundary implements DataInitializable {
         while (correctCompanyName.equals("NULL")) {
             correctCompanyName = owner.getFuelCompany().get(rand.nextInt(3));
         }
-        System.out.println(correctCompanyName);
         //set the image of the company.
         if (correctCompanyName.equals("PAZ")) {
             image = new Image(getClass().getResourceAsStream("../media/CostumerRegisterationMedia/pazLogoimg.png"));
