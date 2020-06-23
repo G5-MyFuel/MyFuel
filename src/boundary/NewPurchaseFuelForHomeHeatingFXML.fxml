@@ -270,7 +270,7 @@
                                                       </HBox>
                                                       <StackPane prefHeight="288.0" prefWidth="1002.0">
                                                          <children>
-                                                            <VBox fx:id="whenPane" alignment="TOP_CENTER" prefHeight="318.0" prefWidth="1002.0" spacing="5.0" visible="false">
+                                                            <VBox fx:id="whenPane" alignment="TOP_CENTER" prefHeight="318.0" prefWidth="1002.0" spacing="5.0">
                                                                <children>
                                                                   <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="39.0" prefWidth="974.0" style="-fx-background-color: #DCDCDC; -fx-font-size: 22; -fx-font-weight: bold; -fx-background-radius: 30;" text="Select Shipping Date" textAlignment="CENTER">
                                                                      <VBox.margin>
@@ -290,7 +290,7 @@
                                                                         <Font size="24.0" />
                                                                      </font>
                                                                   </Label>
-                                                                  <GridPane fx:id="optionalDatesForShippingGridPane" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="199.0" prefWidth="983.0" stylesheets="@NewPurchaseFuelForHomeHeatingCSS.css" visible="false">
+                                                                  <GridPane fx:id="optionalDatesForShippingGridPane" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="199.0" prefWidth="983.0" stylesheets="@NewPurchaseFuelForHomeHeatingCSS.css">
                                                                      <columnConstraints>
                                                                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="194.2222900390625" minWidth="10.0" prefWidth="194.2222900390625" />
                                                                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="196.0" minWidth="10.0" prefWidth="181.7777099609375" />
@@ -311,14 +311,14 @@
                                                                   </GridPane>
                                                                </children>
                                                             </VBox>
-                                                            <VBox fx:id="whenPane1" alignment="TOP_CENTER" prefHeight="318.0" prefWidth="1002.0" spacing="5.0" visible="false">
+                                                            <VBox fx:id="whenPane1" alignment="TOP_CENTER" prefHeight="318.0" prefWidth="1002.0" spacing="5.0">
                                                                <children>
                                                                   <Label fx:id="whenLable1" alignment="CENTER" contentDisplay="CENTER" prefHeight="39.0" prefWidth="974.0" style="-fx-background-color: #DCDCDC; -fx-font-size: 22; -fx-font-weight: bold; -fx-background-radius: 30;" text="Select Shipping Date:" textAlignment="CENTER">
                                                                      <VBox.margin>
                                                                         <Insets />
                                                                      </VBox.margin>
                                                                   </Label>
-                                                                  <ImageView fitHeight="231.0" fitWidth="428.0" pickOnBounds="true" preserveRatio="true">
+                                                                  <ImageView fitHeight="231.0" fitWidth="428.0" pickOnBounds="true" preserveRatio="true" visible="false">
                                                                      <image>
                                                                         <Image url="@../media/FuelForHomeHeating/fastDelivery1GIF.gif" />
                                                                      </image>
@@ -330,7 +330,7 @@
                                                             <Cursor fx:constant="DEFAULT" />
                                                          </cursor>
                                                       </StackPane>
-                                                      <VBox fx:id="shippingOverviewPane" alignment="CENTER" maxWidth="968.0" prefHeight="90.0" prefWidth="968.0" spacing="10.0" style="-fx-background-color: #DCDCDC; -fx-background-radius: 50;" visible="false">
+                                                      <VBox fx:id="shippingOverviewPane" alignment="CENTER" maxWidth="968.0" prefHeight="90.0" prefWidth="968.0" spacing="10.0" style="-fx-background-color: #DCDCDC; -fx-background-radius: 50;">
                                                          <children>
                                                             <HBox alignment="CENTER">
                                                                <children>
