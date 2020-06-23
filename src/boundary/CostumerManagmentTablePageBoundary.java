@@ -361,6 +361,7 @@ public class CostumerManagmentTablePageBoundary implements DataInitializable {
     @FXML
     void ClickSaveVehicleButton(MouseEvent event) {
         boolean flag = false;
+        boolean length = VehicleIDtxt.getText().length() != 7 ? true:false;
         if (OwnerIDtxt1.getText().isEmpty() || VehicleIDtxt.getText().isEmpty() || GasTypeChoiseBox.getSelectionModel().isEmpty()) {
             ErrorAlert.setTitle("Internal Error");
             ErrorAlert.setHeaderText("One of the required fields is empty.\nPlease insert required information to proceed.");
@@ -369,7 +370,7 @@ public class CostumerManagmentTablePageBoundary implements DataInitializable {
             ErrorAlert.setTitle("Internal Error");
             ErrorAlert.setHeaderText("Vehicle ID already exists.\nPlease chose different ID.");
             ErrorAlert.showAndWait();
-        }else if(!myValidator.isOnlyNumbers()){
+        }else if(length){
             ErrorAlert.setTitle("Internal Error");
             ErrorAlert.setHeaderText("Vehicle ID must contain only numbers.");
             ErrorAlert.showAndWait();

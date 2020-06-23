@@ -94,10 +94,18 @@
                </children>
             </HBox>
          </children></VBox>
-      <Button fx:id="startFuelingBtn" layoutX="402.0" layoutY="431.0" mnemonicParsing="false" onMouseClicked="#startFuelingProccess" prefHeight="67.0" prefWidth="257.0" style="-fx-background-radius: 50;" text="Start fueling" textFill="RED">
+      <Button fx:id="startFuelingBtn" layoutX="402.0" layoutY="431.0" mnemonicParsing="false" onMouseClicked="#startFuelingProccess" prefHeight="67.0" prefWidth="257.0" style="-fx-background-radius: 50;" text="Start fueling">
          <font>
             <Font name="System Bold" size="22.0" />
          </font>
+         <textFill>
+            <LinearGradient endX="0.719047619047619" endY="1.0" startX="0.7095238095238094" startY="0.3904761904761905">
+               <stops>
+                  <Stop color="RED" />
+                  <Stop color="BLACK" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
       </Button>
       <Pane fx:id="paneFinishRefuel" layoutX="88.0" layoutY="498.0" prefHeight="263.0" prefWidth="886.0">
          <children>
@@ -145,11 +153,19 @@
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Your subscription type is:">
                      <font>
-                        <Font name="System Bold" size="14.0" />
+                        <Font name="System Bold" size="17.0" />
                      </font>
                      <HBox.margin>
                         <Insets left="5.0" />
                      </HBox.margin>
+                     <fill>
+                        <LinearGradient endX="0.719047619047619" endY="1.0" startX="0.7095238095238094">
+                           <stops>
+                              <Stop color="RED" />
+                              <Stop color="BLACK" offset="1.0" />
+                           </stops>
+                        </LinearGradient>
+                     </fill>
                   </Text>
                   <Text fx:id="costumerSubscriptionType" strokeType="OUTSIDE" strokeWidth="0.0" text="subscriptionType">
                      <font>
@@ -163,7 +179,7 @@
             </HBox>
          </children>
       </Pane>
-      <VBox layoutX="417.0" layoutY="216.0" prefHeight="198.0" prefWidth="227.0" style="-fx-background-color: #F5F5F5; -fx-background-radius: 50;">
+      <VBox fx:id="detailsBox" layoutX="417.0" layoutY="216.0" prefHeight="198.0" prefWidth="227.0" style="-fx-background-color: #F5F5F5; -fx-background-radius: 50;">
          <children>
             <Label text="Details:">
                <VBox.margin>
@@ -257,7 +273,7 @@
             </HBox>
          </children>
       </VBox>
-      <ImageView fx:id="companyImage" fitHeight="150.0" fitWidth="200.0" layoutX="754.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="companyImage" fitHeight="250.0" fitWidth="350.0" layoutX="691.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true" />
       <JFXTextField fx:id="literAmountInput" labelFloat="true" layoutX="26.0" layoutY="118.0" prefHeight="56.0" prefWidth="344.0" promptText="Please enter amount in liters">
          <font>
             <Font size="26.0" />
@@ -266,6 +282,11 @@
       <ImageView fx:id="zikok" fitHeight="356.0" fitWidth="599.0" layoutX="349.0" layoutY="346.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../media/CostumerRegisterationMedia/oie_oie_twinkles.gif" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="loadingImage" fitHeight="250.0" fitWidth="450.0" layoutX="297.0" layoutY="201.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../media/CostumerRegisterationMedia/loadingGifNoBG.gif" />
          </image>
       </ImageView>
    </children>

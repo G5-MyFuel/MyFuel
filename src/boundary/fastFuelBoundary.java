@@ -11,13 +11,16 @@ import entity.Prices;
 import entity.Vehicle;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 import java.net.URL;
@@ -99,6 +102,11 @@ public class fastFuelBoundary implements DataInitializable {
     private ImageView companyImage;
     @FXML
     private ImageView zikok;
+    @FXML
+    private ImageView loadingImage;
+    @FXML
+    private VBox detailsBox;
+
 
 
 
@@ -117,6 +125,8 @@ public class fastFuelBoundary implements DataInitializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //
+        loadingImage.setVisible(false);
+        detailsBox.setVisible(false);
         group = new ToggleGroup();
         pump1.setToggleGroup(group);
         pump2.setToggleGroup(group);
@@ -139,6 +149,8 @@ public class fastFuelBoundary implements DataInitializable {
             @Override
             public void handle(KeyEvent keyEvent) {
                 if (keyEvent.getCode() == KeyCode.ENTER) {
+                    loadingImage.setVisible(true);
+                    detailsBox.setVisible(false);
                     String text = vehicleIDinput.getText();
                     boolean length = text.length() != 7 ? false:true;
                     boolean isOnlyNumber = text.matches("\\d*");
@@ -157,6 +169,7 @@ public class fastFuelBoundary implements DataInitializable {
                 }
             }
         });
+
 
     }
 
@@ -235,7 +248,7 @@ public class fastFuelBoundary implements DataInitializable {
     }
 
 
-    public void setOwner(Costumer owner) {
+    public void setOwnerAndDetails(Costumer owner) {
         this.owner = owner;
         //setting owner details
         ownerIDtxt.setText(owner.getUserID());
@@ -243,6 +256,7 @@ public class fastFuelBoundary implements DataInitializable {
         fuelTypeTxt.setText(correctVehicleFueling.getGasType());
         costumerSubscriptionType.setText(owner.getPricingModel());
         //get random company from owner companies.
+        correctCompanyName = "NULL";
         Random rand = new Random();
         while (correctCompanyName.equals("NULL")) {
             correctCompanyName = owner.getFuelCompany().get(rand.nextInt(3));
@@ -268,6 +282,8 @@ public class fastFuelBoundary implements DataInitializable {
         }
         stationNameTxt.setText(correctStation.getGasStationName());
         startFuelingBtn.setDisable(false);
+        loadingImage.setVisible(false);
+        detailsBox.setVisible(true);
 
     }
 
