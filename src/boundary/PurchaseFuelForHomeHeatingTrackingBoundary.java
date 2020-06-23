@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
- * @author  Daniel
+ * @author  Daniel Gabbay
  * @see PurchaseFuelForHomeHeatingTrackingBoundary - the from's boundary class
  */
 
@@ -108,5 +108,8 @@ public class PurchaseFuelForHomeHeatingTrackingBoundary implements DataInitializ
         expectedDeliveryDate.setText("expected Delivery Date");
         treeTableOfALlCustomerOrders.setItems(data);
 
+    }
+
+    public void showSelectedRowDetails(javafx.scene.input.MouseEvent mouseEvent) {
     }
 }

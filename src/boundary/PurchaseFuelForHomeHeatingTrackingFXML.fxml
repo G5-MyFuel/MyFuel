@@ -28,17 +28,17 @@
                   <Font name="System Bold Italic" size="40.0" />
                </font>
             </Label>
-            <Pane layoutX="53.0" layoutY="123.0" prefHeight="350.0" prefWidth="942.0">
+            <Pane layoutX="27.0" layoutY="127.0" prefHeight="350.0" prefWidth="942.0">
                <children>
                   <TableView fx:id="treeTableOfALlCustomerOrders" layoutX="146.0" layoutY="2.0" prefHeight="350.0" prefWidth="647.0">
                      <columns>
-                        <TableColumn fx:id="orderDateCol" prefWidth="75.0" resizable="false" sortable="false" text="Column X" />
-                        <TableColumn fx:id="orderTimeCol" prefWidth="75.0" text="Column X" />
-                        <TableColumn fx:id="statusCol" prefWidth="75.0" text="Column X" />
-                        <TableColumn fx:id="expectedDeliveryDate" prefWidth="75.0" text="Column X" />
+                        <TableColumn fx:id="orderDateCol" prefWidth="141.0" resizable="false" sortable="false" text="Column X" />
+                        <TableColumn fx:id="orderTimeCol" minWidth="9.0" prefWidth="174.0" text="Column X" />
+                        <TableColumn fx:id="statusCol" prefWidth="163.0" text="Column X" />
+                        <TableColumn fx:id="expectedDeliveryDate" prefWidth="168.0" text="Column X" />
                      </columns>
                   </TableView>
-                  <Button layoutX="803.0" layoutY="2.0" mnemonicParsing="false" onMouseClicked="#showSelectedRowDetails" prefHeight="58.0" prefWidth="166.0" text="Show selected row details" />
+                  <Button layoutX="797.0" layoutY="42.0" mnemonicParsing="false" onMouseClicked="#showSelectedRowDetails" prefHeight="69.0" prefWidth="207.0" text="Show selected row details" />
                </children>
             </Pane>
             <AnchorPane layoutX="42.0" layoutY="458.0" prefHeight="173.0" prefWidth="954.0">
