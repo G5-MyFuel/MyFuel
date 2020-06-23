@@ -96,8 +96,8 @@ public class NewPurchaseFuelForHomeHeatingController extends BasicController {
      * @param varArray
      */
     public void INSERT_NEW_PURCHASE_FUEL_FOR_HOME_HEATING(ArrayList<Object> varArray) {
-        System.out.println("*****HH*****");
-        varArray.toString();
+        System.out.println("PurchaseFuelForHomeHeating quary");
+        System.out.println(varArray);
         SqlAction sqlAction = new SqlAction(SqlQueryType.INSERT_NEW_PURCHASE_FUEL_FOR_HOME_HEATING, varArray);
         super.sendSqlActionToClient(sqlAction);
     }
@@ -107,6 +107,9 @@ public class NewPurchaseFuelForHomeHeatingController extends BasicController {
      * @param varArray1
      */
     public void INSERT_NEW_PURCHASE_FUEL_FOR_HOME_HEATING1(ArrayList<Object> varArray1) {
+        System.out.println("Purchase quary");
+        varArray1.toString();
+
         SqlAction sqlAction2 = new SqlAction(SqlQueryType.INSERT_NEW_PURCHASE_FUEL_FOR_HOME_HEATING1, varArray1);
         super.sendSqlActionToClient(sqlAction2);
     }
