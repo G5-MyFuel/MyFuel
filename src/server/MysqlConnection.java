@@ -385,16 +385,8 @@ public class MysqlConnection {
                 "`shippingMethod`,\n" +
                 "`shippingDateAndTime`)\n" +
                 "VALUES(?,?,?,?,\"CONFIRMED_ORDER\",?,?);\n";
-        sqlArray[SqlQueryType.INSERT_NEW_PURCHASE_FUEL_FOR_HOME_HEATING1.getCode()] = "INSERT INTO `bpsdc8o22sikrlpvvxqm`.`Purchase`\n" +
-                "(`purchaseID`,\n" +
-                "`customerID`,\n" +
-                "`purchaseDate`,\n" +
-                "`fuelAmount`,\n" +
-                "`totalPrice`,\n" +
-                "`purchaseHour`,\n" +
-                "`CampaignID`)\n" +
-                "VALUES\n" +
-                "(?,?,curdate(),?,?,?,?);\n";
+        sqlArray[SqlQueryType.INSERT_NEW_PURCHASE_FUEL_FOR_HOME_HEATING1.getCode()] = "INSERT INTO `Purchase`(`purchaseID`, `customerID`," +
+        " `purchaseDate`, `fuelAmount`, `totalPrice`, `purchaseHour`, `CampaignID`) VALUES (?,?,CURDATE(),?,?,?,?)";;
         sqlArray[SqlQueryType.GET_CUSTOMER_PFH_TABLE.getCode()] = "SELECT p.purchaseDate as 'Order date',p.purchaseHour as 'Order time', ph.status as 'Order status',ph.shippingDateAndTime as 'Expected delivery date'\n" +
                 "FROM Purchase AS p , PurchaseFuelForHomeHeating AS ph\n" +
                 "WHERE p.purchaseID = ph.purchaseID and p.customerID= ?;";
