@@ -49,7 +49,7 @@
             </ContextMenu>
          </contextMenu>
       </TableView>
-      <Text fx:id="explanationTxt" fill="RED" layoutX="115.0" layoutY="208.0" strokeType="OUTSIDE" strokeWidth="0.0" text="* Orders arrived to your station." wrappingWidth="433.04345703125">
+      <Text fx:id="explanationTxt" fill="RED" layoutX="108.0" layoutY="172.0" strokeType="OUTSIDE" strokeWidth="0.0" text="* Orders arrived to your station." wrappingWidth="433.04345703125">
          <font>
             <Font name="System Bold" size="17.0" />
          </font>
@@ -100,5 +100,10 @@
             </ImageView>
          </children>
       </AnchorPane>
+      <Text layoutX="117.0" layoutY="207.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Double press to see more details" wrappingWidth="317.6708984375">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
    </children>
 </Pane>
