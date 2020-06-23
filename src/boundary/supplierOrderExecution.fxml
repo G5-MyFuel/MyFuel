@@ -114,9 +114,14 @@
             </Text>
          </children>
       </AnchorPane>
-      <Text fx:id="noOrdersTxt" fill="RED" layoutX="61.0" layoutY="211.0" strokeType="OUTSIDE" strokeWidth="0.0" text="* No orders" wrappingWidth="160.9999857544899">
+      <Text fx:id="noOrdersTxt" fill="RED" layoutX="307.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" text="* No orders" wrappingWidth="160.9999857544899">
          <font>
             <Font name="System Bold" size="19.0" />
+         </font>
+      </Text>
+      <Text layoutX="61.0" layoutY="211.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Double press to see more details" wrappingWidth="317.6708984375">
+         <font>
+            <Font size="16.0" />
          </font>
       </Text>
    </children>
