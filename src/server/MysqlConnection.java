@@ -376,25 +376,11 @@ public class MysqlConnection {
         sqlArray[SqlQueryType.GET_ALL_SHIPPING_DATES_AVAILABLE.getCode()] = "SELECT * FROM ShippingOptionalDates;";
         sqlArray[SqlQueryType.GET_SPECIFIC_CUSTOMER_DETAILS.getCode()] = "SELECT * FROM Costumer as C, User as U WHERE C.ID = ? AND U.userID = ?";
         sqlArray[SqlQueryType.INSERT_NEW_AVAILABLE_DATE_FOR_SHIPPING.getCode()] = "INSERT INTO ShippingOptionalDates (`DayAndDate`) VALUES (?);";
-        sqlArray[SqlQueryType.INSERT_NEW_PURCHASE_FUEL_FOR_HOME_HEATING.getCode()] = "INSERT INTO `bpsdc8o22sikrlpvvxqm`.`PurchaseFuelForHomeHeating`\n" +
-                "(`purchaseID`,\n" +
-                "`emailForInvoice`,\n" +
-                "`phoneNumberForContact`,\n" +
-                "`noteForPurchase`,\n" +
-                "`status`,\n" +
-                "`shippingMethod`,\n" +
-                "`shippingDateAndTime`)\n" +
-                "VALUES(?,?,?,?,\"CONFIRMED_ORDER\",?,?);\n";
-        sqlArray[SqlQueryType.INSERT_NEW_PURCHASE_FUEL_FOR_HOME_HEATING1.getCode()] = "INSERT INTO `bpsdc8o22sikrlpvvxqm`.`Purchase`\n" +
-                "(`purchaseID`,\n" +
-                "`customerID`,\n" +
-                "`purchaseDate`,\n" +
-                "`fuelAmount`,\n" +
-                "`totalPrice`,\n" +
-                "`purchaseHour`,\n" +
-                "`CampaignID`)\n" +
-                "VALUES\n" +
-                "(?,?,curdate(),?,?,?,?);\n";
+        sqlArray[SqlQueryType.INSERT_NEW_PURCHASE_FUEL_FOR_HOME_HEATING.getCode()] = "INSERT INTO `PurchaseFuelForHomeHeating`" +
+                "(`purchaseID`, `emailForInvoice`, `phoneNumberForContact`, `noteForPurchase`, `status`, `shippingMethod`," +
+                " `shippingDateAndTime`) VALUES (?,?,?,?,?,?,?)";
+        sqlArray[SqlQueryType.INSERT_NEW_PURCHASE_FUEL_FOR_HOME_HEATING1.getCode()] = "INSERT INTO `Purchase`(`purchaseID`, `customerID`," +
+                " `purchaseDate`, `fuelAmount`, `totalPrice`, `purchaseHour`, `CampaignID`) VALUES (?,?,CURDATE(),?,?,?,?)";
         sqlArray[SqlQueryType.GET_CUSTOMER_PFH_TABLE.getCode()] = "SELECT p.purchaseDate as 'Order date',p.purchaseHour as 'Order time', ph.status as 'Order status',ph.shippingDateAndTime as 'Expected delivery date'\n" +
                 "FROM Purchase AS p , PurchaseFuelForHomeHeating AS ph\n" +
                 "WHERE p.purchaseID = ph.purchaseID and p.customerID= ?;";

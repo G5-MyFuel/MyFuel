@@ -31,6 +31,7 @@ import org.joda.time.format.DateTimeFormatter;
 
 import java.net.URL;
 import java.text.DecimalFormat;
+import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -406,21 +407,25 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
         varArray.add(emailAddressTXT.getText());
         varArray.add(anotherContactPhoneNumberTXT.getText());
         varArray.add(noteTXT.getText());
-        varArray.add(shippingMethodTXT);
+        varArray.add("CONFIRMED_ORDER");
+        varArray.add(shippingMethodComboBOX.getValue());
         varArray.add(shippingSummeryDetailsTXT.getText());
+        System.out.println("******home heating******");
+        System.out.println(varArray);
         myController.INSERT_NEW_PURCHASE_FUEL_FOR_HOME_HEATING(varArray);
         //
+        Format f = new SimpleDateFormat("HH.mm.ss");
+        String strResult = f.format(new Date());
+        System.out.println("Time = "+strResult);
         ArrayList<Object> varArray1 = new ArrayList<>();
         varArray1.add(p_id);
-        varArray1.add(currentCostumerDetailsFromDB.getUserID());
-//        String timeStamp = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
-//        varArray1.add(timeStamp);
+        varArray1.add(this.currentCustomerId);
         varArray1.add(fuelQuantityTXT.getText());
-        varArray1.add(totalPrice);
-        String timeStamp1 = new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime());
-        varArray1.add(timeStamp1);
+        varArray1.add(String.valueOf(totalPrice));
+        varArray1.add(strResult);
         varArray1.add("0");
-        System.out.println(varArray1);
+
+
         System.out.println("******purches******");
         varArray1.toString();
 
@@ -633,7 +638,6 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
             setShippingTimes(t13to15BTN);
             setShippingTimes(t15to17BTN);
             setShippingTimes(t17to19BTN);
-
         }
     }
 
@@ -699,30 +703,6 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
     @FXML
     void confirmOrder(ActionEvent event) {
         this.INSERT_NEW_PURCHASE_FUEL_FOR_HOME_HEATING();
-       /* ArrayList<String> myPurchase = new ArrayList<>();
-        ArrayList<String> myHHPurchase = new ArrayList<>();
-        Random rand = new Random();
-        Integer p_id = rand.nextInt(9000)+1000;
-
-        myPurchase.add(String.valueOf(p_id));
-        myPurchase.add(this.currentCustomerId);
-        myPurchase.add(fuelQuantityTXT.getText());
-        myPurchase.add(String.valueOf(totalPrice));
-        myPurchase.add(LocalTime.now().toString());
-        myPurchase.add(this.thisOrderPrice.getCampaignID());
-        myPurchase.toString();
-        myController.INSERT_NEW_PURCHES_toDB(myPurchase);
-
-        myHHPurchase.add(String.valueOf(p_id));
-        myHHPurchase.add(emailAddressTXT.getText());
-        myHHPurchase.add(anotherContactPhoneNumberTXT.getText());
-        myHHPurchase.add(noteTXT.getText());
-        myHHPurchase.add("CONFIRMED_ORDER");
-        myHHPurchase.add(shippingMethodComboBOX.getValue());
-        myHHPurchase.add(t9to11BTN.getText());
-        myController.INSERT_NEW_PURCHES_TO_HOME_HEATING_toDB(myHHPurchase);
-        confirmMassage.setVisible(true);
-*/
     }
 
     public String getCampaignID() {
