@@ -55,7 +55,7 @@
       <Text layoutX="61.0" layoutY="634.0" strokeType="OUTSIDE" strokeWidth="0.0" text="* Status: In treatment / Done" wrappingWidth="317.6708984375" />
       <Button fx:id="DoneBtn" layoutX="713.0" layoutY="693.0" mnemonicParsing="false" onMouseClicked="#ClickDoneBtn" prefHeight="40.0" prefWidth="89.0" style="-fx-background-radius: 50;" stylesheets="@style.css" text="Done" textFill="WHITE">
          <cursor>
-            <Cursor fx:constant="HAND" />
+            <Cursor fx:constant="WAIT" />
          </cursor></Button>
       <HBox fx:id="hboxOrderConfirmation" alignment="CENTER_LEFT" layoutX="622.0" layoutY="616.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="53.0" prefWidth="285.0" style="-fx-background-color: #fcf8e8; -fx-border-color: #888888; -fx-background-radius: 5; -fx-background-insets: 0;">
          <children>
