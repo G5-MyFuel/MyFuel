@@ -3,6 +3,8 @@ package boundary;
 import Contollers.FormValidation;
 import Contollers.NewPurchaseFuelForHomeHeatingController;
 import com.jfoenix.controls.*;
+import com.sun.xml.internal.ws.util.StringUtils;
+
 import common.assets.enums.FuelTypes;
 import common.assets.enums.ShippingMethod;
 import entity.*;
@@ -24,7 +26,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
-import org.apache.commons.lang3.StringUtils;
 import org.joda.time.LocalDateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;

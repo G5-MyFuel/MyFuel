@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component jdk="JavaSE-1.8" jdk_type="JavaSDK">
+	<exclude-output/>
+	<contentEntry url="file://$MODULE_DIR$"/>
+	<lib name="mysql-connector-java-8.0.20.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/src/mysql-connector-java-8.0.20.jar!/"/>
+	</lib>
+	<lib name="joda-time-2.10.6.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/APIs/jodaTime/joda-time-2.10.6.jar!/"/>
+	</lib>
+	<levels>
+		<level name="validator" value="project"/>
+		<level name="lang" value="project"/>
+		<level name="jfoenix-8.0.8" value="project"/>
+		<level name="Java EE 6-Java EE 6" value="project"/>
+		<level name="javax.mail" value="project"/>
+		<level name="twilio-0.0.1-jar-with-dependencies" value="project"/>
+	</levels>
+</component>

@@ -14,146 +14,151 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<Pane stylesheets="@BGcss.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundary.generalDashBoardBoundary">
-    <children>
-        <HBox>
-            <children>
-                <AnchorPane>
-                    <children>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundary.generalDashBoardBoundary">
+   <children>
+      <Pane stylesheets="@BGcss.css">
+         <children>
+            <HBox>
+               <children>
+                  <AnchorPane>
+                     <children>
                         <AnchorPane prefHeight="794.0" prefWidth="238.0" style="-fx-background-color: #2D4578;">
-                            <children>
-                                <VBox alignment="TOP_CENTER" layoutY="30.0" prefHeight="473.0" prefWidth="238.0" style="-fx-background-color: #2D4578;">
-                                    <children>
-                                        <Label fx:id="userPermissionsTitel" style="-fx-font-size: 18;" text="Permissions" textAlignment="CENTER" textFill="#e5e5e5">
-                                            <VBox.margin>
-                                                <Insets top="10.0" />
-                                            </VBox.margin>
-                                        </Label>
-                                        <ImageView fitHeight="139.0" fitWidth="191.0" pickOnBounds="true" preserveRatio="true">
-                                            <image>
-                                                <Image url="@../media/avatars/customer_male_avatar.png" />
-                                            </image>
-                                            <VBox.margin>
-                                                <Insets bottom="10.0" top="10.0" />
-                                            </VBox.margin>
-                                        </ImageView>
-                                        <Label fx:id="userFirstName" style="-fx-font-size: 22;" text="user FName" textAlignment="CENTER" textFill="#e5e5e5">
-                                            <VBox.margin>
-                                                <Insets bottom="20.0" />
-                                            </VBox.margin>
-                                        </Label>
-                                        <Pane prefHeight="269.0" prefWidth="238.0">
-                                            <children>
-                                                <GridPane fx:id="allDashButtonsGridPane" layoutX="19.0" layoutY="3.0" prefHeight="281.0" prefWidth="216.0">
-                                                    <columnConstraints>
-                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                                    </columnConstraints>
-                                                    <rowConstraints>
-                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                    </rowConstraints>
-                                                    <children>
-                                                        <Button fx:id="btnSignout" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onMouseClicked="#signOutClick" prefHeight="42.0" prefWidth="259.0" style="-fx-font-family: 'Abel', sans-serif; -fx-font-size: 16;" stylesheets="@style.css" text="Sign Out" GridPane.rowIndex="5">
-                                                            <graphic>
-                                                                <ImageView fitHeight="31.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                                                    <image>
-                                                                        <Image url="@../media/ButtonsDashBoardMedia/signOut.png" />
-                                                                    </image>
-                                                                </ImageView>
-                                                            </graphic>
-                                                        </Button>
-                                                        <Button fx:id="btnHomePage" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onMouseClicked="#homePageClick" prefHeight="42.0" prefWidth="259.0" style="-fx-font-family: 'Abel', sans-serif; -fx-font-size: 16;" stylesheets="@style.css" text="Home Page" textFill="#e7e5e5">
-                                                            <graphic>
-                                                                <ImageView fx:id="homePageIconImage" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                                                    <image>
-                                                                        <Image url="@../media/CostumerRegisterationMedia/icons8_home_80px.png" />
-                                                                    </image>
-                                                                </ImageView>
-                                                            </graphic>
-                                                            <opaqueInsets>
-                                                                <Insets />
-                                                            </opaqueInsets>
-                                                        </Button>
-                                                        <Button fx:id="button1" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onMouseClicked="#homePageClick" prefHeight="50.0" prefWidth="212.0" style="-fx-font-family: 'Abel', sans-serif; -fx-font-size: 14;" stylesheets="@style.css" text="b1" textAlignment="CENTER" textFill="#e7e5e5" textOverrun="CLIP" GridPane.rowIndex="1">
-                                                            <graphic>
-                                                                <ImageView fx:id="button1img" fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
-                                                                    <image>
-                                                                        <Image url="@../media/CostumerRegisterationMedia/icons8_home_80px.png" />
-                                                                    </image>
-                                                                </ImageView>
-                                                            </graphic>
-                                                            <opaqueInsets>
-                                                                <Insets />
-                                                            </opaqueInsets>
-                                                        </Button>
-                                                        <Button fx:id="button2" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onMouseClicked="#homePageClick" prefHeight="48.0" prefWidth="216.0" style="-fx-font-family: 'Abel', sans-serif; -fx-font-size: 14; " stylesheets="@style.css" text="b2" textAlignment="CENTER" textFill="#e7e5e5" GridPane.rowIndex="2">
-                                                            <graphic>
-                                                                <ImageView fx:id="button2img" fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
-                                                                    <image>
-                                                                        <Image url="@../media/CostumerRegisterationMedia/icons8_home_80px.png" />
-                                                                    </image>
-                                                                </ImageView>
-                                                            </graphic>
-                                                            <opaqueInsets>
-                                                                <Insets />
-                                                            </opaqueInsets>
-                                                        </Button>
-                                                        <Button fx:id="button3" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onMouseClicked="#homePageClick" prefHeight="51.0" prefWidth="216.0" style="-fx-font-family: 'Abel', sans-serif; -fx-font-size: 14;" stylesheets="@style.css" text="b3" textFill="#e7e5e5" GridPane.rowIndex="3">
-                                                            <graphic>
-                                                                <ImageView fx:id="button3img" fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
-                                                                    <image>
-                                                                        <Image url="@../media/CostumerRegisterationMedia/icons8_home_80px.png" />
-                                                                    </image>
-                                                                </ImageView>
-                                                            </graphic>
-                                                            <opaqueInsets>
-                                                                <Insets />
-                                                            </opaqueInsets>
-                                                        </Button>
-                                          <Button fx:id="button4" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onMouseClicked="#homePageClick" prefHeight="51.0" prefWidth="216.0" style="-fx-font-family: 'Abel', sans-serif; -fx-font-size: 14;" stylesheets="@style.css" text="b4" textFill="#e7e5e5" GridPane.rowIndex="4">
-                                             <graphic>
-                                                <ImageView fx:id="button3img1" fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@../media/CostumerRegisterationMedia/icons8_home_80px.png" />
-                                                   </image>
-                                                </ImageView>
-                                             </graphic>
-                                             <opaqueInsets>
-                                                <Insets />
-                                             </opaqueInsets>
-                                          </Button>
-                                                    </children>
-                                                </GridPane>
-                                            </children>
-                                        </Pane>
-                                    </children>
-                                </VBox>
-                                <VBox layoutX="6.0" layoutY="707.0" prefHeight="128.0" prefWidth="228.0" style="-fx-border-color: linear-gradient(to left, white, orange);">
-                                    <children>
-                                        <Text fx:id="time" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 35; -fx-font-family: 'Abel', sans-serif;;" text="13:00" textAlignment="CENTER" wrappingWidth="223.6215419769287" />
-                                        <Text fx:id="currectDate" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 25; -fx-font-family: 'Abel', sans-serif;;" text="15/05/20" textAlignment="CENTER" wrappingWidth="225.39935874938965" />
-                                        <Text fx:id="currectDay" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 25; -fx-font-family: 'Abel', sans-serif;;" text="Wednesday" textAlignment="CENTER" wrappingWidth="224.39935874938965" />
-                                    </children>
-                                </VBox>
-                            </children>
+                           <children>
+                              <VBox alignment="TOP_CENTER" layoutY="30.0" prefHeight="473.0" prefWidth="238.0" style="-fx-background-color: #2D4578;">
+                                 <children>
+                                    <Label fx:id="userPermissionsTitel" style="-fx-font-size: 18;" text="Permissions" textAlignment="CENTER" textFill="#e5e5e5">
+                                       <VBox.margin>
+                                          <Insets top="10.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <ImageView fitHeight="139.0" fitWidth="191.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../media/avatars/customer_male_avatar.png" />
+                                       </image>
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" top="10.0" />
+                                       </VBox.margin>
+                                    </ImageView>
+                                    <Label fx:id="userFirstName" style="-fx-font-size: 22;" text="user FName" textAlignment="CENTER" textFill="#e5e5e5">
+                                       <VBox.margin>
+                                          <Insets bottom="20.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <Pane prefHeight="269.0" prefWidth="238.0">
+                                       <children>
+                                          <GridPane fx:id="allDashButtonsGridPane" layoutX="19.0" layoutY="3.0" prefHeight="281.0" prefWidth="216.0">
+                                             <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                             </rowConstraints>
+                                             <children>
+                                                <Button fx:id="btnSignout" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onMouseClicked="#signOutClick" prefHeight="42.0" prefWidth="259.0" style="-fx-font-family: 'Abel', sans-serif; -fx-font-size: 16;" stylesheets="@style.css" text="Sign Out" GridPane.rowIndex="5">
+                                                   <graphic>
+                                                      <ImageView fitHeight="31.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../media/ButtonsDashBoardMedia/signOut.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
+                                                </Button>
+                                                <Button fx:id="btnHomePage" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onMouseClicked="#homePageClick" prefHeight="42.0" prefWidth="259.0" style="-fx-font-family: 'Abel', sans-serif; -fx-font-size: 16;" stylesheets="@style.css" text="Home Page" textFill="#e7e5e5">
+                                                   <graphic>
+                                                      <ImageView fx:id="homePageIconImage" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../media/CostumerRegisterationMedia/icons8_home_80px.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
+                                                   <opaqueInsets>
+                                                      <Insets />
+                                                   </opaqueInsets>
+                                                </Button>
+                                                <Button fx:id="button1" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onMouseClicked="#homePageClick" prefHeight="50.0" prefWidth="212.0" style="-fx-font-family: 'Abel', sans-serif; -fx-font-size: 14;" stylesheets="@style.css" text="b1" textAlignment="CENTER" textFill="#e7e5e5" textOverrun="CLIP" GridPane.rowIndex="1">
+                                                   <graphic>
+                                                      <ImageView fx:id="button1img" fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../media/CostumerRegisterationMedia/icons8_home_80px.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
+                                                   <opaqueInsets>
+                                                      <Insets />
+                                                   </opaqueInsets>
+                                                </Button>
+                                                <Button fx:id="button2" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onMouseClicked="#homePageClick" prefHeight="48.0" prefWidth="216.0" style="-fx-font-family: 'Abel', sans-serif; -fx-font-size: 14; " stylesheets="@style.css" text="b2" textAlignment="CENTER" textFill="#e7e5e5" GridPane.rowIndex="2">
+                                                   <graphic>
+                                                      <ImageView fx:id="button2img" fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../media/CostumerRegisterationMedia/icons8_home_80px.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
+                                                   <opaqueInsets>
+                                                      <Insets />
+                                                   </opaqueInsets>
+                                                </Button>
+                                                <Button fx:id="button3" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onMouseClicked="#homePageClick" prefHeight="51.0" prefWidth="216.0" style="-fx-font-family: 'Abel', sans-serif; -fx-font-size: 14;" stylesheets="@style.css" text="b3" textFill="#e7e5e5" GridPane.rowIndex="3">
+                                                   <graphic>
+                                                      <ImageView fx:id="button3img" fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../media/CostumerRegisterationMedia/icons8_home_80px.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
+                                                   <opaqueInsets>
+                                                      <Insets />
+                                                   </opaqueInsets>
+                                                </Button>
+                                                <Button fx:id="button4" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onMouseClicked="#homePageClick" prefHeight="51.0" prefWidth="216.0" style="-fx-font-family: 'Abel', sans-serif; -fx-font-size: 14;" stylesheets="@style.css" text="b4" textFill="#e7e5e5" GridPane.rowIndex="4">
+                                                   <graphic>
+                                                      <ImageView fx:id="button3img1" fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../media/CostumerRegisterationMedia/icons8_home_80px.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
+                                                   <opaqueInsets>
+                                                      <Insets />
+                                                   </opaqueInsets>
+                                                </Button>
+                                             </children>
+                                          </GridPane>
+                                       </children>
+                                    </Pane>
+                                 </children>
+                              </VBox>
+                              <VBox layoutX="6.0" layoutY="707.0" prefHeight="128.0" prefWidth="228.0" style="-fx-border-color: linear-gradient(to left, white, orange);">
+                                 <children>
+                                    <Text fx:id="time" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 35; -fx-font-family: 'Abel', sans-serif;;" text="13:00" textAlignment="CENTER" wrappingWidth="223.6215419769287" />
+                                    <Text fx:id="currectDate" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 25; -fx-font-family: 'Abel', sans-serif;;" text="15/05/20" textAlignment="CENTER" wrappingWidth="225.39935874938965" />
+                                    <Text fx:id="currectDay" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 25; -fx-font-family: 'Abel', sans-serif;;" text="Wednesday" textAlignment="CENTER" wrappingWidth="224.39935874938965" />
+                                 </children>
+                              </VBox>
+                           </children>
                         </AnchorPane>
-                    </children>
-                </AnchorPane>
-                <Pane fx:id="HomePagePane" prefHeight="796.0" prefWidth="1062.0" style="-fx-position-shape: center; -fx-border-color: transparent;" stylesheets="@BGcss.css">
-                    <children>
+                     </children>
+                  </AnchorPane>
+                  <Pane fx:id="HomePagePane" prefHeight="796.0" prefWidth="1062.0" style="-fx-position-shape: center; -fx-border-color: transparent;" stylesheets="@BGcss.css">
+                     <children>
                         <ImageView fx:id="myFuelLogo" fitHeight="166.0" fitWidth="429.0" layoutX="300.0" layoutY="301.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@../media/2065573.png" />
-                            </image>
+                           <image>
+                              <Image url="@../media/2065573.png" />
+                           </image>
                         </ImageView>
                         <Pane fx:id="currentPagePane" stylesheets="@BGcss.css" />
-                    </children>
-                </Pane>
-            </children>
-        </HBox>
-    </children>
-</Pane>
+                     </children>
+                  </Pane>
+               </children>
+            </HBox>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

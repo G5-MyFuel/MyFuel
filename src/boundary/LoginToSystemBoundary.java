@@ -8,22 +8,17 @@ import com.jfoenix.controls.JFXTextField;
 import common.assets.PermissionsManagement;
 import common.assets.ProjectPages;
 import entity.User;
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -33,12 +28,11 @@ import java.util.ResourceBundle;
  * login to system Boundary class- Handle user connection to system - gui
  * @author Daniel Gabbay
  */
-public class LoginToSystemBoundary extends Application {
+public class LoginToSystemBoundary {
     /* variables: */
     private static LoginToSystemBoundary Instance;
     private PermissionsManagement permissionsManagement = new PermissionsManagement();
     private ActionEvent event = null;
-    Contollers.LoginToSystemController loginToSystemLogic; //logic instance
     FormValidation formValidation;
     private ArrayList<User> allDBUsersArrayList;
     private LoginToSystemController myController = new LoginToSystemController(this);
@@ -86,7 +80,7 @@ public class LoginToSystemBoundary extends Application {
         formValidation = FormValidation.getValidator(); //for form validation instance
         loginAsComboBox.getItems().addAll("Customer", "Employee", "Supplier");  //set the user types
         LoginValidation();
-        Image img = new Image("/media/loginBeautiful.png");
+        Image img = new Image(getClass().getResource("/media/loginBeautiful.png").toString());
         imageView.setImage(img);
 
         //setting a listener to the vehicle text area:
@@ -106,16 +100,14 @@ public class LoginToSystemBoundary extends Application {
         formValidation.isOnlyNumbers(userIDTextField, "user ID");
         formValidation.maxLengthValidation(userIDTextField, "user ID", 9);
         //password validation
-        System.out.println(allDBUsersArrayList);
         formValidation.isEmptyPasswordField(passwordField, "Password");
     }
 
     @FXML
     void clickLoginBtn() {
         System.out.println("-->clickLoginBtn method");
-        //System.out.println(allDBUsersArrayList);
         if (checkInputs()) {    //if the user exist in the db
-            ArrayList<String> allButtons = myController.getUserButtons(this, userType);
+            ArrayList<String> allButtons = myController.getUserButtons(userType);
             mainProjectFX.pagingController.loadBoundary(ProjectPages.GENERAL_DASH_BOARD.getPath(), allButtons);
         }
     }
@@ -203,22 +195,6 @@ public class LoginToSystemBoundary extends Application {
     }
 
 
-    @Override
-    public void start(Stage primaryStage) throws IOException {
-        Pane newRoot = null;
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/boundary/LoginToSystemFXML.fxml"));
-            newRoot = loader.load();
-            Scene s1 = new Scene(newRoot, 807, 600);
-
-            this.primaryStage.setScene(s1);
-            this.primaryStage.show();
-        } catch (IOException e) {
-            System.err.println("IOException - open LoginToSystemFXML.fxml file!!!");
-            e.printStackTrace();
-        }
-    }
     @FXML
     public void openFastFuelSimulation(MouseEvent event){
         mainProjectFX.pagingController.loadAdditionalStage(ProjectPages.FAST_FUEL_PAGE.getPath());

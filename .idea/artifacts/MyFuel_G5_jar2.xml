@@ -1,0 +1,37 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="MyFuel_G5:jar2">
+    <output-path>$PROJECT_DIR$/classes/artifacts/MyFuel_G5_jar2</output-path>
+    <root id="archive" name="MyFuel_G5.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$USER_HOME$/Desktop/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="module-output" name="MyFuel_G5" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/APIs/validator/commons-validator-1.6-sources.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/javax.jms.jar" path-in-jar="/" />
+      <element id="library" level="module" name="twilio-0.0.1-jar-with-dependencies.jar" module-name="MyFuel_G5" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/javax.resource.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/javax.persistence.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/APIs/lang/commons-lang3-3.10-sources.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/APIs/validator/commons-validator-1.6-test-sources.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/APIs/validator/commons-validator-1.6.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/javax.annotation.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/javax.servlet.jsp.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/javax.servlet.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/javax.transaction.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/javax.ejb.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/javax.servlet.jsp.jstl.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/APIs/validator/commons-validator-1.6-tests.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/jfoenix-8.0.8.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/mysql-connector-java-8.0.20.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/javax.mail.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/APIs/lang/commons-lang3-3.10-javadoc.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/APIs/jodaTime/joda-time-2.10.6.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/APIs/validator/commons-validator-1.6-javadoc.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/controlsfx-8.40.13.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/APIs/lang/commons-lang3-3.10-test-sources.jar" path-in-jar="/" />
+      <element id="library" level="project" name="twilio-0.0.1-jar-with-dependencies" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/APIs/lang/commons-lang3-3.10.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/APIs/lang/commons-lang3-3.10-tests.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

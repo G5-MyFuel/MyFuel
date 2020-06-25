@@ -16,6 +16,7 @@ import java.util.ArrayList;
  *
  * @author itay ziv
  */
+@SuppressWarnings("serial")
 public class GeneralDashBoardController extends BasicController {
     private generalDashBoardBoundary myBoundary;
     private static Double fuelAmountOfPreMonthForCurrentUser = 0.0;
@@ -40,7 +41,6 @@ public class GeneralDashBoardController extends BasicController {
     @Override
     public void getResultFromClient(SqlResult result) {
         Platform.runLater(() -> {
-            try {
                 switch (result.getActionType()) {
                     case GET_ALL_UPDATED_PRICES:
                         this.changeResultToFuelPrices(result);
@@ -49,12 +49,10 @@ public class GeneralDashBoardController extends BasicController {
                         this.changeResultToFueAmountOfPreMonthOfCurUser(result, currentUserID);
                         Prices.fuelAmountOfPreviousMonth = Double.valueOf(fuelAmountOfPreMonthForCurrentUser);
                         break;
-
                     default:
                         break;
                 }
-            } catch (NullPointerException npe) {
-            }
+
         });
     }
 

@@ -12,7 +12,6 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
@@ -49,16 +48,7 @@ public class generalDashBoardBoundary implements DataInitializable {
     public Label userFirstName;
 
     @FXML
-    private GridPane allDashButtonsGridPane;
-
-    @FXML
     private Button btnSignout;
-
-    @FXML
-    private Button btnHomePage;
-
-    @FXML
-    private ImageView homePageIconImage;
 
     @FXML
     private Button button1;
@@ -76,13 +66,7 @@ public class generalDashBoardBoundary implements DataInitializable {
     private Text currectDate;
 
     @FXML
-    private Text notificationCounter;
-
-    @FXML
     private Text currectDay;
-
-    @FXML
-    private Pane HomePagePane;
 
     @FXML
     public ImageView myFuelLogo;
@@ -100,6 +84,8 @@ public class generalDashBoardBoundary implements DataInitializable {
      */
     @Override
     public void initData(Object data) {
+        clockFuntion();
+        weekDay();
         ArrayList<String> pageNameArrayList = (ArrayList<String>) data;
         myController.setCurrentUserID(userID);
         //get all updated prices
@@ -127,10 +113,10 @@ public class generalDashBoardBoundary implements DataInitializable {
             //
             switch (pn) {
                 case "PURCHASE_FUEL_FOR_HOME_HEATING_TRACKING":
-                    image = new Image(getClass().getResourceAsStream("../media/FuelForHomeHeating/orderTrackingIcon.png"));
+                    image = new Image(getClass().getResource("/media/FuelForHomeHeating/orderTrackingIcon.png").toString());
                     imageView = new ImageView(image);
-                    imageView.setFitHeight(27);
-                    imageView.setFitWidth(25);
+                    imageView.setFitHeight(30);
+                    imageView.setFitWidth(30);
                     currentBtn.setGraphic(imageView);
                     currentBtn.setText("Orders Tracking");
                     currentBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -141,10 +127,10 @@ public class generalDashBoardBoundary implements DataInitializable {
                     });
                     break;
                 case "COSTUMER_MANAGEMENT_TABLE_PAGE":
-                    image = new Image(getClass().getResourceAsStream("../media/CostumerRegisterationMedia/managment.png"));
+                    image = new Image(getClass().getResource("/media/CostumerRegisterationMedia/managment.png").toString());
                     imageView = new ImageView(image);
-                    imageView.setFitHeight(27);
-                    imageView.setFitWidth(25);
+                    imageView.setFitHeight(30);
+                    imageView.setFitWidth(30);
                     currentBtn.setGraphic(imageView);
                     currentBtn.setText("Customer\nManagement");
                     currentBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -156,7 +142,7 @@ public class generalDashBoardBoundary implements DataInitializable {
                     break;
 
                 case "COSTUMER_REGISTRATION_PAGE":
-                    image = new Image(getClass().getResourceAsStream("../media/CostumerRegisterationMedia/addCostumer.png"));
+                    image = new Image(getClass().getResource("/media/CostumerRegisterationMedia/addCostumer.png").toString());
                     imageView = new ImageView(image);
                     imageView.setFitHeight(30);
                     imageView.setFitWidth(30);
@@ -171,7 +157,7 @@ public class generalDashBoardBoundary implements DataInitializable {
                     break;
 
                 case "FAST_FUEL_PAGE":
-                    image = new Image(getClass().getResourceAsStream("../media/ButtonsDashBoardMedia/fastfuel.png"));
+                    image = new Image(getClass().getResource("/media/ButtonsDashBoardMedia/fastfuel.png").toString());
                     imageView = new ImageView(image);
                     imageView.setFitHeight(30);
                     imageView.setFitWidth(30);
@@ -186,7 +172,7 @@ public class generalDashBoardBoundary implements DataInitializable {
                     break;
 
                 case "SALE_OPERATION_TEMPLATE_PAGE":
-                    image = new Image(getClass().getResourceAsStream("../media/ButtonsDashBoardMedia/sale.png"));
+                    image = new Image(getClass().getResource("/media/ButtonsDashBoardMedia/sale.png").toString());
                     imageView = new ImageView(image);
                     imageView.setFitHeight(30);
                     imageView.setFitWidth(30);
@@ -201,7 +187,7 @@ public class generalDashBoardBoundary implements DataInitializable {
                     break;
 
                 case "RUN_MARKETING_CAMPAIGN_PAGE":
-                    image = new Image(getClass().getResourceAsStream("../media/ButtonsDashBoardMedia/sale.png"));
+                    image = new Image(getClass().getResource("/media/ButtonsDashBoardMedia/sale.png").toString());
                     imageView = new ImageView(image);
                     imageView.setFitHeight(30);
                     imageView.setFitWidth(30);
@@ -216,7 +202,7 @@ public class generalDashBoardBoundary implements DataInitializable {
                     break;
 
                 case "SETTING_DISCOUNT_RATES_PAGE":
-                    image = new Image(getClass().getResourceAsStream("../media/ButtonsDashBoardMedia/discountRatesBtn.png"));
+                    image = new Image(getClass().getResource("/media/ButtonsDashBoardMedia/discountRatesBtn.png").toString());
                     imageView = new ImageView(image);
                     imageView.setFitHeight(30);
                     imageView.setFitWidth(30);
@@ -231,7 +217,7 @@ public class generalDashBoardBoundary implements DataInitializable {
                     break;
 
                 case "CONFIRM_DISCOUNT_RATES_PAGE":
-                    image = new Image(getClass().getResourceAsStream("../media/ButtonsDashBoardMedia/discountRatesBtn.png"));
+                    image = new Image(getClass().getResource("/media/ButtonsDashBoardMedia/discountRatesBtn.png").toString());
                     imageView = new ImageView(image);
                     imageView.setFitHeight(30);
                     imageView.setFitWidth(30);
@@ -246,7 +232,7 @@ public class generalDashBoardBoundary implements DataInitializable {
                     break;
 
                 case "GENERATING_REPORTS_STATION_MANAGER_PAGE":
-                    image = new Image(getClass().getResourceAsStream("../media/ButtonsDashBoardMedia/reports.png"));
+                    image = new Image(getClass().getResource("/media/ButtonsDashBoardMedia/reports.png").toString());
                     imageView = new ImageView(image);
                     imageView.setFitHeight(30);
                     imageView.setFitWidth(30);
@@ -261,7 +247,7 @@ public class generalDashBoardBoundary implements DataInitializable {
                     break;
 
                 case "GENERATING_REPORTS_MARKETING_MANAGER_PAGE":
-                    image = new Image(getClass().getResourceAsStream("../media/ButtonsDashBoardMedia/reports.png"));
+                    image = new Image(getClass().getResource("/media/ButtonsDashBoardMedia/reports.png").toString());
                     imageView = new ImageView(image);
                     imageView.setFitHeight(30);
                     imageView.setFitWidth(30);
@@ -276,7 +262,7 @@ public class generalDashBoardBoundary implements DataInitializable {
                     break;
 
                 case "MANAGER_SUPPLY_CONFIRMATION_PAGE":
-                    image = new Image(getClass().getResourceAsStream("../media/ButtonsDashBoardMedia/approveOrder.png"));
+                    image = new Image(getClass().getResource("/media/ButtonsDashBoardMedia/approveOrder.png").toString());
                     imageView = new ImageView(image);
                     imageView.setFitHeight(30);
                     imageView.setFitWidth(30);
@@ -291,7 +277,7 @@ public class generalDashBoardBoundary implements DataInitializable {
                     break;
 
                 case "VIEW_ANALITIC_DATA":
-                    image = new Image(getClass().getResourceAsStream("../media/ButtonsDashBoardMedia/analiticData.png"));
+                    image = new Image(getClass().getResource("/media/ButtonsDashBoardMedia/analiticData.png").toString());
                     imageView = new ImageView(image);
                     imageView.setFitHeight(30);
                     imageView.setFitWidth(30);
@@ -306,7 +292,7 @@ public class generalDashBoardBoundary implements DataInitializable {
                     break;
 
                 case "PURCHASE_FUEL_FOR_HOME_HEATING":
-                    image = new Image(getClass().getResourceAsStream("../media/ButtonsDashBoardMedia/newFuelOrder.png"));
+                    image = new Image(getClass().getResource("/media/ButtonsDashBoardMedia/newFuelOrder.png").toString());
                     imageView = new ImageView(image);
                     imageView.setFitHeight(30);
                     imageView.setFitWidth(30);
@@ -321,7 +307,7 @@ public class generalDashBoardBoundary implements DataInitializable {
                     break;
 
                 case "SUPPLY_ORDER_EXECUTION":
-                    image = new Image(getClass().getResourceAsStream("../media/ButtonsDashBoardMedia/approveOrder.png"));
+                    image = new Image(getClass().getResource("/media/ButtonsDashBoardMedia/approveOrder.png").toString());
                     imageView = new ImageView(image);
                     imageView.setFitHeight(30);
                     imageView.setFitWidth(30);
@@ -338,7 +324,7 @@ public class generalDashBoardBoundary implements DataInitializable {
                     break;
 
                 case "MANAGER_NOTIFICATION_PAGE":
-                    image = new Image(getClass().getResourceAsStream("../media/ButtonsDashBoardMedia/alarm.png"));
+                    image = new Image(getClass().getResource("/media/ButtonsDashBoardMedia/alarm.png").toString());
                     imageView = new ImageView(image);
                     imageView.setFitHeight(30);
                     imageView.setFitWidth(30);
@@ -353,7 +339,7 @@ public class generalDashBoardBoundary implements DataInitializable {
                     break;
 
                 case "FUEL_MANAGMENT_PAGE":
-                    image = new Image(getClass().getResourceAsStream("../media/ButtonsDashBoardMedia/fuelManagement.png"));
+                    image = new Image(getClass().getResource("/media/ButtonsDashBoardMedia/fuelManagement.png").toString());
                     imageView = new ImageView(image);
                     imageView.setFitHeight(30);
                     imageView.setFitWidth(30);
@@ -367,7 +353,7 @@ public class generalDashBoardBoundary implements DataInitializable {
                     });
                     break;
                 case "VIEW_REPORTS_PAGE":
-                    image = new Image(getClass().getResourceAsStream("../media/ButtonsDashBoardMedia/reports.png"));
+                    image = new Image(getClass().getResource("/media/ButtonsDashBoardMedia/reports.png").toString());
                     imageView = new ImageView(image);
                     imageView.setFitHeight(30);
                     imageView.setFitWidth(30);
@@ -413,8 +399,7 @@ public class generalDashBoardBoundary implements DataInitializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        clockFuntion();
-        weekDay();
+
     }
 
     /**
@@ -423,7 +408,6 @@ public class generalDashBoardBoundary implements DataInitializable {
     void PURCHASE_FUEL_FOR_HOME_HEATING_TRACKING(){
         currentPagePane.setVisible(true);
         currentPagePane.getChildren().clear();
-      //  currentPagePane.getStylesheets().add("../boudary/BGcss.css");
         currentPagePane.getChildren().setAll(mainProjectFX.pagingController.loadBoundaryInPane(ProjectPages.PURCHASE_FUEL_FOR_HOME_HEATING_TRACKING.getPath(), userID));
         myFuelLogo.setVisible(false);
     }
@@ -434,7 +418,6 @@ public class generalDashBoardBoundary implements DataInitializable {
     void SUPPLY_ORDER_EXECUTION() {
         currentPagePane.setVisible(true);
         currentPagePane.getChildren().clear();
-        currentPagePane.getStylesheets().add("../boudary/BGcss.css");
         currentPagePane.getChildren().setAll(mainProjectFX.pagingController.loadBoundaryInPane(ProjectPages.SUPPLY_ORDER_EXECUTION.getPath(), userID));
         myFuelLogo.setVisible(false);
     }
@@ -445,7 +428,6 @@ public class generalDashBoardBoundary implements DataInitializable {
     void GENERATING_REPORTS_MARKETING_MANAGER_PAGE() {
         currentPagePane.setVisible(true);
         currentPagePane.getChildren().clear();
-        currentPagePane.getStylesheets().add("../boudary/BGcss.css");
         currentPagePane.getChildren().setAll(mainProjectFX.pagingController.loadBoundaryInPane(ProjectPages.GENERATING_REPORTS_MARKETING_MANAGER_PAGE.getPath(), userID));
         myFuelLogo.setVisible(false);
     }
@@ -456,7 +438,6 @@ public class generalDashBoardBoundary implements DataInitializable {
     void CONFIRM_DISCOUNT_RATES_PAGE() {
         currentPagePane.setVisible(true);
         currentPagePane.getChildren().clear();
-        currentPagePane.getStylesheets().add("../boudary/BGcss.css");
         currentPagePane.getChildren().setAll(mainProjectFX.pagingController.loadBoundaryInPane(ProjectPages.CONFIRM_DISCOUNT_RATES_PAGE.getPath(), userID));
         myFuelLogo.setVisible(false);
     }
@@ -467,7 +448,6 @@ public class generalDashBoardBoundary implements DataInitializable {
     void SETTING_DISCOUNT_RATES_PAGE() {
         currentPagePane.setVisible(true);
         currentPagePane.getChildren().clear();
-        currentPagePane.getStylesheets().add("../boudary/BGcss.css");
         currentPagePane.getChildren().setAll(mainProjectFX.pagingController.loadBoundaryInPane(ProjectPages.SETTING_DISCOUNT_RATES_PAGE.getPath(), userID));
         myFuelLogo.setVisible(false);
     }
@@ -478,7 +458,6 @@ public class generalDashBoardBoundary implements DataInitializable {
     void RUN_SALE_OPERATION_PAGE() {
         currentPagePane.setVisible(true);
         currentPagePane.getChildren().clear();
-        currentPagePane.getStylesheets().add("../boudary/BGcss.css");
         currentPagePane.getChildren().setAll(mainProjectFX.pagingController.loadBoundaryInPane(ProjectPages.RUN_MARKETING_CAMPAIGN_PAGE.getPath(), userID));
         myFuelLogo.setVisible(false);
     }
@@ -489,7 +468,6 @@ public class generalDashBoardBoundary implements DataInitializable {
     void COSTUMER_REGISTRATION_PAGE() {
         currentPagePane.setVisible(true);
         currentPagePane.getChildren().clear();
-        currentPagePane.getStylesheets().add("../boudary/BGcss.css");
         currentPagePane.getChildren().setAll(mainProjectFX.pagingController.loadBoundaryInPane(ProjectPages.COSTUMER_REGISTRATION_PAGE.getPath(), userID));
         myFuelLogo.setVisible(false);
     }
@@ -500,7 +478,6 @@ public class generalDashBoardBoundary implements DataInitializable {
     void SALE_OPERATION_TEMPLATE_PAGE() {
         currentPagePane.setVisible(true);
         currentPagePane.getChildren().clear();
-        currentPagePane.getStylesheets().add("../boudary/BGcss.css");
         currentPagePane.getChildren().setAll(mainProjectFX.pagingController.loadBoundaryInPane(ProjectPages.SALE_OPERATION_TEMPLATE_PAGE.getPath(), userID));
         myFuelLogo.setVisible(false);
     }
@@ -511,7 +488,6 @@ public class generalDashBoardBoundary implements DataInitializable {
     void FAST_FUEL_PAGE() {
         currentPagePane.setVisible(true);
         currentPagePane.getChildren().clear();
-        currentPagePane.getStylesheets().add("../boudary/BGcss.css");
         currentPagePane.getChildren().setAll(mainProjectFX.pagingController.loadBoundaryInPane(ProjectPages.FAST_FUEL_PAGE.getPath(), userID));
         myFuelLogo.setVisible(false);
     }
@@ -522,7 +498,6 @@ public class generalDashBoardBoundary implements DataInitializable {
     void GENERATING_REPORTS_STATION_MANAGER_PAGE() {
         currentPagePane.setVisible(true);
         currentPagePane.getChildren().clear();
-        currentPagePane.getStylesheets().add("../boudary/BGcss.css");
         currentPagePane.getChildren().setAll(mainProjectFX.pagingController.loadBoundaryInPane(ProjectPages.GENERATING_REPORTS_STATION_MANAGER_PAGE.getPath(), userID));
         myFuelLogo.setVisible(false);
     }
@@ -534,7 +509,6 @@ public class generalDashBoardBoundary implements DataInitializable {
     void MANAGER_SUPPLY_CONFIRMATION_PAGE() {
         currentPagePane.setVisible(true);
         currentPagePane.getChildren().clear();
-        currentPagePane.getStylesheets().add("../boudary/BGcss.css");
         currentPagePane.getChildren().setAll(mainProjectFX.pagingController.loadBoundaryInPane(ProjectPages.MANAGER_SUPPLY_CONFIRMATION_PAGE.getPath(), userID));
         myFuelLogo.setVisible(false);
     }
@@ -545,7 +519,6 @@ public class generalDashBoardBoundary implements DataInitializable {
     void MANAGER_NOTIFICATION_PAGE() {
         currentPagePane.setVisible(true);
         currentPagePane.getChildren().clear();
-        currentPagePane.getStylesheets().add("../boudary/BGcss.css");
         currentPagePane.getChildren().setAll(mainProjectFX.pagingController.loadBoundaryInPane(ProjectPages.MANAGER_NOTIFICATION_PAGE.getPath(), userID));
         myFuelLogo.setVisible(false);
     }
@@ -556,7 +529,6 @@ public class generalDashBoardBoundary implements DataInitializable {
     void VIEW_ANALITIC_DATA() {
         currentPagePane.setVisible(true);
         currentPagePane.getChildren().clear();
-        //   currentPagePane.getStylesheets().add("../boudary/BGcss.css");
         currentPagePane.getChildren().setAll(mainProjectFX.pagingController.loadBoundaryInPane(ProjectPages.VIEW_ANALITIC_DATA.getPath(), this));
         myFuelLogo.setVisible(false);
     }
@@ -580,7 +552,6 @@ public class generalDashBoardBoundary implements DataInitializable {
     void costumerMenagmentClick() {
         currentPagePane.setVisible(true);
         currentPagePane.getChildren().clear();
-        currentPagePane.getStylesheets().add("../boudary/BGcss.css");
         currentPagePane.getChildren().setAll(mainProjectFX.pagingController.loadBoundaryInPane(ProjectPages.COSTUMER_MANAGEMENT_TABLE_PAGE.getPath(), userID));
         myFuelLogo.setVisible(false);
     }
@@ -600,7 +571,6 @@ public class generalDashBoardBoundary implements DataInitializable {
     void VIEW_REPORTS_PAGE() {
         currentPagePane.setVisible(true);
         currentPagePane.getChildren().clear();
-        currentPagePane.getStylesheets().add("../boudary/BGcss.css");
         currentPagePane.getChildren().setAll(mainProjectFX.pagingController.loadBoundaryInPane(ProjectPages.VIEW_REPORTS_PAGE.getPath(), userID));
         myFuelLogo.setVisible(false);
     }

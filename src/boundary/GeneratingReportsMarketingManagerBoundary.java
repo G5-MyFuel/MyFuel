@@ -19,7 +19,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.util.Callback;
-import org.apache.commons.lang3.StringUtils;
 
 import java.net.URL;
 import java.time.LocalDate;

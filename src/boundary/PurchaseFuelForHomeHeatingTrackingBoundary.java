@@ -4,6 +4,7 @@ import Contollers.PurchaseFuelForHomeHeatingTrackingController;
 import entity.HomeHeatingOrderTracking;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TableColumn;
@@ -17,11 +18,11 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
- * @author  Daniel Gabbay
+ * @author Daniel Gabbay
  * @see PurchaseFuelForHomeHeatingTrackingBoundary - the from's boundary class
  */
 
-public class PurchaseFuelForHomeHeatingTrackingBoundary implements DataInitializable{
+public class PurchaseFuelForHomeHeatingTrackingBoundary implements DataInitializable {
     /**
      * Gloable Variables:
      */
@@ -30,7 +31,7 @@ public class PurchaseFuelForHomeHeatingTrackingBoundary implements DataInitializ
     ArrayList<HomeHeatingOrderTracking> arrayListOfCustomerOrders = null;
 
     /**
-     *     GUI variables:
+     * GUI variables:
      */
 
 
@@ -76,11 +77,35 @@ public class PurchaseFuelForHomeHeatingTrackingBoundary implements DataInitializ
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        treeTableOfALlCustomerOrders.setOnMouseClicked((new EventHandler<javafx.scene.input.MouseEvent>() {
+            @Override
+            public void handle(javafx.scene.input.MouseEvent event) {
+                HomeHeatingOrderTracking selectedItem = treeTableOfALlCustomerOrders.getSelectionModel().getSelectedItem();
+                shippingStatusLable.setText(selectedItem.getStatus().getOrderDeliveryStatus());
+                expectedLable.setText(selectedItem.expectedDeliveryDate);
+                //set progress bar
+                switch (selectedItem.statusStr){
+                    case "CONFIRMED_ORDER":
+                        progressBarShipping.setProgress(0.25);
+                        break;
+                    case "PREPARING_TO_SHIP":
+                        progressBarShipping.setProgress(0.5);
+                        break;
+                    case "IN_TRANSIT":
+                        progressBarShipping.setProgress(0.75);
+                        break;
+                    case "COMPLETED":
+                        progressBarShipping.setProgress(1);
+                        break;
+                }
+            }
 
+        }) );
 
     }
+
     @FXML
-    void showSelectedRowDetails(MouseEvent event){
+    void showSelectedRowDetails(MouseEvent event) {
         HomeHeatingOrderTracking tempOrder = treeTableOfALlCustomerOrders.getSelectionModel().getSelectedItem();
     }
 
@@ -90,6 +115,7 @@ public class PurchaseFuelForHomeHeatingTrackingBoundary implements DataInitializ
 
     /**
      * Update the tableView with costumer orders
+     *
      * @param arrayListOfCustomerOrders
      */
     public void setArrayListOfCustomerOrders(ArrayList<HomeHeatingOrderTracking> arrayListOfCustomerOrders) {
@@ -97,14 +123,14 @@ public class PurchaseFuelForHomeHeatingTrackingBoundary implements DataInitializ
         System.out.println(arrayListOfCustomerOrders);
         treeTableOfALlCustomerOrders.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         ObservableList<HomeHeatingOrderTracking> data = FXCollections.observableArrayList(arrayListOfCustomerOrders);
-        orderDateCol.setCellValueFactory(new PropertyValueFactory<HomeHeatingOrderTracking,String>("OrderDate"));
+        orderDateCol.setCellValueFactory(new PropertyValueFactory<HomeHeatingOrderTracking, String>("OrderDate"));
         orderDateCol.setText("Order Date");
-                //
-        orderTimeCol.setCellValueFactory(new PropertyValueFactory<HomeHeatingOrderTracking,String>("OrderTime"));
+        //
+        orderTimeCol.setCellValueFactory(new PropertyValueFactory<HomeHeatingOrderTracking, String>("OrderTime"));
         orderTimeCol.setText("Order Time");
-        statusCol.setCellValueFactory(new PropertyValueFactory<HomeHeatingOrderTracking,String>("statusStr"));
+        statusCol.setCellValueFactory(new PropertyValueFactory<HomeHeatingOrderTracking, String>("statusStr"));
         statusCol.setText("Shipping Status");
-        expectedDeliveryDate.setCellValueFactory(new PropertyValueFactory<HomeHeatingOrderTracking,String>("expectedDeliveryDate"));
+        expectedDeliveryDate.setCellValueFactory(new PropertyValueFactory<HomeHeatingOrderTracking, String>("expectedDeliveryDate"));
         expectedDeliveryDate.setText("expected Delivery Date");
         treeTableOfALlCustomerOrders.setItems(data);
 

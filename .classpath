@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.8.0_201"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.USER_LIBRARY/validator"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.USER_LIBRARY/lang"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.USER_LIBRARY/jfoenix-8.0.8"/>
+	<classpathentry exported="true" kind="lib" path="src/mysql-connector-java-8.0.20.jar"/>
+	<classpathentry exported="true" kind="lib" path="src/controlsfx-8.40.13.jar"/>
+	<classpathentry exported="true" kind="lib" path="src/jfoenix-8.0.8.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/javax.annotation.jar"/>
+	<classpathentry kind="lib" path="lib/javax.mail.jar"/>
+	<classpathentry kind="lib" path="lib/javax.ejb.jar"/>
+	<classpathentry kind="lib" path="lib/javax.jms.jar"/>
+	<classpathentry kind="lib" path="lib/javax.persistence.jar"/>
+	<classpathentry kind="lib" path="lib/javax.resource.jar"/>
+	<classpathentry kind="lib" path="lib/javax.servlet.jar"/>
+	<classpathentry kind="lib" path="lib/javax.servlet.jsp.jar"/>
+	<classpathentry kind="lib" path="lib/javax.transaction.jar"/>
+	<classpathentry kind="lib" path="lib/javax.servlet.jsp.jstl.jar"/>
+	<classpathentry kind="lib" path="lib/twilio-0.0.1-jar-with-dependencies.jar"/>
+	<classpathentry kind="lib" path="APIs/lang/commons-lang3-3.10-javadoc.jar"/>
+	<classpathentry kind="lib" path="APIs/lang/commons-lang3-3.10-sources.jar"/>
+	<classpathentry kind="lib" path="APIs/lang/commons-lang3-3.10-test-sources.jar"/>
+	<classpathentry kind="lib" path="APIs/lang/commons-lang3-3.10-tests.jar"/>
+	<classpathentry kind="lib" path="APIs/lang/commons-lang3-3.10.jar"/>
+	<classpathentry kind="lib" path="APIs/validator/commons-validator-1.6-javadoc.jar"/>
+	<classpathentry kind="lib" path="APIs/validator/commons-validator-1.6-sources.jar"/>
+	<classpathentry kind="lib" path="APIs/validator/commons-validator-1.6-test-sources.jar"/>
+	<classpathentry kind="lib" path="APIs/validator/commons-validator-1.6-tests.jar"/>
+	<classpathentry kind="lib" path="APIs/validator/commons-validator-1.6.jar"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.USER_LIBRARY/Java EE 6-Java EE 6"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.USER_LIBRARY/javax.mail"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/twilio-0.0.1-jar-with-dependencies"/>
+	<classpathentry exported="true" kind="lib" path="APIs/jodaTime/joda-time-2.10.6.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

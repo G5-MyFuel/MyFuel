@@ -15,6 +15,7 @@ import java.util.ArrayList;
  * login to system class- Handles user connection to system
  * @author Daniel Gabbay
  */
+@SuppressWarnings("serial")
 public class LoginToSystemController extends BasicController {
     public static ArrayList<User> usersArrayList;
     private LoginToSystemBoundary myBoundary;
@@ -51,7 +52,6 @@ public class LoginToSystemController extends BasicController {
     @Override
     public void getResultFromClient(SqlResult result) {
         Platform.runLater(() -> {
-            try{
             switch (result.getActionType()) {
                 case GET_ALL_USERS_TABLE:
                     System.out.println("LoginToSystemController -> myController.getUsersTable();");
@@ -70,8 +70,7 @@ public class LoginToSystemController extends BasicController {
                 //
                 default:
                     break;
-            }}catch (NullPointerException npe){}
-
+            }
         });
     }
 
@@ -166,11 +165,10 @@ public class LoginToSystemController extends BasicController {
 
     /**
      * Bring the navigation buttons on the system according to the permissions of that user
-     * @param loginToSystemBoundary
      * @param userType
      * @return button Name Array List
      */
-    public ArrayList<String> getUserButtons(LoginToSystemBoundary loginToSystemBoundary, String userType) {
+    public ArrayList<String> getUserButtons(String userType) {
         ArrayList<String> buttonNameArrayList = new ArrayList<>();
         String temp;
         switch (userType) {
