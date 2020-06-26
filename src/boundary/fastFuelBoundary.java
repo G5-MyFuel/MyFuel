@@ -301,15 +301,15 @@ public class fastFuelBoundary implements DataInitializable {
         }
         //set the image of the company.
         if (correctCompanyName.equals("PAZ")) {
-            image = new Image(getClass().getResourceAsStream("../media/CostumerRegisterationMedia/pazLogoimg.png"));
+            image = new Image(getClass().getResource("/media/CostumerRegisterationMedia/pazLogoimg.png").toString());
             companyImage.setImage(image);
         }
         else if (correctCompanyName.equals("SONOL")) {
-            image = new Image(getClass().getResourceAsStream("../media/CostumerRegisterationMedia/sonollogoimg.png"));
+            image = new Image(getClass().getResource("/media/CostumerRegisterationMedia/sonollogoimg.png").toString());
             companyImage.setImage(image);
         }
         else if (correctCompanyName.equals("YELLOW")) {
-            image = new Image(getClass().getResourceAsStream("../media/CostumerRegisterationMedia/yellowLogo.png"));
+            image = new Image(getClass().getResource("/media/CostumerRegisterationMedia/yellowLogo.png").toString());
             companyImage.setImage(image);
         }
         //chose the first station that fit the client company name.
