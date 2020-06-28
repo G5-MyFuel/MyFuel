@@ -232,14 +232,14 @@ public class CostumerManagmentTablePageBoundary implements DataInitializable {
      * @return boolean
      */
     public boolean checkSubscriptionType(String subToCheck, Costumer tempCos) {
-        if (subToCheck.equals("Regular monthly subscription(singel)") || subToCheck.equals("Full monthly subscription")) {
+        if (subToCheck.equals("Regular monthly subscription (single)") || subToCheck.equals("Full monthly subscription")) {
             if (tempCos.getCostumerVehicle().size() > 1) {
                 ErrorAlert.setTitle("Subscription Type Error");
                 ErrorAlert.setHeaderText("Costumer has more then 1 vehicle.\nYou may chose different subscription plan.");
                 ErrorAlert.showAndWait();
                 return false;
             }
-        } else if (subToCheck.equals("Regular monthly subscription(multiple)")) {
+        } else if (subToCheck.equals("Regular monthly subscription (multiple)")) {
             if (tempCos.getCostumerVehicle().size() < 2) {
                 ErrorAlert.setTitle("Subscription Type Error");
                 ErrorAlert.setHeaderText("Costumer has 1 or less vehicles.\nYou may chose different subscription plan.");
@@ -303,7 +303,7 @@ public class CostumerManagmentTablePageBoundary implements DataInitializable {
         CostumerTypeCol.setCellFactory(ComboBoxTableCell.forTableColumn(CostumerType));
 
         pricingModelCol.setCellValueFactory(new PropertyValueFactory<Costumer, String>("pricingModel"));
-        ObservableList<String> pricingModelType = FXCollections.observableArrayList("Casual fueling", "Regular monthly subscription(singel)", "Regular monthly subscription(multiple)", "Full monthly subscription");
+        ObservableList<String> pricingModelType = FXCollections.observableArrayList("Casual fueling", "Regular monthly subscription (single)", "Regular monthly subscription (multiple)", "Full monthly subscription");
         pricingModelCol.setCellFactory(ComboBoxTableCell.forTableColumn(pricingModelType));
 
         PurchasePlanCol.setCellValueFactory(new PropertyValueFactory<Costumer, String>("purchasePlan"));

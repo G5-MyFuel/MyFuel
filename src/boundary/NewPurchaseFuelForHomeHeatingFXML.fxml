@@ -235,7 +235,7 @@
                               </Tab>
                               <Tab fx:id="shippingDetailsTab" onSelectionChanged="#CheckOrderDetails" styleClass="blue-titledPaneTab" text="Shipping">
                                  <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="180.0" prefWidth="990.0">
+                                    <AnchorPane fx:id="shippingAnchorPane" minHeight="0.0" minWidth="0.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="180.0" prefWidth="990.0">
                                        <children>
                                           <AnchorPane fx:id="topAnchorPane" layoutX="1.0" layoutY="1.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="654.0" prefWidth="1001.0" styleClass="card-unpadded">
                                              <children>
@@ -392,7 +392,7 @@
                               </Tab>
                               <Tab fx:id="orderReviewTab" onSelectionChanged="#ClickOnREVIEWtab" styleClass="blue-titledPaneTab" text="Review">
                                  <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1129.0">
+                                    <AnchorPane fx:id="ReviewAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1129.0">
                                        <children>
                                           <GridPane gridLinesVisible="true" layoutX="258.0" layoutY="316.0" prefHeight="191.0" prefWidth="482.0">
                                             <columnConstraints>

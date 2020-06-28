@@ -134,7 +134,7 @@ public class CustomerRegistrationBoundary implements DataInitializable {
 
     private ObservableList<String> GasType = FXCollections.observableArrayList("Gasoline-95", "Diesel", "Scooter Fuel");
 
-    private ObservableList<String> SingelVehicle;
+    private ObservableList<String> SingleVehicle;
 
     /**
      *initData this will start in the initialize of the boundary.
@@ -253,10 +253,10 @@ public class CustomerRegistrationBoundary implements DataInitializable {
         vehicleMangTAB.getTabPane().getSelectionModel().selectNext();
         Integer numberOfCars = tempVehicleArray.size();
         if (numberOfCars > 1)
-            SingelVehicle = FXCollections.observableArrayList("Casual fueling", "Regular monthly subscription (multiple)");
+            SingleVehicle = FXCollections.observableArrayList("Casual fueling", "Regular monthly subscription (multiple)");
         else
-            SingelVehicle = FXCollections.observableArrayList("Casual fueling", "Regular monthly subscription (single)", "Full monthly subscription");
-        PricingModelChoiseBox1.setItems(SingelVehicle);
+            SingleVehicle = FXCollections.observableArrayList("Casual fueling", "Regular monthly subscription (single)", "Full monthly subscription");
+        PricingModelChoiseBox1.setItems(SingleVehicle);
         NumberOfVehcles.setText("The Total number of vehicles that " + FirstNametxt.getText() + " have is: " + numberOfCars.toString());
     }
 

@@ -76,7 +76,7 @@ public class Prices {
         this.fuelAmount = fuelAmount;
         this.fuelType = fueltype;
         this.purchasePlan = correctCostumer.getPurchasePlanAsEnum();
-        this.pricingModelType = correctCostumer.getPricingModelTypeAsEnum();
+        this.pricingModelType = correctCostumer.getPricingModelTypeAsEnum();/////////
         this.sm = shippingMethod;
         this.totalPrice = 0.0;
         for (String correctCompanyName : correctCostumer.getFuelCompany()) {

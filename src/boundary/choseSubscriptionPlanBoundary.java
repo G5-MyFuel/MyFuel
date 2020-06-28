@@ -31,7 +31,7 @@ public class choseSubscriptionPlanBoundary implements DataInitializable {
     @FXML
     private Button ConfirmBtn;
 
-    private ObservableList<String> SingelVehicle;
+    private ObservableList<String> SingleVehicle;
 
     /**
      *Confirm button listener.
@@ -57,10 +57,10 @@ public class choseSubscriptionPlanBoundary implements DataInitializable {
          managmentBoundary = ((ArrayList<CostumerManagmentTablePageBoundary>)data).get(1);
 
         if (type.equals("single"))
-            SingelVehicle = FXCollections.observableArrayList("Casual fueling", "Regular monthly subscription (single)", "Full monthly subscription");
+            SingleVehicle = FXCollections.observableArrayList("Casual fueling", "Regular monthly subscription (single)", "Full monthly subscription");
         else
-            SingelVehicle = FXCollections.observableArrayList("Casual fueling", "Regular monthly subscription (multiple)");
-        PricingModelChoiseBox1.setItems(SingelVehicle);
+            SingleVehicle = FXCollections.observableArrayList("Casual fueling", "Regular monthly subscription (multiple)");
+        PricingModelChoiseBox1.setItems(SingleVehicle);
 
 
     }
@@ -72,8 +72,8 @@ public class choseSubscriptionPlanBoundary implements DataInitializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        SingelVehicle = FXCollections.observableArrayList("Casual fueling", "Regular monthly subscription (single)", "Full monthly subscription");
-        PricingModelChoiseBox1.setItems(SingelVehicle);
+        SingleVehicle = FXCollections.observableArrayList("Casual fueling", "Regular monthly subscription (single)", "Full monthly subscription");
+        PricingModelChoiseBox1.setItems(SingleVehicle);
 
     }
 }

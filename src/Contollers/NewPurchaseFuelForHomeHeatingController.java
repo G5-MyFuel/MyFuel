@@ -35,10 +35,11 @@ public class NewPurchaseFuelForHomeHeatingController extends BasicController {
 
     /**
      * validate page-check if text filed is empty and return answer
-     * @param guiObj
+     *
+     * @param guiObjects
      * @return
      */
-    public boolean validatePage(Object guiObj) {
+    /*public boolean validatePage(Object guiObj) {
         if (guiObj instanceof JFXTextField) {
             JFXTextField jfxTextField = (JFXTextField) guiObj;
             if (jfxTextField.getText().isEmpty())
@@ -52,10 +53,26 @@ public class NewPurchaseFuelForHomeHeatingController extends BasicController {
             return true;
         }
         return false;
+    }*/
+    public boolean validatePage(ArrayList<Object> guiObjects) {
+        for (Object guiObj : guiObjects) {
+            if (guiObj instanceof JFXTextField) {
+                JFXTextField jfxTextField = (JFXTextField) guiObj;
+                if (jfxTextField.getText().isEmpty())
+                    return false;
+            }
+            if (guiObj instanceof JFXTextArea) {
+                JFXTextArea jfxTextArea = (JFXTextArea) guiObj;
+                if (jfxTextArea.getText().isEmpty())
+                    return false;
+            }
+        }
+        return true;
     }
 
     /**
      * Every action in this page
+     *
      * @param result - The result recieved from the DB
      */
     @Override
@@ -93,6 +110,7 @@ public class NewPurchaseFuelForHomeHeatingController extends BasicController {
 
     /**
      * Active when there is a new purchase by costumer and saves it in DB
+     *
      * @param varArray
      */
     public void INSERT_NEW_PURCHASE_FUEL_FOR_HOME_HEATING(ArrayList<Object> varArray) {
@@ -104,6 +122,7 @@ public class NewPurchaseFuelForHomeHeatingController extends BasicController {
 
     /**
      * Active when there is a new purchase by costumer and saves it in DB
+     *
      * @param varArray1
      */
     public void INSERT_NEW_PURCHASE_FUEL_FOR_HOME_HEATING1(ArrayList<Object> varArray1) {
@@ -116,6 +135,7 @@ public class NewPurchaseFuelForHomeHeatingController extends BasicController {
 
     /**
      * Get a specific costumer from DB
+     *
      * @param str
      */
     public void GET_SPECIFIC_CUSTOMER_DETAILS(String str) {
@@ -125,7 +145,6 @@ public class NewPurchaseFuelForHomeHeatingController extends BasicController {
         SqlAction sqlAction = new SqlAction(SqlQueryType.GET_SPECIFIC_CUSTOMER_DETAILS, varArray);
         super.sendSqlActionToClient(sqlAction);
     }
-
 
 
     /**
@@ -210,24 +229,24 @@ public class NewPurchaseFuelForHomeHeatingController extends BasicController {
 
     /**
 
-    public void INSERT_NEW_PURCHES_toDB(ArrayList<String> myPurchase) {
-        ArrayList<Object> varArray = new ArrayList<>();
-        varArray.add(myPurchase.get(0));
-        varArray.add(myPurchase.get(1));
-        varArray.add(myPurchase.get(2));
-        varArray.add(myPurchase.get(3));
-        varArray.add(myPurchase.get(4));
-        varArray.add(myPurchase.get(6));
+     public void INSERT_NEW_PURCHES_toDB(ArrayList<String> myPurchase) {
+     ArrayList<Object> varArray = new ArrayList<>();
+     varArray.add(myPurchase.get(0));
+     varArray.add(myPurchase.get(1));
+     varArray.add(myPurchase.get(2));
+     varArray.add(myPurchase.get(3));
+     varArray.add(myPurchase.get(4));
+     varArray.add(myPurchase.get(6));
 
-        SqlAction sqlAction = new SqlAction(SqlQueryType.INSERT_NEW_PURCHES, varArray);
-        super.sendSqlActionToClient(sqlAction);
-    }
+     SqlAction sqlAction = new SqlAction(SqlQueryType.INSERT_NEW_PURCHES, varArray);
+     super.sendSqlActionToClient(sqlAction);
+     }
 
-    public void INSERT_NEW_PURCHES_TO_HOME_HEATING_toDB(ArrayList<String> myPurchase) {
-        ArrayList<Object> varArray = new ArrayList<>();
-        varArray.add();
-        SqlAction sqlAction = new SqlAction(SqlQueryType.INSERT_NEW_PURCHES_TO_HOME_HEATING, varArray);
-        super.sendSqlActionToClient(sqlAction);
-    }
+     public void INSERT_NEW_PURCHES_TO_HOME_HEATING_toDB(ArrayList<String> myPurchase) {
+     ArrayList<Object> varArray = new ArrayList<>();
+     varArray.add();
+     SqlAction sqlAction = new SqlAction(SqlQueryType.INSERT_NEW_PURCHES_TO_HOME_HEATING, varArray);
+     super.sendSqlActionToClient(sqlAction);
+     }
      */
 }
