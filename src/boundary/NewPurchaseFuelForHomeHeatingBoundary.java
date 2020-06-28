@@ -234,6 +234,9 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
     @FXML
     private AnchorPane ReviewAnchorPane;
 
+    @FXML
+    private ImageView fastShipping;
+
     @Override
     public void initData(Object data) {
         ArrayList<Object> varArray = (ArrayList<Object>) data;
@@ -594,9 +597,10 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
      * Show specific things after we select fast shipping
      */
     private void FastShippingSelected() {
-        whenPane.setVisible(false);
+        whenPane.setVisible(false);         ////standard ship
         whenPane1.setVisible(true);
         //
+        fastShipping.setVisible(true);
         firstOverviewText.setText("You chose a fast shipping method!");
         shippingSummeryDetailsTXT.setText("You will receive your invitation to the address you entered in the next 6 hours");
         shippingOverviewPane.setVisible(true);
@@ -757,7 +761,7 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
                 if (sd.getT2() == 1) {
                     t9to11BTN.setDisable(true);
                 } else {
-                    t11to13BTN.setDisable(false);
+                    t9to11BTN.setDisable(false);
                 }
 
                 if (sd.getT3() == 1) {
@@ -803,8 +807,11 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
         btn.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                if (!shippingOverviewPane.isVisible())
+                if (!shippingOverviewPane.isVisible()){
+                    firstOverviewText.setText("Your fuel order will be delivered on");
                     shippingOverviewPane.setVisible(true);
+                }
+
                 ///
 
                 StringBuilder str = new StringBuilder();

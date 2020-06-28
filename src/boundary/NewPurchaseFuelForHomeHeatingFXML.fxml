@@ -311,16 +311,16 @@
                                                                   </GridPane>
                                                                </children>
                                                             </VBox>
-                                                            <VBox fx:id="whenPane1" alignment="TOP_CENTER" prefHeight="318.0" prefWidth="1002.0" spacing="5.0">
+                                                            <VBox fx:id="whenPane1" alignment="TOP_CENTER" prefHeight="318.0" prefWidth="1002.0" spacing="5.0" visible="false">
                                                                <children>
                                                                   <Label fx:id="whenLable1" alignment="CENTER" contentDisplay="CENTER" prefHeight="39.0" prefWidth="974.0" style="-fx-background-color: #DCDCDC; -fx-font-size: 22; -fx-font-weight: bold; -fx-background-radius: 30;" text="Select Shipping Date:" textAlignment="CENTER">
                                                                      <VBox.margin>
                                                                         <Insets />
                                                                      </VBox.margin>
                                                                   </Label>
-                                                                  <ImageView fitHeight="231.0" fitWidth="428.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                                                                  <ImageView fx:id="fastShipping" fitHeight="231.0" fitWidth="428.0" pickOnBounds="true" preserveRatio="true" visible="false">
                                                                      <image>
-                                                                        <Image url="@../media/FuelForHomeHeating/fastDelivery1GIF.gif" />
+                                                                        <Image url="@../media/FuelForHomeHeating/fastDeliveryGIF.gif" />
                                                                      </image>
                                                                   </ImageView>
                                                                </children>
