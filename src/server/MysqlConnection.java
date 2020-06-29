@@ -162,8 +162,15 @@ public class MysqlConnection {
          * *****************************************************/
         sqlArray[SqlQueryType.GET_ALL_VEHICLE_TABLE.getCode()] = "SELECT * FROM `Vehicle`";
         sqlArray[SqlQueryType.GET_ALL_UPDATED_PRICES.getCode()] = "SELECT * FROM Prices;";
+        sqlArray[SqlQueryType.GET_PRE_MONTH_PURCHASE_FUEL_AMOUNT_OF_USER.getCode()] = "SELECT `customerID`, SUM(`totalPrice`) FROM `Purchase` WHERE `customerID` = ? " +
+                "AND `purchaseDate` BETWEEN DATE_SUB(DATE_ADD(LAST_DAY(DATE_SUB(CURDATE(),INTERVAL 1 MONTH)),interval 1 DAY),interval 1 MONTH) " +
+                "AND LAST_DAY(DATE_SUB(CURDATE(),INTERVAL 1 MONTH))";
+        sqlArray[SqlQueryType.CheckIfExists_PRE_MONTH_PURCHASE_OF_USER.getCode()] = "SELECT IF( EXISTS (SELECT `customerID`, SUM(`totalPrice`) " +
+                "FROM `Purchase` WHERE `customerID` = ? AND `purchaseDate` " +
+                "BETWEEN DATE_SUB(DATE_ADD(LAST_DAY(DATE_SUB(CURDATE(),INTERVAL 1 MONTH)),interval 1 DAY),interval 1 MONTH) " +
+                "AND LAST_DAY(DATE_SUB(CURDATE(),INTERVAL 1 MONTH))), 1, 0)";
 
-        /* *****************************************************
+                /* *****************************************************
          * *************** Fuel Management Queries ****************
          * *****************************************************/
         sqlArray[SqlQueryType.GET_ALL_MANAGER_STATIONS.getCode()] = "SELECT * FROM `GasStation` WHERE managerID = ?";

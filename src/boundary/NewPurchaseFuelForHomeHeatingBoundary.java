@@ -24,12 +24,15 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
 import org.joda.time.LocalDateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
 import java.net.URL;
 import java.text.DecimalFormat;
 import java.text.Format;
@@ -59,6 +62,7 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
     private Prices thisOrderPrice;
     private String campaignID;
     private FormValidation formValidation;
+    boolean isStandardShippingSelected = false;
 
     /**
      * gui variables
@@ -115,7 +119,10 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
     private JFXComboBox<String> shippingMethodComboBOX;
 
     @FXML
-    private ImageView WrongQuantity111111;
+    private ImageView RightQuantity;
+
+    @FXML
+    private ImageView WrongQuantity;
 
     @FXML
     private VBox whenPane;
@@ -153,7 +160,7 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
     @FXML
     private VBox whenPane1;
 
-    @FXML
+    /*@FXML
     private Label whenLable1;
 
     @FXML
@@ -184,7 +191,7 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
     private JFXButton t17to19BTN1;
 
     @FXML
-    private JFXButton t13to15BTN1;
+    private JFXButton t13to15BTN1;*/
 
     @FXML
     private VBox shippingOverviewPane;
@@ -197,6 +204,9 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
 
     @FXML
     private ImageView shippingIndicatorTAB1;
+
+    @FXML
+    private ImageView reviewIndicatorTAB;
 
     @FXML
     private Tab orderReviewTab;
@@ -237,6 +247,10 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
     @FXML
     private ImageView fastShipping;
 
+    @FXML
+    private Text FullsubscriptionTxt;
+
+
     @Override
     public void initData(Object data) {
         ArrayList<Object> varArray = (ArrayList<Object>) data;
@@ -244,8 +258,8 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
         this.currentCustomerId = currentCustomerId1;
         myDashBoundary = (generalDashBoardBoundary) varArray.get(1);
         String[] words = myDashBoundary.userFirstName.getText().split("\\s+");
-        firstNameTXT.setText(words[0]);
-        lastNameTXT.setText(words[1]);
+        firstNameTXT.setText(" " + words[0]);
+        lastNameTXT.setText(" " + words[1]);
         LocalDate.now().toString();
         myController.GET_SPECIFIC_CUSTOMER_DETAILS(this.currentCustomerId);
         this.currentPurchaseHomeHeating = new PurchaseFuelForHomeHeating(currentCustomerId, LocalDateTime.now(), 0.0);
@@ -258,9 +272,11 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
         this.confirmMassage.setVisible(false);
         this.shippingIndicatorTAB1.setVisible(false);
         shippingAnchorPane.setVisible(false);
-        //shippingAnchorPane.setDisable(true);
-        //ReviewAnchorPane.setDisable(true);
         ReviewAnchorPane.setVisible(false);
+        FullsubscriptionTxt.setVisible(false);
+        WrongQuantity.setVisible(true);
+        RightQuantity.setVisible(false);
+        reviewIndicatorTAB.setVisible(false);
         /*  set all fields validators */
         FormValidation();   //
         /* set form items */
@@ -294,9 +310,8 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
      */
     @FXML
     void orderReviewTab(MouseEvent event) {
-        CheckOrderDetails();
-        //TODO: here need to check if all order details are correct and if and only if correct allowed to move to shipping.
-        orderDetailsTab.getTabPane().getSelectionModel().selectNext();
+        //isOrderDetailsValid();
+        //orderDetailsTab.getTabPane().getSelectionModel().selectNext();
     }
 
     /**
@@ -361,85 +376,19 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
      */
     @FXML
     public void CheckOrderDetails() {
-
-        //shippingDetailsTab.getOnSelectionChanged();
-        System.out.println("blabla");
         isOrderDetailsValid();
-        //if(isOrderDetailsValid())
-        //orderDetailsTab.getTabPane().getSelectionModel().selectNext();
-
-
-        //orderDetailsTab.getTabPane().getSelectionModel().selectNext();
-        /*ArrayList<Object> guiObjects = new ArrayList<Object>();
-        guiObjects.add(fuelQuantityTXT);
-        guiObjects.add(streetNameTXT);
-        guiObjects.add(ApartmentNumberTXT);
-        guiObjects.add(cityTXT);
-        guiObjects.add(zipCodeTXT);*/
-        //
-        /*for (Object guiObj : guiObjects) {
-            if (!myController.validatePage(guiObj)) {
-                orderDetailsIndicatorTAB.setImage(new Image("media/PurchaseMedia/cancel.png"));
-                shippingDetailsTab.setDisable(true);
-                orderReviewTab.setDisable(true);
-                break;
-            }
-            else{
-
-                shippingDetailsTab.setDisable(false);
-                orderReviewTab.setDisable(false);
-            }
-        }*/
-        /*if (!myController.validatePage(guiObjects)) {
-            orderDetailsIndicatorTAB.setImage(new Image("media/PurchaseMedia/cancel.png"));
-            shippingDetailsTab.setDisable(true);
-            orderReviewTab.setDisable(true);
-        } else {
-            CheckFuelQuantity();
-            CheckStreetName();
-        }*/
-
-        /*if (CheckFuelQuantity() && CheckStreetName() && CheckApartmentNumber() && CheckCity() && CheckZipCode()){
-            //orderDetailsIndicatorTAB.setVisible(true);
-            orderDetailsIndicatorTAB.setImage(new Image("media/PurchaseMedia/ok.png"));
-            shippingDetailsTab.setDisable(false);
-            orderDetailsToShipping.setDisable(false);
-            orderDetailsTab.getTabPane().getSelectionModel().selectNext();/////////////
-            //orderReviewTab.setDisable(false);
-        }
-        else {
-            orderDetailsIndicatorTAB.setImage(new Image("media/PurchaseMedia/cancel.png"));
-            shippingDetailsTab.setDisable(true);
-            orderReviewTab.setDisable(true);
-        }
-            orderDetailsIndicatorTAB.setVisible(true);*/
     }
 
     boolean isOrderDetailsValid() {
 
-        ArrayList<Object> guiObjects = new ArrayList<Object>();
-        guiObjects.add(fuelQuantityTXT);
-        guiObjects.add(streetNameTXT);
-        guiObjects.add(ApartmentNumberTXT);
-        guiObjects.add(cityTXT);
-        guiObjects.add(zipCodeTXT);
-
-        if (CheckFuelQuantity() && CheckStreetName() && CheckApartmentNumber() && CheckCity() && CheckZipCode()) {
+        if (CheckFuelQuantity() && CheckStreetName() && CheckApartmentNumber() && CheckCity() && CheckZipCode() && isValidEmailAddress(emailAddressTXT.getText())) {
             orderDetailsIndicatorTAB.setImage(new Image("media/PurchaseMedia/ok.png"));
-            //shippingDetailsTab.setDisable(false);
             shippingAnchorPane.setVisible(true);
-            //shippingAnchorPane.setDisable(false);
-            orderDetailsToShipping.setDisable(false);
-            //orderDetailsTab.getTabPane().getSelectionModel().selectNext();/////////////
             orderDetailsIndicatorTAB.setVisible(true);
             return true;
-            //orderReviewTab.setDisable(false);
         } else {
             orderDetailsIndicatorTAB.setImage(new Image("media/PurchaseMedia/cancel.png"));
-            //shippingDetailsTab.setDisable(true);
             shippingAnchorPane.setVisible(false);
-            //shippingAnchorPane.setDisable(true);
-            //ReviewAnchorPane.setDisable(true);
             ReviewAnchorPane.setVisible(false);
             orderDetailsIndicatorTAB.setVisible(true);
             return false;
@@ -451,10 +400,6 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
         Double fuelQuantity = new Double(0.0);
         if (fuelQuantityTXT.getText().isEmpty())
             return false;
-        /*if(!(org.apache.commons.lang3.StringUtils.isNumeric(fuelQuantityTXT.getText()))){
-            System.out.println("Not a number");
-            return false;
-        }*/
         try {
             fuelQuantity = Double.parseDouble(fuelQuantityTXT.getText());
         } catch (NumberFormatException e) {
@@ -473,10 +418,10 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
             return false;
         if (streetNameTXT.getText().length() > 25)
             return false;
-        if (!(org.apache.commons.lang3.StringUtils.isAlpha(streetNameTXT.getText())))
+        return streetNameTXT.getText().matches("^[a-zA-z ]*$");
+        /*if (!(org.apache.commons.lang3.StringUtils.isAlpha(streetNameTXT.getText())))
             return false;
-        //return streetNameTXT.getText().matches("[a-zA-Z]+");
-        return true;
+        return true;*/
     }
 
     boolean CheckApartmentNumber() {
@@ -503,17 +448,17 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
             return false;
         if (cityTXT.getText().length() > 15)
             return false;
-        if (!(org.apache.commons.lang3.StringUtils.isAlpha(cityTXT.getText())))
-            return false;
-        //return cityTXT.getText().matches("[a-zA-Z]+");
-        return true;
+        return cityTXT.getText().matches("^[a-zA-z ]*$");
+        /*if (!(org.apache.commons.lang3.StringUtils.isAlpha(cityTXT.getText())))
+            return false;*/
+        //return true;
     }
 
     boolean CheckZipCode() {
         Integer ZipCode = new Integer(0);
         if (zipCodeTXT.getText().isEmpty())
             return false;
-        if (zipCodeTXT.getText().length() > 5)
+        if (zipCodeTXT.getText().length() > 7)
             return false;
         try {
             ZipCode = Integer.parseInt(zipCodeTXT.getText());
@@ -527,6 +472,19 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
         return true;
     }
 
+    public static boolean isValidEmailAddress(String email) {
+        boolean result = true;
+        if (email.equals(""))
+            return true;
+        try {
+            InternetAddress emailAddr = new InternetAddress(email);
+            emailAddr.validate();
+        } catch (AddressException ex) {
+            result = false;
+        }
+        return result;
+    }
+
     /**
      *
      */
@@ -537,6 +495,8 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
         shippingMethodComboBOX.valueProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                WrongQuantity.setVisible(false);
+                RightQuantity.setVisible(true);
                 switch (shippingMethodComboBOX.getValue()) {
                     case "Fast Shipping - Extra 2% per liter of fuel":
                         System.out.println("Fast Shipping selected");
@@ -558,42 +518,6 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
     }
 
     /**
-     * To insert all the details of this purchase to DB
-     */
-    public void INSERT_NEW_PURCHASE_FUEL_FOR_HOME_HEATING() {
-        ArrayList<Object> varArray = new ArrayList<>();
-        Random rand = new Random();
-        Integer p_id = rand.nextInt(9000) + 1000;
-        varArray.add(p_id);
-        varArray.add(emailAddressTXT.getText());
-        varArray.add(anotherContactPhoneNumberTXT.getText());
-        varArray.add(noteTXT.getText());
-        varArray.add("CONFIRMED_ORDER");
-        varArray.add(shippingMethodComboBOX.getValue());
-        varArray.add(shippingSummeryDetailsTXT.getText());
-        System.out.println("******home heating******");
-        System.out.println(varArray);
-        myController.INSERT_NEW_PURCHASE_FUEL_FOR_HOME_HEATING(varArray);
-        //
-        Format f = new SimpleDateFormat("HH.mm.ss");
-        String strResult = f.format(new Date());
-        System.out.println("Time = " + strResult);
-        ArrayList<Object> varArray1 = new ArrayList<>();
-        varArray1.add(p_id);
-        varArray1.add(this.currentCustomerId);
-        varArray1.add(fuelQuantityTXT.getText());
-        varArray1.add(String.valueOf(totalPrice));
-        varArray1.add(strResult);
-        varArray1.add("0");
-
-
-        System.out.println("******purches******");
-        varArray1.toString();
-
-        myController.INSERT_NEW_PURCHASE_FUEL_FOR_HOME_HEATING1(varArray1);
-    }
-
-    /**
      * Show specific things after we select fast shipping
      */
     private void FastShippingSelected() {
@@ -604,6 +528,7 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
         firstOverviewText.setText("You chose a fast shipping method!");
         shippingSummeryDetailsTXT.setText("You will receive your invitation to the address you entered in the next 6 hours");
         shippingOverviewPane.setVisible(true);
+        isStandardShippingSelected = false;
     }
 
     /**
@@ -633,113 +558,12 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
         shippingDatePicker.setDayCellFactory(callB);
     }
 
-
-    //after selected shipping date
-    public void SetAvailableTimesOfDateSelected(Date localDate) {
-        shippingDatePicker.getValue();
-        DateTimeFormatter fmt = DateTimeFormat.forPattern("yyyy-MM-dd");
-        ArrayList<ShippingDay> allDatesAvailableAsArrayList = myController.getAvailableTimesInDate();
-    }
-
-    @FXML
-    void GoToOrderDetailsPage(MouseEvent event) {
-
-    }
-
-    @FXML
-    void GoToReviewPage(MouseEvent event) {
-
-    }
-
-    @FXML
-    void GoToShippingPage(MouseEvent event) {
-
-    }
-
-    /**
-     *
-     */
-    @FXML
-    void ClickOnREVIEWtab() {
-        if (checkAndSetShippingMethod()) {
-            //shipping details setters
-            currentPurchaseHomeHeating.setCustomerID(currentCustomerId);
-            //
-            StringBuilder deliveryAddressFormat = new StringBuilder();
-            deliveryAddressFormat.append(streetNameTXT.getText());
-            deliveryAddressFormat.append(" | ");
-            deliveryAddressFormat.append(ApartmentNumberTXT.getText());
-            deliveryAddressFormat.append(" | ");
-            deliveryAddressFormat.append(cityTXT.getText());
-            deliveryAddressFormat.append(" | ");
-            deliveryAddressFormat.append(zipCodeTXT.getText());
-            //
-            deliveryAddressTXT.setText(deliveryAddressFormat.toString());
-            //
-            if (currentPurchaseHomeHeating.getShippingMethod().equals(ShippingMethod.STANDARD)) {
-                scheduledDeliveryDateTXT.setText(" " + shippingSummeryDetailsTXT.getText());
-                DeliveryFeeTXT.setText("Fast Shipping");
-            } else {
-                scheduledDeliveryDateTXT.setText(" You will receive the shipment in the next 6 hours");
-                DeliveryFeeTXT.setText("Standard Shipping");
-            }
-
-            //Prices sets
-            String fuelQuantityStr = fuelQuantityTXT.getText() + " Liters";
-            totalPrice = calculateOrderPrice();
-            fuelQuantityInLitersTXT.setText(fuelQuantityStr);
-            totalPricesOfAlllInUsdTXT.setText(new DecimalFormat("##.##").format(totalPrice) + "$");
-            subTotalPriceInUsdTXT.setText(String.valueOf(Prices.basePrice_homeHeating * Double.parseDouble(fuelQuantityTXT.getText())));
-
-        }
-    }
-
-    /**
-     * @return
-     */
-    private boolean checkAndSetShippingMethod() {
-        //set shipping method
-        //check if shipping method selected
-        if (!(shippingMethodComboBOX.getValue() == null)) {
-            switch (shippingMethodComboBOX.getValue()) {
-                case "Fast Shipping - Extra 2% per liter of fuel":
-                    this.shippingMethodTXT = "Fast Shipping";
-                    this.currentPurchaseHomeHeating.setShippingMethod(ShippingMethod.FAST);
-                    return true;
-                case "Standard Shipping":
-                    shippingMethodTXT = "Standard Shipping";
-                    this.currentPurchaseHomeHeating.setShippingMethod(ShippingMethod.STANDARD);
-                    return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * @return
-     */
-    private Double calculateOrderPrice() {
-        totalPrice = 0.0;
-        thisOrderPrice.calculateTotalPrice();
-        currentPurchaseHomeHeating.setPriceOfOrder(thisOrderPrice);
-        totalPrice = thisOrderPrice.getTotalPrice();
-        return totalPrice;
-    }
-
-
     /**
      * @param event
      */
     @FXML
     void handleJFXDatePicker(ActionEvent event) {
         myController.GetShippingOptionalDatesTableFromDB(); //get the available shipping dates and times range
-        //
-        java.sql.Date dateSelectedAsDate = java.sql.Date.valueOf(shippingDatePicker.getValue());
-        SetAvailableTimesOfDateSelected(dateSelectedAsDate);
-    }
-
-    public void setAllShippingDetailsAdded(boolean allShippingDetailsAdded) {
-        this.allShippingDetailsAdded = allShippingDetailsAdded;
     }
 
     /**
@@ -807,7 +631,7 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
         btn.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                if (!shippingOverviewPane.isVisible()){
+                if (!shippingOverviewPane.isVisible()) {
                     firstOverviewText.setText("Your fuel order will be delivered on");
                     shippingOverviewPane.setVisible(true);
                 }
@@ -826,14 +650,131 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
                 date.append(shippingDatePicker.getValue().format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd")));
                 date.append(" " + btn.getText());
                 currentPurchaseHomeHeating.setShippingDateAndTime(date.toString());
+                isStandardShippingSelected = true;
             }
         });
     }
 
     /**
+     *
+     */
+    @FXML
+    void ClickOnREVIEWtab() {
+        if (isOrderDetailsValid() && checkAndSetShippingMethod()) {
+            //shipping details setters
+            shippingIndicatorTAB1.setImage(new Image("media/PurchaseMedia/ok.png"));
+            shippingIndicatorTAB1.setVisible(true);
+            currentPurchaseHomeHeating.setCustomerID(currentCustomerId);
+            //
+            StringBuilder deliveryAddressFormat = new StringBuilder();
+            deliveryAddressFormat.append(" " + streetNameTXT.getText() + ", " + ApartmentNumberTXT.getText());
+            //deliveryAddressFormat.append(" | ");
+            //deliveryAddressFormat.append(ApartmentNumberTXT.getText());
+            deliveryAddressFormat.append(" | ");
+            deliveryAddressFormat.append(cityTXT.getText());
+            deliveryAddressFormat.append(" | ");
+            deliveryAddressFormat.append(zipCodeTXT.getText());
+            //
+            deliveryAddressTXT.setText(deliveryAddressFormat.toString());
+            //
+            if (currentPurchaseHomeHeating.getShippingMethod().equals(ShippingMethod.STANDARD)) {
+                scheduledDeliveryDateTXT.setText(" " + shippingSummeryDetailsTXT.getText());
+                DeliveryFeeTXT.setText("Standard Shipping");
+            } else {
+                scheduledDeliveryDateTXT.setText(" You will receive the shipment in the next 6 hours");
+                DeliveryFeeTXT.setText("Fast Shipping");
+            }
+
+            //Prices sets
+            String fuelQuantityStr = fuelQuantityTXT.getText() + " Liters";
+            totalPrice = calculateOrderPrice();
+            fuelQuantityInLitersTXT.setText(fuelQuantityStr);
+            totalPricesOfAlllInUsdTXT.setText(new DecimalFormat("##.##").format(totalPrice) + "$");
+            if (currentCostumerDetailsFromDB.getPricingModel().equals("Full monthly subscription")) {
+                FullsubscriptionTxt.setVisible(true);
+            }
+            subTotalPriceInUsdTXT.setText(String.valueOf(Prices.basePrice_homeHeating * Double.parseDouble(fuelQuantityTXT.getText())));
+            ReviewAnchorPane.setVisible(true);
+        } else {
+            shippingIndicatorTAB1.setImage(new Image("media/PurchaseMedia/cancel.png"));
+            shippingIndicatorTAB1.setVisible(true);
+            ReviewAnchorPane.setVisible(false);
+        }
+    }
+
+    /**
+     * @return
+     */
+    private boolean checkAndSetShippingMethod() {
+        //set shipping method
+        //check if shipping method selected
+        if (!(shippingMethodComboBOX.getValue() == null)) {
+            switch (shippingMethodComboBOX.getValue()) {
+                case "Fast Shipping - Extra 2% per liter of fuel":
+                    this.shippingMethodTXT = "Fast Shipping";
+                    this.currentPurchaseHomeHeating.setShippingMethod(ShippingMethod.FAST);
+                    return true;
+                case "Standard Shipping":
+                    shippingMethodTXT = "Standard Shipping";
+                    this.currentPurchaseHomeHeating.setShippingMethod(ShippingMethod.STANDARD);
+                    return isStandardShippingSelected;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * @return
+     */
+    private Double calculateOrderPrice() {
+        totalPrice = 0.0;
+        thisOrderPrice.calculateTotalPrice();
+        currentPurchaseHomeHeating.setPriceOfOrder(thisOrderPrice);
+        totalPrice = thisOrderPrice.getTotalPrice();
+        return totalPrice;
+    }
+
+    /**
+     * To insert all the details of this purchase to DB
+     */
+    public void INSERT_NEW_PURCHASE_FUEL_FOR_HOME_HEATING() {
+        ArrayList<Object> varArray = new ArrayList<>();
+        Random rand = new Random();
+        Integer p_id = rand.nextInt(9000) + 1000;
+        varArray.add(p_id);
+        varArray.add(emailAddressTXT.getText());
+        varArray.add(anotherContactPhoneNumberTXT.getText());
+        varArray.add(noteTXT.getText());
+        varArray.add("CONFIRMED_ORDER");
+        varArray.add(shippingMethodComboBOX.getValue());
+        varArray.add(shippingSummeryDetailsTXT.getText());
+        System.out.println("******home heating******");
+        System.out.println(varArray);
+        myController.INSERT_NEW_PURCHASE_FUEL_FOR_HOME_HEATING(varArray);
+        //
+        Format f = new SimpleDateFormat("HH:mm:ss");
+        String strResult = f.format(new Date());
+        System.out.println("Time = " + strResult);
+        ArrayList<Object> varArray1 = new ArrayList<>();
+        varArray1.add(p_id);
+        varArray1.add(this.currentCustomerId);
+        varArray1.add(fuelQuantityTXT.getText());
+        varArray1.add(String.valueOf(totalPrice));
+        varArray1.add(strResult);
+        varArray1.add("0");
+
+        System.out.println("******purches******");
+        varArray1.toString();
+
+        myController.INSERT_NEW_PURCHASE_FUEL_FOR_HOME_HEATING1(varArray1);
+        reviewIndicatorTAB.setVisible(true);
+        confirmMassage.setVisible(true);
+    }
+
+    /**
      * review order tab setting
      */
-    private void SetReviewOrderPane() {
+    /*private void SetReviewOrderPane() {
         this.currentPurchaseHomeHeating.setFuelAmount(Double.valueOf(fuelQuantityTXT.getText()));
         this.currentPurchaseHomeHeating.setEmailForInvoice(emailAddressTXT.getText());
         PurchaseFuelForHomeHeating.Address address = new PurchaseFuelForHomeHeating.Address(streetNameTXT.getText(), ApartmentNumberTXT.getText(), cityTXT.getText(), zipCodeTXT.getText());
@@ -841,8 +782,7 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
         this.currentPurchaseHomeHeating.setPhoneNumberForContact(anotherContactPhoneNumberTXT.getText());
         this.currentPurchaseHomeHeating.setNoteForPurchase(noteTXT.getText());
         this.currentPurchaseHomeHeating.setDeliveryStatus(OrderDeliveryStatus.CONFIRMED_ORDER);
-    }
-
+    }*/
     public Costumer getCurrentCostumerDetailsFromDB() {
         return currentCostumerDetailsFromDB;
     }
@@ -880,5 +820,20 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
 
         if (isOrderDetailsValid())
             orderDetailsTab.getTabPane().getSelectionModel().selectNext();
+    }
+
+    @FXML
+    void GoToOrderDetailsPage(MouseEvent event) {
+
+    }
+
+    @FXML
+    void GoToReviewPage(MouseEvent event) {
+
+    }
+
+    @FXML
+    void GoToShippingPage(MouseEvent event) {
+
     }
 }

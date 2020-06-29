@@ -251,12 +251,12 @@
                                                             <JFXComboBox fx:id="shippingMethodComboBOX" prefHeight="37.0" prefWidth="268.0" promptText="Select Shipping Method" style="-fx-font-size: 12pt;" unFocusColor="BLUE" />
                                                             <StackPane maxHeight="25.0" maxWidth="25.0" prefHeight="25.0" prefWidth="25.0">
                                                                <children>
-                                                                  <ImageView fitHeight="25.0" fitWidth="25.0" visible="false">
+                                                                  <ImageView fx:id="RightQuantity" fitHeight="25.0" fitWidth="25.0" visible="false">
                                                                      <image>
                                                                         <Image url="@../media/alerts/icons8_ok_48px.png" />
                                                                      </image>
                                                                   </ImageView>
-                                                                  <ImageView fx:id="WrongQuantity111111" fitHeight="25.0" fitWidth="25.0" visible="false">
+                                                                  <ImageView fx:id="WrongQuantity" fitHeight="25.0" fitWidth="25.0" visible="false">
                                                                      <image>
                                                                         <Image url="@../media/alerts/icons8_close_window_48px.png" />
                                                                      </image>
@@ -322,6 +322,9 @@
                                                                      <image>
                                                                         <Image url="@../media/FuelForHomeHeating/fastDeliveryGIF.gif" />
                                                                      </image>
+                                                                     <VBox.margin>
+                                                                        <Insets />
+                                                                     </VBox.margin>
                                                                   </ImageView>
                                                                </children>
                                                             </VBox>
@@ -537,12 +540,17 @@
                                                 <Font name="System Bold" size="20.0" />
                                              </font>
                                           </Text>
+                                          <Text fx:id="FullsubscriptionTxt" fill="#1923f2" layoutX="689.0" layoutY="537.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*Will be charged next month">
+                                             <font>
+                                                <Font name="System Bold" size="20.0" />
+                                             </font>
+                                          </Text>
                                        </children></AnchorPane>
                                  </content>
                                  <graphic>
-                                    <ImageView disable="true" fitHeight="25.0" fitWidth="25.0" visible="false">
+                                    <ImageView fx:id="reviewIndicatorTAB" disable="true" fitHeight="25.0" fitWidth="25.0" visible="false">
                                        <image>
-                                          <Image url="@../media/icons/icons8_checked_48px.png" />
+                                          <Image url="@../media/PurchaseMedia/ok.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>

@@ -80,19 +80,19 @@ public class NewPurchaseFuelForHomeHeatingController extends BasicController {
         Platform.runLater(() -> {
             try {
                 switch (result.getActionType()) {
-                    case GET_ALL_USERS_TABLE:
+                    /*case GET_ALL_USERS_TABLE:
                         System.out.println("NewPurchaseFuelForHomeHeatingController -> myController.getUsersTable();");
                         ArrayList<User> resultListUsers = new ArrayList<>();
-                        break;
+                        break;*/
                     case GET_ALL_SHIPPING_DATES_AVAILABLE:
                         System.out.println("NewPurchaseFuelForHomeHeatingController -> myController.GetAvailableTimesToShippingDate();");
                         availableTimesInDate = changeResultToAvailableShippingDatesArrayList(result);
                         System.out.println(availableTimesInDate);
                         myBoundary.setAvailableTimesForShipping(availableTimesInDate);
                         break;
-                    case INSERT_NEW_AVAILABLE_DATE_FOR_SHIPPING:
+                    /*case INSERT_NEW_AVAILABLE_DATE_FOR_SHIPPING:
                         System.out.println("NewPurchaseFuelForHomeHeatingController -> myController.INSERT_NEW_AVAILABLE_DATE_FOR_SHIPPING;");
-                        break;
+                        break;*/
                     case GET_SPECIFIC_CUSTOMER_DETAILS:
                         myBoundary.setCurrentCostumerDetailsFromDB(this.fromResultSetToCustomers(result));
                         break;
@@ -114,7 +114,7 @@ public class NewPurchaseFuelForHomeHeatingController extends BasicController {
      * @param varArray
      */
     public void INSERT_NEW_PURCHASE_FUEL_FOR_HOME_HEATING(ArrayList<Object> varArray) {
-        System.out.println("PurchaseFuelForHomeHeating quary");
+        System.out.println("PurchaseFuelForHomeHeating query");
         System.out.println(varArray);
         SqlAction sqlAction = new SqlAction(SqlQueryType.INSERT_NEW_PURCHASE_FUEL_FOR_HOME_HEATING, varArray);
         super.sendSqlActionToClient(sqlAction);
@@ -126,7 +126,7 @@ public class NewPurchaseFuelForHomeHeatingController extends BasicController {
      * @param varArray1
      */
     public void INSERT_NEW_PURCHASE_FUEL_FOR_HOME_HEATING1(ArrayList<Object> varArray1) {
-        System.out.println("Purchase quary");
+        System.out.println("Purchase query");
         varArray1.toString();
 
         SqlAction sqlAction2 = new SqlAction(SqlQueryType.INSERT_NEW_PURCHASE_FUEL_FOR_HOME_HEATING1, varArray1);
@@ -186,13 +186,13 @@ public class NewPurchaseFuelForHomeHeatingController extends BasicController {
     /**
      * set new row in ShippingOptionalDates Table
      */
-    public void InsertNewAvailableDateToDB(String dateAsString) throws ParseException {
+    /*public void InsertNewAvailableDateToDB(String dateAsString) throws ParseException {
         Date date = new SimpleDateFormat("yyyy-MM-dd").parse(dateAsString);
         ArrayList<Object> varArray = new ArrayList<>();
         varArray.add(dateAsString);
         SqlAction sqlAction = new SqlAction(SqlQueryType.INSERT_NEW_AVAILABLE_DATE_FOR_SHIPPING, varArray);
         super.sendSqlActionToClient(sqlAction);
-    }
+    }*/
 
     /**
      * convert the result from db to arrayList of all available dates for shipping

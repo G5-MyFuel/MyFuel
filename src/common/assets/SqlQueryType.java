@@ -16,6 +16,7 @@ public enum SqlQueryType {
     //for Price class
     GET_ALL_UPDATED_PRICES(SqlExecutionType.EXECUTE_QUERY),
     GET_PRE_MONTH_PURCHASE_FUEL_AMOUNT_OF_USER(SqlExecutionType.EXECUTE_QUERY),
+    CheckIfExists_PRE_MONTH_PURCHASE_OF_USER(SqlExecutionType.EXECUTE_QUERY),
 
     /* *****************************************
      * ********** Fuel Management Queries ****************

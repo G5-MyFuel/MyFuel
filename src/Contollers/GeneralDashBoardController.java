@@ -41,19 +41,50 @@ public class GeneralDashBoardController extends BasicController {
     @Override
     public void getResultFromClient(SqlResult result) {
         Platform.runLater(() -> {
-                switch (result.getActionType()) {
-                    case GET_ALL_UPDATED_PRICES:
-                        this.changeResultToFuelPrices(result);
-                        break;
-                    case GET_PRE_MONTH_PURCHASE_FUEL_AMOUNT_OF_USER:
-                        this.changeResultToFueAmountOfPreMonthOfCurUser(result, currentUserID);
-                        Prices.fuelAmountOfPreviousMonth = Double.valueOf(fuelAmountOfPreMonthForCurrentUser);
-                        break;
-                    default:
-                        break;
-                }
+            switch (result.getActionType()) {
+                case GET_ALL_UPDATED_PRICES:
+                    this.changeResultToFuelPrices(result);
+                    break;
+                case GET_PRE_MONTH_PURCHASE_FUEL_AMOUNT_OF_USER:
+                    this.changeResultToFueAmountOfPreMonthOfCurUser(result);
+                    Prices.fuelAmountOfPreviousMonth = Double.valueOf(fuelAmountOfPreMonthForCurrentUser);
+                    break;
+                case CheckIfExists_PRE_MONTH_PURCHASE_OF_USER:
+                    myBoundary.checkIfExistsCustomerPurchaseAmountInLastMonthFromDB(this.checkIfExistsCustomerPurchaseAmountInLastMonthFromDB(result));
+                    break;
+                default:
+                    break;
+            }
 
         });
+    }
+
+    /**
+     * Check if exists Customer Purchase Amount In Last Month From DB
+     * @param customerId
+     */
+    public void getIfExistsCustomerPurchaseAmountInLastMonthFromDB(String customerId) {
+        ArrayList<Object> vars = new ArrayList<>();
+        vars.add(customerId);
+        SqlAction sqlAction = new SqlAction(SqlQueryType.CheckIfExists_PRE_MONTH_PURCHASE_OF_USER, vars);
+        super.sendSqlActionToClient(sqlAction);
+    }
+
+    /**
+     * get Customer Purchase Amount In Last Month From DB
+     * @param result
+     * @return
+     */
+    private String checkIfExistsCustomerPurchaseAmountInLastMonthFromDB(SqlResult result) {
+        Long isExsits = new Long(0);
+        ArrayList<Object> a = result.getResultData().get(0);
+        isExsits = (Long) a.get(0);
+        if (isExsits.compareTo(Long.valueOf(0)) == 0){
+            this.fuelAmountOfPreMonthForCurrentUser = 0.0;
+            Prices.fuelAmountOfPreviousMonth = 0.0;
+        }
+        setFuelAmountOfPreMonthForCurrentUser(this.fuelAmountOfPreMonthForCurrentUser);
+        return isExsits.toString();
     }
 
     /**
@@ -63,8 +94,7 @@ public class GeneralDashBoardController extends BasicController {
      */
     public void getCustomerPurchaseAmountInLastMonthFromDB(String customerId) {
         ArrayList<Object> vars = new ArrayList<>();
-        if (currentUserID != null) vars.add(currentUserID);
-        if (customerId != null) vars.add(customerId);
+        vars.add(customerId);
         SqlAction sqlAction = new SqlAction(SqlQueryType.GET_PRE_MONTH_PURCHASE_FUEL_AMOUNT_OF_USER, vars);
         super.sendSqlActionToClient(sqlAction);
     }
@@ -73,17 +103,15 @@ public class GeneralDashBoardController extends BasicController {
      * change Result To Fuel Amount Of Pre Month Of Cur User
      *
      * @param result
-     * @param userID
      */
-    private void changeResultToFueAmountOfPreMonthOfCurUser(SqlResult result, String userID) {
+    private void changeResultToFueAmountOfPreMonthOfCurUser(SqlResult result) {
         for (ArrayList<Object> a : result.getResultData()) {
-            this.fuelAmountOfPreMonthForCurrentUser = (Double) a.get(1);
-            System.out.println(fuelAmountOfPreMonthForCurrentUser.getClass().getName() + "-->" + fuelAmountOfPreMonthForCurrentUser.toString());
+            if (!(a.get(1) == null))
+                this.fuelAmountOfPreMonthForCurrentUser = (Double) a.get(1);
+            else
+                this.fuelAmountOfPreMonthForCurrentUser = 0.0;
         }
     }
-
-
-
 
 
     /**

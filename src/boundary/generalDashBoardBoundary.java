@@ -93,6 +93,10 @@ public class generalDashBoardBoundary implements DataInitializable {
         //
         String userPermission = pageNameArrayList.get(0);
         this.userID = pageNameArrayList.get(1);
+        //Nir check
+        System.out.println("userID: "+userID);
+        myController.getIfExistsCustomerPurchaseAmountInLastMonthFromDB(userID);
+        //
         String userFullName = pageNameArrayList.get(2);
         this.fuelCompany = pageNameArrayList.get(3);
         userPermissionsTitel.setText(userPermission);
@@ -400,6 +404,12 @@ public class generalDashBoardBoundary implements DataInitializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+    }
+
+    public void checkIfExistsCustomerPurchaseAmountInLastMonthFromDB(String isExsits) {
+
+        if (isExsits.equals("1"))
+            myController.getCustomerPurchaseAmountInLastMonthFromDB(userID);
     }
 
     /**

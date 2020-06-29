@@ -46,6 +46,7 @@ public class Prices {
     public static Double fuelAmountOfPreviousMonth;
     private FuelTypes fuelType;
     private PurchasePlanTypes purchasePlan;
+
     private PricingModelTypes pricingModelType;
     private static Double totalPrice;
     private Costumer correctCostumer;
@@ -150,7 +151,7 @@ public class Prices {
         //fuel amount
         totalPrice = getFuelPriceByFuelType(fuelType) * fuelAmount;
         System.out.println("after amount*6.2: " + totalPrice);
-
+        System.out.println("fuelAmountOfPreviousMonth:  "+fuelAmountOfPreviousMonth);
         //pricing model
         switch (pricingModelType) {
             case Casual_fueling:
@@ -160,10 +161,10 @@ public class Prices {
                 totalPrice *= pricingModel_Regular_monthly_subscription_single;
                 break;
             case Regular_monthly_subscription_multiple:
-                totalPrice = (totalPrice *= pricingModel_Regular_monthly_subscription_single) * purchasePlanDiscount_multiple;
+                totalPrice = (totalPrice *= pricingModel_Regular_monthly_subscription_single) * pricingModel_Regular_monthly_subscription_multiple;
                 break;
-            case Full_monthly_subscription: // מה קורה פה ?
-                //((((totalPrice*previousMonthFuelAmount)*0.96)*0.9))*0.97
+            case Full_monthly_subscription:
+                totalPrice = (totalPrice *= pricingModel_Regular_monthly_subscription_single) * pricingModel_Regular_monthly_subscription_multiple* pricingModel_Full_monthly_subscription;
                 //totalPrice = (((totalPrice * generalDashBoardController.getFuelAmountOfPreMonthForCurrentUser()) * pricingModel_Regular_monthly_subscription_single)) * pricingModel_Full_monthly_subscription;
                 break;
             default:
@@ -382,6 +383,9 @@ public class Prices {
 
     public void setFastShippingTotalPrice() {
 //????????
+    }
+    public PricingModelTypes getPricingModelType() {
+        return pricingModelType;
     }
 
 

@@ -20,7 +20,6 @@ public class PricesController extends BasicController {
 
     public void getPricingModelDiscount(ArrayList<String> vArray) {
         ArrayList<Object> varArray = new ArrayList<>();
-        System.out.println("pooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo"+vArray.toString());
         varArray.add(vArray.get(0));
         varArray.add(vArray.get(1));
         SqlAction sqlAction = new SqlAction(SqlQueryType.GET_PRICING_MODEL_DISCOUNT, varArray);
@@ -41,30 +40,6 @@ public class PricesController extends BasicController {
         });
     }
 
-    /**
-     * get Customer Purchase Amount In Last Month From DB
-     *
-     * @param customerId
-     */
-    public void getCustomerPurchaseAmountInLastMonthFromDB(String customerId) {
-        ArrayList<Object> vars = new ArrayList<>();
-        vars.add(customerId);
-        vars.add(customerId);
-        SqlAction sqlAction = new SqlAction(SqlQueryType.GET_PRE_MONTH_PURCHASE_FUEL_AMOUNT_OF_USER, vars);
-        super.sendSqlActionToClient(sqlAction);
-    }
-
-    /**
-     * change Result To Fuel Amount Of Pre Month Of Cur User
-     *
-     * @param result
-     */
-    private void changeResultToFueAmountOfPreMonthOfCurUser(SqlResult result) {
-        for (ArrayList<Object> a : result.getResultData()) {
-            this.fuelAmountOfPreMonthForCurrentUser = (Double) a.get(1);
-        }
-    }
-
 
     public void GET_CURRENT_MARKETING_CAMPEIGN_fromDB() {
         SqlAction sqlAction = new SqlAction(SqlQueryType.GET_CURRENT_MARKETING_CAMPEIGN);
@@ -83,9 +58,6 @@ public class PricesController extends BasicController {
         myPrices.marketingCapmeignDiscount(resArr);
     }
 
-
-
-
     private void fromResultToPricingModelDiscount(SqlResult result) {
         ArrayList<String> resArr = new ArrayList<>();
         for (ArrayList<Object> a : result.getResultData()) {
@@ -95,7 +67,3 @@ public class PricesController extends BasicController {
         myPrices.setPricingModelDiscount(resArr);
     }
 }
-
-
-
-
