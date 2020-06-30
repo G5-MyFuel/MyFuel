@@ -43,6 +43,7 @@ public class Prices {
 
     //currentPrice details
     private Double fuelAmount;
+
     public static Double fuelAmountOfPreviousMonth;
     private FuelTypes fuelType;
     private PurchasePlanTypes purchasePlan;
@@ -386,6 +387,10 @@ public class Prices {
     }
     public PricingModelTypes getPricingModelType() {
         return pricingModelType;
+    }
+
+    public void setFuelAmount(Double fuelAmount) {
+        this.fuelAmount = fuelAmount;
     }
 
 

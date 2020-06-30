@@ -160,39 +160,6 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
     @FXML
     private VBox whenPane1;
 
-    /*@FXML
-    private Label whenLable1;
-
-    @FXML
-    private HBox dayAndDateComboBoxHboxLine1;
-
-    @FXML
-    private JFXDatePicker shippingDatePicker1;
-
-    @FXML
-    private Label ShippingHouresAvailableOnThisDateLABLE1;
-
-    @FXML
-    private GridPane optionalDatesForShippingGridPane1;
-
-    @FXML
-    private JFXButton t9to11BTN1;
-
-    @FXML
-    private JFXButton t11to13BTN1;
-
-    @FXML
-    private JFXButton t15to17BTN1;
-
-    @FXML
-    private JFXButton t7to9BTN1;
-
-    @FXML
-    private JFXButton t17to19BTN1;
-
-    @FXML
-    private JFXButton t13to15BTN1;*/
-
     @FXML
     private VBox shippingOverviewPane;
 
@@ -668,8 +635,6 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
             //
             StringBuilder deliveryAddressFormat = new StringBuilder();
             deliveryAddressFormat.append(" " + streetNameTXT.getText() + ", " + ApartmentNumberTXT.getText());
-            //deliveryAddressFormat.append(" | ");
-            //deliveryAddressFormat.append(ApartmentNumberTXT.getText());
             deliveryAddressFormat.append(" | ");
             deliveryAddressFormat.append(cityTXT.getText());
             deliveryAddressFormat.append(" | ");
@@ -728,6 +693,9 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
      */
     private Double calculateOrderPrice() {
         totalPrice = 0.0;
+
+        thisOrderPrice.setFuelAmount(Double.parseDouble(fuelQuantityTXT.getText()));
+
         thisOrderPrice.calculateTotalPrice();
         currentPurchaseHomeHeating.setPriceOfOrder(thisOrderPrice);
         totalPrice = thisOrderPrice.getTotalPrice();
@@ -771,18 +739,6 @@ public class NewPurchaseFuelForHomeHeatingBoundary implements DataInitializable 
         confirmMassage.setVisible(true);
     }
 
-    /**
-     * review order tab setting
-     */
-    /*private void SetReviewOrderPane() {
-        this.currentPurchaseHomeHeating.setFuelAmount(Double.valueOf(fuelQuantityTXT.getText()));
-        this.currentPurchaseHomeHeating.setEmailForInvoice(emailAddressTXT.getText());
-        PurchaseFuelForHomeHeating.Address address = new PurchaseFuelForHomeHeating.Address(streetNameTXT.getText(), ApartmentNumberTXT.getText(), cityTXT.getText(), zipCodeTXT.getText());
-        this.currentPurchaseHomeHeating.setAddressForShipping(address);
-        this.currentPurchaseHomeHeating.setPhoneNumberForContact(anotherContactPhoneNumberTXT.getText());
-        this.currentPurchaseHomeHeating.setNoteForPurchase(noteTXT.getText());
-        this.currentPurchaseHomeHeating.setDeliveryStatus(OrderDeliveryStatus.CONFIRMED_ORDER);
-    }*/
     public Costumer getCurrentCostumerDetailsFromDB() {
         return currentCostumerDetailsFromDB;
     }
